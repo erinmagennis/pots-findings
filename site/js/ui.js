@@ -1,0 +1,174 @@
+/* ui.js — shared chrome: framing banner, nav, result cards, citation lines. */
+import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS } from './data.js';
+
+export const PAGES = [
+  ['index.html','Search'],['entities.html','Entities'],['conditions.html','Conditions'],
+  ['papers.html','Papers'],['discover.html','Discover'],['charts.html','Charts'],
+  ['builder.html','Chart builder'],['chat.html','Ask (BYO key)'],['about.html','About & limits']
+];
+
+/** The three non-negotiable framings, on every page, above the fold. */
+export function framingBanner(){
+  const m = state.meta, c = m.counts;
+  return `<div id="framing"><div class="wrap">
+    <div class="fr-item"><b>Scope: POTS / dysautonomia only.</b> Tier 1 covers ${fmt(c.tier1_chunks)} of
+      ${fmt(c.corpus_chunks)} corpus chunks — ${fmt(c.papers)} of ~${fmt(c.corpus_papers_total)} papers.
+      ME/CFS, fibromyalgia, EDS, MCAS, IBS, migraine and autism appear <b>only as incidental mentions inside
+      POTS/dysautonomia papers</b>, not as their own literature (Tiers 2–4, not yet extracted).
+      <a href="about.html#scope">What this means</a>.</div>
+    <div class="fr-item"><b>Not medical advice.</b> Machine-extracted research information, not clinical
+      guidance — no diagnostic or treatment recommendations. Talk to a qualified clinician about any
+      personal health decision.</div>
+    <div class="fr-item"><b>Automated extraction has errors.</b> Co-occurrence is not causation; thin
+      evidence includes noise and single-lab artifacts.
+      <a href="about.html#limits">Limitations</a>. Every finding links to its source — the credit belongs to
+      the original authors; please read their paper.</div>
+  </div></div>`;
+}
+
+export function header(active){
+  const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'on':''}">${t}</a>`).join('');
+  return `<header class="site"><div class="wrap">
+    <div class="brand">POTS &amp; Dysautonomia Findings Browser
+      <small>Tier-1 MVP · ${fmt(state.meta.counts.findings)} machine-extracted findings from
+      ${fmt(state.meta.counts.papers)} papers</small></div>
+    <nav class="tabs">${tabs}</nav></div></header>`;
+}
+
+export function footer(){
+  const m=state.meta;
+  return `<footer class="site"><div class="wrap">
+    Tier-1 MVP · data generated ${esc(m.generated_utc)} · embeddings ${m.model.name} (${m.model.dims}d,
+    int8, mean cosine fidelity ${m.counts.emb_fidelity}).
+    Quotes are verbatim excerpts from the cited papers, truncated to ${m.quote_max_chars} characters and always
+    shown next to the full citation — no bulk quote export is provided.
+    <a href="about.html">Scope, methods and limitations</a>.
+  </div></footer>`;
+}
+
+export function mount(active){
+  document.getElementById('framing-slot').outerHTML = framingBanner();
+  document.getElementById('header-slot').outerHTML  = header(active);
+  const f=document.getElementById('footer-slot'); if(f) f.outerHTML = footer();
+}
+
+/* ---------- citation line: prominent, always with a link ---------- */
+export function citeLine(pi){
+  const p = paper(pi);
+  if(!p) return `<div class="cite">Citation unavailable</div>`;
+  const url = p.doi_url || p.pubmed_url || p.pmc_url || '';
+  const etal = p.author_count>1 ? ' et al.' : '';
+  const label = `${esc(p.first_author||'Unknown')}${etal}`;
+  const link = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${label}</a>` : label;
+  return `<div class="cite">${link} — <span class="jr">${esc(p.journal||'—')}</span>
+    ${p.year?`(${p.year})`:''}
+    ${p.pubmed_url?` · <a href="${esc(p.pubmed_url)}" target="_blank" rel="noopener">PubMed</a>`:''}
+    ${p.doi_url?` · <a href="${esc(p.doi_url)}" target="_blank" rel="noopener">DOI</a>`:''}
+    ${p.is_open_access?` · <span class="pill grey">open access</span>`:''}
+    <a href="paper.html?pmid=${esc(p.pmid)}" style="margin-left:6px">all findings from this paper →</a></div>`;
+}
+
+/** Reusable notice for any surface built on canonical_entity. Two different coverage numbers —
+    they are not the same thing and must not be conflated. */
+export function entityCoverageNote(context){
+  const c = state.meta.counts;
+  return `<div class="note"><b>Entity coverage — read before interpreting ${context}.</b>
+    A canonical entity is present on <b>${fmt(c.canonical_entity_rows)} of ${fmt(c.findings)} findings
+    (${c.canonical_entity_pct}%)</b>, spanning ${fmt(c.papers_with_canonical_entity)} of ${fmt(c.papers)} papers.
+    An <i>original</i> (uncanonicalized) entity string is present on ${fmt(c.entity_string_rows)} findings
+    (${c.entity_string_pct}%) — these are two different things.
+    The gap is ${fmt(c.entity_unmapped_rows)} findings that name an entity which received no canonical mapping:
+    of ${fmt(c.strings_total)} distinct entity strings, ${fmt(c.strings_mapped)} resolve to a canonical and
+    ${fmt(c.strings_unmapped_distinct)} do not, because canonicalization deliberately covered the head of the
+    distribution and left the long tail of mostly one-off strings alone.
+    <b>${context} therefore cover about ${c.canonical_entity_pct}% of findings, not half the corpus</b> —
+    findings without a canonical entity are excluded from it. They remain fully findable by
+    <a href="index.html">keyword search</a> on their original string.</div>`;
+}
+
+/** Result card. Shows canonical entity AND the original string when they differ, so merges are auditable. */
+export function findingCard(row, opts={}){
+  const t = textOf(row) || '(text not loaded)';
+  const d = detailOf(row);
+  const dir = val('d',row), ent = val('e',row), cond = val('c',row), tier = val('tr',row),
+        cert = val('ce',row), ft = val('ft',row), ek = val('ek',row), mc = val('mc',row),
+        yr = val('y',row) || state.facets.cols.y[row], nres = val('nc',row);
+  const orig = origEntity(row);
+  const dc = DIRCLASS(dir);
+  const estr = val('es_str',row);
+  const tags = [];
+  if(ent) tags.push(`<a class="tag ent" href="entity.html?e=${encodeURIComponent(ent)}">${esc(ent)}</a>`);
+  else if(estr) tags.push(`<span class="tag lowconf" title="This entity string was not canonicalized, so this finding does not appear in entity roll-ups or entity filters. It is still fully searchable by keyword.">${esc(estr)} · not canonicalized</span>`);
+  if(dir && dir!=='not applicable') tags.push(`<span class="tag dir ${dc}">${esc(dir)}</span>`);
+  if(cond) tags.push(`<a class="tag" href="condition.html?c=${encodeURIComponent(cond)}">${esc(cond)}</a>`);
+  if(tier) tags.push(`<span class="tag tier">${esc(tier)}</span>`);
+  if(cert) tags.push(`<span class="tag">${esc(cert)}</span>`);
+  if(ft) tags.push(`<span class="tag">${esc(ft)}</span>`);
+  if(ek) tags.push(`<span class="tag">${esc(ek)}</span>`);
+  if(nres && nres!=='positive-effect' && nres!=='not-applicable')
+    tags.push(`<span class="tag lowconf">${esc(nres)}</span>`);
+  if(mc==='low'||mc==='medium')
+    tags.push(`<span class="tag lowconf" title="Entity mapping confidence — review before relying on the merge">map: ${esc(mc)}</span>`);
+  if(state.facets.cols.sd[row]) tags.push(`<span class="tag" title="Derived by splitting a compound entity string">split-derived</span>`);
+
+  const score = opts.score!=null ? `<span class="pill grey" title="cosine similarity">${opts.score.toFixed(3)}</span> ` : '';
+  const quote = d.quote ? `<div class="quote">“${esc(d.quote)}”${d.sec?` <span class="pill grey">${esc(d.sec)}</span>`:''}</div>` : '';
+  const quant = d.quant ? `<div class="srcline"><b>Quantitative:</b> ${esc(d.quant)}${d.eff?` · effect: ${esc(d.eff)}`:''}</div>` : '';
+  const npart = d.npart ? `<div class="srcline"><b>n</b> = ${esc(d.npart)}${d.comp?` · vs ${esc(d.comp)}`:''}</div>` : '';
+  const mergedNote = (orig && orig!==ent)
+    ? `<div class="merged">Reported as <code>${esc(orig)}</code>, folded into canonical <code>${esc(ent)}</code></div>` : '';
+  return `<div class="card d-${dc}">
+    <p class="ftext">${score}${esc(t)}</p>
+    <div class="tags">${tags.join('')}</div>
+    ${mergedNote}${quant}${npart}${quote}
+    ${citeLine(state.facets.cols.p[row])}
+  </div>`;
+}
+
+export function selectOpts(values, sel, anyLabel='Any'){
+  return `<option value="">${anyLabel}</option>` + values.filter(v=>v && v!=='—')
+    .map(v=>`<option value="${esc(v)}"${v===sel?' selected':''}>${esc(v)}</option>`).join('');
+}
+
+/** sortable table helper */
+export function sortTable(rows, key, dir){
+  const r=[...rows];
+  r.sort((a,b)=>{
+    let x=a[key], y=b[key];
+    if(x==null)x=-Infinity; if(y==null)y=-Infinity;
+    if(typeof x==='string'||typeof y==='string') return dir*String(x).localeCompare(String(y));
+    return dir*(x-y);
+  });
+  return r;
+}
+
+export function autocomplete(input, items, onPick){
+  const box = document.createElement('div'); box.className='acbox hidden';
+  input.parentNode.appendChild(box);
+  let sel=-1, cur=[];
+  const close=()=>{ box.classList.add('hidden'); sel=-1; };
+  input.addEventListener('input', ()=>{
+    const q=input.value.toLowerCase().trim();
+    if(q.length<2) return close();
+    cur = items.filter(s=>s.toLowerCase().includes(q)).slice(0,12);
+    if(!cur.length) return close();
+    box.innerHTML = cur.map((s,i)=>`<div data-i="${i}">${esc(s)}</div>`).join('');
+    box.classList.remove('hidden');
+  });
+  box.addEventListener('mousedown', e=>{
+    const d=e.target.closest('div[data-i]'); if(!d) return;
+    e.preventDefault(); input.value=cur[+d.dataset.i]; close(); onPick&&onPick(input.value);
+  });
+  input.addEventListener('keydown', e=>{
+    if(box.classList.contains('hidden')) return;
+    const ds=[...box.querySelectorAll('div')];
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      e.preventDefault(); sel=(sel+(e.key==='ArrowDown'?1:-1)+ds.length)%ds.length;
+      ds.forEach((d,i)=>d.classList.toggle('sel',i===sel));
+    } else if(e.key==='Enter' && sel>=0){ e.preventDefault(); input.value=cur[sel]; close(); onPick&&onPick(input.value); }
+    else if(e.key==='Escape') close();
+  });
+  input.addEventListener('blur', ()=>setTimeout(close,150));
+}
+
+export function qs(name){ return new URLSearchParams(location.search).get(name); }

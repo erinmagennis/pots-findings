@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ask (BYO key) — POTS &amp; Dysautonomia Findings Browser</title>
+<link rel="stylesheet" href="css/app.css">
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+  <div class="panel">
+    <h1>Ask questions about the findings <span class="pill grey">bring your own API key</span></h1>
+    <p class="lede">This panel searches the findings locally, then sends the matching ones to a language model
+      as context. Answers must cite the findings used, with links to the source papers.</p>
+    <div class="note stop"><b>Not medical advice.</b> This answers questions <i>about what these papers
+      reported</i> — it is not a clinician, cannot diagnose, and must not be used for treatment decisions.
+      The model can also misread the findings it is given; always open the cited papers.</div>
+    <div id="keypanel"></div>
+  </div>
+
+  <div class="panel" id="chatui">
+    <div id="chatlog"></div>
+    <div class="searchbar" style="margin-top:10px">
+      <input type="text" id="msg" placeholder="e.g. what is reported about norepinephrine in POTS?" style="flex:1 1 340px">
+      <button class="primary" id="send">Ask</button>
+      <button id="reset">Clear conversation</button>
+    </div>
+    <div class="chks">
+      <label>Retrieval <select id="rmode"><option value="keyword">keyword</option>
+        <option value="semantic">semantic (loads model)</option></select></label>
+      <label>Findings as context <input type="number" id="ctxn" value="12" min="3" max="30" style="width:64px"></label>
+      <div id="rstate" class="kv"></div>
+    </div>
+  </div>
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-chat.js"></script>
+</body></html>

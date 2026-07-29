@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "POTS / Dysautonomia Literature Findings — Tier 1"
+message: "If you use this dataset, please cite it AND the original papers behind any finding you rely on."
+type: dataset
+authors:
+  - family-names: "Magennis"
+    given-names: "Erin"
+version: tier1-v1
+date-released: "2026-07-29"
+license: CC-BY-4.0
+abstract: >-
+  36,459 structured research findings machine-extracted from 3,121 POTS and dysautonomia papers,
+  with canonicalized entities, ontology identifiers where a genuine term exists, full source
+  attribution, and four discovery tables (associations, under-studied signals, contradictions,
+  null/failed results). Tier 1 of a planned four-tier corpus; covers POTS/dysautonomia only.
+  Short quoted excerpts remain the copyright of their publishers and are capped at 200 characters.

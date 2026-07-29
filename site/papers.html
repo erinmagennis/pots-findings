@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Papers — POTS &amp; Dysautonomia Findings Browser</title>
+<link rel="stylesheet" href="css/app.css">
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+
+  <div class="panel">
+    <h1>Papers</h1>
+    <p class="lede">3,121 distinct papers (from 3,129 pmids). These are other researchers' publications —
+      the findings here are automated summaries and the credit is theirs. Please read the original.</p>
+    <div class="searchbar">
+      <input type="text" id="q" placeholder="filter by title, author or journal…" style="flex:1 1 320px">
+      <select id="oa"><option value="">Any access</option><option value="y">Open access only</option></select>
+      <label class="kv">Year <input type="number" id="y0" style="width:78px" placeholder="2019">
+        – <input type="number" id="y1" style="width:78px" placeholder="2026"></label>
+    </div>
+  </div>
+  <div class="rowmeta"><div id="count"></div><div class="pager" id="pager"></div></div>
+  <div class="tblwrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-papers.js"></script>
+</body></html>

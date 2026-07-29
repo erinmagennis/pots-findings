@@ -1,0 +1,28 @@
+tier1-v1
+
+Release:      Tier 1 (POTS / dysautonomia only) — chunks 0-75 of a 286-chunk corpus
+Coverage:     ~3,121 of ~14,263 corpus papers. Tiers 2-4 NOT extracted.
+Not medical advice. Machine-extracted research information.
+
+Row counts
+  tier1_findings              36,459 rows x 89 cols   (36,032 distinct finding_text)
+  entity_vocabulary            2,019 rows  (1,803 typed, 570 with ontology id)
+  paper_metadata               3,129 rows  (3,121 distinct canonical papers)
+  pmid_dedup_map                  18 rows  (9 title groups: 8 merged, 1 retained as distinct)
+  association_table              555 rows  (547 tested, 456 significant BH q<0.05)
+  understudied_signals           329 rows  (226 headline-eligible)
+  contradictions                 532 rows  (268 flips + 264 null-vs-positive)
+  null_results                 5,324 rows
+  convergence_tier1              308 rows  (106 pass non-POTS bar, 45 headline-eligible)
+  findings_embeddings_int8    36,459 x 384 uint8 (14.0 MB, mean cosine fidelity 0.99997)
+
+Entities:     863 canonical, 368 with ontology IDs (145 HGNC, 189 ChEBI, 34 MeSH)
+Key caveat:   Entity coverage is TWO different numbers. canonical_entity is present on
+              10,858 rows = 29.8% (2,185 of 3,121 papers); the original entity string is
+              present on 19,307 rows = 53.0%. 17,152 rows name no entity at all (by design);
+              a further 8,449 carry an entity string that was never canonicalized (head-only
+              mapping: 7,605 of 9,582 distinct strings left unmapped, 6,761 of them singletons,
+              none appearing more than twice). Entity-keyed views cover ~30% of findings, NOT
+              half. Unmapped-string rows stay findable by keyword on entity_norm_original.
+Counting:     papers = canonical_pmid.nunique() = 3,121. Report papers_direct
+              (excluding split_derived, 696 rows) separately from totals.

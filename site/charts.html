@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charts — POTS &amp; Dysautonomia Findings Browser</title>
+<link rel="stylesheet" href="css/app.css">
+<script src="vendor/chart.umd.js"></script>
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+  <div class="panel">
+    <h1>Preset charts</h1>
+    <p class="lede">Five views over the extracted findings. Every chart can be downloaded as a PNG and its
+      underlying numbers as CSV. For arbitrary cuts, use the <a href="builder.html">chart builder</a>.</p>
+    <div id="stats" class="statgrid"></div>
+  </div>
+  <div id="charts"></div>
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-charts.js"></script>
+</body></html>

@@ -1,0 +1,199 @@
+{
+ "papers_by_year": {
+  "2019": 1,
+  "2020": 20,
+  "2021": 253,
+  "2022": 315,
+  "2023": 403,
+  "2024": 495,
+  "2025": 896,
+  "2026": 740
+ },
+ "findings_by_condition": {
+  "dysautonomia": 18293,
+  "general": 5854,
+  "POTS": 5078,
+  "long_COVID": 2608,
+  "multiple": 1129,
+  "ME_CFS": 845,
+  "fibromyalgia": 756,
+  "small_fiber_neuropathy": 642,
+  "EDS_hypermobility": 625,
+  "migraine": 255,
+  "MCAS": 236,
+  "IBS_gut": 90,
+  "autism": 44,
+  "orthostatic_hypotension": 4
+ },
+ "papers_by_condition": {
+  "dysautonomia": 2332,
+  "general": 853,
+  "POTS": 749,
+  "multiple": 345,
+  "long_COVID": 324,
+  "small_fiber_neuropathy": 202,
+  "EDS_hypermobility": 146,
+  "ME_CFS": 136,
+  "fibromyalgia": 103,
+  "MCAS": 90,
+  "IBS_gut": 64,
+  "migraine": 61,
+  "autism": 18,
+  "orthostatic_hypotension": 1
+ },
+ "evidence_tier": {
+  "cohort": 8239,
+  "cross-sectional": 7009,
+  "review/expert-opinion": 6507,
+  "case-report": 3777,
+  "case-series": 3239,
+  "case-control": 3184,
+  "mechanistic/in-vitro": 2787,
+  "RCT": 877,
+  "meta-analysis": 840
+ },
+ "finding_type": {
+  "mechanism/biomarker": 16348,
+  "treatment/intervention": 7210,
+  "diagnostic/screening": 4830,
+  "comorbidity": 4187,
+  "symptom-burden": 3884
+ },
+ "direction": {
+  "elevated": 11761,
+  "not applicable": 9277,
+  "depleted/reduced": 5763,
+  "dysregulated (unspecified direction)": 5126,
+  "no significant difference": 4481,
+  "sex-difference-reported": 50,
+  "mixed": 1
+ },
+ "certainty": {
+  "confirmed": 23310,
+  "hedged": 9347,
+  "mixed": 3802
+ },
+ "causal_or_correlational": {
+  "correlational-only": 23193,
+  "not-stated": 8893,
+  "causal-claim": 4373
+ },
+ "entity_kind_rows": {
+  "physiological-measure": 2812,
+  "molecule-or-analyte": 2472,
+  "drug-or-drug-class": 1964,
+  "gene-or-protein": 1924,
+  "clinical-sign-or-condition": 961,
+  "other": 725
+ },
+ "map_confidence_rows": {
+  "high": 9627,
+  "medium": 999,
+  "low": 232
+ },
+ "null_class": {
+  "biomarker/mechanism null": 3076,
+  "treatment/intervention failure": 1340,
+  "diagnostic null": 908
+ },
+ "contradiction_type": {
+  "hard-direction-flip": 268,
+  "null-vs-positive": 264
+ },
+ "fulltext_status": {
+  "retrieved-fulltext": 29910,
+  "abstract-only": 6535,
+  "blocked": 14
+ },
+ "top20_entities_by_papers": {
+  "norepinephrine (molecule-or-analyte)": 194,
+  "heart rate (physiological-measure)": 178,
+  "heart rate variability (physiological-measure)": 170,
+  "orthostatic hypotension (clinical-sign-or-condition)": 115,
+  "midodrine (drug-or-drug-class)": 95,
+  "sdnn (physiological-measure)": 94,
+  "rmssd (physiological-measure)": 84,
+  "lf/hf ratio (physiological-measure)": 81,
+  "snca (gene-or-protein)": 77,
+  "il-6 (molecule-or-analyte)": 75,
+  "intravenous immunoglobulin (drug-or-drug-class)": 62,
+  "ivabradine (drug-or-drug-class)": 62,
+  "systolic blood pressure (physiological-measure)": 62,
+  "fludrocortisone (drug-or-drug-class)": 61,
+  "blood pressure (physiological-measure)": 57,
+  "tnf-alpha (molecule-or-analyte)": 54,
+  "elp1 (gene-or-protein)": 53,
+  "hf power (physiological-measure)": 52,
+  "c-reactive protein (molecule-or-analyte)": 46,
+  "diastolic blood pressure (physiological-measure)": 45
+ },
+ "key_field_fill_pct": {
+  "entity": 52.96,
+  "canonical_entity": 29.78,
+  "entity_ontology_id": 12.67,
+  "canonical_ontology_id": 11.85,
+  "pathway_id": 0.06,
+  "dataset_accession": 0.72,
+  "phenotype_hpo": 2.78,
+  "contradicts_finding_ref": 4.17,
+  "effect_size": 37.98,
+  "n_participants": 53.86,
+  "study_type": 75.51,
+  "_note": "entity 53.0% and canonical_entity 29.8% are DIFFERENT columns; do not use the entity figure to describe canonical-entity coverage."
+ },
+ "headline": {
+  "findings": 36459,
+  "papers": 3121,
+  "papers_rows": 3129,
+  "distinct_finding_text": 36032,
+  "canonical_entities": 863,
+  "entities_with_ontology": 368,
+  "split_derived_rows": 696,
+  "corpus_papers_total": 14263,
+  "corpus_chunks_total": 286,
+  "tier1_chunks": "0-75",
+  "entity_coverage_note": "canonical_entity covers 29.8% of findings (10,858 rows, 2,185 of 3,121 papers). The original entity string covers 53.0% (19,307 rows). Different columns, different numbers."
+ },
+ "entity_coverage": {
+  "total_rows": 36459,
+  "rows_entity_string": 19307,
+  "pct_entity_string": 53.0,
+  "rows_canonical_entity": 10858,
+  "pct_canonical_entity": 29.8,
+  "rows_entity_string_no_canonical": 8449,
+  "rows_no_entity_at_all": 17152,
+  "papers_total_canonical_pmid": 3121,
+  "papers_with_canonical_entity": 2185,
+  "papers_with_entity_string": 2494,
+  "papers_with_no_canonical_entity": 936,
+  "distinct_norm_strings": 9582,
+  "distinct_norm_strings_mapped": 1977,
+  "distinct_norm_strings_unmapped": 7605,
+  "unmapped_singleton_strings": 6761,
+  "unmapped_max_rows_per_string": 2,
+  "vocabulary_rows": 2019,
+  "vocabulary_typed": 1803,
+  "distinct_canonical_entities": 863,
+  "note": "Entity coverage is TWO numbers: canonical_entity 29.8% of rows (the key for entity views), original entity string 53.0%. The gap is 17,152 rows with no entity at all (by design) plus 8,449 rows whose entity string was never canonicalized (head-only mapping). Unmapped-string rows remain findable by keyword on entity_norm_original."
+ },
+ "pmid_basis_examples": {
+  "note": "Paper counts depend on the basis. Use canonical_pmid and state it. Only 3 of 863 canonical entities differ between raw pmid and canonical_pmid.",
+  "canonical_pmid_basis": {
+   "norepinephrine": 194,
+   "elp1": 53,
+   "ivabradine": 62
+  },
+  "raw_pmid_basis": {
+   "norepinephrine": 195,
+   "elp1": 58,
+   "ivabradine": 63
+  },
+  "papers_direct_canonical_basis": {
+   "norepinephrine": 176,
+   "elp1": 52,
+   "ivabradine": 60
+  },
+  "entities_affected": 3,
+  "entities_total": 863
+ }
+}

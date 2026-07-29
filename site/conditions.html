@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conditions — POTS &amp; Dysautonomia Findings Browser</title>
+<link rel="stylesheet" href="css/app.css">
+<script src="vendor/chart.umd.js"></script>
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+
+  <div class="panel">
+    <h1>Conditions</h1>
+    <div class="note"><b>Read this before interpreting condition counts.</b> Tier 1 extracted the
+      POTS/dysautonomia literature. The labels inside that scope are <code>POTS</code>,
+      <code>dysautonomia</code>, <code>long_COVID</code>, <code>small_fiber_neuropathy</code>,
+      <code>orthostatic_hypotension</code>, plus the non-specific <code>general</code> and
+      <code>multiple</code> buckets — these are condition labels applied to papers that the
+      POTS/dysautonomia search retrieved, so they reflect the extracted corpus.
+      <b>Seven conditions are different:</b> ME/CFS, fibromyalgia, EDS/hypermobility, MCAS, IBS, migraine and
+      autism appear <i>only</i> because a POTS/dysautonomia paper mentioned them. The ME/CFS row is not "the
+      ME/CFS literature" — it is ME/CFS as discussed inside POTS papers. Those seven literatures sit in
+      Tiers 2–4 and are <b>not yet extracted</b>. The right-hand column below states which case each row is.</div>
+    <div id="cards" class="statgrid"></div>
+  </div>
+  <div class="chartbox"><h3>Findings by condition</h3><div class="canvasholder"><canvas id="cChart"></canvas></div></div>
+  <div class="tblwrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-conditions.js"></script>
+</body></html>

@@ -1,0 +1,6 @@
+# The website is site/ only. These live in the GitHub repo, not on the CDN.
+/data
+/figures
+/notebooks
+/validation
+/docs

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chart builder — POTS &amp; Dysautonomia Findings Browser</title>
+<link rel="stylesheet" href="css/app.css">
+<script src="vendor/chart.umd.js"></script>
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+  <div class="panel">
+    <h1>No-code chart builder</h1>
+    <p class="lede">Pick an axis, a metric and an optional grouping, add filters, and get a chart plus the
+      exact numbers behind it. Nothing is computed on a server — this runs entirely in your browser over the
+      shipped data.</p>
+    <div class="filters">
+      <div><label>Chart type</label><select id="ctype">
+        <option value="bar">Bar</option><option value="stackedBar">Stacked bar</option>
+        <option value="line">Line</option><option value="doughnut">Doughnut</option>
+        <option value="horizontalBar">Horizontal bar</option></select></div>
+      <div><label>X axis (grouping)</label><select id="xaxis"></select></div>
+      <div><label>Y metric</label><select id="ymetric">
+        <option value="findings">Findings (row count)</option>
+        <option value="papers">Distinct papers</option>
+        <option value="pct">% of findings in group</option>
+        <option value="entities">Distinct canonical entities</option></select></div>
+      <div><label>Series / colour split</label><select id="series"></select></div>
+      <div><label>Top N categories</label><input type="number" id="topn" value="15" min="3" max="60"></div>
+      <div><label>Sort</label><select id="sortby"><option value="value">By value</option>
+        <option value="label">By label</option><option value="natural">Natural (year order)</option></select></div>
+    </div>
+    <h3>Filters</h3>
+    <div class="filters" id="bfilters"></div>
+    <div class="chks">
+      <label><input type="checkbox" id="fQuant"> has quantitative detail</label>
+      <label><input type="checkbox" id="fNull"> null / failed results only</label>
+      <label><input type="checkbox" id="fSplit"> exclude split-derived rows</label>
+      <label>Year <input type="number" id="y0" style="width:74px" placeholder="2019">
+        – <input type="number" id="y1" style="width:74px" placeholder="2026"></label>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="primary" id="draw">Draw chart</button>
+      <button id="png">Download PNG</button>
+      <button id="csv">Download this chart's data as CSV</button>
+    </div>
+    <div id="covnote"></div>
+  </div>
+  <div class="chartbox">
+    <h3 id="ctitle">Chart</h3>
+    <div class="canvasholder" style="height:420px"><canvas id="cv"></canvas></div>
+    <div class="kv" id="csub" style="margin-top:8px"></div>
+  </div>
+  <div class="panel"><h3>Underlying numbers</h3>
+    <div class="tblwrap"><table id="dtbl"><thead></thead><tbody></tbody></table></div></div>
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-builder.js"></script>
+</body></html>

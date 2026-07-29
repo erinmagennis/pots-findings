@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search — POTS &amp; Dysautonomia Findings Browser (Tier-1 MVP)</title>
+<link rel="stylesheet" href="css/app.css">
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+
+  <div class="panel">
+    <h1>Search 36,459 extracted findings</h1>
+    <p class="lede">Two search modes. <b>Keyword</b> is exact-match and works instantly with no download.
+      <b>Semantic</b> finds findings that mean the same thing in different words — it runs the
+      embedding model in your browser, so the first use downloads about 23&nbsp;MB (then cached).</p>
+
+    <div class="searchbar">
+      <div class="autoc" style="flex:1 1 340px;display:flex">
+        <input type="text" id="q" placeholder="e.g. norepinephrine elevated in POTS" autocomplete="off">
+      </div>
+      <div class="modeswitch">
+        <button id="mKeyword" class="on">Keyword</button>
+        <button id="mSemantic">Semantic</button>
+      </div>
+      <button class="primary" id="go">Search</button>
+      <button id="clear">Clear</button>
+    </div>
+    <div id="modeState" style="margin-top:7px"></div>
+
+    <div class="filters" id="filters"></div>
+    <div class="chks">
+      <label><input type="checkbox" id="fQuant"> has quantitative detail</label>
+      <label><input type="checkbox" id="fNull"> null / failed results only</label>
+      <label><input type="checkbox" id="fSplit"> exclude split-derived rows</label>
+      <label>Year <input type="number" id="y0" style="width:74px" min="2019" max="2026" placeholder="2019">
+        – <input type="number" id="y1" style="width:74px" min="2019" max="2026" placeholder="2026"></label>
+    </div>
+  </div>
+
+  <div class="rowmeta">
+    <div id="count">Loading data…</div>
+    <div class="pager" id="pager"></div>
+  </div>
+  <div id="results"></div>
+  <div class="rowmeta"><div></div><div class="pager" id="pager2"></div></div>
+
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-search.js"></script>
+</body></html>

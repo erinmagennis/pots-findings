@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entities — POTS &amp; Dysautonomia Findings Browser</title>
+<link rel="stylesheet" href="css/app.css">
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+
+  <div class="panel">
+    <h1>Canonical entities</h1>
+    <p class="lede">863 canonical entities after merging 9,582 raw entity strings (1,803 mapped, 216 compound
+      strings split). Click one to see its folded-in original strings, direction breakdown and all findings.
+</p>
+    <div id="covnote"></div>
+    <div class="searchbar">
+      <input type="text" id="q" placeholder="filter entities…" style="flex:1 1 260px">
+      <select id="kind"></select>
+      <select id="onto"><option value="">Any ontology status</option><option value="y">Has ontology ID</option>
+        <option value="n">No ontology ID</option></select>
+      <select id="mapc"><option value="">Any map confidence</option><option value="high">high</option>
+        <option value="medium">medium</option><option value="low">low</option></select>
+    </div>
+  </div>
+  <div class="rowmeta"><div id="count"></div></div>
+  <div class="tblwrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-entities.js"></script>
+</body></html>

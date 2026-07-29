@@ -1,0 +1,242 @@
+{
+  "version": "tier1-v1",
+  "frozen_at": "2026-07-29",
+  "contract": "Every fact carries the expression that produced it and the basis it assumes. Never quote a number without its basis. Never restate from memory \u2014 re-evaluate the expr.",
+  "default_paper_basis": "canonical_pmid.nunique(), direct-only (split_derived==False) unless stated",
+  "facts": {
+    "findings_rows": {
+      "value": 36459,
+      "expr": "len(M)",
+      "basis": "rows, post-split",
+      "note": "36,459 rows; pre-split was 36,067"
+    },
+    "distinct_finding_text": {
+      "value": 36032,
+      "expr": "M.finding_text.nunique()",
+      "basis": "distinct text",
+      "note": "unchanged by splitting \u2014 proves splits duplicate, not invent"
+    },
+    "papers_pmid": {
+      "value": 3129,
+      "expr": "M.pmid.nunique()",
+      "basis": "raw pmid",
+      "note": "before duplicate-title merges"
+    },
+    "papers_canonical": {
+      "value": 3121,
+      "expr": "M.canonical_pmid.nunique()",
+      "basis": "canonical_pmid",
+      "note": "AFTER 8 validated merges \u2014 the default for all paper counts"
+    },
+    "canonical_entities": {
+      "value": 863,
+      "expr": "M.canonical_entity.nunique()",
+      "basis": "distinct canonical",
+      "note": ""
+    },
+    "pct_entity_original": {
+      "value": 53.0,
+      "expr": "100*M.entity.notna().mean()",
+      "basis": "% of post-split rows, ORIGINAL entity col",
+      "note": "NOT the canonical coverage"
+    },
+    "pct_entity_canonical": {
+      "value": 29.8,
+      "expr": "100*M.canonical_entity.notna().mean()",
+      "basis": "% of post-split rows, CANONICAL col",
+      "note": "the number that governs entity views"
+    },
+    "rows_entity_unmapped": {
+      "value": 8449,
+      "expr": "(M.entity.notna()&M.canonical_entity.isna()).sum()",
+      "basis": "rows",
+      "note": "entity string present, no canonical \u2014 must stay keyword-searchable"
+    },
+    "papers_with_canonical_entity": {
+      "value": 2185,
+      "expr": "M[M.canonical_entity.notna()].canonical_pmid.nunique()",
+      "basis": "canonical_pmid",
+      "note": ""
+    },
+    "ne_papers_direct_canonical": {
+      "value": 176,
+      "expr": "M[(M.canonical_entity=='norepinephrine')&nosplit].canonical_pmid.nunique()",
+      "basis": "canonical_pmid, direct-only",
+      "note": "DEFAULT basis. Other valid: 177 raw/direct, 194 canon/all, 195 raw/all"
+    },
+    "rct_findings": {
+      "value": 877,
+      "expr": "(M.evidence_tier=='RCT').sum()",
+      "basis": "rows",
+      "note": ""
+    },
+    "rct_papers": {
+      "value": 189,
+      "expr": "M[M.evidence_tier=='RCT'].canonical_pmid.nunique()",
+      "basis": "canonical_pmid",
+      "note": ""
+    },
+    "meta_papers": {
+      "value": 226,
+      "expr": "M[M.evidence_tier=='meta-analysis'].canonical_pmid.nunique()",
+      "basis": "canonical_pmid",
+      "note": ""
+    },
+    "assoc_significant": {
+      "value": 456,
+      "expr": "A.significant_fdr05.sum()",
+      "basis": "pairs, BH-FDR q<0.05",
+      "note": ""
+    },
+    "contradictions": {
+      "value": 532,
+      "expr": "len(X)",
+      "basis": "rows",
+      "note": ""
+    },
+    "contradiction_moderator": {
+      "value": 127,
+      "expr": "X.has_visible_moderator.sum()",
+      "basis": "rows",
+      "note": "61 are fulltext_status = extraction artifact, not biology"
+    },
+    "nulls": {
+      "value": 5324,
+      "expr": "len(N)",
+      "basis": "rows",
+      "note": ""
+    },
+    "treatment_failures": {
+      "value": 1340,
+      "expr": "(N.finding_type=='treatment/intervention').sum()",
+      "basis": "rows",
+      "note": ""
+    },
+    "convergence_passing": {
+      "value": 106,
+      "expr": "CV.passes_nonpots_bar.sum()",
+      "basis": "rows",
+      "note": ">=2 non-POTS papers"
+    },
+    "max_quote_len": {
+      "value": 200,
+      "expr": "M.provenance_quote_trunc.dropna().str.len().max()",
+      "basis": "chars",
+      "note": "HARD CAP \u2014 copyright invariant"
+    },
+    "authors_pct": {
+      "value": 99.9,
+      "expr": "100*PM.authors.notna().mean()",
+      "basis": "% of papers",
+      "note": ""
+    },
+    "strings_folded::hf_power": {
+      "value": 36,
+      "expr": "M[M.canonical_entity=='hf power'].entity.nunique()",
+      "basis": "distinct ORIGINAL entity strings observed in the findings table",
+      "note": "NOT the vocabulary row count, which is smaller \u2014 state which basis you mean"
+    },
+    "vocab_rows::hf_power": {
+      "value": 25,
+      "expr": "(V.canonical_name=='hf power').sum()",
+      "basis": "rows in entity_vocabulary for this canonical",
+      "note": "the other defensible 'strings merged' basis"
+    },
+    "papers::hf_power": {
+      "value": 49,
+      "expr": "M[(M.canonical_entity=='hf power')&nosplit].canonical_pmid.nunique()",
+      "basis": "canonical_pmid, direct-only",
+      "note": ""
+    },
+    "strings_folded::sdnn": {
+      "value": 44,
+      "expr": "M[M.canonical_entity=='sdnn'].entity.nunique()",
+      "basis": "distinct ORIGINAL entity strings observed in the findings table",
+      "note": "NOT the vocabulary row count, which is smaller \u2014 state which basis you mean"
+    },
+    "vocab_rows::sdnn": {
+      "value": 19,
+      "expr": "(V.canonical_name=='sdnn').sum()",
+      "basis": "rows in entity_vocabulary for this canonical",
+      "note": "the other defensible 'strings merged' basis"
+    },
+    "papers::sdnn": {
+      "value": 80,
+      "expr": "M[(M.canonical_entity=='sdnn')&nosplit].canonical_pmid.nunique()",
+      "basis": "canonical_pmid, direct-only",
+      "note": ""
+    },
+    "strings_folded::rmssd": {
+      "value": 40,
+      "expr": "M[M.canonical_entity=='rmssd'].entity.nunique()",
+      "basis": "distinct ORIGINAL entity strings observed in the findings table",
+      "note": "NOT the vocabulary row count, which is smaller \u2014 state which basis you mean"
+    },
+    "vocab_rows::rmssd": {
+      "value": 18,
+      "expr": "(V.canonical_name=='rmssd').sum()",
+      "basis": "rows in entity_vocabulary for this canonical",
+      "note": "the other defensible 'strings merged' basis"
+    },
+    "papers::rmssd": {
+      "value": 70,
+      "expr": "M[(M.canonical_entity=='rmssd')&nosplit].canonical_pmid.nunique()",
+      "basis": "canonical_pmid, direct-only",
+      "note": ""
+    },
+    "strings_folded::lf_power": {
+      "value": 23,
+      "expr": "M[M.canonical_entity=='lf power'].entity.nunique()",
+      "basis": "distinct ORIGINAL entity strings observed in the findings table",
+      "note": "NOT the vocabulary row count, which is smaller \u2014 state which basis you mean"
+    },
+    "vocab_rows::lf_power": {
+      "value": 16,
+      "expr": "(V.canonical_name=='lf power').sum()",
+      "basis": "rows in entity_vocabulary for this canonical",
+      "note": "the other defensible 'strings merged' basis"
+    },
+    "papers::lf_power": {
+      "value": 28,
+      "expr": "M[(M.canonical_entity=='lf power')&nosplit].canonical_pmid.nunique()",
+      "basis": "canonical_pmid, direct-only",
+      "note": ""
+    },
+    "strings_folded::norepinephrine": {
+      "value": 41,
+      "expr": "M[M.canonical_entity=='norepinephrine'].entity.nunique()",
+      "basis": "distinct ORIGINAL entity strings observed in the findings table",
+      "note": "NOT the vocabulary row count, which is smaller \u2014 state which basis you mean"
+    },
+    "vocab_rows::norepinephrine": {
+      "value": 16,
+      "expr": "(V.canonical_name=='norepinephrine').sum()",
+      "basis": "rows in entity_vocabulary for this canonical",
+      "note": "the other defensible 'strings merged' basis"
+    },
+    "papers::norepinephrine": {
+      "value": 176,
+      "expr": "M[(M.canonical_entity=='norepinephrine')&nosplit].canonical_pmid.nunique()",
+      "basis": "canonical_pmid, direct-only",
+      "note": ""
+    },
+    "low_conf_mappings": {
+      "value": 51,
+      "expr": "(V.map_confidence=='low').sum()",
+      "basis": "DISTINCT MAPPINGS in entity_vocabulary",
+      "note": "the spot-check workload; 51"
+    },
+    "medium_conf_mappings": {
+      "value": 240,
+      "expr": "(V.map_confidence=='medium').sum()",
+      "basis": "DISTINCT MAPPINGS in entity_vocabulary",
+      "note": ""
+    },
+    "low_conf_rows": {
+      "value": 232,
+      "expr": "(M.map_confidence=='low').sum()",
+      "basis": "FINDING ROWS in the findings table",
+      "note": "232 \u2014 NOT the mapping count; confusing these misstates review workload 4.5x"
+    }
+  }
+}

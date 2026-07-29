@@ -1,0 +1,22 @@
+{
+ "01_load_and_explore.ipynb": {
+  "ok": true,
+  "cells_executed": 12,
+  "error": null
+ },
+ "02_reproduce_figures.ipynb": {
+  "ok": true,
+  "cells_executed": 23,
+  "error": null
+ },
+ "03_associations_and_contradictions.ipynb": {
+  "ok": true,
+  "cells_executed": 17,
+  "error": null
+ },
+ "04_query_recipes.ipynb": {
+  "ok": true,
+  "cells_executed": 14,
+  "error": null
+ }
+}
