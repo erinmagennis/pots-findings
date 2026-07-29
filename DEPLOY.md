@@ -15,29 +15,32 @@ downloads a ~23 MB model on first use (a few seconds, then cached by the browser
 
     git init && git add . && git commit -m "Tier 1 (v1): POTS/dysautonomia findings database + browser"
     git branch -M main
-    git remote add origin https://github.com/<you>/<repo>.git
+    git remote add origin https://github.com/erinmagennis/pots-findings.git
     git push -u origin main
 
-## 3. Turn on the website
+## 3. The website
 
-GitHub repo → **Settings → Pages** → Source: **Deploy from a branch** → Branch: **main**, folder: **/ (root)**.
-Wait ~1 minute. Your site is at:
+Published on Vercel, not GitHub Pages. `vercel.json` sets `outputDirectory: "site"`, so the
+browser is served at the domain root:
 
-    https://<you>.github.io/<repo>/site/
+    https://pots.erinmagennis.com
 
-That URL is the thing you share. Everything works for visitors with no key and no install: search, browse,
-all charts, the chart builder, every download. The chat panel is the only part needing an API key, and each
-visitor supplies their own.
+`.vercelignore` keeps `data/`, `figures/`, `notebooks/`, `validation/` and `docs/` off the CDN.
+They stay in this repo. Redeploy after a data change with `vercel deploy --prod` from the repo root.
+
+Everything works for visitors with no key and no install: search, browse, all charts, the chart
+builder, every download. The chat panel is the only part needing an API key, and each visitor
+supplies their own.
 
 ## 4. Notebooks in Colab (no install for anyone)
 
 Colab opens any notebook straight from GitHub:
 
-    https://colab.research.google.com/github/<you>/<repo>/blob/main/notebooks/01_load_and_explore.ipynb
+    https://colab.research.google.com/github/erinmagennis/pots-findings/blob/main/notebooks/01_load_and_explore.ipynb
 
 Set `DATA_BASE` at the top of each notebook to your raw URL:
 
-    https://raw.githubusercontent.com/<you>/<repo>/main/data/
+    https://raw.githubusercontent.com/erinmagennis/pots-findings/main/data/
 
 Paste those four links into your README so a reader is one click from running the analysis.
 
