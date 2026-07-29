@@ -185,7 +185,7 @@ argument, read and cite the original paper, not this database. This database is 
 
 - **Derived structured data** (the extracted fields, canonical entities, discovery tables,
   embeddings): CC-BY-4.0. Attribution to Erin Magennis is required for any use, fork, or
-  derivative work — see [`LICENSE`](LICENSE) for the exact credit line.
+  derivative work — see [`LICENSE`](LICENSE) and [`NOTICE.md`](NOTICE.md) for the exact credit line.
 - **`provenance_quote_trunc`**: short verbatim excerpts from the source papers, **copyright of
   their respective publishers**, included for identification and verification only, truncated
   to ≤200 characters and always adjacent to the full citation and link. No license is claimed
