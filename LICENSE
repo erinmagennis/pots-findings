@@ -11,10 +11,16 @@ the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
 
 Full text: https://creativecommons.org/licenses/by/4.0/legalcode
 
-**You must attribute.** Any use, redistribution, or derivative work must credit:
+**You must attribute.** Any use, redistribution, or derivative work — including a fork, a
+republished copy, a paper, a product, or a model trained on this data — must credit:
 
-> POTS/Dysautonomia Literature Findings, Tier 1 v1 — machine-extracted structured findings from
-> the POTS/dysautonomia literature.
+> Magennis, E. (2026). POTS/Dysautonomia Literature Findings, Tier 1 v1.
+> https://pots.erinmagennis.com · https://github.com/erinmagennis/pots-findings
+> Licensed CC BY 4.0.
+
+The credit must appear wherever the work is normally credited, and must not be removed from
+redistributed copies. If you modify the data, say so, and do not imply that the modified version
+is endorsed by the author.
 
 **And you should credit the underlying researchers.** The scientific content summarized here is
 the work of the ~3,121 papers' authors. Every row carries `citation_short`, `authors`,
