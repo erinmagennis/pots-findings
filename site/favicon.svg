@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">POTS literature findings index</title>
+  <rect x="4" y="4" width="56" height="56" rx="11" fill="#20231f"/>
+  <path d="M17 20h30M17 32h22M17 44h26" fill="none" stroke="#f7f4ee" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="46" cy="32" r="5" fill="#d85f38"/>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">POTS and Dysautonomia Research Findings social preview, signal concept</title>
+  <desc id="desc">A dark research signal map based on real associations and contradictions in the database.</desc>
+  <rect width="1200" height="630" fill="#111713"/>
+  <g opacity=".16" stroke="#aab8ae" stroke-width="1">
+    <path d="M600 0v630M720 0v630M840 0v630M960 0v630M1080 0v630"/>
+    <path d="M540 90h660M540 210h660M540 330h660M540 450h660M540 570h660"/>
+  </g>
+  <g transform="translate(70 68)">
+    <g aria-label="favicon mark">
+      <circle cx="24" cy="24" r="21" fill="none" stroke="#e8efe9" stroke-width="2"/>
+      <path d="M13 31 23 16l13 16M17 26h14" fill="none" stroke="#e8efe9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="13" cy="31" r="3.5" fill="#ec6b45"/><circle cx="23" cy="16" r="3.5" fill="#d9d75d"/><circle cx="36" cy="32" r="3.5" fill="#75c3a4"/>
+    </g>
+    <text x="0" y="118" fill="#eef3ef" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="55" font-weight="690" letter-spacing="-1.7">POTS &amp; Dysautonomia</text>
+    <text x="0" y="176" fill="#eef3ef" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="55" font-weight="690" letter-spacing="-1.7">Research Findings</text>
+    <text x="2" y="226" fill="#aab8ae" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="23">36,459 extracted findings from 3,121 papers so far.</text>
+    <g transform="translate(2 305)" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+      <text x="0" y="0" fill="#718078" font-size="12">CURRENT CORPUS</text>
+      <text x="0" y="48" fill="#eef3ef" font-size="44" font-weight="700">36,459</text>
+      <text x="0" y="72" fill="#93a39a" font-size="14">findings</text>
+      <text x="180" y="48" fill="#eef3ef" font-size="44" font-weight="700">3,121</text>
+      <text x="180" y="72" fill="#93a39a" font-size="14">papers so far</text>
+      <text x="0" y="130" fill="#eef3ef" font-size="44" font-weight="700">532</text>
+      <text x="0" y="154" fill="#93a39a" font-size="14">contradictions</text>
+      <text x="180" y="130" fill="#eef3ef" font-size="44" font-weight="700">5,324</text>
+      <text x="180" y="154" fill="#93a39a" font-size="14">null results</text>
+    </g>
+  </g>
+  <g transform="translate(670 48) scale(.86)" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+    <g stroke-linecap="round" fill="none">
+      <path d="M85 110 265 70M85 110 235 230M235 230 365 118M235 230 350 310M85 110 425 210" stroke="#61736a" stroke-width="3"/>
+      <path d="M110 430 275 360M275 360 430 438M110 430 430 438" stroke="#ec6b45" stroke-width="4"/>
+    </g>
+    <g>
+      <circle cx="85" cy="110" r="14" fill="#d9d75d"/><circle cx="265" cy="70" r="10" fill="#75c3a4"/>
+      <circle cx="235" cy="230" r="13" fill="#eef3ef"/><circle cx="365" cy="118" r="9" fill="#75c3a4"/>
+      <circle cx="350" cy="310" r="8" fill="#eef3ef"/><circle cx="425" cy="210" r="9" fill="#75c3a4"/>
+      <circle cx="110" cy="430" r="13" fill="#ec6b45"/><circle cx="275" cy="360" r="11" fill="#d9d75d"/>
+      <circle cx="430" cy="438" r="10" fill="#75c3a4"/>
+    </g>
+    <g fill="#c8d2cb" font-size="13">
+      <text x="30" y="87">HF power</text><text x="235" y="45">LF power</text>
+      <text x="198" y="263">SDNN</text><text x="340" y="92">RMSSD</text>
+      <text x="327" y="342">pNN50</text><text x="397" y="187">LF/HF ratio</text>
+      <text x="28" y="465">fludrocortisone</text><text x="245" y="337">midodrine</text>
+      <text x="393" y="473">pyridostigmine</text>
+    </g>
+  </g>
+</svg>
