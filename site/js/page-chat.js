@@ -1,4 +1,4 @@
-/* page-chat.js — retrieval-augmented Q&A with a key the VISITOR pastes.
+/* page-chat.js: retrieval-augmented Q&A with a key the VISITOR pastes.
    The key is kept in localStorage on this device only and is sent to the model provider's own
    endpoint and nowhere else. There is no server in this app to send it to. */
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, ensureRows,
@@ -41,9 +41,9 @@ function renderKeyPanel(){
         <button id="clearkey">Clear key</button>
       </div>
       <div class="note plain">Your key is in this browser's <code>localStorage</code> only. It is sent
-        directly to ${esc(new URL(PROVIDERS[prov].url).host)} and to no one else — this site has no backend.
+        directly to ${esc(new URL(PROVIDERS[prov].url).host)} and to no one else: this site has no backend.
         Clearing it removes it from this device.</div>`
-   : `<h3>No API key set — everything except this chat panel already works</h3>
+   : `<h3>No API key set: everything except this chat panel already works</h3>
       <p class="lede">Search, filters, entity and paper pages, all five discovery tables, the preset charts and
         the chart builder need <b>no key at all</b>. A key is only needed to have a language model summarise
         retrieved findings in prose.</p>
@@ -80,7 +80,7 @@ onModelStatus(s=>{
   if(document.getElementById('rmode').value!=='semantic') return;
   rstate.innerHTML = s==='ready'? '<span class="pill">semantic retrieval ready</span>'
     : s==='loading'? '<span class="spinner"></span> loading search model…'
-    : s==='unavailable'? '<span class="pill err">semantic unavailable — using keyword</span>' : '';
+    : s==='unavailable'? '<span class="pill err">semantic unavailable: using keyword</span>' : '';
 });
 document.getElementById('rmode').onchange=e=>{
   if(e.target.value==='semantic'){ initModel(); loadEmbeddings().catch(()=>{}); }
@@ -96,7 +96,7 @@ async function retrieve(q, n){
       if(!embeddingsReady()) await loadEmbeddings();
       const v=await embedQuery(q);
       scored=rankByVector(v,allowed,n);
-    }catch(e){ rstate.innerHTML='<span class="pill err">semantic failed — used keyword</span>'; }
+    }catch(e){ rstate.innerHTML='<span class="pill err">semantic failed: used keyword</span>'; }
   }
   if(!scored.length){
     if(!keywordReady()) await prepareKeyword();
@@ -113,22 +113,23 @@ function contextBlock(rows){
     const d=detailOf(r), p=paper(state.facets.cols.p[r]);
     const etal=p&&p.author_count>1?' et al.':'';
     return `[F${i+1}] ${textOf(r)}
-  entity: ${val('e',r)||val('es_str',r)||'—'}${val('e',r)?'':' (not canonicalized)'} | direction: ${val('d',r)||'—'} | condition: ${val('c',r)||'—'}
-  evidence_tier: ${val('tr',r)||'—'} | certainty: ${val('ce',r)||'—'} | finding_type: ${val('ft',r)||'—'}${d.npart?` | n=${d.npart}`:''}
+  entity: ${val('e',r)||val('es_str',r)||'N/A'}${val('e',r)?'':' (not canonicalized)'} | direction: ${val('d',r)||'N/A'} | condition: ${val('c',r)||'N/A'}
+  evidence_tier: ${val('tr',r)||'N/A'} | certainty: ${val('ce',r)||'N/A'} | finding_type: ${val('ft',r)||'N/A'}${d.npart?` | n=${d.npart}`:''}
   ${d.quant?`quantitative: ${d.quant}\n  `:''}source: ${p?`${p.first_author||'?'}${etal}, ${p.journal||'?'} (${p.year||'?'}), pmid ${p.pmid}`:'unknown'}
   link: ${p?(p.doi_url||p.pubmed_url||''):''}`;
   }).join('\n\n');
 }
-const SYSTEM=`You answer questions about a database of machine-extracted findings from POTS and dysautonomia research papers.
+const SYSTEM=`You answer questions about a database of machine-extracted findings from POTS, dysautonomia, and related-condition research papers.
 
 HARD RULES:
 1. Answer ONLY from the numbered findings provided in the user's message. If they do not contain the answer, say so plainly and suggest a different search. Never add facts from your own knowledge, and never fill gaps with plausible-sounding detail.
 2. Cite every claim with the finding tags you used, like [F3] or [F1][F7]. A sentence with no tag is not allowed.
 3. You are NOT giving medical advice. Do not recommend, dose, or rank treatments, and do not tell the user what to do about their health. Describe only what the papers reported. If the question asks what someone should take or do, say that this is a research-literature tool and refer them to a qualified clinician.
 4. Respect the evidence. State the evidence tier and certainty where they matter, and prefer "one cohort study reported X" over "X is true". Flag when findings disagree, when a result is a null result, or when support is a single case report.
-5. Scope: this corpus is POTS/dysautonomia literature only. ME/CFS, fibromyalgia, EDS, MCAS, IBS, migraine and autism appear only as incidental mentions inside POTS/dysautonomia papers — never present them as those conditions' own literature.
-6. Quote at most a dozen words verbatim from any finding. Summarize in your own words otherwise.
-7. Be concise and concrete. No preamble about being an AI.`;
+5. Scope: the database combines Tier 1 with ${state.meta.counts.tier2_chunks_extracted} of ${state.meta.counts.tier2_chunks_total} Tier 2 chunks (${state.meta.counts.tier2_coverage_pct}%). All Tier 2 and combined results are partial. Never treat the absence of a finding as evidence that a relationship is absent.
+6. Distinguish a finding's condition label from its source literature when that distinction matters. Co-mention is not evidence of interaction, and shared biology is not the same claim as patient comorbidity.
+7. Quote at most a dozen words verbatim from any finding. Summarize in your own words otherwise.
+8. Be concise and concrete. No preamble about being an AI.`;
 
 /* ---------- chat ---------- */
 const log=document.getElementById('chatlog');
@@ -136,7 +137,7 @@ let history=[];
 function greet(){
   log.innerHTML=`<div class="msg"><div class="who">about this panel</div><div class="body">Ask about what these
 ${fmt(state.meta.counts.findings)} findings report. Your question is used to retrieve the most relevant findings
-locally, and only those findings — plus your question — are sent to the model. Answers cite the findings used
+locally, and only those findings: plus your question: are sent to the model. Answers cite the findings used
 so you can open the source papers yourself.
 
 This is research information, not medical advice.</div></div>`;
@@ -147,7 +148,7 @@ function add(role, body, used){
   const div=document.createElement('div');
   div.className='msg '+(role==='user'?'u':'');
   div.innerHTML=`<div class="who">${role==='user'?'you':'answer'}</div><div class="body">${esc(body)}</div>
-    ${used?`<div class="used"><b>Findings used (open the papers — these are automated extractions):</b>
+    ${used?`<div class="used"><b>Findings used (open the papers: these are automated extractions):</b>
       <ol>${used.map((r,i)=>{
         const d=detailOf(r);
         return `<li><b>[F${i+1}]</b> ${esc(textOf(r))}
@@ -160,7 +161,7 @@ function add(role, body, used){
 async function send(){
   const q=document.getElementById('msg').value.trim();
   if(!q) return;
-  if(!getKey()){ add('assistant','No API key is set. Add one above, or use Search / Charts / Discover — those need no key.'); return; }
+  if(!getKey()){ add('assistant','No API key is set. Add one above, or use Search / Charts / Discover: those need no key.'); return; }
   document.getElementById('msg').value='';
   add('user',q);
   const pending=add('assistant','retrieving findings…');
@@ -183,7 +184,7 @@ async function send(){
       let detail='';
       try{ const j=await res.json(); detail=j.error?.message||JSON.stringify(j).slice(0,300); }
       catch{ detail=await res.text().catch(()=>''); }
-      throw new Error(`${res.status} ${res.statusText} — ${detail}`);
+      throw new Error(`${res.status} ${res.statusText}: ${detail}`);
     }
     const j=await res.json();
     const text=prov.parse(j)||'(empty response)';
@@ -194,7 +195,7 @@ async function send(){
   }catch(e){
     const msg=String(e.message||e);
     const hint = /Failed to fetch|NetworkError|CORS/i.test(msg)
-      ? ` This is usually a browser/CORS or network problem, or a key the provider rejected before responding. Your key never leaves this device except to the provider — check it is valid and that the provider allows direct browser calls.`
+      ? ` This is usually a browser/CORS or network problem, or a key the provider rejected before responding. Your key never leaves this device except to the provider: check it is valid and that the provider allows direct browser calls.`
       : /401|403/.test(msg) ? ' The provider rejected the key. Check it, or clear and re-enter it.'
       : /429/.test(msg) ? ' Rate-limited or out of quota on your account.' : '';
     pending.querySelector('.body').innerHTML=

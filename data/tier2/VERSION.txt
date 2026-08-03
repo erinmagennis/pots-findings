@@ -1,0 +1,11 @@
+tier2-55pct-2026-08-03
+
+Coverage: 81 of 146 Tier 2 chunks, or 55.5%.
+Findings: 36,611.
+Canonical papers: 3,123.
+Combined Tier 1 plus Tier 2 canonical papers: 6,244.
+
+Every Tier 2 and combined figure is a subset figure. Absence is not evidence of absence.
+
+The public finding exports omit the undocumented `_blob` processing helper. Its intended pipeline
+purpose should be documented before any future release reintroduces it.

@@ -25,3 +25,5 @@ b0331b81e482e6d36ac5c13030c893c2e77b7fc017a530cdce0e337fd8717369  pmid_dedup_map
 3c8da31d0a846dd837aab77ea0bf1df25b68912d6dcc7e8b3d7564698efb14a8  tier1_findings.parquet   (11,372,509 bytes)
 ecda6fff8e61fbf44af061e028207448bee16ff78770561bad876195db12ea4e  understudied_signals.csv   (99,168 bytes)
 43e2dd82dbd420beceb6fc4e9663f043f99bca1a58d284952487f65db06977f3  understudied_signals.parquet   (45,293 bytes)
+1e94336229b270caa8d067b5d938dfe6875b6bbf2be5d888ac113e43456553bc  chunk_order.parquet   (340,937 bytes)
+eb4df7f37ebaabaf6827f307eb842ada1f4be1bbd07aacb6be1ebcbdf26aff8d  corpus_augmented.parquet   (15,242,813 bytes)

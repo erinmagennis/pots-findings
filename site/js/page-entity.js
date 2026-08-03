@@ -14,12 +14,12 @@ if(!e){
 } else {
   rows=applyFilters(state.facets,{e:name});
   const ont = e.oid
-    ? `<span class="mono">${esc(e.oid)}</span> <span class="pill grey">${esc(e.osrc||'')}</span>${e.olabel?` — ${esc(e.olabel)}`:''}`
+    ? `<span class="mono">${esc(e.oid)}</span> <span class="pill grey">${esc(e.osrc||'')}</span>${e.olabel?`: ${esc(e.olabel)}`:''}`
     : `<span class="pill grey">no ontology ID</span>`;
   document.getElementById('head').innerHTML=`<div class="panel">
     <h1>${esc(e.name)} ${e.kind?`<span class="pill">${esc(e.kind)}</span>`:''}</h1>
     <p class="kv">Ontology: ${ont} · Entity-mapping confidence:
-      <b>${esc(e.mapc||'—')}</b>${e.mapc&&e.mapc!=='high'?' <span class="tag lowconf">review this merge before relying on it</span>':''}</p>
+      <b>${esc(e.mapc||'N/A')}</b>${e.mapc&&e.mapc!=='high'?' <span class="tag lowconf">review this merge before relying on it</span>':''}</p>
     <div class="statgrid" style="margin-top:10px">
       <div class="stat"><div class="v">${fmt(e.np_)}</div><div class="k">papers</div></div>
       <div class="stat"><div class="v">${fmt(e.npd)}</div><div class="k">papers (direct)</div></div>
@@ -33,11 +33,11 @@ if(!e){
   </div>`;
 
   const origs=(e.origs||[]);
-  document.getElementById('audit').innerHTML=`<h3>Auditability — original strings folded into this canonical</h3>
+  document.getElementById('audit').innerHTML=`<h3>Auditability: original strings folded into this canonical</h3>
     ${origs.length? `<p class="kv">These ${origs.length} raw extraction strings were merged into
       <code>${esc(e.name)}</code>. If any of them does not belong, this canonical is over-merged.</p>
       <div class="tags">${origs.map(o=>`<span class="tag">${esc(o)}</span>`).join('')}</div>`
-      : `<p class="kv">No variant strings were merged — the extracted string matched the canonical name directly.</p>`}`;
+      : `<p class="kv">No variant strings were merged: the extracted string matched the canonical name directly.</p>`}`;
 
   const bar=(title,obj,id)=>`<div class="chartbox"><h3>${title}</h3>
     <div class="canvasholder" style="height:250px"><canvas id="${id}"></canvas></div></div>`;

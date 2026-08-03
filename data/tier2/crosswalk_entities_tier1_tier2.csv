@@ -1,0 +1,2804 @@
+canonical_entity,t1_papers,t1_findings,t2_papers,t2_findings,presence,combined_papers,entity_kind
+(-)-OSU6162,0,0,1,12,tier2_only,1,drug-or-drug-class
+1-deoxyceramide,1,3,0,0,tier1_only,1,molecule-or-analyte
+1-deoxysphinganine,2,9,1,1,both,3,molecule-or-analyte
+1-deoxysphinganine / 1-deoxysphingosine,0,0,1,7,tier2_only,1,molecule-or-analyte
+1-deoxysphingolipid,6,17,1,1,both,7,molecule-or-analyte
+1-methylnicotinamide (1-MNA),0,0,1,5,tier2_only,1,molecule-or-analyte
+12-hete,0,0,1,2,tier2_only,1,molecule-or-analyte
+123i-mibg,5,11,1,1,both,6,molecule-or-analyte
+123i-mibg myocardial scintigraphy,2,14,0,0,tier1_only,2,physiological-measure
+12s-hete,0,0,1,4,tier2_only,1,molecule-or-analyte
+18f-dopa,1,4,0,0,tier1_only,1,molecule-or-analyte
+18f-dopamine,7,8,0,0,tier1_only,7,molecule-or-analyte
+18f-dopamine pet radioactivity,1,5,0,0,tier1_only,1,physiological-measure
+"2,3-dinor-11β-prostaglandin F2α",0,0,2,2,tier2_only,2,molecule-or-analyte
+2-arachidonoylglycerol,0,0,1,2,tier2_only,1,molecule-or-analyte
+25-hydroxyvitamin D,0,0,2,2,tier2_only,2,molecule-or-analyte
+25-hydroxyvitamin d,6,40,7,18,both,13,molecule-or-analyte
+"3,4-dihydroxyphenylacetic acid",3,6,0,0,tier1_only,3,molecule-or-analyte
+"3,4-dihydroxyphenylglycol",6,17,0,0,tier1_only,6,molecule-or-analyte
+3-hydroxykynurenine,0,0,2,2,tier2_only,2,molecule-or-analyte
+3-methoxy-4-hydroxyphenylglycol,2,6,0,0,tier1_only,2,molecule-or-analyte
+4-hydroxynonenal,0,0,2,2,tier2_only,2,molecule-or-analyte
+4-methylumbelliferone,0,0,1,5,tier2_only,1,drug-or-drug-class
+5-HIAA,0,0,1,3,tier2_only,1,molecule-or-analyte
+5-HT1A receptor,0,0,5,9,tier2_only,5,gene-or-protein
+5-aminolevulinic acid,0,0,2,4,tier2_only,2,molecule-or-analyte
+5-hiaa,0,0,1,2,tier2_only,1,molecule-or-analyte
+5-ht2a receptor,0,0,4,4,tier2_only,4,gene-or-protein
+5-ht4 receptor,0,0,2,2,tier2_only,2,gene-or-protein
+5-ht4 receptor agonist,0,0,1,2,tier2_only,1,drug-or-drug-class
+5-hydroxyindoleacetic acid,2,4,1,1,both,3,molecule-or-analyte
+6-MSITC,0,0,2,21,tier2_only,2,drug-or-drug-class
+6-minute walk distance,0,0,2,2,tier2_only,2,physiological-measure
+7-methoxyisoflavone,0,0,1,2,tier2_only,1,molecule-or-analyte
+8-ohdg,0,0,2,3,tier2_only,2,molecule-or-analyte
+ACE,0,0,6,13,tier2_only,6,gene-or-protein
+ACTH,0,0,12,17,tier2_only,12,molecule-or-analyte
+ADAMTS2/ADAMTS14,0,0,1,2,tier2_only,1,gene-or-protein
+AIRE,0,0,1,2,tier2_only,1,gene-or-protein
+ALFF,0,0,1,2,tier2_only,1,physiological-measure
+ANP/BNP,0,0,1,2,tier2_only,1,molecule-or-analyte
+"Ara h 1, Ara h 2, Ara h 3, Ara h 6",0,0,1,2,tier2_only,1,molecule-or-analyte
+"Ara h 1, Ara h 3",0,0,1,2,tier2_only,1,molecule-or-analyte
+Ara h 2,0,0,1,2,tier2_only,1,molecule-or-analyte
+Ara h 2 IgE epitope diversity,0,0,1,2,tier2_only,1,physiological-measure
+Ara h 2-specific IgE,0,0,2,6,tier2_only,2,molecule-or-analyte
+Ara h 3,0,0,1,2,tier2_only,1,molecule-or-analyte
+Ara h 6,0,0,1,2,tier2_only,1,molecule-or-analyte
+B4GALT7,0,0,8,11,tier2_only,8,gene-or-protein
+BDNF,0,0,4,7,tier2_only,4,molecule-or-analyte
+BIO101 (20-hydroxyecdysone),0,0,1,2,tier2_only,1,drug-or-drug-class
+BNT162b2 mRNA COVID-19 vaccine,0,0,1,2,tier2_only,1,drug-or-drug-class
+"Bacteroides, Firmicutes",0,0,2,2,tier2_only,2,other
+Bcl-2 probiotic formulation,0,0,1,2,tier2_only,1,drug-or-drug-class
+Beighton score,0,0,8,14,tier2_only,8,physiological-measure
+Bifidobacteria,0,0,2,2,tier2_only,2,other
+Brachyspira,0,0,1,6,tier2_only,1,other
+C188-9,0,0,1,2,tier2_only,1,drug-or-drug-class
+C1R,0,0,7,9,tier2_only,7,gene-or-protein
+C1S,0,0,6,9,tier2_only,6,gene-or-protein
+CA14,0,0,1,2,tier2_only,1,gene-or-protein
+CART peptide,0,0,1,2,tier2_only,1,molecule-or-analyte
+CCL1,0,0,2,2,tier2_only,2,molecule-or-analyte
+CCL18,0,0,1,2,tier2_only,1,molecule-or-analyte
+CCL2,0,0,15,18,tier2_only,15,molecule-or-analyte
+CCL3,0,0,6,8,tier2_only,6,molecule-or-analyte
+CCNB1/CCNB2,0,0,1,2,tier2_only,1,gene-or-protein
+CD4+ T cells; CD8+ T cells,0,0,1,4,tier2_only,1,other
+CD4+ T lymphocytes,0,0,2,2,tier2_only,2,other
+CD4+ and CD8+ T cells,0,0,2,3,tier2_only,2,other
+CD40,0,0,1,2,tier2_only,1,gene-or-protein
+CD8+ T cells,0,0,6,8,tier2_only,6,other
+COL12A1,0,0,3,10,tier2_only,3,gene-or-protein
+CRF-ergic neurons,0,0,1,4,tier2_only,1,other
+CRH,0,0,3,17,tier2_only,3,molecule-or-analyte
+CT38,0,0,1,2,tier2_only,1,drug-or-drug-class
+CTGF,0,0,2,2,tier2_only,2,molecule-or-analyte
+CTGF; fibronectin; alpha-SMA,0,0,1,2,tier2_only,1,gene-or-protein
+CX3CL1 (fractalkine),0,0,2,2,tier2_only,2,molecule-or-analyte
+CXCL10,0,0,5,8,tier2_only,5,molecule-or-analyte
+CXCL13,0,0,3,4,tier2_only,3,molecule-or-analyte
+Cav3.2,0,0,2,2,tier2_only,2,gene-or-protein
+Clinical Global Impression-Improvement (CGI-I),0,0,1,4,tier2_only,1,physiological-measure
+Clostridia,0,0,2,2,tier2_only,2,other
+Collagen I,0,0,8,20,tier2_only,8,gene-or-protein
+Collagen V,0,0,6,11,tier2_only,6,gene-or-protein
+Crohn's disease,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+Cry j 1,0,0,1,4,tier2_only,1,molecule-or-analyte
+CuInS2/ZnS-PEG quantum dots,0,0,1,6,tier2_only,1,other
+DARPin E2_79,0,0,1,2,tier2_only,1,drug-or-drug-class
+DHMEQ,0,0,1,2,tier2_only,1,drug-or-drug-class
+DTI-ALPS index,0,0,1,3,tier2_only,1,physiological-measure
+EB-A (amide alkaloid),0,0,1,2,tier2_only,1,molecule-or-analyte
+EBV dUTPase,0,0,1,2,tier2_only,1,gene-or-protein
+EBV/HHV-6A,0,0,1,2,tier2_only,1,other
+EPA/DHA (n-3 PUFA),0,0,1,2,tier2_only,1,drug-or-drug-class
+"ERK1/2, STAT3",0,0,1,2,tier2_only,1,gene-or-protein
+"ERK1/2, p38 MAPK",0,0,2,2,tier2_only,2,gene-or-protein
+Ehlers-Danlos syndrome,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+Epstein-Barr virus,0,0,3,5,tier2_only,3,other
+Epstein-Barr virus (EBV),0,0,6,6,tier2_only,6,other
+"F4/80, CD11c, TNF-alpha",0,0,1,2,tier2_only,1,molecule-or-analyte
+FGF-21,0,0,1,21,tier2_only,1,molecule-or-analyte
+FGF2; CTGF; HDGF,0,0,1,2,tier2_only,1,molecule-or-analyte
+FLNA,0,0,2,8,tier2_only,2,gene-or-protein
+FcεRI,0,0,12,19,tier2_only,12,gene-or-protein
+Firmicutes/Bacteroidetes ratio,0,0,2,2,tier2_only,2,physiological-measure
+GABRB3/TAAR1/GBP1,0,0,2,2,tier2_only,2,gene-or-protein
+GC2008,0,0,1,4,tier2_only,1,drug-or-drug-class
+GSK3,0,0,1,4,tier2_only,1,gene-or-protein
+Giardia lamblia,0,0,1,2,tier2_only,1,other
+Glehnia littoralis extract,0,0,1,2,tier2_only,1,other
+Graves' disease,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+H1 antihistamine,0,0,2,2,tier2_only,2,drug-or-drug-class
+H1-antihistamines,0,0,2,2,tier2_only,2,drug-or-drug-class
+HASMC proliferation,0,0,1,3,tier2_only,1,physiological-measure
+HAdV IgG,0,0,1,10,tier2_only,1,molecule-or-analyte
+HH-205M,0,0,1,3,tier2_only,1,other
+HHV-6,0,0,3,9,tier2_only,3,other
+HHV-6 dUTPase,0,0,1,2,tier2_only,1,gene-or-protein
+HHV-6 miR-aU14,0,0,1,3,tier2_only,1,molecule-or-analyte
+HHV-6 p41,0,0,1,2,tier2_only,1,gene-or-protein
+"HHV-6A/B, HHV-7, B19V (composite)",0,0,1,4,tier2_only,1,other
+HHV-6B U94,0,0,1,2,tier2_only,1,gene-or-protein
+HHV-6B; HHV-7,0,0,1,2,tier2_only,1,other
+HMGB1/S100B,0,0,1,2,tier2_only,1,molecule-or-analyte
+HRG80 red ginseng,0,0,1,10,tier2_only,1,drug-or-drug-class
+HTT,0,0,1,2,tier2_only,1,gene-or-protein
+HbO,0,0,1,9,tier2_only,1,molecule-or-analyte
+Helicobacter pylori infection,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+HybridPoseNet,0,0,1,6,tier2_only,1,other
+IBA1/GFAP,0,0,1,2,tier2_only,1,gene-or-protein
+IFN-β,0,0,1,4,tier2_only,1,molecule-or-analyte
+IFN-γ,0,0,1,2,tier2_only,1,molecule-or-analyte
+IL-1,0,0,2,5,tier2_only,2,molecule-or-analyte
+IL-10,0,0,16,21,tier2_only,16,molecule-or-analyte
+IL-12 p40,0,0,1,2,tier2_only,1,molecule-or-analyte
+IL-13,0,0,5,6,tier2_only,5,molecule-or-analyte
+IL-17/IL-5/IL-6/TNF-α/IL-1β/TARC/eotaxin panel,0,0,1,2,tier2_only,1,molecule-or-analyte
+IL-17A,0,0,10,10,tier2_only,10,molecule-or-analyte
+IL-18,0,0,8,8,tier2_only,8,molecule-or-analyte
+IL-1RA,0,0,4,6,tier2_only,4,molecule-or-analyte
+IL-1beta,0,0,6,8,tier2_only,6,molecule-or-analyte
+IL-1β/IL-6/TNF-α,0,0,2,2,tier2_only,2,molecule-or-analyte
+IL-1β/TNF,0,0,1,2,tier2_only,1,molecule-or-analyte
+IL-1β/TNF/IL-6/TGF-β1,0,0,1,2,tier2_only,1,molecule-or-analyte
+IL-1β; IL-6; TNF,0,0,1,2,tier2_only,1,molecule-or-analyte
+IL-2,0,0,11,13,tier2_only,11,molecule-or-analyte
+IL-24,0,0,2,2,tier2_only,2,molecule-or-analyte
+IL-3,0,0,2,2,tier2_only,2,molecule-or-analyte
+IL-31,0,0,2,3,tier2_only,2,molecule-or-analyte
+IL-33,0,0,18,19,tier2_only,18,molecule-or-analyte
+IL-35,0,0,1,4,tier2_only,1,molecule-or-analyte
+IL-4,0,0,20,26,tier2_only,20,molecule-or-analyte
+IL-4; IL-13,0,0,2,2,tier2_only,2,molecule-or-analyte
+IL-4; IL-5; IL-13; IFN-gamma,0,0,1,2,tier2_only,1,molecule-or-analyte
+IL-5,0,0,8,9,tier2_only,8,molecule-or-analyte
+IL-6,0,0,12,13,tier2_only,12,molecule-or-analyte
+IL-6/CXCL8,0,0,2,2,tier2_only,2,molecule-or-analyte
+IL-6; IL-10; IL-1β,0,0,1,2,tier2_only,1,molecule-or-analyte
+IL-6; IL-1; TNF-alpha,0,0,2,2,tier2_only,2,molecule-or-analyte
+IL-8,0,0,21,28,tier2_only,21,molecule-or-analyte
+IL-9,0,0,2,9,tier2_only,2,molecule-or-analyte
+IPO8,0,0,2,9,tier2_only,2,gene-or-protein
+IVIG,0,0,1,2,tier2_only,1,drug-or-drug-class
+IgA,0,0,3,6,tier2_only,3,molecule-or-analyte
+IgE,0,0,39,51,tier2_only,39,molecule-or-analyte
+IgE-antigen immune complex,0,0,1,2,tier2_only,1,other
+IgG,0,0,8,17,tier2_only,8,molecule-or-analyte
+IgG autoantibodies,0,0,3,3,tier2_only,3,molecule-or-analyte
+IgM,0,0,4,4,tier2_only,4,molecule-or-analyte
+JNK,0,0,1,2,tier2_only,1,gene-or-protein
+Jollab,0,0,1,2,tier2_only,1,other
+Kounis syndrome,0,0,3,5,tier2_only,3,clinical-sign-or-condition
+Kounis syndrome type I,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+L-kynurenine,0,0,2,2,tier2_only,2,molecule-or-analyte
+LAD2 mast cell activation test,0,0,1,3,tier2_only,1,physiological-measure
+LDL cholesterol,0,0,2,2,tier2_only,2,molecule-or-analyte
+LRP1B,0,0,1,11,tier2_only,1,gene-or-protein
+LTB4/TXB2/15(S)-HPETE/12-oxoETE,0,0,1,2,tier2_only,1,molecule-or-analyte
+Lactobacillus gasseri OLL2716 (LG21),0,0,1,6,tier2_only,1,other
+MACE,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+MBCT/MBSR/ACT,0,0,1,8,tier2_only,1,other
+MCBB signature,0,0,1,4,tier2_only,1,other
+MCHR1,0,0,1,9,tier2_only,1,gene-or-protein
+MEDI4212,0,0,1,2,tier2_only,1,drug-or-drug-class
+MMP-2,0,0,2,2,tier2_only,2,molecule-or-analyte
+MMP9,0,0,7,9,tier2_only,7,gene-or-protein
+MRGPRX2/MRGPRB2,0,0,2,2,tier2_only,2,gene-or-protein
+MRI-1867,0,0,1,8,tier2_only,1,drug-or-drug-class
+MT-ND3,0,0,2,2,tier2_only,2,gene-or-protein
+Marfan syndrome,0,0,3,6,tier2_only,3,clinical-sign-or-condition
+Myelophil,0,0,2,9,tier2_only,2,drug-or-drug-class
+N-acetylaspartate,0,0,1,4,tier2_only,1,molecule-or-analyte
+N-acetylaspartate (NAA),0,0,1,2,tier2_only,1,molecule-or-analyte
+N-acetylcysteine,0,0,1,2,tier2_only,1,drug-or-drug-class
+N-methylhistamine,0,0,4,4,tier2_only,4,molecule-or-analyte
+NADH,0,0,5,10,tier2_only,5,molecule-or-analyte
+NADH; Coenzyme Q10,0,0,2,2,tier2_only,2,drug-or-drug-class
+NK cell cytotoxicity,0,0,1,11,tier2_only,1,physiological-measure
+NK cells,0,0,7,8,tier2_only,7,other
+NOTCH1/NICD/HES1,0,0,1,2,tier2_only,1,gene-or-protein
+NPY,0,0,2,4,tier2_only,2,molecule-or-analyte
+NSAIDs,0,0,2,2,tier2_only,2,drug-or-drug-class
+NSE,0,0,1,2,tier2_only,1,gene-or-protein
+NSE/GFAP/NfL/Nestin panel,0,0,1,2,tier2_only,1,gene-or-protein
+NT-proBNP,0,0,1,2,tier2_only,1,molecule-or-analyte
+NYX-2925,0,0,1,3,tier2_only,1,drug-or-drug-class
+Nepro,0,0,1,2,tier2_only,1,other
+PCSK9,0,0,1,2,tier2_only,1,gene-or-protein
+PD-1,0,0,3,11,tier2_only,3,gene-or-protein
+PDGF-BB,0,0,3,5,tier2_only,3,molecule-or-analyte
+PEA,0,0,3,11,tier2_only,3,drug-or-drug-class
+PGE2,0,0,2,2,tier2_only,2,molecule-or-analyte
+PLC/IP3/PKC/ERK pathway,0,0,2,4,tier2_only,2,other
+Panax ginseng,0,0,1,4,tier2_only,1,drug-or-drug-class
+Plexin D1-IgG,0,0,1,11,tier2_only,1,molecule-or-analyte
+Proteobacteria,0,0,2,2,tier2_only,2,other
+REMAS score,0,0,1,3,tier2_only,1,physiological-measure
+RI37 peptide,0,0,1,3,tier2_only,1,molecule-or-analyte
+Resolvin D1,0,0,2,2,tier2_only,2,molecule-or-analyte
+Ruminococcus,0,0,3,3,tier2_only,3,other
+S100A9,0,0,1,2,tier2_only,1,molecule-or-analyte
+SARS-CoV-2 IgG seropositivity,0,0,1,4,tier2_only,1,physiological-measure
+SARS-CoV-2 spike protein,0,0,1,9,tier2_only,1,molecule-or-analyte
+SCF,0,0,5,7,tier2_only,5,molecule-or-analyte
+SD-208,0,0,1,2,tier2_only,1,drug-or-drug-class
+SIK1,0,0,1,11,tier2_only,1,gene-or-protein
+SKI,0,0,3,9,tier2_only,3,gene-or-protein
+SMAD signaling,0,0,1,2,tier2_only,1,other
+SMAD2,0,0,9,9,tier2_only,9,gene-or-protein
+SMAD4,0,0,4,10,tier2_only,4,gene-or-protein
+SORD,0,0,1,11,tier2_only,1,gene-or-protein
+STAT4,0,0,1,2,tier2_only,1,gene-or-protein
+SYK,0,0,8,10,tier2_only,8,gene-or-protein
+Salvia amarissima EtOAc extract,0,0,1,3,tier2_only,1,drug-or-drug-class
+Streptococcus,0,0,2,2,tier2_only,2,other
+Strongyloides ratti,0,0,1,2,tier2_only,1,other
+T cell proliferation,0,0,1,4,tier2_only,1,physiological-measure
+T-5224,0,0,1,10,tier2_only,1,drug-or-drug-class
+T-cell receptor repertoire,0,0,1,3,tier2_only,1,physiological-measure
+TGF-beta,0,0,38,52,tier2_only,38,molecule-or-analyte
+TGF-beta 1,0,0,5,9,tier2_only,5,molecule-or-analyte
+"TGF-beta 1, CTGF",0,0,1,2,tier2_only,1,molecule-or-analyte
+TGF-β,0,0,11,19,tier2_only,11,molecule-or-analyte
+TGF-β1,0,0,2,2,tier2_only,2,molecule-or-analyte
+TGFB3,0,0,8,11,tier2_only,8,gene-or-protein
+TGFBR1/TGFBR2,0,0,4,10,tier2_only,4,gene-or-protein
+TIMP-1,0,0,4,9,tier2_only,4,gene-or-protein
+TLR4/MyD88/TRAF6/p-NF-κB,0,0,1,2,tier2_only,1,gene-or-protein
+"TNF-alpha, IL-6",0,0,4,4,tier2_only,4,molecule-or-analyte
+TRPA1,0,0,5,9,tier2_only,5,gene-or-protein
+TRPC6,0,0,1,2,tier2_only,1,gene-or-protein
+TSLP,0,0,5,7,tier2_only,5,molecule-or-analyte
+TSPO PET signal,0,0,1,2,tier2_only,1,physiological-measure
+TXB2/PGD2/PGJ2/15-keto-PGF2alpha/free AA,0,0,1,2,tier2_only,1,molecule-or-analyte
+Th17 cells,0,0,2,2,tier2_only,2,other
+VEGF-C,0,0,2,2,tier2_only,2,molecule-or-analyte
+VO2 at ventilatory threshold (VO2VT),0,0,1,2,tier2_only,1,physiological-measure
+Xiebai San (XBS),0,0,1,2,tier2_only,1,other
+ZO-1,0,0,7,9,tier2_only,7,gene-or-protein
+aaas,2,5,0,0,tier1_only,2,gene-or-protein
+abaloparatide,1,3,0,0,tier1_only,1,drug-or-drug-class
+abce1,0,0,2,2,tier2_only,2,gene-or-protein
+abdominal binder,3,3,0,0,tier1_only,3,other
+abdominal compression garment,2,5,0,0,tier1_only,2,other
+abobotulinumtoxina,1,12,0,0,tier1_only,1,drug-or-drug-class
+abrocitinib,0,0,1,7,tier2_only,1,drug-or-drug-class
+ac068672.2,0,0,1,2,tier2_only,1,gene-or-protein
+acadm,0,0,2,2,tier2_only,2,gene-or-protein
+acarbose,4,6,0,0,tier1_only,4,drug-or-drug-class
+acceleration index,2,5,0,0,tier1_only,2,physiological-measure
+ace,0,0,3,3,tier2_only,3,gene-or-protein
+ace inhibitors,0,0,2,2,tier2_only,2,drug-or-drug-class
+ace inhibitors and arbs,0,0,2,3,tier2_only,2,drug-or-drug-class
+ace2,41,58,26,47,both,67,gene-or-protein
+"ace2, tmprss2",0,0,1,4,tier2_only,1,gene-or-protein
+acetaminophen,2,4,5,7,both,7,drug-or-drug-class
+acetate,0,0,2,2,tier2_only,2,molecule-or-analyte
+acetazolamide,3,4,0,0,tier1_only,3,drug-or-drug-class
+acetyl-dl-leucine,1,7,0,0,tier1_only,1,drug-or-drug-class
+acetyl-l-carnitine,0,0,4,4,tier2_only,4,drug-or-drug-class
+acetylcarnitine,0,0,1,43,tier2_only,1,molecule-or-analyte
+acetylcholine,16,22,4,4,both,20,molecule-or-analyte
+acetylcholine receptor autoantibody,3,3,1,2,both,4,molecule-or-analyte
+ache,4,6,0,0,tier1_only,4,gene-or-protein
+acly,2,9,0,0,tier1_only,2,gene-or-protein
+acta2,0,0,5,9,tier2_only,5,gene-or-protein
+acta2 (α-sma); ctgf; col1a1; fn1,0,0,1,2,tier2_only,1,gene-or-protein
+acta2/col1a2/fn1,0,0,1,2,tier2_only,1,gene-or-protein
+actb,0,0,2,2,tier2_only,2,gene-or-protein
+acth/cortisol response to crh stimulation,0,0,1,2,tier2_only,1,physiological-measure
+actin,0,0,2,3,tier2_only,2,gene-or-protein
+actin (alpha-actin-1); actin (gamma-actin),0,0,1,2,tier2_only,1,gene-or-protein
+activated mast cells,0,0,4,5,tier2_only,4,other
+active tryptase,0,0,1,2,tier2_only,1,molecule-or-analyte
+activin B,0,0,2,9,tier2_only,2,molecule-or-analyte
+activin a,0,0,1,3,tier2_only,1,molecule-or-analyte
+activity pacing,0,0,2,3,tier2_only,2,other
+actn2,1,4,0,0,tier1_only,1,gene-or-protein
+actr3,0,0,1,4,tier2_only,1,gene-or-protein
+acupuncture,0,0,2,4,tier2_only,2,other
+acute kidney injury,1,3,0,0,tier1_only,1,clinical-sign-or-condition
+acyclovir,3,3,3,4,both,6,drug-or-drug-class
+acylcarnitine,0,0,3,4,tier2_only,3,molecule-or-analyte
+adam17,0,0,1,2,tier2_only,1,gene-or-protein
+adamts14,0,0,1,2,tier2_only,1,gene-or-protein
+adamts2,0,0,11,82,tier2_only,11,gene-or-protein
+adamtsl2,0,0,3,6,tier2_only,3,gene-or-protein
+adenosine,0,0,2,2,tier2_only,2,molecule-or-analyte
+adenosine a2b receptor,0,0,5,6,tier2_only,5,gene-or-protein
+adenylate cyclase,1,8,0,0,tier1_only,1,gene-or-protein
+adgre1,0,0,2,2,tier2_only,2,gene-or-protein
+adgre2,0,0,2,2,tier2_only,2,gene-or-protein
+adhd stimulants,1,3,0,0,tier1_only,1,drug-or-drug-class
+adiponectin,3,4,3,3,both,6,molecule-or-analyte
+adora2a,0,0,1,2,tier2_only,1,gene-or-protein
+adra1,0,0,2,3,tier2_only,2,gene-or-protein
+adra1a,0,0,3,5,tier2_only,3,gene-or-protein
+adra2a,0,0,2,2,tier2_only,2,gene-or-protein
+adrb1,2,6,3,4,both,5,gene-or-protein
+adrb2,6,13,10,16,both,16,gene-or-protein
+adrenal gland,0,0,4,4,tier2_only,4,other
+adrenergic receptor autoantibody,14,15,0,0,tier1_only,14,clinical-sign-or-condition
+adrenomedullin,0,0,2,6,tier2_only,2,molecule-or-analyte
+aebp1,0,0,5,13,tier2_only,5,gene-or-protein
+aflatoxin,0,0,1,2,tier2_only,1,molecule-or-analyte
+aflibercept,0,0,1,4,tier2_only,1,drug-or-drug-class
+age,42,43,9,12,both,51,other
+agtr1,0,0,1,4,tier2_only,1,gene-or-protein
+ahr,0,0,2,3,tier2_only,2,gene-or-protein
+aif1,0,0,2,2,tier2_only,2,gene-or-protein
+aim2,0,0,1,3,tier2_only,1,gene-or-protein
+akkermansia muciniphila,0,0,3,3,tier2_only,3,other
+akt,0,0,7,8,tier2_only,7,gene-or-protein
+akt1,0,0,3,3,tier2_only,3,gene-or-protein
+al34k2,0,0,1,5,tier2_only,1,drug-or-drug-class
+alada,0,0,1,4,tier2_only,1,gene-or-protein
+alada; al34k2,0,0,1,2,tier2_only,1,other
+alanine,0,0,5,6,tier2_only,5,molecule-or-analyte
+alanine aminotransferase,0,0,3,3,tier2_only,3,molecule-or-analyte
+albendazole,2,3,0,0,tier1_only,2,drug-or-drug-class
+albumin,16,16,5,6,both,21,molecule-or-analyte
+aldosterone,15,19,4,4,both,19,molecule-or-analyte
+"alistipes, faecalibacterium",0,0,2,2,tier2_only,2,other
+alkaline phosphatase,4,5,2,2,both,6,molecule-or-analyte
+allodynia,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+allopurinol,0,0,1,4,tier2_only,1,drug-or-drug-class
+aloe-emodin,0,0,1,2,tier2_only,1,drug-or-drug-class
+alpha power (eeg),1,3,0,0,tier1_only,1,physiological-measure
+alpha-1 adrenergic receptor,4,4,1,1,both,5,gene-or-protein
+alpha-1 adrenergic receptor autoantibody,7,8,0,0,tier1_only,7,molecule-or-analyte
+alpha-2 adrenergic receptor,2,3,0,0,tier1_only,2,gene-or-protein
+alpha-amylase,0,0,2,6,tier2_only,2,molecule-or-analyte
+alpha-delta sleep pattern,0,0,2,3,tier2_only,2,physiological-measure
+alpha-gal ige sensitization,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+alpha-gal specific ige,0,0,1,4,tier2_only,1,molecule-or-analyte
+alpha-galactosidase A,0,0,8,10,tier2_only,8,gene-or-protein
+alpha-helical crh,0,0,1,2,tier2_only,1,drug-or-drug-class
+alpha-ketoglutarate,0,0,3,5,tier2_only,3,molecule-or-analyte
+alpha-lactalbumin; beta-lactoglobulin,0,0,1,2,tier2_only,1,molecule-or-analyte
+alpha-linolenic acid,0,0,5,10,tier2_only,5,molecule-or-analyte
+alpha-lipoic acid,5,5,2,2,both,7,molecule-or-analyte
+alpha-synuclein oligomers,0,0,1,4,tier2_only,1,molecule-or-analyte
+alpha-tocopherol,0,0,3,3,tier2_only,3,molecule-or-analyte
+alpha-tryptase,0,0,3,3,tier2_only,3,gene-or-protein
+alpha/beta ratio (eeg),1,10,0,0,tier1_only,1,physiological-measure
+aluminum,1,5,0,0,tier1_only,1,molecule-or-analyte
+amarisolide A,0,0,2,6,tier2_only,2,drug-or-drug-class
+ambp,0,0,1,2,tier2_only,1,gene-or-protein
+amitriptyline,9,11,11,12,both,20,drug-or-drug-class
+amlodipine,3,5,1,1,both,4,drug-or-drug-class
+ammonia,0,0,2,2,tier2_only,2,molecule-or-analyte
+amphiregulin,0,0,2,2,tier2_only,2,molecule-or-analyte
+ampk,0,0,5,5,tier2_only,5,gene-or-protein
+ampreloxetine,9,26,0,0,tier1_only,9,drug-or-drug-class
+amygdala,2,3,1,2,both,3,other
+amyloid,0,0,1,2,tier2_only,1,molecule-or-analyte
+amyloid beta 42,1,3,0,0,tier1_only,1,molecule-or-analyte
+anakinra,2,3,1,1,both,3,drug-or-drug-class
+anandamide,0,0,1,4,tier2_only,1,molecule-or-analyte
+andrographolide,0,0,1,2,tier2_only,1,drug-or-drug-class
+anger,0,0,1,2,tier2_only,1,other
+angiopoietin-2,0,0,1,3,tier2_only,1,molecule-or-analyte
+angiotensin (1-7),1,7,2,2,both,3,molecule-or-analyte
+angiotensin ii,20,27,3,4,both,23,molecule-or-analyte
+angiotensin ii type 1 receptor autoantibody,1,3,0,0,tier1_only,1,molecule-or-analyte
+angiotensin receptor blockers (ARBs),0,0,1,2,tier2_only,1,drug-or-drug-class
+angiotensin-(1-7),0,0,1,2,tier2_only,1,molecule-or-analyte
+ansindex,1,4,0,0,tier1_only,1,physiological-measure
+anterior cervical revision surgery,0,0,1,2,tier2_only,1,other
+anterior cingulate cortex,0,0,4,6,tier2_only,4,other
+anterior cingulate gyri,1,6,0,0,tier1_only,1,other
+anterior insula,2,4,1,1,both,3,other
+anterior nasal nerves,1,3,0,0,tier1_only,1,other
+anterior talofibular ligament,0,0,2,7,tier2_only,2,other
+anthocyanins,0,0,1,2,tier2_only,1,drug-or-drug-class
+anthracycline,2,3,0,0,tier1_only,2,drug-or-drug-class
+anti-CASPR2/anti-LGI1/anti-FGFR3/anti-TS-HDS/anti-plexin D1 antibodies,0,0,1,2,tier2_only,1,molecule-or-analyte
+anti-FGFR3 antibody,0,0,2,3,tier2_only,2,molecule-or-analyte
+anti-FcεRI IgG autoantibody,0,0,1,2,tier2_only,1,molecule-or-analyte
+anti-Scl-70 antibody,0,0,1,3,tier2_only,1,molecule-or-analyte
+anti-cdtb antibody,0,0,1,3,tier2_only,1,molecule-or-analyte
+anti-flagellin antibody,0,0,2,4,tier2_only,2,molecule-or-analyte
+anti-gfap antibody,0,0,1,2,tier2_only,1,molecule-or-analyte
+anti-phosphatidylinositol IgM antibodies,0,0,1,2,tier2_only,1,molecule-or-analyte
+anti-sars-cov-2 spike s1 protein-specific ige,0,0,1,2,tier2_only,1,molecule-or-analyte
+anti-thyroid peroxidase antibody,0,0,3,5,tier2_only,3,molecule-or-analyte
+anticardiolipin antibody,0,0,1,2,tier2_only,1,molecule-or-analyte
+anticentromere antibody,0,0,1,2,tier2_only,1,molecule-or-analyte
+anticonvulsants,0,0,2,2,tier2_only,2,drug-or-drug-class
+antidepressants,0,0,4,4,tier2_only,4,drug-or-drug-class
+antihistamines,0,0,5,5,tier2_only,5,drug-or-drug-class
+antihypertensive therapy,2,10,0,0,tier1_only,2,drug-or-drug-class
+antinuclear antibody,17,17,15,21,both,32,molecule-or-analyte
+antiphospholipid antibodies,5,8,1,1,both,6,molecule-or-analyte
+antiphospholipid syndrome,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+antipsychotic,3,5,0,0,tier1_only,3,drug-or-drug-class
+antivirals (acyclovir; valganciclovir),0,0,1,2,tier2_only,1,drug-or-drug-class
+anxiety,8,10,4,4,both,12,clinical-sign-or-condition
+anxiety disorder,0,0,3,3,tier2_only,3,clinical-sign-or-condition
+anxiety disorders,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+aoc1,0,0,2,16,tier2_only,2,gene-or-protein
+aorta,0,0,2,2,tier2_only,2,other
+aortic root,0,0,2,2,tier2_only,2,other
+aortic root dilation,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+apathy,1,4,0,0,tier1_only,1,clinical-sign-or-condition
+apigenin,0,0,1,3,tier2_only,1,molecule-or-analyte
+apnea-hypopnea index,5,5,0,0,tier1_only,5,physiological-measure
+apoe,3,9,1,1,both,4,gene-or-protein
+apolipoprotein a1,1,4,0,0,tier1_only,1,molecule-or-analyte
+apomorphine,3,6,0,0,tier1_only,3,drug-or-drug-class
+apoo (mic26),0,0,1,2,tier2_only,1,gene-or-protein
+aqp4,4,5,0,0,tier1_only,4,gene-or-protein
+aqp4 autoantibody,1,3,0,0,tier1_only,1,molecule-or-analyte
+ara h 1,0,0,1,3,tier2_only,1,molecule-or-analyte
+ara h 2-specific ige,0,0,1,2,tier2_only,1,molecule-or-analyte
+ara h 2/total ige ratio,0,0,1,3,tier2_only,1,physiological-measure
+arachidonic acid,0,0,2,2,tier2_only,2,molecule-or-analyte
+areg; ptgs2; tnf; hspa1a; map3k8; malt1; ccl3; ccl4; il6,0,0,1,2,tier2_only,1,gene-or-protein
+arf1,0,0,2,6,tier2_only,2,gene-or-protein
+arhgef28,0,0,1,3,tier2_only,1,gene-or-protein
+aripiprazole,0,0,5,18,tier2_only,5,drug-or-drug-class
+artemisinic acid,0,0,1,4,tier2_only,1,molecule-or-analyte
+arterial blood pressure,0,0,1,2,tier2_only,1,physiological-measure
+arterial compliance,2,3,0,0,tier1_only,2,physiological-measure
+arterial stiffness,2,3,0,0,tier1_only,2,physiological-measure
+aryl hydrocarbon receptor,0,0,2,2,tier2_only,2,gene-or-protein
+ascending arousal network midbrain nuclei,0,0,1,2,tier2_only,1,physiological-measure
+ascorbic acid,2,7,6,10,both,8,molecule-or-analyte
+asic1a,0,0,1,2,tier2_only,1,gene-or-protein
+asic2,1,3,0,0,tier1_only,1,gene-or-protein
+asic3,0,0,1,3,tier2_only,1,gene-or-protein
+asp0819,0,0,1,8,tier2_only,1,drug-or-drug-class
+asparagine,0,0,1,2,tier2_only,1,molecule-or-analyte
+aspartic acid,0,0,2,2,tier2_only,2,molecule-or-analyte
+aspergillus,0,0,2,2,tier2_only,2,other
+aspirin,0,0,5,5,tier2_only,5,drug-or-drug-class
+astragalus,0,0,1,2,tier2_only,1,drug-or-drug-class
+astragalus membranaceus extract,1,3,0,0,tier1_only,1,drug-or-drug-class
+atenolol,4,6,0,0,tier1_only,4,drug-or-drug-class
+atf3,2,3,1,2,both,3,gene-or-protein
+atf6,0,0,3,6,tier2_only,3,gene-or-protein
+atg13,0,0,1,3,tier2_only,1,gene-or-protein
+atg5; atg7,0,0,1,2,tier2_only,1,gene-or-protein
+atomoxetine,19,26,0,0,tier1_only,19,drug-or-drug-class
+atopic dermatitis,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+atp,6,6,14,16,both,20,molecule-or-analyte
+atp production,0,0,1,2,tier2_only,1,physiological-measure
+atp synthase,0,0,3,4,tier2_only,3,gene-or-protein
+atp2c1,0,0,1,2,tier2_only,1,gene-or-protein
+atrial fibrillation,6,7,0,0,tier1_only,6,clinical-sign-or-condition
+atropine,6,6,2,2,both,8,drug-or-drug-class
+attentional performance,1,4,0,0,tier1_only,1,physiological-measure
+atxn3,1,3,0,0,tier1_only,1,gene-or-protein
+augmentation index (AIx75),0,0,1,3,tier2_only,1,physiological-measure
+autoantibody,10,12,2,2,both,12,molecule-or-analyte
+autonomic dysfunction,28,34,0,0,tier1_only,28,clinical-sign-or-condition
+autonomic failure,4,4,0,0,tier1_only,4,clinical-sign-or-condition
+autonomic nervous system,9,10,0,0,tier1_only,9,other
+autonomic nervous system function,3,3,1,1,both,4,physiological-measure
+autonomic symptom burden,4,9,0,0,tier1_only,4,physiological-measure
+autophagy,0,0,2,2,tier2_only,2,other
+autotaxin,0,0,2,2,tier2_only,2,molecule-or-analyte
+avapritinib,0,0,4,8,tier2_only,4,drug-or-drug-class
+avp,0,0,1,2,tier2_only,1,molecule-or-analyte
+axial diffusivity,0,0,2,6,tier2_only,2,physiological-measure
+axin2,0,0,2,2,tier2_only,2,gene-or-protein
+azithromycin,0,0,2,2,tier2_only,2,drug-or-drug-class
+b cells (cd19+b220+),0,0,1,3,tier2_only,1,other
+b3galt6,0,0,10,21,tier2_only,10,gene-or-protein
+b3gat3,0,0,2,3,tier2_only,2,gene-or-protein
+bace1,0,0,1,4,tier2_only,1,gene-or-protein
+baclofen,5,5,1,1,both,6,drug-or-drug-class
+bacterial dna,0,0,1,2,tier2_only,1,molecule-or-analyte
+bacteroidaceae,0,0,3,3,tier2_only,3,other
+bacteroidales,0,0,2,2,tier2_only,2,other
+bacteroides,5,6,3,4,both,8,other
+bacteroides ovatus,0,0,2,2,tier2_only,2,other
+bacteroides thetaiotaomicron,0,0,2,2,tier2_only,2,other
+bacteroidetes,4,4,6,6,both,10,other
+baevsky stress index,2,5,0,0,tier1_only,2,physiological-measure
+baroreflex,6,6,0,0,tier1_only,6,physiological-measure
+baroreflex sensitivity,43,75,4,10,both,47,physiological-measure
+barzolvolimab,0,0,2,2,tier2_only,2,drug-or-drug-class
+basal forebrain cholinergic neurons,0,0,2,2,tier2_only,2,other
+basal respiration,0,0,1,2,tier2_only,1,physiological-measure
+bascule syndrome,2,4,0,0,tier1_only,2,clinical-sign-or-condition
+basophil activation test (bat),0,0,2,2,tier2_only,2,physiological-measure
+baxdrostat,0,0,1,2,tier2_only,1,drug-or-drug-class
+bcam,0,0,1,2,tier2_only,1,gene-or-protein
+bcg,0,0,1,3,tier2_only,1,other
+bdkrb1,1,3,0,0,tier1_only,1,gene-or-protein
+bdnf,13,17,17,35,both,30,gene-or-protein
+beclin-1,0,0,1,3,tier2_only,1,gene-or-protein
+becn1; lc3b,0,0,1,2,tier2_only,1,gene-or-protein
+benzodiazepine,5,7,1,1,both,6,drug-or-drug-class
+berberine,0,0,4,5,tier2_only,4,drug-or-drug-class
+beta eeg power spectrum,0,0,1,2,tier2_only,1,physiological-measure
+beta power (eeg),1,8,0,0,tier1_only,1,physiological-measure
+beta-1 adrenergic receptor autoantibody,4,5,0,0,tier1_only,4,clinical-sign-or-condition
+beta-2 adrenergic receptor autoantibody,8,13,1,2,both,9,clinical-sign-or-condition
+beta-alanine,0,0,2,2,tier2_only,2,molecule-or-analyte
+beta-blocker,22,28,3,3,both,25,drug-or-drug-class
+beta-catenin,0,0,2,2,tier2_only,2,gene-or-protein
+beta-defensin 2,0,0,1,4,tier2_only,1,gene-or-protein
+beta-endorphin,0,0,7,7,tier2_only,7,molecule-or-analyte
+beta-glucan,0,0,1,2,tier2_only,1,molecule-or-analyte
+beta-hexosaminidase,0,0,13,14,tier2_only,13,gene-or-protein
+beta-hydroxybutyrate,0,0,2,8,tier2_only,2,molecule-or-analyte
+beta-hydroxyisovalerate,0,0,1,2,tier2_only,1,molecule-or-analyte
+bifidobacteria probiotic,0,0,1,2,tier2_only,1,drug-or-drug-class
+bifidobacterium,0,0,4,4,tier2_only,4,other
+bifidobacterium infantis,0,0,1,2,tier2_only,1,other
+bifidobacterium longum,0,0,2,2,tier2_only,2,other
+biglycan,0,0,2,2,tier2_only,2,gene-or-protein
+bile acid,0,0,2,2,tier2_only,2,molecule-or-analyte
+bilirubin,0,0,2,2,tier2_only,2,molecule-or-analyte
+bisoprolol,11,13,0,0,tier1_only,11,drug-or-drug-class
+bisphenol A (BPA),0,0,1,2,tier2_only,1,molecule-or-analyte
+bjcul,0,0,1,2,tier2_only,1,other
+blautia,0,0,1,2,tier2_only,1,other
+blink reflex latency,0,0,1,2,tier2_only,1,physiological-measure
+blood pressure,57,75,2,2,both,59,physiological-measure
+blood pressure recovery,2,5,0,0,tier1_only,2,physiological-measure
+blood pressure variability,11,16,0,0,tier1_only,11,physiological-measure
+blood volume,10,12,0,0,tier1_only,10,physiological-measure
+blood volume deviation,1,3,0,0,tier1_only,1,physiological-measure
+blood-brain barrier,0,0,2,5,tier2_only,2,other
+blood-brain barrier permeability,0,0,1,2,tier2_only,1,physiological-measure
+bmpr2,0,0,2,4,tier2_only,2,gene-or-protein
+bms-986187,0,0,1,5,tier2_only,1,drug-or-drug-class
+bnt162b2 covid-19 vaccine,1,3,0,0,tier1_only,1,drug-or-drug-class
+body fat mass,0,0,2,2,tier2_only,2,physiological-measure
+body fat percentage,0,0,2,2,tier2_only,2,physiological-measure
+body mass index,28,32,21,27,both,49,physiological-measure
+body weight,3,3,1,1,both,4,physiological-measure
+bone marrow mesenchymal stem cells,0,0,1,2,tier2_only,1,other
+bone mineral density,2,9,4,6,both,6,physiological-measure
+bony sulcus angle,0,0,1,2,tier2_only,1,physiological-measure
+borrelia burgdorferi,1,6,4,5,both,5,other
+bortezomib,3,4,2,5,both,5,drug-or-drug-class
+botulinum toxin,4,9,1,3,both,5,drug-or-drug-class
+botulinum toxin type a,8,17,0,0,tier1_only,8,drug-or-drug-class
+botulinum toxin type b,2,6,0,0,tier1_only,2,drug-or-drug-class
+brachial artery blood flow,1,5,0,0,tier1_only,1,physiological-measure
+bradykinin,0,0,4,7,tier2_only,4,molecule-or-analyte
+bradykinin b1 receptor (bdkrb1),0,0,1,2,tier2_only,1,gene-or-protein
+brain iron (R2* relaxation rate),0,0,1,4,tier2_only,1,physiological-measure
+brain oxygenation (bold signal),0,0,1,2,tier2_only,1,physiological-measure
+brainstem,0,0,1,4,tier2_only,1,other
+brat1,1,7,0,0,tier1_only,1,gene-or-protein
+brd4,0,0,3,5,tier2_only,3,gene-or-protein
+brl37344,1,4,0,0,tier1_only,1,drug-or-drug-class
+bromelain,0,0,1,2,tier2_only,1,drug-or-drug-class
+bromocriptine,2,3,0,0,tier1_only,2,drug-or-drug-class
+btk,0,0,3,3,tier2_only,3,gene-or-protein
+budesonide,0,0,3,5,tier2_only,3,drug-or-drug-class
+bumetanide,0,0,2,7,tier2_only,2,drug-or-drug-class
+bupropion,4,5,1,3,both,5,drug-or-drug-class
+butyrate,3,4,8,10,both,11,molecule-or-analyte
+butyrate-producing bacteria,0,0,2,2,tier2_only,2,other
+butyrate-producing gut bacteria,0,0,2,2,tier2_only,2,other
+c nociceptor,1,4,0,0,tier1_only,1,other
+c-peptide,5,6,1,1,both,6,molecule-or-analyte
+c-reactive protein,46,55,41,53,both,87,molecule-or-analyte
+"c-src, shp-1",0,0,1,2,tier2_only,1,gene-or-protein
+c1 inhibitor,0,0,1,2,tier2_only,1,molecule-or-analyte
+c16 glucosylceramide,1,7,0,0,tier1_only,1,molecule-or-analyte
+c1r/c1s,0,0,6,6,tier2_only,6,gene-or-protein
+c3,0,0,2,3,tier2_only,2,molecule-or-analyte
+c3; c4,0,0,2,2,tier2_only,2,molecule-or-analyte
+c5a,0,0,3,3,tier2_only,3,molecule-or-analyte
+c9orf72,2,6,0,0,tier1_only,2,gene-or-protein
+cAMP,0,0,4,4,tier2_only,4,molecule-or-analyte
+ca1 body volume,0,0,1,2,tier2_only,1,physiological-measure
+ca4 head volume,0,0,1,2,tier2_only,1,physiological-measure
+cacna1c,0,0,1,5,tier2_only,1,gene-or-protein
+cacna1e,0,0,1,6,tier2_only,1,gene-or-protein
+cacna1s,0,0,2,5,tier2_only,2,gene-or-protein
+cact (slc25a20),0,0,1,2,tier2_only,1,gene-or-protein
+caffeic acid,0,0,1,4,tier2_only,1,molecule-or-analyte
+caffeine,4,5,3,3,both,7,drug-or-drug-class
+calcitonin gene-related peptide,13,17,12,15,both,25,molecule-or-analyte
+calcitriol,0,0,1,2,tier2_only,1,drug-or-drug-class
+calcium,0,0,10,11,tier2_only,10,molecule-or-analyte
+calcium channel blocker,8,10,1,1,both,9,drug-or-drug-class
+calcium ion,0,0,1,2,tier2_only,1,molecule-or-analyte
+camkii,0,0,2,4,tier2_only,2,gene-or-protein
+campylobacter jejuni,5,5,2,2,both,7,other
+candida,0,0,3,3,tier2_only,3,other
+cannabidiol,0,0,3,3,tier2_only,3,drug-or-drug-class
+cannabinoids,0,0,5,10,tier2_only,5,drug-or-drug-class
+cannabis,0,0,2,3,tier2_only,2,drug-or-drug-class
+cannabis-based medicinal products,0,0,1,2,tier2_only,1,drug-or-drug-class
+cannabis-based medicine,0,0,1,2,tier2_only,1,drug-or-drug-class
+capsaicin,0,0,2,3,tier2_only,2,drug-or-drug-class
+carbachol,0,0,2,2,tier2_only,2,drug-or-drug-class
+carbidopa,6,12,0,0,tier1_only,6,drug-or-drug-class
+carbon dioxide,4,7,0,0,tier1_only,4,molecule-or-analyte
+carboplatin,3,3,1,2,both,4,drug-or-drug-class
+cardiac autonomic dysfunction,3,5,1,1,both,4,clinical-sign-or-condition
+cardiac autonomic neuropathy,17,23,0,0,tier1_only,17,clinical-sign-or-condition
+cardiac index,10,13,0,0,tier1_only,10,physiological-measure
+cardiac output,12,14,3,5,both,15,physiological-measure
+cardiac sympathetic innervation,6,6,0,0,tier1_only,6,physiological-measure
+cardiac vagal tone,0,0,1,2,tier2_only,1,physiological-measure
+cardiovagal function,6,6,0,0,tier1_only,6,physiological-measure
+cardiovascular autonomic neuropathy,6,9,0,0,tier1_only,6,clinical-sign-or-condition
+cardiovascular disease,1,5,0,0,tier1_only,1,clinical-sign-or-condition
+cardiovascular disease history,1,4,0,0,tier1_only,1,other
+carnitine,0,0,6,6,tier2_only,6,molecule-or-analyte
+carnosic acid,0,0,1,4,tier2_only,1,drug-or-drug-class
+carnosine,0,0,1,2,tier2_only,1,molecule-or-analyte
+carotid arterial strain,1,7,0,0,tier1_only,1,physiological-measure
+carotid baroreceptor,1,4,0,0,tier1_only,1,other
+carvedilol,6,13,0,0,tier1_only,6,drug-or-drug-class
+caspase-1 and caspase-4,0,0,1,3,tier2_only,1,gene-or-protein
+caspase-3,0,0,7,9,tier2_only,7,gene-or-protein
+"caspase-3, bcl-2",0,0,1,2,tier2_only,1,gene-or-protein
+caspr2,5,11,0,0,tier1_only,5,gene-or-protein
+caspr2 autoantibody,7,20,1,2,both,8,molecule-or-analyte
+casticin,0,0,1,2,tier2_only,1,drug-or-drug-class
+catalase,0,0,2,3,tier2_only,2,molecule-or-analyte
+catecholamines,26,30,0,0,tier1_only,26,molecule-or-analyte
+catestatin,1,5,0,0,tier1_only,1,molecule-or-analyte
+cationic liposomal carotenoids (beta-carotene; lutein),0,0,1,2,tier2_only,1,drug-or-drug-class
+caudate nucleus,1,4,2,3,both,3,other
+caveolin-1,0,0,1,3,tier2_only,1,gene-or-protein
+ccdc134,0,0,1,3,tier2_only,1,gene-or-protein
+ccl11,4,4,4,9,both,8,gene-or-protein
+ccl11 and cxcl10,0,0,2,3,tier2_only,2,molecule-or-analyte
+ccl19,0,0,1,3,tier2_only,1,gene-or-protein
+ccl23,0,0,1,2,tier2_only,1,gene-or-protein
+ccl4,1,6,3,3,both,4,gene-or-protein
+ccl5,4,4,2,3,both,6,gene-or-protein
+ccn2,0,0,11,25,tier2_only,11,gene-or-protein
+ccna2,0,0,1,3,tier2_only,1,gene-or-protein
+ccnb1,0,0,1,2,tier2_only,1,gene-or-protein
+ccnb2,0,0,1,2,tier2_only,1,gene-or-protein
+ccvhf,0,0,1,2,tier2_only,1,physiological-measure
+cd117,0,0,1,2,tier2_only,1,gene-or-protein
+cd14,1,9,1,1,both,2,gene-or-protein
+cd160,0,0,1,4,tier2_only,1,gene-or-protein
+cd19,0,0,1,2,tier2_only,1,gene-or-protein
+cd19; cd47; cd52; cd79a; cd164,0,0,1,2,tier2_only,1,gene-or-protein
+cd20,0,0,1,2,tier2_only,1,gene-or-protein
+cd203c,0,0,1,2,tier2_only,1,gene-or-protein
+cd226; cd48; cd70,0,0,1,2,tier2_only,1,gene-or-protein
+cd25,0,0,2,2,tier2_only,2,gene-or-protein
+cd25+foxp3+ regulatory t cells,0,0,1,2,tier2_only,1,other
+cd27,0,0,1,2,tier2_only,1,gene-or-protein
+cd30,0,0,2,4,tier2_only,2,gene-or-protein
+cd300a,0,0,2,2,tier2_only,2,gene-or-protein
+cd300f,0,0,3,4,tier2_only,3,gene-or-protein
+cd34,0,0,4,4,tier2_only,4,gene-or-protein
+cd38,0,0,3,5,tier2_only,3,gene-or-protein
+cd3e,0,0,1,2,tier2_only,1,gene-or-protein
+cd4+ t cells,0,0,5,8,tier2_only,5,other
+cd41a,0,0,1,2,tier2_only,1,gene-or-protein
+cd44,0,0,3,5,tier2_only,3,gene-or-protein
+cd45,0,0,1,2,tier2_only,1,gene-or-protein
+cd48,0,0,1,2,tier2_only,1,gene-or-protein
+cd63,0,0,2,4,tier2_only,2,gene-or-protein
+cd68,3,3,3,4,both,6,gene-or-protein
+cd8,2,3,0,0,tier1_only,2,gene-or-protein
+cd86,0,0,1,2,tier2_only,1,gene-or-protein
+cd96,0,0,2,2,tier2_only,2,gene-or-protein
+cdh1,2,3,3,3,both,5,gene-or-protein
+cdkn2d,1,2,0,0,tier1_only,1,gene-or-protein
+cebpd,0,0,1,3,tier2_only,1,gene-or-protein
+celiac artery,2,3,1,4,both,3,other
+celiac disease,5,7,1,1,both,6,clinical-sign-or-condition
+celiprolol,0,0,24,29,tier2_only,24,drug-or-drug-class
+cell-free heme,0,0,1,2,tier2_only,1,molecule-or-analyte
+cell-free mitochondrial DNA integrity,0,0,1,3,tier2_only,1,physiological-measure
+celsr1,1,3,0,0,tier1_only,1,gene-or-protein
+center of pressure mean velocity,0,0,1,4,tier2_only,1,physiological-measure
+central airway resistance,1,3,0,0,tier1_only,1,physiological-measure
+central autonomic network functional connectivity,1,3,0,0,tier1_only,1,physiological-measure
+central sensitisation,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+central sensitivity syndrome,0,0,1,4,tier2_only,1,clinical-sign-or-condition
+central sensitization,0,0,3,6,tier2_only,3,clinical-sign-or-condition
+central sensitization inventory,0,0,2,2,tier2_only,2,physiological-measure
+central sensitization inventory score,0,0,1,2,tier2_only,1,physiological-measure
+ceramide,0,0,3,3,tier2_only,3,molecule-or-analyte
+ceramides,0,0,2,2,tier2_only,2,molecule-or-analyte
+cerebellum,0,0,3,7,tier2_only,3,other
+cerebral autoregulation,6,9,0,0,tier1_only,6,physiological-measure
+cerebral blood flow,18,45,5,5,both,23,physiological-measure
+cerebral blood flow velocity,16,34,0,0,tier1_only,16,physiological-measure
+cerebral blood flow velocity (mca),0,0,1,2,tier2_only,1,physiological-measure
+cerebral total hemoglobin,1,4,0,0,tier1_only,1,physiological-measure
+cerebrospinal fluid pressure,0,0,1,4,tier2_only,1,physiological-measure
+cerebrospinal fluid protein,7,7,0,0,tier1_only,7,molecule-or-analyte
+cerebrovascular resistance,3,6,0,0,tier1_only,3,physiological-measure
+cervical lordosis,0,0,2,2,tier2_only,2,physiological-measure
+cesium,0,0,1,4,tier2_only,1,molecule-or-analyte
+cetn3,0,0,1,4,tier2_only,1,gene-or-protein
+cetn3; cacna1e,0,0,1,2,tier2_only,1,gene-or-protein
+cfh,0,0,1,2,tier2_only,1,gene-or-protein
+cftr,1,3,2,3,both,3,gene-or-protein
+cgas; sting,0,0,1,2,tier2_only,1,gene-or-protein
+chat,8,9,8,11,both,16,gene-or-protein
+chemokines,0,0,2,2,tier2_only,2,molecule-or-analyte
+childhood trauma,0,0,1,3,tier2_only,1,other
+cholecystokinin,0,0,1,2,tier2_only,1,molecule-or-analyte
+cholesterol,0,0,2,5,tier2_only,2,molecule-or-analyte
+choline,5,8,7,9,both,12,molecule-or-analyte
+choline acetyltransferase,0,0,5,10,tier2_only,5,gene-or-protein
+cholinomiRs,0,0,1,2,tier2_only,1,gene-or-protein
+chop,0,0,2,2,tier2_only,2,gene-or-protein
+choroidal blood flow,0,0,1,4,tier2_only,1,physiological-measure
+chrm1,0,0,2,2,tier2_only,2,gene-or-protein
+chrm2,0,0,1,2,tier2_only,1,gene-or-protein
+chrm3,0,0,3,4,tier2_only,3,gene-or-protein
+chrm4,0,0,1,4,tier2_only,1,gene-or-protein
+chrna3,3,10,1,1,both,4,gene-or-protein
+chrna7,3,8,1,2,both,4,gene-or-protein
+chromogranin a,0,0,2,2,tier2_only,2,molecule-or-analyte
+chronic fatigue,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+chronic fatigue syndrome,0,0,9,15,tier2_only,9,clinical-sign-or-condition
+chronic kidney disease,3,3,2,3,both,5,clinical-sign-or-condition
+chronic urticaria,0,0,1,6,tier2_only,1,clinical-sign-or-condition
+chronotropic incompetence,5,10,1,1,both,6,clinical-sign-or-condition
+chst14,0,0,12,40,tier2_only,12,gene-or-protein
+chymase,0,0,8,13,tier2_only,8,molecule-or-analyte
+cilp2; cga; fshb,0,0,1,2,tier2_only,1,gene-or-protein
+cingulate gyrus,0,0,1,3,tier2_only,1,other
+cingulate gyrus oxygenation,0,0,1,3,tier2_only,1,physiological-measure
+ciprofloxacin,0,0,2,2,tier2_only,2,drug-or-drug-class
+circulating tumor mast cells,0,0,1,10,tier2_only,1,other
+"cistanche tubulosa extract, ginkgo biloba extract",0,0,1,2,tier2_only,1,drug-or-drug-class
+citrate,0,0,3,5,tier2_only,3,molecule-or-analyte
+citrulline,0,0,5,5,tier2_only,5,molecule-or-analyte
+cladribine,0,0,2,2,tier2_only,2,drug-or-drug-class
+clarithromycin,0,0,2,2,tier2_only,2,drug-or-drug-class
+classical ehlers-danlos syndrome,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+clathrin; caveolin,0,0,1,2,tier2_only,1,gene-or-protein
+claudin-1,0,0,3,3,tier2_only,3,gene-or-protein
+claudin-2,0,0,2,2,tier2_only,2,gene-or-protein
+clec12b,0,0,1,3,tier2_only,1,gene-or-protein
+clec4a,0,0,1,3,tier2_only,1,gene-or-protein
+clec4m,0,0,1,2,tier2_only,1,gene-or-protein
+clic4,0,0,1,16,tier2_only,1,gene-or-protein
+clock,0,0,2,2,tier2_only,2,gene-or-protein
+clomipramine,0,0,2,2,tier2_only,2,drug-or-drug-class
+clonal hematopoiesis of indeterminate potential,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+clonal mast cell disorder,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+clonazepam,4,4,0,0,tier1_only,4,drug-or-drug-class
+clonidine,16,19,2,2,both,18,drug-or-drug-class
+clostridiales,0,0,2,2,tier2_only,2,other
+closure technique,1,3,0,0,tier1_only,1,other
+cma1,0,0,3,5,tier2_only,3,gene-or-protein
+cnr2,0,0,1,2,tier2_only,1,gene-or-protein
+cns autoantibody neurodegeneration index (cai),0,0,1,3,tier2_only,1,physiological-measure
+cntnap2,0,0,2,2,tier2_only,2,gene-or-protein
+"coagulation factor XIIIa, mast cell protease 4",0,0,1,2,tier2_only,1,molecule-or-analyte
+coefficient of variation of rr intervals,2,4,0,0,tier1_only,2,physiological-measure
+coenzyme Q10 + NADH,0,0,3,6,tier2_only,3,drug-or-drug-class
+coenzyme Q10 supplementation,0,0,1,2,tier2_only,1,drug-or-drug-class
+coenzyme q10,6,19,20,49,both,26,molecule-or-analyte
+coenzyme q10 + nadh,0,0,1,8,tier2_only,1,drug-or-drug-class
+coenzyme q10; nadh,0,0,2,2,tier2_only,2,molecule-or-analyte
+coenzyme q10; selenium,0,0,2,2,tier2_only,2,molecule-or-analyte
+cofilin,0,0,1,2,tier2_only,1,gene-or-protein
+cognitive behavioral therapy,0,0,1,4,tier2_only,1,other
+cognitive efficiency,0,0,1,2,tier2_only,1,physiological-measure
+cognitive failures questionnaire,1,4,0,0,tier1_only,1,physiological-measure
+cognitive function,5,7,0,0,tier1_only,5,physiological-measure
+cognitive impairment,9,14,1,2,both,10,clinical-sign-or-condition
+cognitive restructuring,0,0,1,4,tier2_only,1,other
+col12a1,0,0,16,43,tier2_only,16,gene-or-protein
+col14a1,0,0,1,2,tier2_only,1,gene-or-protein
+col15a1,0,0,2,2,tier2_only,2,gene-or-protein
+col1a1,0,0,22,42,tier2_only,22,gene-or-protein
+col1a1/col1a2,0,0,9,14,tier2_only,9,gene-or-protein
+col1a2,0,0,21,35,tier2_only,21,gene-or-protein
+col22a1,0,0,3,5,tier2_only,3,gene-or-protein
+col2a1,0,0,2,2,tier2_only,2,gene-or-protein
+col3a1,3,3,124,247,both,127,gene-or-protein
+col3a1; col1a1,0,0,1,2,tier2_only,1,gene-or-protein
+col4a1,0,0,3,4,tier2_only,3,gene-or-protein
+col5a1,0,0,37,112,tier2_only,37,gene-or-protein
+col5a1/col5a2,0,0,6,6,tier2_only,6,gene-or-protein
+col5a2,0,0,6,12,tier2_only,6,gene-or-protein
+col6a1; col6a2; col6a3,0,0,1,2,tier2_only,1,gene-or-protein
+col6a5,0,0,2,2,tier2_only,2,gene-or-protein
+colchicine,0,0,1,2,tier2_only,1,drug-or-drug-class
+cold detection threshold,0,0,3,3,tier2_only,3,physiological-measure
+cold pain threshold,0,0,2,2,tier2_only,2,physiological-measure
+collagen,0,0,17,18,tier2_only,17,other
+collagen I; collagen III,0,0,2,2,tier2_only,2,molecule-or-analyte
+collagen III fibrils,0,0,2,2,tier2_only,2,other
+collagen IV (α1α1α2),0,0,1,2,tier2_only,1,gene-or-protein
+collagen alpha-1(V) chain,0,0,1,2,tier2_only,1,gene-or-protein
+collagen fiber,0,0,1,3,tier2_only,1,other
+collagen fibril,0,0,3,4,tier2_only,3,other
+collagen fibril diameter,0,0,1,2,tier2_only,1,physiological-measure
+collagen fibrils,0,0,6,6,tier2_only,6,other
+collagen iii,0,0,2,3,tier2_only,2,other
+collagen type i; collagen type vi,0,0,1,2,tier2_only,1,gene-or-protein
+collagen type vi,0,0,1,4,tier2_only,1,gene-or-protein
+collagen type vi; collagen type xii,0,0,1,2,tier2_only,1,molecule-or-analyte
+collagen v,0,0,2,3,tier2_only,2,gene-or-protein
+collagen xi,0,0,1,7,tier2_only,1,gene-or-protein
+colonic motility index,0,0,1,2,tier2_only,1,physiological-measure
+colonic transit time,0,0,1,2,tier2_only,1,physiological-measure
+combined aerobic and resistance training,3,4,0,0,tier1_only,3,other
+common iliac vein stenting,1,3,0,0,tier1_only,1,other
+compass-31,18,59,2,8,both,20,physiological-measure
+compass-31 autonomic symptom score,0,0,3,3,tier2_only,3,physiological-measure
+compass-31 total score,1,4,0,0,tier1_only,1,physiological-measure
+complement C1q,0,0,2,5,tier2_only,2,molecule-or-analyte
+complement C3,0,0,7,16,tier2_only,7,molecule-or-analyte
+complement C3c,0,0,1,6,tier2_only,1,molecule-or-analyte
+complement C4,0,0,9,13,tier2_only,9,molecule-or-analyte
+complement c2,0,0,2,3,tier2_only,2,molecule-or-analyte
+complement c3a,0,0,2,2,tier2_only,2,molecule-or-analyte
+complement c3b,1,3,0,0,tier1_only,1,molecule-or-analyte
+complement c4a,0,0,1,2,tier2_only,1,molecule-or-analyte
+complement component C4,0,0,2,2,tier2_only,2,molecule-or-analyte
+complement component c7,1,3,0,0,tier1_only,1,molecule-or-analyte
+complement panel,0,0,1,2,tier2_only,1,molecule-or-analyte
+complement system,2,4,1,1,both,3,other
+composite autonomic severity score,2,5,0,0,tier1_only,2,physiological-measure
+compound 48/80,0,0,6,6,tier2_only,6,drug-or-drug-class
+compression stockings,3,3,0,0,tier1_only,3,other
+compression tights,1,8,0,0,tier1_only,1,other
+comt,7,19,10,28,both,17,gene-or-protein
+condyle-C1 interval,0,0,1,2,tier2_only,1,physiological-measure
+connective tissue disease,0,0,3,3,tier2_only,3,clinical-sign-or-condition
+constipation,9,10,0,0,tier1_only,9,clinical-sign-or-condition
+contact dermatitis,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+copd (chronic obstructive pulmonary disease),0,0,1,2,tier2_only,1,clinical-sign-or-condition
+copper,0,0,2,3,tier2_only,2,molecule-or-analyte
+copper; hemoglobin,0,0,1,2,tier2_only,1,molecule-or-analyte
+copy-neutral loss of heterozygosity,0,0,1,2,tier2_only,1,other
+coq2,4,6,0,0,tier1_only,4,gene-or-protein
+corneal confocal microscopy,0,0,2,2,tier2_only,2,other
+corneal nerve branch density,0,0,4,6,tier2_only,4,physiological-measure
+corneal nerve fiber density,4,7,9,17,both,13,physiological-measure
+corneal nerve fiber density and length,0,0,2,2,tier2_only,2,physiological-measure
+corneal nerve fiber length,4,5,8,21,both,12,physiological-measure
+corneal nerve fiber parameters,0,0,2,2,tier2_only,2,physiological-measure
+corneal nerve fiber tortuosity,0,0,2,2,tier2_only,2,physiological-measure
+corneal nerve fibers,0,0,3,3,tier2_only,3,other
+corneal subbasal nerve fibers,0,0,1,2,tier2_only,1,other
+corneal subbasal plexus nerve density,0,0,1,4,tier2_only,1,physiological-measure
+corpus callosum,2,2,1,1,both,3,other
+cortical autonomic network,0,0,1,2,tier2_only,1,other
+cortical bone area,0,0,1,2,tier2_only,1,physiological-measure
+cortical bone mineral content,0,0,1,2,tier2_only,1,physiological-measure
+corticosteroid,13,14,6,7,both,19,drug-or-drug-class
+corticosterone,4,5,4,6,both,8,molecule-or-analyte
+corticotropin-releasing factor,0,0,1,2,tier2_only,1,molecule-or-analyte
+corticotropin-releasing hormone,4,4,9,11,both,13,molecule-or-analyte
+cortisol,41,72,48,92,both,89,molecule-or-analyte
+cortisol / hpa axis,0,0,2,2,tier2_only,2,physiological-measure
+"cortisol, acth",0,0,2,2,tier2_only,2,molecule-or-analyte
+cortisol; ACTH,0,0,2,2,tier2_only,2,molecule-or-analyte
+cortistatin,0,0,1,8,tier2_only,1,molecule-or-analyte
+covid-19,2,4,0,0,tier1_only,2,clinical-sign-or-condition
+covid-19 vaccination,0,0,1,5,tier2_only,1,other
+cox inhibitor,0,0,1,2,tier2_only,1,drug-or-drug-class
+cox7c,0,0,1,2,tier2_only,1,gene-or-protein
+coxiella burnetii,1,4,1,2,both,2,other
+coxsackievirus,1,5,0,0,tier1_only,1,other
+cpa3,0,0,3,5,tier2_only,3,gene-or-protein
+craniocervical instability,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+creatine,0,0,2,8,tier2_only,2,molecule-or-analyte
+creatine kinase,7,8,14,15,both,21,molecule-or-analyte
+creatine monohydrate,0,0,1,2,tier2_only,1,drug-or-drug-class
+creatinine,9,9,11,14,both,20,molecule-or-analyte
+creatinine clearance,0,0,1,2,tier2_only,1,physiological-measure
+crh,0,0,4,4,tier2_only,4,molecule-or-analyte
+crh-r1,0,0,1,5,tier2_only,1,gene-or-protein
+crhr1,0,0,2,4,tier2_only,2,gene-or-protein
+crhr2,0,0,4,6,tier2_only,4,gene-or-protein
+crocin,0,0,1,2,tier2_only,1,drug-or-drug-class
+cromoglycate,0,0,1,2,tier2_only,1,drug-or-drug-class
+cromolyn,0,0,9,17,tier2_only,9,drug-or-drug-class
+cromolyn sodium,0,0,8,14,tier2_only,8,drug-or-drug-class
+crtap,0,0,1,6,tier2_only,1,gene-or-protein
+csf2; csf3,0,0,1,2,tier2_only,1,gene-or-protein
+csk,0,0,1,3,tier2_only,1,gene-or-protein
+ct38s,0,0,1,8,tier2_only,1,drug-or-drug-class
+ctgf,0,0,15,47,tier2_only,15,gene-or-protein
+ctgf; fibronectin; col3a1; alpha-sma; e-cadherin,0,0,1,2,tier2_only,1,gene-or-protein
+ctgf; zeb1,0,0,1,2,tier2_only,1,gene-or-protein
+ctla4,0,0,2,2,tier2_only,2,gene-or-protein
+ctnnb1,0,0,2,6,tier2_only,2,gene-or-protein
+cupping,0,0,1,2,tier2_only,1,other
+curcumin,1,9,4,14,both,5,drug-or-drug-class
+cutaneous mastocytosis,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+cutaneous silent period duration,0,0,1,2,tier2_only,1,physiological-measure
+cutaneous silent period parameters,0,0,1,5,tier2_only,1,physiological-measure
+cutibacterium acnes,0,0,1,2,tier2_only,1,other
+cvrr,0,0,1,2,tier2_only,1,physiological-measure
+cx3cr1,0,0,2,5,tier2_only,2,gene-or-protein
+cxcl1,0,0,3,3,tier2_only,3,molecule-or-analyte
+cxcr1; cxcr2,0,0,2,2,tier2_only,2,gene-or-protein
+cyclobenzaprine,0,0,2,2,tier2_only,2,drug-or-drug-class
+cyclopentolate,0,0,1,4,tier2_only,1,drug-or-drug-class
+cyclophosphamide,0,0,2,3,tier2_only,2,drug-or-drug-class
+cyclosporine A,0,0,3,4,tier2_only,3,drug-or-drug-class
+cyp21a2,0,0,9,16,tier2_only,9,gene-or-protein
+cyp21a2/cyp21a1p,0,0,1,3,tier2_only,1,gene-or-protein
+cyp24a1,1,6,0,0,tier1_only,1,gene-or-protein
+cyp27b1,1,4,0,0,tier1_only,1,gene-or-protein
+cyp2d6,4,6,2,2,both,6,gene-or-protein
+cyp2e1,1,3,0,0,tier1_only,1,gene-or-protein
+cyp2r1,1,8,0,0,tier1_only,1,gene-or-protein
+cyproheptadine,3,12,1,1,both,4,drug-or-drug-class
+cytochrome b,0,0,1,4,tier2_only,1,gene-or-protein
+cytokines,0,0,5,6,tier2_only,5,molecule-or-analyte
+d-dimer,9,13,5,7,both,14,molecule-or-analyte
+d-lactate,0,0,3,4,tier2_only,3,molecule-or-analyte
+d-lactate-producing bacteria,0,0,1,2,tier2_only,1,other
+d1-like dopamine receptor,1,3,0,0,tier1_only,1,gene-or-protein
+da-9701,1,6,0,0,tier1_only,1,drug-or-drug-class
+dactolisib,0,0,1,6,tier2_only,1,drug-or-drug-class
+damgo,0,0,1,3,tier2_only,1,drug-or-drug-class
+dao,0,0,2,7,tier2_only,2,gene-or-protein
+dapagliflozin,5,8,0,0,tier1_only,5,drug-or-drug-class
+dasatinib,0,0,2,2,tier2_only,2,drug-or-drug-class
+dbh,7,11,2,2,both,9,gene-or-protein
+dbn1,2,4,0,0,tier1_only,2,gene-or-protein
+dbsi hindered fraction,0,0,1,2,tier2_only,1,physiological-measure
+dbsi restricted fraction,0,0,1,4,tier2_only,1,physiological-measure
+dcn,0,0,3,5,tier2_only,3,gene-or-protein
+deceleration capacity,6,22,0,0,tier1_only,6,physiological-measure
+decorin,0,0,8,13,tier2_only,8,gene-or-protein
+decorin; dermatan sulfate,0,0,1,2,tier2_only,1,molecule-or-analyte
+deep vein thrombosis,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+default mode network,0,0,3,4,tier2_only,3,physiological-measure
+default mode network connectivity,0,0,2,2,tier2_only,2,physiological-measure
+degraded porphyra haitanensis sulfated polysaccharide (dphsp),0,0,1,3,tier2_only,1,drug-or-drug-class
+delta opioid receptor,0,0,1,3,tier2_only,1,gene-or-protein
+dengue virus,2,3,2,2,both,4,other
+denosumab,0,0,3,9,tier2_only,3,drug-or-drug-class
+deoxygenated hemoglobin,3,3,0,0,tier1_only,3,physiological-measure
+depression,13,16,11,14,both,24,clinical-sign-or-condition
+depressive symptoms,0,0,4,9,tier2_only,4,clinical-sign-or-condition
+der f 40,0,0,1,8,tier2_only,1,molecule-or-analyte
+dermal collagen,0,0,2,2,tier2_only,2,other
+dermal collagen fiber bundles,1,5,0,0,tier1_only,1,other
+dermal elastic fibers,0,0,1,2,tier2_only,1,other
+dermatan sulfate,0,0,6,9,tier2_only,6,molecule-or-analyte
+dermatan sulfate / chondroitin sulfate,0,0,2,3,tier2_only,2,molecule-or-analyte
+dermatan sulfate disaccharides,0,0,1,2,tier2_only,1,molecule-or-analyte
+dermatophytosis,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+dermcidin,0,0,1,2,tier2_only,1,molecule-or-analyte
+desmopressin,13,15,0,0,tier1_only,13,drug-or-drug-class
+dexamethasone,3,5,5,5,both,8,drug-or-drug-class
+dexmedetomidine,12,15,1,1,both,13,drug-or-drug-class
+dextromethorphan,0,0,1,6,tier2_only,1,drug-or-drug-class
+dextrose prolotherapy,0,0,1,3,tier2_only,1,drug-or-drug-class
+dfa scaling exponent,1,4,0,0,tier1_only,1,physiological-measure
+dhea,0,0,1,2,tier2_only,1,molecule-or-analyte
+dhrsx,0,0,1,2,tier2_only,1,gene-or-protein
+diabetes duration,10,12,0,0,tier1_only,10,other
+diabetes mellitus,12,13,3,3,both,15,clinical-sign-or-condition
+diabetic autonomic neuropathy,9,10,0,0,tier1_only,9,clinical-sign-or-condition
+diabetic nephropathy,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+diabetic neuropathy,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+diabetic peripheral neuropathy,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+diabetic retinopathy,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+diamine oxidase,0,0,3,5,tier2_only,3,molecule-or-analyte
+diaphragm,0,0,1,3,tier2_only,1,other
+diastolic blood pressure,45,54,2,2,both,47,physiological-measure
+diazinon,0,0,1,4,tier2_only,1,molecule-or-analyte
+diclofenac,0,0,2,2,tier2_only,2,drug-or-drug-class
+dietary inflammatory index,0,0,1,2,tier2_only,1,physiological-measure
+dietary non-heme iron,0,0,1,2,tier2_only,1,molecule-or-analyte
+dietary sodium intake,1,6,0,0,tier1_only,1,other
+dihydroartemisinin,0,0,1,3,tier2_only,1,drug-or-drug-class
+dihydrocoumarin,0,0,1,3,tier2_only,1,drug-or-drug-class
+dihydrosphingolipids,1,3,0,0,tier1_only,1,molecule-or-analyte
+dimethyl fumarate,0,0,2,5,tier2_only,2,drug-or-drug-class
+dio3os,0,0,1,6,tier2_only,1,gene-or-protein
+diosgenin,0,0,1,2,tier2_only,1,molecule-or-analyte
+diosmin,0,0,1,2,tier2_only,1,drug-or-drug-class
+disease duration,3,3,1,1,both,4,other
+disequilibrium,1,4,0,0,tier1_only,1,clinical-sign-or-condition
+distribution entropy,0,0,1,12,tier2_only,1,physiological-measure
+disturbance of smell and taste,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+diuretic,4,4,0,0,tier1_only,4,drug-or-drug-class
+diurnal rhythm disruption,1,2,0,0,tier1_only,1,clinical-sign-or-condition
+dkk3,0,0,2,3,tier2_only,2,gene-or-protein
+dnm1l,0,0,1,2,tier2_only,1,gene-or-protein
+dnmt1,6,12,1,2,both,7,gene-or-protein
+dnmt3a,0,0,2,5,tier2_only,2,gene-or-protein
+dock8,0,0,1,2,tier2_only,1,gene-or-protein
+domestic abuse exposure,0,0,1,7,tier2_only,1,other
+dopamine,30,46,12,17,both,42,molecule-or-analyte
+dopamine transporter striatal binding ratio,2,14,0,0,tier1_only,2,physiological-measure
+dorsal motor nucleus of the vagus,2,3,0,0,tier1_only,2,other
+dorsal root ganglia,0,0,1,2,tier2_only,1,other
+dorsal root ganglion neurons,0,0,1,2,tier2_only,1,other
+dorsolateral prefrontal cortex,0,0,1,2,tier2_only,1,other
+doxazosin,2,3,0,0,tier1_only,2,drug-or-drug-class
+doxycycline,0,0,3,3,tier2_only,3,drug-or-drug-class
+dpp-4 inhibitor,2,4,0,0,tier1_only,2,drug-or-drug-class
+dpp4,1,9,1,2,both,2,gene-or-protein
+drd2,4,4,1,1,both,5,gene-or-protein
+drd3,0,0,1,2,tier2_only,1,gene-or-protein
+droxidopa,33,50,0,0,tier1_only,33,drug-or-drug-class
+dse,0,0,9,16,tier2_only,9,gene-or-protein
+dsel,0,0,2,5,tier2_only,2,gene-or-protein
+dst,8,44,0,0,tier1_only,8,gene-or-protein
+duloxetine,26,54,4,15,both,30,drug-or-drug-class
+dupilumab,0,0,11,15,tier2_only,11,drug-or-drug-class
+dysautonomia,22,39,2,2,both,24,clinical-sign-or-condition
+dysfunctional breathing pattern,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+dyslipidemia,0,0,2,4,tier2_only,2,clinical-sign-or-condition
+dysphagia,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+dystrophin,0,0,1,2,tier2_only,1,gene-or-protein
+e/i ratio,3,5,0,0,tier1_only,3,physiological-measure
+ebastine,0,0,4,4,tier2_only,4,drug-or-drug-class
+ebna4_0529; ebna6_0070 (ebv peptide antigens),0,0,1,2,tier2_only,1,molecule-or-analyte
+ebv dutpase,0,0,5,5,tier2_only,5,gene-or-protein
+ebv vca igm antibody,0,0,2,2,tier2_only,2,molecule-or-analyte
+ecm1,0,0,1,3,tier2_only,1,gene-or-protein
+edaravone,2,3,0,0,tier1_only,2,drug-or-drug-class
+edn1,0,0,1,3,tier2_only,1,gene-or-protein
+edn1; ntf3,0,0,1,5,tier2_only,1,gene-or-protein
+eeg spectral power,1,3,0,0,tier1_only,1,physiological-measure
+efemp1,0,0,1,2,tier2_only,1,gene-or-protein
+efemp2,0,0,1,3,tier2_only,1,gene-or-protein
+efnb2; ephb2,0,0,1,4,tier2_only,1,gene-or-protein
+egfr,4,7,1,1,both,5,gene-or-protein
+egr1,0,0,2,5,tier2_only,2,gene-or-protein
+egr2,0,0,1,4,tier2_only,1,gene-or-protein
+ehlers-danlos syndrome,15,18,21,31,both,36,clinical-sign-or-condition
+eicosapentaenoic acid,0,0,2,2,tier2_only,2,molecule-or-analyte
+elastic fibers,0,0,2,3,tier2_only,2,other
+elastin,0,0,4,4,tier2_only,4,gene-or-protein
+electrical risk score,1,8,0,0,tier1_only,1,physiological-measure
+electroacupuncture,0,0,2,2,tier2_only,2,other
+electrochemical skin conductance,9,36,2,6,both,11,physiological-measure
+electrogastrography,0,0,1,2,tier2_only,1,physiological-measure
+electromechanical activation time,1,8,0,0,tier1_only,1,physiological-measure
+ellagic acid,0,0,1,2,tier2_only,1,drug-or-drug-class
+eln,0,0,2,3,tier2_only,2,gene-or-protein
+elp1,53,203,0,0,tier1_only,53,gene-or-protein
+elp1 mrna splicing,1,3,0,0,tier1_only,1,other
+elp3,3,3,0,0,tier1_only,3,gene-or-protein
+empagliflozin,4,6,0,0,tier1_only,4,drug-or-drug-class
+empirical dietary inflammatory pattern,0,0,1,2,tier2_only,1,physiological-measure
+employment status,0,0,2,2,tier2_only,2,other
+end-tidal co2,16,21,1,2,both,17,physiological-measure
+endogenous opioids,0,0,2,2,tier2_only,2,molecule-or-analyte
+endothelial dysfunction,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+endothelial function,0,0,3,3,tier2_only,3,physiological-measure
+endothelial progenitor cells (CD34+/CD144+),0,0,1,2,tier2_only,1,other
+endothelin receptor type a autoantibody,1,4,0,0,tier1_only,1,molecule-or-analyte
+endothelin-1,6,9,8,13,both,14,molecule-or-analyte
+endothelium,0,0,3,3,tier2_only,3,other
+eno2,0,0,1,4,tier2_only,1,gene-or-protein
+enos,0,0,3,6,tier2_only,3,gene-or-protein
+enteric glial cell mediators,0,0,1,2,tier2_only,1,other
+enterovirus,0,0,4,7,tier2_only,4,other
+eosinophil-derived neurotoxin,0,0,1,2,tier2_only,1,molecule-or-analyte
+eosinophils,5,6,21,26,both,26,other
+ep2 receptor (ptger2),0,0,1,2,tier2_only,1,gene-or-protein
+ep3 receptor antagonist,0,0,1,2,tier2_only,1,drug-or-drug-class
+ephedrine,4,4,0,0,tier1_only,4,drug-or-drug-class
+epidermal nerve fiber density,5,7,2,2,both,7,physiological-measure
+epidermal nerve fiber density (pgp9.5-immunolabeled),0,0,1,2,tier2_only,1,physiological-measure
+epidermal neurite density,0,0,1,3,tier2_only,1,physiological-measure
+epinephrine,43,58,5,7,both,48,molecule-or-analyte
+epstein-barr virus,9,10,26,29,both,35,other
+erbb4,1,5,0,0,tier1_only,1,gene-or-protein
+erbin,0,0,3,3,tier2_only,3,gene-or-protein
+ereg,0,0,1,2,tier2_only,1,gene-or-protein
+erenumab,1,3,0,0,tier1_only,1,drug-or-drug-class
+ergothioneine,0,0,1,3,tier2_only,1,molecule-or-analyte
+erk,0,0,5,6,tier2_only,5,gene-or-protein
+erk1/2,0,0,8,9,tier2_only,8,gene-or-protein
+erythrocyte sedimentation rate,0,0,3,3,tier2_only,3,physiological-measure
+erythropoietin,4,6,0,0,tier1_only,4,molecule-or-analyte
+erα,0,0,1,2,tier2_only,1,gene-or-protein
+escitalopram,0,0,2,2,tier2_only,2,drug-or-drug-class
+esmolol,2,3,0,0,tier1_only,2,drug-or-drug-class
+esomeprazole,0,0,1,2,tier2_only,1,drug-or-drug-class
+esr1,0,0,1,3,tier2_only,1,gene-or-protein
+essential fatty acids,0,0,1,2,tier2_only,1,molecule-or-analyte
+estimated glomerular filtration rate,4,6,0,0,tier1_only,4,physiological-measure
+estimated glucose disposal rate,1,5,0,0,tier1_only,1,physiological-measure
+estradiol,3,13,5,8,both,8,molecule-or-analyte
+estrogen,5,7,7,7,both,12,molecule-or-analyte
+estrogen receptor beta,0,0,2,2,tier2_only,2,gene-or-protein
+ethnicity,0,0,1,2,tier2_only,1,other
+ethyl ferulate,0,0,1,2,tier2_only,1,molecule-or-analyte
+ets1,0,0,1,2,tier2_only,1,gene-or-protein
+executive function,1,6,0,0,tier1_only,1,physiological-measure
+exendin-4,0,0,2,5,tier2_only,2,drug-or-drug-class
+exercise-induced hypoalgesia,0,0,1,2,tier2_only,1,physiological-measure
+experiential avoidance,0,0,1,3,tier2_only,1,other
+external abdominal oblique muscle,0,0,1,2,tier2_only,1,other
+extra virgin olive oil,0,0,1,2,tier2_only,1,other
+extracellular vesicle,0,0,1,2,tier2_only,1,other
+extracellular vesicle proteins,0,0,1,2,tier2_only,1,molecule-or-analyte
+extracellular vesicles,0,0,7,11,tier2_only,7,other
+extraversion,0,0,1,2,tier2_only,1,other
+extreme hypermobility,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+ezh2,0,0,2,5,tier2_only,2,gene-or-protein
+f-actin,0,0,2,2,tier2_only,2,other
+f2-isoprostanes,0,0,3,5,tier2_only,3,molecule-or-analyte
+f2rl1,0,0,9,15,tier2_only,9,gene-or-protein
+fabp5,1,5,0,0,tier1_only,1,gene-or-protein
+factor viii,3,3,0,0,tier1_only,3,molecule-or-analyte
+faecal calprotectin,0,0,1,10,tier2_only,1,molecule-or-analyte
+faecalibacterium,5,5,2,4,both,7,other
+faecalibacterium prausnitzii,4,4,6,9,both,10,other
+faf1,0,0,1,2,tier2_only,1,gene-or-protein
+fam20a,0,0,1,2,tier2_only,1,gene-or-protein
+family history of cervical artery dissection (CeAD),0,0,1,2,tier2_only,1,other
+famotidine,0,0,4,11,tier2_only,4,drug-or-drug-class
+fas,3,4,0,0,tier1_only,3,gene-or-protein
+fascia shear modulus,0,0,1,2,tier2_only,1,physiological-measure
+fat attenuation index,0,0,1,6,tier2_only,1,physiological-measure
+fat3,1,5,0,0,tier1_only,1,gene-or-protein
+fatigue,10,17,10,13,both,20,clinical-sign-or-condition
+fatigue ratio,0,0,1,2,tier2_only,1,physiological-measure
+fatigue severity,0,0,2,2,tier2_only,2,physiological-measure
+fatty acid beta-oxidation enzymes,0,0,1,2,tier2_only,1,other
+fatty acid oxidation,0,0,3,3,tier2_only,3,physiological-measure
+fbn1,0,0,21,61,tier2_only,21,gene-or-protein
+fbn1; cav1.2,0,0,1,2,tier2_only,1,gene-or-protein
+fbn2,0,0,3,3,tier2_only,3,gene-or-protein
+fcer1,0,0,1,2,tier2_only,1,gene-or-protein
+fcer1a,0,0,5,19,tier2_only,5,gene-or-protein
+fcer1b,0,0,1,3,tier2_only,1,gene-or-protein
+fcer1g,0,0,3,4,tier2_only,3,gene-or-protein
+fcgr1a,1,5,0,0,tier1_only,1,gene-or-protein
+fcεri,0,0,1,3,tier2_only,1,gene-or-protein
+fecal elastase-1,0,0,2,2,tier2_only,2,molecule-or-analyte
+fecal microbiota transplantation,0,0,4,5,tier2_only,4,other
+fecal microbiota transplantation (FMT),0,0,2,2,tier2_only,2,other
+fenebrutinib,0,0,2,10,tier2_only,2,drug-or-drug-class
+fermentable carbohydrates (fodmaps),0,0,1,2,tier2_only,1,other
+ferric carboxymaltose,0,0,3,3,tier2_only,3,drug-or-drug-class
+ferritin,6,8,7,17,both,13,molecule-or-analyte
+ffar3,0,0,1,2,tier2_only,1,gene-or-protein
+fgf18,0,0,1,2,tier2_only,1,gene-or-protein
+fgf21,0,0,2,2,tier2_only,2,molecule-or-analyte
+fgfr1,0,0,1,3,tier2_only,1,gene-or-protein
+fgfr2,0,0,1,3,tier2_only,1,gene-or-protein
+fgfr3,0,0,2,2,tier2_only,2,gene-or-protein
+fgfr3 autoantibody,2,3,0,0,tier1_only,2,molecule-or-analyte
+fgti-2734,0,0,1,4,tier2_only,1,drug-or-drug-class
+fib-4 index,2,5,0,0,tier1_only,2,physiological-measure
+fibrillin-1,0,0,2,3,tier2_only,2,gene-or-protein
+fibrinaloid microclot,4,8,3,6,both,7,other
+fibrinogen,0,0,3,3,tier2_only,3,molecule-or-analyte
+fibroblast,0,0,1,2,tier2_only,1,other
+fibroblast growth factor 21,0,0,1,3,tier2_only,1,molecule-or-analyte
+fibromuscular dysplasia,0,0,4,7,tier2_only,4,clinical-sign-or-condition
+fibromyalgia,7,7,24,37,both,31,clinical-sign-or-condition
+filum terminale,0,0,2,10,tier2_only,2,other
+firmicutes,3,3,4,4,both,7,other
+"firmicutes, actinobacteria, bacteroidetes",0,0,1,2,tier2_only,1,other
+first ray sagittal plane motion,0,0,1,3,tier2_only,1,physiological-measure
+fis-40 physical fatigue scale,0,0,1,2,tier2_only,1,physiological-measure
+fisetin,0,0,2,2,tier2_only,2,molecule-or-analyte
+fkbp14,0,0,8,14,tier2_only,8,gene-or-protein
+flavonoids/polyphenols,0,0,1,2,tier2_only,1,molecule-or-analyte
+flcn,0,0,1,3,tier2_only,1,gene-or-protein
+flg,1,3,0,0,tier1_only,1,gene-or-protein
+flna,0,0,3,5,tier2_only,3,gene-or-protein
+flow-mediated dilation,8,12,3,3,both,11,physiological-measure
+fluconazole,0,0,2,2,tier2_only,2,drug-or-drug-class
+fludrocortisone,61,72,3,3,both,64,drug-or-drug-class
+fluoroquinolones,0,0,3,8,tier2_only,3,drug-or-drug-class
+fluoxetine,3,3,5,16,both,8,drug-or-drug-class
+fluvastatin,0,0,2,5,tier2_only,2,drug-or-drug-class
+fluvoxamine,3,3,0,0,tier1_only,3,drug-or-drug-class
+flvcr1,3,8,0,0,tier1_only,3,gene-or-protein
+fmr1,2,4,4,16,both,6,gene-or-protein
+fn1,0,0,11,18,tier2_only,11,gene-or-protein
+folic acid,0,0,3,3,tier2_only,3,molecule-or-analyte
+food-specific IgE,0,0,1,2,tier2_only,1,molecule-or-analyte
+formononetin,0,0,1,2,tier2_only,1,molecule-or-analyte
+fos,4,15,7,8,both,11,gene-or-protein
+foxp3,0,0,5,7,tier2_only,5,gene-or-protein
+fractional anisotropy,0,0,1,2,tier2_only,1,physiological-measure
+fractional anisotropy; mean diffusivity; radial diffusivity,0,0,1,2,tier2_only,1,physiological-measure
+frailty,4,7,0,0,tier1_only,4,clinical-sign-or-condition
+free ige,0,0,2,2,tier2_only,2,molecule-or-analyte
+free light chains,0,0,1,7,tier2_only,1,molecule-or-analyte
+free testosterone,0,0,1,5,tier2_only,1,molecule-or-analyte
+fremanezumab,0,0,1,4,tier2_only,1,drug-or-drug-class
+fresolimumab,0,0,1,2,tier2_only,1,drug-or-drug-class
+fuligo plantae carbon dots,1,5,0,0,tier1_only,1,other
+functional ability,1,3,0,0,tier1_only,1,physiological-measure
+functional connectivity metrics,0,0,1,2,tier2_only,1,physiological-measure
+functional dyspepsia,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+furosemide,2,3,0,0,tier1_only,2,drug-or-drug-class
+fusobacterium nucleatum,0,0,1,7,tier2_only,1,other
+fyn,0,0,3,7,tier2_only,3,gene-or-protein
+fyn; rhoa; lyn,0,0,1,2,tier2_only,1,gene-or-protein
+g protein-coupled receptor autoantibody,8,8,2,2,both,10,molecule-or-analyte
+g-protein-coupled receptor autoantibody,2,3,0,0,tier1_only,2,molecule-or-analyte
+gaba,13,15,13,18,both,26,molecule-or-analyte
+gaba-a receptor,3,3,2,2,both,5,gene-or-protein
+gabaa receptor,0,0,2,2,tier2_only,2,gene-or-protein
+gabapentin,11,18,5,5,both,16,drug-or-drug-class
+gabapentinoid,6,7,2,2,both,8,drug-or-drug-class
+gabrb3,0,0,2,2,tier2_only,2,gene-or-protein
+gad65; gad67,0,0,1,2,tier2_only,1,gene-or-protein
+gadd45b,0,0,2,3,tier2_only,2,gene-or-protein
+gadolinium,0,0,1,6,tier2_only,1,drug-or-drug-class
+gadolinium-based contrast agent,0,0,2,3,tier2_only,2,drug-or-drug-class
+galactocerebroside autoantibody,1,3,0,0,tier1_only,1,molecule-or-analyte
+galanin,0,0,5,8,tier2_only,5,molecule-or-analyte
+galcanezumab,3,5,0,0,tier1_only,3,drug-or-drug-class
+galectin-3,0,0,2,2,tier2_only,2,molecule-or-analyte
+galectin-9,0,0,3,3,tier2_only,3,molecule-or-analyte
+gallamine,0,0,1,3,tier2_only,1,drug-or-drug-class
+gallic acid,0,0,2,5,tier2_only,2,drug-or-drug-class
+gallstones,1,4,0,0,tier1_only,1,clinical-sign-or-condition
+ganglionic acetylcholine receptor autoantibody,36,66,1,1,both,37,molecule-or-analyte
+ganglioside,1,3,0,0,tier1_only,1,molecule-or-analyte
+ganglioside autoantibody,14,14,0,0,tier1_only,14,molecule-or-analyte
+gap43,0,0,2,7,tier2_only,2,gene-or-protein
+gastric emptying,0,0,2,3,tier2_only,2,physiological-measure
+gastroparesis,6,9,0,0,tier1_only,6,clinical-sign-or-condition
+gba1,7,15,0,0,tier1_only,7,gene-or-protein
+gbp1,1,6,1,1,both,2,gene-or-protein
+gc-ml-dg head volume,0,0,1,2,tier2_only,1,physiological-measure
+gch1,0,0,4,9,tier2_only,4,gene-or-protein
+gcsaml,0,0,1,5,tier2_only,1,gene-or-protein
+gdf-15,0,0,1,5,tier2_only,1,molecule-or-analyte
+gdf8,0,0,1,2,tier2_only,1,gene-or-protein
+gdnf,0,0,3,5,tier2_only,3,gene-or-protein
+generalised joint hypermobility,0,0,5,14,tier2_only,5,clinical-sign-or-condition
+generalized joint hypermobility,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+generalized worry,0,0,1,2,tier2_only,1,other
+genipin,2,14,0,0,tier1_only,2,molecule-or-analyte
+genistein,0,0,2,4,tier2_only,2,molecule-or-analyte
+gfap,13,21,12,16,both,25,gene-or-protein
+gfap autoantibody,1,3,0,0,tier1_only,1,molecule-or-analyte
+ghrelin,2,3,2,2,both,4,molecule-or-analyte
+gi-specific avoidance behaviour,0,0,1,2,tier2_only,1,physiological-measure
+ginger,0,0,2,2,tier2_only,2,drug-or-drug-class
+ginseng,0,0,3,5,tier2_only,3,drug-or-drug-class
+ginseng stem and leaf saponins,0,0,1,2,tier2_only,1,drug-or-drug-class
+givosiran,4,5,1,2,both,5,drug-or-drug-class
+gla,0,0,2,4,tier2_only,2,gene-or-protein
+gli2,0,0,1,2,tier2_only,1,gene-or-protein
+gliotoxin,0,0,2,3,tier2_only,2,molecule-or-analyte
+global longitudinal strain,7,8,0,0,tier1_only,7,physiological-measure
+glp-1,3,4,1,1,both,4,molecule-or-analyte
+glp-1 receptor agonist,13,20,1,2,both,14,drug-or-drug-class
+glucagon,0,0,2,2,tier2_only,2,molecule-or-analyte
+glucocorticoid,3,4,1,1,both,4,drug-or-drug-class
+glucose,12,18,8,9,both,20,molecule-or-analyte
+glun2a,0,0,1,2,tier2_only,1,gene-or-protein
+glutamate,5,5,20,33,both,25,molecule-or-analyte
+glutamate/N-acetyl-aspartate,0,0,2,2,tier2_only,2,molecule-or-analyte
+glutamate; gaba,0,0,1,5,tier2_only,1,molecule-or-analyte
+glutamic acid,0,0,2,2,tier2_only,2,molecule-or-analyte
+glutamine,0,0,4,5,tier2_only,4,molecule-or-analyte
+glutathione,3,3,11,13,both,14,molecule-or-analyte
+glx,0,0,1,3,tier2_only,1,molecule-or-analyte
+glycerol,0,0,2,2,tier2_only,2,molecule-or-analyte
+glycopyrrolate,0,0,1,2,tier2_only,1,drug-or-drug-class
+glymphatic system,0,0,1,2,tier2_only,1,other
+gm-csf,2,4,5,5,both,7,molecule-or-analyte
+gm1 ganglioside autoantibody,4,9,0,0,tier1_only,4,molecule-or-analyte
+goal setting,0,0,1,2,tier2_only,1,other
+goblet cells,0,0,1,2,tier2_only,1,other
+gorab,0,0,2,2,tier2_only,2,gene-or-protein
+gpbar1,0,0,3,4,tier2_only,3,gene-or-protein
+gpcr autoantibody,11,17,5,7,both,16,molecule-or-analyte
+gper,0,0,1,2,tier2_only,1,gene-or-protein
+gpr109a,0,0,1,2,tier2_only,1,gene-or-protein
+gpr183,0,0,4,4,tier2_only,4,gene-or-protein
+gpx4,0,0,1,2,tier2_only,1,gene-or-protein
+gq1b ganglioside,3,3,0,0,tier1_only,3,molecule-or-analyte
+gq1b ganglioside autoantibody,15,18,1,1,both,16,molecule-or-analyte
+graded exercise therapy,0,0,6,8,tier2_only,6,other
+granzyme b,0,0,1,2,tier2_only,1,gene-or-protein
+grape seed extract,0,0,1,2,tier2_only,1,drug-or-drug-class
+grape seed proanthocyanidin extract (gspe),0,0,1,2,tier2_only,1,drug-or-drug-class
+gray matter volume,0,0,4,4,tier2_only,4,physiological-measure
+green light-emitting diode exposure,0,0,1,5,tier2_only,1,other
+gremlin-1,0,0,1,4,tier2_only,1,molecule-or-analyte
+grey matter volume,0,0,2,2,tier2_only,2,physiological-measure
+grik2,0,0,2,3,tier2_only,2,gene-or-protein
+grik3,0,0,1,2,tier2_only,1,gene-or-protein
+grin1,0,0,1,2,tier2_only,1,gene-or-protein
+grin2b,0,0,2,3,tier2_only,2,gene-or-protein
+growing pains,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+growth hormone,10,19,5,8,both,15,molecule-or-analyte
+"growth hormone, cortisol",0,0,2,2,tier2_only,2,molecule-or-analyte
+growth hormone; IGF-1,0,0,2,2,tier2_only,2,molecule-or-analyte
+growth hormone; igf-1,0,0,1,2,tier2_only,1,molecule-or-analyte
+gts-21,1,3,0,0,tier1_only,1,drug-or-drug-class
+guanfacine,5,9,1,1,both,6,drug-or-drug-class
+guillain-barré syndrome,10,15,0,0,tier1_only,10,clinical-sign-or-condition
+gut microbiome,16,18,20,20,both,36,other
+gut microbiome community composition,2,5,0,0,tier1_only,2,other
+gut microbiome composition,0,0,4,6,tier2_only,4,physiological-measure
+gut microbiome-brain axis,0,0,1,2,tier2_only,1,other
+gut microbiota alpha diversity,3,3,1,1,both,4,physiological-measure
+gut microbiota diversity,0,0,4,4,tier2_only,4,physiological-measure
+gut-brain axis,11,35,0,0,tier1_only,11,other
+h1r,0,0,1,3,tier2_only,1,gene-or-protein
+hair cortisol concentration,0,0,1,2,tier2_only,1,physiological-measure
+hallux,0,0,1,2,tier2_only,1,other
+hand grip strength,0,0,1,2,tier2_only,1,physiological-measure
+hand grip strength recovery,0,0,1,2,tier2_only,1,physiological-measure
+handgrip strength,6,15,3,9,both,9,physiological-measure
+haptoglobin,0,0,2,15,tier2_only,2,molecule-or-analyte
+has2,0,0,1,2,tier2_only,1,gene-or-protein
+havcr2,0,0,2,2,tier2_only,2,gene-or-protein
+hbd2,0,0,1,16,tier2_only,1,gene-or-protein
+hdac6,3,4,0,0,tier1_only,3,gene-or-protein
+hdl cholesterol,5,5,4,4,both,9,molecule-or-analyte
+headache,0,0,3,4,tier2_only,3,clinical-sign-or-condition
+hearing loss,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+heart period,2,4,0,0,tier1_only,2,physiological-measure
+heart rate,178,271,15,27,both,193,physiological-measure
+heart rate recovery,12,33,5,6,both,17,physiological-measure
+heart rate response score,1,4,0,0,tier1_only,1,physiological-measure
+heart rate response to regadenoson,1,4,0,0,tier1_only,1,physiological-measure
+heart rate variability,170,291,16,24,both,186,physiological-measure
+heartbeat-evoked potential,2,3,0,0,tier1_only,2,physiological-measure
+heat shock proteins,0,0,2,2,tier2_only,2,gene-or-protein
+helicobacter pylori,1,4,6,11,both,7,other
+hematocrit,5,6,1,1,both,6,physiological-measure
+heme,0,0,1,2,tier2_only,1,molecule-or-analyte
+hemin,4,5,1,1,both,5,drug-or-drug-class
+hemoglobin,15,17,8,9,both,23,molecule-or-analyte
+hemoglobin a1c,33,42,5,7,both,38,molecule-or-analyte
+heparin,0,0,2,2,tier2_only,2,drug-or-drug-class
+hepatic arterial aneurysm,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+hereditary alpha tryptasemia,0,0,3,6,tier2_only,3,clinical-sign-or-condition
+hereditary alpha-tryptasemia,2,7,4,12,both,6,clinical-sign-or-condition
+herpes simplex virus type 1,0,0,1,3,tier2_only,1,other
+herpes zoster,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+hesperidin,0,0,1,2,tier2_only,1,drug-or-drug-class
+hf power,52,70,1,4,both,53,physiological-measure
+hf power (heart rate variability),0,0,1,2,tier2_only,1,physiological-measure
+hhv-6; hhv-7,0,0,1,2,tier2_only,1,other
+hhv-6b,0,0,3,8,tier2_only,3,other
+hhv-7,0,0,3,10,tier2_only,3,other
+hidradenitis suppurativa,0,0,1,5,tier2_only,1,clinical-sign-or-condition
+hif-1α,0,0,1,2,tier2_only,1,gene-or-protein
+hif1a,0,0,5,6,tier2_only,5,gene-or-protein
+high-frequency power,0,0,2,4,tier2_only,2,physiological-measure
+high-inflammation cluster,1,2,0,0,tier1_only,1,other
+hint1,0,0,1,2,tier2_only,1,gene-or-protein
+hippocampal ca1 neurons,0,0,1,2,tier2_only,1,other
+hippocampal head volume,0,0,1,2,tier2_only,1,physiological-measure
+hippocampal molecular layer volume,0,0,1,2,tier2_only,1,physiological-measure
+hippocampal supply vessel signal intensity,1,3,0,0,tier1_only,1,physiological-measure
+hippocampal tail volume,0,0,1,2,tier2_only,1,physiological-measure
+hippurate,0,0,1,2,tier2_only,1,molecule-or-analyte
+histamine,11,13,57,83,both,68,molecule-or-analyte
+"histamine, tryptase",0,0,3,3,tier2_only,3,molecule-or-analyte
+histidine,0,0,2,2,tier2_only,2,molecule-or-analyte
+histone h3,0,0,1,2,tier2_only,1,gene-or-protein
+hiv,2,3,1,1,both,3,other
+hla-b27,0,0,4,4,tier2_only,4,gene-or-protein
+hla-c,0,0,3,4,tier2_only,3,gene-or-protein
+hla-cw12; hla-dr15; hla-dq7; hla-dpw9,0,0,1,2,tier2_only,1,gene-or-protein
+hla-dq2,0,0,2,2,tier2_only,2,gene-or-protein
+hla-dqa1*01; hla-dqb1*06; hla-dqb1*0303; hla-dq3; hla-dr4; hla-dr5,0,0,1,2,tier2_only,1,gene-or-protein
+hla-dqb1,4,4,4,4,both,8,gene-or-protein
+hla-drb1,4,4,2,2,both,6,gene-or-protein
+hmbs,4,8,1,1,both,5,gene-or-protein
+hmgb1,2,5,2,2,both,4,gene-or-protein
+hmgcr,0,0,1,2,tier2_only,1,gene-or-protein
+hmox1,0,0,4,6,tier2_only,4,gene-or-protein
+hoehn & yahr stage,2,4,0,0,tier1_only,2,physiological-measure
+homa-ir,3,3,0,0,tier1_only,3,physiological-measure
+homocysteine,9,14,5,7,both,14,molecule-or-analyte
+hpa axis,0,0,2,2,tier2_only,2,other
+hpv vaccine,6,22,0,0,tier1_only,6,drug-or-drug-class
+hrh1,0,0,4,4,tier2_only,4,gene-or-protein
+hrh2,0,0,1,4,tier2_only,1,gene-or-protein
+hrv triangular index,6,7,0,0,tier1_only,6,physiological-measure
+hsa_circRNA_102682,0,0,1,4,tier2_only,1,molecule-or-analyte
+htr1a,0,0,1,6,tier2_only,1,gene-or-protein
+htr2a,0,0,2,3,tier2_only,2,gene-or-protein
+htr2b,0,0,1,2,tier2_only,1,gene-or-protein
+htr3a,0,0,1,4,tier2_only,1,gene-or-protein
+hu autoantibody,3,9,1,1,both,4,molecule-or-analyte
+hucmsc-ex,0,0,1,2,tier2_only,1,other
+human adenovirus,0,0,1,2,tier2_only,1,other
+human herpesvirus 6,0,0,6,8,tier2_only,6,other
+human herpesvirus 6 (HHV-6),0,0,1,6,tier2_only,1,other
+human igg,0,0,1,5,tier2_only,1,molecule-or-analyte
+human parvovirus b19,0,0,1,5,tier2_only,1,other
+hydralazine,0,0,2,2,tier2_only,2,drug-or-drug-class
+hydrocortisone,0,0,3,4,tier2_only,3,drug-or-drug-class
+hydrogen peroxide,0,0,1,2,tier2_only,1,molecule-or-analyte
+hydrogen sulfide,3,4,4,5,both,7,molecule-or-analyte
+hydrogen-rich water,0,0,1,4,tier2_only,1,drug-or-drug-class
+hydroxyurea,0,0,1,5,tier2_only,1,drug-or-drug-class
+hyperbaric oxygen therapy,0,0,1,3,tier2_only,1,other
+hypermobile Ehlers-Danlos syndrome,0,0,5,5,tier2_only,5,clinical-sign-or-condition
+hypertension,18,18,3,5,both,21,clinical-sign-or-condition
+hypothalamic-pituitary-adrenal axis,0,0,2,2,tier2_only,2,other
+hypothalamus,3,6,0,0,tier1_only,3,other
+hypoxanthine,0,0,4,4,tier2_only,4,molecule-or-analyte
+iba1,0,0,2,3,tier2_only,2,gene-or-protein
+icam-1,0,0,2,2,tier2_only,2,gene-or-protein
+icatibant,0,0,2,2,tier2_only,2,drug-or-drug-class
+icp8,0,0,1,3,tier2_only,1,gene-or-protein
+ido,0,0,2,2,tier2_only,2,gene-or-protein
+ido1,0,0,2,2,tier2_only,2,gene-or-protein
+ido2,0,0,3,3,tier2_only,3,gene-or-protein
+ifitm3,0,0,2,2,tier2_only,2,gene-or-protein
+ifn-alpha,0,0,3,3,tier2_only,3,molecule-or-analyte
+ifng,0,0,1,2,tier2_only,1,gene-or-protein
+iga,0,0,3,4,tier2_only,3,molecule-or-analyte
+ige,0,0,1,2,tier2_only,1,molecule-or-analyte
+ige diversity,0,0,1,3,tier2_only,1,physiological-measure
+igf-1,0,0,2,3,tier2_only,2,molecule-or-analyte
+igfbp-2,0,0,1,3,tier2_only,1,gene-or-protein
+igg autoantibodies,0,0,3,8,tier2_only,3,molecule-or-analyte
+igg immunoadsorption,0,0,2,2,tier2_only,2,other
+igg1,0,0,3,4,tier2_only,3,molecule-or-analyte
+igg2a,0,0,1,2,tier2_only,1,molecule-or-analyte
+igg3,0,0,3,3,tier2_only,3,molecule-or-analyte
+igg4,2,5,4,5,both,6,molecule-or-analyte
+igh-affecting expanded mast cell activation,0,0,1,2,tier2_only,1,other
+ighg1,0,0,1,3,tier2_only,1,gene-or-protein
+ighv3-30,0,0,1,2,tier2_only,1,gene-or-protein
+ih (hyperpolarization-activated current),0,0,1,2,tier2_only,1,physiological-measure
+il-10,9,12,31,38,both,40,molecule-or-analyte
+il-12p70,0,0,1,2,tier2_only,1,molecule-or-analyte
+il-13,2,6,13,17,both,15,molecule-or-analyte
+il-17,5,5,8,12,both,13,molecule-or-analyte
+il-18,0,0,2,2,tier2_only,2,molecule-or-analyte
+il-1beta,27,34,17,20,both,44,molecule-or-analyte
+il-1α,0,0,3,5,tier2_only,3,molecule-or-analyte
+il-1β; tnf-α,0,0,2,2,tier2_only,2,molecule-or-analyte
+il-21,3,3,3,6,both,6,molecule-or-analyte
+il-27,0,0,1,2,tier2_only,1,molecule-or-analyte
+il-31,0,0,2,2,tier2_only,2,molecule-or-analyte
+il-33,0,0,2,5,tier2_only,2,molecule-or-analyte
+il-33/st2,0,0,2,3,tier2_only,2,gene-or-protein
+il-38,0,0,1,2,tier2_only,1,molecule-or-analyte
+il-4,0,0,2,2,tier2_only,2,molecule-or-analyte
+il-4 receptor,0,0,1,2,tier2_only,1,gene-or-protein
+il-4 receptor alpha,0,0,1,3,tier2_only,1,gene-or-protein
+il-4/il-5/il-6/il-13,0,0,2,2,tier2_only,2,molecule-or-analyte
+il-6,75,92,78,117,both,153,molecule-or-analyte
+"il-6, il-13",0,0,1,2,tier2_only,1,molecule-or-analyte
+"il-6, il-8",0,0,2,2,tier2_only,2,molecule-or-analyte
+il-6; il-8; tnf-alpha,0,0,2,2,tier2_only,2,molecule-or-analyte
+il-8,7,9,11,17,both,18,molecule-or-analyte
+il18r1,0,0,2,4,tier2_only,2,gene-or-protein
+il1b,5,6,6,8,both,11,gene-or-protein
+il1rl1,0,0,7,7,tier2_only,7,gene-or-protein
+il1rn,0,0,2,2,tier2_only,2,gene-or-protein
+il6st,0,0,2,2,tier2_only,2,gene-or-protein
+imatinib,0,0,4,5,tier2_only,4,drug-or-drug-class
+imc-2,1,6,0,0,tier1_only,1,drug-or-drug-class
+immunoglobulin e,6,6,19,31,both,25,molecule-or-analyte
+immunoglobulin g,4,7,8,9,both,12,molecule-or-analyte
+immunoglobulin m,2,7,2,2,both,4,molecule-or-analyte
+imperatorin,0,0,2,6,tier2_only,2,drug-or-drug-class
+impulse response metrics,1,4,0,0,tier1_only,1,physiological-measure
+incobotulinumtoxina,2,6,0,0,tier1_only,2,drug-or-drug-class
+index of cardiac electrophysiological balance,1,4,0,0,tier1_only,1,physiological-measure
+indoxyl sulfate,2,3,0,0,tier1_only,2,molecule-or-analyte
+inferior popliteomeniscal fascicle (ipmf),0,0,1,3,tier2_only,1,other
+inferior whorl dendritic cell density,0,0,1,3,tier2_only,1,physiological-measure
+inferior whorl length,0,0,1,5,tier2_only,1,physiological-measure
+inflammatory cytokines,0,0,2,2,tier2_only,2,molecule-or-analyte
+infliximab,0,0,3,3,tier2_only,3,drug-or-drug-class
+initial orthostatic hypotension,4,9,0,0,tier1_only,4,clinical-sign-or-condition
+inos,0,0,10,13,tier2_only,10,gene-or-protein
+inotodiol,0,0,2,6,tier2_only,2,drug-or-drug-class
+insolitispirillum,0,0,1,2,tier2_only,1,other
+insomnia,3,6,2,4,both,5,clinical-sign-or-condition
+insula,0,0,2,2,tier2_only,2,other
+insular cortex,5,5,2,2,both,7,other
+insulin,19,22,7,15,both,26,molecule-or-analyte
+insulin resistance,5,5,2,2,both,7,physiological-measure
+insulin; nnos,0,0,1,2,tier2_only,1,molecule-or-analyte
+integrated stress response,1,3,0,0,tier1_only,1,other
+integrin-alpha5beta1,0,0,1,2,tier2_only,1,gene-or-protein
+intense visual environments sensitivity factor,0,0,1,3,tier2_only,1,physiological-measure
+interferon alpha,2,4,0,0,tier1_only,2,molecule-or-analyte
+interferon gamma,19,22,16,21,both,35,molecule-or-analyte
+"interferon gamma, CXCL10",0,0,1,2,tier2_only,1,molecule-or-analyte
+interferon-stimulated genes (mx1/mx2/trim22/oas2/oas3/ifi44/ddx60l/epsti1/parp14/ifit3),0,0,1,2,tier2_only,1,gene-or-protein
+internal jugular vein,2,3,1,3,both,3,other
+interstitial cells of cajal,3,5,1,2,both,4,other
+intra-epidermal nerve fiber density (IENFD),0,0,1,2,tier2_only,1,physiological-measure
+intracellular calcium,0,0,4,6,tier2_only,4,molecule-or-analyte
+intracortical inhibition (tms metric),0,0,1,2,tier2_only,1,physiological-measure
+intraepidermal nerve fiber density,14,17,52,128,both,66,physiological-measure
+intraepidermal nerve fiber density (IENFD),0,0,1,2,tier2_only,1,physiological-measure
+intraepithelial lymphocytes,0,0,1,3,tier2_only,1,other
+intraepithelial nerve fiber density,0,0,1,3,tier2_only,1,physiological-measure
+intramuscular pressure,0,0,3,3,tier2_only,3,physiological-measure
+intravenous immunoglobulin,62,84,14,25,both,76,drug-or-drug-class
+ipdef1,0,0,1,2,tier2_only,1,gene-or-protein
+ipo8,0,0,1,2,tier2_only,1,gene-or-protein
+irak1,0,0,1,2,tier2_only,1,gene-or-protein
+irbesartan,0,0,2,6,tier2_only,2,drug-or-drug-class
+irf5,0,0,3,4,tier2_only,3,gene-or-protein
+iron,9,25,3,6,both,12,molecule-or-analyte
+irritable bowel syndrome,7,7,12,18,both,19,clinical-sign-or-condition
+ischemic heart disease,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+isoproterenol,3,3,0,0,tier1_only,3,drug-or-drug-class
+itgam,0,0,1,2,tier2_only,1,gene-or-protein
+ivabradine,62,125,2,2,both,64,drug-or-drug-class
+ivermectin,0,0,2,3,tier2_only,2,drug-or-drug-class
+ivig,0,0,1,7,tier2_only,1,drug-or-drug-class
+ivig (intravenous immunoglobulin),0,0,1,2,tier2_only,1,drug-or-drug-class
+jak/stat pathway,0,0,2,2,tier2_only,2,gene-or-protein
+jak2,0,0,2,4,tier2_only,2,gene-or-protein
+jam-a,0,0,2,4,tier2_only,2,gene-or-protein
+jm25-1,0,0,1,2,tier2_only,1,drug-or-drug-class
+joint hypermobility,4,4,15,28,both,19,clinical-sign-or-condition
+joint hypermobility syndrome,0,0,4,10,tier2_only,4,clinical-sign-or-condition
+jup,1,3,0,0,tier1_only,1,gene-or-protein
+juvenile idiopathic arthritis,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+kaempferol,0,0,2,4,tier2_only,2,molecule-or-analyte
+kapq questionnaire,1,3,0,0,tier1_only,1,other
+kars,0,0,1,6,tier2_only,1,gene-or-protein
+kcnma1,0,0,1,4,tier2_only,1,gene-or-protein
+kcnn4,0,0,1,2,tier2_only,1,gene-or-protein
+kdr (delayed rectifier potassium current),0,0,1,2,tier2_only,1,physiological-measure
+keratinocytes,0,0,2,2,tier2_only,2,other
+ketamine,7,7,4,15,both,11,drug-or-drug-class
+ketogenic diet,0,0,1,2,tier2_only,1,other
+ketotifen,0,0,9,12,tier2_only,9,drug-or-drug-class
+kif1a,4,41,0,0,tier1_only,4,gene-or-protein
+kinesiophobia,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+kinetin,4,4,0,0,tier1_only,4,molecule-or-analyte
+kinetin isosteres,1,4,0,0,tier1_only,1,molecule-or-analyte
+kit,0,0,51,101,tier2_only,51,gene-or-protein
+kit d816v mutation,0,0,2,2,tier2_only,2,gene-or-protein
+klf11,1,8,0,0,tier1_only,1,gene-or-protein
+klhl5,1,3,0,0,tier1_only,1,gene-or-protein
+klotho,0,0,1,5,tier2_only,1,molecule-or-analyte
+korean red ginseng,0,0,1,2,tier2_only,1,drug-or-drug-class
+kras,0,0,1,2,tier2_only,1,gene-or-protein
+krt8,0,0,1,2,tier2_only,1,gene-or-protein
+kv7 channel,0,0,1,2,tier2_only,1,gene-or-protein
+kynurenic acid,0,0,6,8,tier2_only,6,molecule-or-analyte
+kynurenic acid/quinolinic acid ratio,0,0,2,2,tier2_only,2,physiological-measure
+kynurenine,2,3,6,7,both,8,molecule-or-analyte
+kynurenine pathway,0,0,1,2,tier2_only,1,other
+kynurenine pathway metabolites,0,0,1,2,tier2_only,1,molecule-or-analyte
+kynurenine/kynurenic acid,0,0,1,2,tier2_only,1,molecule-or-analyte
+kynurenine/tryptophan ratio,0,0,3,3,tier2_only,3,physiological-measure
+l-carnitine,0,0,2,7,tier2_only,2,drug-or-drug-class
+l-glutamine,0,0,2,3,tier2_only,2,molecule-or-analyte
+l-serine,4,8,0,0,tier1_only,4,molecule-or-analyte
+l-tryptophan,0,0,3,3,tier2_only,3,molecule-or-analyte
+l. fermentum; gabapentin; rifaximin,0,0,1,2,tier2_only,1,drug-or-drug-class
+labetalol,4,4,0,0,tier1_only,4,drug-or-drug-class
+lachnospiraceae,0,0,2,3,tier2_only,2,other
+lactate,9,9,23,25,both,32,molecule-or-analyte
+lactate dehydrogenase,0,0,8,9,tier2_only,8,molecule-or-analyte
+lactate; pyruvate,0,0,2,2,tier2_only,2,molecule-or-analyte
+lactic acid,0,0,3,5,tier2_only,3,molecule-or-analyte
+lacticaseibacillus rhamnosus gg,0,0,1,5,tier2_only,1,other
+lactobacillus,4,4,2,2,both,6,other
+lactoferrin,0,0,2,3,tier2_only,2,molecule-or-analyte
+lactulose/mannitol ratio,1,3,0,0,tier1_only,1,physiological-measure
+lag3,0,0,2,3,tier2_only,2,gene-or-protein
+lair1,0,0,1,7,tier2_only,1,gene-or-protein
+lamb4,2,13,0,0,tier1_only,2,gene-or-protein
+lamp1,2,5,0,0,tier1_only,2,gene-or-protein
+lanifibranor,0,0,1,5,tier2_only,1,drug-or-drug-class
+lat,0,0,2,2,tier2_only,2,gene-or-protein
+lat2,0,0,2,2,tier2_only,2,gene-or-protein
+lateral pterygoid muscle,0,0,1,3,tier2_only,1,other
+lbp,0,0,1,2,tier2_only,1,molecule-or-analyte
+"lbp, scd14",0,0,1,2,tier2_only,1,molecule-or-analyte
+lc3,0,0,1,2,tier2_only,1,gene-or-protein
+"lc3, beclin-1",0,0,1,2,tier2_only,1,gene-or-protein
+lc3-ii,0,0,1,2,tier2_only,1,molecule-or-analyte
+lcp2,0,0,1,4,tier2_only,1,gene-or-protein
+ldl cholesterol,9,9,3,3,both,12,molecule-or-analyte
+left common iliac vein,3,3,0,0,tier1_only,3,other
+left frontoparietal network,0,0,1,3,tier2_only,1,other
+left posterior insula,0,0,1,2,tier2_only,1,other
+left rostral caudate,0,0,1,2,tier2_only,1,other
+left subiculum head,0,0,1,3,tier2_only,1,other
+left superior frontal cortex,0,0,1,2,tier2_only,1,other
+left ventricular ejection fraction,8,11,2,2,both,10,physiological-measure
+left ventricular ejection time,1,3,0,0,tier1_only,1,physiological-measure
+left ventricular hypertrophy,2,5,1,1,both,3,clinical-sign-or-condition
+leptin,10,12,3,4,both,13,molecule-or-analyte
+let-7d,0,0,2,2,tier2_only,2,gene-or-protein
+leucine,0,0,2,2,tier2_only,2,molecule-or-analyte
+leukocytes,0,0,3,3,tier2_only,3,other
+leukotriene c4,0,0,3,3,tier2_only,3,molecule-or-analyte
+leukotriene e4,1,3,4,4,both,5,molecule-or-analyte
+levodopa,33,66,0,0,tier1_only,33,drug-or-drug-class
+levodopa equivalent daily dose,6,6,0,0,tier1_only,6,other
+levodopa/carbidopa,5,19,0,0,tier1_only,5,drug-or-drug-class
+levonorgestrel,0,0,1,2,tier2_only,1,drug-or-drug-class
+levonorgestrel intrauterine system,0,0,1,2,tier2_only,1,drug-or-drug-class
+lewy body pathology,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+lf power,34,54,0,0,tier1_only,34,physiological-measure
+lf/hf ratio,81,117,5,12,both,86,physiological-measure
+lgals9,0,0,1,8,tier2_only,1,gene-or-protein
+lgi1,3,4,0,0,tier1_only,3,gene-or-protein
+lgi1 autoantibody,2,4,0,0,tier1_only,2,molecule-or-analyte
+lidocaine,4,10,6,15,both,10,drug-or-drug-class
+lifr,3,8,0,0,tier1_only,3,gene-or-protein
+ligelizumab,0,0,3,6,tier2_only,3,drug-or-drug-class
+lilrb4,0,0,1,2,tier2_only,1,gene-or-protein
+limosilactobacillus fermentum cect5716,0,0,1,7,tier2_only,1,drug-or-drug-class
+linaclotide,0,0,2,2,tier2_only,2,drug-or-drug-class
+linagliptin,0,0,2,2,tier2_only,2,drug-or-drug-class
+lincrna-01028,0,0,1,2,tier2_only,1,gene-or-protein
+linear polarizance,0,0,1,2,tier2_only,1,physiological-measure
+lingual frenulum,0,0,1,3,tier2_only,1,other
+lipofuscin,1,5,0,0,tier1_only,1,molecule-or-analyte
+lipopolysaccharide,6,8,10,12,both,16,molecule-or-analyte
+liraglutide,4,4,1,1,both,5,drug-or-drug-class
+listeriolysin O (LLO),0,0,1,2,tier2_only,1,molecule-or-analyte
+lithium,2,3,1,2,both,3,drug-or-drug-class
+ll-37,0,0,2,2,tier2_only,2,molecule-or-analyte
+lmna,1,4,0,0,tier1_only,1,gene-or-protein
+locus coeruleus,6,7,0,0,tier1_only,6,other
+locus coeruleus mri signal,1,3,0,0,tier1_only,1,physiological-measure
+locus coeruleus neuromelanin signal,1,6,0,0,tier1_only,1,physiological-measure
+long non-coding RNAs (lncRNAs),0,0,1,2,tier2_only,1,gene-or-protein
+loperamide,2,5,1,1,both,3,drug-or-drug-class
+losartan,7,7,11,22,both,18,drug-or-drug-class
+low-dose naltrexone,4,5,7,11,both,11,drug-or-drug-class
+low-nickel diet,0,0,1,2,tier2_only,1,other
+lpar2,0,0,1,2,tier2_only,1,gene-or-protein
+lrg1,1,4,1,2,both,2,gene-or-protein
+lrp1,0,0,1,3,tier2_only,1,gene-or-protein
+lrrk2,11,22,1,2,both,12,gene-or-protein
+ltbp1,0,0,4,17,tier2_only,4,gene-or-protein
+ltbp4,0,0,1,7,tier2_only,1,gene-or-protein
+lum,0,0,1,4,tier2_only,1,gene-or-protein
+lumbrokinase,0,0,2,3,tier2_only,2,drug-or-drug-class
+lupus anticoagulant,0,0,2,2,tier2_only,2,molecule-or-analyte
+luteolin,0,0,3,5,tier2_only,3,drug-or-drug-class
+lymphocyte count,4,4,0,0,tier1_only,4,physiological-measure
+lymphocytes,5,5,6,7,both,11,other
+lyn,0,0,11,18,tier2_only,11,gene-or-protein
+lysine,0,0,2,4,tier2_only,2,molecule-or-analyte
+lysophosphatidylcholine,0,0,2,2,tier2_only,2,molecule-or-analyte
+lysozyme,0,0,1,2,tier2_only,1,molecule-or-analyte
+lysrs,0,0,1,2,tier2_only,1,gene-or-protein
+lysyl oxidase,0,0,4,4,tier2_only,4,molecule-or-analyte
+lzts1,0,0,5,5,tier2_only,5,gene-or-protein
+m3 muscarinic acetylcholine receptor autoantibody,2,4,1,1,both,3,molecule-or-analyte
+m4 muscarinic acetylcholine receptor autoantibody,1,4,0,0,tier1_only,1,molecule-or-analyte
+mMCP-1,0,0,1,6,tier2_only,1,molecule-or-analyte
+mTORC1/mTORC2,0,0,1,2,tier2_only,1,gene-or-protein
+macrophage m0,0,0,1,2,tier2_only,1,other
+macrophage-activating factor,0,0,1,2,tier2_only,1,molecule-or-analyte
+macrophages,0,0,2,2,tier2_only,2,other
+magnesium,3,4,8,12,both,11,molecule-or-analyte
+magnesium sulfate,2,3,0,0,tier1_only,2,drug-or-drug-class
+major depressive disorder,0,0,4,8,tier2_only,4,clinical-sign-or-condition
+maleic acid,0,0,1,2,tier2_only,1,molecule-or-analyte
+malnutrition,4,6,0,0,tier1_only,4,clinical-sign-or-condition
+malondialdehyde,6,8,12,16,both,18,molecule-or-analyte
+mannitol,0,0,1,2,tier2_only,1,molecule-or-analyte
+mannose-binding lectin (MBL),0,0,2,2,tier2_only,2,molecule-or-analyte
+maoa,2,3,0,0,tier1_only,2,gene-or-protein
+map1lc3b,0,0,2,2,tier2_only,2,gene-or-protein
+map3k7,0,0,2,16,tier2_only,2,gene-or-protein
+mapk,0,0,2,2,tier2_only,2,gene-or-protein
+mapk14,0,0,5,6,tier2_only,5,gene-or-protein
+mapt,6,18,1,4,both,7,gene-or-protein
+mapt; chat,0,0,1,2,tier2_only,1,gene-or-protein
+marital status,0,0,2,2,tier2_only,2,other
+massage therapy,0,0,1,4,tier2_only,1,other
+mast cell,10,17,138,252,both,148,other
+mast cell (tryptase+/cpa3+),0,0,1,4,tier2_only,1,other
+mast cell activation,0,0,9,10,tier2_only,9,clinical-sign-or-condition
+mast cell activation gene signature,0,0,2,6,tier2_only,2,other
+mast cell activation syndrome,16,19,8,8,both,24,clinical-sign-or-condition
+mast cell activation test (mat),0,0,2,2,tier2_only,2,physiological-measure
+mast cell chymase,0,0,1,2,tier2_only,1,molecule-or-analyte
+mast cell degranulation,0,0,7,7,tier2_only,7,other
+mast cell density,0,0,2,4,tier2_only,2,physiological-measure
+mast cell exosomes,0,0,1,3,tier2_only,1,other
+mast cell infiltration,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+mast cell mediators,0,0,4,5,tier2_only,4,molecule-or-analyte
+mast cell progenitors,0,0,1,2,tier2_only,1,other
+mast cell protease-1 (MMCP-1),0,0,2,2,tier2_only,2,molecule-or-analyte
+mast cell tryptase,0,0,8,10,tier2_only,8,molecule-or-analyte
+mast cells,0,0,12,29,tier2_only,12,other
+"mast cells, vip production",0,0,1,2,tier2_only,1,other
+"mast cells, vip-ir neuronal fibers",0,0,1,2,tier2_only,1,other
+mast cells; eosinophils,0,0,1,4,tier2_only,1,other
+mavs,0,0,2,6,tier2_only,2,gene-or-protein
+maximal handgrip strength,0,0,1,2,tier2_only,1,physiological-measure
+maximal respiration,0,0,1,2,tier2_only,1,physiological-measure
+maximal voluntary contraction,0,0,1,2,tier2_only,1,physiological-measure
+mbp,0,0,1,2,tier2_only,1,gene-or-protein
+mcbb signature,0,0,1,2,tier2_only,1,other
+mdk,0,0,1,5,tier2_only,1,gene-or-protein
+mean arterial pressure,22,28,0,0,tier1_only,22,physiological-measure
+mean corpuscular hemoglobin concentration,3,3,0,0,tier1_only,3,physiological-measure
+mean diffusivity; radial diffusivity,0,0,1,2,tier2_only,1,physiological-measure
+mean network connectivity,1,6,0,0,tier1_only,1,physiological-measure
+mean rr interval,8,8,0,0,tier1_only,8,physiological-measure
+mechanical pain sensitivity,0,0,1,2,tier2_only,1,physiological-measure
+mecp2,2,3,0,0,tier1_only,2,gene-or-protein
+medial meniscus extrusion,0,0,1,2,tier2_only,1,physiological-measure
+medial prefrontal cortex,0,0,1,4,tier2_only,1,other
+medical cannabis,0,0,1,4,tier2_only,1,drug-or-drug-class
+melatonin,15,22,16,36,both,31,molecule-or-analyte
+melatonin plus zinc,0,0,1,10,tier2_only,1,drug-or-drug-class
+memantine,2,4,0,0,tier1_only,2,drug-or-drug-class
+mesenchymal stem cells,3,5,1,1,both,4,other
+metabolic syndrome,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+metanephrine,4,6,0,0,tier1_only,4,molecule-or-analyte
+metformin,10,20,6,7,both,16,drug-or-drug-class
+methionine,0,0,2,3,tier2_only,2,molecule-or-analyte
+methotrexate,0,0,2,2,tier2_only,2,drug-or-drug-class
+methylcobalamin,3,3,1,1,both,4,drug-or-drug-class
+methylphenidate,6,11,1,1,both,7,drug-or-drug-class
+methylprednisolone,5,5,2,2,both,7,drug-or-drug-class
+metoclopramide,3,3,4,4,both,7,drug-or-drug-class
+metoprolol,25,32,1,1,both,26,drug-or-drug-class
+mettl3,0,0,2,2,tier2_only,2,gene-or-protein
+mfap4,0,0,2,2,tier2_only,2,gene-or-protein
+mfi-s general fatigue score,0,0,1,2,tier2_only,1,physiological-measure
+mfn1,0,0,1,2,tier2_only,1,gene-or-protein
+mfn2,1,5,0,0,tier1_only,1,gene-or-protein
+mhc class ii,0,0,2,2,tier2_only,2,gene-or-protein
+mhc-affecting expanded mca,0,0,1,3,tier2_only,1,other
+miR-195-5p,0,0,1,10,tier2_only,1,gene-or-protein
+miR-483-3p,0,0,1,9,tier2_only,1,gene-or-protein
+mia3,0,0,1,2,tier2_only,1,gene-or-protein
+mic26,0,0,1,4,tier2_only,1,gene-or-protein
+microalbuminuria,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+microglia,7,8,7,7,both,14,other
+microglia; astrocytes,0,0,2,2,tier2_only,2,other
+microrna,0,0,3,5,tier2_only,3,other
+midbrain,0,0,1,3,tier2_only,1,other
+middle cerebral artery velocity pulsatility,1,3,0,0,tier1_only,1,physiological-measure
+midodrine,95,153,0,0,tier1_only,95,drug-or-drug-class
+midostaurin,0,0,7,9,tier2_only,7,drug-or-drug-class
+mif,0,0,2,2,tier2_only,2,gene-or-protein
+migraine,11,12,13,19,both,24,clinical-sign-or-condition
+migraine with aura,0,0,2,3,tier2_only,2,clinical-sign-or-condition
+milnacipran,8,20,3,15,both,11,drug-or-drug-class
+milnacipran; pregabalin,0,0,2,2,tier2_only,2,drug-or-drug-class
+minimum cross-sectional area of upper airway,0,0,1,2,tier2_only,1,physiological-measure
+minocycline,5,12,4,9,both,9,drug-or-drug-class
+mir-101a-3p,0,0,1,2,tier2_only,1,gene-or-protein
+mir-122,0,0,1,3,tier2_only,1,gene-or-protein
+mir-133a-3p,1,5,0,0,tier1_only,1,gene-or-protein
+mir-133b,0,0,1,5,tier2_only,1,gene-or-protein
+mir-140-5p,0,0,2,3,tier2_only,2,gene-or-protein
+mir-143,0,0,2,3,tier2_only,2,gene-or-protein
+mir-150-5p,0,0,2,3,tier2_only,2,gene-or-protein
+mir-153-3p,0,0,1,2,tier2_only,1,gene-or-protein
+mir-155,0,0,3,3,tier2_only,3,gene-or-protein
+mir-21,0,0,4,10,tier2_only,4,gene-or-protein
+mir-21-5p,1,3,0,0,tier1_only,1,gene-or-protein
+mir-217,0,0,1,2,tier2_only,1,gene-or-protein
+mir-23a,0,0,2,2,tier2_only,2,gene-or-protein
+"mir-23a, mir-30a",0,0,1,7,tier2_only,1,gene-or-protein
+mir-29a,0,0,2,3,tier2_only,2,gene-or-protein
+mir-29b,0,0,3,5,tier2_only,3,gene-or-protein
+mir-29b-3p,0,0,2,3,tier2_only,2,gene-or-protein
+mir-320a,0,0,2,2,tier2_only,2,gene-or-protein
+mir-34a-5p,0,0,1,2,tier2_only,1,gene-or-protein
+mir-374b-5p,1,8,1,1,both,2,gene-or-protein
+mir-448,0,0,1,3,tier2_only,1,gene-or-protein
+mir-532,0,0,1,2,tier2_only,1,gene-or-protein
+"mir-656-3p, mir-485-5p",0,0,1,3,tier2_only,1,gene-or-protein
+mirabegron,4,4,0,0,tier1_only,4,drug-or-drug-class
+mirogabalin,3,5,0,0,tier1_only,3,drug-or-drug-class
+mirtazapine,5,9,1,1,both,6,drug-or-drug-class
+mitf,0,0,2,2,tier2_only,2,gene-or-protein
+mitochondria,6,6,5,7,both,11,other
+mitochondrial ATP production,0,0,2,2,tier2_only,2,physiological-measure
+mitochondrial DNA,0,0,3,4,tier2_only,3,molecule-or-analyte
+mitochondrial cristae,0,0,2,3,tier2_only,2,other
+mitochondrial dna,0,0,6,8,tier2_only,6,molecule-or-analyte
+mitochondrial function,0,0,2,3,tier2_only,2,physiological-measure
+mitochondrial membrane potential,0,0,2,2,tier2_only,2,physiological-measure
+mitochondrial respiratory chain genes,0,0,1,2,tier2_only,1,gene-or-protein
+mitocur-1,0,0,1,2,tier2_only,1,drug-or-drug-class
+mitocur-1; mitocur-3,0,0,1,2,tier2_only,1,drug-or-drug-class
+mitocur-3,0,0,1,2,tier2_only,1,drug-or-drug-class
+mitral valve,0,0,3,3,tier2_only,3,other
+mitral valve prolapse,2,3,2,2,both,4,clinical-sign-or-condition
+mki67,0,0,1,3,tier2_only,1,gene-or-protein
+mmcp-4,0,0,1,4,tier2_only,1,gene-or-protein
+mmp-1,0,0,2,3,tier2_only,2,gene-or-protein
+mmp-9,0,0,4,4,tier2_only,4,gene-or-protein
+mmp1,0,0,4,4,tier2_only,4,gene-or-protein
+mmp2,0,0,4,5,tier2_only,4,gene-or-protein
+mmp2; mmp9,0,0,2,4,tier2_only,2,gene-or-protein
+mobility impairment,1,4,0,0,tier1_only,1,clinical-sign-or-condition
+modafinil,7,11,1,3,both,8,drug-or-drug-class
+molecular hydrogen,1,7,4,12,both,5,molecule-or-analyte
+monoclonal gammopathy of undetermined significance,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+monocyte-to-hdl-cholesterol ratio,1,9,0,0,tier1_only,1,physiological-measure
+monocytes,0,0,4,4,tier2_only,4,other
+monosodium glutamate/aspartame,0,0,1,2,tier2_only,1,molecule-or-analyte
+montelukast,0,0,3,3,tier2_only,3,drug-or-drug-class
+montreal cognitive assessment,6,8,0,0,tier1_only,6,physiological-measure
+morphine,0,0,3,3,tier2_only,3,drug-or-drug-class
+mortality,3,3,0,0,tier1_only,3,other
+mosaic chromosomal alterations,0,0,3,4,tier2_only,3,other
+mosaic loss of chromosome y (mloy),0,0,1,2,tier2_only,1,other
+mosaic loss-of-Y chromosome,0,0,1,2,tier2_only,1,other
+moxibustion,0,0,1,2,tier2_only,1,other
+moxonidine,3,3,0,0,tier1_only,3,drug-or-drug-class
+mrap2,1,17,0,0,tier1_only,1,gene-or-protein
+mrgpra3,0,0,1,2,tier2_only,1,gene-or-protein
+mrgprb2,0,0,3,6,tier2_only,3,gene-or-protein
+mrgprx2,0,0,49,117,tier2_only,49,gene-or-protein
+mt-atp6,0,0,2,4,tier2_only,2,gene-or-protein
+mt-co1; mt-co2,0,0,2,2,tier2_only,2,gene-or-protein
+mt-cyb,0,0,1,2,tier2_only,1,gene-or-protein
+mt-cyb; htt; muc3a; hla-b; hla-drb1,0,0,1,2,tier2_only,1,gene-or-protein
+mt-cyb; mt-nd1; emc1; acad9,0,0,1,2,tier2_only,1,gene-or-protein
+mthfr,4,7,3,4,both,7,gene-or-protein
+mtor,0,0,4,6,tier2_only,4,gene-or-protein
+mtorc1,0,0,3,4,tier2_only,3,gene-or-protein
+mu-opioid receptor,0,0,5,6,tier2_only,5,gene-or-protein
+muc22,0,0,1,2,tier2_only,1,gene-or-protein
+muc3a,0,0,1,2,tier2_only,1,gene-or-protein
+mucin-16,0,0,1,6,tier2_only,1,molecule-or-analyte
+mucin-19,0,0,1,4,tier2_only,1,gene-or-protein
+mucosal mast cells,0,0,2,2,tier2_only,2,other
+multi-herpesvirus dUTPase IgG panel,0,0,1,2,tier2_only,1,molecule-or-analyte
+multiple sclerosis,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+multiple system atrophy,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+multisensory sensitivity,0,0,1,6,tier2_only,1,clinical-sign-or-condition
+muscarinic acetylcholine receptor,0,0,2,2,tier2_only,2,gene-or-protein
+muscarinic blockade,1,3,0,0,tier1_only,1,other
+muscarinic m2 receptor autoantibody,4,14,0,0,tier1_only,4,molecule-or-analyte
+muscarinic receptor autoantibody,7,7,0,0,tier1_only,7,molecule-or-analyte
+muscle cross-sectional area,0,0,1,2,tier2_only,1,physiological-measure
+muscle density,0,0,2,2,tier2_only,2,physiological-measure
+muscle fiber conduction velocity,0,0,1,4,tier2_only,1,physiological-measure
+muscle mass,0,0,3,4,tier2_only,3,physiological-measure
+muscle sympathetic nerve activity,16,31,0,0,tier1_only,16,physiological-measure
+mx1,0,0,2,14,tier2_only,2,gene-or-protein
+myalgia,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+myalgia; arthralgia (combined diagnosis),0,0,1,2,tier2_only,1,clinical-sign-or-condition
+mybpc3,0,0,1,3,tier2_only,1,gene-or-protein
+mycophenolate mofetil,3,3,0,0,tier1_only,3,drug-or-drug-class
+mycoplasma pneumoniae,4,5,0,0,tier1_only,4,other
+myd88,0,0,2,3,tier2_only,2,gene-or-protein
+myeloperoxidase,0,0,4,4,tier2_only,4,molecule-or-analyte
+myenteric neurons,0,0,1,2,tier2_only,1,other
+myh11,0,0,2,2,tier2_only,2,gene-or-protein
+myh7,1,3,1,1,both,2,gene-or-protein
+myo-inositol,2,3,3,5,both,5,molecule-or-analyte
+myocardial infarction,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+myocardin,0,0,1,4,tier2_only,1,gene-or-protein
+myocarditis,3,4,0,0,tier1_only,3,clinical-sign-or-condition
+myofibroblasts,0,0,1,2,tier2_only,1,other
+myogenin,0,0,1,2,tier2_only,1,gene-or-protein
+myoglobin,3,3,0,0,tier1_only,3,molecule-or-analyte
+myorg,1,6,0,0,tier1_only,1,gene-or-protein
+myostatin,0,0,3,8,tier2_only,3,molecule-or-analyte
+myricetin,0,0,1,2,tier2_only,1,molecule-or-analyte
+myriocin,2,3,0,0,tier1_only,2,molecule-or-analyte
+myrrh resin extract,0,0,1,3,tier2_only,1,drug-or-drug-class
+n-acetylaspartate,0,0,1,2,tier2_only,1,molecule-or-analyte
+n-acetylcysteine,0,0,5,5,tier2_only,5,drug-or-drug-class
+n-terminal pro-b-type natriuretic peptide,13,23,4,4,both,17,molecule-or-analyte
+n1-p1 amplitude,2,3,0,0,tier1_only,2,physiological-measure
+nNOS,0,0,7,19,tier2_only,7,gene-or-protein
+na+/k+-atpase,0,0,2,2,tier2_only,2,gene-or-protein
+nabilone,2,4,2,2,both,4,drug-or-drug-class
+nafld,1,3,0,0,tier1_only,1,clinical-sign-or-condition
+naltrexone,7,24,15,30,both,22,drug-or-drug-class
+nanog,0,0,2,2,tier2_only,2,gene-or-protein
+naringenin,0,0,4,17,tier2_only,4,drug-or-drug-class
+naringin,0,0,2,18,tier2_only,2,drug-or-drug-class
+nattokinase,0,0,1,2,tier2_only,1,drug-or-drug-class
+natural killer (NK) cell level,0,0,1,2,tier2_only,1,physiological-measure
+natural killer cell,0,0,3,4,tier2_only,3,other
+natural killer cell cytotoxicity,0,0,1,5,tier2_only,1,physiological-measure
+natural killer cells,1,4,18,20,both,19,other
+nav1.7,0,0,1,4,tier2_only,1,gene-or-protein
+nav1.7 (scn9a),0,0,1,2,tier2_only,1,gene-or-protein
+ncl,0,0,1,2,tier2_only,1,gene-or-protein
+ncx1,0,0,1,2,tier2_only,1,gene-or-protein
+nd4,0,0,1,4,tier2_only,1,gene-or-protein
+nebivolol,0,0,3,4,tier2_only,3,drug-or-drug-class
+neobavaisoflavone,0,0,1,5,tier2_only,1,drug-or-drug-class
+neopterin,1,17,2,2,both,3,molecule-or-analyte
+neurofilament light chain,22,48,9,22,both,31,molecule-or-analyte
+neurogenic orthostatic hypotension,18,32,0,0,tier1_only,18,clinical-sign-or-condition
+neuroinflammation,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+neurokinin-1 receptor antagonist,0,0,1,2,tier2_only,1,drug-or-drug-class
+neurologic pain signature,0,0,1,2,tier2_only,1,physiological-measure
+neuron-specific enolase,0,0,2,2,tier2_only,2,molecule-or-analyte
+neuropeptide y,9,10,9,17,both,18,molecule-or-analyte
+neuropeptides,0,0,2,2,tier2_only,2,molecule-or-analyte
+neuroticism,0,0,1,2,tier2_only,1,other
+neurotransmitter receptor autoantibodies,0,0,2,3,tier2_only,2,molecule-or-analyte
+neutrophil-to-lymphocyte ratio,2,5,3,3,both,5,physiological-measure
+neutrophils,0,0,7,7,tier2_only,7,other
+nf-kb,3,3,16,17,both,19,gene-or-protein
+nf-κb,0,0,5,5,tier2_only,5,gene-or-protein
+nfat,0,0,2,3,tier2_only,2,gene-or-protein
+nfatc2,0,0,1,2,tier2_only,1,gene-or-protein
+nfe2l2,0,0,4,10,tier2_only,4,gene-or-protein
+nfkb1,0,0,3,4,tier2_only,3,gene-or-protein
+nfl,0,0,1,3,tier2_only,1,molecule-or-analyte
+ngf,16,24,15,25,both,31,gene-or-protein
+ngf-trka signaling,1,3,0,0,tier1_only,1,other
+nhe1,0,0,1,2,tier2_only,1,gene-or-protein
+nhe3,0,0,1,3,tier2_only,1,gene-or-protein
+nherf1,0,0,1,5,tier2_only,1,gene-or-protein
+nickel,0,0,2,19,tier2_only,2,molecule-or-analyte
+nicotinamide riboside,0,0,2,3,tier2_only,2,drug-or-drug-class
+nicotine,3,4,1,1,both,4,drug-or-drug-class
+nicotinic acetylcholine receptor,0,0,1,2,tier2_only,1,gene-or-protein
+nirmatrelvir,0,0,1,2,tier2_only,1,drug-or-drug-class
+nirmatrelvir/ritonavir,6,31,0,0,tier1_only,6,drug-or-drug-class
+nitrendipine,1,3,0,0,tier1_only,1,drug-or-drug-class
+nitric oxide,11,12,22,34,both,33,molecule-or-analyte
+nitric oxide signalling,0,0,1,2,tier2_only,1,other
+nitric oxide synthase,0,0,7,9,tier2_only,7,gene-or-protein
+nitric oxide; enos,0,0,1,2,tier2_only,1,molecule-or-analyte
+nitrite,0,0,4,12,tier2_only,4,molecule-or-analyte
+nitro-oleic acid,0,0,1,2,tier2_only,1,molecule-or-analyte
+nitrogen dioxide,1,4,0,0,tier1_only,1,molecule-or-analyte
+nitroglycerin,4,6,0,0,tier1_only,4,drug-or-drug-class
+nitrotyrosine,0,0,2,2,tier2_only,2,molecule-or-analyte
+nk cell,0,0,1,2,tier2_only,1,other
+nkap,0,0,1,6,tier2_only,1,gene-or-protein
+nlrp12,0,0,1,2,tier2_only,1,gene-or-protein
+nlrp3,8,13,11,15,both,19,gene-or-protein
+nlrp3 inflammasome,3,4,3,3,both,6,other
+nmda receptor,6,7,3,3,both,9,gene-or-protein
+nmda receptor autoantibody,7,8,0,0,tier1_only,7,molecule-or-analyte
+nnos,0,0,12,22,tier2_only,12,gene-or-protein
+nociplastic pain,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+nocturnal polyuria index,1,3,0,0,tier1_only,1,physiological-measure
+node degree-frequency correlation,0,0,1,3,tier2_only,1,physiological-measure
+non-Hodgkin lymphoma,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+non-dipping blood pressure pattern,3,6,0,0,tier1_only,3,physiological-measure
+norepinephrine,194,270,14,28,both,208,molecule-or-analyte
+normalized gain,1,3,0,0,tier1_only,1,physiological-measure
+normetanephrine,3,5,0,0,tier1_only,3,molecule-or-analyte
+nortriptyline,0,0,2,3,tier2_only,2,drug-or-drug-class
+nos,0,0,4,5,tier2_only,4,gene-or-protein
+nos1,0,0,9,19,tier2_only,9,gene-or-protein
+nos2,0,0,4,6,tier2_only,4,gene-or-protein
+notch1; jag1,0,0,1,2,tier2_only,1,gene-or-protein
+notch2nlc,9,13,1,1,both,10,gene-or-protein
+notch2nlc intranuclear inclusions,0,0,1,2,tier2_only,1,other
+npas2,0,0,3,6,tier2_only,3,gene-or-protein
+nps,0,0,1,3,tier2_only,1,molecule-or-analyte
+npy1r,1,3,1,3,both,2,gene-or-protein
+npy2r,0,0,1,2,tier2_only,1,gene-or-protein
+nqo1,0,0,2,2,tier2_only,2,gene-or-protein
+nr3c1,0,0,3,4,tier2_only,3,gene-or-protein
+nr3c2,0,0,1,3,tier2_only,1,gene-or-protein
+nr4a3,0,0,1,3,tier2_only,1,gene-or-protein
+nrf2,0,0,5,5,tier2_only,5,gene-or-protein
+nrg1,0,0,1,3,tier2_only,1,gene-or-protein
+nsaid,6,7,2,3,both,8,drug-or-drug-class
+ntf3,0,0,1,4,tier2_only,1,gene-or-protein
+ntn1,0,0,1,3,tier2_only,1,gene-or-protein
+ntrk1,29,74,1,4,both,30,gene-or-protein
+nucleus basalis of meynert grey matter density,1,7,0,0,tier1_only,1,physiological-measure
+obesity,0,0,3,6,tier2_only,3,clinical-sign-or-condition
+obeticholic acid,0,0,2,3,tier2_only,2,drug-or-drug-class
+obstructive sleep apnea,2,5,1,1,both,3,clinical-sign-or-condition
+occludin,0,0,4,4,tier2_only,4,gene-or-protein
+occupational physical activity,1,3,0,0,tier1_only,1,other
+ochratoxin a,0,0,1,2,tier2_only,1,molecule-or-analyte
+octreotide,9,14,2,2,both,11,drug-or-drug-class
+olanzapine,3,5,0,0,tier1_only,3,drug-or-drug-class
+oleoylethanolamide,0,0,1,3,tier2_only,1,molecule-or-analyte
+oligomeric proanthocyanidin complex (opc),0,0,1,2,tier2_only,1,drug-or-drug-class
+omalizumab,3,5,30,42,both,33,drug-or-drug-class
+omalizumab Fab variant,0,0,1,3,tier2_only,1,drug-or-drug-class
+onabotulinumtoxina,2,18,1,4,both,3,drug-or-drug-class
+ondansetron,0,0,1,2,tier2_only,1,drug-or-drug-class
+opioid,6,6,3,5,both,9,drug-or-drug-class
+opioid analgesics,0,0,1,2,tier2_only,1,drug-or-drug-class
+opioid receptor,0,0,2,2,tier2_only,2,gene-or-protein
+oprm1,0,0,2,9,tier2_only,2,gene-or-protein
+optic nerve head blood flow area,0,0,1,2,tier2_only,1,physiological-measure
+optic nerve sheath,0,0,2,2,tier2_only,2,other
+orai1,0,0,1,2,tier2_only,1,gene-or-protein
+orexin receptor,0,0,1,2,tier2_only,1,gene-or-protein
+ormdl,3,7,0,0,tier1_only,3,gene-or-protein
+ormdl3,0,0,1,7,tier2_only,1,gene-or-protein
+ornithine,0,0,3,3,tier2_only,3,molecule-or-analyte
+orosomucoid,0,0,1,2,tier2_only,1,molecule-or-analyte
+orthostatic blood pressure change,4,4,0,0,tier1_only,4,physiological-measure
+orthostatic blood pressure drop rate,1,5,0,0,tier1_only,1,physiological-measure
+orthostatic blood pressure response,6,7,0,0,tier1_only,6,physiological-measure
+orthostatic diastolic blood pressure change,2,4,0,0,tier1_only,2,physiological-measure
+orthostatic dizziness,4,5,0,0,tier1_only,4,clinical-sign-or-condition
+orthostatic heart rate increment,4,8,0,0,tier1_only,4,physiological-measure
+orthostatic heart rate response,4,4,0,0,tier1_only,4,physiological-measure
+orthostatic hypertension,7,8,0,0,tier1_only,7,clinical-sign-or-condition
+orthostatic hypotension,115,249,0,0,tier1_only,115,clinical-sign-or-condition
+orthostatic hypotension onset age,1,4,0,0,tier1_only,1,physiological-measure
+orthostatic hypotension variants,1,4,0,0,tier1_only,1,other
+orthostatic intolerance,19,32,1,1,both,20,clinical-sign-or-condition
+orthostatic symptoms,4,5,0,0,tier1_only,4,clinical-sign-or-condition
+orthostatic systolic blood pressure change,4,7,0,0,tier1_only,4,physiological-measure
+orthostatic systolic blood pressure fall,1,3,0,0,tier1_only,1,physiological-measure
+orthostatic tachycardia,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+osteoporosis,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+osteoprotegerin,0,0,2,3,tier2_only,2,molecule-or-analyte
+otog,2,4,0,0,tier1_only,2,gene-or-protein
+oues,0,0,2,3,tier2_only,2,physiological-measure
+ova-specific ige,0,0,5,6,tier2_only,5,molecule-or-analyte
+ovalbumin,0,0,1,2,tier2_only,1,molecule-or-analyte
+ovarian teratoma,7,9,0,0,tier1_only,7,clinical-sign-or-condition
+oxidative stress markers,0,0,2,3,tier2_only,2,molecule-or-analyte
+oxygen-ozone autohemotherapy,0,0,1,2,tier2_only,1,other
+oxygenated hemoglobin,5,10,0,0,tier1_only,5,physiological-measure
+oxytocin,5,11,1,2,both,6,molecule-or-analyte
+oxytocin; oxytocin receptor,0,0,1,5,tier2_only,1,molecule-or-analyte
+p-ERK/ERK ratio,0,0,1,2,tier2_only,1,physiological-measure
+p-TrkA,0,0,1,4,tier2_only,1,gene-or-protein
+"p-nf-κb, p-pi3k, p-akt, p-p38, p-stat3, gata3",0,0,1,2,tier2_only,1,gene-or-protein
+p2rx1,0,0,1,2,tier2_only,1,gene-or-protein
+p2rx3,3,3,1,1,both,4,gene-or-protein
+p2ry2,0,0,1,2,tier2_only,1,gene-or-protein
+p2ry6,1,5,0,0,tier1_only,1,gene-or-protein
+p2x3,0,0,3,3,tier2_only,3,gene-or-protein
+p2x4,0,0,2,15,tier2_only,2,gene-or-protein
+p2x7 receptor,0,0,5,7,tier2_only,5,gene-or-protein
+p38 mapk,0,0,7,7,tier2_only,7,gene-or-protein
+p4htm,1,3,0,0,tier1_only,1,gene-or-protein
+p53,0,0,2,2,tier2_only,2,gene-or-protein
+p70s6 kinase,0,0,1,2,tier2_only,1,gene-or-protein
+p75ntr/ngf complex,1,4,0,0,tier1_only,1,other
+paclitaxel,0,0,2,3,tier2_only,2,drug-or-drug-class
+paeoniflorin,0,0,3,3,tier2_only,3,drug-or-drug-class
+pain,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+pain acceptance,0,0,2,2,tier2_only,2,physiological-measure
+pain catastrophizing,0,0,8,17,tier2_only,8,physiological-measure
+pain duration,0,0,1,2,tier2_only,1,physiological-measure
+pain intensity,0,0,2,2,tier2_only,2,physiological-measure
+pain intolerance threshold,0,0,1,3,tier2_only,1,physiological-measure
+pain-related evoked potentials,0,0,1,5,tier2_only,1,physiological-measure
+palmitoylethanolamide,0,0,2,8,tier2_only,2,drug-or-drug-class
+palpitations,3,5,0,0,tier1_only,3,clinical-sign-or-condition
+pancreatic polypeptide,0,0,2,2,tier2_only,2,molecule-or-analyte
+par2,0,0,4,4,tier2_only,4,gene-or-protein
+par4,0,0,2,3,tier2_only,2,gene-or-protein
+parkinson's disease,4,5,0,0,tier1_only,4,clinical-sign-or-condition
+paroxetine,4,4,1,1,both,5,drug-or-drug-class
+parvovirus b19,0,0,2,2,tier2_only,2,other
+patellar tendon stiffness,0,0,1,2,tier2_only,1,physiological-measure
+pbmcsec-derived lipids,0,0,1,3,tier2_only,1,molecule-or-analyte
+pd-l1,2,3,3,4,both,5,gene-or-protein
+pdcd1,0,0,2,2,tier2_only,2,gene-or-protein
+pde4,0,0,1,2,tier2_only,1,gene-or-protein
+pde5,0,0,1,2,tier2_only,1,gene-or-protein
+peak VO2,0,0,1,4,tier2_only,1,physiological-measure
+peak VO2 and workload parameters,0,0,1,2,tier2_only,1,physiological-measure
+peak oxygen uptake,16,23,7,8,both,23,physiological-measure
+peanut ige avidity,0,0,1,2,tier2_only,1,physiological-measure
+peanut ige specific activity,0,0,1,2,tier2_only,1,physiological-measure
+peanut ige specific activity and diversity,0,0,1,2,tier2_only,1,physiological-measure
+peanut-specific ige,0,0,1,2,tier2_only,1,molecule-or-analyte
+pedf,0,0,1,3,tier2_only,1,molecule-or-analyte
+peg3,0,0,1,2,tier2_only,1,gene-or-protein
+pelvic organ prolapse,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+pelvic pain severity,0,0,1,2,tier2_only,1,physiological-measure
+pemivibart,1,5,0,0,tier1_only,1,drug-or-drug-class
+pentosan polysulfate,0,0,2,2,tier2_only,2,drug-or-drug-class
+pentraxin 3,0,0,1,7,tier2_only,1,molecule-or-analyte
+pentraxin-3,0,0,1,4,tier2_only,1,molecule-or-analyte
+peptic ulcer disease,0,0,1,4,tier2_only,1,clinical-sign-or-condition
+"peptide 2 (spike-derived, pskps motif)",0,0,1,2,tier2_only,1,molecule-or-analyte
+peptidergic dermal nerve fibers (substance p/cgrp+),0,0,1,3,tier2_only,1,other
+perceived stigma,0,0,1,4,tier2_only,1,other
+perfluorooctane sulfonate (PFOS),0,0,2,5,tier2_only,2,molecule-or-analyte
+perfusion index,4,10,0,0,tier1_only,4,physiological-measure
+periaqueductal gray,0,0,1,2,tier2_only,1,other
+periodic repolarization dynamics,1,6,0,0,tier1_only,1,physiological-measure
+periostin,0,0,2,2,tier2_only,2,molecule-or-analyte
+peripheral neuropathy,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+peripheral oxygen saturation,1,3,0,0,tier1_only,1,physiological-measure
+peripherin,0,0,2,2,tier2_only,2,gene-or-protein
+perk,0,0,1,3,tier2_only,1,gene-or-protein
+peroneal nerve,0,0,2,2,tier2_only,2,other
+perphenazine,0,0,1,2,tier2_only,1,drug-or-drug-class
+pertussis toxin,0,0,2,2,tier2_only,2,drug-or-drug-class
+petco2,0,0,1,2,tier2_only,1,physiological-measure
+pf-431396,0,0,1,3,tier2_only,1,drug-or-drug-class
+pgd2,0,0,3,3,tier2_only,3,molecule-or-analyte
+pge2,0,0,3,3,tier2_only,3,molecule-or-analyte
+pgm1,0,0,1,3,tier2_only,1,gene-or-protein
+pgm3,0,0,2,2,tier2_only,2,gene-or-protein
+pgp9.5,0,0,11,14,tier2_only,11,gene-or-protein
+phactr1,0,0,1,5,tier2_only,1,gene-or-protein
+phb2,0,0,1,7,tier2_only,1,gene-or-protein
+phenylalanine,0,0,3,3,tier2_only,3,molecule-or-analyte
+phenylephrine,7,10,1,2,both,8,drug-or-drug-class
+phgdh,1,3,0,0,tier1_only,1,gene-or-protein
+phosphatidylglycerols,0,0,2,2,tier2_only,2,molecule-or-analyte
+phospho-akt (ser473),0,0,1,2,tier2_only,1,gene-or-protein
+phospho-smad2,0,0,2,3,tier2_only,2,gene-or-protein
+phosphorylated alpha-synuclein,15,52,0,0,tier1_only,15,molecule-or-analyte
+phosphorylated alpha-synuclein (Ser129),0,0,2,6,tier2_only,2,molecule-or-analyte
+phosphorylated tau 181,2,6,0,0,tier1_only,2,molecule-or-analyte
+phox2b,7,11,0,0,tier1_only,7,gene-or-protein
+physical activity level,5,5,0,0,tier1_only,5,other
+physical functioning,0,0,2,3,tier2_only,2,physiological-measure
+pi3k,0,0,4,5,tier2_only,4,gene-or-protein
+pictilisib,0,0,1,2,tier2_only,1,drug-or-drug-class
+piezo2,2,10,1,1,both,3,gene-or-protein
+pimozide,0,0,2,3,tier2_only,2,drug-or-drug-class
+pineal gland,0,0,1,3,tier2_only,1,other
+pioglitazone,0,0,3,3,tier2_only,3,drug-or-drug-class
+piperine,0,0,2,2,tier2_only,2,molecule-or-analyte
+pirenzepine,0,0,2,2,tier2_only,2,drug-or-drug-class
+pitavastatin,0,0,1,2,tier2_only,1,drug-or-drug-class
+pityriasis rosea,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+pkc,0,0,2,3,tier2_only,2,gene-or-protein
+pkg1 alpha,0,0,1,3,tier2_only,1,gene-or-protein
+pkg1alpha,0,0,1,5,tier2_only,1,gene-or-protein
+plasma cell,0,0,1,2,tier2_only,1,other
+plasma exchange,9,10,1,2,both,10,other
+plasma volume,9,12,0,0,tier1_only,9,physiological-measure
+plasmalogens,0,0,3,4,tier2_only,3,molecule-or-analyte
+plasmapheresis,0,0,1,2,tier2_only,1,other
+plasmodium falciparum,3,3,0,0,tier1_only,3,other
+platelet count,0,0,2,2,tier2_only,2,physiological-measure
+platelet dense granules,2,4,0,0,tier1_only,2,other
+platelet-activating factor,0,0,2,2,tier2_only,2,molecule-or-analyte
+platelet-rich fibrin,0,0,1,4,tier2_only,1,other
+platelet-to-lymphocyte ratio,1,3,0,0,tier1_only,1,physiological-measure
+plcg1,0,0,4,4,tier2_only,4,gene-or-protein
+plcg2,0,0,2,3,tier2_only,2,gene-or-protein
+plcxd1,0,0,1,2,tier2_only,1,gene-or-protein
+plcγ1,0,0,3,3,tier2_only,3,gene-or-protein
+plexin d1 antibody,0,0,3,3,tier2_only,3,molecule-or-analyte
+plexin-d1,0,0,1,4,tier2_only,1,gene-or-protein
+plod1,0,0,13,25,tier2_only,13,gene-or-protein
+plod3,0,0,1,3,tier2_only,1,gene-or-protein
+pluviatolide,0,0,1,8,tier2_only,1,molecule-or-analyte
+plxnd1,0,0,1,3,tier2_only,1,gene-or-protein
+pm10,0,0,1,2,tier2_only,1,other
+pm2.5,1,4,1,2,both,2,other
+pmp22,4,7,1,1,both,5,gene-or-protein
+pneumolysin (PLY),0,0,1,2,tier2_only,1,molecule-or-analyte
+pnn50,27,33,0,0,tier1_only,27,physiological-measure
+polar verity sense,1,7,0,0,tier1_only,1,other
+polidocanol,0,0,1,12,tier2_only,1,drug-or-drug-class
+polyethylene glycol,0,0,3,6,tier2_only,3,other
+polyneuropathy,0,0,1,4,tier2_only,1,clinical-sign-or-condition
+polyscore,1,9,0,0,tier1_only,1,physiological-measure
+polysorbate 80,0,0,1,2,tier2_only,1,molecule-or-analyte
+pon1,0,0,1,2,tier2_only,1,gene-or-protein
+pons,0,0,1,3,tier2_only,1,other
+pooled human igg,0,0,1,2,tier2_only,1,drug-or-drug-class
+popliteal hiatus,0,0,2,4,tier2_only,2,other
+porphobilinogen,4,4,0,0,tier1_only,4,molecule-or-analyte
+post-COVID syndrome,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+post-exertional malaise,0,0,3,6,tier2_only,3,clinical-sign-or-condition
+post-traumatic stress disorder,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+posterior cervical revision surgery,0,0,1,2,tier2_only,1,other
+posterior cingulate cortex,0,0,2,2,tier2_only,2,other
+posterior cingulate gyri,1,3,0,0,tier1_only,1,other
+posterior insula,1,4,2,2,both,3,other
+postexertional malaise,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+postprandial hypotension,3,3,0,0,tier1_only,3,clinical-sign-or-condition
+poststroke cognitive impairment,1,3,0,0,tier1_only,1,clinical-sign-or-condition
+posttraumatic growth,1,3,0,0,tier1_only,1,other
+postural instability/gait difficulty subscore,1,5,0,0,tier1_only,1,physiological-measure
+postural orthostatic tachycardia syndrome,31,45,4,6,both,35,clinical-sign-or-condition
+postural orthostatic tachycardia syndrome diagnostic criteria,2,3,0,0,tier1_only,2,other
+postural sway,2,5,0,0,tier1_only,2,physiological-measure
+potassium,8,8,4,6,both,12,molecule-or-analyte
+ppar-gamma,0,0,3,6,tier2_only,3,gene-or-protein
+ppara,0,0,1,3,tier2_only,1,gene-or-protein
+pr interval,3,4,0,0,tier1_only,3,physiological-measure
+pramipexole,4,7,0,0,tier1_only,4,drug-or-drug-class
+prazosin,3,3,0,0,tier1_only,3,drug-or-drug-class
+prdm12,4,7,0,0,tier1_only,4,gene-or-protein
+prdm5,0,0,3,3,tier2_only,3,gene-or-protein
+pre-ejection period,0,0,1,2,tier2_only,1,physiological-measure
+precuneus,0,0,2,2,tier2_only,2,other
+prednisolone,5,6,1,1,both,6,drug-or-drug-class
+prednisone,3,6,1,2,both,4,drug-or-drug-class
+pregabalin,17,33,9,15,both,26,drug-or-drug-class
+pregabalin; gabapentin,0,0,1,2,tier2_only,1,drug-or-drug-class
+pregnanediol-3-glucuronide,0,0,1,2,tier2_only,1,molecule-or-analyte
+pregnenolone,0,0,2,3,tier2_only,2,molecule-or-analyte
+pressure pain threshold,0,0,8,16,tier2_only,8,physiological-measure
+presubiculum head,0,0,1,4,tier2_only,1,other
+prevotella,0,0,3,3,tier2_only,3,other
+prf1,0,0,2,4,tier2_only,2,gene-or-protein
+prnp,2,3,0,0,tier1_only,2,gene-or-protein
+pro-inflammatory cytokines,0,0,8,8,tier2_only,8,molecule-or-analyte
+probdnf,0,0,1,2,tier2_only,1,molecule-or-analyte
+probiotics,0,0,2,4,tier2_only,2,drug-or-drug-class
+problem-solving,0,0,1,2,tier2_only,1,other
+procalcitonin,4,4,1,1,both,5,molecule-or-analyte
+procollagen iii,0,0,1,2,tier2_only,1,molecule-or-analyte
+progesterone,5,6,0,0,tier1_only,5,molecule-or-analyte
+progesterone; testosterone,0,0,2,2,tier2_only,2,molecule-or-analyte
+progranulin,1,4,1,1,both,2,gene-or-protein
+prolactin,5,5,4,7,both,9,molecule-or-analyte
+prolidase,0,0,1,2,tier2_only,1,molecule-or-analyte
+propionate,0,0,1,2,tier2_only,1,molecule-or-analyte
+propofol,0,0,2,4,tier2_only,2,drug-or-drug-class
+propranolol,37,51,3,3,both,40,drug-or-drug-class
+prostaglandin d2,0,0,8,8,tier2_only,8,molecule-or-analyte
+prostaglandin e2,0,0,3,3,tier2_only,3,molecule-or-analyte
+protein,18,18,1,1,both,19,molecule-or-analyte
+proton pump inhibitors,0,0,3,3,tier2_only,3,drug-or-drug-class
+prucalopride,0,0,2,7,tier2_only,2,drug-or-drug-class
+pseudoxanthoma elasticum,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+psoriasis,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+psqi,0,0,2,2,tier2_only,2,physiological-measure
+psychological flexibility,0,0,2,6,tier2_only,2,other
+psychoticism,0,0,1,2,tier2_only,1,other
+ptc258,1,4,0,0,tier1_only,1,drug-or-drug-class
+pten,0,0,2,2,tier2_only,2,gene-or-protein
+ptic,0,0,1,3,tier2_only,1,other
+ptpn22,0,0,3,3,tier2_only,3,gene-or-protein
+ptpn22; ctla4,0,0,2,2,tier2_only,2,gene-or-protein
+ptprc,0,0,1,2,tier2_only,1,gene-or-protein
+ptprn2,0,0,1,5,tier2_only,1,gene-or-protein
+pts,0,0,2,2,tier2_only,2,gene-or-protein
+pulse pressure,9,12,1,3,both,10,physiological-measure
+pulse pressure/SBP ratio,0,0,1,4,tier2_only,1,physiological-measure
+pulse wave velocity,6,8,0,0,tier1_only,6,physiological-measure
+pupil diameter,0,0,1,2,tier2_only,1,physiological-measure
+pupil diameter difference,1,10,0,0,tier1_only,1,physiological-measure
+pupil dilation velocity,2,6,0,0,tier1_only,2,physiological-measure
+pupillary light reflex,4,7,0,0,tier1_only,4,physiological-measure
+pupillometry parameters,0,0,1,5,tier2_only,1,physiological-measure
+pura,1,7,0,0,tier1_only,1,gene-or-protein
+putamen,0,0,2,2,tier2_only,2,other
+pyloric distensibility index,1,19,0,0,tier1_only,1,physiological-measure
+pyridostigmine,42,82,7,9,both,49,drug-or-drug-class
+pyridoxal phosphate,0,0,1,2,tier2_only,1,molecule-or-analyte
+pyrrolidine dithiocarbamate,0,0,1,2,tier2_only,1,drug-or-drug-class
+pyruvate,0,0,3,3,tier2_only,3,molecule-or-analyte
+pyruvate dehydrogenase,0,0,2,2,tier2_only,2,gene-or-protein
+pyruvate dehydrogenase (PDH),0,0,2,2,tier2_only,2,gene-or-protein
+pyruvic acid,0,0,2,3,tier2_only,2,molecule-or-analyte
+qdpr,0,0,2,2,tier2_only,2,gene-or-protein
+qt dispersion,2,5,0,0,tier1_only,2,physiological-measure
+qtc dispersion,2,7,0,0,tier1_only,2,physiological-measure
+qtc interval,10,20,1,1,both,11,physiological-measure
+quantitative anisotropy,1,7,0,0,tier1_only,1,physiological-measure
+quercetin,0,0,5,9,tier2_only,5,drug-or-drug-class
+quetiapine,4,4,0,0,tier1_only,4,drug-or-drug-class
+quilizumab,0,0,1,2,tier2_only,1,drug-or-drug-class
+quinapril,2,3,0,0,tier1_only,2,drug-or-drug-class
+quinolinic acid,0,0,4,6,tier2_only,4,molecule-or-analyte
+raldh,0,0,1,3,tier2_only,1,gene-or-protein
+ramipril,4,14,0,0,tier1_only,4,drug-or-drug-class
+rapamycin,0,0,4,7,tier2_only,4,drug-or-drug-class
+ras; c-raf; erk; jnk; p38; c-fos; c-jun,0,0,1,2,tier2_only,1,gene-or-protein
+rasagiline,3,7,0,0,tier1_only,3,drug-or-drug-class
+rating of perceived exertion,0,0,2,2,tier2_only,2,physiological-measure
+rbm24,2,5,0,0,tier1_only,2,gene-or-protein
+rbm38,1,4,0,0,tier1_only,1,gene-or-protein
+reactive hyperaemia index,0,0,1,5,tier2_only,1,physiological-measure
+reactive hyperemia index,0,0,1,2,tier2_only,1,physiological-measure
+reactive oxygen species,9,9,20,26,both,29,molecule-or-analyte
+reboxetine,4,4,1,1,both,5,drug-or-drug-class
+rectas,1,6,0,0,tier1_only,1,other
+red blood cell count,0,0,2,2,tier2_only,2,physiological-measure
+reelin,0,0,1,5,tier2_only,1,molecule-or-analyte
+regional cerebral blood flow,0,0,1,2,tier2_only,1,physiological-measure
+regulatory T cells,0,0,3,4,tier2_only,3,other
+regulatory t cells,0,0,3,3,tier2_only,3,other
+rela,0,0,1,2,tier2_only,1,gene-or-protein
+relamorelin,0,0,2,2,tier2_only,2,drug-or-drug-class
+relaxin,0,0,3,4,tier2_only,3,molecule-or-analyte
+rem sleep behavior disorder,6,6,1,1,both,7,clinical-sign-or-condition
+remdesivir,4,4,0,0,tier1_only,4,drug-or-drug-class
+remibrutinib,0,0,3,14,tier2_only,3,drug-or-drug-class
+renin,17,19,0,0,tier1_only,17,molecule-or-analyte
+renin-angiotensin-aldosterone system,5,5,1,1,both,6,other
+reserpine,4,11,1,3,both,5,drug-or-drug-class
+resistin,0,0,1,3,tier2_only,1,molecule-or-analyte
+respiratory rate,5,7,0,0,tier1_only,5,physiological-measure
+respiratory sinus arrhythmia,7,9,0,0,tier1_only,7,physiological-measure
+restless legs syndrome,2,4,2,7,both,4,clinical-sign-or-condition
+resveratrol,0,0,4,6,tier2_only,4,drug-or-drug-class
+ret,2,3,4,14,both,6,gene-or-protein
+retinal ganglion cells,5,7,0,0,tier1_only,5,other
+retinal nerve fiber layer,0,0,1,2,tier2_only,1,other
+retinal nerve fiber layer thickness,0,0,2,2,tier2_only,2,physiological-measure
+retreg1,8,40,0,0,tier1_only,8,gene-or-protein
+retreg3,1,9,0,0,tier1_only,1,gene-or-protein
+retrosplenial cortex,0,0,1,2,tier2_only,1,other
+rfc1,10,39,1,6,both,11,gene-or-protein
+rhbg,0,0,1,2,tier2_only,1,gene-or-protein
+rice bran arabinoxylan compound,0,0,1,5,tier2_only,1,drug-or-drug-class
+rifaximin,0,0,3,3,tier2_only,3,drug-or-drug-class
+right thalamus; left postcentral gyrus; right hippocampus; right fusiform gyrus,0,0,1,2,tier2_only,1,other
+riluzole,2,4,0,0,tier1_only,2,drug-or-drug-class
+rintatolimod,0,0,9,14,tier2_only,9,drug-or-drug-class
+risdiplam,1,4,0,0,tier1_only,1,drug-or-drug-class
+rituximab,6,8,17,31,both,23,drug-or-drug-class
+rivastigmine,4,4,0,0,tier1_only,4,drug-or-drug-class
+rmssd,84,121,2,2,both,86,physiological-measure
+rnf123,0,0,1,2,tier2_only,1,gene-or-protein
+rnf213,0,0,2,6,tier2_only,2,gene-or-protein
+rocuronium,0,0,2,2,tier2_only,2,drug-or-drug-class
+ropinirole,4,6,0,0,tier1_only,4,drug-or-drug-class
+rosacea severity,0,0,1,2,tier2_only,1,physiological-measure
+roseburia,3,3,1,1,both,4,other
+rosiglitazone,0,0,2,2,tier2_only,2,drug-or-drug-class
+rosuvastatin,0,0,1,2,tier2_only,1,drug-or-drug-class
+rough endoplasmic reticulum,0,0,1,2,tier2_only,1,other
+rr interval,7,9,0,0,tier1_only,7,physiological-measure
+rspry1,0,0,1,12,tier2_only,1,gene-or-protein
+runx2,0,0,4,7,tier2_only,4,gene-or-protein
+ruxolitinib,0,0,3,6,tier2_only,3,drug-or-drug-class
+rvsp,0,0,1,3,tier2_only,1,physiological-measure
+ryr1,0,0,1,4,tier2_only,1,gene-or-protein
+s-adenosylmethionine,0,0,1,2,tier2_only,1,molecule-or-analyte
+s1 spike protein,2,3,0,0,tier1_only,2,molecule-or-analyte
+s100a4,0,0,2,19,tier2_only,2,gene-or-protein
+sRAGE,0,0,1,4,tier2_only,1,molecule-or-analyte
+sacral anterior root stimulation with deafferentation,1,6,0,0,tier1_only,1,other
+saffron extract,0,0,1,9,tier2_only,1,drug-or-drug-class
+salience network,3,3,3,5,both,6,other
+salience network - posterior cingulate cortex connectivity,0,0,1,2,tier2_only,1,physiological-measure
+salivary alpha-amylase,0,0,3,4,tier2_only,3,molecule-or-analyte
+salubrinal,0,0,1,4,tier2_only,1,drug-or-drug-class
+salusin-beta,0,0,1,9,tier2_only,1,molecule-or-analyte
+salvia amarissima aqueous extract,0,0,1,2,tier2_only,1,drug-or-drug-class
+samd9,2,5,0,0,tier1_only,2,gene-or-protein
+sarcoidosis,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+sars-cov,0,0,2,3,tier2_only,2,other
+sars-cov-2,14,17,13,16,both,27,other
+sars-cov-2 rna,7,10,1,1,both,8,molecule-or-analyte
+sars-cov-2 spike antibody,0,0,2,2,tier2_only,2,molecule-or-analyte
+sars-cov-2 spike protein,16,18,5,8,both,21,molecule-or-analyte
+sars-cov-2 spike s1 igg,0,0,1,2,tier2_only,1,molecule-or-analyte
+satellite glial cells,0,0,2,2,tier2_only,2,other
+scapular upward rotation,0,0,1,2,tier2_only,1,physiological-measure
+schizophrenia polygenic risk score,1,3,0,0,tier1_only,1,other
+schwann cells,1,7,1,1,both,2,other
+sciatic nerve,0,0,1,3,tier2_only,1,other
+scn10a,0,0,8,13,tier2_only,8,gene-or-protein
+scn11a,0,0,2,2,tier2_only,2,gene-or-protein
+scn2b,0,0,1,2,tier2_only,1,gene-or-protein
+scn9a,8,36,15,50,both,23,gene-or-protein
+sco m 5,0,0,1,5,tier2_only,1,gene-or-protein
+scopa-aut,9,13,0,0,tier1_only,9,other
+sd2,6,8,0,0,tier1_only,6,physiological-measure
+sd_bold,0,0,1,7,tier2_only,1,physiological-measure
+sdann,10,15,0,0,tier1_only,10,physiological-measure
+sdhb; gls; ndufb1; ndufb10,0,0,1,2,tier2_only,1,gene-or-protein
+sdnn,94,162,0,0,tier1_only,94,physiological-measure
+sdnn index,4,4,0,0,tier1_only,4,physiological-measure
+sedentary time,0,0,2,8,tier2_only,2,physiological-measure
+selegiline,1,3,0,0,tier1_only,1,drug-or-drug-class
+selenium,0,0,3,5,tier2_only,3,molecule-or-analyte
+selenoprotein,0,0,1,2,tier2_only,1,molecule-or-analyte
+selenoprotein p autoantibodies,0,0,1,2,tier2_only,1,molecule-or-analyte
+self-efficacy,0,0,1,2,tier2_only,1,other
+sensorimotor cortex,0,0,1,2,tier2_only,1,other
+serca,0,0,1,2,tier2_only,1,gene-or-protein
+serine,3,3,5,6,both,8,molecule-or-analyte
+serotonin,23,30,38,62,both,61,molecule-or-analyte
+serpina5,0,0,2,3,tier2_only,2,gene-or-protein
+serpinb9,0,0,1,2,tier2_only,1,gene-or-protein
+serpine1,0,0,4,5,tier2_only,4,gene-or-protein
+serpinh1,0,0,3,6,tier2_only,3,gene-or-protein
+serrapeptase,0,0,1,2,tier2_only,1,drug-or-drug-class
+sert,0,0,4,4,tier2_only,4,gene-or-protein
+sertraline,4,5,0,0,tier1_only,4,drug-or-drug-class
+sex,15,17,3,3,both,18,other
+sfn-siq score,0,0,2,3,tier2_only,2,physiological-measure
+sgk1,1,3,1,1,both,2,gene-or-protein
+sglt2 inhibitor,8,14,1,1,both,9,drug-or-drug-class
+short-chain fatty acids,6,8,5,8,both,11,molecule-or-analyte
+sibo,0,0,1,7,tier2_only,1,clinical-sign-or-condition
+sick leave,0,0,1,2,tier2_only,1,other
+siglec6,0,0,1,13,tier2_only,1,gene-or-protein
+siglec8,0,0,6,19,tier2_only,6,gene-or-protein
+silicon dioxide nanoparticle (SiO2),0,0,1,5,tier2_only,1,other
+simvastatin,0,0,1,2,tier2_only,1,drug-or-drug-class
+single-domain antibody 026 (sdAb-026),0,0,1,2,tier2_only,1,drug-or-drug-class
+sinus tachycardia,4,4,0,0,tier1_only,4,clinical-sign-or-condition
+sirt1,0,0,6,6,tier2_only,6,gene-or-protein
+sirt2; sirt3; sirt6,0,0,1,2,tier2_only,1,gene-or-protein
+sirt3,0,0,2,6,tier2_only,2,gene-or-protein
+sirt6,0,0,1,4,tier2_only,1,gene-or-protein
+skeletal muscle pump,1,5,0,0,tier1_only,1,other
+skil,0,0,1,2,tier2_only,1,gene-or-protein
+skin conductance level,0,0,2,2,tier2_only,2,physiological-measure
+skin sympathetic nerve activity,4,10,0,0,tier1_only,4,physiological-measure
+slc15a1,1,4,0,0,tier1_only,1,gene-or-protein
+slc15a2,0,0,1,3,tier2_only,1,gene-or-protein
+slc17a9,0,0,1,2,tier2_only,1,gene-or-protein
+slc18a2,5,11,1,8,both,6,gene-or-protein
+slc18a3,2,4,1,2,both,3,gene-or-protein
+slc1a2,1,4,0,0,tier1_only,1,gene-or-protein
+slc25a11,0,0,1,2,tier2_only,1,gene-or-protein
+slc2a10,0,0,2,4,tier2_only,2,gene-or-protein
+slc39a13,0,0,6,14,tier2_only,6,gene-or-protein
+slc6a2,17,47,0,0,tier1_only,17,gene-or-protein
+slc6a3,16,25,0,0,tier1_only,16,gene-or-protein
+slc6a4,1,3,3,3,both,4,gene-or-protein
+sleep disorder,1,3,0,0,tier1_only,1,clinical-sign-or-condition
+sleep disturbance,3,3,1,1,both,4,clinical-sign-or-condition
+sleep duration,0,0,1,2,tier2_only,1,physiological-measure
+sleep efficiency,0,0,2,2,tier2_only,2,physiological-measure
+sleep quality,5,7,0,0,tier1_only,5,physiological-measure
+slow oscillation power,0,0,1,2,tier2_only,1,physiological-measure
+smad1,0,0,1,2,tier2_only,1,gene-or-protein
+smad1/5/8,1,3,0,0,tier1_only,1,gene-or-protein
+smad2/3,0,0,2,2,tier2_only,2,gene-or-protein
+smad2/smad3,0,0,3,3,tier2_only,3,gene-or-protein
+smad2; smad3,0,0,4,4,tier2_only,4,gene-or-protein
+smad3,0,0,12,25,tier2_only,12,gene-or-protein
+smad7,0,0,3,4,tier2_only,3,gene-or-protein
+small fiber neuropathy,11,13,9,11,both,20,clinical-sign-or-condition
+small intestinal bacterial overgrowth,0,0,3,6,tier2_only,3,clinical-sign-or-condition
+small nerve fibers,0,0,3,3,tier2_only,3,other
+small-fiber neuropathy,0,0,2,5,tier2_only,2,clinical-sign-or-condition
+smn2,2,5,0,0,tier1_only,2,gene-or-protein
+smoking status,0,0,2,2,tier2_only,2,other
+smpdl3b,0,0,2,17,tier2_only,2,gene-or-protein
+snca,77,182,2,2,both,79,gene-or-protein
+snri,5,6,0,0,tier1_only,5,drug-or-drug-class
+soce (store-operated calcium entry),0,0,1,2,tier2_only,1,physiological-measure
+sod2,0,0,3,3,tier2_only,3,gene-or-protein
+sod3,0,0,2,6,tier2_only,2,gene-or-protein
+sodium,17,26,4,9,both,21,molecule-or-analyte
+sodium chloride,4,10,0,0,tier1_only,4,drug-or-drug-class
+sodium cromoglicate,0,0,2,2,tier2_only,2,drug-or-drug-class
+sodium oxybate,4,4,0,0,tier1_only,4,drug-or-drug-class
+sofa score,2,3,0,0,tier1_only,2,physiological-measure
+soluble guanylate cyclase/cGMP,0,0,1,2,tier2_only,1,molecule-or-analyte
+soluble interleukin-2 receptor,0,0,2,2,tier2_only,2,molecule-or-analyte
+somatomotor network-default mode network connectivity,0,0,1,2,tier2_only,1,physiological-measure
+somatostatin,0,0,2,2,tier2_only,2,molecule-or-analyte
+sophoricoside,0,0,1,2,tier2_only,1,molecule-or-analyte
+sox10,4,4,0,0,tier1_only,4,gene-or-protein
+sox11,0,0,1,2,tier2_only,1,gene-or-protein
+spare respiratory capacity,0,0,1,2,tier2_only,1,physiological-measure
+sphingadienines (4-cis-8-trans; 4-cis-8-cis),0,0,1,2,tier2_only,1,molecule-or-analyte
+sphingolipids,5,8,1,1,both,6,molecule-or-analyte
+sphingomyelin,0,0,2,2,tier2_only,2,molecule-or-analyte
+sphingosine-1-phosphate receptor modulator,0,0,1,2,tier2_only,1,drug-or-drug-class
+spike-derived peptide 4,0,0,1,2,tier2_only,1,molecule-or-analyte
+spinal cord stimulation,2,15,0,0,tier1_only,2,other
+spinal fluid evacuation,0,0,1,2,tier2_only,1,other
+spinal microglia,0,0,1,2,tier2_only,1,other
+spinal teratoma,1,5,0,0,tier1_only,1,clinical-sign-or-condition
+spironolactone,3,5,1,1,both,4,drug-or-drug-class
+spleen weight,0,0,2,2,tier2_only,2,physiological-measure
+spleen/thymus index,0,0,1,2,tier2_only,1,physiological-measure
+sptlc1,16,63,0,0,tier1_only,16,gene-or-protein
+sptlc2,6,12,0,0,tier1_only,6,gene-or-protein
+sqstm1,0,0,1,2,tier2_only,1,gene-or-protein
+sr 57227a,0,0,1,2,tier2_only,1,drug-or-drug-class
+srrm3,3,5,0,0,tier1_only,3,gene-or-protein
+srsf6,2,6,0,0,tier1_only,2,gene-or-protein
+ssl12,0,0,1,6,tier2_only,1,molecule-or-analyte
+ssr amplitude,1,3,0,0,tier1_only,1,physiological-measure
+ssri,9,14,1,1,both,10,drug-or-drug-class
+stap2,0,0,1,2,tier2_only,1,gene-or-protein
+staphylococcus aureus,0,0,4,4,tier2_only,4,other
+stat1,0,0,2,3,tier2_only,2,gene-or-protein
+stat3,4,4,10,14,both,14,gene-or-protein
+stat5,0,0,2,2,tier2_only,2,gene-or-protein
+stat5b,0,0,1,3,tier2_only,1,gene-or-protein
+stat6,0,0,2,3,tier2_only,2,gene-or-protein
+statin,3,3,2,3,both,5,drug-or-drug-class
+statins,0,0,1,2,tier2_only,1,drug-or-drug-class
+stearoylethanolamide,0,0,1,3,tier2_only,1,molecule-or-analyte
+stem cell factor,0,0,2,3,tier2_only,2,molecule-or-analyte
+stem cell therapy,0,0,1,2,tier2_only,1,other
+stim1,1,4,0,0,tier1_only,1,gene-or-protein
+stoppfall medications,2,15,0,0,tier1_only,2,drug-or-drug-class
+stoppfall medications with delayed blood pressure recovery,1,3,0,0,tier1_only,1,other
+stoppfall medications with orthostatic hypotension,1,3,0,0,tier1_only,1,other
+streptolysin O,0,0,1,5,tier2_only,1,molecule-or-analyte
+stroke volume,27,33,2,2,both,29,physiological-measure
+stroke volume index,4,6,1,2,both,5,physiological-measure
+strongyloides stercoralis,2,3,0,0,tier1_only,2,other
+strontium,0,0,1,2,tier2_only,1,molecule-or-analyte
+stw 5,0,0,1,3,tier2_only,1,drug-or-drug-class
+subbasal nerve plexus neuromas,0,0,1,2,tier2_only,1,other
+subcutaneous immunoglobulin,5,6,0,0,tier1_only,5,drug-or-drug-class
+subiculum head volume,0,0,1,2,tier2_only,1,physiological-measure
+"substance P, human hemokinin-1",0,0,1,2,tier2_only,1,molecule-or-analyte
+substance p,7,7,29,43,both,36,molecule-or-analyte
+substance p (1-9)-cooh,0,0,1,2,tier2_only,1,molecule-or-analyte
+subthalamic nucleus deep brain stimulation,2,3,0,0,tier1_only,2,other
+succinate,0,0,4,6,tier2_only,4,molecule-or-analyte
+sucnr1,0,0,1,4,tier2_only,1,gene-or-protein
+sucnr1 antagonists,0,0,1,2,tier2_only,1,drug-or-drug-class
+sucrase-isomaltase,0,0,2,2,tier2_only,2,gene-or-protein
+sugammadex,0,0,5,7,tier2_only,5,drug-or-drug-class
+sulf1,0,0,2,2,tier2_only,2,gene-or-protein
+sulfur dioxide (SO2) donor,0,0,1,3,tier2_only,1,drug-or-drug-class
+sulfur dioxide (SO2)/AAT1,0,0,1,2,tier2_only,1,molecule-or-analyte
+supercomplex iii2+iv,0,0,1,5,tier2_only,1,other
+superior mesenteric artery,0,0,2,2,tier2_only,2,other
+superior popliteomeniscal fascicle (spmf),0,0,1,3,tier2_only,1,other
+superoxide dismutase,0,0,3,3,tier2_only,3,gene-or-protein
+supine hypertension,15,19,0,0,tier1_only,15,clinical-sign-or-condition
+supine hypertension without standing hypotension,1,3,0,0,tier1_only,1,clinical-sign-or-condition
+survey of autonomic symptoms,2,3,0,0,tier1_only,2,physiological-measure
+sv2a,1,3,0,0,tier1_only,1,gene-or-protein
+symmetric dimethylarginine,0,0,2,3,tier2_only,2,molecule-or-analyte
+sympathetic blockade,1,4,0,0,tier1_only,1,other
+sympathetic nerve fibers,3,4,0,0,tier1_only,3,other
+sympathetic nervous system,7,8,1,1,both,8,other
+sympathetic skin response,20,43,5,9,both,25,physiological-measure
+sympathetic skin response latency,3,5,0,0,tier1_only,3,physiological-measure
+symptom duration,3,3,1,1,both,4,other
+symptom focusing,0,0,1,2,tier2_only,1,other
+symptomatic generalized joint hypermobility,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+synaptophysin,0,0,2,2,tier2_only,2,gene-or-protein
+syncope,3,4,0,0,tier1_only,3,clinical-sign-or-condition
+syndecan-1,0,0,1,2,tier2_only,1,gene-or-protein
+syne2,1,3,0,0,tier1_only,1,gene-or-protein
+systemic immune-inflammation index,3,3,0,0,tier1_only,3,physiological-measure
+systemic joint laxity,0,0,1,9,tier2_only,1,clinical-sign-or-condition
+systolic blood pressure,62,89,4,4,both,66,physiological-measure
+systolic blood pressure variability,11,24,0,0,tier1_only,11,physiological-measure
+t follicular helper cells,0,0,2,2,tier2_only,2,other
+t3,0,0,2,3,tier2_only,2,molecule-or-analyte
+tab2,0,0,1,2,tier2_only,1,gene-or-protein
+tachycardia,2,4,0,0,tier1_only,2,clinical-sign-or-condition
+tacrolimus,0,0,4,5,tier2_only,4,drug-or-drug-class
+tacrolimus/cyclosporine A,0,0,1,2,tier2_only,1,drug-or-drug-class
+tadalafil,3,3,0,0,tier1_only,3,drug-or-drug-class
+tafa4,0,0,1,3,tier2_only,1,gene-or-protein
+tafamidis,5,6,0,0,tier1_only,5,drug-or-drug-class
+tafazzin,0,0,1,3,tier2_only,1,gene-or-protein
+tamoxifen,0,0,1,3,tier2_only,1,drug-or-drug-class
+tamsulosin,3,4,0,0,tier1_only,3,drug-or-drug-class
+tarlov cyst,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+tau,7,9,1,3,both,8,molecule-or-analyte
+taurine,3,4,4,5,both,7,molecule-or-analyte
+tavapadon,2,3,0,0,tier1_only,2,drug-or-drug-class
+tecpr2,9,53,0,0,tier1_only,9,gene-or-protein
+telomerase,0,0,2,2,tier2_only,2,gene-or-protein
+telomere length,0,0,3,5,tier2_only,3,physiological-measure
+tempol,1,6,1,1,both,2,drug-or-drug-class
+temporal summation,0,0,1,2,tier2_only,1,physiological-measure
+temporomandibular disorder,0,0,1,2,tier2_only,1,clinical-sign-or-condition
+tenapanor,0,0,2,19,tier2_only,2,drug-or-drug-class
+tenascin-X,0,0,1,3,tier2_only,1,molecule-or-analyte
+tenascin-x,0,0,6,8,tier2_only,6,gene-or-protein
+tenascin-x (tnx),0,0,2,2,tier2_only,2,gene-or-protein
+terazosin,1,4,0,0,tier1_only,1,drug-or-drug-class
+teriparatide,0,0,2,2,tier2_only,2,drug-or-drug-class
+testosterone,9,10,7,10,both,16,molecule-or-analyte
+tet2,0,0,2,4,tier2_only,2,gene-or-protein
+tetrahydrobiopterin,2,19,1,1,both,3,molecule-or-analyte
+tezepelumab,0,0,2,3,tier2_only,2,drug-or-drug-class
+tfam,0,0,4,4,tier2_only,4,gene-or-protein
+tgf-beta,0,0,4,7,tier2_only,4,molecule-or-analyte
+tgf-beta signaling,0,0,2,2,tier2_only,2,other
+tgfb1,0,0,44,77,tier2_only,44,gene-or-protein
+tgfb2,0,0,9,28,tier2_only,9,gene-or-protein
+tgfbi,0,0,2,2,tier2_only,2,gene-or-protein
+tgfbr1,0,0,15,34,tier2_only,15,gene-or-protein
+tgfbr2,0,0,17,45,tier2_only,17,gene-or-protein
+tgm2,0,0,1,6,tier2_only,1,gene-or-protein
+tgm2 inhibitory antibody,0,0,1,2,tier2_only,1,drug-or-drug-class
+th,23,30,15,23,both,38,gene-or-protein
+th2 cells,0,0,1,2,tier2_only,1,other
+thalamocortical functional connectivity,0,0,1,2,tier2_only,1,physiological-measure
+thalamus,4,7,4,10,both,8,other
+thbs2,0,0,1,5,tier2_only,1,gene-or-protein
+thermal grill illusion of pain,0,0,1,4,tier2_only,1,physiological-measure
+thermal threshold testing,0,0,1,3,tier2_only,1,physiological-measure
+theta power (eeg),1,4,0,0,tier1_only,1,physiological-measure
+thiamine,0,0,2,3,tier2_only,2,molecule-or-analyte
+thoracic aorta,0,0,1,3,tier2_only,1,other
+threonine,0,0,2,3,tier2_only,2,molecule-or-analyte
+thrombin,0,0,2,12,tier2_only,2,molecule-or-analyte
+thrombospondin-1,0,0,2,2,tier2_only,2,molecule-or-analyte
+thy1,0,0,2,2,tier2_only,2,gene-or-protein
+thy1; sulf1,0,0,1,2,tier2_only,1,gene-or-protein
+thyroid disease,0,0,3,4,tier2_only,3,clinical-sign-or-condition
+thyroid hormone,0,0,2,2,tier2_only,2,molecule-or-analyte
+thyroid-stimulating hormone,0,0,2,2,tier2_only,2,molecule-or-analyte
+thyroid-to-mediastinum ratio,1,3,0,0,tier1_only,1,physiological-measure
+tibial spino-meniscal clearance,0,0,1,5,tier2_only,1,physiological-measure
+ticagrelor,0,0,1,2,tier2_only,1,drug-or-drug-class
+tight junction proteins (zo-1/claudin-1/occludin),0,0,1,2,tier2_only,1,gene-or-protein
+tilt table test,5,5,0,0,tier1_only,5,physiological-measure
+tim-3,0,0,1,2,tier2_only,1,gene-or-protein
+time in bed,0,0,1,2,tier2_only,1,physiological-measure
+timp1,0,0,4,4,tier2_only,4,gene-or-protein
+tinnitus,2,3,1,1,both,3,clinical-sign-or-condition
+tirzepatide,3,5,0,0,tier1_only,3,drug-or-drug-class
+tissue factor,0,0,2,2,tier2_only,2,gene-or-protein
+tissue saturation index,3,5,0,0,tier1_only,3,physiological-measure
+tissue transglutaminase iga antibody,0,0,2,2,tier2_only,2,molecule-or-analyte
+tlr-4; tnf-alpha; il-6; ifn-gamma; il-8,0,0,1,2,tier2_only,1,molecule-or-analyte
+tlr2,0,0,4,4,tier2_only,4,gene-or-protein
+tlr3,0,0,5,6,tier2_only,5,gene-or-protein
+tlr4,7,8,16,25,both,23,gene-or-protein
+tlr4/iba1,0,0,1,4,tier2_only,1,gene-or-protein
+tlr7,0,0,3,3,tier2_only,3,gene-or-protein
+tlr8,1,4,0,0,tier1_only,1,gene-or-protein
+tmscf proteoliposomes/nanodiscs,0,0,1,3,tier2_only,1,other
+tnf-alpha,54,65,75,89,both,129,molecule-or-analyte
+tnf-alpha and il-6,0,0,1,3,tier2_only,1,molecule-or-analyte
+tnfr2,0,0,2,3,tier2_only,2,gene-or-protein
+tnfsf10,3,8,0,0,tier1_only,3,gene-or-protein
+tnfsf13b,0,0,2,3,tier2_only,2,gene-or-protein
+tnxa,0,0,1,7,tier2_only,1,gene-or-protein
+tnxb,0,0,33,118,tier2_only,33,gene-or-protein
+tocilizumab,3,3,4,4,both,7,drug-or-drug-class
+tofacitinib,0,0,3,5,tier2_only,3,drug-or-drug-class
+topical capsaicin cream,0,0,1,3,tier2_only,1,drug-or-drug-class
+toronto clinical neuropathy score,2,4,0,0,tier1_only,2,physiological-measure
+torque teno mini virus 9,0,0,1,3,tier2_only,1,other
+total IgE,0,0,1,2,tier2_only,1,molecule-or-analyte
+total antioxidant capacity,0,0,6,6,tier2_only,6,physiological-measure
+total cholesterol,7,8,1,1,both,8,molecule-or-analyte
+total peripheral resistance,8,12,2,4,both,10,physiological-measure
+total power (hrv),13,15,0,0,tier1_only,13,physiological-measure
+total serum igg,0,0,2,2,tier2_only,2,molecule-or-analyte
+total tau,4,8,0,0,tier1_only,4,molecule-or-analyte
+tppp,0,0,3,6,tier2_only,3,gene-or-protein
+tpsab1,3,5,27,70,both,30,gene-or-protein
+tpsab1/tpsb2,0,0,2,2,tier2_only,2,gene-or-protein
+tpsb2,0,0,2,2,tier2_only,2,gene-or-protein
+tra locus,0,0,1,3,tier2_only,1,gene-or-protein
+tramadol,5,5,2,2,both,7,drug-or-drug-class
+trans-DHA,0,0,1,2,tier2_only,1,molecule-or-analyte
+transaldolase,0,0,1,3,tier2_only,1,gene-or-protein
+transcutaneous vagus nerve stimulation,3,6,0,0,tier1_only,3,other
+transferrin,0,0,1,4,tier2_only,1,molecule-or-analyte
+transforming growth factor-beta,0,0,1,2,tier2_only,1,molecule-or-analyte
+transthyretin,26,64,8,15,both,34,gene-or-protein
+transversus abdominis muscle,0,0,1,3,tier2_only,1,other
+trazodone,3,11,0,0,tier1_only,3,drug-or-drug-class
+trem1,0,0,1,5,tier2_only,1,gene-or-protein
+trem2,3,6,1,1,both,4,gene-or-protein
+tricyclic antidepressant,9,13,1,1,both,10,drug-or-drug-class
+trigeminocardiac reflex,1,9,0,0,tier1_only,1,physiological-measure
+triglycerides,8,9,4,6,both,12,molecule-or-analyte
+triglycerides; C-reactive protein,0,0,1,2,tier2_only,1,molecule-or-analyte
+trigonelline,0,0,1,2,tier2_only,1,molecule-or-analyte
+triiodothyronine,0,0,2,2,tier2_only,2,molecule-or-analyte
+trimethylamine n-oxide,2,7,1,2,both,3,molecule-or-analyte
+trisulfated heparin disaccharide antibody,0,0,1,2,tier2_only,1,molecule-or-analyte
+trochlear sulcus depth,0,0,1,2,tier2_only,1,physiological-measure
+tropomyosin,0,0,1,2,tier2_only,1,molecule-or-analyte
+troponin,9,10,1,1,both,10,molecule-or-analyte
+troponin i,6,7,3,4,both,9,molecule-or-analyte
+troponin t,7,10,1,1,both,8,molecule-or-analyte
+trpm2,0,0,3,3,tier2_only,3,gene-or-protein
+trpm3,3,3,22,60,both,25,gene-or-protein
+trpm7,0,0,3,13,tier2_only,3,gene-or-protein
+trpm8,0,0,3,3,tier2_only,3,gene-or-protein
+trpv1,4,4,24,57,both,28,gene-or-protein
+trpv1/trpv4,0,0,2,4,tier2_only,2,gene-or-protein
+trpv2,1,9,1,1,both,2,gene-or-protein
+trpv4,0,0,4,4,tier2_only,4,gene-or-protein
+trypanosoma cruzi,1,7,0,0,tier1_only,1,other
+tryptase,15,19,99,166,both,114,molecule-or-analyte
+tryptase depletion index,0,0,1,2,tier2_only,1,physiological-measure
+tryptase-1,0,0,1,2,tier2_only,1,molecule-or-analyte
+tryptase-1; pgd2; il-6; tnf-α; il-4; ifn-γ; cxcl1; cxcl5; ltb4,0,0,1,2,tier2_only,1,molecule-or-analyte
+tryptase-positive mast cell,0,0,1,2,tier2_only,1,other
+tryptase; chymase,0,0,2,2,tier2_only,2,molecule-or-analyte
+tryptophan,3,3,12,17,both,15,molecule-or-analyte
+"tsh, free t4",0,0,2,2,tier2_only,2,molecule-or-analyte
+tslp,0,0,2,3,tier2_only,2,molecule-or-analyte
+tspo,0,0,10,28,tier2_only,10,gene-or-protein
+tspyl5,1,4,0,0,tier1_only,1,gene-or-protein
+tussilagone,0,0,1,3,tier2_only,1,molecule-or-analyte
+twist1,0,0,1,2,tier2_only,1,gene-or-protein
+type 2 diabetes mellitus,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+type III collagen,0,0,12,12,tier2_only,12,other
+type i collagen,0,0,3,3,tier2_only,3,other
+type iii procollagen,0,0,3,3,tier2_only,3,other
+type v collagen,0,0,2,2,tier2_only,2,gene-or-protein
+tyrosine,0,0,3,4,tier2_only,3,molecule-or-analyte
+tönnis angle,0,0,1,2,tier2_only,1,physiological-measure
+ubiquinol,0,0,1,2,tier2_only,1,molecule-or-analyte
+uchl1,0,0,2,2,tier2_only,2,gene-or-protein
+ulk1,0,0,2,4,tier2_only,2,gene-or-protein
+ulodesine,0,0,1,2,tier2_only,1,drug-or-drug-class
+ultra-short heart rate variability,0,0,1,4,tier2_only,1,physiological-measure
+unmyelinated sciatic nerve fibers,0,0,1,2,tier2_only,1,other
+urea,0,0,4,4,tier2_only,4,molecule-or-analyte
+uric acid,9,16,4,13,both,13,molecule-or-analyte
+urinary sodium excretion,3,4,0,0,tier1_only,3,physiological-measure
+urocortin,0,0,1,2,tier2_only,1,molecule-or-analyte
+ursolic acid,0,0,2,13,tier2_only,2,drug-or-drug-class
+usp5,0,0,2,2,tier2_only,2,gene-or-protein
+uts2,1,4,0,0,tier1_only,1,gene-or-protein
+v-atpase,0,0,1,4,tier2_only,1,gene-or-protein
+vacht,0,0,1,3,tier2_only,1,gene-or-protein
+vagal activity,0,0,2,3,tier2_only,2,physiological-measure
+vagal efficiency,0,0,1,2,tier2_only,1,physiological-measure
+vagotomy,1,3,1,1,both,2,other
+vagus nerve,21,72,12,21,both,33,other
+vagus nerve activity,1,4,0,0,tier1_only,1,physiological-measure
+vagus nerve stimulation,13,31,0,0,tier1_only,13,other
+valacyclovir,0,0,2,2,tier2_only,2,drug-or-drug-class
+valganciclovir,0,0,4,4,tier2_only,4,drug-or-drug-class
+valsalva ratio,16,21,0,0,tier1_only,16,physiological-measure
+valsartan,1,3,1,1,both,2,drug-or-drug-class
+vascular ehlers-danlos syndrome,0,0,2,2,tier2_only,2,clinical-sign-or-condition
+vasoactive intestinal peptide,4,5,5,6,both,9,molecule-or-analyte
+vasopressin,10,15,1,2,both,11,molecule-or-analyte
+vasoregulative GPCR autoantibodies,0,0,1,2,tier2_only,1,molecule-or-analyte
+vcam-1,5,5,1,1,both,6,molecule-or-analyte
+vcan,1,4,0,0,tier1_only,1,gene-or-protein
+vdr,0,0,3,4,tier2_only,3,gene-or-protein
+ve/vco2 slope,0,0,2,2,tier2_only,2,physiological-measure
+vegf,3,3,11,24,both,14,molecule-or-analyte
+vegfa,0,0,3,3,tier2_only,3,gene-or-protein
+venlafaxine,9,15,0,0,tier1_only,9,drug-or-drug-class
+verapamil,3,3,1,1,both,4,drug-or-drug-class
+vestibular migraine,2,3,0,0,tier1_only,2,clinical-sign-or-condition
+vildagliptin,0,0,1,2,tier2_only,1,drug-or-drug-class
+vimentin,0,0,2,2,tier2_only,2,gene-or-protein
+vincristine,4,4,1,1,both,5,drug-or-drug-class
+vip,0,0,3,5,tier2_only,3,molecule-or-analyte
+vitamin B12 deficiency,0,0,1,3,tier2_only,1,clinical-sign-or-condition
+vitamin B12/vitamin D3/vitamin K2,0,0,1,2,tier2_only,1,molecule-or-analyte
+vitamin B6,0,0,2,2,tier2_only,2,molecule-or-analyte
+vitamin C/vitamin E,0,0,1,2,tier2_only,1,molecule-or-analyte
+vitamin b12,15,37,10,17,both,25,molecule-or-analyte
+vitamin c,0,0,4,4,tier2_only,4,molecule-or-analyte
+vitamin d,8,11,16,40,both,24,molecule-or-analyte
+vitamin d3,0,0,2,2,tier2_only,2,molecule-or-analyte
+vitexin,0,0,1,2,tier2_only,1,molecule-or-analyte
+vlf power,9,10,0,0,tier1_only,9,physiological-measure
+voltage-gated sodium channel,0,0,3,3,tier2_only,3,gene-or-protein
+von willebrand factor,6,6,2,2,both,8,molecule-or-analyte
+vorinostat,0,0,1,2,tier2_only,1,drug-or-drug-class
+vortioxetine,1,3,0,0,tier1_only,1,drug-or-drug-class
+vpac1,0,0,1,2,tier2_only,1,gene-or-protein
+vps13c,1,17,0,0,tier1_only,1,gene-or-protein
+wasf3,0,0,2,22,tier2_only,2,gene-or-protein
+white matter hyperintensities,1,5,0,0,tier1_only,1,physiological-measure
+whole blood viscosity,1,5,0,0,tier1_only,1,physiological-measure
+widespread pain index (WPI),0,0,1,2,tier2_only,1,physiological-measure
+wnk1,6,20,0,0,tier1_only,6,gene-or-protein
+workload at ventilatory threshold,0,0,3,3,tier2_only,3,physiological-measure
+xingbi gel nasal drops,0,0,1,2,tier2_only,1,drug-or-drug-class
+xist,0,0,2,2,tier2_only,2,gene-or-protein
+yars1,1,3,0,0,tier1_only,1,gene-or-protein
+zeb2,0,0,1,6,tier2_only,1,gene-or-protein
+zfpm1,0,0,2,2,tier2_only,2,gene-or-protein
+zinc,1,8,4,8,both,5,molecule-or-analyte
+znf469,0,0,5,7,tier2_only,5,gene-or-protein
+znf717,0,0,1,2,tier2_only,1,gene-or-protein
+zoledronic acid,0,0,1,2,tier2_only,1,drug-or-drug-class
+zonulin,0,0,2,2,tier2_only,2,molecule-or-analyte
+zrsr2,0,0,1,3,tier2_only,1,gene-or-protein
+zscan1 autoantibody,1,3,0,0,tier1_only,1,molecule-or-analyte
+α-asarone,0,0,1,3,tier2_only,1,drug-or-drug-class
+α-sma,0,0,4,5,tier2_only,4,gene-or-protein
+β-catenin; gli2,0,0,1,2,tier2_only,1,gene-or-protein
+β1-adrenergic receptor autoantibody; β2-adrenergic receptor autoantibody; m3-muscarinic receptor autoantibody; m4-muscarinic receptor autoantibody,0,0,1,2,tier2_only,1,molecule-or-analyte
+β2-adrenergic receptor autoantibody,0,0,1,2,tier2_only,1,molecule-or-analyte
+β7high mast cells,0,0,1,2,tier2_only,1,other
+βenac,0,0,1,3,tier2_only,1,gene-or-protein
+γδ t cells,0,0,2,3,tier2_only,2,other

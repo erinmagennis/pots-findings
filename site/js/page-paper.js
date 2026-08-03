@@ -18,8 +18,8 @@ if(pi<0){
   const etal=p.author_count>1?' et al.':'';
   document.getElementById('head').innerHTML=`<div class="panel">
     <h1>${esc(p.title||'(untitled)')}</h1>
-    <p class="kv"><b>${esc(p.authors||p.first_author||'—')}</b></p>
-    <p class="kv"><span class="jr">${esc(p.journal||'—')}</span> ${p.year?`(${p.year})`:''} ·
+    <p class="kv"><b>${esc(p.authors||p.first_author||'N/A')}</b></p>
+    <p class="kv"><span class="jr">${esc(p.journal||'N/A')}</span> ${p.year?`(${p.year})`:''} ·
       pmid <span class="mono">${esc(p.pmid)}</span> ·
       ${p.is_open_access?'<span class="pill grey">open access</span>':'<span class="pill grey">not open access</span>'} ·
       cited by ${fmt(p.cited_by_count)}</p>
@@ -28,7 +28,7 @@ if(pi<0){
        ${p.pmc_url?` · <a href="${esc(p.pmc_url)}" target="_blank" rel="noopener">PMC full text</a>`:''}</p>
     <div class="note plain">The ${fmt(rows.length)} items below are <b>machine-generated summaries</b> of this
       paper, not the authors' own words (except the short verbatim quotes, which are truncated excerpts).
-      Extraction can be wrong — please read the original before citing anything here.
+      Extraction can be wrong: please read the original before citing anything here.
       Citation: ${esc(p.citation_short||'')}</div>
   </div>`;
   document.getElementById('count').innerHTML=`${fmt(rows.length)} findings`;

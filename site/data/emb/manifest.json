@@ -1,1 +1,108 @@
-{"version":"tier1-v1","model":"all-MiniLM-L6-v2","dims":384,"dtype":"uint8","quantization":"per-dimension min/scale, dequant = q*scale+qmin then L2-normalize","fidelity_mean_cosine":0.99997,"total_rows":36459,"shard_rows":6000,"shards":[{"file":"emb_t1_00.bin","start":0,"end":6000,"rows":6000,"bytes":2304000},{"file":"emb_t1_01.bin","start":6000,"end":12000,"rows":6000,"bytes":2304000},{"file":"emb_t1_02.bin","start":12000,"end":18000,"rows":6000,"bytes":2304000},{"file":"emb_t1_03.bin","start":18000,"end":24000,"rows":6000,"bytes":2304000},{"file":"emb_t1_04.bin","start":24000,"end":30000,"rows":6000,"bytes":2304000},{"file":"emb_t1_05.bin","start":30000,"end":36000,"rows":6000,"bytes":2304000},{"file":"emb_t1_06.bin","start":36000,"end":36459,"rows":459,"bytes":176256}],"tiers_included":["tier1"],"note":"Designed for incremental extension: Tiers 2-4 append new shards and bump version; existing shards and row offsets never change."}
+{
+ "version": "tier12-v1",
+ "model": "all-MiniLM-L6-v2",
+ "dims": 384,
+ "dtype": "uint8",
+ "quantization": "per-dimension min/scale, dequant = q*scale+qmin then L2-normalize",
+ "fidelity_mean_cosine": 0.99996,
+ "total_rows": 73070,
+ "shard_rows": 6000,
+ "shards": [
+  {
+   "file": "emb_t12_00.bin",
+   "start": 0,
+   "end": 6000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_01.bin",
+   "start": 6000,
+   "end": 12000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_02.bin",
+   "start": 12000,
+   "end": 18000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_03.bin",
+   "start": 18000,
+   "end": 24000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_04.bin",
+   "start": 24000,
+   "end": 30000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_05.bin",
+   "start": 30000,
+   "end": 36000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_06.bin",
+   "start": 36000,
+   "end": 42000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_07.bin",
+   "start": 42000,
+   "end": 48000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_08.bin",
+   "start": 48000,
+   "end": 54000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_09.bin",
+   "start": 54000,
+   "end": 60000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_10.bin",
+   "start": 60000,
+   "end": 66000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_11.bin",
+   "start": 66000,
+   "end": 72000,
+   "rows": 6000,
+   "bytes": 2304000
+  },
+  {
+   "file": "emb_t12_12.bin",
+   "start": 72000,
+   "end": 73070,
+   "rows": 1070,
+   "bytes": 410880
+  }
+ ],
+ "tiers_included": [
+  "tier1",
+  "tier2"
+ ],
+ "note": "Rows 0-36458 are tier-1 findings in tier1_findings_canonical.parquet order; rows 36459-73069 are tier-2 findings in tier2_findings_canonical.parquet order. Designed for incremental extension: Tiers 3-4 append new shards and bump version; existing row offsets never change."
+}

@@ -30,10 +30,10 @@ function render(){
   document.getElementById('tbl').querySelector('tbody').innerHTML=r.slice(page*PAGE,(page+1)*PAGE).map(p=>{
     const etal=p.author_count>1?' et al.':'';
     return `<tr>
-      <td><a href="paper.html?pmid=${esc(p.pmid)}"><b>${esc(p.first_author||'—')}${etal}</b></a></td>
+      <td><a href="paper.html?pmid=${esc(p.pmid)}"><b>${esc(p.first_author||'N/A')}${etal}</b></a></td>
       <td>${esc((p.title||'').slice(0,120))}${(p.title||'').length>120?'…':''}</td>
-      <td class="jr">${esc(p.journal||'—')}</td>
-      <td class="num">${p.year||'—'}</td>
+      <td class="jr">${esc(p.journal||'N/A')}</td>
+      <td class="num">${p.year||'N/A'}</td>
       <td class="num">${fmt(p.n_findings)}</td>
       <td class="num">${fmt(p.cited_by_count)}</td></tr>`;
   }).join('');

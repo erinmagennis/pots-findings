@@ -1,4 +1,4 @@
-/* data.js — shared loader/state for the Tier-1 findings browser.
+/* data.js: shared loader/state for the combined findings browser.
    No framework, no build step. Everything is fetched from ./data/ as static files. */
 export const DATA = './data/';
 const _cache = {};
@@ -17,7 +17,7 @@ export const state = { facets:null, meta:null, papers:null, entities:null, text:
 
 export async function loadMeta(){ state.meta = state.meta || await getJSON('meta.json'); return state.meta; }
 
-/** Facet layer: dictionary-encoded columns for all 36,459 rows. Filters+charts need only this. */
+/** Facet layer: dictionary-encoded columns for every finding. Filters and charts need only this. */
 export async function loadFacets(){
   if(state.facets) return state.facets;
   const f = await getJSON('findings_facets.json');
@@ -91,7 +91,7 @@ export function detailOf(row){
   for(const k in d) if(k!=='start' && k!=='end') o[k] = d[k][i];
   return o;
 }
-/** Load ALL text shards — needed for keyword search over finding_text. */
+/** Load ALL text shards: needed for keyword search over finding_text. */
 export async function loadAllText(onProgress){
   const n = state.facets.n_shards; let done=0;
   await Promise.all(Array.from({length:n},(_,s)=>loadTextShard(s).then(()=>{ done++; onProgress&&onProgress(done,n); })));
@@ -99,22 +99,21 @@ export async function loadAllText(onProgress){
 
 /* ---- facet accessors ---- */
 /** Read a facet value. Returns null for absent values: dictionary-encoded columns store missing
-    data as the placeholder "—" (or "" for the entity-string column), and both must read as null so
-    callers can use a plain truthiness test without rendering a phantom "—" entity chip. */
+    data as the placeholder "\u2014" (or "" for the entity-string column), and both must read as null so
+    callers can use a plain truthiness test without rendering a phantom missing-value entity chip. */
 export function val(field, row){
   const f = state.facets, c = f.cols[field];
   if(!c) return null;
   const d = f.dicts[field];
   const v = d ? d[c[row]] : c[row];
-  if(v==='—' || v==='') return null;
+  if(v==='\u2014' || v==='') return null;
   return v;
 }
 export function code(field, v){ return state.facets.inv[field]?.get(v); }
 export function origEntity(row){ return state.facets.orig_entity[String(row)] || null; }
 
-/* Condition labels INSIDE the Tier-1 extraction scope (the POTS/dysautonomia search).
-   The complement — ME/CFS, fibromyalgia, EDS, MCAS, IBS, migraine, autism — appears only as
-   incidental mentions inside those papers. These two sets together cover all 14 condition labels. */
+/* Legacy Tier 1 condition grouping. New combined views should use the ti and sl facets to
+   distinguish extraction tier and source literature instead of inferring scope from condition. */
 export const TIER1_CONDITIONS = new Set(['POTS','dysautonomia','orthostatic_hypotension','general',
   'multiple','long_COVID','small_fiber_neuropathy']);
 export const inTier1Scope = c => TIER1_CONDITIONS.has(c);
@@ -128,10 +127,10 @@ export const DIRCLASS = v =>
 export function esc(s){
   return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-export function fmt(n){ return (n==null||isNaN(n)) ? '—' : Number(n).toLocaleString('en-US'); }
+export function fmt(n){ return (n==null||isNaN(n)) ? 'N/A' : Number(n).toLocaleString('en-US'); }
 
 /* ---- filtering over the facet layer ---- */
-export const FILTER_FIELDS = ['c','d','tr','ce','ft','ek','mc','e','st','ca','ps','ag','cv','th'];
+export const FILTER_FIELDS = ['ti','sl','c','d','tr','ce','ft','ek','mc','e','st','ca','ps','ag','cv','th'];
 
 export function applyFilters(f, opts){
   const F = state.facets, n = F.n, out = [];

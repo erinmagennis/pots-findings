@@ -1,0 +1,179 @@
+{
+ "version": "tier2-v1",
+ "frozen_at": "2026-07-30",
+ "contract": "Every fact carries the expression that produced it and the basis it assumes. Never quote a number without its basis. Never restate from memory \u2014 re-evaluate the expr.",
+ "relationship_to_tier1": "ADDITIVE. tier1_golden_facts.json v1 values are NOT edited. Where a tier-1 number is superseded by a combined figure, the combined figure is registered here under a NEW name with its own basis; the tier-1 value remains valid for tier-1 scope.",
+ "default_paper_basis": "canonical_pmid.nunique(); tier-2 canonical_pmid == raw pmid (duplicate-title audit merged 0 groups)",
+ "scope_caveat": "Tier-2 extraction covers 81 of 146 tier-2 chunks (~55%). ALL tier-2 numbers are subset figures, not the complete tier-2 corpus.",
+ "facts": {
+  "t2_findings_rows": {
+   "value": 36611,
+   "expr": "len(T2C)",
+   "basis": "rows, tier-2 pooled (81 chunks)"
+  },
+  "t2_distinct_finding_text": {
+   "value": 36559,
+   "expr": "T2C.finding_text.nunique()",
+   "basis": "distinct text"
+  },
+  "t2_papers": {
+   "value": 3123,
+   "expr": "T2C.canonical_pmid.nunique()",
+   "basis": "canonical_pmid",
+   "note": "== raw pmid; 0 title merges in tier-2"
+  },
+  "t2_chunks_extracted": {
+   "value": 81,
+   "expr": "T2C._chunk.nunique()",
+   "basis": "chunks",
+   "note": "of 146 tier-2 chunks total"
+  },
+  "t2_entity_bearing_rows": {
+   "value": 21264,
+   "expr": "T2C.entity_norm.notna().sum()",
+   "basis": "rows"
+  },
+  "t2_entity_free_rows": {
+   "value": 15347,
+   "expr": "T2C.entity_norm.isna().sum()",
+   "basis": "rows",
+   "note": "symptom-burden/comorbidity findings; tier-1 comparable rate 47.0%"
+  },
+  "t2_distinct_raw_entity_strings": {
+   "value": 10969,
+   "expr": "T2C.loc[ent,'entity_norm'].nunique()",
+   "basis": "distinct raw strings, pre-canonicalization"
+  },
+  "t2_canonical_entities": {
+   "value": 2329,
+   "expr": "T2C.canonical_entity.nunique()",
+   "basis": "distinct canonical, post-canonicalization"
+  },
+  "t2_entity_rows_mapped": {
+   "value": 12951,
+   "expr": "(T2C.entity_norm.notna() & T2C.canonical_entity.notna()).sum()",
+   "basis": "rows",
+   "note": "60.9% of entity rows; head-only mapping by design"
+  },
+  "t2_mapped_via_v1": {
+   "value": 4043,
+   "expr": "(T2C.vocab_version_used=='v1').sum()",
+   "basis": "rows"
+  },
+  "t2_mapped_via_v2": {
+   "value": 8908,
+   "expr": "(T2C.vocab_version_used=='v2').sum()",
+   "basis": "rows"
+  },
+  "t2_unmapped_singleton_rows": {
+   "value": 8296,
+   "expr": "(T2C.entity_norm.notna() & T2C.vocab_version_used.isna()).sum()",
+   "basis": "rows",
+   "note": "KNOWN UNDERCOUNT: 8,296 singleton strings, verified 0 span >=2 conditions"
+  },
+  "vocab_v1_rows": {
+   "value": 2019,
+   "expr": "(VOCAB2.vocab_version=='v1').sum()",
+   "basis": "vocab rows",
+   "note": "UNCHANGED from tier-1, byte-identical (asserted)"
+  },
+  "vocab_v2_rows_added": {
+   "value": 2200,
+   "expr": "(VOCAB2.vocab_version=='v2').sum()",
+   "basis": "vocab rows",
+   "note": "tier-2 head strings, >=2 rows each"
+  },
+  "vocab_combined_canonical_entities": {
+   "value": 2803,
+   "expr": "VOCAB2.canonical_name.nunique()",
+   "basis": "distinct canonical across v1+v2"
+  },
+  "t2_fold_ratio": {
+   "value": 1.1017,
+   "expr": "len(HEAD)/V2.canonical_name.nunique()",
+   "basis": "strings per canonical, tier-2 head only",
+   "note": "1.10 vs tier-1's 2.34 \u2014 deliberately conservative"
+  },
+  "convergence_entities_2plus_conditions": {
+   "value": 1139,
+   "expr": "len(CONV)",
+   "basis": "canonical entities in >=2 source literatures, tier-1+2 pooled"
+  },
+  "convergence_entities_4plus": {
+   "value": 299,
+   "expr": "(CONV.n_conditions>=4).sum()",
+   "basis": "canonical entities"
+  },
+  "convergence_entities_cross_tier": {
+   "value": 389,
+   "expr": "(CONV.tiers=='1|2').sum()",
+   "basis": "canonical entities present in BOTH tiers"
+  },
+  "comorbidity_candidates_screened": {
+   "value": 644,
+   "expr": "len(Ci)",
+   "basis": "candidate rows (>=2 conditions named AND a comorbidity cue)"
+  },
+  "comorbidity_explicit_claims": {
+   "value": 355,
+   "expr": "len(POS)",
+   "basis": "adjudicated rows labeled explicit_comorbidity"
+  },
+  "comorbidity_explicit_papers": {
+   "value": 203,
+   "expr": "POS.pmid.nunique()",
+   "basis": "distinct pmid"
+  },
+  "comorbidity_condition_pairs": {
+   "value": 50,
+   "expr": "len(CM)",
+   "basis": "distinct unordered condition pairs"
+  },
+  "comorbidity_rejected_passing_mentions": {
+   "value": 151,
+   "expr": "(M.label=='neither').sum()",
+   "basis": "rows",
+   "note": "23.4% of candidates rejected \u2014 strictness check"
+  },
+  "comorbidity_shared_mechanism_claims": {
+   "value": 138,
+   "expr": "len(MECH)",
+   "basis": "adjudicated rows labeled shared_mechanism"
+  },
+  "crosswalk_shared_entities": {
+   "value": 389,
+   "expr": "len(t1_ent & t2_ent)",
+   "basis": "canonical entities in both tiers"
+  },
+  "crosswalk_papers_in_both_tiers": {
+   "value": 0,
+   "expr": "len(t1_pap & t2_pap)",
+   "basis": "papers",
+   "note": "tiers partition the corpus; combined_papers is EXACT, not an upper bound"
+  },
+  "combined_findings_rows": {
+   "value": 73070,
+   "expr": "len(t1)+len(T2C)",
+   "basis": "rows, tier-1 + tier-2",
+   "note": "SUPERSEDES tier-1 findings_rows=36459 for combined scope only; tier-1 value unchanged"
+  },
+  "combined_papers": {
+   "value": 6244,
+   "expr": "len(t1_canonical_pmid | t2_pap)",
+   "basis": "canonical_pmid on BOTH sides (tier-1 raw pmid mapped through pmid_dedup_map: 3,129->3,121; tier-2 3,123)",
+   "note": "0 overlap, so exact. SUPERSEDES nothing in tier-1; tier-1 papers_canonical=3,121 unchanged."
+  },
+  "combined_papers_raw_pmid_basis": {
+   "value": 6252,
+   "expr": "len(t1_pap | t2_pap)",
+   "basis": "raw pmid on both sides (tier-1 3,129 pre-merge + tier-2 3,123)",
+   "note": "Registered so the 8-paper difference is explicit rather than a discrepancy. Use the canonical figure by default."
+  },
+  "tier1_papers_canonical_recomputed": {
+   "value": 3121,
+   "expr": "len(t1_canonical_pmid)",
+   "basis": "canonical_pmid",
+   "note": "Reproduces tier-1's frozen papers_canonical exactly \u2014 cross-version check passed."
+  }
+ }
+}

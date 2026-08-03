@@ -35,12 +35,12 @@ function render(){
     const full=state.entityByName.get(e.name);
     return `<tr>
       <td><a href="entity.html?e=${encodeURIComponent(e.name)}"><b>${esc(e.name)}</b></a></td>
-      <td>${esc(e.kind||'—')}</td>
+      <td>${esc(e.kind||'N/A')}</td>
       <td class="num">${fmt(e.np_)} <span class="bar" style="width:${Math.round(46*e.np_/max)}px"></span></td>
       <td class="num">${fmt(e.nf)}</td>
       <td class="num" title="${esc((full.origs||[]).slice(0,12).join(' · '))}">${e.origs||''}</td>
-      <td class="mono">${e.oid?esc(e.oid):'—'}${e.osrc?` <span class="pill grey">${esc(e.osrc.split('/')[0])}</span>`:''}</td>
-      <td>${e.mapc?`<span class="tag${e.mapc!=='high'?' lowconf':''}">${esc(e.mapc)}</span>`:'—'}</td></tr>`;
+      <td class="mono">${e.oid?esc(e.oid):'N/A'}${e.osrc?` <span class="pill grey">${esc(e.osrc.split('/')[0])}</span>`:''}</td>
+      <td>${e.mapc?`<span class="tag${e.mapc!=='high'?' lowconf':''}">${esc(e.mapc)}</span>`:'N/A'}</td></tr>`;
   }).join('');
   document.getElementById('count').innerHTML=`${fmt(r.length)} entities${r.length>600?' (showing first 600)':''} ·
     ${fmt(r.filter(x=>x.oid).length)} with an ontology ID`;

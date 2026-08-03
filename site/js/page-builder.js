@@ -1,5 +1,5 @@
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, fmt, esc, val,
-         FILTER_FIELDS, TIER1_CONDITIONS } from './data.js';
+         FILTER_FIELDS } from './data.js';
 import { mount, selectOpts, entityCoverageNote } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
@@ -10,7 +10,7 @@ const DIM = {c:'Condition', d:'Direction', tr:'Evidence tier', ce:'Certainty', f
   ek:'Entity kind', mc:'Map confidence', e:'Canonical entity', st:'Study type', y:'Year',
   ca:'Causal/correlational', an:'Anatomical system', ps:'POTS subtype', ag:'Age group',
   sx:'Sex/hormonal', th:'Theme', sr:'Source stream', es:'Evidence stratum', rt:'Relation type',
-  cv:'COVID-associated', nc:'Null/positive class'};
+  cv:'COVID-associated', nc:'Null/positive class', ti:'Extraction tier', sl:'Source literature'};
 
 document.getElementById('xaxis').innerHTML=Object.entries(DIM)
   .map(([k,l])=>`<option value="${k}"${k==='c'?' selected':''}>${l}</option>`).join('');
@@ -45,8 +45,8 @@ function draw(){
   // group -> series -> {findings, papers:Set, entities:Set}
   const G=new Map();
   for(const r of rows){
-    const x=getDim(xf,r); if(x==null||x==='—') continue;
-    const s=sf? (getDim(sf,r)??'—') : '_';
+    const x=getDim(xf,r); if(x==null||x==='\u2014') continue;
+    const s=sf? (getDim(sf,r)??'N/A') : '_';
     if(!G.has(x)) G.set(x,new Map());
     const m=G.get(x);
     if(!m.has(s)) m.set(s,{n:0,p:new Set(),e:new Set()});
@@ -92,7 +92,7 @@ function draw(){
     `${fmt(rows.length)} findings pass the current filters (${nf} active filter${nf===1?'':'s'}) ·
      ${fmt(cats.length)} categories shown${G.size>cats.length?` of ${fmt(G.size)}`:''}
      ${ym==='papers'?' · papers counted on canonical_pmid':''}
-     ${(xf==='e'||sf==='e'||ym==='entities')?' · <b>canonical-entity based: covers 29.8% of findings</b>':''}`;
+     ${(xf==='e'||sf==='e'||ym==='entities')?` · <b>canonical-entity based: covers ${state.meta.counts.canonical_entity_pct}% of findings</b>`:''}`;
   document.getElementById('cn').innerHTML=(xf==='e'||sf==='e'||ym==='entities')
     ? entityCoverageNote('this chart') : '';
 
@@ -123,16 +123,14 @@ document.getElementById('png').onclick=()=>{
 document.getElementById('csv').onclick=()=>{
   if(!LAST) return;
   const q=v=>{const s=String(v==null?'':v); return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
-  const head=[`# POTS/dysautonomia Tier-1 findings browser — chart data`,
+  const c=state.meta.counts;
+  const head=[`# POTS and related-condition findings browser: chart data`,
     `# metric: ${LAST.meta.metric} by ${LAST.meta.x}${LAST.meta.series?` split by ${LAST.meta.series}`:''}`,
     `# filters: ${LAST.meta.filters}`,
-    `# papers are counted on canonical_pmid (after 8 validated duplicate merges)`,
-    `# scope: Tier 1 extracted the POTS/dysautonomia literature (${state.meta.counts.papers} of`,
-    `#   ~${state.meta.counts.corpus_papers_total} corpus papers). Condition labels within that scope:`,
-    `#   ${[...TIER1_CONDITIONS].join(', ')}`,
-    `# incidental mentions ONLY (their own literature is NOT extracted, Tiers 2-4):`,
-    `#   ${Object.keys(state.meta.incidental).join(', ')}`,
-    `# canonical_entity covers ${state.meta.counts.canonical_entity_pct}% of findings; entity-based cuts exclude the rest`,
+    `# papers are counted on canonical_pmid`,
+    `# scope: Tier 1 plus ${c.tier2_chunks_extracted} of ${c.tier2_chunks_total} Tier 2 chunks (${c.tier2_coverage_pct}%)`,
+    `# all Tier 2 and combined counts are subset counts; absence is not evidence of absence`,
+    `# canonical_entity covers ${c.canonical_entity_pct}% of findings; entity-based cuts exclude the rest`,
     `# NOT MEDICAL ADVICE - machine-extracted research information, extraction errors possible`];
   const body=[...head, LAST.cols.map(q).join(','), ...LAST.rows.map(r=>r.map(q).join(','))].join('\n');
   const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([body],{type:'text/csv'}));

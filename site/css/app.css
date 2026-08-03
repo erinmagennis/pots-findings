@@ -43,6 +43,7 @@ p.lede{color:var(--muted);margin:.3em 0 1em;max-width:78ch}
 /* ---------- search ---------- */
 .searchbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .searchbar input[type=text]{flex:1 1 320px;padding:10px 12px;border:1px solid var(--line);border-radius:7px;font-size:15px;background:#fff}
+#entSel{min-width:0;max-width:100%}
 button,.btn{font:inherit;font-size:13.5px;padding:8px 13px;border:1px solid var(--line);background:#fff;
   border-radius:7px;cursor:pointer;color:var(--ink)}
 button:hover{border-color:var(--accent);color:var(--accent)}

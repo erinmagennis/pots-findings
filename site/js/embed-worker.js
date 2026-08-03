@@ -1,4 +1,4 @@
-/* embed-worker.js — runs all-MiniLM-L6-v2 in a Web Worker via transformers.js.
+/* embed-worker.js: runs all-MiniLM-L6-v2 in a Web Worker via transformers.js.
    The findings were embedded with sentence-transformers/all-MiniLM-L6-v2; Xenova/all-MiniLM-L6-v2
    is the ONNX export of that same checkpoint, so query and document vectors share one space and
    cosine ranking is exact (not an approximation).

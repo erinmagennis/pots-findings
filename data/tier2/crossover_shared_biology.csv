@@ -1,0 +1,1140 @@
+canonical_entity,n_conditions,n_papers,n_findings,conditions,tiers,cross_mention_rows,within_rows
+tnf-alpha,12,129,154,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|patient_evidence|rccx_gene|small_fiber,1|2,13,12
+heart rate variability,11,186,315,ME_CFS|POTS|autism_intersection|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|patient_evidence|rccx_gene|small_fiber,1|2,12,10
+il-6,11,153,209,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,16,11
+cortisol,11,89,164,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|autism_intersection|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,15,11
+c-reactive protein,11,87,108,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|patient_evidence|rccx_gene,1|2,11,11
+intravenous immunoglobulin,11,76,109,EDS_hypermobility|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|gastroparesis|hyperadrenergic|ibs_intersection|patient_evidence|small_fiber,1|2,15,9
+body mass index,11,49,59,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|patient_evidence|small_fiber,1|2,9,11
+gut microbiome,10,36,38,MCAS_mast|ME_CFS|POTS|autism_intersection|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,5,9
+calcitonin gene-related peptide,10,25,32,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,7,9
+depression,10,24,30,EDS_hypermobility|ME_CFS|POTS|autism_intersection|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|patient_evidence,1|2,11,7
+norepinephrine,9,208,298,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|patient_evidence|rccx_gene,1|2,10,9
+heart rate,9,193,298,EDS_hypermobility|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|patient_evidence|rccx_gene,1|2,9,9
+mast cell,9,148,269,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|ibs_intersection|rccx_gene|small_fiber,1|2,17,9
+ace2,9,67,105,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|patient_evidence|small_fiber,1|2,9,8
+serotonin,9,61,92,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,11,9
+age,9,51,55,EDS_hypermobility|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|patient_evidence|rccx_gene,1|2,4,9
+il-1beta,9,44,54,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,4,9
+il-10,9,40,50,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,4,9
+substance p,9,36,50,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,6,9
+antinuclear antibody,9,32,38,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|rccx_gene|small_fiber,1|2,11,9
+lactate,9,32,34,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|small_fiber,1|2,3,9
+melatonin,9,31,58,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,4,7
+vitamin d,9,24,51,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection|rccx_gene,1|2,4,9
+corticosteroid,9,19,21,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|patient_evidence|small_fiber,1|2,5,6
+neuropeptide y,9,18,27,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,2,8
+comt,9,17,47,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|patient_evidence|rccx_gene,1|2,4,7
+tryptase,8,114,185,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,15,5
+intraepidermal nerve fiber density,8,66,145,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|gastroparesis|rccx_gene|small_fiber,1|2,7,7
+systolic blood pressure,8,66,93,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene,1|2,6,8
+nitric oxide,8,33,46,MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,4,7
+vagus nerve,8,33,93,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection,1|2,6,8
+ngf,8,31,49,MCAS_mast|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,1,8
+bdnf,8,30,52,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,3,8
+trpv1,8,28,61,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|small_fiber,1|2,1,7
+eosinophils,8,26,32,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|ibs_intersection|rccx_gene,1|2,2,7
+insulin,8,26,37,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene,1|2,4,7
+gfap,8,25,37,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,0,8
+tlr4,8,23,33,MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,5,8
+amitriptyline,8,20,23,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|small_fiber,1|2,6,7
+creatinine,8,20,23,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,2,8
+malondialdehyde,8,18,24,MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,2,7
+25-hydroxyvitamin d,8,13,58,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|patient_evidence|small_fiber,1|2,2,8
+anxiety,8,12,14,EDS_hypermobility|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|patient_evidence|small_fiber,1|2,5,4
+potassium,8,12,14,MCAS_mast|ME_CFS|POTS|autism_intersection|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection,1|2,1,8
+triglycerides,8,12,15,EDS_hypermobility|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,3,6
+lf/hf ratio,7,86,129,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection,1|2,6,7
+histamine,7,68,96,MCAS_mast|ME_CFS|POTS|dysautonomia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,10,7
+pyridostigmine,7,49,91,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|gastroparesis|hyperadrenergic|ibs_intersection,1|2,9,6
+th,7,38,53,ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,3,7
+interferon gamma,7,35,43,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,5,6
+neurofilament light chain,7,31,70,ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|patient_evidence|small_fiber,1|2,1,7
+reactive oxygen species,7,29,35,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection|rccx_gene,1|2,4,7
+sars-cov-2,7,27,33,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|patient_evidence|rccx_gene,1|2,7,7
+gaba,7,26,33,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection,1|2,7,7
+glutamate,7,25,38,MCAS_mast|ME_CFS|dysautonomia|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,9,4
+immunoglobulin e,7,25,37,EDS_hypermobility|MCAS_mast|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|rccx_gene,1|2,1,7
+vitamin b12,7,25,54,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection|small_fiber,1|2,4,7
+migraine,7,24,31,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|fibromyalgia|ibs_intersection|patient_evidence,1|2,23,4
+angiotensin ii,7,23,31,EDS_hypermobility|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|rccx_gene,1|2,1,7
+creatine kinase,7,21,23,EDS_hypermobility|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|small_fiber,1|2,0,7
+hypertension,7,21,23,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection,1|2,2,5
+sodium,7,21,35,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene,1|2,2,7
+acetylcholine,7,20,26,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene,1|2,1,7
+atp,7,20,22,MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|hyperadrenergic|rccx_gene,1|2,4,7
+glucose,7,20,27,ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene,1|2,1,7
+adrb2,7,16,29,MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|hyperadrenergic|rccx_gene,1|2,3,6
+gabapentin,7,16,23,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|small_fiber,1|2,3,6
+d-dimer,7,14,20,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|patient_evidence,1|2,4,6
+glutathione,7,14,16,ME_CFS|POTS|fibromyalgia|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,2,5
+vegf,7,14,27,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|ibs_intersection|rccx_gene,1|2,1,7
+uric acid,7,13,29,MCAS_mast|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,3,7
+estrogen,7,12,14,EDS_hypermobility|ME_CFS|POTS|dysautonomia|fibromyalgia|hyperadrenergic|ibs_intersection,1|2,2,7
+fos,7,11,23,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene,1|2,1,7
+low-dose naltrexone,7,11,16,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|hyperadrenergic,1|2,3,6
+short-chain fatty acids,7,11,16,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection,1|2,0,7
+hdl cholesterol,7,9,9,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|patient_evidence|small_fiber,1|2,2,5
+rmssd,6,86,123,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,11,6
+snca,6,79,184,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|rccx_gene|small_fiber,1|2,5,6
+fludrocortisone,6,64,75,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,5,6
+blood pressure,6,59,77,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,6,6
+epinephrine,6,48,65,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,6,6
+dopamine,6,42,63,ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|rccx_gene,1|2,4,5
+propranolol,6,40,54,EDS_hypermobility|MCAS_mast|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,10,5
+TGF-beta,6,38,52,EDS_hypermobility|MCAS_mast|ME_CFS|fibromyalgia|rccx_gene|small_fiber,2,1,6
+hemoglobin a1c,6,38,49,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|small_fiber,1|2,2,5
+epstein-barr virus,6,35,39,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|ibs_intersection|patient_evidence,1|2,7,5
+transthyretin,6,34,79,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|small_fiber,1|2,5,5
+fibromyalgia,6,31,44,EDS_hypermobility|ME_CFS|POTS|fibromyalgia|ibs_intersection|patient_evidence,1|2,21,5
+stroke volume,6,29,35,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,2,6
+pregabalin,6,26,48,POTS|dysautonomia_subtype|fibromyalgia|hyperadrenergic|ibs_intersection|small_fiber,1|2,5,6
+beta-blocker,6,25,31,EDS_hypermobility|MCAS_mast|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,2,6
+mast cell activation syndrome,6,24,27,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|patient_evidence,1|2,25,4
+hemoglobin,6,23,26,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection,1|2,1,6
+naltrexone,6,22,54,EDS_hypermobility|ME_CFS|POTS|dysautonomia|fibromyalgia|ibs_intersection,1|2,10,6
+nlrp3,6,19,28,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|rccx_gene,1|2,2,6
+il-8,6,18,26,MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|rccx_gene,1|2,3,6
+sex,6,18,20,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|patient_evidence,1|2,3,5
+heart rate recovery,6,17,39,ME_CFS|POTS|dysautonomia|fibromyalgia|ibs_intersection|patient_evidence,1|2,0,6
+IL-10,6,16,21,MCAS_mast|ME_CFS|fibromyalgia|ibs_intersection|rccx_gene|small_fiber,2,1,6
+metformin,6,16,27,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection,1|2,2,6
+testosterone,6,16,20,MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|ibs_intersection,1|2,2,6
+cardiac output,6,15,19,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,0,6
+diabetes mellitus,6,15,16,EDS_hypermobility|POTS|dysautonomia|dysautonomia_subtype|ibs_intersection|small_fiber,1|2,2,5
+endothelin-1,6,14,22,MCAS_mast|ME_CFS|POTS|dysautonomia|rccx_gene|small_fiber,1|2,5,5
+stat3,6,14,18,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic|rccx_gene,1|2,4,5
+corticotropin-releasing hormone,6,13,15,MCAS_mast|ME_CFS|dysautonomia|fibromyalgia|hyperadrenergic|ibs_intersection,1|2,2,6
+ferritin,6,13,25,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,5,6
+leptin,6,13,16,POTS|dysautonomia|fibromyalgia|hyperadrenergic|patient_evidence|rccx_gene,1|2,3,5
+IL-6,6,12,13,EDS_hypermobility|MCAS_mast|ME_CFS|ibs_intersection|rccx_gene|small_fiber,2,0,6
+choline,6,12,17,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection,1|2,3,5
+immunoglobulin g,6,12,16,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|rccx_gene,1|2,2,5
+iron,6,12,31,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|dysautonomia|hyperadrenergic,1|2,2,5
+il1b,6,11,14,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic|rccx_gene,1|2,1,5
+IL-17A,6,10,10,MCAS_mast|ME_CFS|fibromyalgia|ibs_intersection|rccx_gene|small_fiber,2,1,5
+bacteroidetes,6,10,10,ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|small_fiber,1|2,1,5
+faecalibacterium prausnitzii,6,10,13,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection,1|2,4,5
+lidocaine,6,10,25,MCAS_mast|ME_CFS|dysautonomia|fibromyalgia|hyperadrenergic|small_fiber,1|2,3,5
+minocycline,6,9,21,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|rccx_gene,1|2,4,6
+troponin i,6,9,11,EDS_hypermobility|POTS|dysautonomia|dysautonomia_subtype|patient_evidence|rccx_gene,1|2,0,6
+vasoactive intestinal peptide,6,9,11,MCAS_mast|dysautonomia|hyperadrenergic|ibs_intersection|rccx_gene|small_fiber,1|2,0,6
+ascorbic acid,6,8,17,EDS_hypermobility|ME_CFS|dysautonomia|fibromyalgia|hyperadrenergic|rccx_gene,1|2,2,6
+corticosterone,6,8,11,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic|rccx_gene,1|2,0,6
+estradiol,6,8,21,MCAS_mast|ME_CFS|POTS|dysautonomia|fibromyalgia|ibs_intersection,1|2,2,5
+acetaminophen,6,7,11,EDS_hypermobility|MCAS_mast|ME_CFS|POTS|hyperadrenergic|ibs_intersection,1|2,3,4
+taurine,6,7,9,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,4,4
+bone mineral density,6,6,15,EDS_hypermobility|MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|patient_evidence,1|2,1,5
+col3a1,5,127,250,EDS_hypermobility|POTS|hyperadrenergic|patient_evidence|rccx_gene,1|2,3,3
+hf power,5,53,74,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,7,5
+baroreflex sensitivity,5,47,85,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,5,5
+diastolic blood pressure,5,47,56,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,7,5
+tgfb1,5,44,77,EDS_hypermobility|MCAS_mast|ME_CFS|rccx_gene|small_fiber,2,2,5
+ganglionic acetylcholine receptor autoantibody,5,37,67,POTS|dysautonomia|dysautonomia_subtype|gastroparesis|hyperadrenergic,1|2,6,4
+ehlers-danlos syndrome,5,36,49,EDS_hypermobility|ME_CFS|POTS|dysautonomia|patient_evidence,1|2,17,4
+duloxetine,5,30,69,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,5,4
+tpsab1,5,30,75,EDS_hypermobility|MCAS_mast|POTS|dysautonomia|ibs_intersection,1|2,9,5
+coenzyme q10,5,26,68,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,6,5
+metoprolol,5,26,33,EDS_hypermobility|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,1,5
+sympathetic skin response,5,25,52,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|small_fiber,1|2,7,5
+peak oxygen uptake,5,23,31,ME_CFS|POTS|dysautonomia|hyperadrenergic|small_fiber,1|2,7,5
+rituximab,5,23,39,MCAS_mast|ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,3,5
+scn9a,5,23,86,dysautonomia|dysautonomia_subtype|fibromyalgia|ibs_intersection|small_fiber,1|2,3,4
+IL-8,5,21,28,MCAS_mast|ME_CFS|fibromyalgia|ibs_intersection|small_fiber,2,4,5
+albumin,5,21,22,EDS_hypermobility|ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,4,5
+fatigue,5,20,30,ME_CFS|POTS|dysautonomia|fibromyalgia|patient_evidence,1|2,1,5
+small fiber neuropathy,5,20,24,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|small_fiber,1|2,11,4
+joint hypermobility,5,19,32,EDS_hypermobility|ME_CFS|POTS|dysautonomia|fibromyalgia,1|2,8,4
+natural killer cells,5,19,24,MCAS_mast|ME_CFS|fibromyalgia|hyperadrenergic|ibs_intersection,1|2,1,4
+nf-kb,5,19,20,MCAS_mast|ME_CFS|dysautonomia|ibs_intersection|rccx_gene,1|2,1,5
+clonidine,5,18,21,MCAS_mast|POTS|dysautonomia|dysautonomia_subtype|small_fiber,1|2,2,4
+losartan,5,18,29,EDS_hypermobility|ME_CFS|dysautonomia|dysautonomia_subtype|rccx_gene,1|2,1,5
+n-terminal pro-b-type natriuretic peptide,5,17,27,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|rccx_gene,1|2,2,5
+chat,5,16,20,dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection|rccx_gene,1|2,0,5
+growth hormone,5,15,27,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,4,5
+homocysteine,5,14,21,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|small_fiber,1|2,1,4
+microglia,5,14,15,ME_CFS|POTS|dysautonomia|fibromyalgia|rccx_gene,1|2,3,4
+il-17,5,13,17,MCAS_mast|ME_CFS|POTS|dysautonomia_subtype|fibromyalgia,1|2,2,5
+ldl cholesterol,5,12,12,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,2,4
+butyrate,5,11,14,MCAS_mast|ME_CFS|dysautonomia|fibromyalgia|ibs_intersection,1|2,0,5
+ketamine,5,11,22,MCAS_mast|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,2,4
+magnesium,5,11,16,EDS_hypermobility|ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,1,5
+mitochondria,5,11,13,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,2,4
+left ventricular ejection fraction,5,10,13,POTS|dysautonomia|hyperadrenergic|patient_evidence|rccx_gene,1|2,1,5
+ssri,5,10,15,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,4,5
+dbh,5,9,13,dysautonomia|dysautonomia_subtype|hyperadrenergic|rccx_gene|small_fiber,1|2,0,5
+handgrip strength,5,9,24,EDS_hypermobility|ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,4,3
+prolactin,5,9,12,ME_CFS|POTS|dysautonomia|fibromyalgia|hyperadrenergic,1|2,2,5
+IL-5,5,8,9,MCAS_mast|ME_CFS|fibromyalgia|rccx_gene|small_fiber,2,1,5
+atropine,5,8,8,MCAS_mast|POTS|dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,5
+bacteroides,5,8,10,ME_CFS|dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,2,5
+dexamethasone,5,8,10,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype|rccx_gene,1|2,1,5
+fluoxetine,5,8,19,MCAS_mast|ME_CFS|dysautonomia|fibromyalgia|hyperadrenergic,1|2,0,5
+hla-dqb1,5,8,8,EDS_hypermobility|ME_CFS|POTS|dysautonomia|patient_evidence,1|2,1,4
+sars-cov-2 rna,5,8,11,ME_CFS|POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,2,5
+thalamus,5,8,17,ME_CFS|dysautonomia|fibromyalgia|hyperadrenergic|small_fiber,1|2,2,4
+helicobacter pylori,5,7,15,MCAS_mast|ME_CFS|dysautonomia_subtype|fibromyalgia|ibs_intersection,1|2,3,5
+insular cortex,5,7,7,EDS_hypermobility|POTS|dysautonomia|fibromyalgia|hyperadrenergic,1|2,1,5
+methylprednisolone,5,7,7,MCAS_mast|dysautonomia|dysautonomia_subtype|hyperadrenergic|rccx_gene,1|2,0,5
+mthfr,5,7,11,ME_CFS|POTS|dysautonomia|fibromyalgia|rccx_gene,1|2,1,5
+tocilizumab,5,7,7,EDS_hypermobility|ME_CFS|POTS|dysautonomia|fibromyalgia,1|2,0,5
+tramadol,5,7,7,dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic|rccx_gene,1|2,1,4
+adiponectin,5,6,7,MCAS_mast|dysautonomia|hyperadrenergic|rccx_gene|small_fiber,1|2,0,5
+lactobacillus,5,6,6,ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection,1|2,1,4
+total antioxidant capacity,5,6,6,MCAS_mast|ME_CFS|fibromyalgia|rccx_gene|small_fiber,2,1,4
+neutrophil-to-lymphocyte ratio,5,5,8,ME_CFS|dysautonomia|dysautonomia_subtype|ibs_intersection|rccx_gene,1|2,0,5
+orthostatic hypotension,4,115,249,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,7,4
+midodrine,4,95,153,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,4,4
+sdnn,4,94,162,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,5,4
+ivabradine,4,64,127,ME_CFS|POTS|dysautonomia|hyperadrenergic,1|2,8,3
+kit,4,51,101,EDS_hypermobility|MCAS_mast|ibs_intersection|rccx_gene,2,1,3
+postural orthostatic tachycardia syndrome,4,35,51,EDS_hypermobility|MCAS_mast|POTS|dysautonomia,1|2,17,4
+droxidopa,4,33,50,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,4
+omalizumab,4,33,47,MCAS_mast|POTS|dysautonomia|rccx_gene,1|2,4,4
+catecholamines,4,26,30,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,2,4
+dysautonomia,4,24,41,EDS_hypermobility|POTS|dysautonomia|dysautonomia_subtype,1|2,7,3
+cerebral blood flow,4,23,50,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,6,4
+sars-cov-2 spike protein,4,21,26,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,4,4
+IL-4,4,20,26,MCAS_mast|ME_CFS|fibromyalgia|rccx_gene,2,2,3
+compass-31,4,20,67,ME_CFS|POTS|dysautonomia|fibromyalgia,1|2,9,4
+orthostatic intolerance,4,20,33,POTS|dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,11,2
+aldosterone,4,19,23,ME_CFS|POTS|dysautonomia|rccx_gene,1|2,1,4
+atomoxetine,4,19,26,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,4
+irritable bowel syndrome,4,19,25,EDS_hypermobility|POTS|ibs_intersection|patient_evidence,1|2,17,3
+IL-33,4,18,19,EDS_hypermobility|MCAS_mast|ME_CFS|rccx_gene,2,1,3
+collagen,4,17,18,EDS_hypermobility|fibromyalgia|ibs_intersection|rccx_gene,2,0,4
+end-tidal co2,4,17,23,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,4,4
+renin,4,17,19,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,3,3
+slc6a2,4,17,47,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,2,4
+lipopolysaccharide,4,16,20,MCAS_mast|ME_CFS|dysautonomia|ibs_intersection,1|2,3,4
+muscle sympathetic nerve activity,4,16,31,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,4
+slc6a3,4,16,25,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,4
+CCL2,4,15,18,MCAS_mast|ME_CFS|fibromyalgia|rccx_gene,2,1,3
+il-13,4,15,23,MCAS_mast|ME_CFS|POTS|hyperadrenergic,1|2,0,4
+tryptophan,4,15,20,ME_CFS|dysautonomia|fibromyalgia|ibs_intersection,1|2,4,4
+glp-1 receptor agonist,4,14,22,POTS|dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,0,4
+dexmedetomidine,4,13,16,ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,2,4
+vagus nerve stimulation,4,13,31,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,2,4
+ACTH,4,12,17,EDS_hypermobility|ME_CFS|fibromyalgia|rccx_gene,2,2,4
+corneal nerve fiber length,4,12,26,POTS|dysautonomia|fibromyalgia|small_fiber,1|2,2,4
+IL-2,4,11,13,ME_CFS|fibromyalgia|rccx_gene|small_fiber,2,2,4
+electrochemical skin conductance,4,11,42,POTS|dysautonomia|dysautonomia_subtype|small_fiber,1|2,6,3
+flow-mediated dilation,4,11,15,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,2,4
+lymphocytes,4,11,12,ME_CFS|POTS|dysautonomia_subtype|rccx_gene,1|2,2,4
+octreotide,4,11,16,EDS_hypermobility|POTS|dysautonomia|dysautonomia_subtype,1|2,0,4
+pgp9.5,4,11,14,EDS_hypermobility|fibromyalgia|rccx_gene|small_fiber,2,2,2
+rfc1,4,11,45,dysautonomia|dysautonomia_subtype|hyperadrenergic|small_fiber,1|2,2,4
+vasopressin,4,11,17,POTS|dysautonomia|hyperadrenergic|rccx_gene,1|2,4,4
+cognitive impairment,4,10,16,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,0,4
+notch2nlc,4,10,14,dysautonomia|dysautonomia_subtype|hyperadrenergic|small_fiber,1|2,0,4
+plasma exchange,4,10,12,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,4,4
+pulse pressure,4,10,15,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,2,4
+total peripheral resistance,4,10,16,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,0,4
+tricyclic antidepressant,4,10,14,dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,2,4
+troponin,4,10,11,MCAS_mast|POTS|dysautonomia|dysautonomia_subtype,1|2,2,4
+calcium channel blocker,4,9,11,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,0,4
+opioid,4,9,11,EDS_hypermobility|dysautonomia|fibromyalgia|hyperadrenergic,1|2,1,4
+venlafaxine,4,9,15,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,4
+IgG,4,8,17,MCAS_mast|ME_CFS|fibromyalgia|rccx_gene,2,0,4
+botulinum toxin type a,4,8,17,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,3
+ccl11,4,8,13,ME_CFS|POTS|dysautonomia|small_fiber,1|2,3,3
+cromolyn sodium,4,8,14,EDS_hypermobility|MCAS_mast|ME_CFS|ibs_intersection,2,6,3
+erk1/2,4,8,9,MCAS_mast|fibromyalgia|ibs_intersection|rccx_gene,2,1,4
+gabapentinoid,4,8,9,dysautonomia|fibromyalgia|hyperadrenergic|ibs_intersection,1|2,1,4
+nsaid,4,8,10,EDS_hypermobility|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,1,3
+phenylephrine,4,8,12,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,2,4
+pressure pain threshold,4,8,16,EDS_hypermobility|ME_CFS|fibromyalgia|ibs_intersection,2,3,3
+sympathetic nervous system,4,8,9,POTS|dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,2,3
+total cholesterol,4,8,9,POTS|dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,2,2
+troponin t,4,8,11,MCAS_mast|POTS|dysautonomia|dysautonomia_subtype,1|2,1,4
+von willebrand factor,4,8,8,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,1,4
+alpha-lipoic acid,4,7,7,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype,1|2,1,3
+caffeine,4,7,8,ME_CFS|dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,0,4
+caspase-3,4,7,9,MCAS_mast|ME_CFS|ibs_intersection|rccx_gene,2,0,4
+epidermal nerve fiber density,4,7,9,POTS|dysautonomia|fibromyalgia|small_fiber,1|2,6,3
+faecalibacterium,4,7,9,ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,2,4
+firmicutes,4,7,7,ME_CFS|POTS|dysautonomia_subtype|ibs_intersection,1|2,1,3
+gm-csf,4,7,9,MCAS_mast|dysautonomia|fibromyalgia|hyperadrenergic,1|2,1,4
+hydrogen sulfide,4,7,9,MCAS_mast|ME_CFS|POTS|hyperadrenergic,1|2,0,4
+insulin resistance,4,7,7,dysautonomia|hyperadrenergic|patient_evidence|small_fiber,1|2,2,3
+methylphenidate,4,7,12,ME_CFS|POTS|dysautonomia|hyperadrenergic,1|2,0,4
+123i-mibg,4,6,12,dysautonomia|dysautonomia_subtype|hyperadrenergic|small_fiber,1|2,2,4
+ACE,4,6,13,ME_CFS|fibromyalgia|rccx_gene|small_fiber,2,0,4
+IL-1beta,4,6,8,ME_CFS|fibromyalgia|ibs_intersection|rccx_gene,2,3,2
+acyclovir,4,6,7,ME_CFS|dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,1,3
+alkaline phosphatase,4,6,7,EDS_hypermobility|ME_CFS|dysautonomia|dysautonomia_subtype,1|2,0,4
+benzodiazepine,4,6,8,POTS|dysautonomia|hyperadrenergic|ibs_intersection,1|2,3,2
+c-peptide,4,6,7,POTS|dysautonomia|dysautonomia_subtype|rccx_gene,1|2,0,4
+carbidopa,4,6,12,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,2,3
+cyp2d6,4,6,8,EDS_hypermobility|ME_CFS|dysautonomia|hyperadrenergic,1|2,0,4
+fmr1,4,6,20,EDS_hypermobility|dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,3,4
+guanfacine,4,6,10,ME_CFS|POTS|dysautonomia|hyperadrenergic,1|2,0,4
+hematocrit,4,6,7,POTS|dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,3,3
+igg4,4,6,10,MCAS_mast|ME_CFS|dysautonomia|dysautonomia_subtype,1|2,2,3
+mirtazapine,4,6,10,dysautonomia|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,2,4
+renin-angiotensin-aldosterone system,4,6,6,ME_CFS|POTS|dysautonomia|dysautonomia_subtype,1|2,2,3
+ret,4,6,17,POTS|dysautonomia_subtype|ibs_intersection|small_fiber,1|2,0,4
+IL-13,4,5,6,MCAS_mast|ME_CFS|ibs_intersection|rccx_gene,2,0,4
+TRPA1,4,5,9,ME_CFS|fibromyalgia|ibs_intersection|small_fiber,2,0,4
+adrb1,4,5,10,ME_CFS|POTS|hyperadrenergic|rccx_gene,1|2,1,4
+alpha-1 adrenergic receptor,4,5,5,POTS|dysautonomia|hyperadrenergic|rccx_gene,1|2,0,4
+bortezomib,4,5,9,MCAS_mast|dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,4
+cdh1,4,5,6,MCAS_mast|POTS|dysautonomia|rccx_gene,1|2,1,3
+chronic kidney disease,4,5,6,MCAS_mast|dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,4
+curcumin,4,5,23,ME_CFS|dysautonomia|fibromyalgia|rccx_gene,1|2,0,4
+drd2,4,5,5,ME_CFS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1|2,0,4
+hif1a,4,5,6,MCAS_mast|ME_CFS|fibromyalgia|rccx_gene,2,1,3
+insomnia,4,5,10,dysautonomia|dysautonomia_subtype|ibs_intersection|patient_evidence,1|2,3,4
+myo-inositol,4,5,8,ME_CFS|dysautonomia_subtype|fibromyalgia|hyperadrenergic,1|2,0,4
+paroxetine,4,5,5,MCAS_mast|POTS|dysautonomia|hyperadrenergic,1|2,1,4
+pd-l1,4,5,7,dysautonomia|dysautonomia_subtype|fibromyalgia|rccx_gene,1|2,0,4
+sleep quality,4,5,7,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,4
+tafamidis,4,5,6,POTS|dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,4
+zinc,4,5,16,EDS_hypermobility|ME_CFS|dysautonomia|fibromyalgia,1|2,3,4
+"TNF-alpha, IL-6",4,4,4,MCAS_mast|ME_CFS|ibs_intersection|small_fiber,2,0,4
+cyproheptadine,4,4,13,dysautonomia|dysautonomia_subtype|hyperadrenergic|ibs_intersection,1|2,2,4
+hmox1,4,4,6,ME_CFS|fibromyalgia|ibs_intersection|rccx_gene,2,1,3
+myeloperoxidase,4,4,4,MCAS_mast|ME_CFS|rccx_gene|small_fiber,2,0,4
+nfe2l2,4,4,10,MCAS_mast|ME_CFS|fibromyalgia|rccx_gene,2,2,3
+staphylococcus aureus,4,4,4,EDS_hypermobility|MCAS_mast|ME_CFS|fibromyalgia,2,0,4
+trpv4,4,4,4,MCAS_mast|fibromyalgia|ibs_intersection|rccx_gene,2,0,4
+mrgprx2,3,49,117,MCAS_mast|ibs_intersection|rccx_gene,2,2,2
+lf power,3,34,54,POTS|dysautonomia|hyperadrenergic,1,2,3
+levodopa,3,33,66,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,2,3
+ntrk1,3,30,78,dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,1,3
+autonomic dysfunction,3,28,34,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,4,2
+pnn50,3,27,33,POTS|dysautonomia|hyperadrenergic,1,2,3
+col1a1,3,22,42,EDS_hypermobility|MCAS_mast|rccx_gene,2,0,3
+mean arterial pressure,3,22,28,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+protein,3,19,19,dysautonomia|dysautonomia_subtype|small_fiber,1|2,1,3
+tgfbr2,3,17,45,EDS_hypermobility|ME_CFS|rccx_gene,2,0,3
+cerebral blood flow velocity,3,16,34,POTS|dysautonomia|dysautonomia_subtype,1,4,3
+gpcr autoantibody,3,16,24,ME_CFS|POTS|dysautonomia,1|2,9,3
+gq1b ganglioside autoantibody,3,16,19,dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,0,3
+valsalva ratio,3,16,21,POTS|dysautonomia|dysautonomia_subtype,1,1,3
+phosphorylated alpha-synuclein,3,15,52,POTS|dysautonomia|dysautonomia_subtype,1,2,3
+corneal nerve fiber density,3,13,24,POTS|dysautonomia|small_fiber,1|2,4,3
+total power (hrv),3,13,15,POTS|dysautonomia|hyperadrenergic,1,3,3
+autoantibody,3,12,14,ME_CFS|POTS|dysautonomia_subtype,1|2,2,3
+lrrk2,3,12,24,dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,3
+smad3,3,12,25,EDS_hypermobility|ibs_intersection|rccx_gene,2,0,3
+bisoprolol,3,11,13,POTS|dysautonomia|dysautonomia_subtype,1,2,3
+blood pressure variability,3,11,16,POTS|dysautonomia|hyperadrenergic,1,1,3
+dupilumab,3,11,15,MCAS_mast|ibs_intersection|rccx_gene,2,0,3
+fn1,3,11,18,EDS_hypermobility|MCAS_mast|rccx_gene,2,0,3
+milnacipran,3,11,35,ME_CFS|fibromyalgia|hyperadrenergic,1|2,2,2
+qtc interval,3,11,21,EDS_hypermobility|dysautonomia|dysautonomia_subtype,1|2,2,3
+systolic blood pressure variability,3,11,24,POTS|dysautonomia|dysautonomia_subtype,1,1,3
+calcium,3,10,11,MCAS_mast|ME_CFS|ibs_intersection,2,0,3
+cardiac index,3,10,13,POTS|dysautonomia|dysautonomia_subtype,1,2,3
+g protein-coupled receptor autoantibody,3,10,10,ME_CFS|POTS|dysautonomia,1|2,8,2
+inos,3,10,13,ME_CFS|fibromyalgia|rccx_gene,2,1,3
+tspo,3,10,28,MCAS_mast|ME_CFS|fibromyalgia,2,0,3
+ampreloxetine,3,9,26,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,3
+beta-2 adrenergic receptor autoantibody,3,9,15,ME_CFS|POTS|dysautonomia,1|2,3,3
+chronic fatigue syndrome,3,9,15,ME_CFS|autism_intersection|patient_evidence,2,10,2
+complement C4,3,9,13,EDS_hypermobility|ME_CFS|rccx_gene,2,1,3
+constipation,3,9,10,POTS|dysautonomia|dysautonomia_subtype,1,0,3
+ketotifen,3,9,12,MCAS_mast|fibromyalgia|ibs_intersection,2,1,3
+mast cell activation,3,9,10,EDS_hypermobility|MCAS_mast|ME_CFS,2,6,2
+nmda receptor,3,9,10,dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,0,3
+plasma volume,3,9,12,POTS|dysautonomia|dysautonomia_subtype,1,1,3
+sglt2 inhibitor,3,9,15,ME_CFS|dysautonomia|dysautonomia_subtype,1|2,0,3
+tgfb2,3,9,28,EDS_hypermobility|ME_CFS|rccx_gene,2,0,3
+IL-18,3,8,8,MCAS_mast|ME_CFS|rccx_gene,2,2,3
+caspr2 autoantibody,3,8,22,POTS|dysautonomia|gastroparesis,1|2,1,3
+chymase,3,8,13,EDS_hypermobility|MCAS_mast|rccx_gene,2,2,3
+kynurenine,3,8,10,ME_CFS|dysautonomia|fibromyalgia,1|2,1,3
+mast cell tryptase,3,8,10,MCAS_mast|ibs_intersection|rccx_gene,2,1,3
+modafinil,3,8,14,ME_CFS|POTS|dysautonomia,1|2,2,2
+pro-inflammatory cytokines,3,8,8,MCAS_mast|ME_CFS|fibromyalgia,2,1,3
+serine,3,8,9,ME_CFS|dysautonomia_subtype|fibromyalgia,1|2,0,3
+tau,3,8,12,dysautonomia|dysautonomia_subtype|fibromyalgia,1|2,0,3
+18f-dopamine,3,7,8,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+MMP9,3,7,9,EDS_hypermobility|fibromyalgia|rccx_gene,2,0,3
+campylobacter jejuni,3,7,7,dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,0,3
+extracellular vesicles,3,7,11,MCAS_mast|ME_CFS|rccx_gene,2,2,2
+fibrinaloid microclot,3,7,14,ME_CFS|POTS|dysautonomia,1|2,6,2
+mapt,3,7,22,dysautonomia|dysautonomia_subtype|rccx_gene,1|2,0,3
+metoclopramide,3,7,7,dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,3,2
+neutrophils,3,7,7,EDS_hypermobility|MCAS_mast|ME_CFS,2,0,3
+rem sleep behavior disorder,3,7,7,dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,3
+respiratory sinus arrhythmia,3,7,9,POTS|dysautonomia|dysautonomia_subtype,1,3,2
+rr interval,3,7,9,POTS|dysautonomia|hyperadrenergic,1,2,3
+"3,4-dihydroxyphenylglycol",3,6,17,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+antiphospholipid antibodies,3,6,9,POTS|dysautonomia|fibromyalgia,1|2,3,3
+atrial fibrillation,3,6,7,POTS|dysautonomia|dysautonomia_subtype,1,1,3
+baclofen,3,6,6,POTS|dysautonomia|ibs_intersection,1|2,0,3
+cardiac sympathetic innervation,3,6,6,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,2
+cardiovascular autonomic neuropathy,3,6,9,POTS|dysautonomia|dysautonomia_subtype,1,0,3
+carvedilol,3,6,13,POTS|dysautonomia|hyperadrenergic,1,1,3
+ccl5,3,6,7,POTS|rccx_gene|small_fiber,1|2,1,2
+cd68,3,6,7,dysautonomia|ibs_intersection|rccx_gene,1|2,0,3
+celiac disease,3,6,8,POTS|dysautonomia_subtype|ibs_intersection,1|2,1,3
+cerebral autoregulation,3,6,9,POTS|dysautonomia|dysautonomia_subtype,1,2,2
+gastroparesis,3,6,9,POTS|dysautonomia|dysautonomia_subtype,1,9,1
+hereditary alpha-tryptasemia,3,6,19,EDS_hypermobility|MCAS_mast|POTS,1|2,4,3
+hla-drb1,3,6,6,MCAS_mast|ME_CFS|dysautonomia,1|2,0,3
+mitochondrial dna,3,6,8,MCAS_mast|ME_CFS|patient_evidence,2,2,2
+nlrp3 inflammasome,3,6,7,MCAS_mast|dysautonomia|fibromyalgia,1|2,1,3
+oxytocin,3,6,13,dysautonomia|hyperadrenergic|rccx_gene,1|2,1,3
+prednisolone,3,6,7,ME_CFS|dysautonomia|dysautonomia_subtype,1|2,0,3
+pulse wave velocity,3,6,8,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+salience network,3,6,8,ME_CFS|dysautonomia|fibromyalgia,1|2,1,3
+sirt1,3,6,6,MCAS_mast|ME_CFS|rccx_gene,2,0,3
+slc18a2,3,6,19,dysautonomia|gastroparesis|hyperadrenergic,1|2,1,3
+tenascin-x,3,6,8,EDS_hypermobility|patient_evidence|rccx_gene,2,4,2
+vcam-1,3,6,6,ME_CFS|POTS|dysautonomia,1|2,5,2
+CXCL10,3,5,8,MCAS_mast|fibromyalgia|rccx_gene,2,1,3
+alanine,3,5,6,EDS_hypermobility|ME_CFS|fibromyalgia,2,0,3
+alpha-linolenic acid,3,5,10,MCAS_mast|ME_CFS|ibs_intersection,2,0,3
+ampk,3,5,5,MCAS_mast|ME_CFS|ibs_intersection,2,0,3
+borrelia burgdorferi,3,5,11,ME_CFS|dysautonomia|patient_evidence,1|2,2,2
+bupropion,3,5,8,ME_CFS|POTS|dysautonomia,1|2,2,3
+cannabinoids,3,5,10,EDS_hypermobility|MCAS_mast|fibromyalgia,2,0,3
+cd4+ t cells,3,5,8,MCAS_mast|ME_CFS|fibromyalgia,2,1,3
+citrulline,3,5,5,MCAS_mast|ME_CFS|ibs_intersection,2,0,3
+cognitive function,3,5,7,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,3
+egfr,3,5,8,MCAS_mast|dysautonomia|dysautonomia_subtype,1|2,0,3
+foxp3,3,5,7,MCAS_mast|ME_CFS|rccx_gene,2,0,3
+givosiran,3,5,7,dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,3
+hemin,3,5,6,MCAS_mast|dysautonomia|dysautonomia_subtype,1|2,0,3
+hmbs,3,5,9,dysautonomia|dysautonomia_subtype|rccx_gene,1|2,0,3
+liraglutide,3,5,5,dysautonomia|dysautonomia_subtype|ibs_intersection,1|2,0,3
+mapk14,3,5,6,MCAS_mast|ME_CFS|rccx_gene,2,0,3
+molecular hydrogen,3,5,19,ME_CFS|dysautonomia|fibromyalgia,1|2,3,3
+n-acetylcysteine,3,5,5,MCAS_mast|ME_CFS|fibromyalgia,2,1,3
+nrf2,3,5,5,MCAS_mast|ME_CFS|fibromyalgia,2,0,3
+p2x7 receptor,3,5,7,MCAS_mast|ibs_intersection|rccx_gene,2,0,3
+physical activity level,3,5,5,POTS|dysautonomia|dysautonomia_subtype,1,1,3
+pmp22,3,5,8,dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,3
+procalcitonin,3,5,5,EDS_hypermobility|POTS|dysautonomia,1|2,1,2
+progesterone,3,5,6,POTS|dysautonomia|hyperadrenergic,1,2,3
+stroke volume index,3,5,8,ME_CFS|POTS|dysautonomia,1|2,1,3
+subcutaneous immunoglobulin,3,5,6,POTS|dysautonomia|dysautonomia_subtype,1,2,3
+IL-1RA,3,4,6,EDS_hypermobility|ME_CFS|fibromyalgia,2,0,3
+IgM,3,4,4,MCAS_mast|ME_CFS|rccx_gene,2,0,3
+acetyl-l-carnitine,3,4,4,ME_CFS|fibromyalgia|rccx_gene,2,0,3
+acetylcholine receptor autoantibody,3,4,5,dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,3
+ache,3,4,6,POTS|dysautonomia|hyperadrenergic,1,0,3
+amlodipine,3,4,6,EDS_hypermobility|dysautonomia|dysautonomia_subtype,1|2,0,3
+anterior cingulate cortex,3,4,6,ME_CFS|fibromyalgia|ibs_intersection,2,0,3
+antidepressants,3,4,4,EDS_hypermobility|ME_CFS|ibs_intersection,2,1,3
+apoe,3,4,10,ME_CFS|dysautonomia|dysautonomia_subtype,1|2,1,3
+autonomic failure,3,4,4,POTS|dysautonomia|dysautonomia_subtype,1,2,2
+beta-1 adrenergic receptor autoantibody,3,4,5,POTS|dysautonomia|hyperadrenergic,1,0,3
+body weight,3,4,4,POTS|dysautonomia_subtype|small_fiber,1|2,0,3
+bradykinin,3,4,7,MCAS_mast|ME_CFS|rccx_gene,2,0,3
+cAMP,3,4,4,ME_CFS|fibromyalgia|rccx_gene,2,0,3
+ccl4,3,4,9,MCAS_mast|dysautonomia_subtype|fibromyalgia,1|2,0,3
+cd34,3,4,4,EDS_hypermobility|MCAS_mast|ibs_intersection,2,0,3
+chrna3,3,4,11,dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,3
+chrna7,3,4,10,POTS|dysautonomia|ibs_intersection,1|2,0,3
+crh,3,4,4,MCAS_mast|fibromyalgia|ibs_intersection,2,1,2
+crhr2,3,4,6,MCAS_mast|ME_CFS|ibs_intersection,2,0,3
+dengue virus,3,4,5,ME_CFS|POTS|dysautonomia_subtype,1|2,0,3
+disease duration,3,4,4,dysautonomia|dysautonomia_subtype|small_fiber,1|2,0,3
+estimated glomerular filtration rate,3,4,6,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+glucocorticoid,3,4,5,ME_CFS|dysautonomia|dysautonomia_subtype,1|2,1,3
+glutamine,3,4,5,MCAS_mast|ME_CFS|fibromyalgia,2,1,3
+gut microbiome composition,3,4,6,ME_CFS|fibromyalgia|patient_evidence,2,1,3
+gut microbiota alpha diversity,3,4,4,POTS|fibromyalgia|hyperadrenergic,1|2,1,3
+hla-b27,3,4,4,EDS_hypermobility|ibs_intersection|rccx_gene,2,0,3
+hmgb1,3,4,7,dysautonomia|ibs_intersection|rccx_gene,1|2,1,2
+immunoglobulin m,3,4,9,ME_CFS|dysautonomia|hyperadrenergic,1|2,0,3
+interstitial cells of cajal,3,4,7,POTS|dysautonomia|ibs_intersection,1|2,3,2
+labetalol,3,4,4,POTS|dysautonomia|dysautonomia_subtype,1,0,3
+major depressive disorder,3,4,8,ME_CFS|ibs_intersection|patient_evidence,2,2,2
+metanephrine,3,4,6,POTS|dysautonomia_subtype|hyperadrenergic,1,0,3
+mir-21,3,4,10,ME_CFS|rccx_gene|small_fiber,2,0,3
+mmp-9,3,4,4,MCAS_mast|ME_CFS|rccx_gene,2,0,3
+mmp1,3,4,4,EDS_hypermobility|rccx_gene|small_fiber,2,0,3
+nabilone,3,4,6,POTS|fibromyalgia|hyperadrenergic,1|2,1,2
+naringenin,3,4,17,ME_CFS|fibromyalgia|rccx_gene,2,0,3
+nitrite,3,4,12,fibromyalgia|ibs_intersection|rccx_gene,2,0,3
+nitroglycerin,3,4,6,POTS|dysautonomia|dysautonomia_subtype,1,1,2
+orthostatic systolic blood pressure change,3,4,7,POTS|dysautonomia|dysautonomia_subtype,1,0,3
+p2rx3,3,4,4,POTS|dysautonomia_subtype|ibs_intersection,1|2,0,3
+pi3k,3,4,5,MCAS_mast|ME_CFS|fibromyalgia,2,0,3
+pramipexole,3,4,7,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+prednisone,3,4,8,MCAS_mast|dysautonomia|dysautonomia_subtype,1|2,0,3
+pupillary light reflex,3,4,7,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+ramipril,3,4,14,POTS|dysautonomia|dysautonomia_subtype,1,0,3
+rapamycin,3,4,7,MCAS_mast|ME_CFS|rccx_gene,2,2,3
+resveratrol,3,4,6,MCAS_mast|fibromyalgia|rccx_gene,2,0,3
+runx2,3,4,7,EDS_hypermobility|ibs_intersection|rccx_gene,2,0,3
+sert,3,4,4,MCAS_mast|ME_CFS|fibromyalgia,2,0,3
+slc6a4,3,4,6,ME_CFS|hyperadrenergic|ibs_intersection,1|2,2,3
+sleep disturbance,3,4,4,ME_CFS|POTS|dysautonomia,1|2,0,3
+sodium oxybate,3,4,4,POTS|dysautonomia|hyperadrenergic,1,2,1
+spironolactone,3,4,6,MCAS_mast|dysautonomia_subtype|hyperadrenergic,1|2,1,3
+succinate,3,4,6,MCAS_mast|ME_CFS|ibs_intersection,2,1,2
+symptom duration,3,4,4,POTS|dysautonomia_subtype|fibromyalgia,1|2,1,3
+tacrolimus,3,4,5,MCAS_mast|ibs_intersection|rccx_gene,2,1,2
+tfam,3,4,4,EDS_hypermobility|ME_CFS|rccx_gene,2,0,3
+timp1,3,4,4,EDS_hypermobility|rccx_gene|small_fiber,2,0,3
+tlr2,3,4,4,MCAS_mast|ME_CFS|ibs_intersection,2,0,3
+total tau,3,4,8,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+verapamil,3,4,4,EDS_hypermobility|POTS|dysautonomia,1|2,1,3
+5-hydroxyindoleacetic acid,3,3,5,MCAS_mast|POTS|hyperadrenergic,1|2,1,2
+CXCL13,3,3,4,EDS_hypermobility|MCAS_mast|ME_CFS,2,0,3
+PEA,3,3,11,MCAS_mast|ME_CFS|fibromyalgia,2,5,2
+ace,3,3,3,ME_CFS|rccx_gene|small_fiber,2,1,3
+alanine aminotransferase,3,3,3,ME_CFS|fibromyalgia|ibs_intersection,2,0,3
+anakinra,3,3,4,MCAS_mast|POTS|dysautonomia,1|2,0,3
+angiotensin (1-7),3,3,9,POTS|patient_evidence|rccx_gene,1|2,1,3
+anti-thyroid peroxidase antibody,3,3,5,MCAS_mast|ME_CFS|fibromyalgia,2,2,2
+cannabidiol,3,3,3,MCAS_mast|ME_CFS|fibromyalgia,2,0,3
+caudate nucleus,3,3,7,ME_CFS|dysautonomia_subtype|small_fiber,1|2,0,3
+cd38,3,3,5,ME_CFS|fibromyalgia|small_fiber,2,0,3
+cerebrovascular resistance,3,3,6,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,2,2
+cftr,3,3,6,MCAS_mast|ME_CFS|dysautonomia_subtype,1|2,0,3
+complement system,3,3,5,MCAS_mast|dysautonomia|dysautonomia_subtype,1|2,0,3
+connective tissue disease,3,3,3,EDS_hypermobility|autism_intersection|ibs_intersection,2,3,3
+denosumab,3,3,9,EDS_hypermobility|MCAS_mast|rccx_gene,2,0,3
+erythrocyte sedimentation rate,3,3,3,ME_CFS|ibs_intersection|rccx_gene,2,1,2
+galectin-9,3,3,3,MCAS_mast|ME_CFS|rccx_gene,2,1,3
+hiv,3,3,4,dysautonomia_subtype|hyperadrenergic|ibs_intersection,1|2,1,2
+ifn-alpha,3,3,3,MCAS_mast|ME_CFS|rccx_gene,2,1,2
+igg1,3,3,4,MCAS_mast|ME_CFS|fibromyalgia,2,0,3
+loperamide,3,3,6,POTS|dysautonomia|ibs_intersection,1|2,0,3
+m3 muscarinic acetylcholine receptor autoantibody,3,3,5,ME_CFS|POTS|dysautonomia,1|2,3,2
+muscle mass,3,3,4,EDS_hypermobility|fibromyalgia|ibs_intersection,2,0,3
+nebivolol,3,3,4,EDS_hypermobility|MCAS_mast|rccx_gene,2,0,3
+neopterin,3,3,19,ME_CFS|dysautonomia_subtype|rccx_gene,1|2,2,3
+obesity,3,3,6,MCAS_mast|ME_CFS|patient_evidence,2,1,3
+olanzapine,3,3,5,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,1,2
+ornithine,3,3,3,MCAS_mast|fibromyalgia|patient_evidence,2,1,2
+orthostatic tachycardia,3,3,3,POTS|dysautonomia|dysautonomia_subtype,1,0,3
+plasmodium falciparum,3,3,3,POTS|dysautonomia|dysautonomia_subtype,1,1,2
+prostaglandin e2,3,3,3,MCAS_mast|ME_CFS|ibs_intersection,2,1,2
+rasagiline,3,3,7,dysautonomia|dysautonomia_subtype|hyperadrenergic,1,0,3
+regulatory t cells,3,3,3,MCAS_mast|ibs_intersection|rccx_gene,2,0,3
+salivary alpha-amylase,3,3,4,ME_CFS|fibromyalgia|ibs_intersection,2,0,3
+small intestinal bacterial overgrowth,3,3,6,EDS_hypermobility|MCAS_mast|ibs_intersection,2,0,3
+superoxide dismutase,3,3,3,ME_CFS|ibs_intersection|rccx_gene,2,0,3
+tadalafil,3,3,3,POTS|dysautonomia|dysautonomia_subtype,1,0,3
+thyroid disease,3,3,4,EDS_hypermobility|MCAS_mast|fibromyalgia,2,1,2
+tinnitus,3,3,4,dysautonomia|hyperadrenergic|ibs_intersection,1|2,2,2
+trpm8,3,3,3,MCAS_mast|ibs_intersection|small_fiber,2,0,3
+tyrosine,3,3,4,ME_CFS|fibromyalgia|ibs_intersection,2,1,2
+urinary sodium excretion,3,3,4,POTS|dysautonomia_subtype|hyperadrenergic,1,0,3
+vdr,3,3,4,MCAS_mast|fibromyalgia|rccx_gene,2,0,3
+vegfa,3,3,3,MCAS_mast|ME_CFS|small_fiber,2,0,3
+elp1,2,53,203,dysautonomia|dysautonomia_subtype,1,1,2
+IgE,2,39,51,MCAS_mast|rccx_gene,2,3,2
+col5a1,2,37,112,EDS_hypermobility|rccx_gene,2,2,2
+tnxb,2,33,118,EDS_hypermobility|rccx_gene,2,4,2
+trpm3,2,25,63,ME_CFS|dysautonomia,1|2,2,1
+celiprolol,2,24,29,EDS_hypermobility|patient_evidence,2,1,1
+col1a2,2,21,35,EDS_hypermobility|rccx_gene,2,2,1
+fbn1,2,21,61,EDS_hypermobility|rccx_gene,2,1,2
+neurogenic orthostatic hypotension,2,18,32,dysautonomia|dysautonomia_subtype,1,0,2
+cardiac autonomic neuropathy,2,17,23,dysautonomia|dysautonomia_subtype,1,0,2
+sptlc1,2,16,63,dysautonomia|dysautonomia_subtype,1,1,2
+supine hypertension,2,15,19,dysautonomia|dysautonomia_subtype,1,0,2
+tgfbr1,2,15,34,EDS_hypermobility|rccx_gene,2,0,2
+adrenergic receptor autoantibody,2,14,15,POTS|dysautonomia,1,3,2
+ganglioside autoantibody,2,14,14,dysautonomia|dysautonomia_subtype,1,3,2
+desmopressin,2,13,15,POTS|dysautonomia,1,0,2
+nnos,2,12,22,ibs_intersection|rccx_gene,2,1,2
+TGF-β,2,11,19,ME_CFS|rccx_gene,2,2,2
+adamts2,2,11,82,EDS_hypermobility|rccx_gene,2,1,2
+ccn2,2,11,25,ibs_intersection|rccx_gene,2,0,2
+gut-brain axis,2,11,35,dysautonomia|dysautonomia_subtype,1,0,2
+blood volume,2,10,12,POTS|dysautonomia_subtype,1,2,2
+diabetes duration,2,10,12,dysautonomia|dysautonomia_subtype,1,1,2
+guillain-barré syndrome,2,10,15,dysautonomia|dysautonomia_subtype,1,1,2
+sdann,2,10,15,POTS|dysautonomia,1,0,2
+SMAD2,2,9,9,EDS_hypermobility|rccx_gene,2,0,2
+col1a1/col1a2,2,9,14,EDS_hypermobility|rccx_gene,2,1,1
+cromolyn,2,9,17,MCAS_mast|ME_CFS,2,2,1
+cyp21a2,2,9,16,EDS_hypermobility|rccx_gene,2,1,2
+diabetic autonomic neuropathy,2,9,10,dysautonomia|dysautonomia_subtype,1,0,2
+f2rl1,2,9,15,MCAS_mast|ibs_intersection,2,0,2
+nos1,2,9,19,ibs_intersection|rccx_gene,2,0,2
+scopa-aut,2,9,13,dysautonomia|dysautonomia_subtype,1,0,2
+vlf power,2,9,10,dysautonomia|dysautonomia_subtype,1,0,2
+Collagen I,2,8,20,EDS_hypermobility|rccx_gene,2,0,2
+TGFB3,2,8,11,EDS_hypermobility|rccx_gene,2,0,2
+alpha-galactosidase A,2,8,10,fibromyalgia|small_fiber,2,1,1
+lactate dehydrogenase,2,8,9,ME_CFS|rccx_gene,2,1,2
+pain catastrophizing,2,8,17,fibromyalgia|ibs_intersection,2,1,2
+scn10a,2,8,13,fibromyalgia|small_fiber,2,0,2
+1-deoxysphingolipid,2,7,18,dysautonomia_subtype|small_fiber,1|2,1,2
+NK cells,2,7,8,ME_CFS|rccx_gene,2,1,2
+ZO-1,2,7,9,MCAS_mast|ibs_intersection,2,1,2
+akt,2,7,8,MCAS_mast|rccx_gene,2,0,2
+beta-endorphin,2,7,7,ME_CFS|fibromyalgia,2,1,2
+cerebrospinal fluid protein,2,7,7,dysautonomia|dysautonomia_subtype,1,0,2
+complement C3,2,7,16,ME_CFS|rccx_gene,2,1,2
+dnmt1,2,7,14,MCAS_mast|dysautonomia_subtype,1|2,0,2
+gba1,2,7,15,dysautonomia|dysautonomia_subtype,1,0,2
+global longitudinal strain,2,7,8,POTS|dysautonomia,1,2,2
+il1rl1,2,7,7,MCAS_mast|rccx_gene,2,0,2
+mast cell degranulation,2,7,7,MCAS_mast|ibs_intersection,2,0,2
+nNOS,2,7,19,ibs_intersection|rccx_gene,2,1,2
+nitric oxide synthase,2,7,9,MCAS_mast|rccx_gene,2,0,2
+nmda receptor autoantibody,2,7,8,POTS|dysautonomia,1,0,2
+orthostatic hypertension,2,7,8,dysautonomia|dysautonomia_subtype,1,0,2
+p38 mapk,2,7,7,MCAS_mast|fibromyalgia,2,0,2
+CCL3,2,6,8,MCAS_mast|small_fiber,2,0,2
+CD8+ T cells,2,6,8,ME_CFS|rccx_gene,2,1,2
+baroreflex,2,6,6,dysautonomia|dysautonomia_subtype,1,0,2
+cardiovagal function,2,6,6,POTS|dysautonomia,1,2,2
+carnitine,2,6,6,ME_CFS|ibs_intersection,2,2,1
+chronotropic incompetence,2,6,11,ME_CFS|dysautonomia,1|2,0,2
+col5a2,2,6,12,EDS_hypermobility|rccx_gene,2,0,2
+hpv vaccine,2,6,22,POTS|dysautonomia,1,4,2
+il-21,2,6,9,ME_CFS|POTS,1|2,0,2
+kynurenic acid,2,6,8,ME_CFS|rccx_gene,2,1,2
+levodopa equivalent daily dose,2,6,6,dysautonomia|dysautonomia_subtype,1,0,2
+locus coeruleus,2,6,7,dysautonomia|hyperadrenergic,1,0,2
+montreal cognitive assessment,2,6,8,dysautonomia|dysautonomia_subtype,1,0,2
+nirmatrelvir/ritonavir,2,6,31,POTS|dysautonomia,1,2,1
+orthostatic blood pressure response,2,6,7,dysautonomia|dysautonomia_subtype,1,0,2
+sphingolipids,2,6,9,ME_CFS|dysautonomia_subtype,1|2,0,2
+5-HT1A receptor,2,5,9,ME_CFS|fibromyalgia,2,0,2
+SCF,2,5,7,MCAS_mast|rccx_gene,2,0,2
+TGF-beta 1,2,5,9,MCAS_mast|rccx_gene,2,1,2
+adenosine a2b receptor,2,5,6,ibs_intersection|rccx_gene,2,0,2
+apnea-hypopnea index,2,5,5,dysautonomia|dysautonomia_subtype,1,0,2
+aspirin,2,5,5,EDS_hypermobility|MCAS_mast,2,0,2
+botulinum toxin,2,5,12,dysautonomia|ibs_intersection,1|2,1,2
+caspr2,2,5,11,dysautonomia|dysautonomia_subtype,1,1,2
+choline acetyltransferase,2,5,10,ibs_intersection|rccx_gene,2,1,1
+cytokines,2,5,6,ME_CFS|ibs_intersection,2,1,1
+dapagliflozin,2,5,8,dysautonomia|dysautonomia_subtype,1,0,2
+erk,2,5,6,MCAS_mast|ME_CFS,2,0,2
+gaba-a receptor,2,5,5,dysautonomia|fibromyalgia,1|2,0,2
+galanin,2,5,8,ME_CFS|rccx_gene,2,1,1
+hypermobile Ehlers-Danlos syndrome,2,5,5,EDS_hypermobility|MCAS_mast,2,3,2
+leukotriene e4,2,5,7,MCAS_mast|hyperadrenergic,1|2,1,2
+levodopa/carbidopa,2,5,19,dysautonomia_subtype|hyperadrenergic,1,1,2
+lzts1,2,5,5,EDS_hypermobility|patient_evidence,2,1,1
+nf-κb,2,5,5,ME_CFS|rccx_gene,2,1,2
+oxygenated hemoglobin,2,5,10,dysautonomia|dysautonomia_subtype,1,0,2
+quercetin,2,5,9,MCAS_mast|ME_CFS,2,0,2
+reboxetine,2,5,5,hyperadrenergic|rccx_gene,1|2,1,2
+reserpine,2,5,14,fibromyalgia|hyperadrenergic,1|2,1,2
+respiratory rate,2,5,7,POTS|dysautonomia,1,3,1
+retinal ganglion cells,2,5,7,dysautonomia|dysautonomia_subtype,1,1,1
+statin,2,5,6,MCAS_mast|dysautonomia,1|2,0,2
+tilt table test,2,5,5,POTS|dysautonomia,1,2,2
+tlr3,2,5,6,MCAS_mast|ME_CFS,2,0,2
+vincristine,2,5,5,dysautonomia|small_fiber,1|2,0,2
+5-ht2a receptor,2,4,4,fibromyalgia|ibs_intersection,2,0,2
+BDNF,2,4,7,MCAS_mast|fibromyalgia,2,1,1
+TGFBR1/TGFBR2,2,4,10,EDS_hypermobility|rccx_gene,2,0,2
+acarbose,2,4,6,dysautonomia|dysautonomia_subtype,1,0,2
+aqp4,2,4,5,dysautonomia|hyperadrenergic,1,0,2
+atenolol,2,4,6,POTS|dysautonomia_subtype,1,1,2
+autonomic nervous system function,2,4,4,dysautonomia|small_fiber,1|2,1,2
+berberine,2,4,5,MCAS_mast|ibs_intersection,2,1,1
+bifidobacterium,2,4,4,ME_CFS|ibs_intersection,2,1,2
+carbon dioxide,2,4,7,POTS|dysautonomia,1,1,2
+carboplatin,2,4,5,MCAS_mast|dysautonomia,1|2,0,2
+cardiac autonomic dysfunction,2,4,6,dysautonomia|fibromyalgia,1|2,1,2
+clonazepam,2,4,4,POTS|dysautonomia,1,0,2
+coq2,2,4,6,dysautonomia|dysautonomia_subtype,1,0,2
+depressive symptoms,2,4,9,ME_CFS|fibromyalgia,2,1,2
+diuretic,2,4,4,dysautonomia|dysautonomia_subtype,1,0,2
+ebastine,2,4,4,MCAS_mast|ibs_intersection,2,1,1
+empagliflozin,2,4,6,dysautonomia|dysautonomia_subtype,1,0,2
+ephedrine,2,4,4,POTS|dysautonomia,1,1,2
+erythropoietin,2,4,6,POTS|dysautonomia_subtype,1,0,2
+frailty,2,4,7,dysautonomia|dysautonomia_subtype,1,0,2
+gch1,2,4,9,ME_CFS|rccx_gene,2,1,2
+ghrelin,2,4,5,dysautonomia|ibs_intersection,1|2,0,2
+glp-1,2,4,5,MCAS_mast|dysautonomia,1|2,1,2
+gm1 ganglioside autoantibody,2,4,9,dysautonomia|dysautonomia_subtype,1,1,2
+gray matter volume,2,4,4,fibromyalgia|small_fiber,2,0,2
+hrh1,2,4,4,MCAS_mast|ibs_intersection,2,0,2
+hu autoantibody,2,4,10,dysautonomia|ibs_intersection,1|2,0,2
+intracellular calcium,2,4,6,MCAS_mast|ibs_intersection,2,0,2
+kinetin,2,4,4,dysautonomia|dysautonomia_subtype,1,1,2
+l-serine,2,4,8,dysautonomia|dysautonomia_subtype,1,0,2
+ltbp1,2,4,17,EDS_hypermobility|rccx_gene,2,0,2
+lymphocyte count,2,4,4,POTS|dysautonomia,1,1,2
+malnutrition,2,4,6,dysautonomia|dysautonomia_subtype,1,0,2
+mast cell mediators,2,4,5,MCAS_mast|ibs_intersection,2,1,2
+mesenchymal stem cells,2,4,6,ME_CFS|dysautonomia,1|2,0,2
+methylcobalamin,2,4,4,ME_CFS|dysautonomia,1|2,0,2
+mirabegron,2,4,4,dysautonomia|dysautonomia_subtype,1,1,2
+mitral valve prolapse,2,4,5,EDS_hypermobility|dysautonomia,1|2,1,2
+mmp2,2,4,5,EDS_hypermobility|rccx_gene,2,0,2
+monocytes,2,4,4,ME_CFS|rccx_gene,2,1,2
+mtor,2,4,6,MCAS_mast|ME_CFS,2,0,2
+muscarinic m2 receptor autoantibody,2,4,14,POTS|dysautonomia,1,0,2
+mycoplasma pneumoniae,2,4,5,dysautonomia|dysautonomia_subtype,1,0,2
+nicotine,2,4,5,dysautonomia|ibs_intersection,1|2,0,2
+nos,2,4,5,ME_CFS|rccx_gene,2,1,2
+nos2,2,4,6,ME_CFS|rccx_gene,2,0,2
+occludin,2,4,4,MCAS_mast|ibs_intersection,2,1,2
+orthostatic dizziness,2,4,5,dysautonomia|dysautonomia_subtype,1,0,2
+orthostatic heart rate response,2,4,4,dysautonomia|dysautonomia_subtype,1,1,2
+orthostatic symptoms,2,4,5,dysautonomia|dysautonomia_subtype,1,1,2
+par2,2,4,4,MCAS_mast|ibs_intersection,2,1,2
+parkinson's disease,2,4,5,dysautonomia|dysautonomia_subtype,1,0,2
+perfusion index,2,4,10,POTS|dysautonomia,1,0,2
+quetiapine,2,4,4,dysautonomia|hyperadrenergic,1,2,1
+remdesivir,2,4,4,POTS|dysautonomia,1,0,2
+restless legs syndrome,2,4,11,POTS|ibs_intersection,1|2,1,2
+rivastigmine,2,4,4,dysautonomia|dysautonomia_subtype,1,0,2
+ropinirole,2,4,6,dysautonomia_subtype|hyperadrenergic,1,0,2
+roseburia,2,4,4,MCAS_mast|dysautonomia,1|2,2,2
+sdnn index,2,4,4,POTS|dysautonomia,1,0,2
+serpine1,2,4,5,ME_CFS|rccx_gene,2,0,2
+sertraline,2,4,5,POTS|hyperadrenergic,1,0,2
+sinus tachycardia,2,4,4,POTS|dysautonomia,1,2,2
+sodium chloride,2,4,10,POTS|dysautonomia,1,4,2
+sox10,2,4,4,dysautonomia|dysautonomia_subtype,1,0,2
+tgf-beta,2,4,7,ME_CFS|rccx_gene,2,1,2
+trem2,2,4,7,dysautonomia_subtype|rccx_gene,1|2,1,2
+urea,2,4,4,ME_CFS|fibromyalgia,2,0,2
+vitamin c,2,4,4,EDS_hypermobility|ME_CFS,2,1,2
+1-deoxysphinganine,2,3,10,dysautonomia_subtype|rccx_gene,1|2,0,2
+"3,4-dihydroxyphenylacetic acid",2,3,6,dysautonomia|hyperadrenergic,1,0,2
+CRH,2,3,17,MCAS_mast|ibs_intersection,2,1,2
+IgA,2,3,6,MCAS_mast|ME_CFS,2,0,2
+IgG autoantibodies,2,3,3,fibromyalgia|small_fiber,2,0,2
+Kounis syndrome,2,3,5,MCAS_mast|ibs_intersection,2,0,2
+PD-1,2,3,11,ME_CFS|fibromyalgia,2,0,2
+Ruminococcus,2,3,3,ME_CFS|ibs_intersection,2,0,2
+SKI,2,3,9,EDS_hypermobility|rccx_gene,2,0,2
+abdominal binder,2,3,3,dysautonomia|dysautonomia_subtype,1,0,2
+acetazolamide,2,3,4,dysautonomia|dysautonomia_subtype,1,1,2
+acylcarnitine,2,3,4,ME_CFS|small_fiber,2,1,2
+adra1a,2,3,5,ibs_intersection|rccx_gene,2,1,1
+akkermansia muciniphila,2,3,3,fibromyalgia|ibs_intersection,2,0,2
+akt1,2,3,3,MCAS_mast|ibs_intersection,2,0,2
+alpha-ketoglutarate,2,3,5,ME_CFS|ibs_intersection,2,1,1
+alpha-tryptase,2,3,3,EDS_hypermobility|MCAS_mast,2,3,2
+amygdala,2,3,5,dysautonomia|fibromyalgia,1|2,0,2
+anterior insula,2,3,5,dysautonomia|ibs_intersection,1|2,0,2
+anxiety disorder,2,3,3,EDS_hypermobility|ME_CFS,2,2,2
+apomorphine,2,3,6,dysautonomia_subtype|hyperadrenergic,1,0,2
+atf3,2,3,5,dysautonomia_subtype|small_fiber,1|2,0,2
+atf6,2,3,6,EDS_hypermobility|MCAS_mast,2,0,2
+bacteroidaceae,2,3,3,MCAS_mast|ME_CFS,2,0,2
+brd4,2,3,5,MCAS_mast|ME_CFS,2,0,2
+budesonide,2,3,5,MCAS_mast|ibs_intersection,2,0,2
+c5a,2,3,3,MCAS_mast|rccx_gene,2,0,2
+candida,2,3,3,ME_CFS|ibs_intersection,2,0,2
+cd300f,2,3,4,MCAS_mast|rccx_gene,2,0,2
+cd44,2,3,5,ibs_intersection|rccx_gene,2,0,2
+celiac artery,2,3,7,EDS_hypermobility|POTS,1|2,1,2
+ceramide,2,3,3,MCAS_mast|ME_CFS,2,0,2
+chrm3,2,3,4,ME_CFS|rccx_gene,2,0,2
+claudin-1,2,3,3,MCAS_mast|ibs_intersection,2,0,2
+col22a1,2,3,5,EDS_hypermobility|rccx_gene,2,0,2
+col4a1,2,3,4,EDS_hypermobility|rccx_gene,2,0,2
+cold detection threshold,2,3,3,fibromyalgia|small_fiber,2,1,2
+combined aerobic and resistance training,2,3,4,dysautonomia|hyperadrenergic,1,1,1
+compression stockings,2,3,3,POTS|dysautonomia,1,1,2
+corneal nerve fibers,2,3,3,fibromyalgia|small_fiber,2,2,1
+corpus callosum,2,3,3,ME_CFS|dysautonomia,1|2,0,2
+cxcl1,2,3,3,MCAS_mast|ME_CFS,2,1,1
+cyclosporine A,2,3,4,MCAS_mast|small_fiber,2,0,2
+default mode network,2,3,4,ME_CFS|fibromyalgia,2,0,2
+diabetic peripheral neuropathy,2,3,3,dysautonomia|dysautonomia_subtype,1,0,2
+diabetic retinopathy,2,3,3,dysautonomia|dysautonomia_subtype,1,0,2
+doxycycline,2,3,3,EDS_hypermobility|ME_CFS,2,0,2
+endothelium,2,3,3,MCAS_mast|ME_CFS,2,0,2
+enos,2,3,6,ME_CFS|rccx_gene,2,1,2
+erbin,2,3,3,MCAS_mast|rccx_gene,2,1,2
+fatty acid oxidation,2,3,3,MCAS_mast|ME_CFS,2,1,2
+ferric carboxymaltose,2,3,3,ME_CFS|fibromyalgia,2,1,2
+fibrinogen,2,3,3,ME_CFS|rccx_gene,2,0,2
+flna,2,3,5,EDS_hypermobility|ME_CFS,2,0,2
+flvcr1,2,3,8,dysautonomia|dysautonomia_subtype,1,0,2
+folic acid,2,3,3,ME_CFS|fibromyalgia,2,1,2
+galcanezumab,2,3,5,POTS|dysautonomia,1,1,2
+gdnf,2,3,5,ibs_intersection|rccx_gene,2,0,2
+gpbar1,2,3,4,MCAS_mast|ME_CFS,2,0,2
+gq1b ganglioside,2,3,3,dysautonomia|dysautonomia_subtype,1,0,2
+hdac6,2,3,4,dysautonomia|dysautonomia_subtype,1,0,2
+headache,2,3,4,EDS_hypermobility|MCAS_mast,2,3,1
+"histamine, tryptase",2,3,3,MCAS_mast|rccx_gene,2,1,2
+hla-c,2,3,4,ME_CFS|patient_evidence,2,1,1
+homa-ir,2,3,3,dysautonomia|hyperadrenergic,1,1,1
+hydrocortisone,2,3,4,EDS_hypermobility|ME_CFS,2,0,2
+iga,2,3,4,ME_CFS|small_fiber,2,0,2
+igg autoantibodies,2,3,8,fibromyalgia|patient_evidence,2,2,2
+internal jugular vein,2,3,6,EDS_hypermobility|dysautonomia,1|2,0,2
+irf5,2,3,4,ME_CFS|rccx_gene,2,0,2
+isoproterenol,2,3,3,POTS|dysautonomia_subtype,1,0,2
+l-tryptophan,2,3,3,ME_CFS|ibs_intersection,2,0,2
+lactic acid,2,3,5,MCAS_mast|ME_CFS,2,0,2
+left ventricular hypertrophy,2,3,6,dysautonomia|small_fiber,1|2,0,2
+leukocytes,2,3,3,ME_CFS|rccx_gene,2,0,2
+lgi1,2,3,4,dysautonomia|dysautonomia_subtype,1,0,2
+lithium,2,3,5,EDS_hypermobility|dysautonomia,1|2,0,2
+luteolin,2,3,5,MCAS_mast|ME_CFS,2,1,2
+mean corpuscular hemoglobin concentration,2,3,3,POTS|dysautonomia,1,1,1
+metabolic syndrome,2,3,3,dysautonomia|hyperadrenergic,1,1,1
+microrna,2,3,5,MCAS_mast|fibromyalgia,2,0,2
+mir-155,2,3,3,MCAS_mast|rccx_gene,2,1,2
+mirogabalin,2,3,5,dysautonomia_subtype|hyperadrenergic,1,1,1
+mitochondrial DNA,2,3,4,MCAS_mast|ME_CFS,2,1,1
+morphine,2,3,3,MCAS_mast|ME_CFS,2,2,1
+moxonidine,2,3,3,POTS|hyperadrenergic,1,0,2
+multiple system atrophy,2,3,3,dysautonomia|dysautonomia_subtype,1,0,2
+myostatin,2,3,8,EDS_hypermobility|rccx_gene,2,0,2
+natural killer cell,2,3,4,ME_CFS|fibromyalgia,2,0,2
+nfkb1,2,3,4,MCAS_mast|rccx_gene,2,1,1
+non-dipping blood pressure pattern,2,3,6,POTS|dysautonomia,1,0,2
+normetanephrine,2,3,5,POTS|hyperadrenergic,1,0,2
+nr3c1,2,3,4,ME_CFS|patient_evidence,2,1,1
+obstructive sleep apnea,2,3,6,EDS_hypermobility|dysautonomia,1|2,0,2
+onabotulinumtoxina,2,3,22,EDS_hypermobility|dysautonomia,1|2,1,2
+paeoniflorin,2,3,3,MCAS_mast|ibs_intersection,2,0,2
+pgd2,2,3,3,MCAS_mast|ibs_intersection,2,0,2
+pge2,2,3,3,MCAS_mast|rccx_gene,2,0,2
+phenylalanine,2,3,3,ME_CFS|ibs_intersection,2,0,2
+piezo2,2,3,11,dysautonomia_subtype|ibs_intersection,1|2,0,2
+pioglitazone,2,3,3,MCAS_mast|rccx_gene,2,0,2
+plasmalogens,2,3,4,ME_CFS|ibs_intersection,2,2,1
+polyethylene glycol,2,3,6,MCAS_mast|small_fiber,2,0,2
+posterior insula,2,3,6,dysautonomia|fibromyalgia,1|2,0,2
+ppar-gamma,2,3,6,MCAS_mast|rccx_gene,2,0,2
+pr interval,2,3,4,dysautonomia|dysautonomia_subtype,1,1,1
+prazosin,2,3,3,dysautonomia|dysautonomia_subtype,1,0,2
+prevotella,2,3,3,ME_CFS|ibs_intersection,2,0,2
+proton pump inhibitors,2,3,3,EDS_hypermobility|ibs_intersection,2,0,2
+ptpn22,2,3,3,ME_CFS|rccx_gene,2,0,2
+pyruvate,2,3,3,MCAS_mast|ME_CFS,2,0,2
+relaxin,2,3,4,EDS_hypermobility|patient_evidence,2,0,2
+rifaximin,2,3,3,ME_CFS|ibs_intersection,2,1,1
+ruxolitinib,2,3,6,MCAS_mast|ME_CFS,2,0,2
+selenium,2,3,5,ME_CFS|fibromyalgia,2,1,2
+slc18a3,2,3,6,dysautonomia|rccx_gene,1|2,1,2
+small nerve fibers,2,3,3,fibromyalgia|small_fiber,2,2,2
+sympathetic nerve fibers,2,3,4,POTS|hyperadrenergic,1,0,2
+syncope,2,3,4,POTS|dysautonomia_subtype,1,0,2
+systemic immune-inflammation index,2,3,3,dysautonomia|dysautonomia_subtype,1,0,2
+tamsulosin,2,3,4,dysautonomia|dysautonomia_subtype,1,0,2
+tetrahydrobiopterin,2,3,20,dysautonomia|fibromyalgia,1|2,2,2
+tirzepatide,2,3,5,POTS|dysautonomia,1,1,2
+tissue saturation index,2,3,5,dysautonomia|dysautonomia_subtype,1,0,2
+tlr7,2,3,3,MCAS_mast|ME_CFS,2,0,2
+tnfsf10,2,3,8,dysautonomia|dysautonomia_subtype,1,0,2
+tofacitinib,2,3,5,MCAS_mast|fibromyalgia,2,0,2
+transcutaneous vagus nerve stimulation,2,3,6,POTS|dysautonomia,1,0,2
+trazodone,2,3,11,dysautonomia_subtype|hyperadrenergic,1,1,2
+trimethylamine n-oxide,2,3,9,ME_CFS|dysautonomia,1|2,0,2
+voltage-gated sodium channel,2,3,3,EDS_hypermobility|small_fiber,2,0,2
+123i-mibg myocardial scintigraphy,2,2,14,dysautonomia_subtype|hyperadrenergic,1,2,1
+25-hydroxyvitamin D,2,2,2,EDS_hypermobility|ME_CFS,2,0,2
+3-methoxy-4-hydroxyphenylglycol,2,2,6,dysautonomia_subtype|hyperadrenergic,1,0,2
+4-hydroxynonenal,2,2,2,ME_CFS|fibromyalgia,2,0,2
+5-aminolevulinic acid,2,2,4,rccx_gene|small_fiber,2,0,2
+"Bacteroides, Firmicutes",2,2,2,MCAS_mast|ME_CFS,2,0,2
+Bifidobacteria,2,2,2,ME_CFS|fibromyalgia,2,0,2
+CD4+ and CD8+ T cells,2,2,3,MCAS_mast|rccx_gene,2,0,2
+CX3CL1 (fractalkine),2,2,2,rccx_gene|small_fiber,2,0,2
+Cav3.2,2,2,2,fibromyalgia|ibs_intersection,2,0,2
+Clostridia,2,2,2,ME_CFS|ibs_intersection,2,2,0
+Crohn's disease,2,2,2,MCAS_mast|autism_intersection,2,3,2
+Firmicutes/Bacteroidetes ratio,2,2,2,ME_CFS|ibs_intersection,2,0,2
+Graves' disease,2,2,2,MCAS_mast|autism_intersection,2,3,2
+H1 antihistamine,2,2,2,MCAS_mast|ME_CFS,2,2,1
+H1-antihistamines,2,2,2,EDS_hypermobility|MCAS_mast,2,0,2
+IL-1,2,2,5,ME_CFS|fibromyalgia,2,0,2
+IL-24,2,2,2,MCAS_mast|small_fiber,2,0,2
+IL-6/CXCL8,2,2,2,MCAS_mast|fibromyalgia,2,0,2
+IL-6; IL-1; TNF-alpha,2,2,2,ME_CFS|patient_evidence,2,1,1
+L-kynurenine,2,2,2,ME_CFS|rccx_gene,2,0,2
+LDL cholesterol,2,2,2,MCAS_mast|ME_CFS,2,0,2
+NPY,2,2,4,ME_CFS|rccx_gene,2,0,2
+NSAIDs,2,2,2,MCAS_mast|ME_CFS,2,0,2
+Resolvin D1,2,2,2,ME_CFS|ibs_intersection,2,1,1
+TGF-β1,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+Th17 cells,2,2,2,MCAS_mast|ME_CFS,2,1,1
+aaas,2,2,5,dysautonomia|dysautonomia_subtype,1,0,2
+acadm,2,2,2,MCAS_mast|ME_CFS,2,0,2
+acceleration index,2,2,5,POTS|dysautonomia,1,1,1
+ace inhibitors,2,2,2,EDS_hypermobility|MCAS_mast,2,0,2
+acetate,2,2,2,ME_CFS|fibromyalgia,2,0,2
+actb,2,2,2,ME_CFS|rccx_gene,2,0,2
+actin,2,2,3,MCAS_mast|ME_CFS,2,0,2
+activity pacing,2,2,3,ME_CFS|patient_evidence,2,1,1
+adgre1,2,2,2,MCAS_mast|rccx_gene,2,0,2
+adrenomedullin,2,2,6,MCAS_mast|rccx_gene,2,0,2
+ahr,2,2,3,MCAS_mast|ibs_intersection,2,0,2
+aif1,2,2,2,MCAS_mast|fibromyalgia,2,0,2
+allodynia,2,2,2,ME_CFS|fibromyalgia,2,0,2
+alpha-amylase,2,2,6,autism_intersection|ibs_intersection,2,1,2
+alpha-delta sleep pattern,2,2,3,ME_CFS|fibromyalgia,2,0,2
+amphiregulin,2,2,2,MCAS_mast|small_fiber,2,0,2
+anticonvulsants,2,2,2,EDS_hypermobility|ibs_intersection,2,1,2
+aoc1,2,2,16,MCAS_mast|fibromyalgia,2,1,2
+aorta,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+arachidonic acid,2,2,2,MCAS_mast|ibs_intersection,2,0,2
+arf1,2,2,6,MCAS_mast|ME_CFS,2,0,2
+aryl hydrocarbon receptor,2,2,2,ibs_intersection|rccx_gene,2,0,2
+aspartic acid,2,2,2,ME_CFS|fibromyalgia,2,0,2
+autophagy,2,2,2,MCAS_mast|ME_CFS,2,0,2
+autotaxin,2,2,2,MCAS_mast|rccx_gene,2,0,2
+axin2,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+bacteroides ovatus,2,2,2,ME_CFS|fibromyalgia,2,0,2
+bacteroides thetaiotaomicron,2,2,2,ME_CFS|ibs_intersection,2,1,1
+bascule syndrome,2,2,4,POTS|dysautonomia,1,3,2
+beta-alanine,2,2,2,ME_CFS|rccx_gene,2,0,2
+beta-hydroxybutyrate,2,2,8,ibs_intersection|small_fiber,2,0,2
+biglycan,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+bile acid,2,2,2,MCAS_mast|ibs_intersection,2,1,1
+bilirubin,2,2,2,MCAS_mast|ME_CFS,2,0,2
+blood-brain barrier,2,2,5,ME_CFS|fibromyalgia,2,0,2
+bmpr2,2,2,4,fibromyalgia|rccx_gene,2,0,2
+body fat mass,2,2,2,fibromyalgia|patient_evidence,2,0,2
+body fat percentage,2,2,2,ME_CFS|ibs_intersection,2,1,1
+bromocriptine,2,2,3,dysautonomia|dysautonomia_subtype,1,0,2
+bumetanide,2,2,7,ME_CFS|autism_intersection,2,1,2
+butyrate-producing bacteria,2,2,2,ibs_intersection|patient_evidence,2,0,2
+c3,2,2,3,EDS_hypermobility|ME_CFS,2,0,2
+c3; c4,2,2,2,MCAS_mast|rccx_gene,2,0,2
+c9orf72,2,2,6,dysautonomia|dysautonomia_subtype,1,0,2
+cacna1s,2,2,5,EDS_hypermobility|MCAS_mast,2,0,2
+cannabis,2,2,3,EDS_hypermobility|fibromyalgia,2,0,2
+capsaicin,2,2,3,ME_CFS|fibromyalgia,2,0,2
+carbachol,2,2,2,MCAS_mast|ibs_intersection,2,0,2
+catalase,2,2,3,fibromyalgia|rccx_gene,2,1,1
+cd14,2,2,10,ME_CFS|dysautonomia,1|2,0,2
+cd96,2,2,2,MCAS_mast|fibromyalgia,2,0,2
+central sensitization inventory,2,2,2,ME_CFS|fibromyalgia,2,1,2
+cholesterol,2,2,5,MCAS_mast|ME_CFS,2,0,2
+chop,2,2,2,EDS_hypermobility|rccx_gene,2,1,1
+chrm1,2,2,2,ME_CFS|rccx_gene,2,0,2
+ciprofloxacin,2,2,2,MCAS_mast|ME_CFS,2,0,2
+clarithromycin,2,2,2,MCAS_mast|ME_CFS,2,0,2
+clock,2,2,2,MCAS_mast|ME_CFS,2,1,2
+clostridiales,2,2,2,ME_CFS|rccx_gene,2,0,2
+cntnap2,2,2,2,gastroparesis|small_fiber,2,0,2
+col15a1,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+col2a1,2,2,2,EDS_hypermobility|rccx_gene,2,1,1
+col6a5,2,2,2,EDS_hypermobility|small_fiber,2,0,2
+cold pain threshold,2,2,2,fibromyalgia|ibs_intersection,2,1,2
+complement c3a,2,2,2,MCAS_mast|rccx_gene,2,1,1
+complement component C4,2,2,2,ME_CFS|rccx_gene,2,1,1
+corneal nerve fiber density and length,2,2,2,fibromyalgia|small_fiber,2,1,1
+covid-19,2,2,4,POTS|dysautonomia,1,0,2
+coxiella burnetii,2,2,6,ME_CFS|dysautonomia,1|2,2,2
+crhr1,2,2,4,MCAS_mast|ibs_intersection,2,0,2
+ctnnb1,2,2,6,ME_CFS|rccx_gene,2,0,2
+cutaneous mastocytosis,2,2,2,EDS_hypermobility|MCAS_mast,2,1,2
+cx3cr1,2,2,5,fibromyalgia|rccx_gene,2,1,2
+cxcr1; cxcr2,2,2,2,MCAS_mast|ME_CFS,2,0,2
+dao,2,2,7,MCAS_mast|fibromyalgia,2,0,2
+dbn1,2,2,4,dysautonomia|dysautonomia_subtype,1,0,2
+diclofenac,2,2,2,MCAS_mast|fibromyalgia,2,0,2
+dimethyl fumarate,2,2,5,MCAS_mast|ME_CFS,2,1,2
+dkk3,2,2,3,EDS_hypermobility|rccx_gene,2,0,2
+dnmt3a,2,2,5,EDS_hypermobility|MCAS_mast,2,0,2
+doxazosin,2,2,3,POTS|dysautonomia_subtype,1,0,2
+dpp4,2,2,11,ME_CFS|POTS,1|2,1,2
+dyslipidemia,2,2,4,MCAS_mast|small_fiber,2,0,2
+edaravone,2,2,3,dysautonomia|dysautonomia_subtype,1,0,2
+egr1,2,2,5,MCAS_mast|rccx_gene,2,0,2
+eicosapentaenoic acid,2,2,2,ME_CFS|ibs_intersection,2,0,2
+electroacupuncture,2,2,2,ME_CFS|ibs_intersection,2,0,2
+eln,2,2,3,EDS_hypermobility|autism_intersection,2,0,2
+employment status,2,2,2,ME_CFS|ibs_intersection,2,1,1
+endogenous opioids,2,2,2,ME_CFS|fibromyalgia,2,1,1
+endothelial dysfunction,2,2,2,ME_CFS|fibromyalgia,2,1,2
+escitalopram,2,2,2,MCAS_mast|ME_CFS,2,0,2
+estrogen receptor beta,2,2,2,ME_CFS|fibromyalgia,2,0,2
+exendin-4,2,2,5,ibs_intersection|small_fiber,2,0,2
+ezh2,2,2,5,MCAS_mast|rccx_gene,2,0,2
+fatigue severity,2,2,2,ME_CFS|fibromyalgia,2,0,2
+fecal elastase-1,2,2,2,EDS_hypermobility|ibs_intersection,2,1,1
+fecal microbiota transplantation (FMT),2,2,2,ME_CFS|fibromyalgia,2,0,2
+fgf21,2,2,2,ME_CFS|small_fiber,2,0,2
+fgfr3,2,2,2,EDS_hypermobility|small_fiber,2,0,2
+fib-4 index,2,2,5,dysautonomia|dysautonomia_subtype,1,0,2
+fisetin,2,2,2,MCAS_mast|ME_CFS,2,0,2
+fluconazole,2,2,2,EDS_hypermobility|ibs_intersection,2,0,2
+gabaa receptor,2,2,2,fibromyalgia|rccx_gene,2,0,2
+gadolinium-based contrast agent,2,2,3,MCAS_mast|small_fiber,2,0,2
+gallic acid,2,2,5,MCAS_mast|ibs_intersection,2,0,2
+gap43,2,2,7,fibromyalgia|ibs_intersection,2,0,2
+gastric emptying,2,2,3,EDS_hypermobility|ibs_intersection,2,1,2
+gbp1,2,2,7,dysautonomia_subtype|fibromyalgia,1|2,1,2
+genipin,2,2,14,dysautonomia|dysautonomia_subtype,1,0,2
+genistein,2,2,4,MCAS_mast|fibromyalgia,2,0,2
+ginger,2,2,2,fibromyalgia|ibs_intersection,2,0,2
+glutamic acid,2,2,2,ME_CFS|ibs_intersection,2,1,1
+glycerol,2,2,2,ME_CFS|fibromyalgia,2,0,2
+grey matter volume,2,2,2,ME_CFS|fibromyalgia,2,0,2
+grin2b,2,2,3,MCAS_mast|ibs_intersection,2,0,2
+"growth hormone, cortisol",2,2,2,MCAS_mast|fibromyalgia,2,0,2
+gut microbiome community composition,2,2,5,POTS|dysautonomia,1,0,2
+haptoglobin,2,2,15,ME_CFS|rccx_gene,2,0,2
+heart period,2,2,4,dysautonomia|dysautonomia_subtype,1,0,2
+histidine,2,2,2,ME_CFS|ibs_intersection,2,1,1
+hla-dq2,2,2,2,ME_CFS|ibs_intersection,2,0,2
+hoehn & yahr stage,2,2,4,dysautonomia|dysautonomia_subtype,1,0,2
+htr2a,2,2,3,ME_CFS|ibs_intersection,2,1,1
+hydralazine,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+hypothalamic-pituitary-adrenal axis,2,2,2,ME_CFS|fibromyalgia,2,0,2
+iba1,2,2,3,MCAS_mast|fibromyalgia,2,0,2
+ido1,2,2,2,MCAS_mast|ibs_intersection,2,0,2
+ifitm3,2,2,2,ME_CFS|rccx_gene,2,0,2
+igf-1,2,2,3,ME_CFS|rccx_gene,2,0,2
+il-18,2,2,2,rccx_gene|small_fiber,2,0,2
+il-1β; tnf-α,2,2,2,MCAS_mast|ibs_intersection,2,0,2
+il-31,2,2,2,MCAS_mast|small_fiber,2,0,2
+il-33,2,2,5,MCAS_mast|rccx_gene,2,0,2
+il-4,2,2,2,MCAS_mast|small_fiber,2,0,2
+"il-6, il-8",2,2,2,ME_CFS|fibromyalgia,2,1,1
+il-6; il-8; tnf-alpha,2,2,2,fibromyalgia|ibs_intersection,2,0,2
+il18r1,2,2,4,fibromyalgia|small_fiber,2,0,2
+il1rn,2,2,2,EDS_hypermobility|MCAS_mast,2,0,2
+il6st,2,2,2,MCAS_mast|fibromyalgia,2,0,2
+incobotulinumtoxina,2,2,6,dysautonomia|dysautonomia_subtype,1,0,2
+insula,2,2,2,fibromyalgia|small_fiber,2,0,2
+interferon alpha,2,2,4,POTS|hyperadrenergic,1,1,1
+jak/stat pathway,2,2,2,ME_CFS|fibromyalgia,2,0,2
+jam-a,2,2,4,MCAS_mast|ibs_intersection,2,1,1
+juvenile idiopathic arthritis,2,2,2,EDS_hypermobility|small_fiber,2,0,2
+keratinocytes,2,2,2,gastroparesis|small_fiber,2,0,2
+lachnospiraceae,2,2,3,ME_CFS|ibs_intersection,2,0,2
+lactate; pyruvate,2,2,2,ME_CFS|fibromyalgia,2,0,2
+lactoferrin,2,2,3,ME_CFS|rccx_gene,2,0,2
+lag3,2,2,3,MCAS_mast|rccx_gene,2,1,1
+leucine,2,2,2,fibromyalgia|ibs_intersection,2,1,1
+lgi1 autoantibody,2,2,4,dysautonomia|hyperadrenergic,1,1,2
+linaclotide,2,2,2,EDS_hypermobility|ibs_intersection,2,0,2
+linagliptin,2,2,2,ME_CFS|ibs_intersection,2,1,1
+lrg1,2,2,6,ME_CFS|dysautonomia,1|2,1,2
+lupus anticoagulant,2,2,2,ME_CFS|rccx_gene,2,0,2
+lysine,2,2,4,fibromyalgia|ibs_intersection,2,1,2
+lysophosphatidylcholine,2,2,2,MCAS_mast|ibs_intersection,2,1,1
+macrophages,2,2,2,ibs_intersection|small_fiber,2,0,2
+mannose-binding lectin (MBL),2,2,2,ME_CFS|rccx_gene,2,0,2
+map3k7,2,2,16,EDS_hypermobility|rccx_gene,2,1,2
+marital status,2,2,2,ME_CFS|ibs_intersection,2,1,1
+mast cell infiltration,2,2,2,MCAS_mast|ibs_intersection,2,0,2
+mast cell protease-1 (MMCP-1),2,2,2,MCAS_mast|rccx_gene,2,1,1
+mavs,2,2,6,MCAS_mast|ME_CFS,2,0,2
+methionine,2,2,3,ME_CFS|ibs_intersection,2,1,1
+methotrexate,2,2,2,EDS_hypermobility|MCAS_mast,2,1,1
+mettl3,2,2,2,ME_CFS|small_fiber,2,0,2
+mfap4,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+mhc class ii,2,2,2,fibromyalgia|rccx_gene,2,0,2
+microglia; astrocytes,2,2,2,fibromyalgia|rccx_gene,2,1,1
+mif,2,2,2,ME_CFS|small_fiber,2,0,2
+mir-140-5p,2,2,3,ME_CFS|rccx_gene,2,0,2
+mir-143,2,2,3,ibs_intersection|rccx_gene,2,0,2
+mir-23a,2,2,2,ME_CFS|ibs_intersection,2,1,1
+mir-29a,2,2,3,ibs_intersection|rccx_gene,2,0,2
+mir-374b-5p,2,2,9,ME_CFS|hyperadrenergic,1|2,3,2
+mitochondrial cristae,2,2,3,ME_CFS|fibromyalgia,2,0,2
+mmp-1,2,2,3,rccx_gene|small_fiber,2,0,2
+mmp2; mmp9,2,2,4,MCAS_mast|rccx_gene,2,0,2
+monoclonal gammopathy of undetermined significance,2,2,2,MCAS_mast|small_fiber,2,0,2
+mt-atp6,2,2,4,EDS_hypermobility|ME_CFS,2,0,2
+mt-co1; mt-co2,2,2,2,EDS_hypermobility|ME_CFS,2,0,2
+muscarinic acetylcholine receptor,2,2,2,MCAS_mast|rccx_gene,2,0,2
+myd88,2,2,3,ME_CFS|rccx_gene,2,0,2
+myh7,2,2,4,ME_CFS|POTS,1|2,1,2
+n1-p1 amplitude,2,2,3,POTS|dysautonomia_subtype,1,0,2
+nanog,2,2,2,EDS_hypermobility|MCAS_mast,2,0,2
+naringin,2,2,18,ME_CFS|fibromyalgia,2,0,2
+neuroinflammation,2,2,2,ME_CFS|fibromyalgia,2,0,2
+neuropeptides,2,2,2,MCAS_mast|small_fiber,2,0,2
+nfat,2,2,3,MCAS_mast|ME_CFS,2,0,2
+nickel,2,2,19,MCAS_mast|ibs_intersection,2,2,2
+nicotinamide riboside,2,2,3,EDS_hypermobility|ME_CFS,2,0,2
+nitrotyrosine,2,2,2,ME_CFS|rccx_gene,2,1,2
+nortriptyline,2,2,3,fibromyalgia|ibs_intersection,2,1,1
+npy1r,2,2,6,dysautonomia|rccx_gene,1|2,0,2
+nqo1,2,2,2,fibromyalgia|rccx_gene,2,0,2
+oprm1,2,2,9,ME_CFS|fibromyalgia,2,0,2
+optic nerve sheath,2,2,2,EDS_hypermobility|ME_CFS,2,0,2
+osteoprotegerin,2,2,3,EDS_hypermobility|rccx_gene,2,0,2
+p53,2,2,2,ibs_intersection|rccx_gene,2,0,2
+paclitaxel,2,2,3,MCAS_mast|patient_evidence,2,0,2
+pain,2,2,2,EDS_hypermobility|ibs_intersection,2,1,2
+pain acceptance,2,2,2,fibromyalgia|small_fiber,2,0,2
+pain intensity,2,2,2,EDS_hypermobility|ibs_intersection,2,1,1
+palmitoylethanolamide,2,2,8,MCAS_mast|fibromyalgia,2,0,2
+par4,2,2,3,MCAS_mast|ibs_intersection,2,0,2
+periostin,2,2,2,MCAS_mast|rccx_gene,2,0,2
+peripherin,2,2,2,rccx_gene|small_fiber,2,0,2
+pgm3,2,2,2,MCAS_mast|rccx_gene,2,0,2
+phosphorylated tau 181,2,2,6,dysautonomia_subtype|hyperadrenergic,1,0,2
+piperine,2,2,2,MCAS_mast|ME_CFS,2,1,1
+pirenzepine,2,2,2,ibs_intersection|small_fiber,2,0,2
+pkc,2,2,3,MCAS_mast|ibs_intersection,2,0,2
+platelet count,2,2,2,MCAS_mast|ibs_intersection,2,1,1
+pm2.5,2,2,6,MCAS_mast|dysautonomia,1|2,0,2
+posterior cingulate cortex,2,2,2,fibromyalgia|small_fiber,2,0,2
+precuneus,2,2,2,ME_CFS|fibromyalgia,2,0,2
+pregnenolone,2,2,3,MCAS_mast|fibromyalgia,2,0,2
+probiotics,2,2,4,ME_CFS|fibromyalgia,2,1,2
+progranulin,2,2,5,ME_CFS|dysautonomia_subtype,1|2,0,2
+psqi,2,2,2,ME_CFS|ibs_intersection,2,1,1
+psychological flexibility,2,2,6,ME_CFS|ibs_intersection,2,0,2
+pupil dilation velocity,2,2,6,dysautonomia|hyperadrenergic,1,0,2
+putamen,2,2,2,ME_CFS|ibs_intersection,2,0,2
+pyruvate dehydrogenase,2,2,2,MCAS_mast|ME_CFS,2,0,2
+pyruvic acid,2,2,3,MCAS_mast|fibromyalgia,2,0,2
+qt dispersion,2,2,5,POTS|dysautonomia,1,1,2
+red blood cell count,2,2,2,ME_CFS|ibs_intersection,2,1,1
+rnf213,2,2,6,EDS_hypermobility|MCAS_mast,2,0,2
+rosiglitazone,2,2,2,MCAS_mast|ME_CFS,2,0,2
+s1 spike protein,2,2,3,POTS|dysautonomia,1,2,1
+s100a4,2,2,19,EDS_hypermobility|MCAS_mast,2,0,2
+samd9,2,2,5,dysautonomia|dysautonomia_subtype,1,0,2
+schwann cells,2,2,8,dysautonomia|rccx_gene,1|2,0,2
+sgk1,2,2,4,MCAS_mast|dysautonomia,1|2,0,2
+sirt3,2,2,6,ME_CFS|rccx_gene,2,0,2
+skin conductance level,2,2,2,ME_CFS|fibromyalgia,2,0,2
+sleep efficiency,2,2,2,ME_CFS|fibromyalgia,2,0,2
+smad2/3,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+small-fiber neuropathy,2,2,5,EDS_hypermobility|ME_CFS,2,3,2
+smn2,2,2,5,dysautonomia|dysautonomia_subtype,1,0,2
+smoking status,2,2,2,ibs_intersection|patient_evidence,2,1,1
+sod3,2,2,6,EDS_hypermobility|MCAS_mast,2,0,2
+sodium cromoglicate,2,2,2,MCAS_mast|ibs_intersection,2,1,2
+soluble interleukin-2 receptor,2,2,2,MCAS_mast|small_fiber,2,0,2
+somatostatin,2,2,2,EDS_hypermobility|MCAS_mast,2,0,2
+sphingomyelin,2,2,2,ME_CFS|ibs_intersection,2,1,1
+spinal cord stimulation,2,2,15,dysautonomia|dysautonomia_subtype,1,0,2
+spleen weight,2,2,2,MCAS_mast|rccx_gene,2,0,2
+stat1,2,2,3,MCAS_mast|ME_CFS,2,0,2
+stem cell factor,2,2,3,ibs_intersection|rccx_gene,2,1,1
+subthalamic nucleus deep brain stimulation,2,2,3,dysautonomia|dysautonomia_subtype,1,0,2
+sucrase-isomaltase,2,2,2,EDS_hypermobility|MCAS_mast,2,2,0
+sulf1,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+survey of autonomic symptoms,2,2,3,POTS|dysautonomia,1,0,2
+tempol,2,2,7,MCAS_mast|dysautonomia,1|2,0,2
+teriparatide,2,2,2,MCAS_mast|rccx_gene,2,0,2
+tgfbi,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+thiamine,2,2,3,ME_CFS|fibromyalgia,2,0,2
+threonine,2,2,3,ME_CFS|fibromyalgia,2,0,2
+thrombin,2,2,12,MCAS_mast|small_fiber,2,0,2
+thrombospondin-1,2,2,2,EDS_hypermobility|ME_CFS,2,0,2
+thy1,2,2,2,MCAS_mast|rccx_gene,2,0,2
+thyroid hormone,2,2,2,MCAS_mast|ME_CFS,2,0,2
+thyroid-stimulating hormone,2,2,2,MCAS_mast|ME_CFS,2,0,2
+tissue transglutaminase iga antibody,2,2,2,EDS_hypermobility|small_fiber,2,1,1
+tnfr2,2,2,3,rccx_gene|small_fiber,2,0,2
+tnfsf13b,2,2,3,ME_CFS|fibromyalgia,2,0,2
+triiodothyronine,2,2,2,MCAS_mast|ME_CFS,2,0,2
+trpv1/trpv4,2,2,4,MCAS_mast|fibromyalgia,2,0,2
+trpv2,2,2,10,dysautonomia|fibromyalgia,1|2,0,2
+tryptase; chymase,2,2,2,MCAS_mast|rccx_gene,2,0,2
+tslp,2,2,3,MCAS_mast|rccx_gene,2,0,2
+usp5,2,2,2,MCAS_mast|patient_evidence,2,0,2
+vagotomy,2,2,4,dysautonomia|ibs_intersection,1|2,0,2
+valsartan,2,2,4,dysautonomia|rccx_gene,1|2,0,2
+ve/vco2 slope,2,2,2,ME_CFS|small_fiber,2,1,1
+vestibular migraine,2,2,3,POTS|dysautonomia,1,2,1
+vimentin,2,2,2,EDS_hypermobility|rccx_gene,2,0,2
+vitamin B6,2,2,2,EDS_hypermobility|ME_CFS,2,0,2
+vitamin d3,2,2,2,MCAS_mast|ME_CFS,2,1,1
+zfpm1,2,2,2,EDS_hypermobility|MCAS_mast,2,0,2
+zonulin,2,2,2,MCAS_mast|ME_CFS,2,1,1
+γδ t cells,2,2,3,MCAS_mast|ME_CFS,2,0,2

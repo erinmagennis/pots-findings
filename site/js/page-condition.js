@@ -1,5 +1,5 @@
 import { loadMeta, loadFacets, loadPapers, state, applyFilters, ensureRows, paperCount, fmt, esc, val,
-         TIER1_CONDITIONS as TIER1 } from './data.js';
+         } from './data.js';
 import { mount, findingCard, qs } from './ui.js';
 
 const PAGE=25; let page=0, rows=[];
@@ -8,25 +8,19 @@ mount('conditions.html');
 
 const c=qs('c');
 rows=applyFilters(state.facets,{c});
-const incid = !TIER1.has(c);
-const n = state.meta.incidental[c];
+const sourceLiteratures=[...new Set(rows.map(r=>val('sl',r)).filter(Boolean))].sort();
+const extractionTiers=[...new Set(rows.map(r=>val('ti',r)).filter(Boolean))].sort();
 
-const tally=(f)=>{ const m={}; for(const r of rows){ const v=val(f,r); if(v&&v!=='—') m[v]=(m[v]||0)+1; } return m; };
+const tally=(f)=>{ const m={}; for(const r of rows){ const v=val(f,r); if(v&&v!=='\u2014') m[v]=(m[v]||0)+1; } return m; };
 
 document.getElementById('head').innerHTML=`<div class="panel">
-  <h1>${esc(c)} ${incid?'<span class="pill grey">incidental mentions only</span>':'<span class="pill">within Tier-1 scope</span>'}</h1>
-  ${incid? `<div class="note stop"><b>This is not the ${esc(c)} literature.</b> Tier 1 extracted only
-      POTS/dysautonomia papers. These ${fmt(rows.length)} findings come from
-      ${n!=null?`${n} POTS/dysautonomia papers that mention ${esc(c)}`:`POTS/dysautonomia papers that mention ${esc(c)}`} —
-      a biased, incidental sample. The actual ${esc(c)} literature sits in Tiers 2–4 and has
-      <b>not yet been extracted</b>. Do not read these counts as a survey of ${esc(c)} research.</div>`
-    : `<div class="note plain">This label sits <b>inside</b> the Tier-1 extraction scope: it was applied to
-      papers the POTS/dysautonomia search retrieved, so it reflects the extracted corpus rather than
-      incidental mentions. Still limited to ${fmt(state.meta.counts.tier1_chunks)} of
-      ${fmt(state.meta.counts.corpus_chunks)} corpus chunks
-      (${fmt(state.meta.counts.papers)} of ~${fmt(state.meta.counts.corpus_papers_total)} papers), and
-      <b>${esc(c)}</b> is a label applied within POTS/dysautonomia papers — not a separately searched
-      literature. ${rows.length<50?'This label carries very few findings, so treat its counts as anecdotal.':''}</div>`}
+  <h1>${esc(c)} <span class="pill">tiers ${extractionTiers.map(esc).join(', ')}</span></h1>
+  <div class="note plain"><b>This is a condition-label view across the current checkpoint.</b>
+    Its ${fmt(rows.length)} findings come from ${sourceLiteratures.length} source literature${sourceLiteratures.length===1?'':'s'}:
+    ${sourceLiteratures.map(x=>`<code>${esc(x)}</code>`).join(', ')}. A condition label and a source literature
+    are not interchangeable. Tier 2 covers ${state.meta.counts.tier2_chunks_extracted} of
+    ${state.meta.counts.tier2_chunks_total} chunks, so these are subset counts and absence is not evidence of absence.
+    ${rows.length<50?'This label carries very few findings, so treat its counts as exploratory.':''}</div>
   <div class="statgrid">
     <div class="stat"><div class="v">${fmt(rows.length)}</div><div class="k">findings</div></div>
     <div class="stat"><div class="v">${fmt(paperCount(rows))}</div><div class="k">papers</div></div>

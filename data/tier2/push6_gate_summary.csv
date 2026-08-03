@@ -1,0 +1,6 @@
+metric,value,floor,pass_
+findings_per_yielding_paper,13.89,>=8.0,True
+yield_fraction_mean,0.817,>=0.60,True
+truncation_continuation_trigger_rate,0.13,informational,True
+truncation_data_loss_rate(parse_fail/papers),0.0,~0.00,True
+grounding_resolution,0.967,>=0.90,True

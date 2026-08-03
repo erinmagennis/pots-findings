@@ -1,8 +1,8 @@
-/* search.js — two independent search modes.
+/* search.js: two independent search modes.
    KEYWORD: instant, zero dependency, works before/without the model. Default mode.
    SEMANTIC: real query embedding from the same MiniLM checkpoint used for the findings,
              cosine-ranked against the dequantized int8 shards. Degrades cleanly if the
-             model or CDN is unavailable — keyword search never depends on it. */
+             model or CDN is unavailable: keyword search never depends on it. */
 import { DATA, getJSON, state, loadAllText, textOf, val } from './data.js';
 
 /* ============ embedding shards ============ */

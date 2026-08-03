@@ -1,6 +1,5 @@
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, paperCount,
          fmt, esc, val } from './data.js';
-import { TIER1_CONDITIONS as TIER1 } from './data.js';
 import { mount, entityCoverageNote } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
@@ -15,7 +14,7 @@ document.getElementById('stats').innerHTML=[
 
 const PALETTE=['#8a4b2a','#2f5f7a','#6b8f3f','#a3352a','#8a6d2a','#5c5470','#3f7a6a','#9a6b4f','#4a6fa5','#7d5b8c'];
 const tally=(rows,field)=>{ const m=new Map();
-  for(const r of rows){ const v=val(field,r); if(!v||v==='—') continue; m.set(v,(m.get(v)||0)+1); } return m; };
+  for(const r of rows){ const v=val(field,r); if(!v||v==='\u2014') continue; m.set(v,(m.get(v)||0)+1); } return m; };
 
 function chartBox(id,title,sub,note){
   return `<div class="chartbox"><h3>${title}</h3>
@@ -32,14 +31,13 @@ const boxes=[];
 /* 1. findings by condition */
 const condM=[...tally(all,'c')].sort((a,b)=>b[1]-a[1]);
 boxes.push(chartBox('c1','Findings by condition',
-  `Distinct papers per condition are shown in the tooltip. Bars are shaded differently for the seven conditions
-   <b>outside</b> the Tier-1 scope (ME/CFS, fibromyalgia, EDS, MCAS, IBS, migraine, autism) — those appear only
-   as incidental mentions inside POTS/dysautonomia papers, not as their own extracted literature.`));
+  `Distinct papers per condition are shown in the tooltip. Condition labels can occur across several source
+   literatures, so use the source-literature filter when you need extraction provenance.`));
 
 /* 2. evidence tier composition */
 const tierM=[...tally(all,'tr')].sort((a,b)=>b[1]-a[1]);
 boxes.push(chartBox('c2','Evidence-tier composition',
-  'Review/expert-opinion and case reports together outnumber RCTs and meta-analyses by a wide margin — weight findings accordingly.'));
+  'Review/expert-opinion and case reports together outnumber RCTs and meta-analyses by a wide margin: weight findings accordingly.'));
 
 /* 3. top entities by paper count */
 const topEnt=[...state.entities].sort((a,b)=>b.np_-a.np_).slice(0,20);
@@ -61,7 +59,7 @@ for(const r of all){ const y=F.cols.y[r]; if(y>0) yrM.set(y,(yrM.get(y)||0)+1); 
 const yrs=[...yrM.keys()].sort();
 boxes.push(chartBox('c5','Findings over time (publication year)',
   `Year is the source paper's publication year. ${state.meta.counts.findings? '':''}
-   2026 is a partial year, and the corpus was assembled from a POTS/dysautonomia query — the shape reflects
+   2026 is a partial year, and Tier 2 is only ${C.tier2_coverage_pct}% extracted. The shape reflects
    both real publication growth and what the query retrieved.`));
 
 document.getElementById('charts').innerHTML=boxes.join('');
@@ -70,13 +68,12 @@ const condPapers=new Map(condM.map(([c])=>[c,paperCount(applyFilters(F,{c}))]));
 
 new Chart(document.getElementById('c1'),{type:'bar',
   data:{labels:condM.map(x=>x[0]),datasets:[{label:'findings',data:condM.map(x=>x[1]),
-    backgroundColor:condM.map(x=>TIER1.has(x[0])?'#8a4b2a':'#c9b08f')}]},
+    backgroundColor:'#8a4b2a'}]},
   options:{plugins:{legend:{display:false},tooltip:{callbacks:{
-    afterLabel:i=>[`${condPapers.get(condM[i.dataIndex][0])} distinct papers`,
-      TIER1.has(condM[i.dataIndex][0])?'within Tier-1 extraction scope':'incidental mentions only — own literature NOT extracted']}}},
+    afterLabel:i=>`${condPapers.get(condM[i.dataIndex][0])} distinct papers`}}},
     scales:{y:{beginAtZero:true}},maintainAspectRatio:false}});
-CSVDATA.c1={cols:['condition','findings','papers','coverage'],
-  rows:condM.map(([c,n])=>[c,n,condPapers.get(c),TIER1.has(c)?'within-tier1-scope':'incidental-mentions-only'])};
+CSVDATA.c1={cols:['condition','findings','papers'],
+  rows:condM.map(([c,n])=>[c,n,condPapers.get(c)])};
 
 new Chart(document.getElementById('c2'),{type:'bar',
   data:{labels:tierM.map(x=>x[0]),datasets:[{data:tierM.map(x=>x[1]),backgroundColor:'#2f5f7a'}]},
@@ -107,7 +104,7 @@ function drawEnt(){
   if(c4) c4.destroy();
   c4=new Chart(document.getElementById('c4'),{type:'doughnut',
     data:{labels:k,datasets:[{data:v,backgroundColor:PALETTE}]},
-    options:{maintainAspectRatio:false,plugins:{title:{display:true,text:`${e.name} — ${e.nf} findings, ${e.np_} papers`}}}});
+    options:{maintainAspectRatio:false,plugins:{title:{display:true,text:`${e.name}: ${e.nf} findings, ${e.np_} papers`}}}});
   CSVDATA.c4={cols:['entity','direction','findings'],rows:k.map((x,i)=>[e.name,x,v[i]])};
 }
 sel.onchange=drawEnt; drawEnt();
@@ -125,11 +122,11 @@ document.addEventListener('click',e=>{
   if(cs){ const d=CSVDATA[cs]; if(!d) return;
     const q=v=>{const s=String(v==null?'':v); return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
     const M=state.meta, cc=M.counts;
-    const head=[`# POTS/dysautonomia Tier-1 findings browser - chart data (${cs})`,
+    const head=[`# POTS and related-condition findings browser: chart data (${cs})`,
       `# generated ${M.generated_utc} | ${fmt(cc.findings)} findings from ${fmt(cc.papers)} papers`,
       `# papers counted on canonical_pmid | canonical_entity covers ${cc.canonical_entity_pct}% of findings`,
-      `# SCOPE: Tier 1 = POTS/dysautonomia literature only (${fmt(cc.papers)} of ~${fmt(cc.corpus_papers_total)} corpus papers).`,
-      `#   Incidental mentions ONLY: ${Object.keys(M.incidental).join(', ')}`,
+      `# scope: Tier 1 plus ${cc.tier2_chunks_extracted} of ${cc.tier2_chunks_total} Tier 2 chunks (${cc.tier2_coverage_pct}%)`,
+      `# all Tier 2 and combined counts are subset counts; absence is not evidence of absence`,
       `# NOT MEDICAL ADVICE. Machine-extracted research information; extraction errors possible.`];
     const body=[...head, d.cols.join(','),...d.rows.map(r=>r.map(q).join(','))].join('\n');
     const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([body],{type:'text/csv'}));

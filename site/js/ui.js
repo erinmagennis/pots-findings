@@ -1,4 +1,4 @@
-/* ui.js — shared chrome: framing banner, nav, result cards, citation lines. */
+/* ui.js: shared chrome: framing banner, nav, result cards, citation lines. */
 import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS } from './data.js';
 
 export const PAGES = [
@@ -11,17 +11,17 @@ export const PAGES = [
 export function framingBanner(){
   const m = state.meta, c = m.counts;
   return `<div id="framing"><div class="wrap">
-    <div class="fr-item"><b>Scope: POTS / dysautonomia only.</b> Tier 1 covers ${fmt(c.tier1_chunks)} of
-      ${fmt(c.corpus_chunks)} corpus chunks — ${fmt(c.papers)} of ~${fmt(c.corpus_papers_total)} papers.
-      ME/CFS, fibromyalgia, EDS, MCAS, IBS, migraine and autism appear <b>only as incidental mentions inside
-      POTS/dysautonomia papers</b>, not as their own literature (Tiers 2–4, not yet extracted).
-      <a href="about.html#scope">What this means</a>.</div>
+    <div class="fr-item"><b>Coverage checkpoint: Tier 1 plus partial Tier 2.</b>
+      This site includes ${fmt(c.findings_tier1)} Tier 1 findings and ${fmt(c.findings_tier2)} findings from
+      <b>${fmt(c.tier2_chunks_extracted)} of ${fmt(c.tier2_chunks_total)} Tier 2 chunks
+      (${c.tier2_coverage_pct}%)</b>. Every Tier 2 and combined count is a subset count. Absence of a signal is
+      not evidence of absence. <a href="about.html#scope">What this means</a>.</div>
     <div class="fr-item"><b>Not medical advice.</b> Machine-extracted research information, not clinical
-      guidance — no diagnostic or treatment recommendations. Talk to a qualified clinician about any
+      guidance. No diagnostic or treatment recommendations. Talk to a qualified clinician about any
       personal health decision.</div>
     <div class="fr-item"><b>Automated extraction has errors.</b> Co-occurrence is not causation; thin
       evidence includes noise and single-lab artifacts.
-      <a href="about.html#limits">Limitations</a>. Every finding links to its source — the credit belongs to
+      <a href="about.html#limits">Limitations</a>. Every finding links to its source. The credit belongs to
       the original authors; please read their paper.</div>
   </div></div>`;
 }
@@ -30,7 +30,7 @@ export function header(active){
   const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'on':''}">${t}</a>`).join('');
   return `<header class="site"><div class="wrap">
     <div class="brand">POTS &amp; Dysautonomia Findings Browser
-      <small>Tier-1 MVP · ${fmt(state.meta.counts.findings)} machine-extracted findings from
+      <small>Tier 1 + partial Tier 2 · ${fmt(state.meta.counts.findings)} machine-extracted findings from
       ${fmt(state.meta.counts.papers)} papers</small></div>
     <nav class="tabs">${tabs}</nav></div></header>`;
 }
@@ -38,10 +38,10 @@ export function header(active){
 export function footer(){
   const m=state.meta;
   return `<footer class="site"><div class="wrap">
-    Tier-1 MVP · data generated ${esc(m.generated_utc)} · embeddings ${m.model.name} (${m.model.dims}d,
+    Tier 1 + Tier 2 at ${m.counts.tier2_coverage_pct}% · data generated ${esc(m.generated_utc)} ·
+    embeddings ${m.model.name} (${m.model.dims}d,
     int8, mean cosine fidelity ${m.counts.emb_fidelity}).
-    Quotes are verbatim excerpts from the cited papers, truncated to ${m.quote_max_chars} characters and always
-    shown next to the full citation — no bulk quote export is provided.
+    The website shows provenance excerpts of up to ${m.quote_max_chars} characters next to a citation.
     <a href="about.html">Scope, methods and limitations</a>.
   </div></footer>`;
 }
@@ -60,7 +60,7 @@ export function citeLine(pi){
   const etal = p.author_count>1 ? ' et al.' : '';
   const label = `${esc(p.first_author||'Unknown')}${etal}`;
   const link = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${label}</a>` : label;
-  return `<div class="cite">${link} — <span class="jr">${esc(p.journal||'—')}</span>
+  return `<div class="cite">${link}: <span class="jr">${esc(p.journal||'N/A')}</span>
     ${p.year?`(${p.year})`:''}
     ${p.pubmed_url?` · <a href="${esc(p.pubmed_url)}" target="_blank" rel="noopener">PubMed</a>`:''}
     ${p.doi_url?` · <a href="${esc(p.doi_url)}" target="_blank" rel="noopener">DOI</a>`:''}
@@ -68,21 +68,21 @@ export function citeLine(pi){
     <a href="paper.html?pmid=${esc(p.pmid)}" style="margin-left:6px">all findings from this paper →</a></div>`;
 }
 
-/** Reusable notice for any surface built on canonical_entity. Two different coverage numbers —
+/** Reusable notice for any surface built on canonical_entity. Two different coverage numbers :
     they are not the same thing and must not be conflated. */
 export function entityCoverageNote(context){
   const c = state.meta.counts;
-  return `<div class="note"><b>Entity coverage — read before interpreting ${context}.</b>
+  return `<div class="note"><b>Entity coverage: read before interpreting ${context}.</b>
     A canonical entity is present on <b>${fmt(c.canonical_entity_rows)} of ${fmt(c.findings)} findings
     (${c.canonical_entity_pct}%)</b>, spanning ${fmt(c.papers_with_canonical_entity)} of ${fmt(c.papers)} papers.
     An <i>original</i> (uncanonicalized) entity string is present on ${fmt(c.entity_string_rows)} findings
-    (${c.entity_string_pct}%) — these are two different things.
+    (${c.entity_string_pct}%). These are two different things.
     The gap is ${fmt(c.entity_unmapped_rows)} findings that name an entity which received no canonical mapping:
     of ${fmt(c.strings_total)} distinct entity strings, ${fmt(c.strings_mapped)} resolve to a canonical and
-    ${fmt(c.strings_unmapped_distinct)} do not, because canonicalization deliberately covered the head of the
+    ${fmt(c.strings_unmapped_distinct)} do not because canonicalization deliberately covered the head of the
     distribution and left the long tail of mostly one-off strings alone.
-    <b>${context} therefore cover about ${c.canonical_entity_pct}% of findings, not half the corpus</b> —
-    findings without a canonical entity are excluded from it. They remain fully findable by
+    <b>${context} therefore cover about ${c.canonical_entity_pct}% of findings, not the whole corpus</b>.
+    Findings without a canonical entity are excluded from it. They remain fully findable by
     <a href="index.html">keyword search</a> on their original string.</div>`;
 }
 
@@ -108,7 +108,7 @@ export function findingCard(row, opts={}){
   if(nres && nres!=='positive-effect' && nres!=='not-applicable')
     tags.push(`<span class="tag lowconf">${esc(nres)}</span>`);
   if(mc==='low'||mc==='medium')
-    tags.push(`<span class="tag lowconf" title="Entity mapping confidence — review before relying on the merge">map: ${esc(mc)}</span>`);
+    tags.push(`<span class="tag lowconf" title="Entity mapping confidence: review before relying on the merge">map: ${esc(mc)}</span>`);
   if(state.facets.cols.sd[row]) tags.push(`<span class="tag" title="Derived by splitting a compound entity string">split-derived</span>`);
 
   const score = opts.score!=null ? `<span class="pill grey" title="cosine similarity">${opts.score.toFixed(3)}</span> ` : '';
@@ -126,7 +126,7 @@ export function findingCard(row, opts={}){
 }
 
 export function selectOpts(values, sel, anyLabel='Any'){
-  return `<option value="">${anyLabel}</option>` + values.filter(v=>v && v!=='—')
+  return `<option value="">${anyLabel}</option>` + values.filter(v=>v && v!=='\u2014')
     .map(v=>`<option value="${esc(v)}"${v===sel?' selected':''}>${esc(v)}</option>`).join('');
 }
 

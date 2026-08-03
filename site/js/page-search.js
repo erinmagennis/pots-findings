@@ -9,7 +9,8 @@ let mode='keyword', rows=[], scored=null, page=0;
 
 const FLABEL = {c:'Condition', d:'Direction', tr:'Evidence tier', ce:'Certainty', ft:'Finding type',
   ek:'Entity kind', mc:'Map confidence', e:'Canonical entity', st:'Study type',
-  ca:'Causal/correlational', ps:'POTS subtype', ag:'Age group', cv:'COVID-associated', th:'Theme'};
+  ca:'Causal/correlational', ps:'POTS subtype', ag:'Age group', cv:'COVID-associated', th:'Theme',
+  ti:'Extraction tier', sl:'Source literature'};
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
 mount('index.html');
@@ -47,15 +48,15 @@ function renderStatus(){
   if(mode==='keyword'){
     s=`<span class="pill">Keyword mode</span> exact substring / token match over finding text, entity and
        condition. No model needed.`;
-    if(st==='ready') s+=` Semantic search is ready — switch any time.`;
+    if(st==='ready') s+=` Semantic search is ready: switch any time.`;
   } else {
     if(st==='ready') s=`<span class="pill">Semantic mode</span> real query embedding
-        (all-MiniLM-L6-v2, the same model used for the findings) — cosine ranking, not an approximation.`;
+        (all-MiniLM-L6-v2, the same model used for the findings): cosine ranking, not an approximation.`;
     else if(st==='loading') s=`<span class="spinner"></span> loading search model (~23&nbsp;MB, cached after
         first use)… <span class="pill grey">keyword search still works</span>`;
     else if(st==='unavailable') s=`<span class="pill err">Semantic search unavailable</span>
         the model could not be loaded (offline, blocked CDN, or unsupported browser).
-        <b>Keyword search still works</b> — switch back to Keyword mode.`;
+        <b>Keyword search still works</b>: switch back to Keyword mode.`;
     else s=`<span class="pill grey">Semantic mode</span> starting model…`;
   }
   msEl.innerHTML = s;
@@ -64,7 +65,7 @@ onModelStatus((s,extra)=>{
   renderStatus();
   if(s==='unavailable' && mode==='semantic'){ /* keep keyword usable, do not throw */ }
   if(s==='loading' && extra && extra.pct) {
-    msEl.innerHTML = `<span class="spinner"></span> loading search model — ${Math.round(extra.pct)}%
+    msEl.innerHTML = `<span class="spinner"></span> loading search model: ${Math.round(extra.pct)}%
       <span class="pill grey">keyword search still works</span>`;
   }
 });
@@ -74,7 +75,7 @@ function setMode(m){
   document.getElementById('mSemantic').classList.toggle('on', m==='semantic');
   renderStatus();
   if(m==='semantic'){ initModel(); loadEmbeddings().catch(e=>{
-      msEl.innerHTML=`<span class="pill err">Embeddings failed to load</span> ${esc(e.message)} — keyword search still works.`; }); }
+      msEl.innerHTML=`<span class="pill err">Embeddings failed to load</span> ${esc(e.message)}: keyword search still works.`; }); }
   run();
 }
 document.getElementById('mKeyword').onclick=()=>setMode('keyword');
@@ -105,7 +106,7 @@ async function run(){
     render(`top ${fmt(rows.length)} semantic matches (of ${fmt(allowed.length)} filtered)`, true);
   }catch(e){
     document.getElementById('count').innerHTML =
-      `<span class="pill err">Semantic search failed</span> ${esc(e.message)} — falling back to keyword.`;
+      `<span class="pill err">Semantic search failed</span> ${esc(e.message)}: falling back to keyword.`;
     setMode('keyword');
   }
 }

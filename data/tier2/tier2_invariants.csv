@@ -1,0 +1,9 @@
+invariant,passed,detail
+I1 conservation: pooled distinct_text <= sum per-chunk,True,"36,559 <= 36,561"
+I2 no orphaned pmids vs chunk_order,True,0 orphans
+I3 every row has chunk provenance,True,0 null
+I4a monotonicity: combined rows >= tier-1,True,"73,070 >= 36,459"
+I4b monotonicity: combined papers >= tier-1,True,"6,252 >= 3,129"
+I5 no full-row duplicates (corrected key),True,0 dups
+"I6 findings/paper in [4,30]",True,11.72
+I7 text-sharing groups all differ in >=1 field,True,0 truly-identical groups
