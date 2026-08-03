@@ -1,84 +1,82 @@
-# How to publish this
+# How to publish this checkpoint
 
-Nothing here needs a server, a build step, or a paid service. Total repo 126 MB, largest file 22 MB —
-under every GitHub limit, so no Git LFS required.
+This repository contains the completed Tier 1 record plus the current Tier 2 checkpoint. Tier 2 covers 81 of
+146 chunks, or 55.5%. Every Tier 2 and combined figure is a subset figure. Absence of a finding is not evidence
+of absence.
 
-## 1. Look at it locally first (2 minutes)
+Nothing needs a build step or application server. The website is served from static files in `site/`.
 
-    cd site && python -m http.server 8000
-    # open http://localhost:8000
+## 1. Verify the exact commit
 
-Click around before publishing. Try the search both ways: keyword mode works instantly; semantic mode
-downloads a ~23 MB model on first use (a few seconds, then cached by the browser).
+From the repository root:
 
-## 2. Push to GitHub
+```bash
+python site_tools/verify_site.py --self-test
+python site_tools/rebuild_site.py --check
+```
 
-    git init && git add . && git commit -m "Tier 1 (v1): POTS/dysautonomia findings database + browser"
-    git branch -M main
-    git remote add origin https://github.com/erinmagennis/pots-findings.git
-    git push -u origin main
+The current checkpoint passes 73,246 assertions and catches all three planted failures. The complete evidence,
+including the 24-view Chrome review, is in
+[`docs/TIER2_55PCT_CHECKPOINT_VERIFICATION.md`](docs/TIER2_55PCT_CHECKPOINT_VERIFICATION.md).
 
-## 3. The website
+The full public-export schema check also needs `pyarrow`:
 
-Published on Vercel, not GitHub Pages. `vercel.json` sets `outputDirectory: "site"`, so the
-browser is served at the domain root:
+```bash
+python site_tools/prepare_public_tier2.py
+```
 
-    https://pots.erinmagennis.com
+## 2. Push the repository
 
-`.vercelignore` keeps `data/`, `figures/`, `notebooks/`, `validation/` and `docs/` off the CDN.
-They stay in this repo. Redeploy after a data change with `vercel deploy --prod` from the repo root.
+Push `main` only after publication approval:
 
-Everything works for visitors with no key and no install: search, browse, all charts, the chart
-builder, every download. The chat panel is the only part needing an API key, and each visitor
-supplies their own.
+```bash
+git push origin main
+```
 
-## 4. Notebooks in Colab (no install for anyone)
+No tracked file exceeds 50 MB, so Git LFS is not required. The intake and local release folders are ignored.
 
-Colab opens any notebook straight from GitHub:
+## 3. Publish immutable downloads
 
-    https://colab.research.google.com/github/erinmagennis/pots-findings/blob/main/notebooks/01_load_and_explore.ipynb
+Two local tags and clean Git archives are prepared:
 
-Set `DATA_BASE` at the top of each notebook to your raw URL:
+| Tag | Download | Purpose |
+|---|---|---|
+| `tier1-v1` | `pots_tier1_v1.zip` | Completed Tier 1 repository snapshot |
+| `tier2-55pct-2026-08-03` | `pots_tier1_plus_tier2_55pct_2026-08-03.zip` | Tier 1 plus the 55.5% Tier 2 checkpoint |
 
-    https://raw.githubusercontent.com/erinmagennis/pots-findings/main/data/
+The files and their checksums are in `_release/`. Upload the ZIPs and `SHA256SUMS.txt` as GitHub release assets.
+Do not add the ZIPs to the Git repository.
 
-Paste those four links into your README so a reader is one click from running the analysis.
+## 4. Deploy the website
 
-## What to hand to whom
+The production site is `https://pots.erinmagennis.com`. `vercel.json` serves `site/` at the domain root, and
+`.vercelignore` keeps research source files off the website CDN.
 
-| Audience | Send them |
-|---|---|
-| A researcher in the field | the Pages URL, then `docs/LIMITATIONS.md` |
-| A collaborator who codes | the repo + `notebooks/04_query_recipes.ipynb` |
-| Someone asking "is this real?" | `docs/VERIFICATION_REPORT.md` |
-| A patient / advocate | `docs/PLAIN_LANGUAGE_SUMMARY.md` |
-| A funder or reviewer | `docs/CORE_FINDINGS.md` §3 (contradictions) + §5 (what failed) |
+After GitHub publication is approved, deploy from the repository root:
 
-## Before you share it widely
+```bash
+vercel deploy --prod
+```
 
-Two things worth doing first, both because you know this literature better than the extraction does:
+Run the verification gate again immediately before deploying. Treat the GitHub push and production deployment
+as separate public actions even if a Git integration is connected.
 
-1. **Spot-check the 51 mappings flagged `map_confidence == "low"`** (plus 240 medium if you have
-   time). That is 51 distinct entity mappings to eyeball — they affect 232 finding rows. Entity pages list every folded-in original string, so a wrong merge is
-   visible in seconds.
-2. **Read the two subtype contradictions in `docs/CORE_FINDINGS.md` §3** (midodrine, gAChR autoantibody). If
-   they hold up against what you know, they are the most publishable thing in this release.
+## What visitors receive
 
-## Citation
+Search, browsing, charts, the chart builder, and downloads work without an account or API key. Semantic search
+loads its model in the browser. The Ask page is the only feature that needs a provider key, and each visitor
+supplies their own. The key stays on that visitor's device.
 
-Add a `CITATION.cff` naming yourself as author before publicising — it makes GitHub show a "Cite this
-repository" button. The derived data is CC-BY-4.0; the short quoted excerpts are not yours or mine to
-license, which is why they are capped at 200 characters and always shown next to their source link.
+The website limits displayed source excerpts to 200 characters. The Tier 2 research files preserve longer
+`provenance_quote` passages for extraction checking and source location. Those passages remain the copyright of
+their authors and publishers. See [`NOTICE.md`](NOTICE.md).
 
-## Reproducing the validation
+## Before broad promotion
 
-`validation/` carries the machinery that guards every number:
+The completed checkpoint can be published with its stated limitations. Two review tasks remain useful before
+making strong scientific claims from it:
 
-    cd validation && python -c "
-    import pandas as pd, tier2_invariants as inv, tier2_facts as tf
-    M = pd.read_parquet('../data/tier1_findings.parquet')
-    V = pd.read_parquet('../data/entity_vocabulary.parquet')
-    inv.report(inv.check(M, V))"
-
-14 invariants; all must pass. `tier2_facts.py` enforces that any quoted number carries its counting
-basis — see `docs/TIER2_HANDOFF.md` for why that matters.
+1. Spot-check the 51 Tier 1 mappings flagged `map_confidence == "low"`, plus medium-confidence mappings as time
+   permits.
+2. Have a domain expert review biomedical interpretations used in any public narrative. The database and website
+   checks do not substitute for scientific review.
