@@ -4,3 +4,7 @@
 /notebooks
 /validation
 /docs
+/_intake
+/_release
+/.vercel
+/site_tools
