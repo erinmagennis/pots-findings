@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search | POTS &amp; Dysautonomia Literature Findings</title>
+<meta name="description" content="Search 73,070 findings from 6,244 papers across Tier 1 and the current partial Tier 2 extraction.">
+<link rel="canonical" href="https://pots.erinmagennis.com/search.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+<meta name="theme-color" content="#f7f4ee">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="POTS &amp; Dysautonomia Literature Findings">
+<meta property="og:title" content="POTS &amp; Dysautonomia Literature Findings">
+<meta property="og:description" content="Search 73,070 findings from 6,244 papers across Tier 1 and the current partial Tier 2 extraction.">
+<meta property="og:url" content="https://pots.erinmagennis.com/search.html">
+<meta property="og:image" content="https://pots.erinmagennis.com/social-preview.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="POTS and Dysautonomia Literature Findings shown above an index of research entities, findings, evidence, and papers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="POTS &amp; Dysautonomia Literature Findings">
+<meta name="twitter:description" content="Search 73,070 findings from 6,244 papers across Tier 1 and the current partial Tier 2 extraction.">
+<meta name="twitter:image" content="https://pots.erinmagennis.com/social-preview.png">
+<meta name="twitter:image:alt" content="POTS and Dysautonomia Literature Findings shown above an index of research entities, findings, evidence, and papers.">
+<link rel="stylesheet" href="css/app-v2.css">
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+
+  <div class="panel">
+    <h1>Search the literature</h1>
+    <p class="lede">Search papers or the findings extracted from them. <b>Keyword</b> search is instant.
+      <b>Semantic</b> search runs in your browser and downloads a 23&nbsp;MB model the first time.</p>
+
+    <div class="modeswitch result-switch" role="tablist" aria-label="Search result type">
+      <button id="viewPapers" class="on" role="tab" aria-selected="true">Papers</button>
+      <button id="viewFindings" role="tab" aria-selected="false">Findings</button>
+    </div>
+
+    <div class="searchbar">
+      <div class="autoc" style="flex:1 1 340px;display:flex">
+        <input type="text" id="q" placeholder="e.g. norepinephrine levels in POTS" autocomplete="off">
+      </div>
+      <div class="modeswitch">
+        <button id="mKeyword" class="on">Keyword</button>
+        <button id="mSemantic">Semantic</button>
+      </div>
+      <button class="primary" id="go">Search</button>
+      <button id="clear">Clear</button>
+    </div>
+    <div id="modeState" style="margin-top:7px"></div>
+
+    <details class="filter-disclosure"><summary>Filter the index</summary>
+    <div class="filters" id="filters"></div>
+    <div class="chks">
+      <label><input type="checkbox" id="fQuant"> has quantitative detail</label>
+      <label><input type="checkbox" id="fNull"> null / failed results only</label>
+      <label><input type="checkbox" id="fSplit"> exclude split-derived rows</label>
+      <label>Year <input type="number" id="y0" style="width:74px" min="2019" max="2026" placeholder="2019">
+        to <input type="number" id="y1" style="width:74px" min="2019" max="2026" placeholder="2026"></label>
+    </div></details>
+  </div>
+
+  <div class="rowmeta">
+    <div id="count">Loading data…</div>
+    <div class="pager" id="pager"></div>
+  </div>
+  <div id="results"></div>
+  <div class="rowmeta"><div></div><div class="pager" id="pager2"></div></div>
+
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-search.js"></script>
+</body></html>

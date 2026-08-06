@@ -29,7 +29,7 @@ if(!e){
     </div>
     <p class="kv" style="margin-top:8px"><b>papers</b> counts distinct canonical papers including
       split-derived rows; <b>papers (direct)</b> excludes rows created by splitting a compound entity string.</p>
-    <p><a href="index.html?e=${encodeURIComponent(e.name)}">Open in search with filters →</a></p>
+    <p><a href="search.html?e=${encodeURIComponent(e.name)}">Open in search with filters →</a></p>
   </div>`;
 
   const origs=(e.origs||[]);
@@ -48,7 +48,7 @@ if(!e){
       options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{precision:0}}},
         maintainAspectRatio:false}});
   };
-  mk('cDir',e.dirs,'#8a4b2a'); mk('cTier',e.tiers,'#2f5f7a');
+  mk('cDir',e.dirs,'#9a5638'); mk('cTier',e.tiers,'#397277');
   render();
 }
 

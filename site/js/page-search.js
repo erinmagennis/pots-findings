@@ -1,11 +1,11 @@
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, ensureRows,
-         paperCount, fmt, esc, FILTER_FIELDS } from './data.js';
+         paperCount, paper, fmt, esc, FILTER_FIELDS } from './data.js';
 import { mount, findingCard, selectOpts, autocomplete, qs, entityCoverageNote } from './ui.js';
 import { initModel, modelStatus, onModelStatus, embedQuery, loadEmbeddings, embeddingsReady,
          rankByVector, prepareKeyword, keywordReady, keywordSearch } from './search.js';
 
 const PAGE=25;
-let mode='keyword', rows=[], scored=null, page=0;
+let mode='keyword', view='papers', rows=[], scored=null, page=0;
 
 const FLABEL = {c:'Condition', d:'Direction', tr:'Evidence tier', ce:'Certainty', ft:'Finding type',
   ek:'Entity kind', mc:'Map confidence', e:'Canonical entity', st:'Study type',
@@ -13,7 +13,7 @@ const FLABEL = {c:'Condition', d:'Direction', tr:'Evidence tier', ce:'Certainty'
   ti:'Extraction tier', sl:'Source literature'};
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
-mount('index.html');
+mount('search.html');
 
 /* ---- filters ---- */
 const fEl = document.getElementById('filters');
@@ -113,14 +113,22 @@ async function run(){
 
 async function render(label, withScores=false){
   const c=document.getElementById('count');
+  const paperRows=[...new Set(rows.map(row=>state.facets.cols.p[row]))];
+  const displayRows=view==='papers' ? paperRows : rows;
   const np=paperCount(rows);
-  c.innerHTML=`${label} · <b>${fmt(np)}</b> distinct papers`;
-  const slice=rows.slice(page*PAGE,(page+1)*PAGE);
-  await ensureRows(slice);
-  document.getElementById('results').innerHTML = slice.length
-    ? slice.map((r,i)=>findingCard(r, withScores&&scored?{score:scored[page*PAGE+i][1]}:{})).join('')
-    : `<div class="panel">No findings match. Try fewer filters, or switch search mode.</div>`;
-  const pages=Math.ceil(rows.length/PAGE);
+  c.innerHTML=view==='papers' ? `${label} · <b>${fmt(displayRows.length)}</b> papers` : `${label} · <b>${fmt(np)}</b> distinct papers`;
+  const slice=displayRows.slice(page*PAGE,(page+1)*PAGE);
+  if(view==='papers'){
+    document.getElementById('results').innerHTML = slice.length
+      ? slice.map(index=>paperCard(paper(index))).join('')
+      : `<div class="panel">No papers match. Try fewer filters, or switch search mode.</div>`;
+  } else {
+    await ensureRows(slice);
+    document.getElementById('results').innerHTML = slice.length
+      ? slice.map((r,i)=>findingCard(r, withScores&&scored?{score:scored[page*PAGE+i][1]}:{})).join('')
+      : `<div class="panel">No findings match. Try fewer filters, or switch search mode.</div>`;
+  }
+  const pages=Math.ceil(displayRows.length/PAGE);
   const pg=`<button ${page===0?'disabled':''} id="prev">‹ prev</button>
     <span>page ${page+1} / ${Math.max(pages,1)}</span>
     <button ${page>=pages-1?'disabled':''} id="next">next ›</button>`;
@@ -129,7 +137,28 @@ async function render(label, withScores=false){
   document.querySelectorAll('#next').forEach(b=>b.onclick=()=>{page++;render(label,withScores);});
 }
 
+function paperCard(p){
+  if(!p) return '';
+  const source=p.doi_url||p.pubmed_url||p.pmc_url;
+  const sourceLink=source?`<a href="${esc(source)}" target="_blank" rel="noopener">Read source</a>`:'';
+  return `<div class="card paper-card"><p class="paper-title"><a href="paper.html?pmid=${esc(p.pmid)}">${esc(p.title||p.citation_short||'Untitled paper')}</a></p>
+    <div class="paper-meta">${esc(p.first_author||'Unknown')}${p.author_count>1?' et al.':''} · ${esc(p.journal||'Unknown journal')} · ${esc(p.year||'Year unavailable')}</div>
+    <div class="paper-actions"><span>${fmt(p.n_findings)} extracted findings</span>${sourceLink?` · ${sourceLink}`:''} · <a href="paper.html?pmid=${esc(p.pmid)}">View findings</a></div></div>`;
+}
+
+function setView(next){
+  view=next;
+  ['papers','findings'].forEach(name=>{
+    const button=document.getElementById(`view${name[0].toUpperCase()+name.slice(1)}`);
+    const active=name===view;
+    button.classList.toggle('on',active); button.setAttribute('aria-selected',String(active));
+  });
+  page=0; run();
+}
+
 document.getElementById('go').onclick=run;
+document.getElementById('viewPapers').onclick=()=>setView('papers');
+document.getElementById('viewFindings').onclick=()=>setView('findings');
 document.getElementById('q').addEventListener('keydown',e=>{ if(e.key==='Enter') run(); });
 document.getElementById('clear').onclick=()=>{
   document.getElementById('q').value=''; document.getElementById('fe').value='';

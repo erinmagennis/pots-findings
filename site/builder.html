@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chart builder: POTS &amp; Dysautonomia Findings Browser</title>
+<title>Analyze: POTS &amp; Dysautonomia Findings Browser</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/app-v2.css">
 <script src="vendor/chart.umd.js"></script>
 </head><body>
 <div id="framing-slot"></div><div id="header-slot"></div>
 <main><div class="wrap">
-  <div class="panel">
-    <h1>No-code chart builder</h1>
-    <p class="lede">Pick an axis, a metric and an optional grouping, add filters, and get a chart plus the
-      exact numbers behind it. Nothing is computed on a server: this runs entirely in your browser over the
-      shipped data.</p>
-    <div class="filters">
+  <div class="analyze-layout">
+  <aside class="analyze-controls" aria-label="Chart controls">
+    <div class="analyze-heading"><p class="section-kicker">Analyze</p><h1>Make the literature legible</h1><p class="lede">Choose what to compare. The chart and numbers update in your browser.</p></div>
+    <section class="control-section"><h2>Chart setup</h2><div class="filters">
       <div><label>Chart type</label><select id="ctype">
         <option value="bar">Bar</option><option value="stackedBar">Stacked bar</option>
         <option value="line">Line</option><option value="doughnut">Doughnut</option>
@@ -30,30 +28,26 @@
       <div><label>Top N categories</label><input type="number" id="topn" value="15" min="3" max="60"></div>
       <div><label>Sort</label><select id="sortby"><option value="value">By value</option>
         <option value="label">By label</option><option value="natural">Natural (year order)</option></select></div>
-    </div>
-    <h3>Filters</h3>
+    </div></section>
+    <details class="analyze-filter-section"><summary>Filter data</summary>
     <div class="filters" id="bfilters"></div>
     <div class="chks">
       <label><input type="checkbox" id="fQuant"> has quantitative detail</label>
       <label><input type="checkbox" id="fNull"> null / failed results only</label>
       <label><input type="checkbox" id="fSplit"> exclude split-derived rows</label>
       <label>Year <input type="number" id="y0" style="width:74px" placeholder="2019">
-        – <input type="number" id="y1" style="width:74px" placeholder="2026"></label>
-    </div>
-    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="primary" id="draw">Draw chart</button>
-      <button id="png">Download PNG</button>
-      <button id="csv">Download this chart's data as CSV</button>
-    </div>
+        to <input type="number" id="y1" style="width:74px" placeholder="2026"></label>
+    </div></details>
+    <section class="control-section analyze-actions"><h2>Export</h2><button class="primary" id="draw">Update chart</button><button id="png">Download PNG</button><button id="csv">Download CSV</button></section>
     <div id="covnote"></div>
-  </div>
-  <div class="chartbox">
-    <h3 id="ctitle">Chart</h3>
+  </aside>
+  <section class="analyze-workspace" aria-label="Analysis output"><div class="chartbox analyze-chart">
+    <div class="analyze-chart-head"><div><p class="section-kicker">Output</p><h2 id="ctitle">Chart</h2></div><div class="kv" id="csub"></div></div>
     <div class="canvasholder" style="height:420px"><canvas id="cv"></canvas></div>
-    <div class="kv" id="csub" style="margin-top:8px"></div>
   </div>
-  <div class="panel"><h3>Underlying numbers</h3>
+  <div class="panel analyze-table"><p class="section-kicker">Data table</p><h2>Underlying numbers</h2><p class="kv">The rows behind the chart, using the same filters and denominator.</p>
     <div class="tblwrap"><table id="dtbl"><thead></thead><tbody></tbody></table></div></div>
+  </section></div>
 </div></main>
 <div id="footer-slot"></div>
 <script type="module" src="js/page-builder.js"></script>

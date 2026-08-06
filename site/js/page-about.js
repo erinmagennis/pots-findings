@@ -6,31 +6,28 @@ mount('about.html');
 const C=state.meta.counts, M=state.meta;
 const literatures=Object.entries(C.findings_by_source_literature||{}).sort((a,b)=>b[1]-a[1]);
 
-document.getElementById('body').innerHTML=`
-<div class="panel">
-  <h1>About this browser, its coverage, and its limits</h1>
-  <p class="lede">A searchable checkpoint containing ${fmt(C.findings)} machine-extracted findings from
-  ${fmt(C.papers)} canonical papers. It combines the published Tier 1 record with the first
-  ${fmt(C.tier2_chunks_extracted)} of ${fmt(C.tier2_chunks_total)} Tier 2 chunks.</p>
+document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="section-index" aria-label="About sections"><a href="#scope">Scope</a><a href="#limits">Limits</a><a href="#reuse">Reuse</a><a href="#connect">Collaborate</a></nav><div class="about-content">
+<div class="page-intro">
+  <h1>About the data, its limits, and how to reuse it</h1>
+  <p class="lede">A searchable index of ${fmt(C.findings)} machine-extracted findings from
+  ${fmt(C.papers)} canonical papers, combining Tier 1 with the current Tier 2 subset.</p>
 </div>
 
 <div class="panel" id="scope">
-  <h2>1. Current scope</h2>
-  <div class="note stop"><b>Tier 2 is ${C.tier2_coverage_pct}% complete.</b> Every Tier 2 and combined count on
-  this site is a subset count. A literature with no displayed finding may simply be in an unprocessed chunk.
-  Absence of a signal here is not evidence of absence in the research literature.</div>
+  <h2>Current scope</h2>
+  <div class="note stop"><b>Tier 2 is ${C.tier2_coverage_pct}% complete.</b> Combined counts are partial.
+  A missing finding may reflect an unprocessed chunk. Absence here is not evidence of absence in the literature.</div>
   <p>Tier 1 contributes ${fmt(C.findings_tier1)} findings from ${fmt(C.papers_tier1)} canonical papers.
   The current Tier 2 subset contributes ${fmt(C.findings_tier2)} findings from ${fmt(C.papers_tier2)} papers.
   The paper sets do not overlap after canonicalization.</p>
   <h3>Findings by source literature</h3>
   <div class="statgrid">${literatures.map(([name,n])=>`<div class="stat"><div class="v">${fmt(n)}</div>
     <div class="k">${esc(name)}</div></div>`).join('')}</div>
-  <p class="kv">Source literature records where a paper entered the extraction pipeline. It is different from
-  the condition label assigned to an individual finding.</p>
+  <p class="kv">Source literature records where a paper entered extraction. It is separate from the condition label on an individual finding.</p>
 </div>
 
 <div class="panel">
-  <h2>2. What the data can and cannot show</h2>
+  <h2>What the data can and cannot show</h2>
   <ul>
     <li>Co-mention means two entities appeared in the same paper. It does not establish interaction or causation.</li>
     <li>Shared biology across source literatures is not the same claim as patient comorbidity.</li>
@@ -41,7 +38,7 @@ document.getElementById('body').innerHTML=`
 </div>
 
 <div class="panel" id="limits">
-  <h2>3. Extraction and provenance</h2>
+  <h2>Extraction and provenance</h2>
   <p>These are automated extractions and can contain errors. Read the cited paper before relying on a finding.
   The website shows provenance excerpts of up to ${M.quote_max_chars} characters beside the citation so a reader
   can locate the relevant passage.</p>
@@ -50,15 +47,22 @@ document.getElementById('body').innerHTML=`
   current Tier 2 rows.</p>
 </div>
 
-<div class="panel">
-  <h2>4. Search and chat</h2>
+<div class="panel" id="reuse">
+  <h2>Search, chat, and reuse</h2>
   <p>Keyword search works without an external model. Semantic search may become unavailable when its browser model
   cannot load; keyword search remains available. The chat page uses a key supplied by the visitor and stores it only
   in that browser's local storage. This site has no server-side API key.</p>
 </div>
 
 <div class="panel">
-  <h2>5. Not medical advice</h2>
+  <h2>Not medical advice</h2>
   <p>This browser reports what papers said. It does not diagnose conditions, recommend treatments, or replace
   advice from a qualified clinician.</p>
-</div>`;
+</div></div></div>`;
+
+document.querySelector('.about-content').insertAdjacentHTML('beforeend', `
+<div class="panel" id="connect">
+  <h2>Connect with the project</h2>
+  <p>Have a question, a useful source, or a way to help this literature become easier to navigate?</p>
+  <p><a href="mailto:hi@erinmagennis.com">Email Erin</a> · <a href="https://x.com/erinmagennis" target="_blank" rel="noopener">Follow on X</a> · <a href="https://github.com/erinmagennis/pots-findings" target="_blank" rel="noopener">View the project on GitHub</a> · <a href="https://artizen.fund/index/p/open-pots" target="_blank" rel="noopener">Support the project</a></p>
+</div>`);

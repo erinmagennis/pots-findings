@@ -64,7 +64,7 @@ function draw(){
   else if(cats.length>topn) cats=cats.slice(0,topn);
 
   const seriesKeys = sf ? [...new Set(cats.flatMap(c=>[...G.get(c).keys()]))].sort() : ['_'];
-  const PALETTE=['#8a4b2a','#2f5f7a','#6b8f3f','#a3352a','#8a6d2a','#5c5470','#3f7a6a','#9a6b4f','#4a6fa5','#7d5b8c'];
+const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a58d','#6d6a63'];
   const grandTotal=cats.reduce((a,c)=>a+total(c),0);
   const datasets=seriesKeys.map((s,i)=>({
     label: sf? String(s):'value',

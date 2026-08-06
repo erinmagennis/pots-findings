@@ -26,14 +26,14 @@ document.getElementById('head').innerHTML=`<div class="panel">
     <div class="stat"><div class="v">${fmt(paperCount(rows))}</div><div class="k">papers</div></div>
     <div class="stat"><div class="v">${fmt(Object.keys(tally('e')).length)}</div><div class="k">named entities</div></div>
   </div>
-  <p><a href="index.html?c=${encodeURIComponent(c)}">Open in search →</a></p></div>`;
+  <p><a href="search.html?c=${encodeURIComponent(c)}">Open in search →</a></p></div>`;
 
 const box=(t,id)=>`<div class="chartbox"><h3>${t}</h3><div class="canvasholder" style="height:260px"><canvas id="${id}"></canvas></div></div>`;
 document.getElementById('charts').innerHTML=box('Direction','cD')+box('Evidence tier','cT');
 const mk=(id,obj,col)=>{const k=Object.keys(obj),v=k.map(x=>obj[x]);
   new Chart(document.getElementById(id),{type:'bar',data:{labels:k,datasets:[{data:v,backgroundColor:col}]},
   options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}},maintainAspectRatio:false}});};
-mk('cD',tally('d'),'#8a4b2a'); mk('cT',tally('tr'),'#2f5f7a');
+mk('cD',tally('d'),'#9a5638'); mk('cT',tally('tr'),'#397277');
 
 async function render(){
   document.getElementById('count').innerHTML=`${fmt(rows.length)} findings`;

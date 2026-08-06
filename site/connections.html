@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Connections | POTS &amp; Dysautonomia Findings Browser</title>
+<meta name="description" content="Explore connections among entities in the POTS and dysautonomia literature.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+<link rel="stylesheet" href="css/app-v2.css">
+</head><body>
+<div id="framing-slot"></div><div id="header-slot"></div>
+<main><div class="wrap">
+  <div class="panel graph-intro">
+    <h1>Connections in the literature</h1>
+    <p class="lede">See which entities occur in the same papers as POTS. Co-mention is not interaction or causation.</p>
+    <div class="graph-controls" aria-label="Graph controls">
+      <label>Scope <select id="scope"><option value="pots">POTS literature</option><option value="all">All available associations</option></select></label>
+      <label>Show <select id="topN"><option value="24">24 associations</option><option value="48" selected>48 associations</option><option value="72">72 associations</option></select></label>
+      <label><input type="checkbox" id="significant" checked> significant only</label>
+      <label><input type="checkbox" id="crossKind"> cross-kind only</label>
+      <button class="primary" id="refreshGraph">Update graph</button>
+    </div>
+  </div>
+  <div class="graph-panel">
+    <div id="connectionGraph" class="connection-graph" role="img" aria-label="Interactive network of POTS literature connections"></div>
+    <aside id="connectionDrawer" class="connection-drawer" aria-live="polite"><p class="section-kicker">Selected entity</p><h2>Choose a node</h2><p class="kv">Select a node to see its visible connections and open its full entity record.</p></aside>
+    <p class="graph-caption" id="graphCaption">Loading connections…</p>
+  </div>
+</div></main>
+<div id="footer-slot"></div>
+<script type="module" src="js/page-connections.js"></script>
+</body></html>

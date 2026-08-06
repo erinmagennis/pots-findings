@@ -1,9 +1,41 @@
-import { loadMeta, loadPapers, getJSON, state, fmt, esc, paperByPmid } from './data.js';
+import { loadMeta, loadPapers, loadFacets, loadEntities, getJSON, state, fmt, esc, paperByPmid, val } from './data.js';
 import { mount, sortTable } from './ui.js';
 
-await loadMeta(); await loadPapers();
+await loadMeta(); await loadPapers(); await loadFacets(); await loadEntities();
 mount('discover.html');
 const C=state.meta.counts;
+document.querySelector('#dtabs').insertAdjacentHTML('beforebegin', `<div class="statgrid findings-summary">
+  <a class="stat" href="#assoc"><div class="v">${fmt(C.assoc_significant)}</div><div class="k">significant comparisons</div></a>
+  <a class="stat" href="#contra"><div class="v">${fmt(C.contradictions)}</div><div class="k">contradictions</div></a>
+  <a class="stat" href="#under"><div class="v">${fmt(C.understudied)}</div><div class="k">understudied entities</div></a>
+  <a class="stat" href="#nulls"><div class="v">${fmt(C.nulls)}</div><div class="k">null or failed findings</div></a>
+</div>`);
+
+const facetRows = Array.from({length:state.facets.n},(_,i)=>i);
+const tally = field => { const map=new Map(); facetRows.forEach(row=>{ const value=val(field,row); if(value) map.set(value,(map.get(value)||0)+1); }); return [...map].sort((a,b)=>b[1]-a[1]); };
+const pct = (n,d) => d ? `${(n/d*100).toFixed(1)}%` : '0%';
+const barRows = (items, denominator, linkFor=()=>null, limit=8) => items.slice(0,limit).map(([label,n])=>`<div class="overview-bar"><div class="overview-bar-head"><span>${linkFor(label)||esc(label)}</span><b>${fmt(n)} <small>${pct(n,denominator)}</small></b></div><div class="overview-track"><i style="width:${Math.max(2,n/items[0][1]*100)}%"></i></div></div>`).join('');
+
+async function viewOverview(){
+  const [associations, contradictions, understudied] = await Promise.all([getJSON('associations.json'),getJSON('contradictions.json'),getJSON('understudied.json')]);
+  const years=tally('y').filter(([year])=>year!=='0').sort((a,b)=>Number(a[0])-Number(b[0]));
+  const areas=tally('th');
+  const directions=tally('d');
+  const nulls=tally('nc');
+  const entityRows=[...state.entities].sort((a,b)=>b.np_-a.np_).slice(0,8).map(entity=>[entity.name,entity.np_]);
+  const entityLinks=barRows(entityRows, state.meta.counts.papers, label=>`<a href="entity.html?e=${encodeURIComponent(label)}">${esc(label)}</a>`);
+  const maxYear=years.length?years[years.length-1][0]:'current';
+  document.getElementById('view').innerHTML=`<section class="overview-grid" aria-label="Findings overview">
+    <div class="overview-main">
+      <div class="overview-section"><div class="section-kicker">01 · Literature growth</div><h2>Findings by publication year</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows. Year comes from the source paper. <a href="search.html">Search the underlying findings</a>.</p><div class="year-bars">${years.map(([year,n])=>`<div class="year-bar"><span>${esc(year)}</span><i style="height:${Math.max(4,n/years.reduce((m,x)=>Math.max(m,x[1]),0)*100)}%" title="${fmt(n)} findings"></i><b>${fmt(n)}</b></div>`).join('')}</div><p class="kv">${esc(maxYear)} is a partial year where applicable. Combined counts include partial Tier 2.</p></div>
+      <div class="overview-section"><div class="section-kicker">02 · Research areas</div><h2>Most represented themes</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows with a theme label. Missing theme labels are excluded.</p>${barRows(areas, state.meta.counts.findings)}</div>
+      <div class="overview-section"><div class="section-kicker">03 · Direction and null results</div><h2>What the extracted rows report</h2><div class="overview-columns"><div><h3>Direction</h3><p class="kv">Denominator: ${fmt(directions.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(directions, directions.reduce((s,x)=>s+x[1],0))}</div><div><h3>Null or failed result</h3><p class="kv">Denominator: ${fmt(nulls.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(nulls, nulls.reduce((s,x)=>s+x[1],0))}</div></div></div>
+    </div>
+    <aside class="overview-side"><div class="overview-section"><div class="section-kicker">04 · Connected entities</div><h2>Highest paper reach</h2><p class="kv">Denominator: ${fmt(state.meta.counts.papers)} canonical papers. Entity coverage is a subset of the findings.</p>${entityLinks}<a class="overview-link" href="connections.html">Open the connection map →</a></div>
+      <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Current contradictions</h2><p class="overview-number">${fmt(state.meta.counts.contradictions)}</p><p class="kv">Rows with conflicting extracted directions or null-versus-positive results.</p><a class="overview-link" href="#contra">Review contradictions →</a><h3>Under-studied signals</h3><p class="overview-number">${fmt(state.meta.counts.understudied)}</p><p class="kv">Candidates ranked from the current combined analysis.</p><a class="overview-link" href="#under">Review under-studied signals →</a></div>
+      <div class="overview-section"><div class="section-kicker">06 · Read the record</div><h2>Complete tables</h2><p class="kv">Browse every row behind this overview, with links to source papers and entities.</p><a class="overview-link" href="#assoc">Comparisons →</a><a class="overview-link" href="#nulls">Null and failed →</a><a class="overview-link" href="papers.html">All papers →</a><a class="overview-link" href="entities.html">All entities →</a></div>
+    </aside></section>`;
+}
 
 const asList=v=>v==null?[]:Array.isArray(v)?v:String(v).split(/[|,;]\s*/).filter(Boolean);
 const pmidLinks=(v,cap=6)=>{const values=asList(v); return values.length
@@ -213,8 +245,8 @@ async function viewConv(){
   document.getElementById('vCsv').onclick=()=>csv(rowsNow(),columns.map(x=>x[0]),'convergence.csv'); render();
 }
 
-const VIEWS={assoc:viewAssoc,under:viewUnder,contra:viewContra,nulls:viewNulls,conv:viewConv};
-function go(){const key=(location.hash||'#assoc').slice(1),fn=VIEWS[key]||viewAssoc;
+const VIEWS={overview:viewOverview,assoc:viewAssoc,under:viewUnder,contra:viewContra,nulls:viewNulls,conv:viewConv};
+function go(){const key=(location.hash||'#overview').slice(1),fn=VIEWS[key]||viewOverview;
   document.querySelectorAll('#dtabs a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+key));
   document.getElementById('view').innerHTML='<div class="panel"><span class="spinner"></span> loading...</div>';fn();}
 window.addEventListener('hashchange',go);go();

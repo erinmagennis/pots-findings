@@ -28,7 +28,7 @@ document.getElementById('tbl').querySelector('tbody').innerHTML=stats.map(s=>`<t
 
 new Chart(document.getElementById('cChart'),{
   type:'bar',
-  data:{labels:stats.map(s=>s.c),datasets:[{label:'findings',data:stats.map(s=>s.n),backgroundColor:'#8a4b2a'}]},
+  data:{labels:stats.map(s=>s.c),datasets:[{label:'findings',data:stats.map(s=>s.n),backgroundColor:'#9a5638'}]},
   options:{plugins:{legend:{display:false},tooltip:{callbacks:{
     afterLabel:i=>`${stats[i.dataIndex].papers} distinct papers across ${stats[i.dataIndex].literatures.length} source literatures`}}},
     scales:{y:{beginAtZero:true}}, maintainAspectRatio:false}});

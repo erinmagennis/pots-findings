@@ -12,7 +12,7 @@ document.getElementById('stats').innerHTML=[
   [fmt(C.nulls),'null / failed results'],[fmt(C.contradictions),'contradictions']
 ].map(([v,k])=>`<div class="stat"><div class="v">${v}</div><div class="k">${k}</div></div>`).join('');
 
-const PALETTE=['#8a4b2a','#2f5f7a','#6b8f3f','#a3352a','#8a6d2a','#5c5470','#3f7a6a','#9a6b4f','#4a6fa5','#7d5b8c'];
+const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a58d','#6d6a63'];
 const tally=(rows,field)=>{ const m=new Map();
   for(const r of rows){ const v=val(field,r); if(!v||v==='\u2014') continue; m.set(v,(m.get(v)||0)+1); } return m; };
 
@@ -68,7 +68,7 @@ const condPapers=new Map(condM.map(([c])=>[c,paperCount(applyFilters(F,{c}))]));
 
 new Chart(document.getElementById('c1'),{type:'bar',
   data:{labels:condM.map(x=>x[0]),datasets:[{label:'findings',data:condM.map(x=>x[1]),
-    backgroundColor:'#8a4b2a'}]},
+    backgroundColor:'#9a5638'}]},
   options:{plugins:{legend:{display:false},tooltip:{callbacks:{
     afterLabel:i=>`${condPapers.get(condM[i.dataIndex][0])} distinct papers`}}},
     scales:{y:{beginAtZero:true}},maintainAspectRatio:false}});
@@ -76,14 +76,14 @@ CSVDATA.c1={cols:['condition','findings','papers'],
   rows:condM.map(([c,n])=>[c,n,condPapers.get(c)])};
 
 new Chart(document.getElementById('c2'),{type:'bar',
-  data:{labels:tierM.map(x=>x[0]),datasets:[{data:tierM.map(x=>x[1]),backgroundColor:'#2f5f7a'}]},
+  data:{labels:tierM.map(x=>x[0]),datasets:[{data:tierM.map(x=>x[1]),backgroundColor:'#397277'}]},
   options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}},maintainAspectRatio:false}});
 CSVDATA.c2={cols:['evidence_tier','findings'],rows:tierM};
 
 new Chart(document.getElementById('c3'),{type:'bar',
   data:{labels:topEnt.map(e=>e.name),datasets:[
-    {label:'papers',data:topEnt.map(e=>e.np_),backgroundColor:'#8a4b2a'},
-    {label:'papers (direct only)',data:topEnt.map(e=>e.npd),backgroundColor:'#c9b08f'}]},
+    {label:'papers',data:topEnt.map(e=>e.np_),backgroundColor:'#9a5638'},
+    {label:'papers (direct only)',data:topEnt.map(e=>e.npd),backgroundColor:'#71896f'}]},
   options:{indexAxis:'y',scales:{x:{beginAtZero:true}},maintainAspectRatio:false}});
 CSVDATA.c3={cols:['entity','kind','papers_canonical_pmid','papers_direct','findings'],
   rows:topEnt.map(e=>[e.name,e.kind,e.np_,e.npd,e.nf])};
@@ -110,7 +110,7 @@ function drawEnt(){
 sel.onchange=drawEnt; drawEnt();
 
 new Chart(document.getElementById('c5'),{type:'line',
-  data:{labels:yrs,datasets:[{label:'findings',data:yrs.map(y=>yrM.get(y)),borderColor:'#8a4b2a',
+  data:{labels:yrs,datasets:[{label:'findings',data:yrs.map(y=>yrM.get(y)),borderColor:'#9a5638',
     backgroundColor:'rgba(138,75,42,.12)',fill:true,tension:.25}]},
   options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}},maintainAspectRatio:false}});
 CSVDATA.c5={cols:['year','findings'],rows:yrs.map(y=>[y,yrM.get(y)])};

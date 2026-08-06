@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POTS and dysautonomia research map</title>
+  <meta name="description" content="A living map of POTS and dysautonomia research. Explore what is known, what is connected, and what is next.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/home-v2.css?v=5">
+</head>
+<body>
+  <div class="match-strip" role="status">
+    <span class="match-copy match-copy-desktop"><strong>4x match</strong> through Thursday 11AM PDT. <strong>Every $1 becomes $5, up to $5,000.</strong></span>
+    <span class="match-copy match-copy-mobile"><strong>4x match</strong> through Thursday 11AM PDT. <strong>Every $1 becomes $5, up to $5,000.</strong></span>
+    <span class="match-count" id="countdown" aria-label="Time remaining">loading</span>
+    <a class="match-link" href="https://artizen.fund/index/p/open-pots" target="_blank" rel="noopener">Support the project <span aria-hidden="true">↗</span></a>
+  </div>
+
+  <header class="topbar"><div class="header-inner">
+    <a class="brand-group" href="index.html" aria-label="POTS and Dysautonomia Literature Project home">
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span>
+      <span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span></span>
+    </a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
+    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation">
+      <a href="search.html">Search</a>
+      <a href="discover.html">Findings</a>
+      <a href="connections.html">Connections</a>
+      <a href="builder.html">Analyze</a>
+      <a href="about.html">About</a>
+      <a href="chat.html">Ask <span>(BYO key)</span></a>
+    </nav>
+  </div></header>
+
+  <main>
+    <section class="hero" aria-labelledby="pageTitle">
+      <div class="hero-copy">
+        <div class="hero-info">
+          <p class="eyebrow">POTS &amp; Dysautonomia Literature Project</p>
+          <h1 id="pageTitle"><span>A living map of POTS and</span><span>dysautonomia research.</span></h1>
+          <p class="hero-lede"><span>Explore what is known, what is connected,</span><span>and what is next.</span></p>
+          <form class="curiosity" id="searchForm" role="search">
+            <label class="sr-only" for="curiosityInput">What are you curious about?</label>
+            <div class="search-input-wrap">
+              <input id="curiosityInput" name="q" type="search" placeholder="What are you curious about?" autocomplete="off">
+              <button type="submit" aria-label="Search the literature"></button>
+            </div>
+          </form>
+          <p class="hero-footnote">Search the <span id="findingCount">73,070</span> findings from <span id="paperCount">6,244</span> papers in the project</p>
+        </div>
+      </div>
+
+      <div class="graph-stage" aria-labelledby="graphTitle">
+        <div id="graph" class="graph" role="img" aria-label="Interactive network showing POTS research overlap"></div>
+        <div class="graph-status" id="graphStatus" aria-live="polite">POTS is connected to overlapping research areas in the literature.</div>
+        <div class="evidence-view" id="evidenceView">
+          <p class="evidence-label">Accessible evidence view</p>
+          <ul id="evidenceList"></ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="project-footer" id="connect">
+    <div class="footer-left">
+      <p class="eyebrow">Grow the map</p>
+      <p class="footer-title">Collaborate with the <a href="about.html#connect">POTS &amp; Dysautonomia Literature Project</a></p>
+    </div>
+    <p class="footer-connect">Have a question, a useful source, or a recommendation?<br><a href="about.html#connect">Let's connect!</a> <span class="arrow-circle" aria-hidden="true">↗</span></p>
+  </footer>
+  <script type="module" src="js/home-v2.js?v=5"></script>
+</body>
+</html>

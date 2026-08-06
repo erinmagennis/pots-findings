@@ -2,54 +2,61 @@
 import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS } from './data.js';
 
 export const PAGES = [
-  ['index.html','Search'],['entities.html','Entities'],['conditions.html','Conditions'],
-  ['papers.html','Papers'],['discover.html','Discover'],['charts.html','Charts'],
-  ['builder.html','Chart builder'],['chat.html','Ask (BYO key)'],['about.html','About & limits']
+  ['search.html','Search'],['discover.html','Findings'],['connections.html','Connections'],
+  ['builder.html','Analyze'],['about.html','About'],['chat.html','Ask']
 ];
 
-/** The three non-negotiable framings, on every page, above the fold. */
-export function framingBanner(){
-  const m = state.meta, c = m.counts;
-  return `<div id="framing"><div class="wrap">
-    <div class="fr-item"><b>Coverage checkpoint: Tier 1 plus partial Tier 2.</b>
-      This site includes ${fmt(c.findings_tier1)} Tier 1 findings and ${fmt(c.findings_tier2)} findings from
-      <b>${fmt(c.tier2_chunks_extracted)} of ${fmt(c.tier2_chunks_total)} Tier 2 chunks
-      (${c.tier2_coverage_pct}%)</b>. Every Tier 2 and combined count is a subset count. Absence of a signal is
-      not evidence of absence. <a href="about.html#scope">What this means</a>.</div>
-    <div class="fr-item"><b>Not medical advice.</b> Machine-extracted research information, not clinical
-      guidance. No diagnostic or treatment recommendations. Talk to a qualified clinician about any
-      personal health decision.</div>
-    <div class="fr-item"><b>Automated extraction has errors.</b> Co-occurrence is not causation; thin
-      evidence includes noise and single-lab artifacts.
-      <a href="about.html#limits">Limitations</a>. Every finding links to its source. The credit belongs to
-      the original authors; please read their paper.</div>
-  </div></div>`;
+function contextPopover(){
+  const c = state.meta.counts;
+  return `<details class="context-details"><summary>Scope &amp; safety</summary><div class="context-popover">
+    <p><b>Coverage checkpoint: Tier 1 plus partial Tier 2.</b> This site includes ${fmt(c.findings_tier1)} Tier 1 findings and ${fmt(c.findings_tier2)} findings from <b>${fmt(c.tier2_chunks_extracted)} of ${fmt(c.tier2_chunks_total)} Tier 2 chunks (${c.tier2_coverage_pct}%)</b>. Every Tier 2 and combined count is a subset count. Absence of a signal is not evidence of absence. <a href="about.html#scope">What this means</a>.</p>
+    <p><b>Not medical advice.</b> Machine-extracted research information, not clinical guidance. No diagnostic or treatment recommendations. Talk to a qualified clinician about any personal health decision.</p>
+    <p><b>Automated extraction has errors.</b> Co-occurrence is not causation; thin evidence includes noise and single-lab artifacts. <a href="about.html#limits">Limitations</a>. Every finding links to its source. The credit belongs to the original authors; please read their paper.</p>
+  </div></details>`;
 }
 
 export function header(active){
-  const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'on':''}">${t}</a>`).join('');
-  return `<header class="site"><div class="wrap">
-    <div class="brand">POTS &amp; Dysautonomia Findings Browser
-      <small>Tier 1 + partial Tier 2 · ${fmt(state.meta.counts.findings)} machine-extracted findings from
-      ${fmt(state.meta.counts.papers)} papers</small></div>
-    <nav class="tabs">${tabs}</nav></div></header>`;
+  const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}${h==='chat.html'?' <span>(BYO key)</span>':''}</a>`).join('');
+  return `<div class="campaign-strip" role="status"><span class="campaign-copy campaign-copy-desktop"><strong>4x match</strong> through Thursday 11AM PDT. <strong>Every $1 becomes $5, up to $5,000.</strong></span><span class="campaign-copy campaign-copy-mobile"><strong>4x match</strong> through Thursday 11AM PDT. <strong>Every $1 becomes $5, up to $5,000.</strong></span><span class="campaign-count" id="campaignCountdown">loading</span><a href="https://artizen.fund/index/p/open-pots" target="_blank" rel="noopener">Support the project ↗</a></div>
+  <header class="site"><div class="wrap">
+    <a class="brand" href="index.html" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
+    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation">${tabs}</nav>
+    <div class="header-rail"><b>${fmt(state.meta.counts.findings)} findings</b>${fmt(state.meta.counts.papers)} papers · Tier 1 + partial Tier 2 ${contextPopover()}</div>
+  </div></header>`;
 }
 
 export function footer(){
   const m=state.meta;
-  return `<footer class="site"><div class="wrap">
-    Tier 1 + Tier 2 at ${m.counts.tier2_coverage_pct}% · data generated ${esc(m.generated_utc)} ·
-    embeddings ${m.model.name} (${m.model.dims}d,
-    int8, mean cosine fidelity ${m.counts.emb_fidelity}).
-    The website shows provenance excerpts of up to ${m.quote_max_chars} characters next to a citation.
-    <a href="about.html">Scope, methods and limitations</a>.
-  </div></footer>`;
+  return `<div class="quiet-support"><div class="wrap"><strong>Grow the map</strong> Help make this public research index easier to extend, check, and reuse. <a href="about.html#connect">Collaborate with the project</a>.</div></div>
+  <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>Tier 1 + Tier 2 at ${m.counts.tier2_coverage_pct}% · data generated ${esc(m.generated_utc)} · <a href="about.html">Scope, methods and limitations</a>.</span></div></footer>`;
 }
 
 export function mount(active){
-  document.getElementById('framing-slot').outerHTML = framingBanner();
+  document.getElementById('framing-slot').outerHTML = '';
   document.getElementById('header-slot').outerHTML  = header(active);
   const f=document.getElementById('footer-slot'); if(f) f.outerHTML = footer();
+  document.querySelectorAll('.nav-pill a').forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
+      const target = new URL(link.href, location.href);
+      if (target.origin !== location.origin) return;
+      event.preventDefault();
+      document.body.classList.add('page-leaving');
+      window.setTimeout(() => { window.location.href = target.href; }, 120);
+    });
+  });
+  const navToggle = document.getElementById('mobileNavToggle');
+  const primaryNav = document.getElementById('primaryNav');
+  navToggle?.addEventListener('click', () => {
+    const open = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', String(!open));
+    primaryNav?.toggleAttribute('data-open', !open);
+  });
+  const end = new Date('2026-08-06T18:00:00Z').getTime();
+  const tick = () => { const e=document.getElementById('campaignCountdown'); if(!e) return; const left=Math.max(0,end-Date.now());
+    e.textContent = left ? `${Math.floor(left/36e5)}h ${String(Math.floor(left/6e4)%60).padStart(2,'0')}m ${String(Math.floor(left/1e3)%60).padStart(2,'0')}s left` : 'match ended'; };
+  tick(); window.setInterval(tick,1000);
 }
 
 /* ---------- citation line: prominent, always with a link ---------- */
@@ -83,7 +90,7 @@ export function entityCoverageNote(context){
     distribution and left the long tail of mostly one-off strings alone.
     <b>${context} therefore cover about ${c.canonical_entity_pct}% of findings, not the whole corpus</b>.
     Findings without a canonical entity are excluded from it. They remain fully findable by
-    <a href="index.html">keyword search</a> on their original string.</div>`;
+    <a href="search.html">keyword search</a> on their original string.</div>`;
 }
 
 /** Result card. Shows canonical entity AND the original string when they differ, so merges are auditable. */
