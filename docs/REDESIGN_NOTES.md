@@ -49,6 +49,63 @@ The overview must continue to derive its highlights from the shipped data. Do no
 - For mobile, verify the notification strip, hamburger menu, homepage graph below the intro, drawer width, filter disclosures, tables, downloads, and horizontal overflow.
 - After any design pass run the JavaScript syntax checks, copy lint, `git diff --check`, and the site verifier. Review both 1440×900 and 390×844 screenshots before publishing.
 
+## Current design source of truth
+
+This note is the active website handoff. `docs/DESIGN_REDESIGN_HANDOFF.md` records the early design sprint, and `docs/HANDOFF-2026-08-06-homepage-ia.md` records the intermediate information-architecture pass. Both are historical and must not be used as current implementation instructions.
+
+Current routes and owners:
+
+- `site/index.html`, `site/css/home-v2.css`, and `site/js/home-v2.js`: production homepage, homepage graph, campaign strip, and mobile homepage navigation.
+- `site/search.html`: Search. The root route is no longer the search page.
+- `site/discover.html` and `site/js/page-discover.js`: Findings Overview plus the five detailed findings views.
+- `site/connections.html` and `site/js/page-connections.js`: draggable connection graph and selected-entity drawer.
+- `site/builder.html`: Analyze.
+- `site/about.html`: project context, limits, reuse, collaboration, and support.
+- `site/chat.html`: Ask with a visitor-owned key.
+- `site/css/app-v2.css`: shared internal-page tokens, components, and responsive rules.
+- `site/js/ui.js`: shared internal-page campaign strip, brand lockup, navigation, scope disclosure, footer, citation presentation, and route transitions.
+
+Preserve these public navigation and deep-link contracts:
+
+- Search: `search.html?q=`, `?e=`, `?c=`, and `?null=1`.
+- Findings: `discover.html#overview`, `#assoc`, `#under`, `#contra`, `#nulls`, and `#conv`.
+- Paper: `paper.html?pmid=`. Entity: `entity.html?e=`. Condition: `condition.html?c=`.
+- Keep every existing DOM ID used by a `page-*.js` module. Layout may move around those controls, but an ID change requires updating and testing the owning module in the same change.
+
+The graphs use project-owned SVG renderers, real shipped association data, pixel-coordinate view boxes, and `ResizeObserver`. There is no `force-graph` or Cytoscape runtime dependency. Keep labels deduplicated, links quiet, nodes bounded inside the canvas, and evidence strength explicit. Connections supports drag and pin behavior; graph editing and user-authored saved graphs are future work.
+
+## Durable visual rules
+
+- Use the current light editorial system as the baseline. Do not revive the deleted `site/css/app.css` dashboard treatment.
+- Align the brand lockup, page content, major surfaces, and footer content to the same maximum-width and gutter tokens.
+- Use rust for primary action and emphasis, teal for connections and informational states, and sage for secondary evidence states. Avoid decorative gradients and dense multicolor graph palettes.
+- Keep utility-page headings compact, filters progressive, tables source-linked, and authors visually prominent.
+- Use whitespace to establish hierarchy, but do not create large empty side fields or vertical gaps that separate related controls from their results.
+- Keep the homepage graph and the Connections graph visually related. The homepage is sparse and invitational; Connections can expose more controls and detail.
+- Preserve reduced-motion behavior, visible keyboard focus, touch targets, mobile graph access, and the mobile navigation menu.
+- A code review is not visual approval. Any future design change needs rendered desktop and mobile screenshots before publication.
+
+## Open design and QA work
+
+1. Replace the expired match state on every page. Erin confirmed that the campaign strip appears on every page while active, then becomes a quiet permanent support treatment. The current code leaves the campaign copy visible and changes only the countdown to `match ended`.
+2. Complete real-browser interaction QA at 1440×900 and 390×844. Check navigation, search modes, filter disclosures, Findings tabs, graph hover, tap, drag and drawer behavior, Analyze downloads, About anchors, footer placement, clipping, horizontal overflow, and the post-match support state.
+3. Treat the connected five-node logo as the current placeholder. A more fitting knowledge-graph and human-discovery mark remains a future design task and needs a separate reaction round before replacement.
+4. Keep `site/preview.html` synchronized only while it is intentionally retained. Production behavior is defined by `site/index.html`; do not fix one copy and assume the other changed.
+
+## Verification commands
+
+Run these before committing a design change:
+
+```sh
+python3 site_tools/verify_site.py --self-test
+for f in site/js/*.js; do node --check "$f" || exit 1; done
+/Users/erinmagennis/foundation/scripts/copy-lint.sh <changed user-facing files>
+git diff --check
+git status --short -- data site/data
+```
+
+The August 6 handoff run passed 73,252 checkpoint assertions, all JavaScript syntax checks, copy lint for the primary and linked redesigned pages, and `git diff --check`. `data/` and `site/data/` were clean. Rendered browser QA was still unavailable and remains open.
+
 ## Release note
 
-The August 2026 redesign is presentation-only. It was published in GitHub commit `1b8aa32`; the core research data was unchanged. The next open QA step is a real-browser interaction review at desktop and mobile sizes.
+The August 2026 redesign is presentation-only. It was published in GitHub commit `1b8aa32`; the core research data was unchanged. The next open changes are the expired-match transition and a real-browser interaction review at desktop and mobile sizes.

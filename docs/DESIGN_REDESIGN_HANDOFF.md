@@ -1,5 +1,7 @@
 # POTS design and redesign handoff
 
+> Historical design-sprint record. Superseded by `docs/REDESIGN_NOTES.md`. Do not use the navigation, graph-library, build-boundary, or next-action sections below as current implementation instructions.
+
 Date: 2026-08-05
 
 ## Direction decided

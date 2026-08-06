@@ -1,5 +1,7 @@
 # POTS homepage and information architecture handoff
 
+> Historical intermediate handoff. The real-page redesign described as unfinished below has since shipped. Use `docs/REDESIGN_NOTES.md` for current routes, architecture, design rules, verification, and open work.
+
 Date: 2026-08-06
 
 ## Current state
