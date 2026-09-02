@@ -4,6 +4,27 @@ Date: 2026-09-02
 
 Status: diagnosis and plan only. No application code changed.
 
+## Product scope decision
+
+Erin's 2026-09-02 decision narrows the product direction: POTS should help people
+share artifacts, graphs, and data views. AI conversations are not the primary
+shareable object.
+
+Consequences:
+
+- Keep chat optional and experimental. Fix the reported OpenAI 400 only if chat
+  remains visible.
+- Do not add Gemini, OpenRouter, accounts, conversation publishing, email delivery,
+  or Git-like conversation history now.
+- Do not build paid provider monitoring now. Revisit it only if chat becomes a core
+  workflow or another provider-contract regression occurs.
+- The next product specification should cover shareable artifact URLs and exports
+  for graphs, filtered data, and research packets. Each artifact should carry its
+  dataset version, configuration, citations, timestamp, and checksum.
+
+This scope decision supersedes Phases 2 through 5 below as active work. They remain
+as a technical record if chat later earns further investment.
+
 ## Decision
 
 Fix the reported OpenAI failure in two passes:
