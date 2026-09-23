@@ -1,0 +1,65 @@
+{
+ "title": "Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS — machine-extracted structured findings (15,646 findings, 1,091 papers)",
+ "upload_type": "dataset",
+ "description": "<p>Package 5 of 5. 15,646 structured findings extracted from 1,091 papers (2020–2026) covering migraine intersection, author-augmented papers, hypermobility spectrum, Sjögren's, PANS/PANDAS.</p><p>One block of a five-way partition of an 11,519-paper, 148,186-finding corpus of the POTS, dysautonomia and comorbid-condition literature. The five packages share <strong>zero papers</strong>; per-package counts sum exactly to the corpus totals.</p><p><strong>Self-contained.</strong> Includes the findings table (parquet and CSV), a data dictionary with fill rates measured on this slice, the QA evidence behind every stated number, the pinned extraction and validation code, and <code>code/verify_package.py</code>, which re-derives every headline number from the shipped data and exits non-zero on disagreement.</p><p><strong>Ontology identifiers:</strong> authority-derived (the extraction model emitted names only; a resolver looked identifiers up afterwards), scoring 0.998 on identifier-denotes-entity rate.</p><p><strong>Quote verifiability:</strong> 100.0% of rows have a provenance quote whose own source text is still available and re-checkable.</p><p><strong>Scientific fidelity is unmeasured.</strong> All QA verifies well-formedness, not whether a finding correctly interprets its source. Treat every row as a pointer to a paper to read.</p><p><strong>Not medical advice.</strong></p>",
+ "creators": [
+  {
+   "name": "Magennis, Erin",
+   "orcid": "0009-0007-9013-8052"
+  }
+ ],
+ "keywords": [
+  "POTS",
+  "postural orthostatic tachycardia syndrome",
+  "dysautonomia",
+  "ME/CFS",
+  "myalgic encephalomyelitis",
+  "chronic fatigue syndrome",
+  "Ehlers-Danlos syndrome",
+  "hypermobility",
+  "fibromyalgia",
+  "mast cell activation syndrome",
+  "long COVID",
+  "post-viral syndrome",
+  "small fiber neuropathy",
+  "autism",
+  "migraine",
+  "text mining",
+  "literature extraction",
+  "biomarkers",
+  "structured findings",
+  "text and data mining",
+  "large language model extraction"
+ ],
+ "license": "cc-by-4.0",
+ "access_right": "open",
+ "language": "eng",
+ "version": "tier4-v1.1",
+ "related_identifiers": [
+  {
+   "identifier": "PLACEHOLDER-DOI-tier1",
+   "relation": "references",
+   "resource_type": "dataset",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "PLACEHOLDER-DOI-tier2a",
+   "relation": "references",
+   "resource_type": "dataset",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "PLACEHOLDER-DOI-tier2b",
+   "relation": "references",
+   "resource_type": "dataset",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "PLACEHOLDER-DOI-tier3",
+   "relation": "references",
+   "resource_type": "dataset",
+   "scheme": "doi"
+  }
+ ],
+ "notes": "The provenance_quote column contains short verbatim excerpts from the source publications and is NOT covered by CC BY 4.0 — that text remains the copyright of the respective publishers and authors. See LICENSE for the excerpt policy and takedown commitment."
+}

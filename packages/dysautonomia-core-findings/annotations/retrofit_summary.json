@@ -1,0 +1,2123 @@
+{
+ "generated_at": "2026-09-16T07:40:23Z",
+ "comparator_version": "quote_trace.py sha256:0a66bf6e1087",
+ "fetch_run": {
+  "n_requests": 16653,
+  "wall_seconds": 7109.0,
+  "n_papers_attempted": 10428,
+  "n_targets": 10428,
+  "fetch_complete": true
+ },
+ "sources": {
+  "fulltext_source_definition": "title + abstract + JATS body paragraphs (first 120,000 chars, = FT_INPUT_CHAR_CAP the extraction model saw)",
+  "abstract_source_definition": "Europe PMC abstractText alone (identical basis to the shipped README census)",
+  "n_papers_with_abstract": 10097,
+  "n_papers_with_fulltext": 6141
+ },
+ "per_tier": {
+  "tier1": {
+   "rows_total": 36067,
+   "rows_with_quote": 36067,
+   "rows_by_fulltext_status": {
+    "retrieved-fulltext": 29531,
+    "abstract-only": 6522,
+    "blocked": 14
+   },
+   "papers": {
+    "n_papers": 3129,
+    "n_papers_attempted": 3129,
+    "n_papers_abstract_fetched": 3003,
+    "n_papers_needing_fulltext": 1917,
+    "n_papers_fulltext_attempted": 1917,
+    "n_papers_fulltext_fetched": 1822,
+    "paper_fetch_status_counts": {
+     "ok": 2976,
+     "fulltext_failed": 81,
+     "no_abstract": 58,
+     "no_pmcid": 14
+    },
+    "fulltext_paper_failure_causes": {
+     "fulltext_failed (HTTP 404)": 79,
+     "no_pmcid": 14,
+     "fulltext_failed (parsed-thin:1017c)": 1,
+     "fulltext_failed (parsed-thin:1267c)": 1
+    }
+   },
+   "rows_by_retrofit_fetch_status": {
+    "ok": 34578,
+    "fulltext_failed": 1192,
+    "no_pmcid": 226,
+    "no_abstract": 71
+   },
+   "rows_by_retrofit_source_depth": {
+    "fulltext": 28113,
+    "abstract": 7836,
+    "none": 118
+   },
+   "verifiable_before": {
+    "n": 6536,
+    "denominator": 36067,
+    "pct": 18.12,
+    "readme_pct": 18.12,
+    "basis": "README basis: rows with fulltext_status in {abstract-only, blocked} (abstract-derived); body text discarded"
+   },
+   "verifiable_after": {
+    "n": 35949,
+    "denominator": 36067,
+    "pct": 99.67,
+    "basis": "rows whose own re-fetched source (full text or abstract) exists: retrofit_source_depth != none"
+   },
+   "traceable_after_all_verifiable": {
+    "n": 33393,
+    "denominator": 35949,
+    "pct": 92.89,
+    "pct_of_all_rows": 92.59
+   },
+   "fulltext_rows_downgraded_to_abstract_source": 1371,
+   "permanent_losses": {
+    "n_rows_no_source": 118,
+    "by_cause": {
+     "fulltext row; paper fulltext_failed; no abstract either": 47,
+     "abstract-stratum row; paper no_abstract": 71
+    }
+   },
+   "strata": {
+    "fulltext_rows_vs_fulltext": {
+     "stratum": "tier1:retrieved-fulltext rows vs re-fetched full text",
+     "n_rows_with_quote": 29531,
+     "n_checked": 28113,
+     "n_traceable": 27390,
+     "n_untraceable": 723,
+     "n_no_source_text": 1418,
+     "traceable_pct": 97.43,
+     "basis": "CENSUS of tier1:retrieved-fulltext rows vs re-fetched full text rows with a non-null quote; 28113 verified against that paper's own retained source text; 1418 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "41743836",
+       "quote": "In FTD, increased overall autonomic symptoms (total ASQ score), positively correlated with the left anterior inferior (rs = 0.57, 95% confidence interval [CI]: "
+      },
+      {
+       "pmid": "38026514",
+       "quote": "In GBA\u2010PD, lower E:I ratio was associated with poorer performances in FAB (r = 0.57, P = 0.009; coefficient of determination R2 = 0.32) and Benson Figure Copy ("
+      },
+      {
+       "pmid": "41444346",
+       "quote": "Kruskal\u2013Wallis tests identified significant group effects for both age (\u03c7\u00b2=18.11, p<0.001) and BMI (\u03c7\u00b2=22.47, p<0.001). Post-hoc comparisons showed that partici"
+      },
+      {
+       "pmid": "41743836",
+       "quote": "Increased gastrointestinal symptoms positively correlated with the left posterior (rs = 0.58, 95% CI: \u22120.03 to 0.85, p = 0.012), left tubular inferior (rs = 0.5"
+      },
+      {
+       "pmid": "40217677",
+       "quote": "Patients with neurogenic OH had significantly higher median nighttime SBP and DBP than non-OH patients, which suggests an increased risk of adverse cardiovascul"
+      },
+      {
+       "pmid": "41743836",
+       "quote": "Increased thermoregulatory\u2010related symptoms showed a positive correlation with the left anterior inferior (rs = 0.60, 95% CI: 0.03\u20130.98, p = 0.018), left anteri"
+      },
+      {
+       "pmid": "39656385",
+       "quote": "dopamine with DOPA (Fig. 2C)... The regression lines of best fit generally passed close to the origin... suggesting a common source. Since DOPA is the precursor"
+      },
+      {
+       "pmid": "41743836",
+       "quote": "Increased urogenital symptoms positively correlated with the right anterior superior (rs = 0.68, 95% CI: 0.17\u20131.12, p = 0.005) and right tubular superior (rs = "
+      },
+      {
+       "pmid": "41743836",
+       "quote": "In controls, both increased cardiovascular (rs = 0.54, 95% CI: 0.01\u20130.91, p = 0.026) and gastrointestinal symptoms (rs = 0.72, 95% CI: 0.09\u20130.99, p = 0.001) pos"
+      },
+      {
+       "pmid": "39964606",
+       "quote": "TTN is associated with familial hypertrophic cardiomyopathy and familial dilated cardiomyopathy, as well as a specific form of cardiomyopathy characterized by a"
+      },
+      {
+       "pmid": "41743836",
+       "quote": "Increased altered pain perception showed positive correlations to the left anterior superior (rs = 0.58, 95% CI: \u22120.18 to 0.77, p = 0.024) and left posterior (r"
+      },
+      {
+       "pmid": "41444346",
+       "quote": "The directionality index (\u0394Dir) was slightly positive in Controls (+0.0561)... Mild and Moderate OSA showed significant negative values (p<0.05), consistent wit"
+      },
+      {
+       "pmid": "41444346",
+       "quote": "A two-factor ANOVA on cluster-based mean amplitudes revealed a main effect of Severity (p=0.0169), whereas the main effect of Electrode (p=0.8467) and the Sever"
+      },
+      {
+       "pmid": "38650940",
+       "quote": "Upstream regulators analyses indicated predicted inhibition in TNF (activation Z score=-1.6, p-value of overlap=2.56E-27) ... TLR4 (Toll-like receptor 4) (activ"
+      },
+      {
+       "pmid": "41189298",
+       "quote": "Although HRV did not significantly correlate with HR in the control group, a correlation was observed in the T1DM group among adults (> 18 years) (T1DM: r2 = 0."
+      },
+      {
+       "pmid": "37308984",
+       "quote": "Family with psychiatric disordersNo7837.545.042.452.541.144.741.7Yes1741.41.3(-2.4, 5.0)40.42.0(-5.5, 1.2)41.6-0.4(-3.1, 2.2)46.9-2.8(-5.4, -0.2)*41.8-0.3(-4.3,"
+      },
+      {
+       "pmid": "35429449",
+       "quote": "SARS-CoV-2 affinity to the receptor is almost 20-fold more than SARS-CoV-1, which would explain many neurological manifestations such as headache, nausea, and v"
+      },
+      {
+       "pmid": "33886001",
+       "quote": "In 258 patients with pulmonary arteriovenous malformations evaluated prospectively, 30% of patients had orthodeoxia, and orthostatic tachycardia was more pronou"
+      },
+      {
+       "pmid": "41385477",
+       "quote": "Pearson correlation analysis showed a strong positive association between test and retest values (R2 = 0.8966, 95% CI: 0.9035\u20130.9711, p < 0.0001), indicating hi"
+      },
+      {
+       "pmid": "41444346",
+       "quote": "over frontal electrodes (F3, F4), a second significant cluster appeared between 540\u2013680 ms (cluster-level p<0.001 for both). No significant effects were found a"
+      }
+     ]
+    },
+    "abstract_stratum_rows_vs_abstract": {
+     "stratum": "tier1:abstract-only+blocked rows vs re-fetched abstract",
+     "n_rows_with_quote": 6536,
+     "n_checked": 6465,
+     "n_traceable": 6001,
+     "n_untraceable": 464,
+     "n_no_source_text": 71,
+     "traceable_pct": 92.82,
+     "basis": "CENSUS of tier1:abstract-only+blocked rows vs re-fetched abstract rows with a non-null quote; 6465 verified against that paper's own retained source text; 71 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "34355400",
+       "quote": "The CSA tended to be larger in acute inflammatory demyelinating polyneuropathy (AIDP) than in acute motor axonal neuropathy (AMAN)/acute motor and sensory axona"
+      },
+      {
+       "pmid": "34355400",
+       "quote": "The CSA tended to be larger in acute inflammatory demyelinating polyneuropathy (AIDP) than in acute motor axonal neuropathy (AMAN)/acute motor and sensory axona"
+      },
+      {
+       "pmid": "40650532",
+       "quote": "Data regression showed that after ablative vein treatments, the magnitude of drop in BP (systolic or diastolic), or increase in HR, were significantly reduced ("
+      },
+      {
+       "pmid": "40650532",
+       "quote": "Data regression showed that after ablative vein treatments, the magnitude of drop in BP (systolic or diastolic), or increase in HR, were significantly reduced ("
+      },
+      {
+       "pmid": "40650532",
+       "quote": "Data regression showed that after ablative vein treatments, the magnitude of drop in BP (systolic or diastolic), or increase in HR, were significantly reduced ("
+      },
+      {
+       "pmid": "36878684",
+       "quote": "In patients with a long-standing diagnosis of T2DM, significantly higher values for maximum anorectal resting pressure (\u0394=+27.81\u00b17.84 mmHg,=0.0015) and baseline"
+      },
+      {
+       "pmid": "36878684",
+       "quote": "In patients with a long-standing diagnosis of T2DM, significantly higher values for maximum anorectal resting pressure (\u0394=+27.81\u00b17.84 mmHg,=0.0015) and baseline"
+      },
+      {
+       "pmid": "40907243",
+       "quote": "A receiver operator curve indicated that the shortest Euclidian distance for systolic BP%ile was 99th%ile (specificity, 85.3%; sensitivity, 65.2% P < 0.0001) an"
+      },
+      {
+       "pmid": "40907243",
+       "quote": "A receiver operator curve indicated that the shortest Euclidian distance for systolic BP%ile was 99th%ile (specificity, 85.3%; sensitivity, 65.2% P < 0.0001) an"
+      },
+      {
+       "pmid": "40962545",
+       "quote": "Multivariate Logistic regression analysis showed that age (OR=1.47, 95%CI 1.08-2.01), SDNN (OR=1.01, 95%CI 1.00-1.22) and VLF (OR=1.01, 95%CI 1.00-1.15) were in"
+      },
+      {
+       "pmid": "40962545",
+       "quote": "Multivariate Logistic regression analysis showed that age (OR=1.47, 95%CI 1.08-2.01), SDNN (OR=1.01, 95%CI 1.00-1.22) and VLF (OR=1.01, 95%CI 1.00-1.15) were in"
+      },
+      {
+       "pmid": "40962545",
+       "quote": "Multivariate Logistic regression analysis showed that age (OR=1.47, 95%CI 1.08-2.01), SDNN (OR=1.01, 95%CI 1.00-1.22) and VLF (OR=1.01, 95%CI 1.00-1.15) were in"
+      },
+      {
+       "pmid": "40962545",
+       "quote": "Multivariate Logistic regression analysis showed that age (OR=1.47, 95%CI 1.08-2.01), SDNN (OR=1.01, 95%CI 1.00-1.22) and VLF (OR=1.01, 95%CI 1.00-1.15) were in"
+      },
+      {
+       "pmid": "40962545",
+       "quote": "Multivariate Logistic regression analysis showed that age (OR=1.47, 95%CI 1.08-2.01), SDNN (OR=1.01, 95%CI 1.00-1.22) and VLF (OR=1.01, 95%CI 1.00-1.15) were in"
+      },
+      {
+       "pmid": "42206616",
+       "quote": "Moreover, there was a decreased standard deviation of normal-to-normal interbeat intervals (31.6\u00b118.7 ms versus 39.9\u00b118.5 ms; P=0.04), and low frequency content"
+      },
+      {
+       "pmid": "42206616",
+       "quote": "Moreover, there was a decreased standard deviation of normal-to-normal interbeat intervals (31.6\u00b118.7 ms versus 39.9\u00b118.5 ms; P=0.04), and low frequency content"
+      },
+      {
+       "pmid": "40962545",
+       "quote": "ROC curve analysis showed that the area under the curve of VLF predicting response to vitamin D treatment for POTS was 0.72 (95%CI 0.58-0.85, P=0.008). When the"
+      },
+      {
+       "pmid": "37843677",
+       "quote": "All 6 patients with low cardiacF-dopamine-derived radioactivity who phenoconverted during follow-up developed a central LBD, whereas none of 4 patients with con"
+      },
+      {
+       "pmid": "40962545",
+       "quote": "ROC curve analysis showed that the area under the curve of VLF predicting response to vitamin D treatment for POTS was 0.72 (95%CI 0.58-0.85, P=0.008). When the"
+      },
+      {
+       "pmid": "37199782",
+       "quote": "Aortic augmentation index (-5 \u00b1 11 vs. -12 \u00b1 12%, P < 0.05) and reservoir pressure (28 \u00b1 8 vs. 26 \u00b1 8 mmHg, P < 0.05) were reduced with a concomitant reduction "
+      }
+     ]
+    },
+    "fulltext_rows_fallback_vs_abstract": {
+     "stratum": "tier1:retrieved-fulltext rows lacking re-fetched body, vs abstract",
+     "n_rows_with_quote": 1418,
+     "n_checked": 1371,
+     "n_traceable": 2,
+     "n_untraceable": 1369,
+     "n_no_source_text": 47,
+     "traceable_pct": 0.15,
+     "basis": "CENSUS of tier1:retrieved-fulltext rows lacking re-fetched body, vs abstract rows with a non-null quote; 1371 verified against that paper's own retained source text; 47 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "42035260",
+       "quote": "At 3 months and 6 months, FD mice receiving intravitreal AAV2.hELP1 at 5.4 \u00d7 108 vg exhibited significantly higher flash VEP (fVEP) amplitudes compared with uni"
+      },
+      {
+       "pmid": "36908200",
+       "quote": "At least one pregnancy loss was reported by 44.2% of participants who had been pregnant, with a mean of 0.78\u00b10.02 pregnancy losses per patient. A similar propor"
+      },
+      {
+       "pmid": "42035260",
+       "quote": "FD mice receiving intravitreal injection (IVI) of AAV2.hELP1 (5.4 \u00d7 108 vg) exhibited better dark-adapted a-wave amplitudes but greater dark and light-adapted b"
+      },
+      {
+       "pmid": "34699985",
+       "quote": "6-OHDA (Fig. 5A\u2013B) or nicotine (Fig. 5C\u2013D) treatment post injury were both effective in reducing the lymph node hypertrophy, as seen by significant decreases in"
+      },
+      {
+       "pmid": "33550497",
+       "quote": "Of note, six of the eight domain scores are influenced by the interplay between these variables, as demonstrated by the ANOVA interaction (Pint.) term. Physical"
+      },
+      {
+       "pmid": "37393658",
+       "quote": "When changing position from supine to standing, patients with POTS had a larger \u0394 heart rate (59.0 beats/min [55.3\u201363.5 beats/min]) compared to the healthy cont"
+      },
+      {
+       "pmid": "42356078",
+       "quote": "Conditional logistic regression demonstrated that the autonomic vulnerability phenotype (OR 2.12, 95% CI 1.18\u20133.82, p = 0.012), rcSO2 decrease \u226520% (OR 2.45, 95"
+      },
+      {
+       "pmid": "42356078",
+       "quote": "Conditional logistic regression demonstrated that the autonomic vulnerability phenotype (OR 2.12, 95% CI 1.18\u20133.82, p = 0.012), rcSO2 decrease \u226520% (OR 2.45, 95"
+      },
+      {
+       "pmid": "42356078",
+       "quote": "A multiplicative interaction between the autonomic vulnerability phenotype and rcSO2 decrease \u226520% was observed in the primary matched analysis (OR 2.10, p = 0."
+      },
+      {
+       "pmid": "42356078",
+       "quote": "Conditional logistic regression demonstrated that the autonomic vulnerability phenotype (OR 2.12, 95% CI 1.18\u20133.82, p = 0.012), rcSO2 decrease \u226520% (OR 2.45, 95"
+      },
+      {
+       "pmid": "41202571",
+       "quote": "Greater COMPASS-31 secretomotor score (Mean 1.76 \u00b1 1.69) was associated with a greater t-score on all three Neuro-QoL scales \u2212 anxiety (p = 0.01), depression (p"
+      },
+      {
+       "pmid": "40990072",
+       "quote": "Both groups had significantly lower HP levels during both exertional tasks (P < .001) and both rest periods (P < .001) compared to baseline, representing the ex"
+      },
+      {
+       "pmid": "38269002",
+       "quote": "Of the 86 patients, 48 (55.8%) had a diagnosis of EDS made previously by a rheumatologist, geneticist, neurologist or other specialist. Of the remaining patient"
+      },
+      {
+       "pmid": "36908200",
+       "quote": "A majority of patients also reported a worsening of their POTS symptoms during the three months after delivery, when compared to their typical pre-pregnancy POT"
+      },
+      {
+       "pmid": "37393658",
+       "quote": "There was moderately negative nonsignificant correlation between baseline aldosterone level and plasma volume deficit in healthy controls but not in patients wi"
+      },
+      {
+       "pmid": "33550497",
+       "quote": "When comparing HRQoL between male and female VVS patients, males reported higher HRQoL than females. Significant differences were observed in the RAND36 domain "
+      },
+      {
+       "pmid": "33550497",
+       "quote": "The same comparison was made for males versus females diagnosed with POTS. In this population, male patients scored significantly lower than their female counte"
+      },
+      {
+       "pmid": "41907062",
+       "quote": "No significant differences were observed in caudate uptake in the motor slowing/DAT normal group (0.83\u00b11.15 for mean right uptake and 0.46\u00b10.98 for mean left up"
+      },
+      {
+       "pmid": "42035260",
+       "quote": "By contrast, FD mice receiving the higher dose (2.7 \u00d7 109 vg) exhibited transiently increased middle-retina thickness at 3 months (p < 0.01; Figure S1B) followe"
+      },
+      {
+       "pmid": "40580092",
+       "quote": "Comparison of \u201cHigh\u201d and \u201cLow\u201d score groups regarding heart failure stage, quality of life, and echocardiography parameters demonstrated \u201cHigh\u201d COMPASS-31 (\u226535."
+      }
+     ]
+    },
+    "all_rows_vs_abstract_only": {
+     "stratum": "tier1:ALL quote rows vs abstract only",
+     "n_rows_with_quote": 36067,
+     "n_checked": 35344,
+     "n_traceable": 6097,
+     "n_untraceable": 29247,
+     "n_no_source_text": 723,
+     "traceable_pct": 17.25,
+     "basis": "CENSUS of tier1:ALL quote rows vs abstract only rows with a non-null quote; 35344 verified against that paper's own retained source text; 723 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "35794147",
+       "quote": "For executive function as shown in Fig. 1D, compared with 41 patients without executive impairment, 19 patients with executive impairment had higher scores of t"
+      },
+      {
+       "pmid": "42193380",
+       "quote": "Age and remodeling were associated with an advanced acrophase in the SNS Index (mean phase: Older CR = 17:07 \u00b1 0.15 h; Older Control = 19:47 \u00b1 0.24 h; ANOVA: ag"
+      },
+      {
+       "pmid": "41528744",
+       "quote": "During the head-up tilt (Figure and eFigure 1 in Supplement 1), patients with CSS vs those without CSS had a higher heart rate (110.27 [18.14] beats per minute "
+      },
+      {
+       "pmid": "39838139",
+       "quote": "Similar to the cognitive results, analysis of anxious\u2013depressive symptomatology also revealed significant differences between the LC+ group (M = 8.52, SD = 3.56"
+      },
+      {
+       "pmid": "35794147",
+       "quote": "For visuospatial function as shown in Fig. 1C, compared with 45 patients without visuospatial impairment, 15 patients with visuospatial impairment showed higher"
+      },
+      {
+       "pmid": "39524912",
+       "quote": "The major systems included, in descending order of frequency, pain conditions (94.4% vs. 0%, p < 0.001), neurological conditions (92.4% vs. 15.4%, p < 0.001), s"
+      },
+      {
+       "pmid": "40972508",
+       "quote": "The following factors showed statistically significant correlations with incidental falls: lower SE ADL scores, longer disease duration, more concurrent medicat"
+      },
+      {
+       "pmid": "40944028",
+       "quote": "Pupillomotor risk showed a significant effect on pain-related measures [SF-36 Bodily Pain (\u2206 = 7.4, d = 0.73), PROMIS Pain Interference (\u2206 = 6.4, d = 0.71) and "
+      },
+      {
+       "pmid": "35794147",
+       "quote": "For memory domain as shown in Fig. 1B, compared with 33 patients without memory impairment, 27 patients with memory impairment exhibited higher scores of total "
+      },
+      {
+       "pmid": "40091132",
+       "quote": "A Kruskal-Wallis test showed that median fESC values were statistically significantly different between subgroups with different BP scoring (p = 0.001). Specifi"
+      },
+      {
+       "pmid": "41302648",
+       "quote": "Quantile regression analysis confirmed a significant negative association between mean RR and BMI (\u03b2 = \u22128.10, SE = 3.15, p = 0.014, 95% CI [\u221214.46, \u22121.73]) and "
+      },
+      {
+       "pmid": "40371587",
+       "quote": "age (\u03b2 = \u22121.72 [95% CI, \u22122.27 to \u22121.16]; P<0.0001), sex (\u03b2 = \u22121.41 [95% CI, \u22122.62 to \u22120.21]; P=0.022), diabetes (\u03b2 = \u22121.43 [95% CI, \u22122.78 to \u22120.09]; P=0.037), o"
+      },
+      {
+       "pmid": "41423698",
+       "quote": "The comparison of inflammatory data among T2D patients with normal carotid arteries (the NCA group), carotid intima\u2012media thickening (the CAT group), and caroti"
+      },
+      {
+       "pmid": "39175851",
+       "quote": "In patients with MSA, the CSA value of the right VN correlated inversely with the LF/HF-sBP ratio in the resting (r = \u22120.663; p = 0.007) (Figure 4(a)), upright "
+      },
+      {
+       "pmid": "37360110",
+       "quote": "Similarly, we found that participants who had reflex syncope had higher total COMPASS 31 scores (median 23.36 [IQR 11.34\u201338.51] vs 10.22 [IQR 4.92\u201316.99], p < 0"
+      },
+      {
+       "pmid": "41573479",
+       "quote": "Four distinct patterns of thalamic infarction have been described on diffusion-weighted MRI: (1) bilateral paramedian thalamic infarction with mesencephalic inv"
+      },
+      {
+       "pmid": "41312002",
+       "quote": "In patients with FD, \u0394mean of LF/HF in the awake period was not significantly different compared to that in the sleep period; p = 0.650 (sleep; median 2.52, IQR"
+      },
+      {
+       "pmid": "40492481",
+       "quote": "In terms of vitamin D status, compared to the normal vitamin D group, no significant differences in HRV indices were observed in the vitamin D insufficiency gro"
+      },
+      {
+       "pmid": "35794147",
+       "quote": "For the language domain as shown in Fig. 1A, compared with 42 patients without language impairment, 12 patients with language impairment had higher scores of to"
+      },
+      {
+       "pmid": "38189712",
+       "quote": "Post hoc testing showed an increased lying HR in PDnon-chrono (73.0\u00b19.5 bpm) when compared to PDchrono (61.5\u00b17.4 bpm, p < 0.001adj) and PDchronomed (66.1\u00b110.2 b"
+      }
+     ]
+    },
+    "fulltext_rows_vs_abstract_only": {
+     "stratum": "tier1:retrieved-fulltext rows vs abstract only",
+     "n_rows_with_quote": 29531,
+     "n_checked": 28879,
+     "n_traceable": 96,
+     "n_untraceable": 28783,
+     "n_no_source_text": 652,
+     "traceable_pct": 0.33,
+     "basis": "CENSUS of tier1:retrieved-fulltext rows vs abstract only rows with a non-null quote; 28879 verified against that paper's own retained source text; 652 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "35794147",
+       "quote": "For executive function as shown in Fig. 1D, compared with 41 patients without executive impairment, 19 patients with executive impairment had higher scores of t"
+      },
+      {
+       "pmid": "42193380",
+       "quote": "Age and remodeling were associated with an advanced acrophase in the SNS Index (mean phase: Older CR = 17:07 \u00b1 0.15 h; Older Control = 19:47 \u00b1 0.24 h; ANOVA: ag"
+      },
+      {
+       "pmid": "41528744",
+       "quote": "During the head-up tilt (Figure and eFigure 1 in Supplement 1), patients with CSS vs those without CSS had a higher heart rate (110.27 [18.14] beats per minute "
+      },
+      {
+       "pmid": "39838139",
+       "quote": "Similar to the cognitive results, analysis of anxious\u2013depressive symptomatology also revealed significant differences between the LC+ group (M = 8.52, SD = 3.56"
+      },
+      {
+       "pmid": "35794147",
+       "quote": "For visuospatial function as shown in Fig. 1C, compared with 45 patients without visuospatial impairment, 15 patients with visuospatial impairment showed higher"
+      },
+      {
+       "pmid": "39524912",
+       "quote": "The major systems included, in descending order of frequency, pain conditions (94.4% vs. 0%, p < 0.001), neurological conditions (92.4% vs. 15.4%, p < 0.001), s"
+      },
+      {
+       "pmid": "40972508",
+       "quote": "The following factors showed statistically significant correlations with incidental falls: lower SE ADL scores, longer disease duration, more concurrent medicat"
+      },
+      {
+       "pmid": "40944028",
+       "quote": "Pupillomotor risk showed a significant effect on pain-related measures [SF-36 Bodily Pain (\u2206 = 7.4, d = 0.73), PROMIS Pain Interference (\u2206 = 6.4, d = 0.71) and "
+      },
+      {
+       "pmid": "35794147",
+       "quote": "For memory domain as shown in Fig. 1B, compared with 33 patients without memory impairment, 27 patients with memory impairment exhibited higher scores of total "
+      },
+      {
+       "pmid": "40091132",
+       "quote": "A Kruskal-Wallis test showed that median fESC values were statistically significantly different between subgroups with different BP scoring (p = 0.001). Specifi"
+      },
+      {
+       "pmid": "41302648",
+       "quote": "Quantile regression analysis confirmed a significant negative association between mean RR and BMI (\u03b2 = \u22128.10, SE = 3.15, p = 0.014, 95% CI [\u221214.46, \u22121.73]) and "
+      },
+      {
+       "pmid": "40371587",
+       "quote": "age (\u03b2 = \u22121.72 [95% CI, \u22122.27 to \u22121.16]; P<0.0001), sex (\u03b2 = \u22121.41 [95% CI, \u22122.62 to \u22120.21]; P=0.022), diabetes (\u03b2 = \u22121.43 [95% CI, \u22122.78 to \u22120.09]; P=0.037), o"
+      },
+      {
+       "pmid": "41423698",
+       "quote": "The comparison of inflammatory data among T2D patients with normal carotid arteries (the NCA group), carotid intima\u2012media thickening (the CAT group), and caroti"
+      },
+      {
+       "pmid": "39175851",
+       "quote": "In patients with MSA, the CSA value of the right VN correlated inversely with the LF/HF-sBP ratio in the resting (r = \u22120.663; p = 0.007) (Figure 4(a)), upright "
+      },
+      {
+       "pmid": "37360110",
+       "quote": "Similarly, we found that participants who had reflex syncope had higher total COMPASS 31 scores (median 23.36 [IQR 11.34\u201338.51] vs 10.22 [IQR 4.92\u201316.99], p < 0"
+      },
+      {
+       "pmid": "41573479",
+       "quote": "Four distinct patterns of thalamic infarction have been described on diffusion-weighted MRI: (1) bilateral paramedian thalamic infarction with mesencephalic inv"
+      },
+      {
+       "pmid": "41312002",
+       "quote": "In patients with FD, \u0394mean of LF/HF in the awake period was not significantly different compared to that in the sleep period; p = 0.650 (sleep; median 2.52, IQR"
+      },
+      {
+       "pmid": "40492481",
+       "quote": "In terms of vitamin D status, compared to the normal vitamin D group, no significant differences in HRV indices were observed in the vitamin D insufficiency gro"
+      },
+      {
+       "pmid": "35794147",
+       "quote": "For the language domain as shown in Fig. 1A, compared with 42 patients without language impairment, 12 patients with language impairment had higher scores of to"
+      },
+      {
+       "pmid": "38189712",
+       "quote": "Post hoc testing showed an increased lying HR in PDnon-chrono (73.0\u00b19.5 bpm) when compared to PDchrono (61.5\u00b17.4 bpm, p < 0.001adj) and PDchronomed (66.1\u00b110.2 b"
+      }
+     ]
+    }
+   },
+   "census_seconds": 110.5
+  },
+  "tier2a": {
+   "rows_total": 36611,
+   "rows_with_quote": 36611,
+   "rows_by_fulltext_status": {
+    "retrieved-fulltext": 28898,
+    "abstract-only": 7706,
+    "blocked": 7
+   },
+   "papers": {
+    "n_papers": 3123,
+    "n_papers_attempted": 3123,
+    "n_papers_abstract_fetched": 3012,
+    "n_papers_needing_fulltext": 1745,
+    "n_papers_fulltext_attempted": 1745,
+    "n_papers_fulltext_fetched": 1744,
+    "paper_fetch_status_counts": {
+     "ok": 3064,
+     "no_abstract": 58,
+     "fulltext_failed": 1
+    },
+    "fulltext_paper_failure_causes": {
+     "fulltext_failed (parsed-thin:890c)": 1
+    }
+   },
+   "rows_by_retrofit_fetch_status": {
+    "ok": 36547,
+    "no_abstract": 61,
+    "fulltext_failed": 3
+   },
+   "rows_by_retrofit_source_depth": {
+    "fulltext": 28895,
+    "abstract": 7652,
+    "none": 64
+   },
+   "verifiable_before": {
+    "n": 7713,
+    "denominator": 36611,
+    "pct": 21.07,
+    "readme_pct": 21.07,
+    "basis": "README basis: rows with fulltext_status in {abstract-only, blocked} (abstract-derived); body text discarded"
+   },
+   "verifiable_after": {
+    "n": 36547,
+    "denominator": 36611,
+    "pct": 99.83,
+    "basis": "rows whose own re-fetched source (full text or abstract) exists: retrofit_source_depth != none"
+   },
+   "traceable_after_all_verifiable": {
+    "n": 35498,
+    "denominator": 36547,
+    "pct": 97.13,
+    "pct_of_all_rows": 96.96
+   },
+   "fulltext_rows_downgraded_to_abstract_source": 0,
+   "permanent_losses": {
+    "n_rows_no_source": 64,
+    "by_cause": {
+     "abstract-stratum row; paper no_abstract": 61,
+     "fulltext row; paper fulltext_failed; no abstract either": 3
+    }
+   },
+   "strata": {
+    "fulltext_rows_vs_fulltext": {
+     "stratum": "tier2a:retrieved-fulltext rows vs re-fetched full text",
+     "n_rows_with_quote": 28898,
+     "n_checked": 28895,
+     "n_traceable": 28353,
+     "n_untraceable": 542,
+     "n_no_source_text": 3,
+     "traceable_pct": 98.12,
+     "basis": "CENSUS of tier2a:retrieved-fulltext rows vs re-fetched full text rows with a non-null quote; 28895 verified against that paper's own retained source text; 3 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "32814824",
+       "quote": "In addition, the level of MC protease-1 (MCPT1) was significantly elevated in mice exposed to CS and decreased with anti-S8 treatment."
+      },
+      {
+       "pmid": "32814824",
+       "quote": "Anti-S8 treatment also significantly reduced histopathologic, airway, parenchymal, and vascular inflammation scores induced by chronic CS exposure compared to i"
+      },
+      {
+       "pmid": "32814824",
+       "quote": "Treatment with anti-S8 significantly decreased MC numbers, activation state, and tissue levels of MCPT1 and MCPT4, indicative of MC inhibition."
+      },
+      {
+       "pmid": "32814824",
+       "quote": "In addition, anti-S8 treatment significantly reduced lung fibrosis as assessed by histology, Ashcroft score, and lung tissue hydroxyproline levels."
+      },
+      {
+       "pmid": "32814824",
+       "quote": "Eosinophil depletion did not decrease IL-33-induced neutrophil influx compared to mice with eosinophils."
+      },
+      {
+       "pmid": "32814824",
+       "quote": "We identified 498 differentially expressed genes that were up- or downregulated upon IL-33 administration and significantly changed after anti-S8 treatment."
+      },
+      {
+       "pmid": "32814824",
+       "quote": "Treatment with anti-S8 significantly reduced hMC activation as evidenced by decreased CD63 expression, suggesting Siglec-8 is functional in these cells."
+      },
+      {
+       "pmid": "33092395",
+       "quote": "There was a range of illness severity, but most families described CFS/ME as a persistent...and disabling condition. It impacted the child's hobbies, activities"
+      },
+      {
+       "pmid": "33092395",
+       "quote": "In addition symptoms were feeling 'weak' (Willow, KS2); disturbed and unrefreshing sleep...digestive symptoms ('stomach pain um, IBS like type symptoms', Chloe'"
+      },
+      {
+       "pmid": "33337383",
+       "quote": "For example, in diabetic patients, axon swelling seen in skin biopsies can predict progression of distal SFN to proximal large fiber or polyneuropathy [20\u201322]. "
+      },
+      {
+       "pmid": "33461311",
+       "quote": "We found DistEn to be negatively correlated with RHR (r2=0.11, P<0.0001) and positively correlated with RMSSD (r2=0.36, P<0.0001), but had no relationship with "
+      },
+      {
+       "pmid": "33562474",
+       "quote": "reports suggest that 88 suicides have been partly attributed to CFS/ME between 2001 and 2016... Depression is not always a feature in CFS/ME-related suicide [49"
+      },
+      {
+       "pmid": "33560495",
+       "quote": "Unlike other typical IgE-mediated reactions to food, mammalian meat allergy can manifest with symptoms that are delayed up to 6 h after ingestion."
+      },
+      {
+       "pmid": "33560495",
+       "quote": "Additionally, reported tick bite within the 12 months prior to blood sampling significantly increased the risk of \u03b1-gal-sIgE positivity."
+      },
+      {
+       "pmid": "33560495",
+       "quote": "Evidence suggests that treatment of systemic reactions with epinephrine prevents progression to more severe symptoms."
+      },
+      {
+       "pmid": "33560495",
+       "quote": "Steroid sparing evidence has been published using ketotifen in IA, and its mast cell stabilizing properties have also been demonstrated in mastocytosis. The usu"
+      },
+      {
+       "pmid": "33609255",
+       "quote": "Two FDA-approved medications, nintedanib and pirfenidone, are non-curative but have been demonstrated to slow the progression of pulmonary fibrosis."
+      },
+      {
+       "pmid": "33633136",
+       "quote": "We ran the REFS algorithm ten times on the CAMDA mRNA expression dataset containing 118 samples and the algorithm found the optimal number of predictor genes to"
+      },
+      {
+       "pmid": "33633136",
+       "quote": "Similarly, ARRB1 protein was decreased after Epstein-Barr virus-infection in mice. Its downregulation in our study concurs with this finding."
+      },
+      {
+       "pmid": "33633136",
+       "quote": "Blockage of CCR4 by mogamulizumab induced fatigue in human subjects."
+      }
+     ]
+    },
+    "abstract_stratum_rows_vs_abstract": {
+     "stratum": "tier2a:abstract-only+blocked rows vs re-fetched abstract",
+     "n_rows_with_quote": 7713,
+     "n_checked": 7652,
+     "n_traceable": 7145,
+     "n_untraceable": 507,
+     "n_no_source_text": 61,
+     "traceable_pct": 93.37,
+     "basis": "CENSUS of tier2a:abstract-only+blocked rows vs re-fetched abstract rows with a non-null quote; 7652 verified against that paper's own retained source text; 61 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "32293111",
+       "quote": "Maximal muscle strength of the knee flexors (decreased in the control group: p\u02732 = 0.139), strength endurance of the knee extensors (decreased in the hEDS/HSD g"
+      },
+      {
+       "pmid": "32293111",
+       "quote": "strength endurance of the knee extensors (decreased in the hEDS/HSD group and increased in the control group: p\u02732 = 0.244)"
+      },
+      {
+       "pmid": "32293111",
+       "quote": "muscle density (decreased in the hEDS/HSD group: p\u02732 = 0.263) showed a significantly different evolution over 8 years"
+      },
+      {
+       "pmid": "32338564",
+       "quote": "Genetic testing revealed a pathogenic variant in the COL1A1 gene (c.472-1G > C), consistent with arthrochalasia type EDS, reported previously."
+      },
+      {
+       "pmid": "32519918",
+       "quote": "Baseline AHR to mannitol was comparable: Gmean PD15: 150 mg (95% CI 61-368) and 214 mg (95% CI 106-432) for T2-high and T2-low asthma respectively (P = 0.51)."
+      },
+      {
+       "pmid": "32519918",
+       "quote": "Both groups improved equally: Gmean PD15: 488 mg (95% CI 311-767) and 507 mg (95% CI 345-746); corresponding to a doubling-dose of: 3.00 (95% CI 1.58-5.74, P = "
+      },
+      {
+       "pmid": "32594231",
+       "quote": "...and greater expression of TNF, adiponectin and nitric oxide synthase 2 (marker of pro-inflammatory M1 macrophages) in epidural fat."
+      },
+      {
+       "pmid": "32594231",
+       "quote": "...and greater expression of TNF, adiponectin and nitric oxide synthase 2 (marker of pro-inflammatory M1 macrophages) in epidural fat."
+      },
+      {
+       "pmid": "32594231",
+       "quote": "...and greater expression of TNF, adiponectin and nitric oxide synthase 2 (marker of pro-inflammatory M1 macrophages) in epidural fat."
+      },
+      {
+       "pmid": "31996086",
+       "quote": "They all demonstrated lower parent-rated PCS and less internalizing behaviors (all, < 0.01)."
+      },
+      {
+       "pmid": "32915071",
+       "quote": "Lower scores with the Fatigue Severity Scale (p = 0.033) and the anxiety subscale of the Hospital Anxiety and Depression Scale (p = 0.021), were associated with"
+      },
+      {
+       "pmid": "32915071",
+       "quote": "Lower scores with the Fatigue Severity Scale (p = 0.033) and the anxiety subscale of the Hospital Anxiety and Depression Scale (p = 0.021), were associated with"
+      },
+      {
+       "pmid": "32801135",
+       "quote": "Among biopsied juvenile FM patients, 53% (8/15) had END < 5th centile vs 4% (1/23) of healthy controls (P < 0.001)."
+      },
+      {
+       "pmid": "32801135",
+       "quote": "Mean patient END was 273/mm2 skin surface (95% CI 198-389) vs 413/mm2 (95% CI 359-467, P < 0.001)."
+      },
+      {
+       "pmid": "32934132",
+       "quote": "Patients with FMS were more tender than controls based on both dolorimetry (P < 0.001) and digital palpation (P < 0.001)."
+      },
+      {
+       "pmid": "32934132",
+       "quote": "Patients with FMS were more tender than controls based on both dolorimetry (P < 0.001) and digital palpation (P < 0.001)."
+      },
+      {
+       "pmid": "32934132",
+       "quote": "The mean pain score in patients with FMS and controls was 6.68 \u00b1 1.91 and 1.43 \u00b1 1.79, respectively (P < 0.001)."
+      },
+      {
+       "pmid": "32900253",
+       "quote": "The incidence of MCA was significantly higher among non-Caucasian patients (24/177,727) when compared to Caucasian patients (8/154,732)(p =.01)."
+      },
+      {
+       "pmid": "33218687",
+       "quote": "The removal of extracellular Ca2+ instead of monomer hapten addition did not restore cofilin phosphorylation, suggesting that the significant decrease in [Ca2+]"
+      },
+      {
+       "pmid": "33218687",
+       "quote": "Additionally, monovalent hapten did not completely reduce [Ca2+]i in mast cells pretreated with jasplakinolide, an inhibitor of actin depolymerization."
+      }
+     ]
+    },
+    "fulltext_rows_fallback_vs_abstract": {
+     "stratum": "tier2a:retrieved-fulltext rows lacking re-fetched body, vs abstract",
+     "n_rows_with_quote": 3,
+     "n_checked": 0,
+     "n_traceable": 0,
+     "n_untraceable": 0,
+     "n_no_source_text": 3,
+     "traceable_pct": null,
+     "basis": "CENSUS of tier2a:retrieved-fulltext rows lacking re-fetched body, vs abstract rows with a non-null quote; 0 verified against that paper's own retained source text; 3 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 0,
+      "n_false_positives": 0,
+      "false_positive_pct": null,
+      "basis": "0 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "MATCHER SUSPECT - headline rate not trustworthy"
+     },
+     "untraceable_examples": []
+    },
+    "all_rows_vs_abstract_only": {
+     "stratum": "tier2a:ALL quote rows vs abstract only",
+     "n_rows_with_quote": 36611,
+     "n_checked": 36072,
+     "n_traceable": 7193,
+     "n_untraceable": 28879,
+     "n_no_source_text": 539,
+     "traceable_pct": 19.94,
+     "basis": "CENSUS of tier2a:ALL quote rows vs abstract only rows with a non-null quote; 36072 verified against that paper's own retained source text; 539 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "32293111",
+       "quote": "Maximal muscle strength of the knee flexors (decreased in the control group: p\u02732 = 0.139), strength endurance of the knee extensors (decreased in the hEDS/HSD g"
+      },
+      {
+       "pmid": "32293111",
+       "quote": "strength endurance of the knee extensors (decreased in the hEDS/HSD group and increased in the control group: p\u02732 = 0.244)"
+      },
+      {
+       "pmid": "32293111",
+       "quote": "muscle density (decreased in the hEDS/HSD group: p\u02732 = 0.263) showed a significantly different evolution over 8 years"
+      },
+      {
+       "pmid": "32338564",
+       "quote": "Genetic testing revealed a pathogenic variant in the COL1A1 gene (c.472-1G > C), consistent with arthrochalasia type EDS, reported previously."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "Tests for between-subject effects and Table 1, which shows the estimated marginal mean (standard error) values, indicate that cesium was significantly lower in "
+      },
+      {
+       "pmid": "32556004",
+       "quote": "the two other trace elements did not differ between the groups."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "CCL11, IL-1\u03b2, and TNF-\u03b1 were significantly higher in patients with SCZ as compared with healthy controls."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "All cognitive test scores were significantly lower in patients than controls."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "there were significant correlations between cesium and the total BPRS score (r = -0.269, p < 0.001), SANS (r = -0.247, p < 0.001), FF scale (r = -0.234, p = 0.0"
+      },
+      {
+       "pmid": "32556004",
+       "quote": "there were significant correlations between cesium and the total BPRS score (r = -0.269, p < 0.001), SANS (r = -0.247, p < 0.001), FF scale (r = -0.234, p = 0.0"
+      },
+      {
+       "pmid": "32556004",
+       "quote": "Serum cesium levels were also correlated with the results of cognitive probes, namely Tower of London (r = 0.221, p = 0.003), Symbol Coding (r = 0.276, p < 0.00"
+      },
+      {
+       "pmid": "32556004",
+       "quote": "Cesium was significantly correlated with CCL11 (r = -0.210, p = 0.006) and TNF-\u03b1 (r = -0.198, p = 0.010), but not with IL-1\u03b2 (r = -0.09, p = 0.237)."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "using multivariate GLM analysis and tests for between-subjects we found no significant effects of use of risperidone (F = 0.731, df = 3/166, p = 0.535, partial "
+      },
+      {
+       "pmid": "32519918",
+       "quote": "Baseline AHR to mannitol was comparable: Gmean PD15: 150 mg (95% CI 61-368) and 214 mg (95% CI 106-432) for T2-high and T2-low asthma respectively (P = 0.51)."
+      },
+      {
+       "pmid": "32519918",
+       "quote": "Both groups improved equally: Gmean PD15: 488 mg (95% CI 311-767) and 507 mg (95% CI 345-746); corresponding to a doubling-dose of: 3.00 (95% CI 1.58-5.74, P = "
+      },
+      {
+       "pmid": "32546287",
+       "quote": "these translate into the following incidence rates: 48.9, 8.8 and 20.6 per 10 000 person years for IBS, CFS and FM, respectively."
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Sex (female)1.881003.16100"
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Sex (female)1.881003.16100"
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Disturbed sleep (PSQI score), greater stress related to chronic ill health, higher somatization score (SCL-90 SOM) and poor perception of general health (RAND s"
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Disturbed sleep (PSQI score), greater stress related to chronic ill health, higher somatization score (SCL-90 SOM) and poor perception of general health (RAND s"
+      }
+     ]
+    },
+    "fulltext_rows_vs_abstract_only": {
+     "stratum": "tier2a:retrieved-fulltext rows vs abstract only",
+     "n_rows_with_quote": 28898,
+     "n_checked": 28420,
+     "n_traceable": 48,
+     "n_untraceable": 28372,
+     "n_no_source_text": 478,
+     "traceable_pct": 0.17,
+     "basis": "CENSUS of tier2a:retrieved-fulltext rows vs abstract only rows with a non-null quote; 28420 verified against that paper's own retained source text; 478 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "32556004",
+       "quote": "Tests for between-subject effects and Table 1, which shows the estimated marginal mean (standard error) values, indicate that cesium was significantly lower in "
+      },
+      {
+       "pmid": "32556004",
+       "quote": "the two other trace elements did not differ between the groups."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "CCL11, IL-1\u03b2, and TNF-\u03b1 were significantly higher in patients with SCZ as compared with healthy controls."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "All cognitive test scores were significantly lower in patients than controls."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "there were significant correlations between cesium and the total BPRS score (r = -0.269, p < 0.001), SANS (r = -0.247, p < 0.001), FF scale (r = -0.234, p = 0.0"
+      },
+      {
+       "pmid": "32556004",
+       "quote": "there were significant correlations between cesium and the total BPRS score (r = -0.269, p < 0.001), SANS (r = -0.247, p < 0.001), FF scale (r = -0.234, p = 0.0"
+      },
+      {
+       "pmid": "32556004",
+       "quote": "Serum cesium levels were also correlated with the results of cognitive probes, namely Tower of London (r = 0.221, p = 0.003), Symbol Coding (r = 0.276, p < 0.00"
+      },
+      {
+       "pmid": "32556004",
+       "quote": "Cesium was significantly correlated with CCL11 (r = -0.210, p = 0.006) and TNF-\u03b1 (r = -0.198, p = 0.010), but not with IL-1\u03b2 (r = -0.09, p = 0.237)."
+      },
+      {
+       "pmid": "32556004",
+       "quote": "using multivariate GLM analysis and tests for between-subjects we found no significant effects of use of risperidone (F = 0.731, df = 3/166, p = 0.535, partial "
+      },
+      {
+       "pmid": "32546287",
+       "quote": "these translate into the following incidence rates: 48.9, 8.8 and 20.6 per 10 000 person years for IBS, CFS and FM, respectively."
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Sex (female)1.881003.16100"
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Sex (female)1.881003.16100"
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Disturbed sleep (PSQI score), greater stress related to chronic ill health, higher somatization score (SCL-90 SOM) and poor perception of general health (RAND s"
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Disturbed sleep (PSQI score), greater stress related to chronic ill health, higher somatization score (SCL-90 SOM) and poor perception of general health (RAND s"
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Disturbed sleep (PSQI score), greater stress related to chronic ill health, higher somatization score (SCL-90 SOM) and poor perception of general health (RAND s"
+      },
+      {
+       "pmid": "32546287",
+       "quote": "The fourth shared predictor, concerning stress related to chronic ill health, highlights one of the novel aspects of this study."
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Four predictors were shared by the IBS and FM onset groups: female sex, allergy, gastrointestinal disorders and low alcohol consumption."
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Not only were IBS and FM mutual risk factors for each other, unlike CFS, but gastrointestinal diseases and their treatment were predictors of both IBS and FM."
+      },
+      {
+       "pmid": "32546287",
+       "quote": "Four predictors were shared by the IBS and FM onset groups: female sex, allergy, gastrointestinal disorders and low alcohol consumption."
+      },
+      {
+       "pmid": "32546287",
+       "quote": "BMI also predicted both IBS and FM onset, but the effects were in the opposite direction, with higher BMI predicting lower onset probability for IBS and higher "
+      }
+     ]
+    }
+   },
+   "census_seconds": 122.6
+  },
+  "tier2b": {
+   "rows_total": 33830,
+   "rows_with_quote": 33830,
+   "rows_by_fulltext_status": {
+    "retrieved-fulltext": 27270,
+    "abstract-only": 6253,
+    "blocked": 307
+   },
+   "papers": {
+    "n_papers": 2589,
+    "n_papers_attempted": 2589,
+    "n_papers_abstract_fetched": 2511,
+    "n_papers_needing_fulltext": 1481,
+    "n_papers_fulltext_attempted": 1481,
+    "n_papers_fulltext_fetched": 1479,
+    "paper_fetch_status_counts": {
+     "ok": 2541,
+     "no_abstract": 46,
+     "fulltext_failed": 2
+    },
+    "fulltext_paper_failure_causes": {
+     "fulltext_failed (HTTP 404)": 1,
+     "fulltext_failed (parsed-thin:1958c)": 1
+    }
+   },
+   "rows_by_retrofit_fetch_status": {
+    "ok": 33758,
+    "no_abstract": 52,
+    "fulltext_failed": 20
+   },
+   "rows_by_retrofit_source_depth": {
+    "fulltext": 27250,
+    "abstract": 6528,
+    "none": 52
+   },
+   "verifiable_before": {
+    "n": 6560,
+    "denominator": 33830,
+    "pct": 19.39,
+    "readme_pct": 19.39,
+    "basis": "README basis: rows with fulltext_status in {abstract-only, blocked} (abstract-derived); body text discarded"
+   },
+   "verifiable_after": {
+    "n": 33778,
+    "denominator": 33830,
+    "pct": 99.85,
+    "basis": "rows whose own re-fetched source (full text or abstract) exists: retrofit_source_depth != none"
+   },
+   "traceable_after_all_verifiable": {
+    "n": 32709,
+    "denominator": 33778,
+    "pct": 96.84,
+    "pct_of_all_rows": 96.69
+   },
+   "fulltext_rows_downgraded_to_abstract_source": 20,
+   "permanent_losses": {
+    "n_rows_no_source": 52,
+    "by_cause": {
+     "abstract-stratum row; paper no_abstract": 52
+    }
+   },
+   "strata": {
+    "fulltext_rows_vs_fulltext": {
+     "stratum": "tier2b:retrieved-fulltext rows vs re-fetched full text",
+     "n_rows_with_quote": 27270,
+     "n_checked": 27250,
+     "n_traceable": 26739,
+     "n_untraceable": 511,
+     "n_no_source_text": 20,
+     "traceable_pct": 98.12,
+     "basis": "CENSUS of tier2b:retrieved-fulltext rows vs re-fetched full text rows with a non-null quote; 27250 verified against that paper's own retained source text; 20 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "36758522",
+       "quote": "Among ME/CFS-specific species, three species (F. prausnitzii, E. rectale, and C. secundus) were deficient in ME/CFS, and nine species... were enriched in ME/CFS"
+      },
+      {
+       "pmid": "36751332",
+       "quote": "In dermatosparaxis EDS (dEDS), the skin is extremely and prematurely fragile with congenital or postnatal tears and sagging around the wrists and ankles."
+      },
+      {
+       "pmid": "37054777",
+       "quote": "In a heterogeneous population referred for iCPET investigation of unexplained exertional intolerance, low biventricular filling pressures (ie, \u201cpreload failure\u201d"
+      },
+      {
+       "pmid": "37046863",
+       "quote": "Many authors reported lower health-related quality of life scores in ED patients if compared to the healthy population."
+      },
+      {
+       "pmid": "37007968",
+       "quote": "Furthermore, Tnxb\u2212/\u2212 mice also exhibited hypersensitization of myelinated A\u03b4- and A\u03b2-fibers, but not unmyelinated C fibers, by using transcutaneous sine wave st"
+      },
+      {
+       "pmid": "37007968",
+       "quote": "Col5a1+/\u2212 mice showed a disorganization of Nav1.8-expressing fibers including above 90% C-fibers, with less fibers crossing the epidermis of footpad glabrous sk"
+      },
+      {
+       "pmid": "37007968",
+       "quote": "Tnxb\u2212/\u2212 mice show hypersensitivity of colonic nociceptive afferents and increased sensory neuron sprouting in the mucosa"
+      },
+      {
+       "pmid": "37007968",
+       "quote": "Tnxb\u2212/\u2212 mice also exhibited gastric dysfunction associated with accelerated gastric emptying and hypersensitivity of gastric vagal mechanoreceptors"
+      },
+      {
+       "pmid": "37015721",
+       "quote": "Patients with OAB have a high risk of developing IC/BPS, and vice versa."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "CRF-R1 antagonist-treated rats showed an increased micturition frequency and a decreased bladder capacity."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "It is well known that the expression levels of 5-HT were remarkably low in the brain of depressed patients."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "Similar to 5-HT, a decreased level of NE is associated with depression."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "Of the 274 women diagnosed with OAB, many of them developed depression or anxiety, accounting for 59.8% and 62.4%, respectively."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "Moreover, in these OAB patients, depression turned out to induce deterioration of incontinence symptom and in quality of life."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "Cats treated with a serotonin antagonist (methysergide), showed reduced micturition threshold."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "the administration of corticosterone injection for the signs of depression and detrusor overactivity displayed a remarkable remission in SNRI (duloxetine)-treat"
+      },
+      {
+       "pmid": "37015721",
+       "quote": "Treatment of a patient suffering from OAB and OAB-related anxiety and depression with duloxetine ameliorated both bladder and mood disorders."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "Approximately 20% of the 504 women with urinary incontinence suffered from fecal incontinence."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "CYP-induced cystitis magnified the visceromotor responses to colonic distension, which suggests that dysfunction in bladder might cause colorectal disorders."
+      },
+      {
+       "pmid": "37015721",
+       "quote": "When comparing with the healthy group, the IC/BPS and OAB groups commonly have a reduced microbial concentration and diversity in urine."
+      }
+     ]
+    },
+    "abstract_stratum_rows_vs_abstract": {
+     "stratum": "tier2b:abstract-only+blocked rows vs re-fetched abstract",
+     "n_rows_with_quote": 6560,
+     "n_checked": 6508,
+     "n_traceable": 5970,
+     "n_untraceable": 538,
+     "n_no_source_text": 52,
+     "traceable_pct": 91.73,
+     "basis": "CENSUS of tier2b:abstract-only+blocked rows vs re-fetched abstract rows with a non-null quote; 6508 verified against that paper's own retained source text; 52 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "36728717",
+       "quote": "Ultrasound measurements revealed lower proximal measurements of the stomach after a meal (p < 0.01) and larger fasting antral area (p = 0.019) compared to healt"
+      },
+      {
+       "pmid": "36728717",
+       "quote": "Ultrasound measurements revealed lower proximal measurements of the stomach after a meal (p < 0.01) and larger fasting antral area (p = 0.019) compared to healt"
+      },
+      {
+       "pmid": "36752120",
+       "quote": "The diagnosis of Ehlers-Danlos syndrome was made following the first skin biopsy. Our examination confirmed a diagnosis of physical abuse."
+      },
+      {
+       "pmid": "36734499",
+       "quote": "the contents of IL-6 and TNF-&#x3b1; were increased (<0.01) in the model group. Following EA intervention, compared with the model group... the contents of IL-6"
+      },
+      {
+       "pmid": "37041781",
+       "quote": "The results showed a significant reduction in pain intensity as reported via the pain numerical scale (PNS; P=0.00), generalized pain index (GPI; P=0.00), and s"
+      },
+      {
+       "pmid": "37041781",
+       "quote": "The results showed a significant reduction in pain intensity as reported via the pain numerical scale (PNS; P=0.00), generalized pain index (GPI; P=0.00), and s"
+      },
+      {
+       "pmid": "37041781",
+       "quote": "The results showed a significant reduction in pain intensity as reported via the pain numerical scale (PNS; P=0.00), generalized pain index (GPI; P=0.00), and s"
+      },
+      {
+       "pmid": "37041781",
+       "quote": "There was no significant difference in any HRV variable (P>0.05)."
+      },
+      {
+       "pmid": "37054767",
+       "quote": "The tUS-mediated analgesia was abolished by a pretreatment of NK1 receptor antagonist-RP-67580 or knockout of substance P (Tac1-/-)."
+      },
+      {
+       "pmid": "37054767",
+       "quote": "The tUS-mediated analgesia was abolished by a pretreatment of NK1 receptor antagonist-RP-67580 or knockout of substance P (Tac1-/-)."
+      },
+      {
+       "pmid": "37031026",
+       "quote": "Of the 38 BAT+ patients, 25 (66%) showed a positive pMAT as well."
+      },
+      {
+       "pmid": "37031026",
+       "quote": "Of the 44 BAT- patients, 43 (98%) also showed a negative pMAT."
+      },
+      {
+       "pmid": "37064342",
+       "quote": "We report this study to remind the clinicians to be aware of the parental transmission ofvariations and also evaluate the parents of the Myhre cases."
+      },
+      {
+       "pmid": "37077400",
+       "quote": "The mechanistic investigation drove us to perform an in silico target fishing study, which allowed the identification of chitinases as one of their putative tar"
+      },
+      {
+       "pmid": "37077400",
+       "quote": "1a showing a submicromolar inhibition of Trichoderma viride chitinase"
+      },
+      {
+       "pmid": "37077400",
+       "quote": "we first validated the inhibitory activity of 1a against AMCase and CHIT1"
+      },
+      {
+       "pmid": "37077400",
+       "quote": "Among them, compound 3f emerged for its activity profile along with its promising in vitro ADME properties."
+      },
+      {
+       "pmid": "37077400",
+       "quote": "We also gained a good understanding of the key interactions with the target enzyme through in silico studies."
+      },
+      {
+       "pmid": "37068712",
+       "quote": "Four weeks of ifetroban significantly increased urinary leukotriene E4 levels and decreased nasal PGE2 levels compared with placebo."
+      },
+      {
+       "pmid": "37068712",
+       "quote": "Four weeks of ifetroban significantly increased urinary leukotriene E4 levels and decreased nasal PGE2 levels compared with placebo."
+      }
+     ]
+    },
+    "fulltext_rows_fallback_vs_abstract": {
+     "stratum": "tier2b:retrieved-fulltext rows lacking re-fetched body, vs abstract",
+     "n_rows_with_quote": 20,
+     "n_checked": 20,
+     "n_traceable": 0,
+     "n_untraceable": 20,
+     "n_no_source_text": 0,
+     "traceable_pct": 0.0,
+     "basis": "CENSUS of tier2b:retrieved-fulltext rows lacking re-fetched body, vs abstract rows with a non-null quote; 20 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 20,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "20 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "38768798",
+       "quote": "Post hoc group comparisons using Fisher\u2019s Least significant difference also confirmed that the VMR to 60-mmHg distention pressure differed between B/6NTac-ZYM a"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "we identified a significant main effect of treatment, where ZYM instillation resulted in decreased CTT regardless of strain (Fig 2), indicating that BL/6J mice "
+      },
+      {
+       "pmid": "38768798",
+       "quote": "we observed significant differences in stool consistency (fecal water retention) in both BL/6J and BL/6NTac mice at 21 days after ZYM treatment (at VH developme"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "No significant differences in body weight were found between strains or as a result of ZYM treatment at any time during the development period for VH (all P > ."
+      },
+      {
+       "pmid": "38768798",
+       "quote": "Of these 5 candidates, only Avpr1a was associated with variability in more than 1 pain assay or measure (Table 1)."
+      },
+      {
+       "pmid": "38768798",
+       "quote": "We identified a SNV in the 5\u2032 flanking sequence for Avpr1a, a region heavily implicated in regulating Avpr1a expression.43,44 Moreover, we found that this SNV r"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "Avpr1a mRNA expression was increased in the colorectum (Fig 5A) but not in colon-specific DRG neurons in BL/6NTac mice treated with ZYM compared with all other "
+      },
+      {
+       "pmid": "38768798",
+       "quote": "No significant main effects or interactions on the expression of Avpr1a in either colon-specific thoracolumbar or lumbosacral primary sensory afferents were det"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "In agreement with increased Avpr1a mRNA expression, colorectal Avpr1a protein levels were significantly higher in BL/6NTac mice compared with BL/6J mice 21 days"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "No significant differences between strains or conditions at day 21 post ZYM/SAL installation, in line with previous reports that the neutrophil-based inflammati"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "Alcian Blue staining, which visualizes acidic epithelial and connective tissue mucins, allowing the measurement of the percent surface area of mucin cell bodies"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "BL/6NTac-ZYM mice had greater AUC compared with BL/6J-ZYM mice, and longitudinal stretch in BL/6NTac-ZYM mice elicited the greatest response magnitude (greatest"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "Colabeling of the distal colon with antisera against PGP9.5 (neuronal marker) and Avpr1a revealed overlap of the 2 markers, suggesting the possibility that Avpr"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "When comparing neurons from BL/6NTac mice with ZYM-VH to SAL-treated controls, neither DRG nor ND ganglion neurons retrogradely labeled from the colon exhibited"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "Enteric neurons isolated from the myenteric plexus exhibited increased responses (\u0394F) to AVP (Fig 8A) and capsaicin (Fig 8B) (all P < .001), suggesting enteric "
+      },
+      {
+       "pmid": "38768798",
+       "quote": "The patients reporting high pain burden appeared to have higher Avpr1a expression than IBS patients reporting low pain burden or healthy controls, though this d"
+      },
+      {
+       "pmid": "38768798",
+       "quote": "Avpr1a expression was significantly higher in biopsies from patients with pain than those without pain, regardless of their UC disease activity status (Fig 9B)."
+      },
+      {
+       "pmid": "38768798",
+       "quote": "While Avpr1a/Avpr1a has been associated with somatic pain variability in prior work, the relationship between Avpr1a expression and somatic inflammatory pain wa"
+      },
+      {
+       "pmid": "41660334",
+       "quote": "A minimillay invasive, midline-sparing, unilateral paraarticular approach for removal of a calcified cervical foraminal synovial cyst."
+      },
+      {
+       "pmid": "41660334",
+       "quote": "5:12 \u2013 Dissection from the C6 nerve root and vertebral artery 5:26 \u2013 En bloc removal of the lesion"
+      }
+     ]
+    },
+    "all_rows_vs_abstract_only": {
+     "stratum": "tier2b:ALL quote rows vs abstract only",
+     "n_rows_with_quote": 33830,
+     "n_checked": 33548,
+     "n_traceable": 6021,
+     "n_untraceable": 27527,
+     "n_no_source_text": 282,
+     "traceable_pct": 17.95,
+     "basis": "CENSUS of tier2b:ALL quote rows vs abstract only rows with a non-null quote; 33548 verified against that paper's own retained source text; 282 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "36769022",
+       "quote": "In contrast, there were no significant gene expression changes in ME/CFS patients when comparing T1 to T0."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In HCs, there were 102 genes that showed significant changes in expression: 4 genes were underexpressed (PHLDB3, LZTS3, SLC16A10, MAL) and 98 were overexpressed"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "The four most significant clusters of differentially expressed genes (DEGs) categorized by pathway analysis were natural killer (NK) cell-mediated cytotoxicity,"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Naive CD4+ T cells were decreased in HCs, while NK cells were significantly increased at T1 time point compared to T0 (Table 2). There were no significant chang"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In HCs, 831 genes had significant changes in their level of expression, with 542 being underexpressed (Supplementary Table S2). ME/CFS patients had 1277 genes t"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "They included herpes virus 1 infection, cytokine signaling, cellular response to cytokine stimulus, positive regulation of cytokine production, cellular respons"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In HCs, leukocyte activation and immune response-regulating signaling were more significantly affected, as compared with ME/CFS patients (Figure 2)."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In ME/CFS patients, naive CD4+ T cells were significantly elevated, while dendritic cells and eosinophils were significantly decreased (Table 3)."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "HCs showed significant decreases in memory B cells, CD8+ T cells, NK cells, and eosinophils. In addition, HCs had significant increases in naive and memory CD4+"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Specifically, genes related to cytokine signaling were overexpressed (CISH and CCR2), while genes related to helping protect cells from the adverse effects of s"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Specifically, genes related to cytokine signaling were overexpressed (CISH and CCR2), while genes related to helping protect cells from the adverse effects of s"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Genes that were downregulated were related to inflammatory signaling in the lymphocytes, including AKAP1, SMAD7, and SPON2."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "It is noteworthy to mention that in the current study, TRAF6 was significantly downregulated in ME/CFS patients (but not HC) at 4 hours post-exercise challenge,"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In our current study, we found that YES1 was significantly down regulated in ME/CFS patients (but not HC) at 4 h post-exercise challenge compared to maximal exe"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "We found that hsa-miR-146a-5p was overexpressed in female ME/CFS patients but not in HC between 4 h after maximal exertion (T2) and maximal exertion (T1)."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Approximately 90 percent of the DEGs identified by RNA-Seq were validated by Nanostring Technologies nCounter (Supplementary Table S4)."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "The ME/CFS cohort had poor self-reported outcomes (p < 0.05) in all domains of SF-36 (except \u201cRole Emotional\u201d), as compares to the level of disability (Table 1)"
+      },
+      {
+       "pmid": "36766636",
+       "quote": "The power to detect an association with ME/CFS decreased with the misdiagnosis probability (Figure 1 and Figure 2)."
+      },
+      {
+       "pmid": "36766636",
+       "quote": "For \u0394T=10, a misdiagnosis probability of 0.53 was sufficient to ensure the desired power for sample sizes greater than or equal to 100 individuals per study gro"
+      },
+      {
+       "pmid": "36766636",
+       "quote": "This minimum probability was reduced to 0.24 for \u0394T=5."
+      }
+     ]
+    },
+    "fulltext_rows_vs_abstract_only": {
+     "stratum": "tier2b:retrieved-fulltext rows vs abstract only",
+     "n_rows_with_quote": 27270,
+     "n_checked": 27040,
+     "n_traceable": 51,
+     "n_untraceable": 26989,
+     "n_no_source_text": 230,
+     "traceable_pct": 0.19,
+     "basis": "CENSUS of tier2b:retrieved-fulltext rows vs abstract only rows with a non-null quote; 27040 verified against that paper's own retained source text; 230 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "36769022",
+       "quote": "In contrast, there were no significant gene expression changes in ME/CFS patients when comparing T1 to T0."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In HCs, there were 102 genes that showed significant changes in expression: 4 genes were underexpressed (PHLDB3, LZTS3, SLC16A10, MAL) and 98 were overexpressed"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "The four most significant clusters of differentially expressed genes (DEGs) categorized by pathway analysis were natural killer (NK) cell-mediated cytotoxicity,"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Naive CD4+ T cells were decreased in HCs, while NK cells were significantly increased at T1 time point compared to T0 (Table 2). There were no significant chang"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In HCs, 831 genes had significant changes in their level of expression, with 542 being underexpressed (Supplementary Table S2). ME/CFS patients had 1277 genes t"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "They included herpes virus 1 infection, cytokine signaling, cellular response to cytokine stimulus, positive regulation of cytokine production, cellular respons"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In HCs, leukocyte activation and immune response-regulating signaling were more significantly affected, as compared with ME/CFS patients (Figure 2)."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In ME/CFS patients, naive CD4+ T cells were significantly elevated, while dendritic cells and eosinophils were significantly decreased (Table 3)."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "HCs showed significant decreases in memory B cells, CD8+ T cells, NK cells, and eosinophils. In addition, HCs had significant increases in naive and memory CD4+"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Specifically, genes related to cytokine signaling were overexpressed (CISH and CCR2), while genes related to helping protect cells from the adverse effects of s"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Specifically, genes related to cytokine signaling were overexpressed (CISH and CCR2), while genes related to helping protect cells from the adverse effects of s"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Genes that were downregulated were related to inflammatory signaling in the lymphocytes, including AKAP1, SMAD7, and SPON2."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "It is noteworthy to mention that in the current study, TRAF6 was significantly downregulated in ME/CFS patients (but not HC) at 4 hours post-exercise challenge,"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "In our current study, we found that YES1 was significantly down regulated in ME/CFS patients (but not HC) at 4 h post-exercise challenge compared to maximal exe"
+      },
+      {
+       "pmid": "36769022",
+       "quote": "We found that hsa-miR-146a-5p was overexpressed in female ME/CFS patients but not in HC between 4 h after maximal exertion (T2) and maximal exertion (T1)."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "Approximately 90 percent of the DEGs identified by RNA-Seq were validated by Nanostring Technologies nCounter (Supplementary Table S4)."
+      },
+      {
+       "pmid": "36769022",
+       "quote": "The ME/CFS cohort had poor self-reported outcomes (p < 0.05) in all domains of SF-36 (except \u201cRole Emotional\u201d), as compares to the level of disability (Table 1)"
+      },
+      {
+       "pmid": "36766636",
+       "quote": "The power to detect an association with ME/CFS decreased with the misdiagnosis probability (Figure 1 and Figure 2)."
+      },
+      {
+       "pmid": "36766636",
+       "quote": "For \u0394T=10, a misdiagnosis probability of 0.53 was sufficient to ensure the desired power for sample sizes greater than or equal to 100 individuals per study gro"
+      },
+      {
+       "pmid": "36766636",
+       "quote": "This minimum probability was reduced to 0.24 for \u0394T=5."
+      }
+     ]
+    }
+   },
+   "census_seconds": 123.7
+  },
+  "tier3": {
+   "rows_total": 26032,
+   "rows_with_quote": 26032,
+   "rows_by_fulltext_status": {
+    "retrieved-fulltext": 22850,
+    "abstract-only": 3033,
+    "blocked": 149
+   },
+   "papers": {
+    "n_papers": 1587,
+    "n_papers_attempted": 1587,
+    "n_papers_abstract_fetched": 1571,
+    "n_papers_needing_fulltext": 1096,
+    "n_papers_fulltext_attempted": 1096,
+    "n_papers_fulltext_fetched": 1096,
+    "paper_fetch_status_counts": {
+     "ok": 1580,
+     "no_abstract": 7
+    },
+    "fulltext_paper_failure_causes": {}
+   },
+   "rows_by_retrofit_fetch_status": {
+    "ok": 26021,
+    "no_abstract": 11
+   },
+   "rows_by_retrofit_source_depth": {
+    "fulltext": 22850,
+    "abstract": 3171,
+    "none": 11
+   },
+   "verifiable_before": {
+    "n": 3182,
+    "denominator": 26032,
+    "pct": 12.22,
+    "readme_pct": 12.22,
+    "basis": "README basis: rows with fulltext_status in {abstract-only, blocked} (abstract-derived); body text discarded"
+   },
+   "verifiable_after": {
+    "n": 26021,
+    "denominator": 26032,
+    "pct": 99.96,
+    "basis": "rows whose own re-fetched source (full text or abstract) exists: retrofit_source_depth != none"
+   },
+   "traceable_after_all_verifiable": {
+    "n": 25441,
+    "denominator": 26021,
+    "pct": 97.77,
+    "pct_of_all_rows": 97.73
+   },
+   "fulltext_rows_downgraded_to_abstract_source": 0,
+   "permanent_losses": {
+    "n_rows_no_source": 11,
+    "by_cause": {
+     "abstract-stratum row; paper no_abstract": 11
+    }
+   },
+   "strata": {
+    "fulltext_rows_vs_fulltext": {
+     "stratum": "tier3:retrieved-fulltext rows vs re-fetched full text",
+     "n_rows_with_quote": 22850,
+     "n_checked": 22850,
+     "n_traceable": 22402,
+     "n_untraceable": 448,
+     "n_no_source_text": 0,
+     "traceable_pct": 98.04,
+     "basis": "CENSUS of tier3:retrieved-fulltext rows vs re-fetched full text rows with a non-null quote; 22850 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "33983522",
+       "quote": "RV dysfunction was also the most common abnormality seen in a multi-center international cohort of over 300 hospitalized patients with COVID-19, around 26%."
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Of a cohort of 143 discharged patients in Italy from April 2020, 87% reported ongoing fatigue and dyspnea at 60 days."
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Within a non-hospitalized cohort of 272 individuals across the USA, 35% reported not being at baseline at 14\u201321 days after COVID-19 diagnosis."
+      },
+      {
+       "pmid": "33983522",
+       "quote": "With regards to specific cardiovascular symptoms, approximately 20% of individuals reported chest pain and 14% reported palpitations at 60 days."
+      },
+      {
+       "pmid": "33491461",
+       "quote": "There was no significant effect of state-anxiety (effect = \u201c0.03, 95% bootstrapped CIs (\u201c0.18, 0.05)) or depression (effect = 0.05, 95% bootstrapped CIs (\u201c0.04,"
+      },
+      {
+       "pmid": "33535874",
+       "quote": "those with autism had shorter IBIs (i.e., faster HR) than those without."
+      },
+      {
+       "pmid": "34035473",
+       "quote": "we determined possible variations in circulating blood glucose levels by measuring the glycaemic index... no differences were detected between P90 Rab39b WT and"
+      },
+      {
+       "pmid": "34204243",
+       "quote": "Spironolactone has been found in vitro to inhibit EBV VCA synthesis and capsid formation."
+      },
+      {
+       "pmid": "34204243",
+       "quote": "Further, they found EBV reactivation to be associated with longer median ICU stays (15 days versus 8 days, p < 0.05)."
+      },
+      {
+       "pmid": "34249668",
+       "quote": "Iloreta AM (NCT04495816) Omega-3 Fatty Acid Supplement versus Placebo 2 Randomised, parallel arm Control Trial BSIT atWeek 0Week 6"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Dyspnea 35.1% (n=56)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Decreased DLCO 31.5% (n=18)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Insomnia 31.9% (n=12)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Elevated circulating D-dimer concentration 26.0% (n=6)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Anxiety 22.2% (n=24)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Depression 21.1% (n=25)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Hypertension 20.4% (n=4)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Cognitive impairment 18.6% (n=13)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Alopecia 18.8% (n=9)"
+      },
+      {
+       "pmid": "34839263",
+       "quote": "Parenchymal consolidation 16.8% (n=8)"
+      }
+     ]
+    },
+    "abstract_stratum_rows_vs_abstract": {
+     "stratum": "tier3:abstract-only+blocked rows vs re-fetched abstract",
+     "n_rows_with_quote": 3182,
+     "n_checked": 3171,
+     "n_traceable": 3039,
+     "n_untraceable": 132,
+     "n_no_source_text": 11,
+     "traceable_pct": 95.84,
+     "basis": "CENSUS of tier3:abstract-only+blocked rows vs re-fetched abstract rows with a non-null quote; 3171 verified against that paper's own retained source text; 11 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "33303701",
+       "quote": "sensu lato is transmitted by ticks from thecomplex. In North America,causes nearly all infections; in Europe,andare most associated with human disease."
+      },
+      {
+       "pmid": "35521752",
+       "quote": "Latent trait severity was associated with decreased body weight and poorer physical performance (coefficients > 0.240; p \u2a7d 0.003)"
+      },
+      {
+       "pmid": "35521752",
+       "quote": "Latent trait severity was associated with decreased body weight and poorer physical performance (coefficients > 0.240; p \u2a7d 0.003)"
+      },
+      {
+       "pmid": "35521752",
+       "quote": "elevated blood levels of C-reactive protein (coefficient = 0.378; 95% CI 0.215-0.541; p < 0.001) and D-dimer (coefficient = 0.412; 95% CI 0.123-0.702; p = 0.005"
+      },
+      {
+       "pmid": "35521752",
+       "quote": "elevated blood levels of C-reactive protein (coefficient = 0.378; 95% CI 0.215-0.541; p < 0.001) and D-dimer (coefficient = 0.412; 95% CI 0.123-0.702; p = 0.005"
+      },
+      {
+       "pmid": "34906501",
+       "quote": "Luciferase assay indicated a decreased transcriptional activation mediated by NF-\u03ba\u200bB signaling for all point variants."
+      },
+      {
+       "pmid": "34923256",
+       "quote": "COP distance and sway area in the three groups (TD: 7.35 \u00b1 2.32 mm, 101.70 \u00b1 64.16 mm/s; DCD: 12.05 \u00b1 8.19 mm, 188.46 \u00b1 231.23 mm/s; CP: 13.25 \u00b1 8.09 mm, 239.13"
+      },
+      {
+       "pmid": "35743993",
+       "quote": "Prescriptions of Kampo medicine accounted for 24.1% of the total prescriptions (n = 609)."
+      },
+      {
+       "pmid": "36313487",
+       "quote": "Female gender was an independent risk factor for severe fatigue (severe cognitive fatigue OR = 8.045, p = 0.010; severe motor fatigue OR = 7.698, p = 0.013)."
+      },
+      {
+       "pmid": "36313487",
+       "quote": "Female gender was an independent risk factor for severe fatigue (severe cognitive fatigue OR = 8.045, p = 0.010; severe motor fatigue OR = 7.698, p = 0.013)."
+      },
+      {
+       "pmid": "36114881",
+       "quote": "Among the 300 LIFs, both the lumbar FA and FH were either increased or decreased by >5% in approximately 30% of LIFs each."
+      },
+      {
+       "pmid": "36327530",
+       "quote": "There were no group differences regarding objective cognitive measures, but the CF-group reported significantly (p < 0.001) more cognitive problems (cognitive s"
+      },
+      {
+       "pmid": "36327530",
+       "quote": "There were no group differences regarding objective cognitive measures, but the CF-group reported significantly (p < 0.001) more cognitive problems (cognitive s"
+      },
+      {
+       "pmid": "36879504",
+       "quote": "We demonstrated increased SARS-CoV-2-specific CD4+ and CD8+ T-cell responses and antibody affinity in patients experiencing long COVID symptoms."
+      },
+      {
+       "pmid": "36879504",
+       "quote": "We demonstrated increased SARS-CoV-2-specific CD4+ and CD8+ T-cell responses and antibody affinity in patients experiencing long COVID symptoms."
+      },
+      {
+       "pmid": "36879504",
+       "quote": "We demonstrated increased SARS-CoV-2-specific CD4+ and CD8+ T-cell responses and antibody affinity in patients experiencing long COVID symptoms."
+      },
+      {
+       "pmid": "37336825",
+       "quote": "Significant regression analysis was obtained for all global parameters of the assessment, including BANFE-2 score (p = 0.021, RAdj. = 0.263), NEUROPSI score (p "
+      },
+      {
+       "pmid": "37443561",
+       "quote": "sNfL (p = 0.74) and sGFAP (p = 0.24) did not change and were not associated with headache (p = 0.51), fatigue (p = 0.93), anosmia (p = 0.77) or ageusia (p = 0.4"
+      },
+      {
+       "pmid": "37443561",
+       "quote": "sNfL (p = 0.74) and sGFAP (p = 0.24) did not change and were not associated with headache (p = 0.51), fatigue (p = 0.93), anosmia (p = 0.77) or ageusia (p = 0.4"
+      },
+      {
+       "pmid": "37443561",
+       "quote": "sNfL (p = 0.74) and sGFAP (p = 0.24) did not change and were not associated with headache (p = 0.51), fatigue (p = 0.93), anosmia (p = 0.77) or ageusia (p = 0.4"
+      }
+     ]
+    },
+    "fulltext_rows_fallback_vs_abstract": {
+     "stratum": "tier3:retrieved-fulltext rows lacking re-fetched body, vs abstract",
+     "n_rows_with_quote": 0,
+     "n_checked": 0,
+     "n_traceable": 0,
+     "n_untraceable": 0,
+     "n_no_source_text": 0,
+     "traceable_pct": null,
+     "basis": "CENSUS of tier3:retrieved-fulltext rows lacking re-fetched body, vs abstract rows with a non-null quote; 0 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 0,
+      "n_false_positives": 0,
+      "false_positive_pct": null,
+      "basis": "0 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "MATCHER SUSPECT - headline rate not trustworthy"
+     },
+     "untraceable_examples": []
+    },
+    "all_rows_vs_abstract_only": {
+     "stratum": "tier3:ALL quote rows vs abstract only",
+     "n_rows_with_quote": 26032,
+     "n_checked": 25937,
+     "n_traceable": 3150,
+     "n_untraceable": 22787,
+     "n_no_source_text": 95,
+     "traceable_pct": 12.14,
+     "basis": "CENSUS of tier3:ALL quote rows vs abstract only rows with a non-null quote; 25937 verified against that paper's own retained source text; 95 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "34234251",
+       "quote": "A significant dissociation over time between long COVID-19 participants with fatigue and control participants was observed (p = 0.046)."
+      },
+      {
+       "pmid": "34234251",
+       "quote": "A trend towards significant dissociation over time was observed between long COVID-19 without fatigue and control participants (p = 0.109)."
+      },
+      {
+       "pmid": "34234251",
+       "quote": "Long COVID-19 participants with fatigue presented higher values of NIJMEGEN and PCL-5 scores (respectively, 36 [15] vs 20 [18] p = 0.002 and 31 [18] vs 18 [19],"
+      },
+      {
+       "pmid": "34234251",
+       "quote": "Long COVID-19 participants with fatigue presented higher values of NIJMEGEN and PCL-5 scores (respectively, 36 [15] vs 20 [18] p = 0.002 and 31 [18] vs 18 [19],"
+      },
+      {
+       "pmid": "34234251",
+       "quote": "6 (54.6%) patients of long COVID-19 group with fatigue and 8 (53.3%) patients of the long COVID-19 group without fatigue presented loss of taste and smell (p = "
+      },
+      {
+       "pmid": "34234251",
+       "quote": "the 30 s of up and down test (respectively, 4 [3] vs 5 [2], p = 0.192,) than long COVID-19 participants without fatigue."
+      },
+      {
+       "pmid": "34234251",
+       "quote": "A recent meta-analysis demonstrated an inverse relation between HRV and inflammation41. The measure of HRV was inversely correlated with CRP42."
+      },
+      {
+       "pmid": "34234251",
+       "quote": "Possible damages to the afferent hypoxia-sensing neuros could be due to the direct effect of COVID-19 by binding ACE2 expressed in capillary endothelium of BBB "
+      },
+      {
+       "pmid": "33983522",
+       "quote": "The prevalence of cardiac injury, as measured by an elevated cardiac troponin, on the order of 20\u201340% among the first reported patients with severe (hospitalize"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Lindner and colleagues demonstrated that while viral RNA was isolated in cardiac tissue, in situ hybridization localized the site of infection not to cardiomyoc"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Metkus and colleagues compared troponin elevation in COVID-19 acute respiratory distress syndrome (ARDS) versus non-COVID-19 ARDS among nearly 250 intubated pat"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "In studies of myocardial injury in COVID-19, predictors of troponin elevation consistently demonstrated associations with inflammatory markers, including C-reac"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Szekely and colleagues found right ventricular (RV) dysfunction to be the most common echocardiographic abnormality in a series of 100 hospitalized COVID-19 pat"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "RV dysfunction was also the most common abnormality seen in a multi-center international cohort of over 300 hospitalized patients with COVID-19, around 26%."
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Use of speckle-tracking echocardiography found reduced basal longitudinal strain to be present in 52% of patients in one single-center study; patients who were "
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Shi and colleagues were among the first to report higher mortality in those with troponin elevation from a single-center cohort in Wuhan, finding a threefold to"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Later, Lombardi and colleagues validated these findings in a multi-center cohort in Italy with over 600 patients, albeit with a more attenuated hazard ratio of "
+      },
+      {
+       "pmid": "33983522",
+       "quote": "In one of the most diverse cohorts studied with over 2000 patients admitted to a New York City hospital system, Smilowitz and colleagues illustrated that the ri"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "In their comparison between COVID and non-COVID ARDS, Metkus and colleagues demonstrated that troponin elevation was no longer associated with mortality after c"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "In a retrospective, multi-center international study of echocardiographic findings in over 300 hospitalized patients with COVID-19, only those with troponin ele"
+      }
+     ]
+    },
+    "fulltext_rows_vs_abstract_only": {
+     "stratum": "tier3:retrieved-fulltext rows vs abstract only",
+     "n_rows_with_quote": 22850,
+     "n_checked": 22766,
+     "n_traceable": 111,
+     "n_untraceable": 22655,
+     "n_no_source_text": 84,
+     "traceable_pct": 0.49,
+     "basis": "CENSUS of tier3:retrieved-fulltext rows vs abstract only rows with a non-null quote; 22766 verified against that paper's own retained source text; 84 excluded for no available source text (denominator is n_checked)",
+     "negative_control": {
+      "n_control": 400,
+      "n_false_positives": 0,
+      "false_positive_pct": 0.0,
+      "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+      "verdict": "matcher discriminates"
+     },
+     "untraceable_examples": [
+      {
+       "pmid": "34234251",
+       "quote": "A significant dissociation over time between long COVID-19 participants with fatigue and control participants was observed (p = 0.046)."
+      },
+      {
+       "pmid": "34234251",
+       "quote": "A trend towards significant dissociation over time was observed between long COVID-19 without fatigue and control participants (p = 0.109)."
+      },
+      {
+       "pmid": "34234251",
+       "quote": "Long COVID-19 participants with fatigue presented higher values of NIJMEGEN and PCL-5 scores (respectively, 36 [15] vs 20 [18] p = 0.002 and 31 [18] vs 18 [19],"
+      },
+      {
+       "pmid": "34234251",
+       "quote": "Long COVID-19 participants with fatigue presented higher values of NIJMEGEN and PCL-5 scores (respectively, 36 [15] vs 20 [18] p = 0.002 and 31 [18] vs 18 [19],"
+      },
+      {
+       "pmid": "34234251",
+       "quote": "6 (54.6%) patients of long COVID-19 group with fatigue and 8 (53.3%) patients of the long COVID-19 group without fatigue presented loss of taste and smell (p = "
+      },
+      {
+       "pmid": "34234251",
+       "quote": "the 30 s of up and down test (respectively, 4 [3] vs 5 [2], p = 0.192,) than long COVID-19 participants without fatigue."
+      },
+      {
+       "pmid": "34234251",
+       "quote": "A recent meta-analysis demonstrated an inverse relation between HRV and inflammation41. The measure of HRV was inversely correlated with CRP42."
+      },
+      {
+       "pmid": "34234251",
+       "quote": "Possible damages to the afferent hypoxia-sensing neuros could be due to the direct effect of COVID-19 by binding ACE2 expressed in capillary endothelium of BBB "
+      },
+      {
+       "pmid": "33983522",
+       "quote": "The prevalence of cardiac injury, as measured by an elevated cardiac troponin, on the order of 20\u201340% among the first reported patients with severe (hospitalize"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Lindner and colleagues demonstrated that while viral RNA was isolated in cardiac tissue, in situ hybridization localized the site of infection not to cardiomyoc"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Metkus and colleagues compared troponin elevation in COVID-19 acute respiratory distress syndrome (ARDS) versus non-COVID-19 ARDS among nearly 250 intubated pat"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "In studies of myocardial injury in COVID-19, predictors of troponin elevation consistently demonstrated associations with inflammatory markers, including C-reac"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Szekely and colleagues found right ventricular (RV) dysfunction to be the most common echocardiographic abnormality in a series of 100 hospitalized COVID-19 pat"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "RV dysfunction was also the most common abnormality seen in a multi-center international cohort of over 300 hospitalized patients with COVID-19, around 26%."
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Use of speckle-tracking echocardiography found reduced basal longitudinal strain to be present in 52% of patients in one single-center study; patients who were "
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Shi and colleagues were among the first to report higher mortality in those with troponin elevation from a single-center cohort in Wuhan, finding a threefold to"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "Later, Lombardi and colleagues validated these findings in a multi-center cohort in Italy with over 600 patients, albeit with a more attenuated hazard ratio of "
+      },
+      {
+       "pmid": "33983522",
+       "quote": "In one of the most diverse cohorts studied with over 2000 patients admitted to a New York City hospital system, Smilowitz and colleagues illustrated that the ri"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "In their comparison between COVID and non-COVID ARDS, Metkus and colleagues demonstrated that troponin elevation was no longer associated with mortality after c"
+      },
+      {
+       "pmid": "33983522",
+       "quote": "In a retrospective, multi-center international study of echocardiographic findings in over 300 hospitalized patients with COVID-19, only those with troponin ele"
+      }
+     ]
+    }
+   },
+   "census_seconds": 103.6
+  }
+ },
+ "fetch_log": {
+  "n_rows": 10428,
+  "fetch_status_counts": {
+   "ok": 10161,
+   "no_abstract": 169,
+   "fulltext_failed": 84,
+   "no_pmcid": 14
+  },
+  "n_has_abstract": 10097,
+  "n_needs_fulltext": 6239,
+  "n_has_fulltext": 6141
+ },
+ "corpus_wide_tiers1_3": {
+  "rows_total": 132540,
+  "verifiable_before": 23991,
+  "verifiable_after": 132295,
+  "traceable_after": 127041,
+  "fulltext_depth_checked": 107108,
+  "fulltext_depth_traceable": 104884,
+  "rows_no_source": 245,
+  "fulltext_rows_downgraded_to_abstract": 1391,
+  "verifiable_before_pct": 18.1,
+  "verifiable_after_pct": 99.82,
+  "traceable_pct_of_verifiable": 96.03,
+  "fulltext_depth_traceable_pct": 97.92
+ }
+}

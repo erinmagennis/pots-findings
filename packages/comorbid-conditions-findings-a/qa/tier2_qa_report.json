@@ -1,0 +1,75 @@
+{
+ "tier2_qa_version": "v1",
+ "generated": "2026-07-30",
+ "scope": {
+  "chunks_pooled": 81,
+  "tier2_chunks_total": 146,
+  "coverage_note": "81 of 146 tier-2 chunks extracted (~55%); this QA covers only the extracted subset"
+ },
+ "counts": {
+  "findings_rows": {
+   "value": 36611,
+   "expr": "len(T2)",
+   "basis": "rows, tier-2 pooled"
+  },
+  "distinct_finding_text": {
+   "value": 36559,
+   "expr": "T2.finding_text.nunique()",
+   "basis": "distinct text"
+  },
+  "papers_raw_pmid": {
+   "value": 3123,
+   "expr": "T2.pmid.nunique()",
+   "basis": "raw pmid (no canonical_pmid yet at QA time)"
+  },
+  "findings_per_paper": {
+   "value": 11.72,
+   "expr": "len(T2)/T2.pmid.nunique()",
+   "basis": "rows / raw pmid"
+  },
+  "null_entity_rate": {
+   "value": 0.4192,
+   "expr": "T2.entity.isna().mean()",
+   "basis": "fraction of rows",
+   "note": "tier-1 comparable = 0.470; entity-free rows are symptom-burden/comorbidity findings, not extraction loss"
+  },
+  "comorbidity_type_rows_entity_free": {
+   "value": 2917,
+   "expr": "((T2.entity.isna())&(T2.finding_type=='comorbidity')).sum()",
+   "basis": "rows",
+   "note": "comorbidity analysis MUST include entity-free rows or it misses most claims"
+  }
+ },
+ "invariants": {
+  "total": 8,
+  "passed": 8,
+  "all_passed": true,
+  "suite_verified_live": "yes - planted regressions caught 4 invariant families",
+  "correction": "I5 originally keyed duplicates on (pmid,finding_text,chunk) and flagged 47 groups; ALL 47 differ in >=1 field (entity/relation/pathway), i.e. one sentence carrying several distinct findings. Key corrected to full-row."
+ },
+ "fill_rates": {
+  "common_fields": 65,
+  "thin_data_fields_below_1pct": [
+   "pots_subtype",
+   "pathway_id",
+   "pathway_id_resolved",
+   "pathway_label"
+  ],
+  "note": "pots_subtype drop (0.5% vs tier-1 14.5%) is expected: tier-2 is EDS/ME-CFS/MCAS literature where POTS subtyping does not apply",
+  "tier2_richer_in": "gene_marker 16.3% vs 7.7%; ontology grounding 19.0% vs 12.7% (full-text names genes abstracts omit)"
+ },
+ "duplicate_title_audit": {
+  "examined": 2,
+  "merged": 0,
+  "retained_distinct": 2,
+  "basis": "same normalized title with >1 pmid; merge requires first-author AND year agreement",
+  "note": "both retained groups share title+first author but differ in year (republication in another venue) - correctly NOT merged"
+ },
+ "singleton_hypothesis_test": {
+  "claim": "unmapped singleton entity strings are one-off mentions, not near-duplicates of head strings",
+  "method": "400 sampled singletons fuzzy-matched (ratio>=0.90) against the 2,200-string mapping head",
+  "near_duplicate_rate": 0.038,
+  "verdict": "CONFIRMED - 3.8% near-dup; singletons average 3.54 tokens vs head 2.22, 27.5% exceed 4 tokens",
+  "caveat": "3.8% residual means head-only mapping leaves a small known undercount; reported, not hidden"
+ }
+}

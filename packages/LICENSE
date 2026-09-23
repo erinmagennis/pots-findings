@@ -1,0 +1,94 @@
+# License
+
+Two different things are in this package, under two different terms.
+
+## 1. Derived structured data — CC BY 4.0
+
+Everything this project produced — the extracted structured fields, the canonical entity
+vocabulary, entity/ontology mappings, all derived tables, all QA evidence and all
+documentation — is released under the **Creative Commons Attribution 4.0 International
+License (CC BY 4.0)**.
+
+Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+**You must attribute.** Any use, redistribution, or derivative work must credit:
+
+> POTS/Dysautonomia Cross-Condition Literature Findings — machine-extracted structured
+> findings from the POTS, dysautonomia and comorbid-condition literature.
+
+**And you should credit the underlying researchers.** The scientific content summarized here
+is the work of the source papers' authors. Every row carries `pmid`, `doi`, `title`,
+`journal` and `year`. If a finding matters to your work, read and cite the original paper.
+Attributing this database is not a substitute for that.
+
+## 2. Verbatim quoted text — NOT licensed by us
+
+The `provenance_quote` column contains **short verbatim excerpts from the source
+publications**. That text is the **copyright of the respective publishers and authors**. It is
+not ours to license, and CC BY 4.0 does **not** apply to it.
+
+### Why the excerpts exist
+
+Each excerpt is the span of source text an extracted finding was derived from. It is included
+for one purpose: letting a reader **verify that the finding actually appears in the cited
+paper**. This is the single most important quality property of the dataset — a finding without
+its source span cannot be checked by anyone. Removing the column would make the corpus
+unfalsifiable.
+
+### What the excerpts actually are — measured, not asserted
+
+Measured over all 148,186 rows of the full corpus:
+
+| property | value |
+|---|---|
+| median length | 180 characters |
+| 90th percentile | 298 characters |
+| 99th percentile | 432 characters |
+| under 400 characters | 98.2% of rows |
+| over 600 characters | 97 rows (0.07%) |
+| longest | 1,065 characters |
+
+An excerpt is typically **one sentence** of a results or discussion paragraph. The
+per-package figures are recomputed in `qa/package_stats.json` under `quote`, and
+`code/verify_package.py` re-derives them from the shipped data.
+
+### Constraints we place on ourselves, and ask you to keep
+
+- Every excerpt is stored **adjacent to its full citation** (`pmid`, `doi`, `title`,
+  `journal`, `year`) and never distributed detached from it.
+- Excerpts are **single spans from a single location** in a paper, with no ordering or
+  offset information retained that would allow reassembly.
+- The corpus is a **distributed index across thousands of papers**, not a substitute for any
+  individual article.
+
+If you redistribute this data: keep the excerpt column with its citation columns, do not
+extract it into a standalone quote corpus, and do not present excerpts without their
+citations.
+
+**Takedown:** if you are an author or publisher and want an excerpt removed, that is a
+reasonable request and it will be honored.
+
+### Amendment note (supersedes the Tier 1 v1 license text)
+
+The Tier 1 v1 license constrained a column named `provenance_quote_trunc` to ≤200 characters.
+That column belonged to the Tier 1 website export and does not exist in this corpus, whose
+column is `provenance_quote` and was never truncated. This clause replaces that text and
+describes the object actually shipped. The substantive commitments — excerpts travel with
+their citations, no standalone quote corpus, honored takedown — are unchanged and now stated
+about the real column. The ≤200-character figure was a self-imposed policy, not an external
+requirement; it is superseded by the measured distribution above.
+
+This is not legal advice, and the maintainer is not a lawyer. If your use requires a
+determination on fair use, quotation exceptions, or text-and-data-mining provisions in your
+jurisdiction, consult your institution's library or scholarly-communications office.
+
+## No warranty
+
+The data is machine-extracted and contains errors. It is provided as-is, with no warranty of
+accuracy, completeness or fitness for any purpose.
+
+**Scientific fidelity is unmeasured.** Every check in `qa/` verifies well-formedness — quotes
+trace to their source, identifiers carry authority provenance, invariants hold. Nobody has
+verified that the extracted science is *correctly interpreted*. That requires a human reader.
+
+This is **not medical advice** and must not be used for diagnosis or treatment decisions.

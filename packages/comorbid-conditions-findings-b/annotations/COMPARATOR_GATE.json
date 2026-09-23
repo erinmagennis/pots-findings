@@ -1,0 +1,53 @@
+{
+ "date": "2026-09-16",
+ "comparator": "quote_trace.normalize / quote_traceability, pinned copy from pots-findings migraine-hypermobility-findings/code (unchanged)",
+ "finding": "The pinned census comparator is already symmetric: normalize() double-unescapes HTML entities and NFKD-folds whitespace-class characters and superscripts on BOTH quote and source. No comparator change is required for the retrofit. The one-sided normalization identified on 2026-09-09 exists only in the AI fidelity harness (fidelity_calibration.py), where build_judge_prompt() normalized the source but presented the stored quote raw; patched so QUOTE_LIKE_FIELDS pass through normalize_source().",
+ "correction_to_CALIBRATION_REPORT_v7": "'0/42 traceable after unescaping the quote' and '128 rows would false-miss against re-fetched source' do not hold for the census comparator (measured 42/42 in every configuration). They describe the LLM judge's raw-text view, which is now normalized symmetrically.",
+ "entity_code_rows_tier4": {
+  "n": 42,
+  "papers": 16,
+  "stored_quote_vs_retained_archive": "42/42",
+  "unescaped_quote_vs_retained_archive": "42/42",
+  "stored_quote_vs_unescaped_archive_(simulated_fresh_fetch)": "42/42"
+ },
+ "tier4_full_census_regression": {
+  "reference_tier4_quote_census.json": {
+   "n_checked": 15646,
+   "n_traceable": 15504,
+   "traceable_pct": 99.09
+  },
+  "rerun_raw_archive": {
+   "n_checked": 15646,
+   "n_traceable": 15504,
+   "n_untraceable": 142,
+   "traceable_pct": 99.09
+  },
+  "rerun_unescaped_archive": {
+   "n_checked": 15646,
+   "n_traceable": 15504,
+   "n_untraceable": 142,
+   "traceable_pct": 99.09
+  },
+  "row_level_decisions_identical": true,
+  "n_rows_differing": 0,
+  "negative_control_raw": {
+   "n_control": 400,
+   "n_false_positives": 0,
+   "false_positive_pct": 0.0,
+   "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+   "verdict": "matcher discriminates"
+  },
+  "negative_control_unescaped": {
+   "n_control": 400,
+   "n_false_positives": 0,
+   "false_positive_pct": 0.0,
+   "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+   "verdict": "matcher discriminates"
+  },
+  "archive_papers_loaded": 1269,
+  "archive_papers_in_reference": 1277,
+  "note_on_archive_count": "1269 vs 1277: reference run loaded an additional unsplit chunk archive / duplicate chunk_259 upload; every one of the 15,646 rows found its source in both runs (n_no_source_text=0), so the difference has no effect on the census."
+ },
+ "unit_tests": "comparator_symmetry_tests.py 8/8 pass",
+ "verdict": "GATE PASSED \u2014 proceed to retrofit with the pinned comparator unchanged; retrofit census must import quote_trace from the package code and run comparator_symmetry_tests.py first."
+}

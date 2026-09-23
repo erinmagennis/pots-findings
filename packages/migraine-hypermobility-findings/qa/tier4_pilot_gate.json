@@ -1,0 +1,167 @@
+{
+ "basis": "pilot = chunks 256-259, 8 half-units at 3 concurrent, screened roster (1,269 papers)",
+ "dispatch": {
+  "chunks_done": 4,
+  "chunks_targeted": 4,
+  "ceiling_events": 0,
+  "guard_violations": 0,
+  "units_failed_then_recovered": [
+   {
+    "chunk": 259,
+    "part": [
+     0,
+     2
+    ],
+    "reason": "under-yield 0.59<0.6",
+    "attempt2_yield": 0.6364
+   }
+  ],
+  "enum_violations_recorded_not_coerced": [
+   {
+    "chunk": 258,
+    "evidence_tier": {
+     "systematic-review/meta-analysis": 1
+    }
+   }
+  ],
+  "archives_written": 8,
+  "archives_missing": 0
+ },
+ "rows": 1593,
+ "papers": 151,
+ "findings_per_paper": 10.55,
+ "yield_vs_tier3": {
+  "tier4_overall": 10.55,
+  "tier3_baseline": 16.38,
+  "explained_by_composition": true,
+  "per_stratum": {
+   "tier4_abstract_only": 6.14,
+   "tier3_abstract_only": 6.48,
+   "tier4_fulltext": 17.59,
+   "tier3_fulltext": 20.85
+  },
+  "abstract_only_share": {
+   "tier4": 0.6176,
+   "tier3": 0.2922
+  },
+  "conclusion": "per-stratum rates match Tier 3; the headline gap is Tier-4's lower open-access share, not extraction regression"
+ },
+ "invariants": {
+  "1_schema": true,
+  "2_no_model_ids": true,
+  "3_enum": true,
+  "4_duplicates": true,
+  "5_conservation": true,
+  "6_monotonicity": true,
+  "7_hpo_multi": true,
+  "8_id_provenance": true,
+  "9_authority_prefix": true
+ },
+ "quote_census": {
+  "strata": [
+   {
+    "stratum": "abstract-only",
+    "n_rows_with_quote": 557,
+    "n_checked": 557,
+    "n_traceable": 548,
+    "n_untraceable": 9,
+    "n_no_source_text": 0,
+    "traceable_pct": 98.38,
+    "basis": "CENSUS of abstract-only rows with a non-null quote; 557 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+    "negative_control": {
+     "n_control": 400,
+     "n_false_positives": 0,
+     "false_positive_pct": 0.0,
+     "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+     "verdict": "matcher discriminates"
+    },
+    "untraceable_examples": [
+     {
+      "pmid": "33567890",
+      "quote": "Of the 26 patients, four (15%) developed a PACAP38-induced migraine attack on sumatriptan and 11 patients (42%) on placebo (=0.016)."
+     },
+     {
+      "pmid": "33567890",
+      "quote": "Sumatriptan significantly constricted the PACAP38-dilated superficial temporal artery immediately after infusion (T30) compared with infusion of placebo (<0.001"
+     },
+     {
+      "pmid": "32671582",
+      "quote": "Headache and migraine were also more common in dyspeptic patients (P<0.05)."
+     },
+     {
+      "pmid": "32671582",
+      "quote": "Chi-square, univariate, and multivariate regression analysis did not disclose any association between PN, headache, or PH (P>0.05)."
+     },
+     {
+      "pmid": "33241941",
+      "quote": "Between-group differences in pain intensity, pain inference and pain acceptance were not signi\u200bficant at short- or long-term follow-up."
+     },
+     {
+      "pmid": "33241941",
+      "quote": "Between-group differences in pain intensity, pain inference and pain acceptance were not signi\u200bficant at short- or long-term follow-up."
+     },
+     {
+      "pmid": "33241941",
+      "quote": "Between-group differences in pain intensity, pain inference and pain acceptance were not signi\u200bficant at short- or long-term follow-up."
+     },
+     {
+      "pmid": "33246366",
+      "quote": "No significant change in HOAs during migraine attack."
+     },
+     {
+      "pmid": "33515728",
+      "quote": "Sj\u00f6gren's Syndrome: an undiagnosed etiology for facial pain Case series with review of neurological manifestation of Sj\u00f6gren syndrome."
+     }
+    ]
+   },
+   {
+    "stratum": "full-text (archive-backed)",
+    "n_rows_with_quote": 1036,
+    "n_checked": 1036,
+    "n_traceable": 1031,
+    "n_untraceable": 5,
+    "n_no_source_text": 0,
+    "traceable_pct": 99.52,
+    "basis": "CENSUS of full-text (archive-backed) rows with a non-null quote; 1036 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+    "negative_control": {
+     "n_control": 400,
+     "n_false_positives": 0,
+     "false_positive_pct": 0.0,
+     "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+     "verdict": "matcher discriminates"
+    },
+    "untraceable_examples": [
+     {
+      "pmid": "33842164",
+      "quote": "In addition to sodium channel blockade, gamma-amino butyric acid (GABA) potentiation, and glutamate antagonism, topiramate also has carbonic anhydrase inhibitor"
+     },
+     {
+      "pmid": "33842164",
+      "quote": "In inflammatory animal models, topiramate has been shown to reduce hyperalgesia through central GABA-A and opioid agonism and by peripheral alfa-2 adrenergic ag"
+     },
+     {
+      "pmid": "33842164",
+      "quote": "However recent studies have shown that hypnic headaches can also occur during non-REM sleep."
+     },
+     {
+      "pmid": "33557909",
+      "quote": "In a previous study [32] a 16.2% higher normalized rate of force development was found for hypermobile women compared to women with normal mobility."
+     },
+     {
+      "pmid": "33363580",
+      "quote": "Acceptance: \u2191(IOT, d = 0.82*; BP, d = 1.22*)...Control of headache: \u2191 (IOT, d = 0.82*; BP, d = 1.65*)."
+     }
+    ]
+   }
+  ],
+  "n_archive_papers": 178,
+  "coverage": {
+   "n_rows_with_quote": 1593,
+   "n_verifiable": 1593,
+   "verifiable_pct_of_quote_rows": 100.0,
+   "n_traceable": 1579,
+   "traceable_pct_of_verifiable": 99.12,
+   "basis": "verifiable = a row whose own source text was retained and could be re-read; the Tier-3 ceiling was the abstract-only stratum alone (11.51% of rows), because body text was discarded"
+  }
+ }
+}

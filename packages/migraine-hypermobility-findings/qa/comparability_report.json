@@ -1,0 +1,1213 @@
+{
+ "report": "corpus_alignment_report",
+ "generated_for": "findings_all_tiers.parquet (four-tier POTS/dysautonomia extraction corpus)",
+ "partition_verification": {
+  "rows_total": 148186,
+  "papers_total": 11519,
+  "rows_per_tier": {
+   "t1": 36067,
+   "t2": 70441,
+   "t3": 26032,
+   "t4": 15646
+  },
+  "papers_per_tier": {
+   "t1": 3129,
+   "t2": 5712,
+   "t3": 1587,
+   "t4": 1091
+  },
+  "pairwise_pmid_overlap": {
+   "t1|t2": 0,
+   "t1|t3": 0,
+   "t1|t4": 0,
+   "t2|t3": 0,
+   "t2|t4": 0,
+   "t3|t4": 0
+  },
+  "zero_overlap_confirmed": true,
+  "papers_sum_equals_union": true,
+  "handoff_figures_corrected": {
+   "plan_step_said": "11,315 papers / 144,669 findings",
+   "measured": "11,519 papers / 148,186 findings",
+   "explanation": "plan-step numbers predate Tier-4 completion; recomputed from the corpora as instructed"
+  },
+  "note_tier4_fulltext_papers": {
+   "handoff_said": 463,
+   "measured": 583,
+   "basis": "papers with >=1 row fulltext_status=='retrieved-fulltext' in the COMPLETE tier-4 corpus"
+  },
+  "reverified_on_corrected_tier4": true
+ },
+ "capability_flags": {
+  "purpose": "per-row booleans so a downstream query cannot silently compare a tier that HAS a field against one that never had it",
+  "computed_from": "whether that tier's corpus actually has the column with >=1 non-null value (not hardcoded)",
+  "matrix": {
+   "t1": {
+    "cap_entity_kind": false,
+    "cap_hpo_verified": false,
+    "cap_number_in_quote": false,
+    "cap_quote_source_retained": false
+   },
+   "t2": {
+    "cap_entity_kind": false,
+    "cap_hpo_verified": false,
+    "cap_number_in_quote": false,
+    "cap_quote_source_retained": false
+   },
+   "t3": {
+    "cap_entity_kind": true,
+    "cap_hpo_verified": true,
+    "cap_number_in_quote": true,
+    "cap_quote_source_retained": false
+   },
+   "t4": {
+    "cap_entity_kind": true,
+    "cap_hpo_verified": true,
+    "cap_number_in_quote": true,
+    "cap_quote_source_retained": true
+   }
+  },
+  "rows_true": {
+   "cap_entity_kind": 41678,
+   "cap_hpo_verified": 41678,
+   "cap_number_in_quote": 41678,
+   "cap_quote_source_retained": 15646
+  },
+  "cap_quote_source_retained_basis": "tier4 alone retained body text; 62 gzipped archives found in the artifact store covering 1277 pmids; 1091/1091 tier-4 papers covered, 0 papers in tiers 1-3"
+ },
+ "grounding_schema_reconciliation": {
+  "columns_MAPPED_same_semantics": {
+   "entity_ontology_id_resolved": {
+    "present_in": [
+     "t1",
+     "t2",
+     "t3",
+     "t4"
+    ],
+    "why_mapped": "same syntactic object (a CURIE for the row's entity) and already shares the column name in all four tiers; safe to query cross-tier ONLY alongside ontology_id_verification",
+    "critical_caveat": "the ID SLOT is shared; the EPISTEMIC STATUS is not - see id_denotes_entity_measurement"
+   },
+   "entity_ontology_label": {
+    "present_in": [
+     "t1",
+     "t2",
+     "t3",
+     "t4"
+    ],
+    "why_mapped": "in all four tiers this is the AUTHORITY's own label, fetched FROM the id",
+    "critical_caveat": "in t1/t2 the label was fetched but never COMPARED to the entity name, which is precisely how fabrication survived"
+   },
+   "ontology_id_source": {
+    "present_in": [
+     "t2",
+     "t3",
+     "t4"
+    ],
+    "why_mapped": "NAME is shared but SEMANTICS are not - see same_name_different_semantics (union 19 values, shared by all three = 1)"
+   }
+  },
+  "columns_KEPT_SEPARATE": {
+   "entity_ontology_id__t1_t2__vs__entity_ontology_id_resolved__all": {
+    "decision": "KEEP BOTH",
+    "reason": "entity_ontology_id is the RAW MODEL-EMITTED id. entity_ontology_id_resolved in t1/t2 is that same string after case/prefix normalization only - not an independent authority derivation.",
+    "evidence": {
+     "t1_resolved_equals_emitted": 0.8665,
+     "t2_resolved_equals_emitted": 0.9202,
+     "t1_differences_that_are_case_only": "583 of 584 (0.9983)",
+     "t1_rows_resolved_without_an_emitted_id": 0,
+     "t2_rows_resolved_without_an_emitted_id": 0,
+     "interpretation": "ZERO rows in t1/t2 gained an id the model did not first emit. In t3/t4 the id is derived from the NAME by authority lookup. Different objects."
+    }
+   },
+   "phenotype_hpo__t1_t2__vs__hpo_ids_verified__t3_t4": {
+    "decision": "KEEP BOTH - do NOT map",
+    "reason": "three independent mismatches: provenance, cardinality, and absence of a match-mode column in t1/t2",
+    "evidence": {
+     "t1_raw_equals_resolved": 0.997,
+     "t2_raw_equals_resolved": 0.993,
+     "cardinality": "t1/t2 strictly single-valued (0.000 multi-valued); t3 35.8% and t4 24.3% of non-null values are ';'-delimited multi-id",
+     "t3_t4_have_hpo_id_source_and_hpo_id_count": true,
+     "t1_t2_have_no_hpo_source_column": true,
+     "fabrication_example_t1": "symptom_correlate 'gastrointestinal symptoms, orthostatic hypotension' -> HP:0012019 whose authority label is 'Lens luxation'"
+    },
+    "unified_helper_added": "hpo_id_count_unified (t3/t4: hpo_id_count; t1/t2: 1 if a single id present else 0) - use ONLY together with hpo_verification"
+   },
+   "pathway_id__t1_t2_only": {
+    "decision": "KEEP; NO t3/t4 COUNTERPART EXISTS",
+    "reason": "t3/t4 never had pathway grounding; pathway_or_mechanism is free text in all four tiers",
+    "coverage": "t1 22 rows (0.06%), t2 196 rows (0.28%) - too sparse for any cross-tier statistic",
+    "quality_note": "3/22 (t1) and 61/196 (t2) resolved pathway ids carry NO label, all Reactome R-HSA-*; unlabeled means correspondence was never checkable"
+   },
+   "entity_kind__and__number_in_quote__t3_t4_only": {
+    "decision": "NULL for t1/t2, gated by cap_entity_kind / cap_number_in_quote",
+    "reason": "the field never existed in the t1/t2 schema; null here means NOT EXTRACTED, not ABSENT"
+   }
+  },
+  "columns_added_by_this_step": {
+   "ontology_id_verification": {
+    "values": {
+     "no_id": 125797,
+     "unverified_model_emitted": 16662,
+     "authority_verified": 5727
+    },
+    "definition": "authority_verified = id derived from the entity NAME by authority lookup (t3/t4); unverified_model_emitted = id recalled by the model, existence-checked only (t1/t2); no_id = null"
+   },
+   "ontology_id_match_mode": {
+    "values": {
+     "t1": {
+      "exact": 0,
+      "none_recorded": 4373,
+      "synonym": 0
+     },
+     "t2": {
+      "exact": 0,
+      "none_recorded": 12289,
+      "synonym": 0
+     },
+     "t3": {
+      "exact": 3066,
+      "none_recorded": 0,
+      "synonym": 1047
+     },
+     "t4": {
+      "exact": 1368,
+      "none_recorded": 0,
+      "synonym": 246
+     }
+    },
+    "definition": "exact/synonym for t3/t4 derived from ontology_id_source; 'none_recorded' for t1/t2 which never logged a match mode"
+   },
+   "hpo_verification": {
+    "values": {
+     "no_hpo": 126790,
+     "authority_verified_exact": 13961,
+     "authority_verified_synonym": 4934,
+     "unverified_model_emitted": 2501
+    }
+   },
+   "ontology_id_prefix": {
+    "definition": "minting authority of the resolved id, per non-negotiable 7 (record the authority; do not prefix-constrain)"
+   },
+   "tier_source": {
+    "definition": "t1..t4 file of origin for every row; authoritative for the partition"
+   }
+  },
+  "tier12_id_verification_verdict": {
+   "answer": "MODEL-EMITTED, existence-checked only. NOT authority-verified.",
+   "what_repaired_means_in_tier2": {
+    "ontology_repair_action_counts": {
+     "None": 67038,
+     "case_normalized": 3363,
+     "unsupported_namespace": 30,
+     "prefixed_MeSH": 9,
+     "dropped_malformed": 1
+    },
+    "finding": "the 'repair' was SYNTACTIC ONLY - 3363 case_normalized, 30 unsupported_namespace, 9 prefixed_MeSH, 1 dropped_malformed on 70441 rows (4.8% touched). It normalized prefix casing and dropped malformed strings. It did NOT re-derive any id from the entity name.",
+    "proof": "0 rows in t2 have a resolved id without a model-emitted id; resolved==emitted for 92.0% of rows and the residual is dominated by case folding (ChEBI->CHEBI, MESH->MeSH)"
+   },
+   "id_denotes_entity_measurement": {
+    "method": "authority label (already stored - no network calls) vs the entity name the model claimed, then LLM adjudication of string-disagreements to separate synonyms from genuine errors",
+    "per_tier": {
+     "t1": {
+      "rows_checked": 4373,
+      "string_agree_pct": 39.4,
+      "string_flagged_pct": 60.6,
+      "adjudicated_sample_n": 276,
+      "genuine_error_frac_of_flags": 0.6957,
+      "est_id_denotes_entity_rate": 0.5784,
+      "by_namespace": {
+       "CHEBI": {
+        "n": 1709,
+        "agree_pct": 41.2
+       },
+       "HGNC": {
+        "n": 1814,
+        "agree_pct": 36.7
+       },
+       "MESH": {
+        "n": 847,
+        "agree_pct": 41.3
+       }
+      }
+     },
+     "t2": {
+      "rows_checked": 12289,
+      "string_agree_pct": 54.2,
+      "string_flagged_pct": 45.8,
+      "adjudicated_sample_n": 270,
+      "genuine_error_frac_of_flags": 0.637,
+      "est_id_denotes_entity_rate": 0.7082,
+      "by_namespace": {
+       "CHEBI": {
+        "n": 3171,
+        "agree_pct": 62.7
+       },
+       "HGNC": {
+        "n": 7847,
+        "agree_pct": 50.6
+       },
+       "MESH": {
+        "n": 1269,
+        "agree_pct": 55.4
+       }
+      }
+     },
+     "t3": {
+      "rows_checked": 4113,
+      "string_agree_pct": 81.0,
+      "string_flagged_pct": 19.0,
+      "adjudicated_sample_n": 199,
+      "genuine_error_frac_of_flags": 0.0754,
+      "est_id_denotes_entity_rate": 0.9857,
+      "by_namespace": {
+       "CHEBI": {
+        "n": 1648,
+        "agree_pct": 87.8
+       },
+       "CL": {
+        "n": 143,
+        "agree_pct": 91.6
+       },
+       "HP": {
+        "n": 902,
+        "agree_pct": 80.4
+       },
+       "NCBITAXON": {
+        "n": 361,
+        "agree_pct": 23.0
+       },
+       "UBERON": {
+        "n": 300,
+        "agree_pct": 90.3
+       },
+       "UNIPROT": {
+        "n": 759,
+        "agree_pct": 88.9
+       }
+      }
+     },
+     "t4": {
+      "rows_checked": 1614,
+      "string_agree_pct": 88.9,
+      "string_flagged_pct": 11.1,
+      "adjudicated_sample_n": 56,
+      "genuine_error_frac_of_flags": 0.0179,
+      "est_id_denotes_entity_rate": 0.998,
+      "by_namespace": {
+       "CHEBI": {
+        "n": 1614,
+        "agree_pct": 88.9
+       }
+      }
+     }
+    },
+    "headline": "est. id_denotes_entity_rate: t1 0.578 / t2 0.708 / t3 0.986 / t4 0.998",
+    "negative_controls": {
+     "shuffled_entity_label_pairing": {
+      "t1": {
+       "observed_agree": 0.4226,
+       "shuffled_control": 0.0034
+      },
+      "t2": {
+       "observed_agree": 0.5677,
+       "shuffled_control": 0.0042
+      },
+      "t3": {
+       "observed_agree": 0.8079,
+       "shuffled_control": 0.0097
+      },
+      "t4": {
+       "observed_agree": 0.8879,
+       "shuffled_control": 0.0099
+      }
+     },
+     "verdict_matcher": "observed agreement exceeds the shuffled control by 40-90x in every tier; the string matcher discriminates",
+     "adjudicator_controls": {
+      "positive_control_pairs_called_SAME": 0.8333,
+      "positive_control_n": 60,
+      "negative_control_shuffled_pairs_called_DIFFERENT": 1.0,
+      "negative_control_n": 30
+     },
+     "adjudicator_caveat": "the adjudicator called only 83.3% of STRING-AGREEING pairs SAME, so it over-calls DIFFERENT by ~17%; genuine_error_frac is therefore an UPPER bound and est_id_denotes_entity_rate a LOWER bound. The direction of the t1/t2 vs t3/t4 gap is unaffected."
+    },
+    "why_t3_t4_exact_lookups_score_1.000": "correspondence is definitional for an exact-label lookup, not independent evidence. The informative comparison is t1/t2 (0.58/0.71) against t3/t4 SYNONYM lookups, where low string agreement reflects authority-asserted synonyms rather than error (t3 15/199, t4 1/56 adjudicated genuinely different)."
+   }
+  }
+ },
+ "metrics": {
+  "id_resolved_frac": {
+   "values_all_rows": {
+    "t1": 0.1212,
+    "t2": 0.1745,
+    "t3": 0.158,
+    "t4": 0.1032
+   },
+   "values_entity_rows": {
+    "t1": 0.2311,
+    "t2": 0.2968,
+    "t3": 0.2307,
+    "t4": 0.1434
+   },
+   "denominator_note": "the ALL_ROWS denominator includes rows with no entity at all (entity is null in t1 47.6% / t2 41.3% / t3 31.5% / t4 28.0% of rows). The entity-row denominator is the meaningful one and it REORDERS the tiers.",
+   "comparable_tiers": "NONE comparable as a quality metric",
+   "naive_aggregate_misleads": true,
+   "why": "id_resolved_frac is a COVERAGE metric measuring 'a string is present', and it conflates two incompatible provenances. Pooling gives 0.1511, which reads as one grounding rate but mixes 16662 unverified t1/t2 ids (est. 42%/29% wrong) with 5727 authority-verified t3/t4 ids (est. ~1% wrong). t2 looks BEST on coverage (0.2968 of entity rows) and second-WORST on correctness.",
+   "correct_usage": "report coverage and correctness separately, per tier, stratified by ontology_id_verification"
+  },
+  "id_denotes_entity_rate": {
+   "values": {
+    "t1": 0.5784,
+    "t2": 0.7082,
+    "t3": 0.9857,
+    "t4": 0.998
+   },
+   "denominator": "rows with a non-null resolved id AND a non-null authority label (t1 4373 / t2 12289 / t3 4113 / t4 1614)",
+   "comparable_tiers": "all four, with the exact-lookup caveat recorded above",
+   "naive_aggregate_misleads": true,
+   "why": "a pooled rate would be dominated by t2's 12289 rows and would hide that t1/t2 and t3/t4 differ by ~30-40 percentage points. This is the metric that actually separates the tiers and it must always be reported per tier."
+  },
+  "quote_verifiability": {
+   "provenance_quote_nonnull": {
+    "t1": 1.0,
+    "t2": 1.0,
+    "t3": 1.0,
+    "t4": 1.0
+   },
+   "measurable_tiers": [
+    "t4"
+   ],
+   "tier4_census": {
+    "stratum": "tier4_all",
+    "n_rows_with_quote": 15646,
+    "n_checked": 15646,
+    "n_traceable": 15504,
+    "n_untraceable": 142,
+    "n_no_source_text": 0,
+    "traceable_pct": 99.09,
+    "basis": "CENSUS of tier4_all rows with a non-null quote; 15646 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+    "negative_control": {
+     "n_control": 400,
+     "n_false_positives": 0,
+     "false_positive_pct": 0.0,
+     "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+     "verdict": "matcher discriminates"
+    }
+   },
+   "comparable_tiers": "NONE - t4 only; t1/t2/t3 are UNMEASURABLE, not 100%",
+   "naive_aggregate_misleads": true,
+   "why": "tiers 1-3 discarded body text after extraction, so no source exists to verify against. The retained archives cover 1091/1091 t4 papers and 0 papers in t1/t2/t3 (verified by pmid intersection). Any four-tier 'quote verifiability' figure would silently be the t4-only number generalized to 11,519 papers on the strength of 1,091.",
+   "what_IS_comparable": "provenance_quote non-null RATE (100% in all four tiers) - but that is a PRESENCE metric, not verifiability",
+   "normalization_note": "per non-negotiable 6 superscripts are NOT normalized (I2 vs I-squared); normalizing drops the census 99.52% -> 99.04%"
+  },
+  "findings_per_paper_by_fulltext_stratum": {
+   "table": [
+    {
+     "tier": "t1",
+     "stratum": "abstract-only",
+     "papers": 1207,
+     "findings": 6522,
+     "findings_per_paper": 5.4
+    },
+    {
+     "tier": "t1",
+     "stratum": "blocked",
+     "papers": 5,
+     "findings": 14,
+     "findings_per_paper": 2.8
+    },
+    {
+     "tier": "t1",
+     "stratum": "retrieved-fulltext",
+     "papers": 1917,
+     "findings": 29531,
+     "findings_per_paper": 15.4
+    },
+    {
+     "tier": "t2",
+     "stratum": "abstract-only",
+     "papers": 2429,
+     "findings": 13959,
+     "findings_per_paper": 5.75
+    },
+    {
+     "tier": "t2",
+     "stratum": "blocked",
+     "papers": 57,
+     "findings": 314,
+     "findings_per_paper": 5.51
+    },
+    {
+     "tier": "t2",
+     "stratum": "retrieved-fulltext",
+     "papers": 3226,
+     "findings": 56168,
+     "findings_per_paper": 17.41
+    },
+    {
+     "tier": "t3",
+     "stratum": "abstract-only",
+     "papers": 468,
+     "findings": 3033,
+     "findings_per_paper": 6.48
+    },
+    {
+     "tier": "t3",
+     "stratum": "blocked",
+     "papers": 23,
+     "findings": 149,
+     "findings_per_paper": 6.48
+    },
+    {
+     "tier": "t3",
+     "stratum": "retrieved-fulltext",
+     "papers": 1096,
+     "findings": 22850,
+     "findings_per_paper": 20.85
+    },
+    {
+     "tier": "t4",
+     "stratum": "abstract-only",
+     "papers": 505,
+     "findings": 3347,
+     "findings_per_paper": 6.63
+    },
+    {
+     "tier": "t4",
+     "stratum": "blocked",
+     "papers": 3,
+     "findings": 20,
+     "findings_per_paper": 6.67
+    },
+    {
+     "tier": "t4",
+     "stratum": "retrieved-fulltext",
+     "papers": 583,
+     "findings": 12279,
+     "findings_per_paper": 21.06
+    }
+   ],
+   "overall": {
+    "t1": 11.53,
+    "t2": 12.33,
+    "t3": 16.4,
+    "t4": 14.34
+   },
+   "retrieved_fulltext_paper_share": {
+    "t1": 0.6127,
+    "t2": 0.5648,
+    "t3": 0.6906,
+    "t4": 0.5344
+   },
+   "comparable_tiers": "comparable WITHIN a fulltext_status stratum only",
+   "naive_aggregate_misleads": true,
+   "why": "yield is driven ~2.9-3.2x by full-text availability (t1 15.40 vs 5.40 findings/paper), and the full-text MIX differs sharply by tier (retrieved-fulltext paper share t1 0.613 / t2 0.565 / t3 0.691 / t4 0.534). An unstratified cross-tier comparison of findings/paper mostly measures full-text retrieval success, not extraction productivity.",
+   "correct_usage": "compare within stratum; the 'blocked' strata (5/57/23/3 papers) are too small to compare"
+  },
+  "entity_kind_availability": {
+   "present_in": [
+    "t3",
+    "t4"
+   ],
+   "absent_in": [
+    "t1",
+    "t2"
+   ],
+   "nonnull_frac": {
+    "t3": 0.7792,
+    "t4": 0.8093
+   },
+   "vocabulary": {
+    "t3": [
+     "anatomical-structure",
+     "cell-type",
+     "chemical/metabolite",
+     "gene/protein",
+     "other",
+     "pathogen",
+     "physiological-measure"
+    ],
+    "t4": [
+     "anatomical-structure",
+     "cell-type",
+     "chemical/metabolite",
+     "device",
+     "gene/protein",
+     "other",
+     "pathogen",
+     "physiological-measure",
+     "procedural"
+    ]
+   },
+   "t4_exclusive_values": [
+    "device",
+    "procedural"
+   ],
+   "comparable_tiers": [
+    "t3",
+    "t4"
+   ],
+   "naive_aggregate_misleads": true,
+   "why": "any entity_kind breakdown over the unified corpus silently carries a 106508-row (71.9%) denominator hole from t1/t2. A per-kind percentage computed on the pooled frame describes tiers 3-4 while appearing to describe all four. Gate on cap_entity_kind.",
+   "vocabulary_drift": "t4 adds 'device' and 'procedural', which t3 never used; a t3-vs-t4 kind distribution is not closed over the same vocabulary"
+  },
+  "canonicalization_rate": {
+   "basis": "fraction of rows with canonical_source == 'authority_label'",
+   "values_all_rows": {
+    "t1": null,
+    "t2": null,
+    "t3": 0.158,
+    "t4": 0.1032
+   },
+   "values_entity_rows": {
+    "t1": null,
+    "t2": null,
+    "t3": 0.2307,
+    "t4": 0.1434
+   },
+   "denominators": {
+    "t1": {
+     "all_rows": null,
+     "entity_rows": null
+    },
+    "t2": {
+     "all_rows": null,
+     "entity_rows": null
+    },
+    "t3": {
+     "all_rows": 26032,
+     "entity_rows": 17828
+    },
+    "t4": {
+     "all_rows": 15646,
+     "entity_rows": 11259
+    }
+   },
+   "n_authority_label": {
+    "t1": null,
+    "t2": null,
+    "t3": 4113,
+    "t4": 1614
+   },
+   "comparable_tiers": [
+    "t3",
+    "t4"
+   ],
+   "undefined_tiers": [
+    "t1",
+    "t2"
+   ],
+   "old_report_warning_resolved": "the previous report warned this metric 'would read t4 as 0% when 10.3% of its rows carry an authority-verified id'. On the corrected Tier 4 it reads 0.1032 all-rows / 0.1434 entity-rows, matching the 1614 authority-verified ids exactly (authority_label count == resolved-id count in both t3 and t4).",
+   "naive_aggregate_misleads": true,
+   "why": "t1/t2 have no canonical_source column at all. Pooling four tiers would treat 106,508 t1/t2 rows as uncanonicalized and report 5727/148186 = 3.9%, which is a schema artifact, not a canonicalization rate.",
+   "pooled_t3_t4_only": 0.1374
+  }
+ },
+ "enum_vocabularies": {
+  "evidence_tier": {
+   "per_tier_distinct": {
+    "t1": [
+     "RCT",
+     "case-control",
+     "case-report",
+     "case-series",
+     "cohort",
+     "cross-sectional",
+     "mechanistic/in-vitro",
+     "meta-analysis",
+     "review/expert-opinion"
+    ],
+    "t2": [
+     "RCT",
+     "case-control",
+     "case-report",
+     "case-report/case-series",
+     "case-series",
+     "cohort",
+     "cross-sectional",
+     "mechanistic/in-vitro",
+     "meta-analysis",
+     "review/expert-opinion",
+     "systematic-review/meta-analysis"
+    ],
+    "t3": [
+     "RCT",
+     "case-control",
+     "case-report",
+     "case-series",
+     "cohort",
+     "cross-sectional",
+     "mechanistic/in-vitro",
+     "meta-analysis",
+     "review/expert-opinion",
+     "systematic review",
+     "systematic-review/meta-analysis"
+    ],
+    "t4": [
+     "RCT",
+     "case-control",
+     "case-report",
+     "case-series",
+     "cohort",
+     "cross-sectional",
+     "mechanistic/in-vitro",
+     "meta-analysis",
+     "review/expert-opinion",
+     "systematic-review/meta-analysis"
+    ]
+   },
+   "counts": {
+    "t1": {
+     "cohort": 8146,
+     "cross-sectional": 6948,
+     "review/expert-opinion": 6434,
+     "case-report": 3754,
+     "case-series": 3219,
+     "case-control": 3139,
+     "mechanistic/in-vitro": 2747,
+     "RCT": 854,
+     "meta-analysis": 826
+    },
+    "t2": {
+     "mechanistic/in-vitro": 14578,
+     "cross-sectional": 12614,
+     "cohort": 11558,
+     "review/expert-opinion": 10262,
+     "case-control": 8482,
+     "case-series": 5599,
+     "case-report": 4057,
+     "RCT": 1986,
+     "meta-analysis": 1276,
+     "systematic-review/meta-analysis": 25,
+     "case-report/case-series": 4
+    },
+    "t3": {
+     "cohort": 9005,
+     "cross-sectional": 5970,
+     "review/expert-opinion": 3392,
+     "case-series": 2011,
+     "case-control": 1617,
+     "mechanistic/in-vitro": 1601,
+     "RCT": 922,
+     "meta-analysis": 900,
+     "case-report": 595,
+     "systematic-review/meta-analysis": 17,
+     "systematic review": 2
+    },
+    "t4": {
+     "cross-sectional": 3491,
+     "cohort": 3452,
+     "review/expert-opinion": 2702,
+     "case-control": 1297,
+     "case-series": 1241,
+     "mechanistic/in-vitro": 1162,
+     "RCT": 1100,
+     "meta-analysis": 679,
+     "case-report": 514,
+     "systematic-review/meta-analysis": 8
+    }
+   },
+   "drift_flagged": [
+    "'systematic-review/meta-analysis' (t2 25, t3 17, t4 8) vs 'systematic review' (t3 2) vs 'meta-analysis' (all four tiers) - three labels spanning overlapping study designs",
+    "'case-report/case-series' (t2 only, n=4) overlaps the separate 'case-report' and 'case-series' values",
+    "t1 has 9 distinct values and never emits 'systematic-review/meta-analysis' at all"
+   ],
+   "naive_aggregate_misleads": true,
+   "why": "pooling files systematic reviews under three different labels, and t1's absence of the compound label is a SCHEMA difference, not evidence that t1 contains no systematic reviews. Design mix also differs greatly (mechanistic/in-vitro share t1 0.0762 vs t2 0.207), so a pooled evidence_tier distribution is a mix artifact.",
+   "action": "FLAGGED, NOT COERCED per non-negotiable 5"
+  },
+  "condition": {
+   "per_tier_distinct": {
+    "t1": [
+     "EDS_hypermobility",
+     "IBS_gut",
+     "MCAS",
+     "ME_CFS",
+     "POTS",
+     "autism",
+     "dysautonomia",
+     "fibromyalgia",
+     "general",
+     "long_COVID",
+     "migraine",
+     "multiple",
+     "orthostatic_hypotension",
+     "small_fiber_neuropathy"
+    ],
+    "t2": [
+     "EDS_hypermobility",
+     "IBD_gut",
+     "IBS_gut",
+     "MCAS",
+     "ME_CFS",
+     "POTS",
+     "autism",
+     "dysautonomia",
+     "fibromyalgia",
+     "general",
+     "long_COVID",
+     "migraine",
+     "multiple",
+     "other patient group",
+     "small_fiber_neuropathy"
+    ],
+    "t3": [
+     "EDS_hypermobility",
+     "IBS_gut",
+     "MCAS",
+     "ME_CFS",
+     "POTS",
+     "autism",
+     "dysautonomia",
+     "fibromyalgia",
+     "general",
+     "long_COVID",
+     "migraine",
+     "multiple",
+     "small_fiber_neuropathy"
+    ],
+    "t4": [
+     "EDS_hypermobility",
+     "IBS_gut",
+     "MCAS",
+     "ME_CFS",
+     "POTS",
+     "autism",
+     "dysautonomia",
+     "fibromyalgia",
+     "general",
+     "long_COVID",
+     "migraine",
+     "multiple",
+     "small_fiber_neuropathy"
+    ]
+   },
+   "drift_flagged": [
+    "'IBD_gut' (t2, n=2) vs 'IBS_gut' (all four tiers) - inflammatory bowel DISEASE vs irritable bowel SYNDROME are different conditions; these 2 rows may be a typo for IBS_gut or a genuine IBD label. NOT auto-merged.",
+    "'other patient group' (t2, n=5) is a free-text escape absent from every other tier's vocabulary",
+    "'orthostatic_hypotension' (t1, n=4) appears in no other tier"
+   ],
+   "naive_aggregate_misleads": true,
+   "why": "condition composition is a direct artifact of each tier's SEARCH STRATEGY, not of the literature. Shares differ by orders of magnitude across tiers (see per_tier_shares). A pooled per-condition count measures which queries were run in which tier and must never be read as disease-level evidence volume.",
+   "per_tier_shares": {
+    "t1": {
+     "dysautonomia": 0.5009,
+     "migraine": 0.0071,
+     "long_COVID": 0.0715,
+     "ME_CFS": 0.0232
+    },
+    "t2": {
+     "dysautonomia": 0.021,
+     "migraine": 0.0057,
+     "long_COVID": 0.0699,
+     "ME_CFS": 0.1773
+    },
+    "t3": {
+     "dysautonomia": 0.0148,
+     "migraine": 0.0021,
+     "long_COVID": 0.7345,
+     "ME_CFS": 0.0113
+    },
+    "t4": {
+     "dysautonomia": 0.12,
+     "migraine": 0.4,
+     "long_COVID": 0.0315,
+     "ME_CFS": 0.006
+    }
+   }
+  },
+  "evidence_stratum": {
+   "per_tier_distinct": {
+    "t1": [
+     "case-report",
+     "clinical-trial-registry",
+     "large-survey",
+     "patient-registry",
+     "peer-reviewed",
+     "preprint",
+     "review/expert-opinion"
+    ],
+    "t2": [
+     "case-control",
+     "case-report",
+     "case-series",
+     "clinical-trial-registry",
+     "cohort",
+     "large-survey",
+     "mechanistic/in-vitro",
+     "patient-registry",
+     "peer-reviewed",
+     "preprint",
+     "review/expert-opinion"
+    ],
+    "t3": [
+     "case-report",
+     "case-series",
+     "clinical-trial-registry",
+     "large-survey",
+     "patient-registry",
+     "peer-reviewed",
+     "preprint",
+     "review/expert-opinion"
+    ],
+    "t4": [
+     "case-report",
+     "clinical-trial-registry",
+     "large-survey",
+     "mechanistic/in-vitro",
+     "meta-analysis",
+     "patient-registry",
+     "peer-reviewed",
+     "preprint",
+     "review/expert-opinion"
+    ]
+   },
+   "drift_flagged": [
+    "CROSS-COLUMN CONTAMINATION: evidence_stratum carries evidence_tier vocabulary in 17 rows - t2 13 ('cohort' 6, 'case-control' 4, 'case-series' 2, 'mechanistic/in-vitro' 1), t3 2 ('case-series'), t4 2 ('mechanistic/in-vitro' 1, 'meta-analysis' 1); t1 0",
+    "'case-report' and 'review/expert-opinion' are legitimate members of BOTH evidence_stratum and evidence_tier, so the two vocabularies genuinely overlap and cannot be separated by value alone"
+   ],
+   "contamination_rate": {
+    "t1": 0.0,
+    "t2": 0.00018,
+    "t3": 8e-05,
+    "t4": 0.00013
+   },
+   "naive_aggregate_misleads": false,
+   "why": "contamination is under 0.02% everywhere and 'peer-reviewed' dominates (t1 0.8719 / t2 0.9161 / t3 0.9439 / t4 0.9176), so a pooled publication-venue breakdown is directionally safe. The 17 contaminated rows should still be excluded or repaired, and t1's zero contamination rate is itself a pipeline-version signal."
+  },
+  "theme": {
+   "per_tier_distinct": {
+    "t1": [
+     "ME_CFS",
+     "POTS",
+     "dysautonomia",
+     "dysautonomia_subtype",
+     "hyperadrenergic",
+     "patient_evidence"
+    ],
+    "t2": [
+     "EDS_hypermobility",
+     "MCAS_mast",
+     "ME_CFS",
+     "autism_intersection",
+     "fibromyalgia",
+     "gastroparesis",
+     "ibs_intersection",
+     "patient_evidence",
+     "rccx_gene",
+     "small_fiber"
+    ],
+    "t3": [
+     "author_augment",
+     "autism_intersection",
+     "hypermobility_spectrum",
+     "long_covid_auto",
+     "migraine_intersection",
+     "post_viral",
+     "sjogrens"
+    ],
+    "t4": [
+     "author_augment",
+     "hypermobility_spectrum",
+     "migraine_intersection",
+     "pans_pandas",
+     "sjogrens"
+    ]
+   },
+   "jaccard_matrix": {
+    "t1": {
+     "t1": 1.0,
+     "t2": 0.143,
+     "t3": 0.0,
+     "t4": 0.0
+    },
+    "t2": {
+     "t1": 0.143,
+     "t2": 1.0,
+     "t3": 0.062,
+     "t4": 0.0
+    },
+    "t3": {
+     "t1": 0.0,
+     "t2": 0.062,
+     "t3": 1.0,
+     "t4": 0.5
+    },
+    "t4": {
+     "t1": 0.0,
+     "t2": 0.0,
+     "t3": 0.5,
+     "t4": 1.0
+    }
+   },
+   "drift_flagged": [
+    "ZERO theme values are shared by all four tiers (intersection 0 of 21 union values). t1<->t3 and t1<->t4 Jaccard = 0.000.",
+    "theme is a per-tier SEARCH-CAMPAIGN label, not a classification of the finding"
+   ],
+   "naive_aggregate_misleads": true,
+   "why": "theme is not a shared vocabulary in any sense. Grouping the unified corpus by theme yields a table that looks like a topic breakdown but is actually a record of which tier ran which query campaign. This is the most dangerous enum in the corpus."
+  }
+ },
+ "same_name_different_semantics": {
+  "already_known_and_fixed_by_user": [
+   "query_contamination"
+  ],
+  "newly_found_this_step": {
+   "ontology_id_source": {
+    "severity": "HIGH",
+    "problem": "in t2 the value 'unresolved_nulled' co-occurs with a NON-NULL entity_ontology_id_resolved in 2242/2242 rows (100%). In t3 and t4 'unresolved_nulled' co-occurs with a NULL id in 100% of rows. The SAME token means 'id kept' in t2 and 'id nulled' in t3/t4.",
+    "measured": {
+     "t2_unresolved_nulled_rows": 2242,
+     "t2_of_which_id_nonnull": 2242,
+     "t3_unresolved_nulled_id_nonnull": 0,
+     "t4_unresolved_nulled_id_nonnull": 0
+    },
+    "second_problem": "the value VOCABULARIES are near-disjoint (union 19, shared by all three tiers that have the column = 1). t2 uses opaque single-letter tags (authority_lookup_B/C/D) recording neither ontology nor match mode; t3/t4 encode both (authority_lookup_ols_chebi_exact).",
+    "consequence": "filtering the unified corpus on ontology_id_source != 'unresolved_nulled' to obtain 'resolved' ids DROPS 2242 t2 rows that DO carry ids; grouping by this column pools incomparable tags",
+    "mitigation": "use the new ontology_id_verification / ontology_id_match_mode columns; ontology_id_source is retained verbatim and uncoerced",
+    "re_verified_on_corrected_tier4": {
+     "measured": {
+      "t2": {
+       "unresolved_nulled_rows": 2242,
+       "of_which_id_nonnull": 2242,
+       "of_which_id_null": 0
+      },
+      "t3": {
+       "unresolved_nulled_rows": 21919,
+       "of_which_id_nonnull": 0,
+       "of_which_id_null": 21919
+      },
+      "t4": {
+       "unresolved_nulled_rows": 14032,
+       "of_which_id_nonnull": 0,
+       "of_which_id_null": 14032
+      }
+     },
+     "vocab_union": 19,
+     "vocab_shared_by_all_three": [
+      "unresolved_nulled"
+     ],
+     "verdict": "FINDING HOLDS UNCHANGED. unresolved_nulled still co-occurs with a NON-NULL id in 2242/2242 t2 rows and with a NULL id in 21919/21919 t3 and 14032/14032 t4 rows. The Tier-4 correction touched canonical_* only; it did not alter ontology_id_source semantics."
+    }
+   },
+   "canonical_source": {
+    "severity": "RESOLVED",
+    "status": "RESOLVED on the corrected Tier 4 - columns are NOW COMPARABLE between t3 and t4",
+    "prior_problem": "in t4 canonical_source took ONE value ('model_name_uncanonicalized' 15646/15646) despite 1614 authority-resolved ids, so it did not track canonicalization outcome; t3 took two values and did",
+    "rule_both_tiers_now_follow": "canonical_source = 'authority_label' when entity_ontology_label is present, else 'model_name_uncanonicalized'",
+    "rule_conformance_verified": {
+     "t3": true,
+     "t4": true
+    },
+    "measured": {
+     "t3": {
+      "model_name_uncanonicalized": 21919,
+      "authority_label": 4113
+     },
+     "t4": {
+      "model_name_uncanonicalized": 14032,
+      "authority_label": 1614
+     }
+    },
+    "comparable_tiers": [
+     "t3",
+     "t4"
+    ],
+    "still_absent_in": [
+     "t1",
+     "t2"
+    ],
+    "residual_difference": {
+     "kind": "RATE difference, not a semantics difference",
+     "authority_label_frac_all_rows": {
+      "t3": 0.158,
+      "t4": 0.1032
+     },
+     "authority_label_frac_entity_rows": {
+      "t3": 0.2307,
+      "t4": 0.1434
+     },
+     "entity_null_frac": {
+      "t3": 0.3152,
+      "t4": 0.2804
+     },
+     "quantified": "t3 15.80% vs t4 10.32% of ALL rows carry authority_label (absolute gap 5.48 pp); on ENTITY rows t3 23.07% vs t4 14.34% (gap 8.73 pp). This is NOT a denominator artifact - t4 actually has a LOWER entity-null rate (28.04% vs 31.52%), so the entity-row denominator WIDENS rather than closes the gap. The residual reflects genuinely lower authority-lookup success in t4 (t4 resolved ids come from CHEBI only; t3 spans CHEBI/HP/UNIPROT/UBERON/CL/NCBITAXON)."
+    },
+    "consequence_now": "a cross-tier canonicalization rate is VALID between t3 and t4 and reads t4 as 10.32% (all rows) / 14.34% (entity rows), NOT 0%. It remains undefined for t1/t2 where the column never existed - null there means NOT PRESENT, not 0%."
+   },
+   "canonical_entity": {
+    "severity": "RESOLVED",
+    "status": "RESOLVED on the corrected Tier 4 - columns are NOW COMPARABLE between t3 and t4",
+    "prior_problem": "non-null in 68.5% of t3 rows but 0.0% of t4 rows although the column existed in both; t4 nulls meant NOT POPULATED",
+    "rule_both_tiers_now_follow": "canonical_entity = entity_ontology_label when present, else `entity` verbatim; null iff entity is null",
+    "rule_conformance_verified": {
+     "t3": {
+      "equals_rule": true,
+      "null_iff_entity_null": true
+     },
+     "t4": {
+      "equals_rule": true,
+      "null_iff_entity_null": true
+     }
+    },
+    "measured": {
+     "t3_nonnull_frac": 0.6848,
+     "t4_nonnull_frac": 0.7196,
+     "t3_nonnull_n": 17828,
+     "t4_nonnull_n": 11259
+    },
+    "negative_control": {
+     "method": "re-derived canonical_entity under a WRONG rule (entity verbatim always, ignoring the authority label) and checked whether it also matches the stored column",
+     "wrong_rule_mismatch_rows": {
+      "t3": 2407,
+      "t4": 529
+     },
+     "verdict": "the wrong rule mismatches 2407 t3 and 529 t4 rows, so the conformance check above is discriminating and not vacuously true"
+    },
+    "comparable_tiers": [
+     "t3",
+     "t4"
+    ],
+    "still_absent_in": [
+     "t1",
+     "t2"
+    ],
+    "residual_difference": {
+     "kind": "non-null FRACTION differs because the tiers have different entity-null rates",
+     "canonical_entity_nonnull_frac": {
+      "t3": 0.6848,
+      "t4": 0.7196
+     },
+     "entity_nonnull_frac": {
+      "t3": 0.6848,
+      "t4": 0.7196
+     },
+     "quantified": "t3 68.48% vs t4 71.96% non-null (3.48 pp gap), which is EXACTLY the entity non-null gap in both tiers (canonical_entity non-null == entity non-null, verified row-for-row). The difference is entity coverage, not canonicalization semantics."
+    },
+    "consequence_now": "cross-tier canonical-entity analysis is valid over t3+t4 (29,087 non-null rows); it is still t3/t4-only because t1/t2 lack the column entirely."
+   },
+   "tier": {
+    "severity": "LOW-MEDIUM",
+    "problem": "the t3 corpus contains 41 rows (6 distinct pmids) whose own 'tier' column reads 4. Those pmids do NOT appear in the t4 corpus, so the pmid partition remains clean, but the in-row tier label disagrees with the file of origin.",
+    "measured": {
+     "t3_rows_with_tier_eq_4": 41,
+     "t3_distinct_pmids_with_tier_eq_4": 6,
+     "those_pmids_present_in_t4": 0
+    },
+    "mitigation": "the new tier_source column records the FILE of origin and is authoritative; the original 'tier' column is retained unmodified"
+   },
+   "source_stream": {
+    "severity": "MEDIUM",
+    "problem": "union 5 values, shared by all four = 1 ('base'). t1 splits augmentation into 'augmentation_subtype' (8105) / 'augmentation_theme' (2003) with NO plain 'augmentation'; t2/t3 use 'augmentation' + 'augmentation_theme'; t4 has NO 'base' rows at all.",
+    "measured": {
+     "t1": {
+      "base": 23702,
+      "augmentation_subtype": 8105,
+      "None": 2238,
+      "augmentation_theme": 2003,
+      "patient_registry": 19
+     },
+     "t2": {
+      "base": 56021,
+      "augmentation": 12045,
+      "patient_registry": 2264,
+      "augmentation_theme": 111
+     },
+     "t3": {
+      "base": 18904,
+      "augmentation": 4069,
+      "augmentation_theme": 3059
+     },
+     "t4": {
+      "augmentation": 12837,
+      "augmentation_theme": 2809
+     }
+    },
+    "consequence": "a base-vs-augmentation split over the unified corpus mislabels all 8105 t1 augmentation_subtype rows unless the t1-specific value is mapped, and t4 contributes zero base rows"
+   },
+   "chunk_id": {
+    "severity": "LOW",
+    "problem": "float64 in t1 (93.8% non-null) vs int64 in t2/t3/t4 (100%); values are per-tier batch indices and are NOT globally unique",
+    "consequence": "joining or grouping on chunk_id across tiers silently merges unrelated batches; always pair it with tier_source"
+   },
+   "is_covid_associated": {
+    "severity": "LOW",
+    "problem": "bool dtype in t1/t2/t4 but object dtype in t3 with 0.999 non-null - t3 carries nulls the bool tiers cannot represent",
+    "consequence": "a pooled mean() silently coerces the nulls; count the three states explicitly"
+   },
+   "source_literature": {
+    "severity": "MEDIUM",
+    "problem": "t3/t4 only, and vocabularies barely overlap (union 7, shared 3); t3-exclusive: autism / long_COVID / post_viral, t4-exclusive: pans_pandas. Also 100% non-null in t3 but 78.7% in t4.",
+    "consequence": "carries the same search-campaign-label hazard as theme"
+   }
+  }
+ },
+ "metrics_not_comparable_summary": [
+  "id_resolved_frac - conflates coverage with correctness AND unverified t1/t2 ids with authority-verified t3/t4 ids; the denominator choice (all rows vs entity rows) reorders the tiers",
+  "id_denotes_entity_rate - measurable in all four tiers from stored labels and it is the metric that separates them (0.58/0.71/0.99/1.00); NOT interchangeable with id_resolved_frac and never to be pooled",
+  "quote verifiability - measurable for t4 only (1091 papers); t1/t2/t3 discarded source text and are UNMEASURABLE, not 100%",
+  "findings_per_paper - comparable only within a fulltext_status stratum; unstratified it mostly measures full-text retrieval success",
+  "entity_kind / number_in_quote / hpo_ids_verified distributions - t3/t4 only; 71.9% denominator hole from t1/t2",
+  "theme - zero values shared by all four tiers; a per-tier search-campaign label, not a classification",
+  "condition - composition is a search-strategy artifact, never disease-level evidence volume",
+  "evidence_tier - three overlapping labels for systematic reviews plus large design-mix differences",
+  "phenotype HPO counts - t1/t2 single-valued model-emitted vs t3/t4 multi-valued authority-verified",
+  "base-vs-augmentation split (source_stream) - t1 uses tier-specific augmentation values and t4 has no base rows",
+  "pathway grounding - exists only in t1/t2 and at 0.06%/0.28% coverage",
+  "canonicalization rate is comparable between t3 and t4 ONLY; t1/t2 lack the columns and null there means NOT PRESENT, not 0%"
+ ],
+ "safe_four_tier_aggregates": [
+  "row and paper counts per tier (partition verified: zero pmid overlap, 11519 papers, 148186 rows)",
+  "provenance_quote non-null PRESENCE rate (100% in all four tiers)",
+  "provenance_section presence (100% all tiers) - though its value vocabulary drifts (union 13, shared 9)",
+  "evidence_stratum publication-venue breakdown, after excluding the 17 cross-column-contaminated rows",
+  "year distribution (union 8 values, shared 7)"
+ ],
+ "non_negotiables_honoured": {
+  "1_no_model_emitted_identifiers": "no identifier was generated in this step; every id is read from the corpora and carries ontology_id_verification + ontology_id_prefix provenance",
+  "2_basis_and_denominator": "every metric above states its basis and denominator",
+  "3_negative_controls": "quote census 0/400 wrong-paper false positives; entity-label matcher vs shuffled pairing (40-90x separation); adjudicator positive control 0.833 and negative control 1.000, with the resulting bound direction stated | REFRESH: canonical_entity rule-conformance was controlled against a deliberately WRONG rule (entity verbatim, ignoring the authority label), which mismatches 2407 t3 / 529 t4 rows - so the conformance pass is discriminating, not vacuous.",
+  "4_computed_not_typed": "all counts and rates in this report were computed in-kernel from the corpora",
+  "5_drift_flagged_not_coerced": "all enum drift is reported; no value was silently remapped; original columns retained verbatim",
+  "6_no_superscript_normalization": "the quote census used the pinned normalize() unmodified",
+  "7_evidence_over_instruction": "plan-step figures 11,315/144,669 and the handoff's t4-fulltext 463 were CONTRADICTED by measurement (11,519/148,186 and 583); measurement was followed and both are recorded | REFRESH: every prior number was recomputed rather than copied; all reproduced identically, and the only entries changed are the two the Tier-4 correction actually affects.",
+  "8_used_existing_conventions": "reused the corpus's own ontology_id_source / hpo_id_source / canonical_source conventions rather than inventing a scheme",
+  "9_llm_budget": "adjudication used 33 batched requests (~0.11M token ceiling), sized before running"
+ },
+ "refresh_provenance": {
+  "reason": "rebuilt on CORRECTED Tier 4 (canonical_entity/canonical_source were previously empty / uniformly model_name_uncanonicalized)",
+  "tier4_version_id_used": "019bc8ae-2b09-41b3-af20-0c90fdeb685d",
+  "tier_version_ids": {
+   "t1": "418fa48d-e6ef-4972-b205-258f2b2c7970",
+   "t2": "1dca4e6a-6df3-4624-948d-c9787ba1ee98",
+   "t3": "c5156f4b-0790-454e-ae0a-8962c6db44c7",
+   "t4": "019bc8ae-2b09-41b3-af20-0c90fdeb685d"
+  },
+  "what_changed": "ONLY the canonical_entity / canonical_source measurements changed. Every other number in this report was recomputed from the four corpora and reproduced identically; all prior findings, same-name/different-semantics entries, not-comparable metrics and enum-drift records are preserved verbatim.",
+  "prior_report_version_id": "556612a9-aa06-463a-91d7-1a911e122209",
+  "recomputed_and_unchanged": [
+   "partition_verification",
+   "capability_flags",
+   "ontology_id_verification/match_mode/hpo_verification distributions",
+   "ontology_id_source same-name-different-semantics finding",
+   "evidence_tier / condition / theme / evidence_stratum / source_stream vocabularies",
+   "evidence_stratum contamination (17 rows: t2 13 / t3 2 / t4 2 / t1 0)",
+   "findings_per_paper by fulltext stratum",
+   "id_resolved_frac"
+  ]
+ },
+ "metrics_not_comparable_summary_changelog": {
+  "removed_this_refresh": [
+   {
+    "entry": "canonicalization rate (canonical_source / canonical_entity) - column semantics differ between t3 and t4",
+    "why_removed": "Tier 4 canonical_entity/canonical_source were corrected to Tier 3's exact rule and both tiers now verify row-for-row against it (canonical_entity = entity_ontology_label else entity verbatim, null iff entity null; canonical_source = authority_label when a label exists else model_name_uncanonicalized). The column semantics no longer differ, so this is a comparable t3-vs-t4 metric. A residual RATE gap remains and is quantified in same_name_different_semantics.canonical_source.residual_difference; it is not a semantics mismatch.",
+    "scope_caveat_retained": "still t3/t4-only - t1/t2 never had these columns; a four-tier canonicalization rate remains undefined and must not read t1/t2 as 0%"
+   }
+  ],
+  "added_this_refresh": [
+   "canonicalization rate is comparable between t3 and t4 ONLY; t1/t2 lack the columns and null there means NOT PRESENT, not 0%"
+  ],
+  "all_other_entries_preserved_verbatim": true,
+  "entries_before": 12,
+  "entries_after": 11
+ }
+}

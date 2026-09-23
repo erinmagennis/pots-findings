@@ -1,0 +1,189 @@
+{
+ "basis": "all 1,463 Tier-4 papers, chunks 256-285; 886 screened rule+llm in pass 1, 577 rule-only completed by a 3-unit concurrent re-screen",
+ "final_verdicts": {
+  "in_scope": 1031,
+  "uncertain": 238,
+  "off_topic": 194
+ },
+ "extract_n": 1269,
+ "extract_denominator": 1463,
+ "off_topic_by_theme": {
+  "author_augment": {
+   "off_topic": 25,
+   "denominator": 425,
+   "rate": 0.0588
+  },
+  "hypermobility_spectrum": {
+   "off_topic": 61,
+   "denominator": 164,
+   "rate": 0.372
+  },
+  "migraine_intersection": {
+   "off_topic": 81,
+   "denominator": 718,
+   "rate": 0.1128
+  },
+  "pans_pandas": {
+   "off_topic": 14,
+   "denominator": 66,
+   "rate": 0.2121
+  },
+  "sjogrens": {
+   "off_topic": 13,
+   "denominator": 90,
+   "rate": 0.1444
+  }
+ },
+ "policy": "off_topic dropped; uncertain EXTRACTED and flagged \u2014 cost of uncertainty is a flag, cost of a wrong off_topic is lost data",
+ "exclusion_class": {
+  "nan": 121,
+  "topical_drift": 73
+ },
+ "adjudication_paths": {
+  "carried_through_rule+llm": 886,
+  "both_arms_agree": 462,
+  "llm_off_topic_topical_drift(rule=in_scope)": 56,
+  "arms_differ(rule=in_scope,llm=uncertain)": 51,
+  "rule_no_anchor_is_absence_of_evidence;llm_affirmative_with_span": 3,
+  "arms_differ(rule=uncertain,llm=in_scope)": 3,
+  "llm_off_topic_topical_drift(rule=uncertain)": 1,
+  "rule_off_topic_vs_llm_uncertain->uncertain": 1
+ },
+ "rescreen_units": {
+  "n_units": 3,
+  "per_unit": [
+   193,
+   192,
+   192
+  ],
+  "inscope_control": "6/6 retained in all 3 units",
+  "decoy_control": "5/5 caught in all 3 units",
+  "span_verifiable": {
+   "slot0": "187/193",
+   "slot1": "192/192",
+   "slot2": "192/192"
+  }
+ },
+ "orchestrator_v1_defect": {
+  "off_topic_v1": 303,
+  "off_topic_corrected": 73,
+  "denominator": 577,
+  "reversal_rate": 0.7591,
+  "cause": "closed in-scope condition list read as exhaustive; excluded familial dysautonomia, convulsive syncope, trigeminal autonomic cephalalgias"
+ },
+ "whole_screen_condition_retention": [
+  {
+   "term": "familial dysautonomia",
+   "n": 9,
+   "n_off_topic": 0,
+   "retention": 1.0
+  },
+  {
+   "term": "postural orthostatic tachycardia",
+   "n": 5,
+   "n_off_topic": 0,
+   "retention": 1.0
+  },
+  {
+   "term": "postural tachycardia syndrome",
+   "n": 10,
+   "n_off_topic": 0,
+   "retention": 1.0
+  },
+  {
+   "term": "ehlers-danlos",
+   "n": 13,
+   "n_off_topic": 1,
+   "retention": 0.9231
+  },
+  {
+   "term": "myalgic encephalomyelitis",
+   "n": 5,
+   "n_off_topic": 0,
+   "retention": 1.0
+  },
+  {
+   "term": "chronic fatigue syndrome",
+   "n": 16,
+   "n_off_topic": 3,
+   "retention": 0.8125
+  },
+  {
+   "term": "fibromyalgia",
+   "n": 297,
+   "n_off_topic": 41,
+   "retention": 0.862
+  },
+  {
+   "term": "systemic mastocytosis",
+   "n": 24,
+   "n_off_topic": 0,
+   "retention": 1.0
+  },
+  {
+   "term": "small fibre neuropathy",
+   "n": 2,
+   "n_off_topic": 0,
+   "retention": 1.0
+  },
+  {
+   "term": "multiple system atrophy",
+   "n": 41,
+   "n_off_topic": 2,
+   "retention": 0.9512
+  },
+  {
+   "term": "orthostatic intolerance",
+   "n": 11,
+   "n_off_topic": 0,
+   "retention": 1.0
+  },
+  {
+   "term": "orthostatic hypotension",
+   "n": 67,
+   "n_off_topic": 2,
+   "retention": 0.9701
+  },
+  {
+   "term": "dysautonomia",
+   "n": 52,
+   "n_off_topic": 2,
+   "retention": 0.9615
+  },
+  {
+   "term": "hypermobility spectrum disorder",
+   "n": 10,
+   "n_off_topic": 0,
+   "retention": 1.0
+  },
+  {
+   "term": "sj\u00f6gren",
+   "n": 76,
+   "n_off_topic": 9,
+   "retention": 0.8816
+  },
+  {
+   "term": "sjogren",
+   "n": 18,
+   "n_off_topic": 3,
+   "retention": 0.8333
+  },
+  {
+   "term": "migraine",
+   "n": 644,
+   "n_off_topic": 73,
+   "retention": 0.8866
+  },
+  {
+   "term": "autonomic dysfunction",
+   "n": 34,
+   "n_off_topic": 1,
+   "retention": 0.9706
+  }
+ ],
+ "tier3_reference": {
+  "autism_theme_off_topic": 28,
+  "denominator": 359,
+  "rate": 0.078
+ }
+}

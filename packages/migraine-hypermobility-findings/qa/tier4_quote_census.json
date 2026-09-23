@@ -1,0 +1,211 @@
+{
+ "strata": [
+  {
+   "stratum": "abstract-only",
+   "n_rows_with_quote": 3347,
+   "n_checked": 3347,
+   "n_traceable": 3266,
+   "n_untraceable": 81,
+   "n_no_source_text": 0,
+   "traceable_pct": 97.58,
+   "basis": "CENSUS of abstract-only rows with a non-null quote; 3347 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+   "negative_control": {
+    "n_control": 400,
+    "n_false_positives": 0,
+    "false_positive_pct": 0.0,
+    "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+    "verdict": "matcher discriminates"
+   },
+   "untraceable_examples": [
+    {
+     "pmid": "32671582",
+     "quote": "Headache and migraine were also more common in dyspeptic patients (P<0.05)."
+    },
+    {
+     "pmid": "32671582",
+     "quote": "Chi-square, univariate, and multivariate regression analysis did not disclose any association between PN, headache, or PH (P>0.05)."
+    },
+    {
+     "pmid": "33241941",
+     "quote": "Between-group differences in pain intensity, pain inference and pain acceptance were not signi\u200bficant at short- or long-term follow-up."
+    },
+    {
+     "pmid": "33241941",
+     "quote": "Between-group differences in pain intensity, pain inference and pain acceptance were not signi\u200bficant at short- or long-term follow-up."
+    },
+    {
+     "pmid": "33241941",
+     "quote": "Between-group differences in pain intensity, pain inference and pain acceptance were not signi\u200bficant at short- or long-term follow-up."
+    },
+    {
+     "pmid": "33246366",
+     "quote": "No significant change in HOAs during migraine attack."
+    },
+    {
+     "pmid": "33515728",
+     "quote": "Sj\u00f6gren's Syndrome: an undiagnosed etiology for facial pain Case series with review of neurological manifestation of Sj\u00f6gren syndrome."
+    },
+    {
+     "pmid": "33567890",
+     "quote": "Of the 26 patients, four (15%) developed a PACAP38-induced migraine attack on sumatriptan and 11 patients (42%) on placebo (=0.016)."
+    },
+    {
+     "pmid": "33567890",
+     "quote": "Sumatriptan significantly constricted the PACAP38-dilated superficial temporal artery immediately after infusion (T30) compared with infusion of placebo (<0.001"
+    },
+    {
+     "pmid": "34600443",
+     "quote": "mRNA profiling in human tissue showed expression of the 5-HT1F receptor in several structures relevant for migraine and cluster headache."
+    },
+    {
+     "pmid": "35157554",
+     "quote": "alcohol use (15.2% vs. 11.8%) ( >.05)"
+    },
+    {
+     "pmid": "35166151",
+     "quote": "After excluding participants with fibromyalgia (n=50) and medication-overuse headache (n=21), endothelin-1 levels were still similar among groups (10.51 [7.96-1"
+    },
+    {
+     "pmid": "35166151",
+     "quote": "There was no significant association of endothelin-1 with headache intensity (mild, 8.99 [8.99-8.99] vs. moderate, 8.71 [6.85-12.15] vs. severe, 9.55 [7.23-13.1"
+    },
+    {
+     "pmid": "35166151",
+     "quote": "There was no significant association of endothelin-1 with... headache frequency per month (exponential and 95% confidence interval, 0.709 [0.296-1.698], =0.440)"
+    },
+    {
+     "pmid": "35283050",
+     "quote": "Clinimetrics: Assessment of generalised joint hypermobility: the Beighton score."
+    },
+    {
+     "pmid": "35338023",
+     "quote": "Remission of indolent systemic mastocytosis in the absence of targeted therapy."
+    },
+    {
+     "pmid": "35670197",
+     "quote": "S100b (569.90 [524.10-783.80] vs. 763.40 [590.15-2713.00]; p\u00a0=\u00a00.013)... levels were lower in patients with three or more autonomic manifestations (n\u00a0=\u00a09)."
+    },
+    {
+     "pmid": "35670197",
+     "quote": "NSE (11.15 [6.26-14.91] vs. 13.93 [10.82-19.04]; p\u00a0=\u00a00.021)... levels were lower in patients with three or more autonomic manifestations (n\u00a0=\u00a09)."
+    },
+    {
+     "pmid": "35670197",
+     "quote": "nNOS (4.24 [3.34-12.85] vs. 12.82 [4.52-15.44]; p\u00a0=\u00a00.028)... levels were lower in patients with three or more autonomic manifestations (n\u00a0=\u00a09)."
+    },
+    {
+     "pmid": "36102346",
+     "quote": "The Bi-Symp group had significantly reduced sub-occipital PPTs relative to the Asymptomatic group on both sides [p<0.009] with no side-to-side differences in ei"
+    }
+   ]
+  },
+  {
+   "stratum": "full-text (archive-backed)",
+   "n_rows_with_quote": 12299,
+   "n_checked": 12299,
+   "n_traceable": 12238,
+   "n_untraceable": 61,
+   "n_no_source_text": 0,
+   "traceable_pct": 99.5,
+   "basis": "CENSUS of full-text (archive-backed) rows with a non-null quote; 12299 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+   "negative_control": {
+    "n_control": 400,
+    "n_false_positives": 0,
+    "false_positive_pct": 0.0,
+    "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+    "verdict": "matcher discriminates"
+   },
+   "untraceable_examples": [
+    {
+     "pmid": "33363580",
+     "quote": "Acceptance: \u2191(IOT, d = 0.82*; BP, d = 1.22*)...Control of headache: \u2191 (IOT, d = 0.82*; BP, d = 1.65*)."
+    },
+    {
+     "pmid": "33557909",
+     "quote": "In a previous study [32] a 16.2% higher normalized rate of force development was found for hypermobile women compared to women with normal mobility."
+    },
+    {
+     "pmid": "33842164",
+     "quote": "In addition to sodium channel blockade, gamma-amino butyric acid (GABA) potentiation, and glutamate antagonism, topiramate also has carbonic anhydrase inhibitor"
+    },
+    {
+     "pmid": "33842164",
+     "quote": "In inflammatory animal models, topiramate has been shown to reduce hyperalgesia through central GABA-A and opioid agonism and by peripheral alfa-2 adrenergic ag"
+    },
+    {
+     "pmid": "33842164",
+     "quote": "However recent studies have shown that hypnic headaches can also occur during non-REM sleep."
+    },
+    {
+     "pmid": "34316727",
+     "quote": "A change in employment status was reported by 27\u00b71% (2524 of 9300) of respondents, and these transitions are depicted in figure 2."
+    },
+    {
+     "pmid": "34576297",
+     "quote": "Parallelly, Curto et al. obtained similar results in patients with episodic or chronic cluster headache."
+    },
+    {
+     "pmid": "34576297",
+     "quote": "Earlier it was suggested that the 4 896 A > G polymorphism of the TLR-4 gene might be a risk factor for migraine."
+    },
+    {
+     "pmid": "34576297",
+     "quote": "Georgescu et al. observed a strong positive correlation between severity of migraine and dysbiosis assessed in fecal microbiota of IBS patients."
+    },
+    {
+     "pmid": "35053680",
+     "quote": "Similarly, CVS patients using cannabis were significantly older than CVS patients without cannabis use (9.9 \u00b1 6.6 years), p < 0.001."
+    },
+    {
+     "pmid": "35287610",
+     "quote": "SexComplete cases164/164 (100.0)Male33/164 (20.1%)31.1 \u00b1 14.20.124Female131/164 (79.9%)35.0 \u00b1 12.8"
+    },
+    {
+     "pmid": "35419902",
+     "quote": "Furthermore, also reduced bone mass and a reduced length of bones have been reported in Fbn2\u2212/\u2212 mice (Nistala et al., 2010)... the low bone mass in Fbn2\u2212/\u2212 mice"
+    },
+    {
+     "pmid": "35611338",
+     "quote": "In studies of mouse sensory ganglia, small-fiber neurons preferentially display the ACE-2 docking protein for SARS-CoV-2, consistent with a potential predominan"
+    },
+    {
+     "pmid": "35869813",
+     "quote": "Allen et al. found that pain severity was increased during the morning and early afternoon, and pain declined during the evening."
+    },
+    {
+     "pmid": "36000602",
+     "quote": "In a study evaluating the data of 1466 patients, FM was found in 24.3% of patients with migraine."
+    },
+    {
+     "pmid": "36802914",
+     "quote": "Post-COVID-19 Afferent Baroreflex Failure."
+    },
+    {
+     "pmid": "36914970",
+     "quote": "LGI1\u2010positive patients rarely have a combination of tumor and the prevalence is at ~10%, which seems inconsistent with the findings of this paper."
+    },
+    {
+     "pmid": "36927366",
+     "quote": "In contrast, the incidence of headache following visual, sensory, and speech aura was reduced in the super-responders but not in the super non-responders."
+    },
+    {
+     "pmid": "37291550",
+     "quote": "Systematic review on gut microbiota disclosed decreased Faecalibacterium and Bifidobacterium as well as increased Lactobacillaceae, Bacteriodes, and Enterobacte"
+    },
+    {
+     "pmid": "37499079",
+     "quote": "Building on this work, Kim and colleagues found that botulinum toxin type A attenuated the amygdala activity in response to angry faces.[63]"
+    }
+   ]
+  }
+ ],
+ "n_archive_papers": 1277,
+ "coverage": {
+  "n_rows_with_quote": 15646,
+  "n_verifiable": 15646,
+  "verifiable_pct_of_quote_rows": 100.0,
+  "n_traceable": 15504,
+  "traceable_pct_of_verifiable": 99.09,
+  "basis": "verifiable = a row whose own source text was retained and could be re-read; the Tier-3 ceiling was the abstract-only stratum alone (11.51% of rows), because body text was discarded"
+ }
+}

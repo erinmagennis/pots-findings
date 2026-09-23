@@ -1,0 +1,719 @@
+{
+ "package": "tier2a",
+ "label": "Tier 2 Part A",
+ "findings": 36611,
+ "papers": 3123,
+ "chunk_ids": [
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  88,
+  89,
+  90,
+  91,
+  92,
+  93,
+  94,
+  95,
+  96,
+  97,
+  98,
+  99,
+  100,
+  101,
+  102,
+  103,
+  104,
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119,
+  120,
+  121,
+  122,
+  123,
+  124,
+  125,
+  127,
+  128,
+  129,
+  132,
+  135,
+  136,
+  137,
+  139,
+  144,
+  148,
+  152,
+  155,
+  161,
+  162,
+  166,
+  169,
+  174,
+  176,
+  178,
+  186,
+  188,
+  192,
+  195,
+  203,
+  206,
+  208,
+  211,
+  212,
+  213,
+  217,
+  220
+ ],
+ "n_chunks": 81,
+ "year_range": [
+  2019,
+  2026
+ ],
+ "year_hist": {
+  "2019": 4,
+  "2020": 42,
+  "2021": 862,
+  "2022": 829,
+  "2023": 466,
+  "2024": 296,
+  "2025": 333,
+  "2026": 291
+ },
+ "themes": {
+  "ME_CFS": {
+   "findings": 10455,
+   "papers": 724
+  },
+  "EDS_hypermobility": {
+   "findings": 7636,
+   "papers": 822
+  },
+  "MCAS_mast": {
+   "findings": 5766,
+   "papers": 504
+  },
+  "fibromyalgia": {
+   "findings": 3440,
+   "papers": 263
+  },
+  "rccx_gene": {
+   "findings": 3170,
+   "papers": 269
+  },
+  "ibs_intersection": {
+   "findings": 2869,
+   "papers": 231
+  },
+  "small_fiber": {
+   "findings": 1965,
+   "papers": 198
+  },
+  "patient_evidence": {
+   "findings": 1140,
+   "papers": 92
+  },
+  "gastroparesis": {
+   "findings": 102,
+   "papers": 9
+  },
+  "autism_intersection": {
+   "findings": 68,
+   "papers": 11
+  }
+ },
+ "conditions": {
+  "ME_CFS": {
+   "findings": 7190,
+   "papers": 670
+  },
+  "EDS_hypermobility": {
+   "findings": 6458,
+   "papers": 873
+  },
+  "general": {
+   "findings": 6232,
+   "papers": 845
+  },
+  "MCAS": {
+   "findings": 4306,
+   "papers": 496
+  },
+  "fibromyalgia": {
+   "findings": 3331,
+   "papers": 406
+  },
+  "long_COVID": {
+   "findings": 2425,
+   "papers": 290
+  },
+  "IBS_gut": {
+   "findings": 2021,
+   "papers": 276
+  },
+  "small_fiber_neuropathy": {
+   "findings": 1749,
+   "papers": 262
+  },
+  "multiple": {
+   "findings": 1557,
+   "papers": 449
+  },
+  "dysautonomia": {
+   "findings": 854,
+   "papers": 187
+  },
+  "autism": {
+   "findings": 226,
+   "papers": 48
+  },
+  "migraine": {
+   "findings": 163,
+   "papers": 64
+  },
+  "POTS": {
+   "findings": 95,
+   "papers": 63
+  },
+  "IBD_gut": {
+   "findings": 2,
+   "papers": 1
+  },
+  "other patient group": {
+   "findings": 2,
+   "papers": 1
+  }
+ },
+ "source_literature": {
+  "None": 36611
+ },
+ "evidence_tier": {
+  "mechanistic/in-vitro": 7436,
+  "cross-sectional": 6197,
+  "cohort": 5832,
+  "review/expert-opinion": 5465,
+  "case-control": 4633,
+  "case-series": 3098,
+  "case-report": 2293,
+  "RCT": 954,
+  "meta-analysis": 687,
+  "systematic-review/meta-analysis": 12,
+  "case-report/case-series": 4
+ },
+ "finding_type": {
+  "mechanism/biomarker": 18337,
+  "treatment/intervention": 6785,
+  "comorbidity": 4023,
+  "diagnostic/screening": 3770,
+  "symptom-burden": 3696
+ },
+ "certainty_derived": {
+  "None": 36611
+ },
+ "causal_or_correlational": {
+  "correlational-only": 21368,
+  "not-stated": 7935,
+  "causal-claim": 7300,
+  "mechanistic/in-vitro": 8
+ },
+ "fulltext_strata": {
+  "abstract-only": {
+   "papers": 1377,
+   "findings": 7706,
+   "findings_per_paper": 5.6
+  },
+  "blocked": {
+   "papers": 1,
+   "findings": 7,
+   "findings_per_paper": 7.0
+  },
+  "retrieved-fulltext": {
+   "papers": 1745,
+   "findings": 28898,
+   "findings_per_paper": 16.56
+  }
+ },
+ "findings_per_paper_overall": 11.72,
+ "quote": {
+  "rows_with_quote": 36611,
+  "median_chars": 181,
+  "p90": 301,
+  "p99": 437,
+  "max_chars": 718,
+  "over_200": 14870,
+  "over_400": 676,
+  "over_600": 13
+ },
+ "provenance_section": {
+  "results": 19447,
+  "discussion": 8174,
+  "abstract": 6651,
+  "introduction": 1577,
+  "figure/table": 368,
+  "conclusion": 201,
+  "methods": 107,
+  "title": 67,
+  "unknown": 18,
+  "future_direction": 1
+ },
+ "grounding": {
+  "rows_with_resolved_id": 6716,
+  "id_resolved_frac_all_rows": 0.1834,
+  "entity_rows": 21264,
+  "id_resolved_frac_entity_rows": 0.3157,
+  "rows_id_and_authority_label": 6716,
+  "verification": {
+   "no_id": 29895,
+   "unverified_model_emitted": 6716
+  },
+  "match_mode": {
+   "None": 29895,
+   "none_recorded": 6716
+  },
+  "id_prefix": {
+   "None": 29895,
+   "HGNC": 4272,
+   "CHEBI": 1777,
+   "MESH": 666,
+   "GO": 1
+  },
+  "ontology_id_source": {
+   "None": 29895,
+   "pipeline_symbol_lookup": 3027,
+   "authority_lookup_C": 1333,
+   "unresolved_nulled": 1243,
+   "authority_lookup_B": 640,
+   "authority_lookup_D": 472,
+   "model_proposed": 1
+  },
+  "id_denotes_entity_rate": {
+   "value": 0.7082,
+   "basis": "INHERITED from Tier 2 as a whole \u2014 the 270-row adjudicated sample spans both waves; no per-wave rate exists",
+   "adjudicated_sample_n": 270,
+   "measured_per_package": false,
+   "caveat": "lower bound; the adjudicator over-calls DIFFERENT by ~17%"
+  },
+  "string_agreement_per_wave": {
+   "note": "pre-adjudication proxy computed identically for both waves; counts synonyms as disagreements so not comparable to id_denotes_entity_rate",
+   "this_package": {
+    "rows_checked": 6716,
+    "string_agree_pct": 40.25
+   },
+   "sibling_wave": {
+    "rows_checked": 5573,
+    "string_agree_pct": 41.58
+   }
+  }
+ },
+ "hpo": {
+  "rows_with_verified_hpo": 0,
+  "verification": {
+   "no_hpo": 35762,
+   "unverified_model_emitted": 849
+  },
+  "rows_model_emitted_hpo": 852
+ },
+ "gene": {
+  "rows_gene_marker": 5958,
+  "rows_gene_resolved": 5725,
+  "rows_hgnc": 5714,
+  "rows_ensembl": 5693
+ },
+ "canonicalization": {
+  "rows_canonical_entity": 0,
+  "distinct_raw_entity": 11527,
+  "distinct_canonical": 0,
+  "canonical_source": {
+   "None": 36611
+  }
+ },
+ "capability_flags": {
+  "cap_entity_kind": {
+   "true": 0,
+   "false": 36611,
+   "null": 0
+  },
+  "cap_hpo_verified": {
+   "true": 0,
+   "false": 36611,
+   "null": 0
+  },
+  "cap_number_in_quote": {
+   "true": 0,
+   "false": 36611,
+   "null": 0
+  },
+  "cap_quote_source_retained": {
+   "true": 0,
+   "false": 36611,
+   "null": 0
+  }
+ },
+ "flags": {
+  "query_contamination": 0,
+  "screen_verdict_uncertain": 0,
+  "null_or_failed_result": 36611,
+  "number_in_quote_true": 0,
+  "number_in_quote_false": 0
+ },
+ "fill_rates_pct": {
+  "relation_object": 100.0,
+  "doi": 100.0,
+  "gene_resolved": 100.0,
+  "certainty": 100.0,
+  "chunk_id": 100.0,
+  "fulltext_status": 100.0,
+  "theme": 100.0,
+  "relation_type": 100.0,
+  "relation_subject": 100.0,
+  "provenance_quote": 100.0,
+  "cap_hpo_verified": 100.0,
+  "provenance_section": 100.0,
+  "null_or_failed_result": 100.0,
+  "source_stream": 100.0,
+  "evidence_stratum": 100.0,
+  "study_quality": 100.0,
+  "journal": 100.0,
+  "year": 100.0,
+  "title": 100.0,
+  "cap_entity_kind": 100.0,
+  "tier_source": 100.0,
+  "cap_number_in_quote": 100.0,
+  "evidence_tier": 100.0,
+  "direction": 100.0,
+  "direction_reference": 100.0,
+  "finding_text": 100.0,
+  "finding_type": 100.0,
+  "hpo_verification": 100.0,
+  "causal_or_correlational": 100.0,
+  "hpo_id_count_unified": 100.0,
+  "ontology_id_verification": 100.0,
+  "condition": 100.0,
+  "cap_quote_source_retained": 100.0,
+  "population_age_group": 100.0,
+  "sex_hormonal": 100.0,
+  "anatomical_system": 100.0,
+  "is_covid_associated": 100.0,
+  "pmid": 100.0,
+  "study_type": 78.83,
+  "comparator": 78.83,
+  "future_direction": 72.64,
+  "limitations_stated": 66.43,
+  "contradicts_or_extends": 63.21,
+  "pathway_or_mechanism": 62.08,
+  "entity_clean": 58.08,
+  "entity": 58.08,
+  "quantitative_detail": 56.36,
+  "demographics": 55.46,
+  "symptom_correlate": 51.92,
+  "n_participants": 50.4,
+  "effect_size": 33.94,
+  "functional_impact": 32.1,
+  "treatment_class": 21.25,
+  "entity_ontology_id": 19.01,
+  "ontology_id_repaired": 19.01,
+  "entity_ontology_label": 18.34,
+  "ontology_id_source": 18.34,
+  "ontology_id_match_mode": 18.34,
+  "entity_ontology_id_resolved": 18.34,
+  "ontology_id_prefix": 18.34,
+  "cohort_registry": 16.47,
+  "gene_marker": 16.27,
+  "hgnc_id": 15.61,
+  "ensembl_id": 15.55,
+  "ontology_id_final": 14.95,
+  "validated_instrument": 14.13,
+  "ontology_label_final": 13.6,
+  "contact_note": 9.98,
+  "cohort_name": 6.25,
+  "ontology_repair_action": 5.26,
+  "contradicts_finding_ref": 4.29,
+  "adverse_event_note": 4.27,
+  "phenotype_hpo": 2.33,
+  "phenotype_hpo_label": 2.32,
+  "phenotype_hpo_resolved": 2.32,
+  "is_duplicate_or_preprint_note": 1.78,
+  "dataset_accession": 1.35,
+  "pots_subtype": 0.53,
+  "pathway_id": 0.31,
+  "pathway_id_resolved": 0.29,
+  "pathway_label": 0.22,
+  "query_contamination_note": 0.0,
+  "screen_verdict_note": 0.0,
+  "_source_version_id": 0.0,
+  "canonical_entity": 0.0,
+  "canonical_source": 0.0,
+  "source_literature": 0.0,
+  "query_contamination": 0.0,
+  "about_condition": 0.0,
+  "evidence_scope": 0.0,
+  "hpo_id_count": 0.0,
+  "screen_verdict_uncertain": 0.0,
+  "tier": 0.0,
+  "anatomical_study": 0.0,
+  "hpo_id_source": 0.0,
+  "hpo_labels_verified": 0.0,
+  "hpo_ids_verified": 0.0,
+  "gene_id_source": 0.0,
+  "fetch_note": 0.0,
+  "certainty_derived": 0.0,
+  "phenotype_terms": 0.0,
+  "entity_kind": 0.0,
+  "source_fidelity": 0.0,
+  "source_route": 0.0,
+  "pmcid": 0.0,
+  "entity_ontology_id_note": 0.0,
+  "number_in_quote": 0.0
+ },
+ "constant_columns": {
+  "tier_source": "t2",
+  "cap_entity_kind": "False",
+  "cap_hpo_verified": "False",
+  "cap_number_in_quote": "False",
+  "cap_quote_source_retained": "False",
+  "ontology_id_match_mode": "none_recorded"
+ },
+ "all_null_columns": [
+  "source_fidelity",
+  "source_route",
+  "pmcid",
+  "entity_ontology_id_note",
+  "anatomical_study",
+  "entity_kind",
+  "phenotype_terms",
+  "certainty_derived",
+  "number_in_quote",
+  "fetch_note",
+  "gene_id_source",
+  "hpo_ids_verified",
+  "hpo_labels_verified",
+  "hpo_id_source",
+  "hpo_id_count",
+  "tier",
+  "_source_version_id",
+  "canonical_entity",
+  "canonical_source",
+  "source_literature",
+  "about_condition",
+  "evidence_scope",
+  "query_contamination",
+  "query_contamination_note",
+  "screen_verdict_uncertain",
+  "screen_verdict_note"
+ ],
+ "tier_source": "t2",
+ "chunk_paper_allotment": {
+  "76": 50,
+  "77": 50,
+  "78": 50,
+  "79": 50,
+  "80": 50,
+  "81": 50,
+  "82": 50,
+  "83": 50,
+  "84": 50,
+  "85": 50,
+  "86": 50,
+  "87": 50,
+  "88": 50,
+  "89": 50,
+  "90": 50,
+  "91": 50,
+  "92": 50,
+  "93": 50,
+  "94": 50,
+  "95": 50,
+  "96": 50,
+  "97": 50,
+  "98": 50,
+  "99": 50,
+  "100": 50,
+  "101": 50,
+  "102": 50,
+  "103": 50,
+  "104": 50,
+  "105": 50,
+  "106": 50,
+  "107": 50,
+  "108": 50,
+  "109": 50,
+  "110": 50,
+  "111": 50,
+  "112": 50,
+  "113": 50,
+  "114": 50,
+  "115": 50,
+  "116": 50,
+  "117": 50,
+  "118": 50,
+  "119": 50,
+  "120": 50,
+  "121": 50,
+  "122": 50,
+  "123": 50,
+  "124": 50,
+  "125": 50,
+  "127": 50,
+  "128": 50,
+  "129": 50,
+  "132": 50,
+  "135": 50,
+  "136": 50,
+  "137": 50,
+  "139": 50,
+  "144": 50,
+  "148": 50,
+  "152": 50,
+  "155": 50,
+  "161": 50,
+  "162": 50,
+  "166": 50,
+  "169": 50,
+  "174": 50,
+  "176": 50,
+  "178": 50,
+  "186": 50,
+  "188": 50,
+  "192": 50,
+  "195": 50,
+  "203": 50,
+  "206": 50,
+  "208": 50,
+  "211": 50,
+  "212": 50,
+  "213": 50,
+  "217": 50,
+  "220": 50
+ },
+ "invariants": {
+  "all_ok": false,
+  "per_check": {
+   "schema_completeness": {
+    "ok": true,
+    "missing": []
+   },
+   "conservation": {
+    "ok": true,
+    "absent_chunks": [],
+    "over_allotment": []
+   },
+   "monotonicity": {
+    "ok": true,
+    "rows": 36611,
+    "papers": 3123,
+    "prior_rows": 0,
+    "prior_papers": 0
+   },
+   "no_model_emitted_ids": {
+    "ok": false,
+    "violations": {
+     "pathway_or_mechanism": 11
+    }
+   },
+   "id_provenance": {
+    "ok": false,
+    "id_without_source": {
+     "entity_ontology_id_resolved": 1243,
+     "hgnc_id": 5714
+    }
+   },
+   "enum_drift": {
+    "ok": true,
+    "flagged": {
+     "evidence_tier": {
+      "systematic-review/meta-analysis": 12,
+      "case-report/case-series": 4
+     },
+     "condition": {
+      "IBD_gut": 2,
+      "other patient group": 2
+     }
+    },
+    "note": "flagged for adjudication, never auto-remapped"
+   },
+   "duplicates": {
+    "ok": true,
+    "fully_identical_rows": 0,
+    "loose_key_groups": 96,
+    "note": "loose>full is expected and NOT a defect; only fully-identical rows are duplicates"
+   },
+   "hpo_multivalue": {
+    "ok": true,
+    "n_with_ids": 0
+   },
+   "authority_prefix_match": {
+    "ok": true,
+    "mismatches": {},
+    "n_mismatched_rows": 0
+   }
+  }
+ },
+ "build_utc": "2026-09-16T12:00:00Z",
+ "source_corpus_version_id": "f0b86f9a-f688-48c4-a08f-94e946afb9af",
+ "partition": {
+  "siblings": [
+   "tier1",
+   "tier2a",
+   "tier2b",
+   "tier3",
+   "tier4"
+  ],
+  "this": "tier2a",
+  "corpus_totals": {
+   "findings": 148186,
+   "papers": 11519,
+   "packages": 5
+  },
+  "pairwise_paper_overlap_all_zero": true,
+  "verified_by": "pmid set intersection across all 10 sibling pairs at build time"
+ },
+ "verifiability": {
+  "rows_total": 36611,
+  "abstract_derived_rows": 7713,
+  "abstract_derived_share_pct": 21.07,
+  "fulltext_derived_rows": 28898,
+  "source_text_retained": false,
+  "verifiable_rows": 7713,
+  "verifiable_share_pct": 21.07,
+  "basis": "abstract-derived rows only; body text was discarded after extraction, so full-text-derived quotes have no surviving source"
+ },
+ "enum_drift": {
+  "evidence_tier": {
+   "systematic-review/meta-analysis": 12,
+   "case-report/case-series": 4
+  },
+  "condition": {
+   "IBD_gut": 2,
+   "other patient group": 2
+  },
+  "total_drifted_rows": 20,
+  "share_pct": 0.0546
+ },
+ "quickstart_expected": {
+  "strong_evidence_rows": 1062,
+  "vocab_join_canonicalized_rows": 21264,
+  "vocab_join_coverage_of_entity_rows_pct": 100.0,
+  "certainty_column_used": "certainty"
+ }
+}

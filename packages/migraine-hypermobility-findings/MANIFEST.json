@@ -1,0 +1,519 @@
+{
+ "package": "migraine-hypermobility-findings-v1.1",
+ "tier": "tier4",
+ "title": "Tier 4 \u2014 migraine, hypermobility spectrum, Sj\u00f6gren's, PANS/PANDAS",
+ "version": "tier4-v1.1",
+ "built_utc": "2026-09-16T12:00:00Z",
+ "creator": {
+  "name": "Magennis, Erin",
+  "orcid": "0009-0007-9013-8052"
+ },
+ "license": {
+  "data": "CC-BY-4.0",
+  "provenance_quote": "verbatim source excerpts, copyright of respective publishers; see LICENSE"
+ },
+ "primary_table": "tier4_findings.parquet",
+ "contents": {
+  "findings": 15646,
+  "papers": 1091,
+  "chunks": 30,
+  "chunk_ids": [
+   256,
+   257,
+   258,
+   259,
+   260,
+   261,
+   262,
+   263,
+   264,
+   265,
+   266,
+   267,
+   268,
+   269,
+   270,
+   271,
+   272,
+   273,
+   274,
+   275,
+   276,
+   277,
+   278,
+   279,
+   280,
+   281,
+   282,
+   283,
+   284,
+   285
+  ],
+  "year_range": [
+   2020,
+   2026
+  ],
+  "tier_source": "t4"
+ },
+ "schema": {
+  "n_columns": 107,
+  "columns": [
+   "entity",
+   "entity_ontology_id",
+   "gene_marker",
+   "direction",
+   "direction_reference",
+   "finding_text",
+   "pathway_or_mechanism",
+   "pathway_id",
+   "quantitative_detail",
+   "effect_size",
+   "causal_or_correlational",
+   "evidence_tier",
+   "functional_impact",
+   "condition",
+   "pots_subtype",
+   "population_age_group",
+   "sex_hormonal",
+   "anatomical_system",
+   "is_covid_associated",
+   "finding_type",
+   "treatment_class",
+   "symptom_correlate",
+   "phenotype_hpo",
+   "validated_instrument",
+   "adverse_event_note",
+   "certainty",
+   "cohort_registry",
+   "cohort_name",
+   "dataset_accession",
+   "relation_type",
+   "relation_subject",
+   "relation_object",
+   "provenance_quote",
+   "provenance_section",
+   "null_or_failed_result",
+   "contradicts_finding_ref",
+   "evidence_stratum",
+   "study_quality",
+   "study_type",
+   "n_participants",
+   "comparator",
+   "demographics",
+   "is_duplicate_or_preprint_note",
+   "contradicts_or_extends",
+   "limitations_stated",
+   "future_direction",
+   "pmid",
+   "doi",
+   "title",
+   "year",
+   "journal",
+   "source_stream",
+   "theme",
+   "fulltext_status",
+   "contact_note",
+   "chunk_id",
+   "hgnc_id",
+   "ensembl_id",
+   "gene_resolved",
+   "entity_ontology_id_resolved",
+   "entity_ontology_label",
+   "pathway_id_resolved",
+   "pathway_label",
+   "phenotype_hpo_resolved",
+   "phenotype_hpo_label",
+   "source_fidelity",
+   "source_route",
+   "pmcid",
+   "entity_ontology_id_note",
+   "anatomical_study",
+   "tier_source",
+   "cap_entity_kind",
+   "cap_hpo_verified",
+   "cap_number_in_quote",
+   "cap_quote_source_retained",
+   "ontology_id_verification",
+   "ontology_id_match_mode",
+   "hpo_verification",
+   "hpo_id_count_unified",
+   "ontology_id_prefix",
+   "ontology_id_repaired",
+   "ontology_repair_action",
+   "ontology_id_final",
+   "ontology_id_source",
+   "entity_clean",
+   "ontology_label_final",
+   "entity_kind",
+   "phenotype_terms",
+   "certainty_derived",
+   "number_in_quote",
+   "fetch_note",
+   "gene_id_source",
+   "hpo_ids_verified",
+   "hpo_labels_verified",
+   "hpo_id_source",
+   "hpo_id_count",
+   "tier",
+   "_source_version_id",
+   "canonical_entity",
+   "canonical_source",
+   "source_literature",
+   "about_condition",
+   "evidence_scope",
+   "query_contamination",
+   "query_contamination_note",
+   "screen_verdict_uncertain",
+   "screen_verdict_note"
+  ],
+  "all_null_in_this_package": [
+   "_source_version_id",
+   "anatomical_study",
+   "entity_clean",
+   "entity_ontology_id",
+   "entity_ontology_id_note",
+   "ontology_id_final",
+   "ontology_id_repaired",
+   "ontology_label_final",
+   "ontology_repair_action",
+   "pathway_id",
+   "pathway_id_resolved",
+   "pathway_label",
+   "phenotype_hpo",
+   "phenotype_hpo_label",
+   "phenotype_hpo_resolved",
+   "pmcid",
+   "query_contamination_note",
+   "source_fidelity",
+   "source_route"
+  ],
+  "constant_in_this_package": {
+   "tier_source": "t4",
+   "cap_entity_kind": "True",
+   "cap_hpo_verified": "True",
+   "cap_number_in_quote": "True",
+   "cap_quote_source_retained": "True",
+   "ontology_id_prefix": "CHEBI",
+   "tier": "4.0",
+   "query_contamination": "False",
+   "screen_verdict_note": "screened 'uncertain' (topical-drift risk, not abbreviation collision): extracted but flagged"
+  }
+ },
+ "quality": {
+  "invariants_passing": 9,
+  "invariants_total": 9,
+  "invariants_all_ok": true,
+  "failing_checks": [],
+  "id_resolved_frac": 0.1032,
+  "id_denotes_entity_rate": 0.998,
+  "id_provenance": "authority-derived",
+  "quote_verifiable_rows": 15646,
+  "quote_verifiable_pct": 100.0,
+  "enum_drift_rows": 8,
+  "scientific_fidelity": "UNMEASURED \u2014 all QA verifies well-formedness, not correct interpretation",
+  "id_denotes_entity_rate_basis": "measured on this package's own tier"
+ },
+ "partition": {
+  "siblings": [
+   "tier1",
+   "tier2a",
+   "tier2b",
+   "tier3",
+   "tier4"
+  ],
+  "this": "tier4",
+  "corpus_totals": {
+   "findings": 148186,
+   "papers": 11519,
+   "packages": 5
+  },
+  "pairwise_paper_overlap_all_zero": true,
+  "verified_by": "pmid set intersection across all 10 sibling pairs at build time"
+ },
+ "source_corpus_version_id": "f0b86f9a-f688-48c4-a08f-94e946afb9af",
+ "verify": "python code/verify_package.py --self-test",
+ "files": [
+  {
+   "path": ".zenodo.json",
+   "bytes": 3121,
+   "sha256": "9c1cf4ab474183f4f9a09c6baaa850fbbe1d3a8a6879ef3d5f1afda8efffcd8a"
+  },
+  {
+   "path": "CITATION.cff",
+   "bytes": 2643,
+   "sha256": "0ad405856eb65eb2a0b47e9bac338e75f4ff4b07ce9199a21eb25970d5e59192"
+  },
+  {
+   "path": "LICENSE",
+   "bytes": 4615,
+   "sha256": "1dad5d8241ed12b11a90d6626960ab5c4284e66a573205c24906abcbd4f85718"
+  },
+  {
+   "path": "README.md",
+   "bytes": 15590,
+   "sha256": "1f87c1107f40897a4c9c078efc413ce7420fea675ab683ac9307aaf6e1ad195d"
+  },
+  {
+   "path": "annotations/COMPARATOR_GATE.json",
+   "bytes": 2826,
+   "sha256": "f14d3b656cf5332e149326eb471697fbda795a0e3043243782882e538ee5cee4"
+  },
+  {
+   "path": "annotations/CONDITION_ANNOTATIONS_README.md",
+   "bytes": 3544,
+   "sha256": "77bda8980baa25a489e91075834c1b2777642b11c150cb197bcdbb26aab063c6"
+  },
+  {
+   "path": "annotations/CONDITION_BUCKET_DEFINITIONS.md",
+   "bytes": 6663,
+   "sha256": "e5534b3423e31352e4d742c1afd52d2e809716323b3d287ef8275b376163a4ea"
+  },
+  {
+   "path": "annotations/RETROFIT_REPORT.md",
+   "bytes": 23456,
+   "sha256": "562c9c501c373f812e5f476c80b55abbfb540e43b10372d862f0753093b1cc31"
+  },
+  {
+   "path": "annotations/condition_annotations.csv",
+   "bytes": 431560,
+   "sha256": "fa0d24080766028282c7ad2ef71ba95216e90d0abbb259ba6e7387b94f07b61d"
+  },
+  {
+   "path": "annotations/condition_annotations.parquet",
+   "bytes": 105104,
+   "sha256": "2e53652e4342b8f34a2c4090da775d4f9d7177bac34271551ede219581e5f24e"
+  },
+  {
+   "path": "annotations/retrofit_fetch_log.parquet",
+   "bytes": 228909,
+   "sha256": "ed72f8314d314d0b0f0772927b47a0920ddc6e0a48f01630de7053414b1b9436"
+  },
+  {
+   "path": "annotations/retrofit_summary.json",
+   "bytes": 99774,
+   "sha256": "e5a14597f4dfea5078b2528d6ee5823e57383506ac39d47d5978130cfc6b0abb"
+  },
+  {
+   "path": "code/README.md",
+   "bytes": 2969,
+   "sha256": "fc8500de03bb7d5171bcf181718931ea15fcc4ba6e24a7d27b16921370ba4974"
+  },
+  {
+   "path": "code/comparator_symmetry_tests.py",
+   "bytes": 4377,
+   "sha256": "dd1e32198a53886e70888d3efd1152fb74346ec98c54853af11b5276aa6771e4"
+  },
+  {
+   "path": "code/crosstier_vocab.py",
+   "bytes": 5811,
+   "sha256": "91ea5461c1fea30431a61742e0bb1727d28fd752e47b5a503a2d6b3eaf7a4a97"
+  },
+  {
+   "path": "code/multi_authority_resolver.py",
+   "bytes": 4820,
+   "sha256": "a2b641aef7a74f5edd76753a95c04418e845ad3d94596e4f60135e4d94bb0f44"
+  },
+  {
+   "path": "code/normalizer_tests.py",
+   "bytes": 3551,
+   "sha256": "7fb9f9567c8e020a3fc7263a76409c766816db941465d99c7511aa85ba855f93"
+  },
+  {
+   "path": "code/quote_trace.py",
+   "bytes": 8344,
+   "sha256": "0a66bf6e10876c5ab601e3dd9070cd51015fcbc88964f80d806ff1ff388848e2"
+  },
+  {
+   "path": "code/resolution_cache.py",
+   "bytes": 7705,
+   "sha256": "ea9b4a46df8c34647eedcd7290ee6298eab3b24dca2fc57ef6d5847b24d70b99"
+  },
+  {
+   "path": "code/tier3_invariants.py",
+   "bytes": 5194,
+   "sha256": "d947d72ecfaba599bbaf4046319f3cb52884aebf482928e83c413f6296f0afd8"
+  },
+  {
+   "path": "code/tier3_invariants_ext.py",
+   "bytes": 2506,
+   "sha256": "1a8f5b5ace1fb94e545941086a9711ed37ad29a441bb30ad6f177092ae002ca9"
+  },
+  {
+   "path": "code/tier4_driver.py",
+   "bytes": 23056,
+   "sha256": "a4cc8a334f5437aee8f6572d03f2b745efd798f007677ea445004b4c04317bb9"
+  },
+  {
+   "path": "code/tier4_driver_tests.py",
+   "bytes": 11168,
+   "sha256": "80321d070f2149c39582d561cb1955e945ae75095955297c9b0cf72a3dc78c77"
+  },
+  {
+   "path": "code/tier4_invariants_ext_v2.py",
+   "bytes": 11266,
+   "sha256": "f60fa80091697ac1e44301718f3e07cce82a80ac35f15f0a5333475c35cf64ed"
+  },
+  {
+   "path": "code/tier4_pipeline.py",
+   "bytes": 34332,
+   "sha256": "ef653c0a44852c8e40681424b4c08fb5e3531f468e04c34b593c07ec4c9316f6"
+  },
+  {
+   "path": "code/tier4_prompt.txt",
+   "bytes": 8715,
+   "sha256": "1093ca4fc1fe295c511bdca90ac1acf4c2556e382daa71057ff456a2fb69979b"
+  },
+  {
+   "path": "code/tier4_quote_census.py",
+   "bytes": 8075,
+   "sha256": "c560801b98c3992c10a25c6be226920daa76405c7a9ec31a4aa6c12ab9446b4d"
+  },
+  {
+   "path": "code/tier4_resolver.py",
+   "bytes": 18397,
+   "sha256": "8ecedca0d449eae70754d133f548200f714fc895eed4e2d9da26fe1e1184c474"
+  },
+  {
+   "path": "code/tier4_scope_definition.txt",
+   "bytes": 3110,
+   "sha256": "870892586905ab776ffdbc6edd2f6361d3be7e488e65fe9da545d2fd28901833"
+  },
+  {
+   "path": "code/verify_package.py",
+   "bytes": 12391,
+   "sha256": "04ca91090fc999882cc43fa8d333963739ef836e95d8211276ba500f33dee30a"
+  },
+  {
+   "path": "data/chunk_order.parquet",
+   "bytes": 340937,
+   "sha256": "1e94336229b270caa8d067b5d938dfe6875b6bbf2be5d888ac113e43456553bc"
+  },
+  {
+   "path": "data/entity_vocabulary_crosstier.parquet",
+   "bytes": 2570259,
+   "sha256": "d5b6cd6320af2d519dc99b303b0a233ba464119a64554586ea4f0dc8218802d1"
+  },
+  {
+   "path": "data/tier4_findings.csv.gz",
+   "bytes": 3578941,
+   "sha256": "625120ae94621adab88dac99d473eec32e8d01d0feb325f7fde4d76c89a2b962"
+  },
+  {
+   "path": "data/tier4_findings.parquet",
+   "bytes": 3873614,
+   "sha256": "e7678dc9987dd7f5c01f941a13c5622b6cd09bf62e904ba51e020f185687291d"
+  },
+  {
+   "path": "deposit/ZENODO_FORM.md",
+   "bytes": 3028,
+   "sha256": "b6f964c14e120ee5a1f8d93f0c1e76f727f3d801dbdbf0f8dac133651c433e21"
+  },
+  {
+   "path": "deposit/github_release_notes.md",
+   "bytes": 1746,
+   "sha256": "3b96119fad9bc70dfaf27074b3a627f97723a7328bca76746cad7d9e7ee03486"
+  },
+  {
+   "path": "deposit/osf_metadata.json",
+   "bytes": 1977,
+   "sha256": "3a71850113db60832c6fa65c2c3c00eedea696c83d59b0b1b97438a96dc19113"
+  },
+  {
+   "path": "docs/COMPARABILITY.md",
+   "bytes": 11789,
+   "sha256": "6f7498d4fb138a1fd1276cd99cbbb796283c8e41a84d14c6bc3065e3987752f8"
+  },
+  {
+   "path": "docs/DATA_DICTIONARY.md",
+   "bytes": 17453,
+   "sha256": "40a8f9284f671ad17006accfcee0c6d95843e0f77ca06b6080d74812df45d95d"
+  },
+  {
+   "path": "docs/LIMITATIONS.md",
+   "bytes": 8353,
+   "sha256": "0dd32c82a9feb3f19b66dc3833dc5f0b231c23d365df7795f09e1de5f42b5038"
+  },
+  {
+   "path": "docs/METHODS.md",
+   "bytes": 5749,
+   "sha256": "ae2d12bd615d2dfae1dfc2624108969cc82aa26fd15e4f7e8d7bd15e32bdbd4d"
+  },
+  {
+   "path": "docs/README.md",
+   "bytes": 15590,
+   "sha256": "1f87c1107f40897a4c9c078efc413ce7420fea675ab683ac9307aaf6e1ad195d"
+  },
+  {
+   "path": "docs/WEBSITE_INTEGRATION.md",
+   "bytes": 3191,
+   "sha256": "95699d45574005abbbb062146aee3afe981b3cdf3f7abd0df70f24d462f58e5a"
+  },
+  {
+   "path": "qa/comparability_report.json",
+   "bytes": 44265,
+   "sha256": "e07f0e782825b747cf7100495bb22b2dcfd31cc9e79324857934be70338cc26b"
+  },
+  {
+   "path": "qa/invariants.json",
+   "bytes": 1120,
+   "sha256": "5a8c218a1543a01d651347689b13e9091cc341c78b3b45ad9cd62247c44d1446"
+  },
+  {
+   "path": "qa/package_stats.json",
+   "bytes": 11489,
+   "sha256": "5db62bd2de8e1b4af609731018d56cb1a6cb5a513db00df026fb8e8967e18997"
+  },
+  {
+   "path": "qa/quote_census_all_tiers.json",
+   "bytes": 19974,
+   "sha256": "d2932723c21bee7bdc6f68e9b4a2977b740fb159409dd60c66068edd88a76cdc"
+  },
+  {
+   "path": "qa/tier4_invariants.json",
+   "bytes": 1406,
+   "sha256": "a75f963e94e3030fe4abc94f513be6bd0ff7f859d08f8f86ac363bc433b96cf1"
+  },
+  {
+   "path": "qa/tier4_measure_authority_eval.json",
+   "bytes": 15934,
+   "sha256": "328bae91bd83c45571f36e9cada361d828ac64d90b01eaa4f99ca5e4f463653e"
+  },
+  {
+   "path": "qa/tier4_pilot_gate.json",
+   "bytes": 5834,
+   "sha256": "53410c3e8f8be190b2be2638e02c81fd78c4606f1688d6dbc115165ca147a1b8"
+  },
+  {
+   "path": "qa/tier4_provenance_audit.json",
+   "bytes": 5906,
+   "sha256": "cc42f02f3837d9ba7afb395cf7c3bafd8798866fd9c14e8845ada40b61189d78"
+  },
+  {
+   "path": "qa/tier4_qa_report.json",
+   "bytes": 11111,
+   "sha256": "7f999a91141b2c5dc807f239863bd0e7ee8193da5efa191638410e6cd7fa9c91"
+  },
+  {
+   "path": "qa/tier4_quote_census.json",
+   "bytes": 9245,
+   "sha256": "a4bd7ef5640fc877e33424ca0acf0e34d4aec166834d6ed086652af4edcb2cc5"
+  },
+  {
+   "path": "qa/tier4_screening_final_summary.json",
+   "bytes": 3846,
+   "sha256": "675447b2626fea70a6c597f13c00fc856fb63838195da4b7d3d12e14ce0e5ca8"
+  },
+  {
+   "path": "scope/tier4_excluded_pmids_final.csv",
+   "bytes": 84416,
+   "sha256": "71d40957c6456f4ceb3c7b8230446d1160c6359f3994f088a4242fa9884c6bd0"
+  },
+  {
+   "path": "scope/tier4_screening_report_final.csv",
+   "bytes": 980177,
+   "sha256": "fa4d6b68111e1a78d28c5c4e52a063c47491641760888262e0c602ec2517a17b"
+  }
+ ],
+ "n_files": 56,
+ "total_bytes": 12730942
+}

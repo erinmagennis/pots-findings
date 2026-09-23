@@ -1,0 +1,195 @@
+{
+ "defect": "id_provenance verified EXISTENCE of a source tag, not AGREEMENT between the tag's named authority and the id prefix it labels.",
+ "corpus": {
+  "path": "/Users/erinmagennis/.claude-science/orgs/6a5d2770-cc82-4fa8-9368-765078a83010/artifacts/proj_2fb6e51be987/4c7449b4-6253-4fe7-a29d-4268ef016625/v65d77afd_tier3_findings_grounded_v3.parquet",
+  "rows": 26032,
+  "cols": 73
+ },
+ "positive_control": {
+  "n_rows": 49,
+  "definition": "rows where an id's prefix differs from the authority named by its *_id_source tag",
+  "columns_scanned": [
+   "hpo_ids_verified/hpo_id_source",
+   "entity_ontology_id_resolved/ontology_id_source"
+  ],
+  "rows_by_column": {
+   "hpo_ids_verified": 49
+  },
+  "rows_by_source_tag": {
+   "authority_lookup_ols_hp": 29,
+   "authority_lookup_ols_hp_synonym": 20
+  },
+  "claimed_authority": {
+   "hp": 49
+  },
+  "prefix_breakdown_ids": {
+   "MPATH": 19,
+   "PATO": 13,
+   "GO": 9,
+   "NBO": 6,
+   "UBERON": 2
+  },
+  "prefix_breakdown_rows": {
+   "MPATH": 19,
+   "PATO": 13,
+   "GO": 9,
+   "NBO": 6,
+   "UBERON": 2
+  },
+  "total_ids_in_offending_rows": 113,
+  "offending_ids": 49,
+  "distinct_offending_ids": 21,
+  "rows_entirely_foreign_prefixed": 23,
+  "rows_mixed_hp_and_foreign": 26
+ },
+ "id_correctness_check": {
+  "method": "each distinct offending id re-queried on OLS4 and compared to its DEFINING ontology's label (is_defining_ontology=true)",
+  "distinct_ids_checked": 21,
+  "exact_label_agreement": 21,
+  "rate": 1.0,
+  "conclusion": "ids and labels are correct; only the provenance claim was wrong",
+  "sample": [
+   {
+    "obo_id": "GO:0006956",
+    "corpus_label": "complement activation",
+    "authority_label": "complement activation",
+    "defining_ontology": "go",
+    "label_matches": true
+   },
+   {
+    "obo_id": "GO:0019233",
+    "corpus_label": "sensory perception of pain",
+    "authority_label": "sensory perception of pain",
+    "defining_ontology": "go",
+    "label_matches": true
+   },
+   {
+    "obo_id": "GO:0030168",
+    "corpus_label": "platelet activation",
+    "authority_label": "platelet activation",
+    "defining_ontology": "go",
+    "label_matches": true
+   },
+   {
+    "obo_id": "GO:0042110",
+    "corpus_label": "T cell activation",
+    "authority_label": "T cell activation",
+    "defining_ontology": "go",
+    "label_matches": true
+   },
+   {
+    "obo_id": "GO:0070227",
+    "corpus_label": "lymphocyte apoptotic process",
+    "authority_label": "lymphocyte apoptotic process",
+    "defining_ontology": "go",
+    "label_matches": true
+   },
+   {
+    "obo_id": "GO:0070254",
+    "corpus_label": "mucus secretion",
+    "authority_label": "mucus secretion",
+    "defining_ontology": "go",
+    "label_matches": true
+   },
+   {
+    "obo_id": "GO:0070527",
+    "corpus_label": "platelet aggregation",
+    "authority_label": "platelet aggregation",
+    "defining_ontology": "go",
+    "label_matches": true
+   },
+   {
+    "obo_id": "MPATH:105",
+    "corpus_label": "circulatory disorder",
+    "authority_label": "circulatory disorder",
+    "defining_ontology": "mpath",
+    "label_matches": true
+   }
+  ]
+ },
+ "option_comparison": {
+  "denominator_rows": 49,
+  "denominator_ids": 113,
+  "option_a_prefix_constrain": {
+   "rows_kept": 26,
+   "rows_nulled": 23,
+   "ids_kept": 64,
+   "ids_discarded": 49,
+   "note": "discards 49 ids verified 21/21 correct against their defining ontology"
+  },
+  "option_b_record_minting": {
+   "rows_kept": 49,
+   "rows_nulled": 0,
+   "ids_kept": 113,
+   "ids_discarded": 0
+  },
+  "chosen": "b",
+  "justification": "Option (a) trades a provenance defect for a recall defect: it would null 23 of 49 rows and drop 49 identifiers that re-verify 21/21 against their defining ontology with exact label agreement. Option (b) fixes what was actually broken - the claim - and makes HPO's import relationships machine-readable. Note the pinned multi_authority_resolver ALREADY implements (a) on the entity path (it prefix-filters inside _ols), which is exactly why zero offenders appear in ontology_id_source and why imported terms are silently lost there."
+ },
+ "defect_locus": {
+  "finding": "all offenders originate in the HPO-verification stage, not the entity-ontology resolver",
+  "hpo_id_source_tag_vocabulary": {
+   "unresolved_nulled": 14615,
+   "authority_lookup_ols_hp_synonym": 3429,
+   "authority_lookup_ols_hp": 7988
+  },
+  "offenders_in_ontology_id_source": 0
+ },
+ "cache_upgrade": {
+  "source": "/Users/erinmagennis/.claude-science/orgs/6a5d2770-cc82-4fa8-9368-765078a83010/artifacts/proj_2fb6e51be987/e6a394f8-8459-43f0-b478-fb696bfb60dd/v2900ff37_resolution_cache.parquet",
+  "pairs_in": 8216,
+  "pairs_out": 8216,
+  "pairs_preserved": true,
+  "resolved_before": 971,
+  "resolved_after": 971,
+  "entries_retagged": 241,
+  "cross_ontology_entries": 0,
+  "note": "241 retags were path normalisation (bare '_ols_x' -> '_ols_x_exact'); the primed cache holds no cross-ontology entries because the old entity path prefix-filtered them away.",
+  "minting_ontology_distribution": {
+   "chebi": 456,
+   "uniprot": 162,
+   "hp": 152,
+   "uberon": 114,
+   "ncbitaxon": 52,
+   "cl": 35
+  }
+ },
+ "resolver_selftest_failures": [],
+ "invariant9_unit_tests": {
+  "positive_old_tag": {
+   "ok": false,
+   "n_mismatched_rows": 49,
+   "n_rows": 49,
+   "passes_test": true
+  },
+  "negative_clean": {
+   "ok": true,
+   "n_mismatched_rows": 0,
+   "n_rows": 11368,
+   "n_ids_checked": 19196,
+   "passes_test": true
+  },
+  "positive_retagged_truthful": {
+   "ok": true,
+   "n_mismatched_rows": 0,
+   "n_rows": 49,
+   "passes_test": true
+  },
+  "adversarial_wrong_minter_declared": {
+   "ok": false,
+   "n_mismatched_rows": 1,
+   "passes_test": true
+  },
+  "adversarial_column_cannot_launder_tag": {
+   "ok": false,
+   "n_mismatched_rows": 1,
+   "passes_test": true
+  },
+  "adversarial_minting_column_contradicts_ids": {
+   "ok": false,
+   "n_mismatched_rows": 1,
+   "passes_test": true
+  },
+  "all_passed": true
+ }
+}

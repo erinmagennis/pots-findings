@@ -1,0 +1,72 @@
+You are extracting structured research findings from a scientific paper for a GROUNDED, TYPED biomedical knowledge base on POTS/dysautonomia/ME-CFS/EDS/fibromyalgia/MCAS/small-fiber-neuropathy/long-COVID (and their autism/migraine/IBS intersections).
+
+This paper's corpus theme tags: {themes}
+Flagged COVID-related in corpus: {is_covid}
+Text provided is: {text_kind}  (full-text sections when available, else title+abstract)
+(Per-finding tags reflect what THAT finding is about, which may be narrower than the paper's themes.)
+
+Return ONLY a JSON object:
+{{
+  "study_type": one of ["RCT","cohort/observational","case-control","case-report/case-series","mechanistic/in-vitro","review/narrative","systematic-review/meta-analysis","cross-sectional","other"],
+  "n_participants": integer or null,
+  "comparator": one of ["healthy controls","other patient group","pre/post within-subject","no comparator","not applicable"],
+  "demographics": "free text if sex/age composition stated, else null",
+  "is_duplicate_or_preprint_note": "note if preprint/letter/duplicate, else null",
+  "findings": [
+    {{
+      "entity": "specific named biological entity, CANONICAL name, or null",
+      "entity_ontology_id": "PROPOSED id: HGNC/Ensembl for genes, ChEBI for chemicals, MeSH/UMLS for other; null if none. Do NOT invent — leave null if unsure.",
+      "gene_marker": "gene symbol AND any specific variant notation stated (rsID like rs1234, or HGVS like c.12174C>G / p.Arg406Trp) — capture the exact variant string verbatim for downstream ClinVar/dbSNP grounding; else null",
+      "direction": one of ["elevated","depleted/reduced","dysregulated (unspecified direction)","no significant difference","not applicable"],
+      "direction_reference": one of ["vs-disease-state","vs-intervention","not-applicable"],
+      "finding_text": "one sentence in your own words, grounded in the text",
+      "pathway_or_mechanism": "named pathway/mechanism (incl. pathogen triggers like EBV/Lyme), else null",
+      "pathway_id": "PROPOSED Reactome/GO id, else null (do not invent)",
+      "quantitative_detail": "specific number/stat for THIS finding (incl. dosage), else null",
+      "effect_size": {{"metric": one of ["OR","HR","RR","beta","r","d","mean_diff","percent","p_value","other"], "value": number, "ci": "lo-hi or null", "p": number or null}} or null,
+      "causal_or_correlational": one of ["causal-claim","correlational-only","not-stated"],
+      "evidence_tier": one of ["meta-analysis","RCT","cohort","case-control","cross-sectional","case-series","case-report","mechanistic/in-vitro","review/expert-opinion"],
+      "functional_impact": "QoL/ADL/functional effect if stated, else null",
+      "condition": one of ["POTS","ME_CFS","long_COVID","EDS_hypermobility","fibromyalgia","MCAS","dysautonomia","small_fiber_neuropathy","autism","migraine","IBS_gut","multiple","general"],
+      "pots_subtype": "if condition=POTS and subtype named: one of ['hyperadrenergic','neurogenic','hypovolemic','not specified'], else null",
+      "population_age_group": one of ["pediatric","adult","mixed","not-stated"],
+      "sex_hormonal": one of ["female-specific","male-specific","sex-difference-reported","hormonal-axis-implicated","none-stated"],
+      "anatomical_system": "one or more (comma-sep) of [autonomic,immune,connective-tissue,GI,neuro,vascular,endocrine,musculoskeletal,other]",
+      "is_covid_associated": true/false,
+      "finding_type": one of ["mechanism/biomarker","treatment/intervention","symptom-burden","comorbidity","diagnostic/screening"],
+      "treatment_class": "if finding_type=treatment/intervention: one of [pharmacologic,non-pharmacologic,device,procedural,supplement/nutraceutical,behavioral,other] + ': ' + intervention name; else null",
+      "symptom_correlate": "specific symptom(s) if stated, else null",
+      "phenotype_hpo": "PROPOSED HPO id(s) for the symptom/phenotype, else null (do not invent)",
+      "validated_instrument": "named validated scale (COMPASS-31, SF-36, Beighton...), else null",
+      "adverse_event_note": "safety/AE info if treatment finding, else null",
+      "certainty": EXACTLY one of "hedged" | "confirmed" | "mixed",
+      "cohort_registry": "named cohort/registry if stated, else null",
+      "cohort_name": "named cohort for grounding (RECOVER, UK Biobank, DecodeME, All of Us...), else null",
+      "dataset_accession": "data repository accession the finding rests on: GEO (GSE/GSM), ArrayExpress (E-), PRIDE (PXD), dbGaP (phs), SRA/ENA; else null. Only if explicitly stated.",
+      "relation_type": one of ["UPREGULATED_IN","DOWNREGULATED_IN","DYSREGULATED_IN","CAUSES","ASSOCIATED_WITH","CO_OCCURS_WITH","PART_OF_PATHWAY","BIOMARKER_FOR","TARGETED_BY_TREATMENT","DIAGNOSED_BY","PREDICTS","NO_ASSOCIATION"],
+      "relation_subject": "the subject of the typed triple (usually the entity/gene)",
+      "relation_object": "the object of the typed triple (usually the condition/pathway/symptom)",
+      "provenance_quote": "VERBATIM sentence(s) from the text this finding is drawn from — copy exactly, 1-2 sentences max, do NOT paraphrase",
+      "provenance_section": one of ["title","abstract","introduction","methods","results","discussion","conclusion","figure/table","unknown"],
+      "null_or_failed_result": one of ["positive-effect","null-no-effect","failed-to-replicate","tried-and-abandoned","not-applicable"],
+      "contradicts_finding_ref": "if this finding directly contradicts a specific prior claim, one sentence naming it, else null",
+      "evidence_stratum": one of ["peer-reviewed","preprint","clinical-trial-registry","patient-registry","large-survey","case-report"],
+      "study_quality": {{"sample_size_adequacy": one of ["adequate","small","underpowered","not-assessable"], "controls": one of ["blinded-RCT","controlled","uncontrolled","single-arm","not-applicable"], "preregistered": true/false/"not-stated", "effect_with_ci_reported": true/false, "conflict_or_funding_flag": "text or null", "replication_status": one of ["replication-of-prior","single-study","contradicts-prior","not-stated"], "quality_caveat": "one-sentence weakness note or null"}}
+    }}
+  ],
+  "contradicts_or_extends": "one sentence if stated, else null",
+  "limitations_stated": "one sentence if stated, else null",
+  "future_direction": "one sentence if stated, else null"
+}}
+
+RULES:
+- Extract only what the text supports. Do NOT invent entities, numbers, mechanisms, ontology ids, or accessions.
+- For grounding ids (entity_ontology_id, pathway_id, phenotype_hpo, dataset_accession): propose ONLY if confident; these are validated downstream. When unsure, use null — a null costs nothing, a wrong id is discarded.
+- direction_reference: use "vs-intervention" when the direction describes a treatment's EFFECT; "vs-disease-state" when comparing patients to controls/baseline.
+- provenance_quote MUST be copied verbatim from the provided text — it is the traceability anchor; never paraphrase or invent it.
+- study_quality is best-effort appraisal from what the text states; use null/not-stated when not determinable.
+- Extract EVERY distinct, substantive finding the text supports — do NOT cap the count. A rich paper may yield 15-25 findings; a thin one 1-2. Do not split one result into fragments, and do not pad with trivia, but never drop a real finding just to shorten the list.
+- Pure review with no specific finding: empty findings list, study_type "review/narrative".
+Return ONLY the JSON object.
+
+TITLE: 

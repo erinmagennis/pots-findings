@@ -1,0 +1,70 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it — and cite the source papers for any finding that matters to your work."
+type: dataset
+title: "Tier 3 — long COVID, post-viral and autism intersections"
+version: "tier3-v1.1"
+date-released: "2026-09-16"
+license: CC-BY-4.0
+repository-code: "https://github.com/erinmagennis/pots-findings"
+authors:
+  - family-names: "Magennis"
+    given-names: "Erin"
+    orcid: "https://orcid.org/0009-0007-9013-8052"
+abstract: >-
+  Package 4 of 5. 26,032 structured findings machine-extracted from
+  1,587 papers (2020-2026) covering long COVID autonomic, autism intersection, post-viral syndromes.
+  One block of a five-way partition of an 11,519-paper, 148,186-finding corpus of the POTS,
+  dysautonomia and comorbid-condition literature; the five packages share zero papers.
+  Scientific fidelity is unmeasured: all QA verifies well-formedness, not correct
+  interpretation of sources. Not medical advice.
+keywords:
+  - "POTS"
+  - "postural orthostatic tachycardia syndrome"
+  - "dysautonomia"
+  - "ME/CFS"
+  - "myalgic encephalomyelitis"
+  - "chronic fatigue syndrome"
+  - "Ehlers-Danlos syndrome"
+  - "hypermobility"
+  - "fibromyalgia"
+  - "mast cell activation syndrome"
+  - "long COVID"
+  - "post-viral syndrome"
+  - "small fiber neuropathy"
+  - "autism"
+  - "migraine"
+  - "text mining"
+  - "literature extraction"
+  - "biomarkers"
+  - "structured findings"
+  - "text and data mining"
+  - "large language model extraction"
+identifiers:
+  - type: doi
+    value: "PLACEHOLDER-DOI-tier3"
+    description: "Replace with the DOI minted on deposit."
+references:
+  - type: dataset
+    title: "Tier 1 — POTS and dysautonomia core literature"
+    authors:
+      - family-names: "Magennis"
+        given-names: "Erin"
+    notes: "Sibling package 1 of 5. Replace notes with its DOI once minted."
+  - type: dataset
+    title: "Tier 2 Part A — comorbid-condition literatures, first extraction wave"
+    authors:
+      - family-names: "Magennis"
+        given-names: "Erin"
+    notes: "Sibling package 2 of 5. Replace notes with its DOI once minted."
+  - type: dataset
+    title: "Tier 2 Part B — comorbid-condition literatures, second extraction wave"
+    authors:
+      - family-names: "Magennis"
+        given-names: "Erin"
+    notes: "Sibling package 3 of 5. Replace notes with its DOI once minted."
+  - type: dataset
+    title: "Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS"
+    authors:
+      - family-names: "Magennis"
+        given-names: "Erin"
+    notes: "Sibling package 5 of 5. Replace notes with its DOI once minted."

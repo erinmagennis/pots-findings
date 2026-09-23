@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this data, please cite it — and cite the source papers for any finding that matters to your work."
+type: dataset
+title: "POTS / Dysautonomia Cross-Condition Literature Findings"
+version: "v1.1"
+date-released: "2026-09-16"
+license: CC-BY-4.0
+repository-code: "https://github.com/erinmagennis/pots-findings"
+authors:
+  - family-names: "Magennis"
+    given-names: "Erin"
+    orcid: "https://orcid.org/0009-0007-9013-8052"
+abstract: >-
+  148,186 structured findings machine-extracted from 11,519 papers across the POTS,
+  dysautonomia and comorbid-condition literature (ME/CFS, Ehlers-Danlos and hypermobility,
+  MCAS, fibromyalgia, IBS, small-fiber neuropathy, long COVID, autism, migraine, Sjogren's,
+  PANS/PANDAS). Distributed as five self-contained packages sharing zero papers. Every
+  finding carries the verbatim source span it was drawn from plus its source paper's PMID
+  and DOI, and explicit provenance for every ontology identifier. Scientific fidelity is
+  unmeasured: all quality checks verify well-formedness, not correct interpretation of
+  sources. Not medical advice.
+keywords:
+  - "POTS"
+  - "postural orthostatic tachycardia syndrome"
+  - "dysautonomia"
+  - "ME/CFS"
+  - "Ehlers-Danlos syndrome"
+  - "hypermobility"
+  - "fibromyalgia"
+  - "mast cell activation syndrome"
+  - "long COVID"
+  - "small fiber neuropathy"
+  - "autism"
+  - "migraine"
+  - "literature extraction"
+  - "text and data mining"
+  - "biomarkers"

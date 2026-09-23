@@ -1,0 +1,111 @@
+{
+  "audit": "Tier-1 provenance quote fidelity (frozen findings table)",
+  "generated_utc": "2026-08-19T06:41:03.845417+00:00",
+  "corpus": {
+    "tier1_findings_total": 36459,
+    "findings_with_quote": 36459,
+    "unique_pmids": 3129
+  },
+  "abstract_only": {
+    "n_checked": 6535,
+    "n_papers": 1207,
+    "verbatim_exact_n": 6410,
+    "verbatim_exact_pct": 98.09,
+    "traceable_n": 6504,
+    "traceable_pct": 99.53,
+    "no_match_n": 31,
+    "match_modes": {
+      "exact": 6410,
+      "shingle": 94,
+      "none": 29,
+      "short_no_exact": 2
+    },
+    "source_text": "stored title + abstract (the complete source for this stratum)"
+  },
+  "fulltext": {
+    "papers_sampled": 52,
+    "papers_fetched": 52,
+    "fetch_failures": 0,
+    "n_checked": 851,
+    "verbatim_exact_n": 832,
+    "verbatim_exact_pct": 97.77,
+    "traceable_n": 847,
+    "traceable_pct": 99.53,
+    "no_match_n": 4,
+    "match_modes": {
+      "exact": 832,
+      "shingle": 15,
+      "short_no_exact": 2,
+      "none": 2
+    },
+    "stratification": "OA papers split into 4 quartiles by findings-per-paper, 13 sampled per quartile (2-55 findings/paper)",
+    "source_text": "Europe PMC fullTextXML re-fetched live with Accept: */*, median 6461 normalized words/paper",
+    "papers_with_tables": 41
+  },
+  "residual_adjudication": {
+    "residual_total": 35,
+    "parse_count_equals_input_count": true,
+    "in_paper_with_other_matching_quotes": 35,
+    "in_paper_where_nothing_matched": 0,
+    "llm_on_topic": 32,
+    "llm_off_topic": 3,
+    "llm_unparsed": 0,
+    "mechanical_categories": {
+      "PARTIAL_ALIGN_ge85": 32,
+      "TABLE_CELL_CONCAT": 2,
+      "INLINE_CITATION_SPLIT": 1
+    },
+    "off_topic_all_mechanically_explained": true,
+    "off_topic_explanations": [
+      {
+        "pmid": "41801611",
+        "mech_category": "TABLE_CELL_CONCAT"
+      },
+      {
+        "pmid": "41981001",
+        "mech_category": "TABLE_CELL_CONCAT"
+      },
+      {
+        "pmid": "41968129",
+        "mech_category": "INLINE_CITATION_SPLIT"
+      }
+    ],
+    "residual_with_no_mechanical_explanation": 0,
+    "longest_contiguous_match_words": {
+      "4": 1,
+      "5": 1,
+      "7": 4,
+      "8": 1,
+      "9": 3,
+      "10": 15,
+      "11": 10
+    },
+    "align_recall_median": 0.917,
+    "align_recall_min": 0.778,
+    "conclusion": "All 35 residual quotes are near-misses of real source text, not fabrications: each sits in a paper whose other quotes matched, each shares a contiguous 4-11 word phrase with the source (just under the 12-word threshold), median token-alignment recall 0.917. The 3 LLM OFF_TOPIC calls were false alarms, each mechanically resolved (2 table-cell digit concatenation, 1 inline-citation split)."
+  },
+  "projected_genuine_fabrication_pct": 0.0,
+  "projected_offtopic_pct": 0.0,
+  "matcher_bugs_hit": {
+    "bug_1_merge_fanout": "Joining residuals on (pmid, chunk_id) fanned 448 rows to 3852: chunk_id is not unique within a pmid. Fixed with a positional uid + row-count asserts.",
+    "bug_2_greedy_tag_regex": "Standard r'<[^>]+>' consumed plain-text inequalities: '( P < .05). Eight participants...' parsed as one fake tag, deleting whole sentences from 260/1207 abstracts. Fixed by requiring a real tag name and forbidding nested '<'. Moved abstract-only traceable 92.61% -> 99.53%.",
+    "bug_3_isOA_truthiness": "isOA holds 'Y'/'N' strings, not booleans; `isOA==True` selected 0 papers and would have yielded an empty full-text sample.",
+    "bug_4_partial_token_overlap": "Residual diagnostic reported 12-word matches contradicting the 12-shingle test, because substring search matched mid-token ('fx ne' vs 'fx ne orf da'). Made token-aligned; max fell to 11, consistent with the strict matcher.",
+    "prebuilt_defenses_that_paid_off": "tags->space, double html.unescape, NFKD + accent strip, lowercase + non-alnum collapse; plus Greek transliteration and letter/digit splitting so alpha1/\u03b11 and IL-6/IL6 agree."
+  },
+  "cross_validation": {
+    "second_implementation": "lxml itertext parse with an independent tokenizer",
+    "abstract_only_disagreements_traceable": 0,
+    "abstract_only_disagreements_exact": 0
+  },
+  "scope_limits": [
+    "Stratum 1 is a CENSUS of all 6,535 abstract-only findings; Stratum 2 is a SAMPLE of 851 findings from 52 OA papers out of 29,910 retrieved-fulltext findings (2.8% of that stratum's findings, 4.2% of its OA papers).",
+    "Full-text results generalize only to OA papers reachable via Europe PMC; 109 non-OA and 559 unknown-OA papers in that stratum were not auditable offline.",
+    "Re-fetched XML is today's version; a genuine quote could mismatch a since-revised article. No mismatch here required that explanation.",
+    "14 findings with fulltext_status='blocked' were not audited (no retrievable source text).",
+    "Table-cell and figure-caption extractions are structurally unmatchable by a linear-text matcher; 342 findings carry provenance_section='figure/table' corpus-wide and are under-represented in the traceable rate.",
+    "This audit tests the COPY path (quote fidelity) only; it says nothing about the RECALL path (ontology identifiers), which prior audits of this corpus found ~28% wrong.",
+    "The 12-word shingle threshold is a convention; quotes under 12 normalized words can only be judged by exact substring match (37 such cases across both strata)."
+  ],
+  "verdict": "PASS - Tier-1 provenance quotes are genuine source text. 98.09% verbatim-exact / 99.53% traceable on a census of all 6,535 abstract-only findings, and 97.77% / 99.53% on 851 findings re-checked against live Europe PMC full text. Zero fabrications identified; all 35 residuals mechanically explained as near-miss/table/citation artifacts. Consistent with, and slightly better than, the Tier-2 result (94.2% / 98.2%)."
+}

@@ -1,0 +1,39 @@
+SCOPE — a biomarker/mechanism corpus for POTS and RELATED conditions. The research programme is
+"biological markers and causes of POTS and related conditions": dysautonomia BROADLY, fibromyalgia,
+Ehlers-Danlos/hypermobility, ME/CFS, IBS, migraine, autism, mast cell disease, small-fibre neuropathy.
+
+IN SCOPE is BROAD and the lists below are ILLUSTRATIVE, NOT EXHAUSTIVE. In particular:
+* ANY dysautonomia or autonomic-nervous-system disorder is IN SCOPE — including familial dysautonomia
+  (Riley-Day, ELP1/HSAN III), hereditary sensory and autonomic neuropathies, multiple system atrophy,
+  pure autonomic failure, orthostatic hypotension, orthostatic intolerance, syncope and convulsive
+  syncope, vasovagal syncope, baroreflex failure, autonomic testing/QSART studies.
+* ANY headache/cephalalgia disorder is in scope for the migraine layer — including trigeminal autonomic
+  cephalalgias, cluster headache, SUNCT/SUNA, hemicrania, new daily persistent headache, and secondary
+  headache when autonomic features are studied.
+* Connective-tissue and hypermobility disorders: Ehlers-Danlos (all types), hypermobility spectrum
+  disorder, joint hypermobility, Marfan, Loeys-Dietz, osteogenesis imperfecta.
+* Mast cell: MCAS, systemic mastocytosis, hereditary alpha-tryptasemia.
+* Post-infectious/post-viral: long COVID, PASC, post-viral fatigue, ME/CFS, PANS/PANDAS.
+* Sjogren syndrome, other autoimmune rheumatic disease WHEN studied for neurological, autonomic,
+  fatigue, small-fibre, or biomarker aspects.
+* Comorbidity, epidemiology, mechanism, biomarker, genetics, treatment, and patient-experience studies
+  of any of the above ALL COUNT as in scope.
+
+OFF TOPIC means one of two specific things:
+(1) WRONG ABBREVIATION SENSE — the paper uses an abbreviation in a sense foreign to this corpus:
+    HSD = hydroxysteroid dehydrogenase or honey-sweetened drink (not hypermobility spectrum disorder);
+    ASD = atrial septal defect or adult spinal deformity (not autism spectrum disorder);
+    EDS = excessive daytime sleepiness or electronic data systems (not Ehlers-Danlos);
+    SS = systemic sclerosis or steady-state (not Sjogren) — BUT systemic sclerosis studied for
+      autonomic/small-fibre involvement is in scope;
+    PANS/PANDAS = polyarteritis nodosa or the animal (not the paediatric neuropsychiatric syndrome);
+    MS = mass spectrometry used as a mere method label; MD = "mean difference"; CM = Chiari malformation.
+(2) TOPICAL DRIFT — an orthopaedic/sports-medicine joint-laxity paper (clubfoot Ponseti, hallux valgus,
+    ACL injury, TMJ prolotherapy) or a rare multi-system genetic syndrome where "joint hypermobility"
+    is one incidental phenotype item in a long list, with no dysautonomia/connective-tissue/biomarker
+    research question.
+
+When a paper studies one of many diseases including an in-scope one (e.g. a survey across rheumatic
+diseases that includes Sjogren), that is IN SCOPE — cross-mention data is used by this corpus.
+If genuinely torn, answer "uncertain". Do NOT answer off_topic merely because a condition is not
+named in the illustrative lists above.

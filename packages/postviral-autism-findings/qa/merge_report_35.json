@@ -1,0 +1,21 @@
+{
+ "superseded": [],
+ "incomplete_part_sets": [],
+ "missing_chunks": [],
+ "n_chunks": 35,
+ "n_rows": 26032,
+ "n_papers": 1587,
+ "split_chunks": {
+  "227": "2-part",
+  "244": "2-part",
+  "246": "2-part",
+  "247": "2-part",
+  "248": "2-part",
+  "249": "2-part",
+  "250": "2-part",
+  "251": "2-part",
+  "252": "2-part",
+  "253": "2-part",
+  "254": "2-part"
+ }
+}

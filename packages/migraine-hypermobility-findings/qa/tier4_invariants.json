@@ -1,0 +1,70 @@
+{
+ "1_schema": {
+  "name": "schema_completeness",
+  "ok": true,
+  "missing": []
+ },
+ "2_no_model_ids": {
+  "name": "no_model_emitted_ids",
+  "ok": true,
+  "violations": {}
+ },
+ "3_enum": {
+  "name": "enum_drift",
+  "ok": true,
+  "flagged": {
+   "evidence_tier": {
+    "systematic-review/meta-analysis": 7
+   }
+  },
+  "note": "flagged for adjudication, never auto-remapped"
+ },
+ "4_duplicates": {
+  "name": "duplicates",
+  "ok": true,
+  "fully_identical_rows": 0,
+  "loose_key_groups": 91,
+  "note": "loose>full is expected and NOT a defect; only fully-identical rows are duplicates"
+ },
+ "5_conservation": {
+  "name": "conservation",
+  "ok": true,
+  "absent_chunks": [],
+  "over_allotment": []
+ },
+ "6_monotonicity": {
+  "name": "monotonicity",
+  "ok": true,
+  "rows": 12129,
+  "papers": 887,
+  "prior_rows": 0,
+  "prior_papers": 0
+ },
+ "7_hpo_multi": {
+  "name": "hpo_multivalue",
+  "ok": true,
+  "mismatch": 0,
+  "n_with_ids": 5891,
+  "n_multi": 1460
+ },
+ "8_id_provenance": {
+  "name": "id_provenance",
+  "ok": true,
+  "id_without_source": {}
+ },
+ "9_authority_prefix": {
+  "name": "authority_prefix_match_v4",
+  "mismatches": {},
+  "n_mismatched_rows": 0,
+  "n_mismatched_ids": 0,
+  "n_rows_checked": 7145,
+  "n_ids_checked": 9288,
+  "n_undeclared_tag_rows": 0,
+  "n_minting_column_disagreements": 0,
+  "columns_checked": [
+   "hpo_ids_verified",
+   "entity_ontology_id_resolved"
+  ],
+  "ok": true
+ }
+}

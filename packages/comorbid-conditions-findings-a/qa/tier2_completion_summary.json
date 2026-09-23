@@ -1,0 +1,29 @@
+{
+ "tier2_papers_total": 7243,
+ "extraction_chunks": 145,
+ "chunks_extracted": 145,
+ "papers_yielding": 5712,
+ "papers_no_findings": 1527,
+ "chunk75_tier2_in_tier1_run": 4,
+ "findings": 70441,
+ "distinct_finding_text": 70315,
+ "findings_per_paper": 12.33,
+ "paper_coverage_pct": 78.9,
+ "prior_81chunk_findings": 36611,
+ "new_64chunk_findings": 33830,
+ "null_entity_rate": 0.4126,
+ "pooled_invariants": {
+  "I1": true,
+  "I2": true,
+  "I3": true,
+  "I4a": true,
+  "I4b": true,
+  "I5": true,
+  "I6": true,
+  "I7": true
+ },
+ "pooled_invariants_n": 8,
+ "pooled_invariants_all_pass": true,
+ "i7_note": "I7 compares ALL 63 non-key fields. A 10-field subset yields 18 false-positive 'identical' groups; that subset is stricter than the check intends.",
+ "text_sharing_groups": 112
+}

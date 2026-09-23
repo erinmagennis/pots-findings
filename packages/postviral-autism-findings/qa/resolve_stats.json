@@ -1,0 +1,9 @@
+{
+ "unique_pairs": 3121,
+ "cache_hits": 0,
+ "network_calls": 3121,
+ "new_resolved": 248,
+ "new_missed": 2873,
+ "checkpoints": 13,
+ "cache_size": 8216
+}

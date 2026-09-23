@@ -1,0 +1,14 @@
+{
+ "I1_distinct_le_rows": true,
+ "I2_no_orphan_pmids": true,
+ "I3_no_null_finding_text": true,
+ "I4_chunks_145": true,
+ "I5_no_full_row_dupes": true,
+ "I6_fpp": 12.33,
+ "I7_identical_nonkey_groups": 0,
+ "I8_quote_fill": 100.0,
+ "I9_no_model_ids_kept": true,
+ "I10_rows": 70441,
+ "I9_definition": "no row RETAINS a model-proposed id (tests ontology_id_final, not the provenance tag)",
+ "all_boolean_invariants_pass": true
+}

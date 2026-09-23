@@ -1,0 +1,65 @@
+{
+ "all_ok": true,
+ "checks": [
+  {
+   "name": "schema_completeness",
+   "ok": true,
+   "missing": []
+  },
+  {
+   "name": "conservation",
+   "ok": true,
+   "absent_chunks": [],
+   "over_allotment": []
+  },
+  {
+   "name": "monotonicity",
+   "ok": true,
+   "rows": 26032,
+   "papers": 1587,
+   "prior_rows": 15505,
+   "prior_papers": 984
+  },
+  {
+   "name": "no_model_emitted_ids",
+   "ok": true,
+   "violations": {}
+  },
+  {
+   "name": "id_provenance",
+   "ok": true,
+   "id_without_source": {}
+  },
+  {
+   "name": "enum_drift",
+   "ok": true,
+   "flagged": {
+    "evidence_tier": {
+     "systematic-review/meta-analysis": 17,
+     "systematic review": 2
+    }
+   },
+   "note": "flagged for adjudication, never auto-remapped"
+  },
+  {
+   "name": "duplicates",
+   "ok": true,
+   "fully_identical_rows": 0,
+   "loose_key_groups": 151,
+   "note": "loose>full is expected and NOT a defect; only fully-identical rows are duplicates"
+  },
+  {
+   "name": "hpo_multivalue",
+   "ok": true,
+   "mismatch": 0,
+   "n_with_ids": 11417,
+   "n_multi": 4091
+  },
+  {
+   "name": "authority_prefix_match",
+   "mismatches": {},
+   "n_mismatched_rows": 0,
+   "ok": true
+  }
+ ]
+}

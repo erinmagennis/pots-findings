@@ -1,0 +1,561 @@
+{
+ "package": "tier4",
+ "label": "Tier 4",
+ "findings": 15646,
+ "papers": 1091,
+ "chunk_ids": [
+  256,
+  257,
+  258,
+  259,
+  260,
+  261,
+  262,
+  263,
+  264,
+  265,
+  266,
+  267,
+  268,
+  269,
+  270,
+  271,
+  272,
+  273,
+  274,
+  275,
+  276,
+  277,
+  278,
+  279,
+  280,
+  281,
+  282,
+  283,
+  284,
+  285
+ ],
+ "n_chunks": 30,
+ "year_range": [
+  2020,
+  2026
+ ],
+ "year_hist": {
+  "2020": 40,
+  "2021": 180,
+  "2022": 199,
+  "2023": 176,
+  "2024": 168,
+  "2025": 202,
+  "2026": 125
+ },
+ "themes": {
+  "migraine_intersection": {
+   "findings": 9503,
+   "papers": 589
+  },
+  "author_augment": {
+   "findings": 3334,
+   "papers": 286
+  },
+  "sjogrens": {
+   "findings": 1197,
+   "papers": 68
+  },
+  "hypermobility_spectrum": {
+   "findings": 1086,
+   "papers": 101
+  },
+  "pans_pandas": {
+   "findings": 526,
+   "papers": 47
+  }
+ },
+ "conditions": {
+  "migraine": {
+   "findings": 6259,
+   "papers": 543
+  },
+  "general": {
+   "findings": 3591,
+   "papers": 386
+  },
+  "dysautonomia": {
+   "findings": 1877,
+   "papers": 243
+  },
+  "fibromyalgia": {
+   "findings": 952,
+   "papers": 182
+  },
+  "EDS_hypermobility": {
+   "findings": 934,
+   "papers": 109
+  },
+  "multiple": {
+   "findings": 743,
+   "papers": 159
+  },
+  "long_COVID": {
+   "findings": 493,
+   "papers": 41
+  },
+  "MCAS": {
+   "findings": 240,
+   "papers": 36
+  },
+  "POTS": {
+   "findings": 176,
+   "papers": 37
+  },
+  "IBS_gut": {
+   "findings": 160,
+   "papers": 41
+  },
+  "small_fiber_neuropathy": {
+   "findings": 119,
+   "papers": 16
+  },
+  "ME_CFS": {
+   "findings": 94,
+   "papers": 21
+  },
+  "autism": {
+   "findings": 8,
+   "papers": 4
+  }
+ },
+ "source_literature": {
+  "migraine": 9503,
+  "None": 3334,
+  "sjogrens": 1197,
+  "EDS_hypermobility": 1086,
+  "pans_pandas": 526
+ },
+ "evidence_tier": {
+  "cross-sectional": 3491,
+  "cohort": 3452,
+  "review/expert-opinion": 2702,
+  "case-control": 1297,
+  "case-series": 1241,
+  "mechanistic/in-vitro": 1162,
+  "RCT": 1100,
+  "meta-analysis": 679,
+  "case-report": 514,
+  "systematic-review/meta-analysis": 8
+ },
+ "finding_type": {
+  "mechanism/biomarker": 5678,
+  "treatment/intervention": 3946,
+  "comorbidity": 2304,
+  "diagnostic/screening": 1874,
+  "symptom-burden": 1844
+ },
+ "certainty_derived": {
+  "confirmed": 13304,
+  "mixed": 1309,
+  "hedged": 1033
+ },
+ "causal_or_correlational": {
+  "correlational-only": 9809,
+  "not-stated": 3548,
+  "causal-claim": 2288,
+  "mechanistic/in-vitro": 1
+ },
+ "fulltext_strata": {
+  "abstract-only": {
+   "papers": 505,
+   "findings": 3347,
+   "findings_per_paper": 6.63
+  },
+  "blocked": {
+   "papers": 3,
+   "findings": 20,
+   "findings_per_paper": 6.67
+  },
+  "retrieved-fulltext": {
+   "papers": 583,
+   "findings": 12279,
+   "findings_per_paper": 21.06
+  }
+ },
+ "findings_per_paper_overall": 14.34,
+ "quote": {
+  "rows_with_quote": 15646,
+  "median_chars": 178,
+  "p90": 297,
+  "p99": 446,
+  "max_chars": 1065,
+  "over_200": 6134,
+  "over_400": 262,
+  "over_600": 34
+ },
+ "provenance_section": {
+  "results": 7761,
+  "discussion": 3972,
+  "abstract": 2853,
+  "introduction": 630,
+  "figure/table": 270,
+  "conclusion": 73,
+  "methods": 45,
+  "unknown": 24,
+  "title": 18
+ },
+ "grounding": {
+  "rows_with_resolved_id": 1614,
+  "id_resolved_frac_all_rows": 0.1032,
+  "entity_rows": 11259,
+  "id_resolved_frac_entity_rows": 0.1434,
+  "rows_id_and_authority_label": 1614,
+  "verification": {
+   "no_id": 14032,
+   "authority_verified": 1614
+  },
+  "match_mode": {
+   "None": 14032,
+   "exact": 1368,
+   "synonym": 246
+  },
+  "id_prefix": {
+   "None": 14032,
+   "CHEBI": 1614
+  },
+  "ontology_id_source": {
+   "unresolved_nulled": 14032,
+   "authority_lookup_ols_chebi": 1368,
+   "authority_lookup_ols_chebi_synonym": 246
+  },
+  "id_denotes_entity_rate": {
+   "value": 0.998,
+   "basis": "measured on this package's own tier",
+   "adjudicated_sample_n": 56,
+   "measured_per_package": true,
+   "caveat": "lower bound; the adjudicator over-calls DIFFERENT by ~17%"
+  }
+ },
+ "hpo": {
+  "rows_with_verified_hpo": 7478,
+  "verification": {
+   "no_hpo": 8168,
+   "authority_verified_exact": 5973,
+   "authority_verified_synonym": 1505
+  },
+  "rows_model_emitted_hpo": 0
+ },
+ "gene": {
+  "rows_gene_marker": 474,
+  "rows_gene_resolved": 382,
+  "rows_hgnc": 382,
+  "rows_ensembl": 382
+ },
+ "canonicalization": {
+  "rows_canonical_entity": 11259,
+  "distinct_raw_entity": 4766,
+  "distinct_canonical": 4740,
+  "canonical_source": {
+   "model_name_uncanonicalized": 14032,
+   "authority_label": 1614
+  }
+ },
+ "capability_flags": {
+  "cap_entity_kind": {
+   "true": 15646,
+   "false": 0,
+   "null": 0
+  },
+  "cap_hpo_verified": {
+   "true": 15646,
+   "false": 0,
+   "null": 0
+  },
+  "cap_number_in_quote": {
+   "true": 15646,
+   "false": 0,
+   "null": 0
+  },
+  "cap_quote_source_retained": {
+   "true": 15646,
+   "false": 0,
+   "null": 0
+  }
+ },
+ "flags": {
+  "query_contamination": 0,
+  "screen_verdict_uncertain": 2257,
+  "null_or_failed_result": 15646,
+  "number_in_quote_true": 8847,
+  "number_in_quote_false": 618
+ },
+ "fill_rates_pct": {
+  "certainty_derived": 100.0,
+  "relation_type": 100.0,
+  "relation_subject": 100.0,
+  "relation_object": 100.0,
+  "provenance_quote": 100.0,
+  "provenance_section": 100.0,
+  "null_or_failed_result": 100.0,
+  "evidence_stratum": 100.0,
+  "study_quality": 100.0,
+  "ontology_id_source": 100.0,
+  "hpo_id_count_unified": 100.0,
+  "hpo_verification": 100.0,
+  "ontology_id_verification": 100.0,
+  "cap_quote_source_retained": 100.0,
+  "cap_number_in_quote": 100.0,
+  "cap_hpo_verified": 100.0,
+  "cap_entity_kind": 100.0,
+  "pmid": 100.0,
+  "title": 100.0,
+  "journal": 100.0,
+  "source_stream": 100.0,
+  "theme": 100.0,
+  "fulltext_status": 100.0,
+  "tier_source": 100.0,
+  "gene_resolved": 100.0,
+  "chunk_id": 100.0,
+  "fetch_note": 100.0,
+  "canonical_source": 100.0,
+  "direction": 100.0,
+  "direction_reference": 100.0,
+  "finding_text": 100.0,
+  "screen_verdict_uncertain": 100.0,
+  "query_contamination": 100.0,
+  "evidence_scope": 100.0,
+  "about_condition": 100.0,
+  "causal_or_correlational": 100.0,
+  "evidence_tier": 100.0,
+  "certainty": 100.0,
+  "condition": 100.0,
+  "population_age_group": 100.0,
+  "sex_hormonal": 100.0,
+  "anatomical_system": 100.0,
+  "is_covid_associated": 100.0,
+  "finding_type": 100.0,
+  "tier": 100.0,
+  "hpo_id_count": 100.0,
+  "hpo_id_source": 100.0,
+  "gene_id_source": 100.0,
+  "doi": 99.98,
+  "year": 99.96,
+  "phenotype_terms": 85.8,
+  "entity_kind": 80.93,
+  "source_literature": 78.69,
+  "canonical_entity": 71.96,
+  "entity": 71.96,
+  "symptom_correlate": 63.5,
+  "quantitative_detail": 61.64,
+  "number_in_quote": 60.49,
+  "study_type": 58.83,
+  "comparator": 58.83,
+  "future_direction": 54.21,
+  "limitations_stated": 51.79,
+  "pathway_or_mechanism": 49.62,
+  "contradicts_or_extends": 48.74,
+  "hpo_ids_verified": 47.79,
+  "hpo_labels_verified": 47.79,
+  "demographics": 45.26,
+  "n_participants": 43.51,
+  "effect_size": 39.9,
+  "treatment_class": 26.64,
+  "functional_impact": 24.26,
+  "cohort_registry": 17.86,
+  "validated_instrument": 16.14,
+  "screen_verdict_note": 14.43,
+  "contact_note": 10.65,
+  "ontology_id_match_mode": 10.32,
+  "ontology_id_prefix": 10.32,
+  "entity_ontology_id_resolved": 10.32,
+  "entity_ontology_label": 10.32,
+  "cohort_name": 10.01,
+  "adverse_event_note": 5.85,
+  "contradicts_finding_ref": 4.13,
+  "gene_marker": 3.03,
+  "is_duplicate_or_preprint_note": 2.83,
+  "ensembl_id": 2.44,
+  "hgnc_id": 2.44,
+  "pots_subtype": 1.2,
+  "dataset_accession": 0.14,
+  "ontology_id_repaired": 0.0,
+  "ontology_repair_action": 0.0,
+  "ontology_id_final": 0.0,
+  "query_contamination_note": 0.0,
+  "pathway_id": 0.0,
+  "pathway_id_resolved": 0.0,
+  "pathway_label": 0.0,
+  "phenotype_hpo_resolved": 0.0,
+  "phenotype_hpo_label": 0.0,
+  "ontology_label_final": 0.0,
+  "_source_version_id": 0.0,
+  "source_fidelity": 0.0,
+  "phenotype_hpo": 0.0,
+  "source_route": 0.0,
+  "entity_ontology_id_note": 0.0,
+  "entity_clean": 0.0,
+  "anatomical_study": 0.0,
+  "entity_ontology_id": 0.0,
+  "pmcid": 0.0
+ },
+ "constant_columns": {
+  "tier_source": "t4",
+  "cap_entity_kind": "True",
+  "cap_hpo_verified": "True",
+  "cap_number_in_quote": "True",
+  "cap_quote_source_retained": "True",
+  "ontology_id_prefix": "CHEBI",
+  "tier": "4.0",
+  "query_contamination": "False",
+  "screen_verdict_note": "screened 'uncertain' (topical-drift risk, not abbreviation collision): extracted but flagged"
+ },
+ "all_null_columns": [
+  "entity_ontology_id",
+  "pathway_id",
+  "phenotype_hpo",
+  "pathway_id_resolved",
+  "pathway_label",
+  "phenotype_hpo_resolved",
+  "phenotype_hpo_label",
+  "source_fidelity",
+  "source_route",
+  "pmcid",
+  "entity_ontology_id_note",
+  "anatomical_study",
+  "ontology_id_repaired",
+  "ontology_repair_action",
+  "ontology_id_final",
+  "entity_clean",
+  "ontology_label_final",
+  "_source_version_id",
+  "query_contamination_note"
+ ],
+ "tier_source": "t4",
+ "chunk_paper_allotment": {
+  "256": 50,
+  "257": 50,
+  "258": 50,
+  "259": 50,
+  "260": 50,
+  "261": 50,
+  "262": 50,
+  "263": 50,
+  "264": 50,
+  "265": 50,
+  "266": 50,
+  "267": 50,
+  "268": 50,
+  "269": 50,
+  "270": 50,
+  "271": 50,
+  "272": 50,
+  "273": 50,
+  "274": 50,
+  "275": 50,
+  "276": 50,
+  "277": 50,
+  "278": 50,
+  "279": 50,
+  "280": 50,
+  "281": 50,
+  "282": 50,
+  "283": 50,
+  "284": 50,
+  "285": 13
+ },
+ "invariants": {
+  "all_ok": true,
+  "per_check": {
+   "schema_completeness": {
+    "ok": true,
+    "missing": []
+   },
+   "conservation": {
+    "ok": true,
+    "absent_chunks": [],
+    "over_allotment": []
+   },
+   "monotonicity": {
+    "ok": true,
+    "rows": 15646,
+    "papers": 1091,
+    "prior_rows": 0,
+    "prior_papers": 0
+   },
+   "no_model_emitted_ids": {
+    "ok": true,
+    "violations": {}
+   },
+   "id_provenance": {
+    "ok": true,
+    "id_without_source": {}
+   },
+   "enum_drift": {
+    "ok": true,
+    "flagged": {
+     "evidence_tier": {
+      "systematic-review/meta-analysis": 8
+     }
+    },
+    "note": "flagged for adjudication, never auto-remapped"
+   },
+   "duplicates": {
+    "ok": true,
+    "fully_identical_rows": 0,
+    "loose_key_groups": 129,
+    "note": "loose>full is expected and NOT a defect; only fully-identical rows are duplicates"
+   },
+   "hpo_multivalue": {
+    "ok": true,
+    "mismatch": 0,
+    "n_with_ids": 7478,
+    "n_multi": 1818
+   },
+   "authority_prefix_match": {
+    "ok": true,
+    "mismatches": {},
+    "n_mismatched_rows": 0
+   }
+  }
+ },
+ "build_utc": "2026-09-16T12:00:00Z",
+ "source_corpus_version_id": "f0b86f9a-f688-48c4-a08f-94e946afb9af",
+ "partition": {
+  "siblings": [
+   "tier1",
+   "tier2a",
+   "tier2b",
+   "tier3",
+   "tier4"
+  ],
+  "this": "tier4",
+  "corpus_totals": {
+   "findings": 148186,
+   "papers": 11519,
+   "packages": 5
+  },
+  "pairwise_paper_overlap_all_zero": true,
+  "verified_by": "pmid set intersection across all 10 sibling pairs at build time"
+ },
+ "verifiability": {
+  "rows_total": 15646,
+  "abstract_derived_rows": 3367,
+  "abstract_derived_share_pct": 21.52,
+  "fulltext_derived_rows": 12279,
+  "source_text_retained": true,
+  "verifiable_rows": 15646,
+  "verifiable_share_pct": 100.0,
+  "basis": "all rows: body text retained in gzipped chunk archives, so every quote is re-checkable"
+ },
+ "enum_drift": {
+  "evidence_tier": {
+   "systematic-review/meta-analysis": 8
+  },
+  "condition": {},
+  "total_drifted_rows": 8,
+  "share_pct": 0.0511
+ },
+ "quickstart_expected": {
+  "strong_evidence_rows": 1598,
+  "vocab_join_canonicalized_rows": 11259,
+  "vocab_join_coverage_of_entity_rows_pct": 100.0,
+  "certainty_column_used": "certainty_derived"
+ }
+}

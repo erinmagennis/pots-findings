@@ -1,0 +1,70 @@
+{
+ "all_ok": false,
+ "checks": [
+  {
+   "name": "schema_completeness",
+   "ok": true,
+   "missing": []
+  },
+  {
+   "name": "conservation",
+   "ok": true,
+   "absent_chunks": [],
+   "over_allotment": []
+  },
+  {
+   "name": "monotonicity",
+   "ok": true,
+   "rows": 33830,
+   "papers": 2589,
+   "prior_rows": 0,
+   "prior_papers": 0
+  },
+  {
+   "name": "no_model_emitted_ids",
+   "ok": false,
+   "violations": {
+    "pathway_or_mechanism": 1
+   }
+  },
+  {
+   "name": "id_provenance",
+   "ok": false,
+   "id_without_source": {
+    "entity_ontology_id_resolved": 999,
+    "hgnc_id": 5232
+   }
+  },
+  {
+   "name": "enum_drift",
+   "ok": true,
+   "flagged": {
+    "evidence_tier": {
+     "systematic-review/meta-analysis": 13
+    },
+    "condition": {
+     "other patient group": 3
+    }
+   },
+   "note": "flagged for adjudication, never auto-remapped"
+  },
+  {
+   "name": "duplicates",
+   "ok": true,
+   "fully_identical_rows": 0,
+   "loose_key_groups": 137,
+   "note": "loose>full is expected and NOT a defect; only fully-identical rows are duplicates"
+  },
+  {
+   "name": "hpo_multivalue",
+   "ok": true,
+   "n_with_ids": 0
+  },
+  {
+   "name": "authority_prefix_match",
+   "mismatches": {},
+   "n_mismatched_rows": 0,
+   "ok": true
+  }
+ ]
+}

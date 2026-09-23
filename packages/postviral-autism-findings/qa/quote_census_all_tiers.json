@@ -1,0 +1,445 @@
+{
+ "instrument": {
+  "matcher": "quote_trace.py (PINNED ffc40716-4cb5-4554-a4dd-52e5743f5809)",
+  "selftest_failures": [],
+  "decision_rule": "quote_traceability(q,t)[1]; exact substring OR >=60% 8-shingle overlap after normalize()",
+  "identical_instrument_all_tiers": true,
+  "superscripts_not_normalized": true
+ },
+ "part1_retention_gap": {
+  "definition": {
+   "rows_verifiable": "rows with a non-null provenance_quote whose OWN source text still exists and was re-read: tiers 1-3 = abstract-derived rows only (fulltext_status in {abstract-only, blocked}) checked against the draw-corpus abstract; tier 4 = all rows, abstract-derived vs abstract and full-text-derived vs its retained gzipped archive",
+   "rows_unverifiable": "rows with a quote whose source text no longer exists anywhere reachable: tiers 1-3 fulltext_status=='retrieved-fulltext' (body text discarded after extraction) plus the handful of abstract-stratum rows whose pmid is absent from the draw corpus",
+   "abstract_source": "draw corpus 528e0f3a-769b-4818-ba75-03454ef20f65, 13653 of 14263 papers carry non-empty abstract text",
+   "archive_source": "62 tier-4 gzipped chunk archives -> 1277 papers with body text (3 flagged prompt_truncated)"
+  },
+  "per_tier": {
+   "tier1": {
+    "rows_total": 36067,
+    "rows_with_quote": 36067,
+    "rows_verifiable": 6488,
+    "rows_unverifiable": 29579,
+    "verifiable_pct_of_quote_rows": 17.99,
+    "n_traceable": 6136,
+    "traceable_pct": 94.57,
+    "traceable_denominator": 6488,
+    "control_fp_pct": 0.0,
+    "control_verdict": "matcher discriminates (<5% FP)",
+    "fulltext_papers": 1917,
+    "fulltext_rows": 29531,
+    "strata": {
+     "abstract-only": {
+      "stratum": "tier1:abstract-only vs abstract",
+      "n_rows_with_quote": 6522,
+      "n_checked": 6475,
+      "n_traceable": 6123,
+      "n_untraceable": 352,
+      "n_no_source_text": 47,
+      "traceable_pct": 94.56,
+      "basis": "CENSUS of tier1:abstract-only vs abstract rows with a non-null quote; 6475 verified against that paper's own retained source text; 47 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 400,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     },
+     "blocked": {
+      "stratum": "tier1:blocked vs abstract",
+      "n_rows_with_quote": 14,
+      "n_checked": 13,
+      "n_traceable": 13,
+      "n_untraceable": 0,
+      "n_no_source_text": 1,
+      "traceable_pct": 100.0,
+      "basis": "CENSUS of tier1:blocked vs abstract rows with a non-null quote; 13 verified against that paper's own retained source text; 1 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 13,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "13 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     },
+     "retrieved-fulltext": {
+      "stratum": "tier1:retrieved-fulltext vs abstract",
+      "n_rows_with_quote": 29531,
+      "n_checked": 28983,
+      "n_traceable": 96,
+      "n_untraceable": 28887,
+      "n_no_source_text": 548,
+      "traceable_pct": 0.33,
+      "basis": "CENSUS of tier1:retrieved-fulltext vs abstract rows with a non-null quote; 28983 verified against that paper's own retained source text; 548 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 400,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     }
+    },
+    "note": "verifiable = abstract-derived rows only (body text discarded after extraction)"
+   },
+   "tier2": {
+    "rows_total": 70441,
+    "rows_with_quote": 70441,
+    "rows_verifiable": 14161,
+    "rows_unverifiable": 56280,
+    "verifiable_pct_of_quote_rows": 20.1,
+    "n_traceable": 13346,
+    "traceable_pct": 94.24,
+    "traceable_denominator": 14161,
+    "control_fp_pct": 0.0,
+    "control_verdict": "matcher discriminates (<5% FP)",
+    "fulltext_papers": 3226,
+    "fulltext_rows": 56168,
+    "strata": {
+     "abstract-only": {
+      "stratum": "tier2:abstract-only vs abstract",
+      "n_rows_with_quote": 13959,
+      "n_checked": 13847,
+      "n_traceable": 13071,
+      "n_untraceable": 776,
+      "n_no_source_text": 112,
+      "traceable_pct": 94.4,
+      "basis": "CENSUS of tier2:abstract-only vs abstract rows with a non-null quote; 13847 verified against that paper's own retained source text; 112 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 400,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     },
+     "blocked": {
+      "stratum": "tier2:blocked vs abstract",
+      "n_rows_with_quote": 314,
+      "n_checked": 314,
+      "n_traceable": 275,
+      "n_untraceable": 39,
+      "n_no_source_text": 0,
+      "traceable_pct": 87.58,
+      "basis": "CENSUS of tier2:blocked vs abstract rows with a non-null quote; 314 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 314,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "314 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     },
+     "retrieved-fulltext": {
+      "stratum": "tier2:retrieved-fulltext vs abstract",
+      "n_rows_with_quote": 56168,
+      "n_checked": 55518,
+      "n_traceable": 100,
+      "n_untraceable": 55418,
+      "n_no_source_text": 650,
+      "traceable_pct": 0.18,
+      "basis": "CENSUS of tier2:retrieved-fulltext vs abstract rows with a non-null quote; 55518 verified against that paper's own retained source text; 650 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 400,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     }
+    },
+    "note": "verifiable = abstract-derived rows only (body text discarded after extraction)"
+   },
+   "tier3": {
+    "rows_total": 26032,
+    "rows_with_quote": 26032,
+    "rows_verifiable": 3177,
+    "rows_unverifiable": 22855,
+    "verifiable_pct_of_quote_rows": 12.2,
+    "n_traceable": 3075,
+    "traceable_pct": 96.79,
+    "traceable_denominator": 3177,
+    "control_fp_pct": 0.0,
+    "control_verdict": "matcher discriminates (<5% FP)",
+    "fulltext_papers": 1096,
+    "fulltext_rows": 22850,
+    "strata": {
+     "abstract-only": {
+      "stratum": "tier3:abstract-only vs abstract",
+      "n_rows_with_quote": 3033,
+      "n_checked": 3029,
+      "n_traceable": 2930,
+      "n_untraceable": 99,
+      "n_no_source_text": 4,
+      "traceable_pct": 96.73,
+      "basis": "CENSUS of tier3:abstract-only vs abstract rows with a non-null quote; 3029 verified against that paper's own retained source text; 4 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 400,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     },
+     "blocked": {
+      "stratum": "tier3:blocked vs abstract",
+      "n_rows_with_quote": 149,
+      "n_checked": 148,
+      "n_traceable": 145,
+      "n_untraceable": 3,
+      "n_no_source_text": 1,
+      "traceable_pct": 97.97,
+      "basis": "CENSUS of tier3:blocked vs abstract rows with a non-null quote; 148 verified against that paper's own retained source text; 1 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 148,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "148 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     },
+     "retrieved-fulltext": {
+      "stratum": "tier3:retrieved-fulltext vs abstract",
+      "n_rows_with_quote": 22850,
+      "n_checked": 22815,
+      "n_traceable": 111,
+      "n_untraceable": 22704,
+      "n_no_source_text": 35,
+      "traceable_pct": 0.49,
+      "basis": "CENSUS of tier3:retrieved-fulltext vs abstract rows with a non-null quote; 22815 verified against that paper's own retained source text; 35 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 400,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     }
+    },
+    "note": "verifiable = abstract-derived rows only (body text discarded after extraction)"
+   },
+   "tier4": {
+    "rows_total": 15646,
+    "rows_with_quote": 15646,
+    "rows_verifiable": 15646,
+    "rows_unverifiable": 0,
+    "verifiable_pct_of_quote_rows": 100.0,
+    "n_traceable": 15504,
+    "traceable_pct": 99.09,
+    "traceable_denominator": 15646,
+    "control_fp_pct": 0.0,
+    "control_verdict": "matcher discriminates (<5% FP)",
+    "fulltext_papers": 583,
+    "fulltext_rows": 12279,
+    "strata": {
+     "abstract-only": {
+      "stratum": "tier4:abstract-only vs abstract",
+      "n_rows_with_quote": 3347,
+      "n_checked": 3347,
+      "n_traceable": 3266,
+      "n_untraceable": 81,
+      "n_no_source_text": 0,
+      "traceable_pct": 97.58,
+      "basis": "CENSUS of tier4:abstract-only vs abstract rows with a non-null quote; 3347 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 400,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     },
+     "blocked": {
+      "stratum": "tier4:blocked vs retained archive",
+      "n_rows_with_quote": 20,
+      "n_checked": 20,
+      "n_traceable": 19,
+      "n_untraceable": 1,
+      "n_no_source_text": 0,
+      "traceable_pct": 95.0,
+      "basis": "CENSUS of tier4:blocked vs retained archive rows with a non-null quote; 20 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 20,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "20 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     },
+     "retrieved-fulltext": {
+      "stratum": "tier4:retrieved-fulltext vs retained archive",
+      "n_rows_with_quote": 12279,
+      "n_checked": 12279,
+      "n_traceable": 12219,
+      "n_untraceable": 60,
+      "n_no_source_text": 0,
+      "traceable_pct": 99.51,
+      "basis": "CENSUS of tier4:retrieved-fulltext vs retained archive rows with a non-null quote; 12279 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+      "negative_control": {
+       "n_control": 400,
+       "n_false_positives": 0,
+       "false_positive_pct": 0.0,
+       "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+       "verdict": "matcher discriminates"
+      }
+     }
+    },
+    "note": "verifiable = all rows; body text retained in 62 gzipped archives"
+   }
+  },
+  "whole_corpus": {
+   "n_quote_rows": 148186,
+   "n_verifiable": 39472,
+   "n_unverifiable": 108714,
+   "verifiable_pct": 26.64,
+   "basis": "denominator = all 148186 rows across four tiers carrying a non-null provenance_quote (100% of rows in every tier); numerator = rows actually re-read against their own source text",
+   "headline": "26.64% of the 11,519-paper corpus's extracted findings can be provenance-checked today; 108714 rows cannot be, and 108549 of those are permanently so unless body text is re-fetched"
+  },
+  "note_tier4_fulltext_paper_count": "recomputed from the COMPLETE tier-4 corpus: 583 unique pmids with fulltext_status=='retrieved-fulltext' (handoff carried 463, which was a partial-tier figure). Reporting the measured value."
+ },
+ "part2_retrofit_feasibility": {
+  "sample": {
+   "population": "tier-3 papers with fulltext_status=='retrieved-fulltext' (n=1096 papers over 35 chunks)",
+   "n_papers_drawn": 97,
+   "seed": 20260902,
+   "stratification": "proportional allocation by chunk_id with randomized-remainder rounding; 35 of 35 chunks represented",
+   "n_tier3_rows_represented": 2081
+  },
+  "fetch": {
+   "method": "extraction_pipeline_v6.py (a3713196) fetch_fulltext/epmc_fulltext/parse_sections, unmodified",
+   "pacing": "ONE worker, 0.9s sleep before every EPMC call, 6-attempt exponential backoff",
+   "wall_seconds": 388,
+   "seconds_per_paper": 4.0,
+   "status_counts": {
+    "retrieved-fulltext": 97
+   },
+   "n_recovered": 97,
+   "refetch_success_rate_pct": 100.0,
+   "basis": "numerator = papers yielding parsed body text >500 chars; denominator = 97 sampled papers"
+  },
+  "traceability_on_recovered": {
+   "stratum": "tier3 retrofit sample: quotes vs RE-FETCHED body text",
+   "n_rows_with_quote": 2081,
+   "n_checked": 2081,
+   "n_traceable": 2053,
+   "n_untraceable": 28,
+   "n_no_source_text": 0,
+   "traceable_pct": 98.65,
+   "basis": "CENSUS of tier3 retrofit sample: quotes vs RE-FETCHED body text rows with a non-null quote; 2081 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+   "negative_control": {
+    "n_control": 400,
+    "n_false_positives": 0,
+    "false_positive_pct": 0.0,
+    "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+    "verdict": "matcher discriminates"
+   }
+  },
+  "status_quo_same_rows": {
+   "stratum": "tier3 retrofit sample: same rows vs abstract only (status quo)",
+   "n_rows_with_quote": 2081,
+   "n_checked": 2081,
+   "n_traceable": 16,
+   "n_untraceable": 2065,
+   "n_no_source_text": 0,
+   "traceable_pct": 0.77,
+   "basis": "CENSUS of tier3 retrofit sample: same rows vs abstract only (status quo) rows with a non-null quote; 2081 verified against that paper's own retained source text; 0 excluded for no available source text (denominator is n_checked)",
+   "negative_control": {
+    "n_control": 400,
+    "n_false_positives": 0,
+    "false_positive_pct": 0.0,
+    "basis": "400 quotes matched against a DIFFERENT paper's retained text (seed 11); a working matcher reports ~0%",
+    "verdict": "matcher discriminates"
+   }
+  },
+  "untraceable_examples_on_recovered": [
+   {
+    "pmid": "36544550",
+    "quote": "while the amount of homocysteine, methionine, glutathione, S-adenosylmethionine, arachidonic acid, docosahexaenoic acid and eicosapentaenoic acid decreased."
+   },
+   {
+    "pmid": "37161995",
+    "quote": "We did not observe statistically significant associations between molnupiravir and ischemic heart disease, diabetes, dysautonomia, shortness of breath, and coug"
+   },
+   {
+    "pmid": "37161995",
+    "quote": "We did not observe statistically significant associations between molnupiravir and ischemic heart disease, diabetes, dysautonomia, shortness of breath, and coug"
+   },
+   {
+    "pmid": "37161995",
+    "quote": "We did not observe statistically significant associations between molnupiravir and ischemic heart disease, diabetes, dysautonomia, shortness of breath, and coug"
+   },
+   {
+    "pmid": "37161995",
+    "quote": "We did not observe statistically significant associations between molnupiravir and ischemic heart disease, diabetes, dysautonomia, shortness of breath, and coug"
+   },
+   {
+    "pmid": "37161995",
+    "quote": "We did not observe statistically significant associations between molnupiravir and ischemic heart disease, diabetes, dysautonomia, shortness of breath, and coug"
+   },
+   {
+    "pmid": "37161995",
+    "quote": "Molnupiravir use was also associated with reduced risk of PASC in those with primary SARS-CoV-2 infection and reinfection."
+   },
+   {
+    "pmid": "38298551",
+    "quote": "There was a significant difference in RMSSD, a HRV measure reflecting parasympathetic activity, between preHRV-B and post HRV-B phases (Table 5)."
+   },
+   {
+    "pmid": "38775379",
+    "quote": "Viral RNA has been detected in brain samples post\u2010mortem, viral RNA and protein have been detected in cerebrospinal fluid, indicating viral persistence in the c"
+   },
+   {
+    "pmid": "38992068",
+    "quote": "concerning being diagnosed with general PASC codes U099/B948..., hospitalized or ICU patients had a 2.2-fold and 4.3-fold higher risk respectively than non-hosp"
+   },
+   {
+    "pmid": "38999375",
+    "quote": "The percentages of patients with insomnia (29.2% vs. 15.2%)... were significantly higher in patients with changes in their working situations than in those with"
+   },
+   {
+    "pmid": "38999375",
+    "quote": "headache (28.1% vs. 17.2%)... were significantly higher in patients with changes in their working situations... 1.42 [95%CI: 0.90\u20132.25] for headache (p = 0.13)"
+   },
+   {
+    "pmid": "38999375",
+    "quote": "dyspnea (22.7% vs. 14%) were significantly higher in patients with changes in their working situations... 1.51 [95%CI: 0.92\u20132.48] for dyspnea (p = 0.10)"
+   },
+   {
+    "pmid": "38999375",
+    "quote": "dysgeusia (23.2% vs. 12.2%)... were rather higher in patients without changes in their working situations. ... 0.61 [95%CI: 0.31\u20131.21] for dysgeusia (p = 0.15)"
+   },
+   {
+    "pmid": "39129538",
+    "quote": "fatigue (OR = 1.971; 95% CI = 1.781\u20132.182, I2 = 95.7%, \u03c42 = 0.0613) ... The 10 most prevalent symptoms were fatigue (18.0%)"
+   },
+   {
+    "pmid": "39232125",
+    "quote": "3 symptoms (n = 36) \u22121.2 (\u22122.2; \u22120.2) 0.025 ... 4 symptoms (n = 19) \u22121.2 (\u22122.3; \u22120.1) 0.026"
+   },
+   {
+    "pmid": "39327264",
+    "quote": "SARS-CoV-2-Infektion, aktuell Long-Covid\u2011/Post-Covid-Zustand 1,86 (1,61\u20132,15) ... adjustiert 1,36 (1,17\u20131,59) ... SARS-CoV-2-Infektion, aktuell KEIN Long-Covid\u2011"
+   },
+   {
+    "pmid": "40868961",
+    "quote": "Available studies suggest that male gender and advanced age increase the risk of long COVID, along with pre-existing cardiovascular and respiratory conditions."
+   },
+   {
+    "pmid": "40868961",
+    "quote": "Pulmonary dysfunction has also been associated with high levels of D-dimer and blood urea nitrogen."
+   },
+   {
+    "pmid": "40868961",
+    "quote": "Additionally, hypoalbuminemia, while a nonspecific marker, has been associated with negative prognosis."
+   }
+  ],
+  "arithmetic": {
+   "fulltext_papers_tiers_1_3": 6239,
+   "unverifiable_rows_recoverable": 108549,
+   "measured_sec_per_paper_1_worker": 4.0,
+   "sec_per_paper_3_workers": 1.33,
+   "estimated_wall_hours_3_workers": 2.31,
+   "projected_whole_corpus_verifiable_pct_after_retrofit": 99.89
+  }
+ }
+}

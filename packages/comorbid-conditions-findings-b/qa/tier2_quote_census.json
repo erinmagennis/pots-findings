@@ -1,0 +1,45 @@
+{
+ "scope": "CENSUS \u2014 every Tier-2 abstract-only finding with a quote (not a sample)",
+ "n_rows": 14133,
+ "verbatim_exact_pct": 96.57,
+ "traceable_pct": 99.08,
+ "by_half": {
+  "first_chunks_lt126": {
+   "n": 4601,
+   "traceable_pct": 99.07
+  },
+  "second_chunks_ge126": {
+   "n": 9532,
+   "traceable_pct": 99.09
+  },
+  "note": "Identical. No drift between extraction waves."
+ },
+ "residual_analysis": {
+  "failures": 130,
+  "papers": 78,
+  "papers_with_other_passing_quotes": 76,
+  "failures_from_truncated_abstracts": 3,
+  "true_residual": 127,
+  "adjudicated": {
+   "PRESENT": 111,
+   "ELSEWHERE": 16,
+   "CONTRADICTS": 0
+  },
+  "parse_complete": true
+ },
+ "genuine_fabrication_rate_pct": 0.0,
+ "negative_control": {
+  "method": "388 full-text quotes paired with the WRONG paper",
+  "verbatim_pct": 0.0,
+  "traceable_pct": 0.0,
+  "true_pairs_traceable_pct": 98.7,
+  "separation_pp": 98.7,
+  "conclusion": "The matcher discriminates; the 99% figures are not an artifact of a permissive test."
+ },
+ "supersedes": "All earlier Tier-2 abstract-only quote figures (89.3/94.2, then 96.6/98.9 on a 3,946-row sample).",
+ "remaining_uncertainty": [
+  "Adjudication of the 127 residuals is LLM-based, not human-verified.",
+  "The retrieved-fulltext stratum (56,168 findings) is still sampled at 24 of 3,226 papers (0.7%); a census would require re-fetching every OA paper.",
+  "This measures quote PROVENANCE only. Whether findings correctly INTERPRET their quotes is the fidelity audit's question and remains unanswered."
+ ]
+}

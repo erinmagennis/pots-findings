@@ -1,0 +1,102 @@
+{
+  "rows_with_ids_before": 4384,
+  "coverage_after": {
+    "rows_with_id": 3093,
+    "pct": 70.55
+  },
+  "string_agreement_before": {
+    "overall_pct": 39.4,
+    "by_namespace": {
+      "CHEBI": 41.3,
+      "HGNC": 36.6,
+      "MESH": 41.3
+    },
+    "n_by_namespace": {
+      "CHEBI": 1717,
+      "HGNC": 1817,
+      "MESH": 847
+    },
+    "label_source": "stored entity_ontology_label (belongs to the OLD ids)"
+  },
+  "string_agreement_after": {
+    "overall_pct": 83.9,
+    "rows_checked": 3093,
+    "by_namespace": {
+      "CHEBI": 100.0,
+      "HGNC": 82.3,
+      "MESH": 59.9
+    },
+    "n_by_namespace": {
+      "CHEBI": 1097,
+      "HGNC": 1350,
+      "MESH": 643
+    },
+    "label_source": "freshly re-fetched authority labels for the repaired ids"
+  },
+  "adjudication": {
+    "flagged_pairs_total": 144,
+    "flagged_rows_total": 514,
+    "adjudicated_pairs": 129,
+    "adjudication_sample_n_rows": 499,
+    "pairs_same": 120,
+    "pairs_different": 9,
+    "true_error_pct_of_repaired_rows": 0.55,
+    "unadjudicated_pairs": 15,
+    "unadjudicated_rows": 15,
+    "unadjudicated_reason": "one batch was declined by the adjudicating model; not re-worded or re-split. Handled by a deterministic label-token-containment check (11/15 contained) and bounded.",
+    "worst_case_true_error_pct": 1.03,
+    "parse_completeness": "asserted: every adjudicated batch item returned a parsable verdict",
+    "note": "adjudicated errors were then NULLED, so they are not present in the delivered table",
+    "rows_model_adjudicated_true_error": 16,
+    "rows_nulled_as_wrong_total": 17,
+    "rows_flagged_by_deterministic_rule_only": 1,
+    "true_error_pct_model_adjudicated_only": 0.51,
+    "denominator_rows": 3110,
+    "provenance_note": "16 rows (9 pairs) were flagged DIFFERENT by model adjudication = 0.51%. 1 further row ('Alpha-1 adrenergic receptor (ADRA1) autoantibody' -> HGNC:278 labelled ADRA1B) was flagged by my own deterministic label-token-containment check, NOT by the adjudicator. Headline 0.55% is the conservative union of both (17/3110); 0.51% is the model-adjudicated-only rate. Worst case 1.03% adds the 15 rows in the declined batch."
+  },
+  "per_action_counts": {
+    "CHANGED": 1798,
+    "KEPT": 1295,
+    "NULLED": 1291
+  },
+  "by_namespace_after_counts": {
+    "HGNC": 1350,
+    "CHEBI": 1097,
+    "MESH": 643,
+    "GO": 3
+  },
+  "tier_counts": {
+    "unresolved_nulled": 1291,
+    "authority_lookup_C": 1097,
+    "pipeline_symbol_lookup": 990,
+    "authority_lookup_D": 643,
+    "authority_lookup_B": 360,
+    "authority_lookup_GO": 3
+  },
+  "tierA_gating": {
+    "pipeline_hgnc_id_present": 1213,
+    "contradicted_model_id": 534,
+    "kept_entity_confirmed": 843,
+    "kept_marker_token_in_entity": 157,
+    "overridden_to_entity_derived_id": 16,
+    "nulled_marker_not_denoting_entity": 197,
+    "finding": "gene_marker does not always describe entity (e.g. entity=ACLY with gene_marker=ELP1), so Tier A was gated on entity correspondence rather than trusted wholesale"
+  },
+  "null_reasons": {
+    "C:no_label_match": 448,
+    "B:not_a_gene_symbol_form": 215,
+    "A:gene_marker_does_not_denote_entity": 197,
+    "C:no_docs": 181,
+    "D:no_uids": 146,
+    "D:no_term_match": 55,
+    "adjudicated_label_denotes_different_entity": 17,
+    "B:mygene_no_unambiguous_hit": 17,
+    "B:ambiguous_mygene_2_genes": 9,
+    "B:ambiguous_mygene_3_genes": 2,
+    "C:ambiguous_label_3": 2,
+    "C:ambiguous_label_2": 1,
+    "entity_name_missing": 1
+  },
+  "gate_pass": true,
+  "source_label_note": "GO rows carry ontology_id_source='authority_lookup_GO' (OLS4 ontology=go); authority_lookup_C is CHEBI-only. An earlier draft conflated the two."
+}

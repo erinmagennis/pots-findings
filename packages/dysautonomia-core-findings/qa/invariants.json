@@ -1,0 +1,65 @@
+{
+ "all_ok": false,
+ "checks": [
+  {
+   "name": "schema_completeness",
+   "ok": true,
+   "missing": []
+  },
+  {
+   "name": "conservation",
+   "ok": true,
+   "absent_chunks": [],
+   "over_allotment": []
+  },
+  {
+   "name": "monotonicity",
+   "ok": true,
+   "rows": 36067,
+   "papers": 3129,
+   "prior_rows": 0,
+   "prior_papers": 0
+  },
+  {
+   "name": "no_model_emitted_ids",
+   "ok": true,
+   "violations": {}
+  },
+  {
+   "name": "id_provenance",
+   "ok": false,
+   "id_without_source": {
+    "entity_ontology_id_resolved": 4373,
+    "hgnc_id": 2681
+   }
+  },
+  {
+   "name": "enum_drift",
+   "ok": true,
+   "flagged": {
+    "condition": {
+     "orthostatic_hypotension": 4
+    }
+   },
+   "note": "flagged for adjudication, never auto-remapped"
+  },
+  {
+   "name": "duplicates",
+   "ok": true,
+   "fully_identical_rows": 0,
+   "loose_key_groups": 68,
+   "note": "loose>full is expected and NOT a defect; only fully-identical rows are duplicates"
+  },
+  {
+   "name": "hpo_multivalue",
+   "ok": true,
+   "n_with_ids": 0
+  },
+  {
+   "name": "authority_prefix_match",
+   "mismatches": {},
+   "n_mismatched_rows": 0,
+   "ok": true
+  }
+ ]
+}

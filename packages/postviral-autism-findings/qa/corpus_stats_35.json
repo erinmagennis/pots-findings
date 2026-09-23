@@ -1,0 +1,60 @@
+{
+ "rows": 26032,
+ "papers": 1587,
+ "chunks": 35,
+ "tier3_total_papers": 1754,
+ "findings_per_paper": 16.4,
+ "fulltext_pct": 87.78,
+ "status_breakdown": {
+  "retrieved-fulltext": 22850,
+  "abstract-only": 3033,
+  "blocked": 149
+ },
+ "theme": {
+  "long_covid_auto": 18904,
+  "autism_intersection": 4048,
+  "post_viral": 3039,
+  "sjogrens": 15,
+  "author_augment": 13,
+  "migraine_intersection": 8,
+  "hypermobility_spectrum": 5
+ },
+ "year": {
+  "2020.0": 22,
+  "2021.0": 1480,
+  "2022.0": 2391,
+  "2023.0": 4802,
+  "2024.0": 5442,
+  "2025.0": 7778,
+  "2026.0": 4117
+ },
+ "condition_top": {
+  "long_COVID": 19121,
+  "general": 2681,
+  "autism": 2286,
+  "multiple": 556,
+  "dysautonomia": 384,
+  "ME_CFS": 293,
+  "fibromyalgia": 200,
+  "EDS_hypermobility": 144,
+  "POTS": 111,
+  "small_fiber_neuropathy": 97,
+  "IBS_gut": 77,
+  "migraine": 55,
+  "MCAS": 27
+ },
+ "evidence_tier": {
+  "cohort": 9005,
+  "cross-sectional": 5970,
+  "review/expert-opinion": 3392,
+  "case-series": 2011,
+  "case-control": 1617,
+  "mechanistic/in-vitro": 1601,
+  "RCT": 922,
+  "meta-analysis": 900,
+  "case-report": 595,
+  "systematic-review/meta-analysis": 17,
+  "systematic review": 2
+ },
+ "coverage_pct": 90.48
+}

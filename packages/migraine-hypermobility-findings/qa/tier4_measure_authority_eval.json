@@ -1,0 +1,571 @@
+{
+ "question": "Should physiological-measure be routed to an authority other than HPO for Tier 4?",
+ "baseline_hpo_in_corpus": {
+  "pm_rows": 6902,
+  "rows_with_ontology_id": 902,
+  "row_resolution_rate": 0.1307,
+  "unique_names": 3096,
+  "unresolved_rows": 5194,
+  "never_resolved_unique_names": 2944
+ },
+ "method": {
+  "discipline": "identical to the resolver: exact label, then AUTHORITY-ASSERTED synonym only; never fuzzy; no match -> null",
+  "endpoint": "EBI OLS4 /api/search, ontology-scoped, 20 rows, single pass per (name, authority)",
+  "authorities_measured": [
+   "snomed",
+   "ncit",
+   "cmo",
+   "hp"
+  ],
+  "sampling": {
+   "random_sample_300": {
+    "n": 300,
+    "frame": "unique never-resolved physiological-measure names",
+    "seed": 20260901,
+    "rows_represented": 546,
+    "pct_of_unresolved_rows": 10.51
+   },
+   "top_100_by_row_count": {
+    "n": 100,
+    "rows_represented": 1364,
+    "pct_of_unresolved_rows": 26.26,
+    "note": "frequency-stratified; NOT representative of the name distribution, reported separately"
+   },
+   "union_387": {
+    "n": 387,
+    "note": "random sample + frequency stratum, deduped"
+   }
+  },
+  "negative_control": {
+   "n": 14,
+   "design": "plausible-shaped but nonexistent measure names (e.g. 'transcapillary borogove ratio', '6-minute snark distance')",
+   "requirement": "must resolve to 0 in every authority, else the matcher is fuzzy"
+  }
+ },
+ "results_by_stratum": {
+  "random_sample_300": {
+   "hp": {
+    "resolved": 3,
+    "denominator": 300,
+    "rate": 0.01,
+    "match_paths": {
+     "exact": 3
+    }
+   },
+   "snomed": {
+    "resolved": 11,
+    "denominator": 300,
+    "rate": 0.0367,
+    "match_paths": {
+     "exact": 11
+    }
+   },
+   "cmo": {
+    "resolved": 4,
+    "denominator": 300,
+    "rate": 0.0133,
+    "match_paths": {
+     "exact": 4
+    }
+   },
+   "ncit": {
+    "resolved": 19,
+    "denominator": 300,
+    "rate": 0.0633,
+    "match_paths": {
+     "exact": 15,
+     "synonym": 4
+    }
+   }
+  },
+  "top_100_by_row_count": {
+   "hp": {
+    "resolved": 1,
+    "denominator": 100,
+    "rate": 0.01,
+    "match_paths": {
+     "exact": 1
+    }
+   },
+   "snomed": {
+    "resolved": 17,
+    "denominator": 100,
+    "rate": 0.17,
+    "match_paths": {
+     "exact": 17
+    }
+   },
+   "cmo": {
+    "resolved": 12,
+    "denominator": 100,
+    "rate": 0.12,
+    "match_paths": {
+     "exact": 9,
+     "synonym": 3
+    }
+   },
+   "ncit": {
+    "resolved": 33,
+    "denominator": 100,
+    "rate": 0.33,
+    "match_paths": {
+     "exact": 24,
+     "synonym": 9
+    }
+   }
+  },
+  "decoy_negative_control": {
+   "hp": {
+    "resolved": 0,
+    "denominator": 14,
+    "rate": 0.0,
+    "match_paths": {}
+   },
+   "snomed": {
+    "resolved": 0,
+    "denominator": 14,
+    "rate": 0.0,
+    "match_paths": {}
+   },
+   "cmo": {
+    "resolved": 0,
+    "denominator": 14,
+    "rate": 0.0,
+    "match_paths": {}
+   },
+   "ncit": {
+    "resolved": 0,
+    "denominator": 14,
+    "rate": 0.0,
+    "match_paths": {}
+   }
+  },
+  "union_387": {
+   "hp": {
+    "resolved": 4,
+    "denominator": 387,
+    "rate": 0.0103,
+    "rows_covered": 12,
+    "rows_in_union_names": 1722,
+    "row_weighted_rate_within_union": 0.007,
+    "pct_of_all_unresolved_pm_rows": 0.231,
+    "exact": 4,
+    "synonym": 0,
+    "exact_only_rate": 0.0103,
+    "rows_covered_exact_only": 12,
+    "pct_unresolved_rows_exact_only": 0.231
+   },
+   "snomed": {
+    "resolved": 25,
+    "denominator": 387,
+    "rate": 0.0646,
+    "rows_covered": 353,
+    "rows_in_union_names": 1722,
+    "row_weighted_rate_within_union": 0.205,
+    "pct_of_all_unresolved_pm_rows": 6.796,
+    "exact": 25,
+    "synonym": 0,
+    "exact_only_rate": 0.0646,
+    "rows_covered_exact_only": 353,
+    "pct_unresolved_rows_exact_only": 6.796
+   },
+   "cmo": {
+    "resolved": 16,
+    "denominator": 387,
+    "rate": 0.0413,
+    "rows_covered": 388,
+    "rows_in_union_names": 1722,
+    "row_weighted_rate_within_union": 0.2253,
+    "pct_of_all_unresolved_pm_rows": 7.47,
+    "exact": 13,
+    "synonym": 3,
+    "exact_only_rate": 0.0336,
+    "rows_covered_exact_only": 361,
+    "pct_unresolved_rows_exact_only": 6.95
+   },
+   "ncit": {
+    "resolved": 47,
+    "denominator": 387,
+    "rate": 0.1214,
+    "rows_covered": 625,
+    "rows_in_union_names": 1722,
+    "row_weighted_rate_within_union": 0.363,
+    "pct_of_all_unresolved_pm_rows": 12.033,
+    "exact": 34,
+    "synonym": 13,
+    "exact_only_rate": 0.0879,
+    "rows_covered_exact_only": 465,
+    "pct_unresolved_rows_exact_only": 8.953
+   }
+  }
+ },
+ "negative_control_result": {
+  "hp": 0,
+  "snomed": 0,
+  "cmo": 0,
+  "ncit": 0
+ },
+ "negative_control_passed": true,
+ "resolved_pairs_sample": {
+  "snomed": [
+   {
+    "name": "heart rate",
+    "id": "SNOMED:364075005",
+    "authority_label": "Heart rate",
+    "match_path": "exact",
+    "corpus_rows": 89
+   },
+   {
+    "name": "body mass index",
+    "id": "SNOMED:60621009",
+    "authority_label": "Body mass index",
+    "match_path": "exact",
+    "corpus_rows": 85
+   },
+   {
+    "name": "age",
+    "id": "SNOMED:397669002",
+    "authority_label": "Age",
+    "match_path": "exact",
+    "corpus_rows": 39
+   },
+   {
+    "name": "diastolic blood pressure",
+    "id": "SNOMED:271650006",
+    "authority_label": "Diastolic blood pressure",
+    "match_path": "exact",
+    "corpus_rows": 13
+   },
+   {
+    "name": "forced vital capacity",
+    "id": "SNOMED:50834005",
+    "authority_label": "Forced vital capacity",
+    "match_path": "exact",
+    "corpus_rows": 13
+   },
+   {
+    "name": "systolic blood pressure",
+    "id": "SNOMED:271649006",
+    "authority_label": "Systolic blood pressure",
+    "match_path": "exact",
+    "corpus_rows": 13
+   },
+   {
+    "name": "cerebral blood flow",
+    "id": "SNOMED:250847003",
+    "authority_label": "Cerebral blood flow",
+    "match_path": "exact",
+    "corpus_rows": 11
+   },
+   {
+    "name": "left ventricular ejection fraction",
+    "id": "SNOMED:250908004",
+    "authority_label": "Left ventricular ejection fraction",
+    "match_path": "exact",
+    "corpus_rows": 10
+   },
+   {
+    "name": "short physical performance battery score",
+    "id": "SNOMED:714339007",
+    "authority_label": "Short Physical Performance Battery score",
+    "match_path": "exact",
+    "corpus_rows": 10
+   },
+   {
+    "name": "pittsburgh sleep quality index",
+    "id": "SNOMED:699200007",
+    "authority_label": "Pittsburgh sleep quality index",
+    "match_path": "exact",
+    "corpus_rows": 9
+   },
+   {
+    "name": "white blood cell count",
+    "id": "SNOMED:767002",
+    "authority_label": "White blood cell count",
+    "match_path": "exact",
+    "corpus_rows": 9
+   },
+   {
+    "name": "body weight",
+    "id": "SNOMED:27113001",
+    "authority_label": "Body weight",
+    "match_path": "exact",
+    "corpus_rows": 8
+   },
+   {
+    "name": "modified medical research council dyspnea scale",
+    "id": "SNOMED:870179002",
+    "authority_label": "modified Medical Research Council Dyspnea Scale",
+    "match_path": "exact",
+    "corpus_rows": 7
+   },
+   {
+    "name": "platelet count",
+    "id": "SNOMED:61928009",
+    "authority_label": "Platelet count",
+    "match_path": "exact",
+    "corpus_rows": 7
+   },
+   {
+    "name": "charlson comorbidity index",
+    "id": "SNOMED:762713009",
+    "authority_label": "Charlson Comorbidity Index",
+    "match_path": "exact",
+    "corpus_rows": 6
+   }
+  ],
+  "ncit": [
+   {
+    "name": "heart rate",
+    "id": "NCIT:C49677",
+    "authority_label": "Heart Rate",
+    "match_path": "exact",
+    "corpus_rows": 89
+   },
+   {
+    "name": "body mass index",
+    "id": "NCIT:C16358",
+    "authority_label": "Body Mass Index",
+    "match_path": "exact",
+    "corpus_rows": 85
+   },
+   {
+    "name": "respiratory sinus arrhythmia",
+    "id": "NCIT:C90450",
+    "authority_label": "Respiratory Sinus Arrhythmia by ECG Finding",
+    "match_path": "synonym",
+    "corpus_rows": 49
+   },
+   {
+    "name": "age",
+    "id": "NCIT:C25150",
+    "authority_label": "Age",
+    "match_path": "exact",
+    "corpus_rows": 39
+   },
+   {
+    "name": "quality of life",
+    "id": "NCIT:C17047",
+    "authority_label": "Quality of Life",
+    "match_path": "exact",
+    "corpus_rows": 31
+   },
+   {
+    "name": "health-related quality of life",
+    "id": "NCIT:C142570",
+    "authority_label": "Health-related Quality of Life",
+    "match_path": "exact",
+    "corpus_rows": 26
+   },
+   {
+    "name": "cognitive function",
+    "id": "NCIT:C122365",
+    "authority_label": "PROMIS Cognitive Function Subordinate Domain",
+    "match_path": "synonym",
+    "corpus_rows": 25
+   },
+   {
+    "name": "sleep quality",
+    "id": "NCIT:C121705",
+    "authority_label": "Sleep Quality Question",
+    "match_path": "synonym",
+    "corpus_rows": 18
+   },
+   {
+    "name": "post-exertional malaise",
+    "id": "NCIT:C189011",
+    "authority_label": "Post-Exertional Malaise",
+    "match_path": "exact",
+    "corpus_rows": 17
+   },
+   {
+    "name": "vo2 peak",
+    "id": "NCIT:C153553",
+    "authority_label": "Peak Oxygen Consumption",
+    "match_path": "synonym",
+    "corpus_rows": 16
+   },
+   {
+    "name": "diastolic blood pressure",
+    "id": "NCIT:C25299",
+    "authority_label": "Diastolic Blood Pressure",
+    "match_path": "exact",
+    "corpus_rows": 13
+   },
+   {
+    "name": "forced vital capacity",
+    "id": "NCIT:C111361",
+    "authority_label": "Forced Vital Capacity",
+    "match_path": "exact",
+    "corpus_rows": 13
+   },
+   {
+    "name": "systolic blood pressure",
+    "id": "NCIT:C25298",
+    "authority_label": "Systolic Blood Pressure",
+    "match_path": "exact",
+    "corpus_rows": 13
+   },
+   {
+    "name": "cerebral blood flow",
+    "id": "NCIT:C94869",
+    "authority_label": "Cerebral Blood Flow",
+    "match_path": "exact",
+    "corpus_rows": 11
+   },
+   {
+    "name": "cognitive dysfunction",
+    "id": "NCIT:C46083",
+    "authority_label": "Cognitive Dysfunction",
+    "match_path": "exact",
+    "corpus_rows": 11
+   }
+  ],
+  "cmo": [
+   {
+    "name": "heart rate variability",
+    "id": "CMO:0002812",
+    "authority_label": "heart rate variability",
+    "match_path": "exact",
+    "corpus_rows": 117
+   },
+   {
+    "name": "heart rate",
+    "id": "CMO:0000002",
+    "authority_label": "heart rate",
+    "match_path": "exact",
+    "corpus_rows": 89
+   },
+   {
+    "name": "body mass index",
+    "id": "CMO:0000105",
+    "authority_label": "body mass index",
+    "match_path": "exact",
+    "corpus_rows": 85
+   },
+   {
+    "name": "diastolic blood pressure",
+    "id": "CMO:0000005",
+    "authority_label": "diastolic blood pressure",
+    "match_path": "exact",
+    "corpus_rows": 13
+   },
+   {
+    "name": "systolic blood pressure",
+    "id": "CMO:0000004",
+    "authority_label": "systolic blood pressure",
+    "match_path": "exact",
+    "corpus_rows": 13
+   },
+   {
+    "name": "left ventricular ejection fraction",
+    "id": "CMO:0000180",
+    "authority_label": "ejection fraction",
+    "match_path": "synonym",
+    "corpus_rows": 10
+   },
+   {
+    "name": "peak oxygen uptake",
+    "id": "CMO:0000135",
+    "authority_label": "maximal oxygen consumption",
+    "match_path": "synonym",
+    "corpus_rows": 9
+   },
+   {
+    "name": "white blood cell count",
+    "id": "CMO:0000027",
+    "authority_label": "white blood cell count",
+    "match_path": "exact",
+    "corpus_rows": 9
+   },
+   {
+    "name": "body weight",
+    "id": "CMO:0000012",
+    "authority_label": "body weight",
+    "match_path": "exact",
+    "corpus_rows": 8
+   },
+   {
+    "name": "estimated glomerular filtration rate",
+    "id": "CMO:0000490",
+    "authority_label": "glomerular filtration rate",
+    "match_path": "synonym",
+    "corpus_rows": 8
+   },
+   {
+    "name": "rr interval",
+    "id": "CMO:0000232",
+    "authority_label": "RR interval",
+    "match_path": "exact",
+    "corpus_rows": 8
+   },
+   {
+    "name": "platelet count",
+    "id": "CMO:0000029",
+    "authority_label": "platelet count",
+    "match_path": "exact",
+    "corpus_rows": 7
+   },
+   {
+    "name": "erythrocyte sedimentation rate",
+    "id": "CMO:0003910",
+    "authority_label": "erythrocyte sedimentation rate",
+    "match_path": "exact",
+    "corpus_rows": 5
+   },
+   {
+    "name": "glomerular filtration rate",
+    "id": "CMO:0000490",
+    "authority_label": "glomerular filtration rate",
+    "match_path": "exact",
+    "corpus_rows": 5
+   },
+   {
+    "name": "body fat percentage",
+    "id": "CMO:0000302",
+    "authority_label": "body fat percentage",
+    "match_path": "exact",
+    "corpus_rows": 1
+   }
+  ]
+ },
+ "combined_any_of_snomed_ncit_cmo": {
+  "names_resolved": 55,
+  "denominator": 387,
+  "rate": 0.1421,
+  "unresolved_pm_rows_covered": 777,
+  "pct_of_unresolved_pm_rows": 14.96
+ },
+ "loinc": {
+  "status": "NOT DONE",
+  "reason": "LOINC is not hosted on EBI OLS4 (checked all 285 OLS4 ontologies). Its official FHIR terminology server fhir.loinc.org was initially blocked by the sandbox allowlist; network access was requested and GRANTED, after which every endpoint ($lookup, $expand, /metadata) returned HTTP 401 Unauthorized - the server requires a LOINC account, and no LOINC credential is configured. The NLM UMLS route (uts-ws.nlm.nih.gov) likewise returned 401 without a UMLS API key. No LOINC resolution rate is reported because none was measured.",
+  "measured_rate": null,
+  "to_enable": "add a LOINC (or UMLS/UTS) API credential, then re-run run_measure_eval.py with a loinc arm"
+ },
+ "recommendation": {
+  "route_physiological_measure_to": "NCIT as primary, with SNOMED and CMO as declared fallbacks; KEEP HPO in the chain",
+  "confidence": "moderate - measured on 387 of 2,944 unresolved unique names (13.1%)",
+  "measured_basis": {
+   "on the representative random 300": {
+    "ncit": 0.0633,
+    "snomed": 0.0367,
+    "cmo": 0.0133,
+    "hp": 0.01
+   },
+   "on the union of 387 names": {
+    "ncit": 0.1214,
+    "snomed": 0.0646,
+    "cmo": 0.0413,
+    "hp": 0.0103
+   },
+   "row_weighted_gain_if_all_three_added": "14.96% of the 5194 currently-unresolved physiological-measure rows"
+  },
+  "why": "NCIT beats HPO by ~6x on the representative sample (19/300 vs 3/300) and ~12x on the union, and the high-frequency stratum shows the gain concentrates where it matters: 33/100 of the most-repeated names resolve in NCIT vs 1/100 in HPO. CMO's names-resolved count is low but its hits are the highest-frequency cardiovascular measures (heart rate variability alone is 117 rows), so it earns inclusion on row weight, not name count. All three pass the decoy negative control at 0/14.",
+  "caveats": [
+   "Absolute rates stay low: even all three authorities together resolve only 14.2% of sampled names / ~15% of unresolved rows. Most physiological-measure names in this corpus are composite or instrument-specific ('orthostatic heart rate and blood pressure response', '19-item cdc long covid symptom list') and no terminology mints them. The majority will remain NULL, which is the correct outcome.",
+   "NCIT's advantage is partly synonym-driven (13 of 47 union hits) and several NCIT synonym matches broaden the concept: 'cognitive function' -> 'PROMIS Cognitive Function Subordinate Domain', 'sleep quality' -> 'Sleep Quality Question', 'pulmonary function' -> 'Diagnostic Pulmonary Function Testing'. These are authority-asserted synonyms, so they are within discipline, but they map a measure onto an instrument item. RECOMMEND running NCIT exact-only for Tier 4 (34/387 = 8.8% of names, 465 rows) and holding synonym matches behind a review gate rather than admitting them silently.",
+   "Multiple authorities per kind means one name can resolve differently in each. Route in a fixed declared order and record the minting ontology per the option-(b) provenance shape, so the tag stays truthful."
+  ],
+  "explicitly_not_recommended": "No authority is added for entity_kind 'other' or null. That kind has no coherent referent, so no authority is clearly right for it, and routing it anywhere would reintroduce the failure mode this architecture exists to remove. It stays unrouted."
+ }
+}

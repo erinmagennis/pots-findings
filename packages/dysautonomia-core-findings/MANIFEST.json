@@ -1,0 +1,551 @@
+{
+ "package": "dysautonomia-core-findings-v1.1",
+ "tier": "tier1",
+ "title": "Tier 1 \u2014 POTS and dysautonomia core literature",
+ "version": "tier1-v1.1",
+ "built_utc": "2026-09-16T12:00:00Z",
+ "creator": {
+  "name": "Magennis, Erin",
+  "orcid": "0009-0007-9013-8052"
+ },
+ "license": {
+  "data": "CC-BY-4.0",
+  "provenance_quote": "verbatim source excerpts, copyright of respective publishers; see LICENSE"
+ },
+ "primary_table": "tier1_findings.parquet",
+ "contents": {
+  "findings": 36067,
+  "papers": 3129,
+  "chunks": 76,
+  "chunk_ids": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   51,
+   52,
+   53,
+   54,
+   55,
+   56,
+   57,
+   58,
+   59,
+   60,
+   61,
+   62,
+   63,
+   64,
+   65,
+   66,
+   67,
+   68,
+   69,
+   70,
+   71,
+   72,
+   73,
+   74,
+   75
+  ],
+  "year_range": [
+   2019,
+   2026
+  ],
+  "tier_source": "t1"
+ },
+ "schema": {
+  "n_columns": 107,
+  "columns": [
+   "entity",
+   "entity_ontology_id",
+   "gene_marker",
+   "direction",
+   "direction_reference",
+   "finding_text",
+   "pathway_or_mechanism",
+   "pathway_id",
+   "quantitative_detail",
+   "effect_size",
+   "causal_or_correlational",
+   "evidence_tier",
+   "functional_impact",
+   "condition",
+   "pots_subtype",
+   "population_age_group",
+   "sex_hormonal",
+   "anatomical_system",
+   "is_covid_associated",
+   "finding_type",
+   "treatment_class",
+   "symptom_correlate",
+   "phenotype_hpo",
+   "validated_instrument",
+   "adverse_event_note",
+   "certainty",
+   "cohort_registry",
+   "cohort_name",
+   "dataset_accession",
+   "relation_type",
+   "relation_subject",
+   "relation_object",
+   "provenance_quote",
+   "provenance_section",
+   "null_or_failed_result",
+   "contradicts_finding_ref",
+   "evidence_stratum",
+   "study_quality",
+   "study_type",
+   "n_participants",
+   "comparator",
+   "demographics",
+   "is_duplicate_or_preprint_note",
+   "contradicts_or_extends",
+   "limitations_stated",
+   "future_direction",
+   "pmid",
+   "doi",
+   "title",
+   "year",
+   "journal",
+   "source_stream",
+   "theme",
+   "fulltext_status",
+   "contact_note",
+   "chunk_id",
+   "hgnc_id",
+   "ensembl_id",
+   "gene_resolved",
+   "entity_ontology_id_resolved",
+   "entity_ontology_label",
+   "pathway_id_resolved",
+   "pathway_label",
+   "phenotype_hpo_resolved",
+   "phenotype_hpo_label",
+   "source_fidelity",
+   "source_route",
+   "pmcid",
+   "entity_ontology_id_note",
+   "anatomical_study",
+   "tier_source",
+   "cap_entity_kind",
+   "cap_hpo_verified",
+   "cap_number_in_quote",
+   "cap_quote_source_retained",
+   "ontology_id_verification",
+   "ontology_id_match_mode",
+   "hpo_verification",
+   "hpo_id_count_unified",
+   "ontology_id_prefix",
+   "ontology_id_repaired",
+   "ontology_repair_action",
+   "ontology_id_final",
+   "ontology_id_source",
+   "entity_clean",
+   "ontology_label_final",
+   "entity_kind",
+   "phenotype_terms",
+   "certainty_derived",
+   "number_in_quote",
+   "fetch_note",
+   "gene_id_source",
+   "hpo_ids_verified",
+   "hpo_labels_verified",
+   "hpo_id_source",
+   "hpo_id_count",
+   "tier",
+   "_source_version_id",
+   "canonical_entity",
+   "canonical_source",
+   "source_literature",
+   "about_condition",
+   "evidence_scope",
+   "query_contamination",
+   "query_contamination_note",
+   "screen_verdict_uncertain",
+   "screen_verdict_note"
+  ],
+  "all_null_in_this_package": [
+   "_source_version_id",
+   "about_condition",
+   "anatomical_study",
+   "canonical_entity",
+   "canonical_source",
+   "certainty_derived",
+   "entity_clean",
+   "entity_kind",
+   "entity_ontology_id_note",
+   "evidence_scope",
+   "fetch_note",
+   "gene_id_source",
+   "hpo_id_count",
+   "hpo_id_source",
+   "hpo_ids_verified",
+   "hpo_labels_verified",
+   "number_in_quote",
+   "ontology_id_final",
+   "ontology_id_repaired",
+   "ontology_id_source",
+   "ontology_label_final",
+   "ontology_repair_action",
+   "phenotype_terms",
+   "query_contamination",
+   "query_contamination_note",
+   "screen_verdict_note",
+   "screen_verdict_uncertain",
+   "source_literature",
+   "tier"
+  ],
+  "constant_in_this_package": {
+   "source_fidelity": "high",
+   "source_route": "poolC1-pmc-xml",
+   "tier_source": "t1",
+   "cap_entity_kind": "False",
+   "cap_hpo_verified": "False",
+   "cap_number_in_quote": "False",
+   "cap_quote_source_retained": "False",
+   "ontology_id_match_mode": "none_recorded"
+  }
+ },
+ "quality": {
+  "invariants_passing": 8,
+  "invariants_total": 9,
+  "invariants_all_ok": false,
+  "failing_checks": [
+   "id_provenance"
+  ],
+  "id_resolved_frac": 0.1212,
+  "id_denotes_entity_rate": 0.5784,
+  "id_provenance": "model-emitted, existence-checked only",
+  "quote_verifiable_rows": 6536,
+  "quote_verifiable_pct": 18.12,
+  "enum_drift_rows": 4,
+  "scientific_fidelity": "UNMEASURED \u2014 all QA verifies well-formedness, not correct interpretation",
+  "id_denotes_entity_rate_basis": "measured on this package's own tier"
+ },
+ "partition": {
+  "siblings": [
+   "tier1",
+   "tier2a",
+   "tier2b",
+   "tier3",
+   "tier4"
+  ],
+  "this": "tier1",
+  "corpus_totals": {
+   "findings": 148186,
+   "papers": 11519,
+   "packages": 5
+  },
+  "pairwise_paper_overlap_all_zero": true,
+  "verified_by": "pmid set intersection across all 10 sibling pairs at build time"
+ },
+ "source_corpus_version_id": "f0b86f9a-f688-48c4-a08f-94e946afb9af",
+ "verify": "python code/verify_package.py --self-test",
+ "files": [
+  {
+   "path": ".zenodo.json",
+   "bytes": 3066,
+   "sha256": "18f4f048b0a1749aa378247d3c923165112924cc0823a1dbdbb4caeb848786f0"
+  },
+  {
+   "path": "CITATION.cff",
+   "bytes": 2611,
+   "sha256": "e4fa67788e9f5daa9031c585be7d775b0a200fbb3b7c694cd8aa30631417eb75"
+  },
+  {
+   "path": "LICENSE",
+   "bytes": 4615,
+   "sha256": "1dad5d8241ed12b11a90d6626960ab5c4284e66a573205c24906abcbd4f85718"
+  },
+  {
+   "path": "README.md",
+   "bytes": 19384,
+   "sha256": "1ccb4aca0bfa36779fb5b8ba9147a4301371feddedea2153fd4a0a11e5f1a597"
+  },
+  {
+   "path": "annotations/COMPARATOR_GATE.json",
+   "bytes": 2826,
+   "sha256": "f14d3b656cf5332e149326eb471697fbda795a0e3043243782882e538ee5cee4"
+  },
+  {
+   "path": "annotations/CONDITION_ANNOTATIONS_README.md",
+   "bytes": 3544,
+   "sha256": "77bda8980baa25a489e91075834c1b2777642b11c150cb197bcdbb26aab063c6"
+  },
+  {
+   "path": "annotations/CONDITION_BUCKET_DEFINITIONS.md",
+   "bytes": 6663,
+   "sha256": "e5534b3423e31352e4d742c1afd52d2e809716323b3d287ef8275b376163a4ea"
+  },
+  {
+   "path": "annotations/RETROFIT_REPORT.md",
+   "bytes": 23456,
+   "sha256": "562c9c501c373f812e5f476c80b55abbfb540e43b10372d862f0753093b1cc31"
+  },
+  {
+   "path": "annotations/condition_annotations.csv",
+   "bytes": 431560,
+   "sha256": "fa0d24080766028282c7ad2ef71ba95216e90d0abbb259ba6e7387b94f07b61d"
+  },
+  {
+   "path": "annotations/condition_annotations.parquet",
+   "bytes": 105104,
+   "sha256": "2e53652e4342b8f34a2c4090da775d4f9d7177bac34271551ede219581e5f24e"
+  },
+  {
+   "path": "annotations/quote_retrofit_tier1.parquet",
+   "bytes": 1709822,
+   "sha256": "205443539e7e96f24285e7b1c59025701a2ae0b3b278face3cc0240649ca5707"
+  },
+  {
+   "path": "annotations/retrofit_fetch_log.parquet",
+   "bytes": 228909,
+   "sha256": "ed72f8314d314d0b0f0772927b47a0920ddc6e0a48f01630de7053414b1b9436"
+  },
+  {
+   "path": "annotations/retrofit_summary.json",
+   "bytes": 99774,
+   "sha256": "e5a14597f4dfea5078b2528d6ee5823e57383506ac39d47d5978130cfc6b0abb"
+  },
+  {
+   "path": "code/README.md",
+   "bytes": 3042,
+   "sha256": "4f14289a8bcd323a65979754fa9a0fc1dded11b8e2b4ce470a427053db59e034"
+  },
+  {
+   "path": "code/build_report.py",
+   "bytes": 13326,
+   "sha256": "e7583d7b185800f234b9ab39d158311681142bdaccb89f2214e08672cfe7daa9"
+  },
+  {
+   "path": "code/comparator_symmetry_tests.py",
+   "bytes": 4377,
+   "sha256": "dd1e32198a53886e70888d3efd1152fb74346ec98c54853af11b5276aa6771e4"
+  },
+  {
+   "path": "code/crosstier_vocab.py",
+   "bytes": 5811,
+   "sha256": "91ea5461c1fea30431a61742e0bb1727d28fd752e47b5a503a2d6b3eaf7a4a97"
+  },
+  {
+   "path": "code/driver.py",
+   "bytes": 7367,
+   "sha256": "7d99f47a90de7b71db18f6af5004dc7625e073c6d2c9c8c9bf7c8a1e967737a6"
+  },
+  {
+   "path": "code/extraction_pipeline.py",
+   "bytes": 16850,
+   "sha256": "179d74195163e67086f468b8b73ff986e7b8e09bea1159dccb18d6900c76358b"
+  },
+  {
+   "path": "code/multi_authority_resolver.py",
+   "bytes": 4820,
+   "sha256": "a2b641aef7a74f5edd76753a95c04418e845ad3d94596e4f60135e4d94bb0f44"
+  },
+  {
+   "path": "code/normalizer_tests.py",
+   "bytes": 3551,
+   "sha256": "7fb9f9567c8e020a3fc7263a76409c766816db941465d99c7511aa85ba855f93"
+  },
+  {
+   "path": "code/quote_trace.py",
+   "bytes": 8344,
+   "sha256": "0a66bf6e10876c5ab601e3dd9070cd51015fcbc88964f80d806ff1ff388848e2"
+  },
+  {
+   "path": "code/resolution_cache.py",
+   "bytes": 7705,
+   "sha256": "ea9b4a46df8c34647eedcd7290ee6298eab3b24dca2fc57ef6d5847b24d70b99"
+  },
+  {
+   "path": "code/retrofit_census.py",
+   "bytes": 11918,
+   "sha256": "1bbab11ef4449a754ef757e2d85289dd9a10b81dffdf8a42eaf0675b3bd6ac53"
+  },
+  {
+   "path": "code/retrofit_fetch.py",
+   "bytes": 5419,
+   "sha256": "c09c9bd165fabdf475db9466f0689eca79eef3a3519231b38b471f1ef0ef3d0b"
+  },
+  {
+   "path": "code/schema_v5_extraction_prompt.txt",
+   "bytes": 7480,
+   "sha256": "b4227e46a2a75401d8335cc9c6a5ad8d104cf5f1357e02890bcf4198edfca3f7"
+  },
+  {
+   "path": "code/tier2_invariants.py",
+   "bytes": 3640,
+   "sha256": "65990108296a4b4d6099f3e013e4a6b7b2275540977d6203f05a8ca4c378c5e1"
+  },
+  {
+   "path": "code/tier3_invariants.py",
+   "bytes": 5194,
+   "sha256": "d947d72ecfaba599bbaf4046319f3cb52884aebf482928e83c413f6296f0afd8"
+  },
+  {
+   "path": "code/tier3_invariants_ext.py",
+   "bytes": 2506,
+   "sha256": "1a8f5b5ace1fb94e545941086a9711ed37ad29a441bb30ad6f177092ae002ca9"
+  },
+  {
+   "path": "code/verify_package.py",
+   "bytes": 12391,
+   "sha256": "04ca91090fc999882cc43fa8d333963739ef836e95d8211276ba500f33dee30a"
+  },
+  {
+   "path": "data/chunk_order.parquet",
+   "bytes": 340937,
+   "sha256": "1e94336229b270caa8d067b5d938dfe6875b6bbf2be5d888ac113e43456553bc"
+  },
+  {
+   "path": "data/entity_vocabulary_crosstier.parquet",
+   "bytes": 2570259,
+   "sha256": "d5b6cd6320af2d519dc99b303b0a233ba464119a64554586ea4f0dc8218802d1"
+  },
+  {
+   "path": "data/tier1_findings.csv.gz",
+   "bytes": 18872889,
+   "sha256": "a5c7a61a55af2c41206f768e9b60000aed8fb688738bc91b0f11543286d557f6"
+  },
+  {
+   "path": "data/tier1_findings.parquet",
+   "bytes": 10565115,
+   "sha256": "10cbd57fb7150407d8714d827ef0213ce1b2fb5b2edad1e70a91effefe550734"
+  },
+  {
+   "path": "deposit/ZENODO_FORM.md",
+   "bytes": 2948,
+   "sha256": "8c31051b3d860f5e412eef359b458691cc83de577d47d878bd899d8f5756f366"
+  },
+  {
+   "path": "deposit/github_release_notes.md",
+   "bytes": 1777,
+   "sha256": "865112197714b696dcc6025275ea572c1deb7ef6795d0c0121487830b5136021"
+  },
+  {
+   "path": "deposit/osf_metadata.json",
+   "bytes": 1925,
+   "sha256": "ac7c0f3a27fd18eaa05b7a313cda4277c400b82c81ad75800074d532da387925"
+  },
+  {
+   "path": "docs/COMPARABILITY.md",
+   "bytes": 11789,
+   "sha256": "6f7498d4fb138a1fd1276cd99cbbb796283c8e41a84d14c6bc3065e3987752f8"
+  },
+  {
+   "path": "docs/DATA_DICTIONARY.md",
+   "bytes": 18878,
+   "sha256": "9c4d404fcc0de303f627df601b621ac50d8d06f94885afc601cab578a01f4105"
+  },
+  {
+   "path": "docs/LIMITATIONS.md",
+   "bytes": 10075,
+   "sha256": "cc36f031f200e4364a9571e007a719ab62fccda50533953ca6db6e7eda8994f2"
+  },
+  {
+   "path": "docs/METHODS.md",
+   "bytes": 6308,
+   "sha256": "8b476fdaba8f826bc79f2d6cf8a324dd24ba7b260c36e5b681ebeb5d3642e63b"
+  },
+  {
+   "path": "docs/README.md",
+   "bytes": 19384,
+   "sha256": "1ccb4aca0bfa36779fb5b8ba9147a4301371feddedea2153fd4a0a11e5f1a597"
+  },
+  {
+   "path": "docs/WEBSITE_INTEGRATION.md",
+   "bytes": 3074,
+   "sha256": "b0d396e779d55993d6deda3b8b804931f4f25d09c08583eb8443d8516eda7a3f"
+  },
+  {
+   "path": "qa/comparability_report.json",
+   "bytes": 44265,
+   "sha256": "e07f0e782825b747cf7100495bb22b2dcfd31cc9e79324857934be70338cc26b"
+  },
+  {
+   "path": "qa/invariants.json",
+   "bytes": 1133,
+   "sha256": "4fa6590fca5fbc3bc18801302bd09d188084e620de3e4a8885a91d61b20647a4"
+  },
+  {
+   "path": "qa/package_stats.json",
+   "bytes": 12177,
+   "sha256": "46386bf09edff74518eda5069f0910c309a5bcf34b7bd31fb9585592c1edd492"
+  },
+  {
+   "path": "qa/quote_census_all_tiers.json",
+   "bytes": 19974,
+   "sha256": "d2932723c21bee7bdc6f68e9b4a2977b740fb159409dd60c66068edd88a76cdc"
+  },
+  {
+   "path": "qa/tier1_golden_facts.json",
+   "bytes": 8453,
+   "sha256": "edf2c98cbb6723c28876a071d4f50b964c1451d0f6a3c6513b2fbb6d6554dd47"
+  },
+  {
+   "path": "qa/tier1_id_repair_summary.json",
+   "bytes": 3665,
+   "sha256": "a4b48a7152df7efbb3fbdaddd02cfefdecb7057d442cd7f86a0df9c042bcf3cd"
+  },
+  {
+   "path": "qa/tier1_quote_fidelity.json",
+   "bytes": 5787,
+   "sha256": "9ab255813ae92f98fe277201ddb69cea2d1b14f6fbe81157b15169dd567d5346"
+  },
+  {
+   "path": "qa/tier1_validation_stats.json",
+   "bytes": 923,
+   "sha256": "caecef8fea4e122a9791df57fdce04c13c5526b088e67d527f2169796f36c498"
+  }
+ ],
+ "n_files": 51,
+ "total_bytes": 35286810
+}

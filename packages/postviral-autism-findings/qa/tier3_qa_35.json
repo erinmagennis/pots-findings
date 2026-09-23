@@ -1,0 +1,434 @@
+{
+ "quote_census": {
+  "subset": "abstract-only",
+  "n_rows_in_subset": 3033,
+  "n_checked": 3029,
+  "n_traceable": 2930,
+  "n_untraceable": 99,
+  "n_no_source_text": 4,
+  "traceable_pct": 96.73,
+  "basis": "CENSUS of every fulltext_status==abstract-only row with a non-null quote; 3029 verified against that paper's own abstract, 4 excluded for no available source text",
+  "negative_control": {
+   "n_control": 400,
+   "n_false_positives": 0,
+   "false_positive_pct": 0.0,
+   "basis": "400 quotes matched against a DIFFERENT paper's abstract (random seed 11); a working matcher reports ~0%",
+   "verdict": "matcher discriminates"
+  },
+  "untraceable_examples": [
+   {
+    "pmid": "35521752",
+    "quote": "Latent trait severity was associated with decreased body weight and poorer physical performance (coefficients > 0.240; p \u2a7d 0.003)"
+   },
+   {
+    "pmid": "35521752",
+    "quote": "Latent trait severity was associated with decreased body weight and poorer physical performance (coefficients > 0.240; p \u2a7d 0.003)"
+   },
+   {
+    "pmid": "35521752",
+    "quote": "elevated blood levels of C-reactive protein (coefficient = 0.378; 95% CI 0.215-0.541; p < 0.001) and D-dimer (coefficient = 0.412; 95% CI 0.123-0.702; p = 0.005"
+   },
+   {
+    "pmid": "35521752",
+    "quote": "elevated blood levels of C-reactive protein (coefficient = 0.378; 95% CI 0.215-0.541; p < 0.001) and D-dimer (coefficient = 0.412; 95% CI 0.123-0.702; p = 0.005"
+   },
+   {
+    "pmid": "34906501",
+    "quote": "Luciferase assay indicated a decreased transcriptional activation mediated by NF-\u03ba\u200bB signaling for all point variants."
+   },
+   {
+    "pmid": "36114881",
+    "quote": "Among the 300 LIFs, both the lumbar FA and FH were either increased or decreased by >5% in approximately 30% of LIFs each."
+   },
+   {
+    "pmid": "36879504",
+    "quote": "We demonstrated increased SARS-CoV-2-specific CD4+ and CD8+ T-cell responses and antibody affinity in patients experiencing long COVID symptoms."
+   },
+   {
+    "pmid": "36879504",
+    "quote": "We demonstrated increased SARS-CoV-2-specific CD4+ and CD8+ T-cell responses and antibody affinity in patients experiencing long COVID symptoms."
+   },
+   {
+    "pmid": "36879504",
+    "quote": "We demonstrated increased SARS-CoV-2-specific CD4+ and CD8+ T-cell responses and antibody affinity in patients experiencing long COVID symptoms."
+   },
+   {
+    "pmid": "37443561",
+    "quote": "sNfL (p = 0.74) and sGFAP (p = 0.24) did not change and were not associated with headache (p = 0.51), fatigue (p = 0.93), anosmia (p = 0.77) or ageusia (p = 0.4"
+   },
+   {
+    "pmid": "37443561",
+    "quote": "sNfL (p = 0.74) and sGFAP (p = 0.24) did not change and were not associated with headache (p = 0.51), fatigue (p = 0.93), anosmia (p = 0.77) or ageusia (p = 0.4"
+   },
+   {
+    "pmid": "37443561",
+    "quote": "sNfL (p = 0.74) and sGFAP (p = 0.24) did not change and were not associated with headache (p = 0.51), fatigue (p = 0.93), anosmia (p = 0.77) or ageusia (p = 0.4"
+   },
+   {
+    "pmid": "37443561",
+    "quote": "sNfL (p = 0.74) and sGFAP (p = 0.24) did not change and were not associated with headache (p = 0.51), fatigue (p = 0.93), anosmia (p = 0.77) or ageusia (p = 0.4"
+   },
+   {
+    "pmid": "37443561",
+    "quote": "In Long-COVID patients, sGFAP (p = 0.038), but not sNfL (p = 0.58), significantly increased but was not associated with neurological associated symptoms."
+   },
+   {
+    "pmid": "37443561",
+    "quote": "In Long-COVID patients, sGFAP (p = 0.038), but not sNfL (p = 0.58), significantly increased but was not associated with neurological associated symptoms."
+   },
+   {
+    "pmid": "37689093",
+    "quote": "The prevalence and concentrations of evaluated autoantibodes were significantly higher in Long-COVID compared to the 2 other groups (p = 2.1*10-9)"
+   },
+   {
+    "pmid": "37675472",
+    "quote": "V\u0307o2peak was lower in PASC than CTRL (24.7 \u00b1 5.0 vs. 32.9 \u00b1 7.4 mL\u00b7min-1\u00b7kg-1, respectively, P < 0.05)."
+   },
+   {
+    "pmid": "37675472",
+    "quote": "V\u0307o2 kinetics was slower in PASC than CTRL (41 \u00b1 12 vs. 30 \u00b1 9 s-1, P < 0.05)."
+   },
+   {
+    "pmid": "37675472",
+    "quote": "k was lower in PASC than CTRL (1.54 \u00b1 0.49 vs. 2.07 \u00b1 0.51 min-1, P < 0.05)."
+   },
+   {
+    "pmid": "37675472",
+    "quote": "Citrate synthase, peroxisome proliferator-activated receptor-\u03b3 coactivator (PGC)1\u03b1, and JO2 for mitochondrial complex II were significantly lower in PASC vs. CT"
+   }
+  ]
+ },
+ "id_correspondence": {
+  "n_audited": 200,
+  "n_exact_label_match": 151,
+  "exact_match_pct": 75.5,
+  "basis": "200 of 4113 id-bearing rows, random seed 7; non-exact rows are synonym-path resolutions, NOT necessarily errors",
+  "rows": [
+   {
+    "entity": "pain",
+    "id": "HP:0012531",
+    "label": "Pain",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "HIV-1",
+    "id": "NCBITaxon:11676",
+    "label": "Human immunodeficiency virus 1",
+    "source": "authority_lookup_ols_ncbitaxon_synonym",
+    "exact_label_match": false
+   },
+   {
+    "entity": "fatigue",
+    "id": "HP:0012378",
+    "label": "Fatigue",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "dexamethasone",
+    "id": "CHEBI:41879",
+    "label": "dexamethasone",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "interleukin-1 beta",
+    "id": "UniProt:P01584",
+    "label": "Interleukin-1 beta",
+    "source": "authority_lookup_uniprot_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "N-acetylcysteine",
+    "id": "CHEBI:28939",
+    "label": "N-acetyl-L-cysteine",
+    "source": "authority_lookup_ols_chebi_synonym",
+    "exact_label_match": false
+   },
+   {
+    "entity": "sinus tachycardia",
+    "id": "HP:0011703",
+    "label": "Sinus tachycardia",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "albumin",
+    "id": "CHEBI:749447",
+    "label": "albumin human",
+    "source": "authority_lookup_ols_chebi_synonym",
+    "exact_label_match": false
+   },
+   {
+    "entity": "Paxlovid",
+    "id": "CHEBI:192712",
+    "label": "Paxlovid",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "chronotropic incompetence",
+    "id": "HP:0033992",
+    "label": "Chronotropic incompetence",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "Clostridium",
+    "id": "NCBITaxon:1485",
+    "label": "Clostridium",
+    "source": "authority_lookup_ols_ncbitaxon_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "vitamin A",
+    "id": "CHEBI:12777",
+    "label": "vitamin A",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "p-cresol",
+    "id": "CHEBI:17847",
+    "label": "p-cresol",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "fatigue",
+    "id": "HP:0012378",
+    "label": "Fatigue",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "serotonin",
+    "id": "CHEBI:28790",
+    "label": "serotonin",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "acetylsalicylic acid",
+    "id": "CHEBI:15365",
+    "label": "acetylsalicylic acid",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "postexertional malaise",
+    "id": "HP:0030973",
+    "label": "Postexertional symptom exacerbation",
+    "source": "authority_lookup_ols_hp_synonym",
+    "exact_label_match": false
+   },
+   {
+    "entity": "olfactory bulb",
+    "id": "UBERON:0002264",
+    "label": "olfactory bulb",
+    "source": "authority_lookup_ols_uberon_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "serotonin",
+    "id": "CHEBI:28790",
+    "label": "serotonin",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "depression",
+    "id": "HP:0000716",
+    "label": "Depression",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "cisterna magna",
+    "id": "UBERON:0005974",
+    "label": "posterior cerebellomedullary cistern",
+    "source": "authority_lookup_ols_uberon_synonym",
+    "exact_label_match": false
+   },
+   {
+    "entity": "natural killer cell",
+    "id": "CL:0000623",
+    "label": "natural killer cell",
+    "source": "authority_lookup_ols_cl_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "Dyspnea",
+    "id": "HP:0002094",
+    "label": "Dyspnea",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "serotonin",
+    "id": "CHEBI:28790",
+    "label": "serotonin",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "vitamin A",
+    "id": "CHEBI:12777",
+    "label": "vitamin A",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "creatine",
+    "id": "CHEBI:16919",
+    "label": "creatine",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "fatigue",
+    "id": "HP:0012378",
+    "label": "Fatigue",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "reactive oxygen species",
+    "id": "CHEBI:26523",
+    "label": "reactive oxygen species",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "von Willebrand factor",
+    "id": "UniProt:P04275",
+    "label": "von Willebrand factor",
+    "source": "authority_lookup_uniprot_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "anakinra",
+    "id": "CHEBI:231683",
+    "label": "Anakinra",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "autonomic nervous system",
+    "id": "UBERON:0002410",
+    "label": "autonomic nervous system",
+    "source": "authority_lookup_ols_uberon_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "obstructive sleep apnea",
+    "id": "HP:0002870",
+    "label": "Obstructive sleep apnea",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "oxaloacetate",
+    "id": "CHEBI:16452",
+    "label": "oxaloacetate(2-)",
+    "source": "authority_lookup_ols_chebi_synonym",
+    "exact_label_match": false
+   },
+   {
+    "entity": "chest pain",
+    "id": "HP:0100749",
+    "label": "Chest pain",
+    "source": "authority_lookup_ols_hp_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "glutamate",
+    "id": "CHEBI:16015",
+    "label": "L-glutamic acid",
+    "source": "authority_lookup_ols_chebi_synonym",
+    "exact_label_match": false
+   },
+   {
+    "entity": "glutamine",
+    "id": "CHEBI:28300",
+    "label": "glutamine",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "oxytocin",
+    "id": "CHEBI:7872",
+    "label": "oxytocin",
+    "source": "authority_lookup_ols_chebi",
+    "exact_label_match": true
+   },
+   {
+    "entity": "growth hormone",
+    "id": "UniProt:P01241",
+    "label": "Somatotropin",
+    "source": "authority_lookup_uniprot_synonym",
+    "exact_label_match": false
+   },
+   {
+    "entity": "pancreas",
+    "id": "UBERON:0001264",
+    "label": "pancreas",
+    "source": "authority_lookup_ols_uberon_exact",
+    "exact_label_match": true
+   },
+   {
+    "entity": "SARS-CoV-2",
+    "id": "NCBITaxon:2697049",
+    "label": "Severe acute respiratory syndrome coronavirus 2",
+    "source": "authority_lookup_ols_ncbitaxon_synonym",
+    "exact_label_match": false
+   }
+  ]
+ },
+ "hpo_multivalue": {
+  "n_rows_total": 26032,
+  "n_with_hpo_ids": 11417,
+  "n_multi_id": 4091,
+  "multi_pct_of_id_bearing": 35.8,
+  "multi_pct_of_all_rows": 15.7,
+  "basis": "denominators stated explicitly: multi-ID share differs by ~3x depending on whether the base is id-bearing rows or all rows",
+  "source_breakdown": {
+   "authority_lookup_ols_hp": 7988,
+   "authority_lookup_ols_hp_synonym": 3429
+  },
+  "n_rows_hp_native_only": 11368,
+  "n_imported_ontology_ids": 49
+ },
+ "number_in_quote": {
+  "n_rows": 26032,
+  "n_checkable": 16000,
+  "n_true": 14080,
+  "n_false": 1920,
+  "fail_pct_of_checkable": 12.0,
+  "basis": "denominator = rows with BOTH a numeric value and a quote; rows with no number are not failures and are excluded"
+ },
+ "blocked": {
+  "row_level_status": {
+   "retrieved-fulltext": 22850,
+   "abstract-only": 3033,
+   "blocked": 149
+  },
+  "n_papers": 1587,
+  "blocked_papers": 23,
+  "blocked_paper_pct": 1.45,
+  "basis": "paper-level rate (rows are not papers); a paper with many findings would otherwise dominate a row-level percentage"
+ },
+ "guard": {
+  "n_rows": 26032,
+  "id_shaped_strings_in_name_fields": "NONE",
+  "verdict": "Fix 2 holding",
+  "basis": "census of all rows, all five name-bearing columns"
+ },
+ "authority_prefix_match": {
+  "name": "authority_prefix_match",
+  "mismatches": {},
+  "n_mismatched_rows": 0,
+  "ok": true
+ }
+}
