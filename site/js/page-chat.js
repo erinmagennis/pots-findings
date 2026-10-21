@@ -13,7 +13,7 @@ mount('chat.html');
 const LS_KEY='pots_browser_api_key', LS_PROV='pots_browser_provider';
 const PROVIDERS={
   anthropic:{ label:'Anthropic (Claude)', url:'https://api.anthropic.com/v1/messages',
-    keyHint:'sk-ant-…', model:'claude-sonnet-4-20250514',
+    keyHint:'sk-ant-…', model:'claude-sonnet-5',
     build:(sys,msgs,model)=>({
       headers:{'content-type':'application/json','x-api-key':getKey(),
                'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},

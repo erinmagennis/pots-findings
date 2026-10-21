@@ -1,21 +1,6 @@
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const title = value => String(value || '').replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
 
-function countdown() {
-  const element = document.getElementById('countdown');
-  const end = new Date('2026-08-06T18:00:00Z').getTime();
-  const tick = () => {
-    const left = Math.max(0, end - Date.now());
-    if (!left) { element.textContent = 'match ended'; return; }
-    const hours = Math.floor(left / 3600000);
-    const minutes = Math.floor(left / 60000) % 60;
-    const seconds = Math.floor(left / 1000) % 60;
-    element.textContent = `${hours}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s left`;
-  };
-  tick();
-  window.setInterval(tick, 1000);
-}
-
 function graphData(rows) {
   const potsRows = rows.filter(row => row.conditions?.includes('POTS'));
   const normalize = label => String(label || '').trim().toLowerCase().replace(/\s+/g, ' ');
@@ -221,7 +206,6 @@ function renderGraph(data) {
 }
 
 async function init() {
-  countdown();
   const navToggle = document.getElementById('mobileNavToggle');
   const primaryNav = document.getElementById('primaryNav');
   navToggle?.addEventListener('click', () => {

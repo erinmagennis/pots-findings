@@ -17,8 +17,7 @@ function contextPopover(){
 
 export function header(active){
   const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}${h==='chat.html'?' <span>(BYO key)</span>':''}</a>`).join('');
-  return `<div class="campaign-strip" role="status"><span class="campaign-copy campaign-copy-desktop"><strong>4x match</strong> through Thursday 11AM PDT. <strong>Every $1 becomes $5, up to $5,000.</strong></span><span class="campaign-copy campaign-copy-mobile"><strong>4x match</strong> through Thursday 11AM PDT. <strong>Every $1 becomes $5, up to $5,000.</strong></span><span class="campaign-count" id="campaignCountdown">loading</span><a href="https://artizen.fund/index/p/open-pots" target="_blank" rel="noopener">Support the project ↗</a></div>
-  <header class="site"><div class="wrap">
+  return `<header class="site"><div class="wrap">
     <a class="brand" href="index.html" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
     <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation">${tabs}</nav>
@@ -53,10 +52,6 @@ export function mount(active){
     navToggle.setAttribute('aria-expanded', String(!open));
     primaryNav?.toggleAttribute('data-open', !open);
   });
-  const end = new Date('2026-08-06T18:00:00Z').getTime();
-  const tick = () => { const e=document.getElementById('campaignCountdown'); if(!e) return; const left=Math.max(0,end-Date.now());
-    e.textContent = left ? `${Math.floor(left/36e5)}h ${String(Math.floor(left/6e4)%60).padStart(2,'0')}m ${String(Math.floor(left/1e3)%60).padStart(2,'0')}s left` : 'match ended'; };
-  tick(); window.setInterval(tick,1000);
 }
 
 /* ---------- citation line: prominent, always with a link ---------- */
