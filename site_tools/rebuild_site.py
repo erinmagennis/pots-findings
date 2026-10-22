@@ -29,10 +29,11 @@ def main():
         raise SystemExit(report(failures, assertions, " rebuild-check"))
 
     raise SystemExit(
-        "FULL REBUILD UNAVAILABLE: the supplied overlay omitted combined_generator.build_all(), "
-        "the upstream combined discovery tables, and the Tier 2 embedding-generation input. "
-        "The verified current projection has not been modified. See "
-        "_intake/FUTURE_TIER_PUBLIC_EXPORT_HANDOFF.md for the exact inputs required."
+        "This entrypoint belongs to the 2026-08 checkpoint generator and is kept for the archive. The current site is built by:\n"
+        "  python site_tools/build_v12_projection.py --root . --out site/data\n"
+        "  python site_tools/embed_v12.py site/data            # sentence-transformers env\n"
+        "  python site_tools/apply_counts.py site README.md\n"
+        "  python site_tools/verify_site_v12.py --self-test"
     )
 
 

@@ -8,7 +8,7 @@ import { initModel, modelStatus, onModelStatus, embedQuery, loadEmbeddings, embe
          rankByVector, prepareKeyword, keywordReady, keywordSearch } from './search.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
-mount('chat.html');
+mount('chat');
 
 const LS_KEY='pots_browser_api_key', LS_PROV='pots_browser_provider';
 const PROVIDERS={
@@ -126,7 +126,7 @@ HARD RULES:
 2. Cite every claim with the finding tags you used, like [F3] or [F1][F7]. A sentence with no tag is not allowed.
 3. You are NOT giving medical advice. Do not recommend, dose, or rank treatments, and do not tell the user what to do about their health. Describe only what the papers reported. If the question asks what someone should take or do, say that this is a research-literature tool and refer them to a qualified clinician.
 4. Respect the evidence. State the evidence tier and certainty where they matter, and prefer "one cohort study reported X" over "X is true". Flag when findings disagree, when a result is a null result, or when support is a single case report.
-5. Scope: the database combines Tier 1 with ${state.meta.counts.tier2_chunks_extracted} of ${state.meta.counts.tier2_chunks_total} Tier 2 chunks (${state.meta.counts.tier2_coverage_pct}%). All Tier 2 and combined results are partial. Never treat the absence of a finding as evidence that a relationship is absent.
+5. Scope: the database holds ${fmt(state.meta.counts.findings)} machine-extracted findings from ${fmt(state.meta.counts.papers)} papers (${state.meta.counts.year_min}–${state.meta.counts.year_max}) on POTS, dysautonomia and related conditions. It is not the whole literature, and the findings have not yet been checked by a human reader against their papers. Never treat the absence of a finding as evidence that a relationship is absent, and say when the retrieved findings are thin.
 6. Distinguish a finding's condition label from its source literature when that distinction matters. Co-mention is not evidence of interaction, and shared biology is not the same claim as patient comorbidity.
 7. Quote at most a dozen words verbatim from any finding. Summarize in your own words otherwise.
 8. Be concise and concrete. No preamble about being an AI.`;

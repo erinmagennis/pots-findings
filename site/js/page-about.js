@@ -2,24 +2,24 @@ import { loadMeta, loadFacets, state, fmt, esc } from './data.js';
 import { mount, entityCoverageNote } from './ui.js';
 
 await loadMeta(); await loadFacets();
-mount('about.html');
+mount('about');
 const C=state.meta.counts, M=state.meta;
+const V = state.meta.verification_stats || {};
 const literatures=Object.entries(C.findings_by_source_literature||{}).sort((a,b)=>b[1]-a[1]);
 
 document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="section-index" aria-label="About sections"><a href="#scope">Scope</a><a href="#limits">Limits</a><a href="#reuse">Reuse</a><a href="#connect">Collaborate</a></nav><div class="about-content">
 <div class="page-intro">
   <h1>About the data, its limits, and how to reuse it</h1>
   <p class="lede">A searchable index of ${fmt(C.findings)} machine-extracted findings from
-  ${fmt(C.papers)} canonical papers, combining Tier 1 with the current Tier 2 subset.</p>
+  ${fmt(C.papers)} papers published ${C.year_min}–${C.year_max} on POTS, dysautonomia and ${C.conditions} related conditions.</p>
 </div>
 
 <div class="panel" id="scope">
-  <h2>Current scope</h2>
-  <div class="note stop"><b>Tier 2 is ${C.tier2_coverage_pct}% complete.</b> Combined counts are partial.
-  A missing finding may reflect an unprocessed chunk. Absence here is not evidence of absence in the literature.</div>
-  <p>Tier 1 contributes ${fmt(C.findings_tier1)} findings from ${fmt(C.papers_tier1)} canonical papers.
-  The current Tier 2 subset contributes ${fmt(C.findings_tier2)} findings from ${fmt(C.papers_tier2)} papers.
-  The paper sets do not overlap after canonicalization.</p>
+  <h2>Scope</h2>
+  <p>${fmt(C.findings)} findings from ${fmt(C.papers)} papers (${C.year_min}–${C.year_max}), released as five data packages on
+  <a href="https://github.com/erinmagennis/pots-findings">GitHub</a> (version ${esc(M.version)}). Each finding is one extracted statement with its
+  verbatim source quote, direction, evidence tier, condition label and, where the paper named one, the entity it concerns. A missing finding may mean the
+  paper was outside the retrieval queries, had no accessible text, or that the extractor missed it. Absence here is not evidence of absence in the literature.</p>
   <h3>Findings by source literature</h3>
   <div class="statgrid">${literatures.map(([name,n])=>`<div class="stat"><div class="v">${fmt(n)}</div>
     <div class="k">${esc(name)}</div></div>`).join('')}</div>
@@ -42,17 +42,15 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
   <p>These are automated extractions and can contain errors. Read the cited paper before relying on a finding.
   The website shows provenance excerpts of up to ${M.quote_max_chars} characters beside the citation so a reader
   can locate the relevant passage.</p>
-  <p>Paper counts use canonical PMID. The combined total is ${fmt(C.papers)}, not a count of raw PMID rows.
-  Finding rows remain append-only: Tier 1 occupies rows 0 through ${fmt(C.findings_tier1-1)}, followed by the
-  current Tier 2 rows.</p>
-  <h3>Verification status (packages v1.2)</h3>
-  <p>Each finding carries a verbatim quote from its paper. Across Tiers 1–3 of the full corpus
-  (132,540 findings), 127,041 of 132,295 quotes whose source could be
-  re-fetched were found in that source (96.03%; by tier 92.89% / 97.13% / 96.84% / 97.77%).
-  In a 200-finding sample drawn across all five packages, 185 of 200 quotes were found in freshly fetched text.
-  In v1.2 every model-written ontology identifier was checked at its authority and corrected or withheld
-  (details in each package's README). <b>Whether each finding also states what its paper found has not yet been
-  checked by a human reader.</b> That audit is in progress; its result will be posted here when it is done.</p>
+  <p>Paper counts use canonical PMID (${fmt(C.papers)} papers; preprint/journal duplicates are merged). Finding rows keep the order of the
+  five released packages, so a row number here is a stable citation into the GitHub data.</p>
+  <h3 id="verification">Verification status</h3>
+  <p>Each finding carries a verbatim quote from its paper. Across ${fmt(V.trace_rows_total)} findings in the first four packages,
+  ${fmt(V.trace_found)} of ${fmt(V.trace_verifiable)} quotes whose source could be re-fetched were found in that source (${V.trace_pct}%).
+  In a ${fmt(V.sample_n)}-finding sample drawn across all five packages, ${fmt(V.sample_found)} of ${fmt(V.sample_n)} quotes were found in freshly fetched text.
+  In version ${esc(M.version)} every model-written ontology identifier was checked at its authority and corrected or withheld
+  (${fmt(C.verified_id_rows)} findings now carry a verified identifier; ${fmt(C.withheld_id_rows)} identifiers were withheld). <b>Whether each finding also
+  states what its paper found has not yet been checked by a human reader.</b> That audit is in progress; its result will be posted here when it is done.</p>
 </div>
 
 <div class="panel" id="reuse">

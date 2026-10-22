@@ -2,7 +2,7 @@ import { loadMeta, loadFacets, loadEntities, state, fmt, esc } from './data.js';
 import { mount, sortTable, selectOpts, entityCoverageNote } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadEntities();
-mount('entities.html');
+mount('entities');
 document.getElementById('covnote').innerHTML=entityCoverageNote('this entity list and every entity filter');
 
 const kinds=[...new Set(state.entities.map(e=>e.kind).filter(Boolean))].sort();
@@ -34,7 +34,7 @@ function render(){
   document.getElementById('tbl').querySelector('tbody').innerHTML=r.slice(0,600).map(e=>{
     const full=state.entityByName.get(e.name);
     return `<tr>
-      <td><a href="entity.html?e=${encodeURIComponent(e.name)}"><b>${esc(e.name)}</b></a></td>
+      <td><a href="entity?e=${encodeURIComponent(e.name)}"><b>${esc(e.name)}</b></a></td>
       <td>${esc(e.kind||'N/A')}</td>
       <td class="num">${fmt(e.np_)} <span class="bar" style="width:${Math.round(46*e.np_/max)}px"></span></td>
       <td class="num">${fmt(e.nf)}</td>

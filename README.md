@@ -1,90 +1,69 @@
 # POTS and dysautonomia literature findings
 
-A public, machine-extracted research dataset and static browser covering the completed Tier 1 record plus the
-current Tier 2 checkpoint.
+A public, machine-extracted research dataset and static browser: findings from the POTS, dysautonomia and related-condition literature, with verbatim source quotes, released as five verifiable data packages.
 
 ## Findings packages v1.2 (the full corpus)
 
-The complete harmonised corpus — **148,186 findings from 11,519 papers** across Tiers 1–4 — ships as five
+The complete harmonised corpus — **<!--n:findings-->148,186<!--/n--> findings from <!--n:pmids-->11,519<!--/n--> papers** across Tiers 1–4 — ships as five
 self-contained packages under [`packages/`](packages/) (start at [`packages/README.md`](packages/README.md) and
 [`packages/OVERVIEW.md`](packages/OVERVIEW.md)). Each package carries its data (Parquet + CSV), documentation,
 QA tables, the code that built it and `CHECKSUMS.sha256`; `code/verify_package.py --self-test` re-checks a package end to end.
 
 | version | tag | what changed |
 |---|---|---|
-| v1.2 | `v1.2` | Every model-emitted ontology identifier in Tiers 1–2 was looked up by id at its minting authority (HGNC, ChEBI, MeSH) and compared with the entity name. 14,055 rows are now `authority_verified_retrospective` (10,879 confirmed, 3,176 replaced by the id the name resolves to); 2,607 ids that denoted a different entity were withheld. The original model id is preserved in `ontology_id_v11_model_emitted`. No finding text, quote, direction, condition or paper changed. |
+| v1.2 | `v1.2` | Every model-emitted ontology identifier in Tiers 1–2 was looked up by id at its minting authority (HGNC, ChEBI, MeSH) and compared with the entity name. <!--n:id_retrospective_rows-->14,055<!--/n--> rows are now `authority_verified_retrospective` (<!--n:id_kept_rows-->10,879<!--/n--> confirmed, <!--n:id_replaced_rows-->3,176<!--/n--> replaced by the id the name resolves to); <!--n:withheld_id_rows-->2,607<!--/n--> ids that denoted a different entity were withheld. The original model id is preserved in `ontology_id_v11_model_emitted`. No finding text, quote, direction, condition or paper changed. |
 | v1.1 | `v1.1` | Five harmonised packages; Tier 1–2 identifiers flagged `unverified_model_emitted`. |
 
 Join on `entity_ontology_id_resolved` only where `ontology_id_verification` is `authority_verified` or
-`authority_verified_retrospective` (19,782 rows). **Scientific fidelity — whether each finding states what its paper
+`authority_verified_retrospective` (<!--n:verified_id_rows-->19,782<!--/n--> rows). **Scientific fidelity — whether each finding states what its paper
 found — has not yet been checked by a human reader**; that audit is open and its result will be posted here and on the
-site's About page. The browser below still serves the Tier 1 + Tier 2 checkpoint; it will move to v1.2 next.
+site's About page. The browser at pots.erinmagennis.com serves this release.
 
-## Current checkpoint
+## Browser
 
-| Measure | Current value | Basis |
-|---|---:|---|
-| Combined findings | 73,070 | Tier 1 rows followed by current Tier 2 rows |
-| Combined papers | 6,244 | Distinct canonical PMID |
-| Canonical entities | 2,803 | Distinct canonical entity across both tiers |
-| Tier 2 progress | 81 of 146 chunks | 55.5% |
+The findings browser at [pots.erinmagennis.com](https://pots.erinmagennis.com) is a static projection of the packages above
+(search, entity and condition pages, derived tables, chart builder). It is regenerated from `packages/` by
+`site_tools/build_v12_projection.py`; every count shown on the site and in this README is read from the generated
+`site/data/meta.json`, never typed. Run it locally:
 
-Every Tier 2 and combined figure is a subset figure. Absence of a finding is not evidence of absence.
+```bash
+python -m http.server 8000 --directory site      # then open http://localhost:8000/
+```
 
-This is machine-extracted research information, not medical advice. Read and cite the original paper before
-relying on a finding.
-
-## Download and browse
-
-The repository keeps the data available as individual files:
-
-- `data/`: independently usable Tier 1 record
-- `data/tier2/`: additive Tier 2 checkpoint and cross-tier tables
-- `site/`: combined static browser
-- `validation/`: frozen facts and verification rules
-
-Each public checkpoint uses an immutable Git tag and release ZIP so `main` can continue into later Tier 2 batches
-and Tiers 3 and 4. The completed Tier 1 documentation is preserved in
-[`docs/TIER1_README.md`](docs/TIER1_README.md). Tier 2 starts at
-[`docs/tier2/README_tier2.md`](docs/tier2/README_tier2.md).
-
-## Quick start
+## Quick start with the data
 
 ```python
 import pandas as pd
-
-tier1 = pd.read_parquet("data/tier1_findings.parquet")
-tier2 = pd.read_parquet("data/tier2/tier2_findings_canonical.parquet")
-
-assert tier1.canonical_pmid.nunique() == 3121
-assert tier2.canonical_pmid.nunique() == 3123
+t1 = pd.read_parquet("packages/dysautonomia-core-findings/data/tier1_findings.parquet")
+ok = t1.ontology_id_verification.isin(["authority_verified", "authority_verified_retrospective"])
+grounded = t1[ok]            # rows whose entity identifier was confirmed at its authority
 ```
 
-Run the website locally:
-
-```bash
-python -m http.server 8000 --directory site
-```
-
-Then open `http://localhost:8000/`.
+Each package's `README.md` has a quickstart, `docs/DATA_DICTIONARY.md` every column, `docs/LIMITATIONS.md` what the
+data cannot support, and `code/verify_package.py --self-test` re-checks the package end to end.
 
 ## Verification
 
-Before publishing any checkpoint:
-
 ```bash
-python site_tools/verify_site.py --self-test
+python site_tools/verify_site_v12.py --self-test     # site projection vs packages, hand-typed-number scan, checksums
+for p in packages/*/; do (cd "$p" && python code/verify_package.py --self-test && shasum -a 256 -c CHECKSUMS.sha256 --quiet); done
 ```
 
-The gate checks frozen counts, canonical accounting, row order, shard alignment, site schemas, scope language,
-and public-export structure. Browser review is the final rendered-site step.
+Scientific fidelity (does each finding state what its paper found) has not yet been human-checked; see the About page.
+
+## Historical checkpoints (archive)
+
+Before the packages existed the repository published an incremental record: `data/` (Tier 1, July 2026) and
+`data/tier2/` (Tier 2 at 55%, August 2026), with docs under `docs/` and `docs/tier2/` and the site generator of that era in
+`site_tools/site_generator.py`. They are kept unchanged for reproducibility of the earlier releases (tags `tier1-v1`,
+`tier2-55pct-2026-08-03`); the packages supersede them. The package versions are tags `v1.1` and `v1.2`.
 
 ## Important distinctions
 
 - Co-mention is not interaction or causation.
 - Shared biology across literatures is not the same as patient comorbidity.
 - A condition label is not the same as the source literature that supplied the paper.
-- Entity-based views cover 32.6% of current finding rows, not the whole dataset.
+- Entity-based views cover the <!--n:entity_string_pct-->60.3<!--/n-->% of findings that name an entity, not the whole dataset; the rest are symptom, phenotype and quality-of-life findings.
 - A null result does not by itself establish ineffectiveness.
 
 ## Citation and license

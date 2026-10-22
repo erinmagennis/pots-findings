@@ -116,8 +116,8 @@ export function keywordReady(){ return textReady; }
 function tokens(qs){ return qs.toLowerCase().split(/[^a-z0-9%+./-]+/).filter(t=>t.length>1); }
 
 /** substring/token match over finding_text + canonical entity + ORIGINAL entity string + condition.
-    Including the original string matters: 8,449 rows carry an entity string that never received a
-    canonical mapping. Those are real findings and must stay findable by their own string. */
+    Including the original string matters: rows whose entity is grouped under a different display name
+    must stay findable by the string the paper used. */
 export function keywordSearch(query, allowed, topK=200){
   const ql = query.toLowerCase().trim();
   if(!ql) return [];

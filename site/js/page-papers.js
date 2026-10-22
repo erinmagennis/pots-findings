@@ -3,7 +3,7 @@ import { mount, sortTable } from './ui.js';
 
 const PAGE=60; let page=0, sortKey='n_findings', sortDir=-1;
 await loadMeta(); await loadPapers();
-mount('papers.html');
+mount('papers');
 
 const P=state.papers, all=P.rows.map((r,i)=>{
   const o={_i:i}; for(const k in P.idx) o[k]=r[P.idx[k]]; return o;
@@ -30,7 +30,7 @@ function render(){
   document.getElementById('tbl').querySelector('tbody').innerHTML=r.slice(page*PAGE,(page+1)*PAGE).map(p=>{
     const etal=p.author_count>1?' et al.':'';
     return `<tr>
-      <td><a href="paper.html?pmid=${esc(p.pmid)}"><b>${esc(p.first_author||'N/A')}${etal}</b></a></td>
+      <td><a href="paper?pmid=${esc(p.pmid)}"><b>${esc(p.first_author||'N/A')}${etal}</b></a></td>
       <td>${esc((p.title||'').slice(0,120))}${(p.title||'').length>120?'…':''}</td>
       <td class="jr">${esc(p.journal||'N/A')}</td>
       <td class="num">${p.year||'N/A'}</td>

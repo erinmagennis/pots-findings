@@ -4,7 +4,7 @@ import { mount, findingCard, qs } from './ui.js';
 
 const PAGE=25; let page=0, rows=[];
 await loadMeta(); await loadFacets(); await loadPapers();
-mount('conditions.html');
+mount('conditions');
 
 const c=qs('c');
 rows=applyFilters(state.facets,{c});
@@ -14,19 +14,18 @@ const extractionTiers=[...new Set(rows.map(r=>val('ti',r)).filter(Boolean))].sor
 const tally=(f)=>{ const m={}; for(const r of rows){ const v=val(f,r); if(v&&v!=='\u2014') m[v]=(m[v]||0)+1; } return m; };
 
 document.getElementById('head').innerHTML=`<div class="panel">
-  <h1>${esc(c)} <span class="pill">tiers ${extractionTiers.map(esc).join(', ')}</span></h1>
-  <div class="note plain"><b>This is a condition-label view across the current checkpoint.</b>
+  <h1>${esc(c)}</h1>
+  <div class="note plain"><b>This is a condition-label view across the whole corpus.</b>
     Its ${fmt(rows.length)} findings come from ${sourceLiteratures.length} source literature${sourceLiteratures.length===1?'':'s'}:
     ${sourceLiteratures.map(x=>`<code>${esc(x)}</code>`).join(', ')}. A condition label and a source literature
-    are not interchangeable. Tier 2 covers ${state.meta.counts.tier2_chunks_extracted} of
-    ${state.meta.counts.tier2_chunks_total} chunks, so these are subset counts and absence is not evidence of absence.
+    are not interchangeable. Absence of a finding is not evidence of absence.
     ${rows.length<50?'This label carries very few findings, so treat its counts as exploratory.':''}</div>
   <div class="statgrid">
     <div class="stat"><div class="v">${fmt(rows.length)}</div><div class="k">findings</div></div>
     <div class="stat"><div class="v">${fmt(paperCount(rows))}</div><div class="k">papers</div></div>
     <div class="stat"><div class="v">${fmt(Object.keys(tally('e')).length)}</div><div class="k">named entities</div></div>
   </div>
-  <p><a href="search.html?c=${encodeURIComponent(c)}">Open in search →</a></p></div>`;
+  <p><a href="search?c=${encodeURIComponent(c)}">Open in search →</a></p></div>`;
 
 const box=(t,id)=>`<div class="chartbox"><h3>${t}</h3><div class="canvasholder" style="height:260px"><canvas id="${id}"></canvas></div></div>`;
 document.getElementById('charts').innerHTML=box('Direction','cD')+box('Evidence tier','cT');

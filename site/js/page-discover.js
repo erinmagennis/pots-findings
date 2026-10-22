@@ -2,7 +2,7 @@ import { loadMeta, loadPapers, loadFacets, loadEntities, getJSON, state, fmt, es
 import { mount, sortTable } from './ui.js';
 
 await loadMeta(); await loadPapers(); await loadFacets(); await loadEntities();
-mount('discover.html');
+mount('discover');
 const C=state.meta.counts;
 document.querySelector('#dtabs').insertAdjacentHTML('beforebegin', `<div class="statgrid findings-summary">
   <a class="stat" href="#assoc"><div class="v">${fmt(C.assoc_significant)}</div><div class="k">significant comparisons</div></a>
@@ -23,23 +23,23 @@ async function viewOverview(){
   const directions=tally('d');
   const nulls=tally('nc');
   const entityRows=[...state.entities].sort((a,b)=>b.np_-a.np_).slice(0,8).map(entity=>[entity.name,entity.np_]);
-  const entityLinks=barRows(entityRows, state.meta.counts.papers, label=>`<a href="entity.html?e=${encodeURIComponent(label)}">${esc(label)}</a>`);
+  const entityLinks=barRows(entityRows, state.meta.counts.papers, label=>`<a href="entity?e=${encodeURIComponent(label)}">${esc(label)}</a>`);
   const maxYear=years.length?years[years.length-1][0]:'current';
   document.getElementById('view').innerHTML=`<section class="overview-grid" aria-label="Findings overview">
     <div class="overview-main">
-      <div class="overview-section"><div class="section-kicker">01 · Literature growth</div><h2>Findings by publication year</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows. Year comes from the source paper. <a href="search.html">Search the underlying findings</a>.</p><div class="year-bars">${years.map(([year,n])=>`<div class="year-bar"><span>${esc(year)}</span><i style="height:${Math.max(4,n/years.reduce((m,x)=>Math.max(m,x[1]),0)*100)}%" title="${fmt(n)} findings"></i><b>${fmt(n)}</b></div>`).join('')}</div><p class="kv">${esc(maxYear)} is a partial year where applicable. Combined counts include partial Tier 2.</p></div>
+      <div class="overview-section"><div class="section-kicker">01 · Literature growth</div><h2>Findings by publication year</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows. Year comes from the source paper. <a href="search">Search the underlying findings</a>.</p><div class="year-bars">${years.map(([year,n])=>`<div class="year-bar"><span>${esc(year)}</span><i style="height:${Math.max(4,n/years.reduce((m,x)=>Math.max(m,x[1]),0)*100)}%" title="${fmt(n)} findings"></i><b>${fmt(n)}</b></div>`).join('')}</div><p class="kv">${esc(maxYear)} is a partial year where applicable. Combined counts include partial Tier 2.</p></div>
       <div class="overview-section"><div class="section-kicker">02 · Research areas</div><h2>Most represented themes</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows with a theme label. Missing theme labels are excluded.</p>${barRows(areas, state.meta.counts.findings)}</div>
       <div class="overview-section"><div class="section-kicker">03 · Direction and null results</div><h2>What the extracted rows report</h2><div class="overview-columns"><div><h3>Direction</h3><p class="kv">Denominator: ${fmt(directions.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(directions, directions.reduce((s,x)=>s+x[1],0))}</div><div><h3>Null or failed result</h3><p class="kv">Denominator: ${fmt(nulls.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(nulls, nulls.reduce((s,x)=>s+x[1],0))}</div></div></div>
     </div>
-    <aside class="overview-side"><div class="overview-section"><div class="section-kicker">04 · Connected entities</div><h2>Highest paper reach</h2><p class="kv">Denominator: ${fmt(state.meta.counts.papers)} canonical papers. Entity coverage is a subset of the findings.</p>${entityLinks}<a class="overview-link" href="connections.html">Open the connection map →</a></div>
+    <aside class="overview-side"><div class="overview-section"><div class="section-kicker">04 · Connected entities</div><h2>Highest paper reach</h2><p class="kv">Denominator: ${fmt(state.meta.counts.papers)} canonical papers. Entity coverage is a subset of the findings.</p>${entityLinks}<a class="overview-link" href="connections">Open the connection map →</a></div>
       <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Current contradictions</h2><p class="overview-number">${fmt(state.meta.counts.contradictions)}</p><p class="kv">Rows with conflicting extracted directions or null-versus-positive results.</p><a class="overview-link" href="#contra">Review contradictions →</a><h3>Under-studied signals</h3><p class="overview-number">${fmt(state.meta.counts.understudied)}</p><p class="kv">Candidates ranked from the current combined analysis.</p><a class="overview-link" href="#under">Review under-studied signals →</a></div>
-      <div class="overview-section"><div class="section-kicker">06 · Read the record</div><h2>Complete tables</h2><p class="kv">Browse every row behind this overview, with links to source papers and entities.</p><a class="overview-link" href="#assoc">Comparisons →</a><a class="overview-link" href="#nulls">Null and failed →</a><a class="overview-link" href="papers.html">All papers →</a><a class="overview-link" href="entities.html">All entities →</a></div>
+      <div class="overview-section"><div class="section-kicker">06 · Read the record</div><h2>Complete tables</h2><p class="kv">Browse every row behind this overview, with links to source papers and entities.</p><a class="overview-link" href="#assoc">Comparisons →</a><a class="overview-link" href="#nulls">Null and failed →</a><a class="overview-link" href="papers">All papers →</a><a class="overview-link" href="entities">All entities →</a></div>
     </aside></section>`;
 }
 
 const asList=v=>v==null?[]:Array.isArray(v)?v:String(v).split(/[|,;]\s*/).filter(Boolean);
 const pmidLinks=(v,cap=6)=>{const values=asList(v); return values.length
-  ? values.slice(0,cap).map(p=>`<a href="paper.html?pmid=${esc(p)}">${esc(p)}</a>`).join(' ')
+  ? values.slice(0,cap).map(p=>`<a href="paper?pmid=${esc(p)}">${esc(p)}</a>`).join(' ')
     +(values.length>cap?` <span class="kv">+${values.length-cap} more</span>`:'')
   :'N/A';};
 const sourceList=v=>asList(v).map(x=>`<span class="tag">${esc(x)}</span>`).join(' ');
@@ -49,8 +49,8 @@ export function csv(rows,cols,name){
   const head=[
     `# POTS and related-condition findings browser: ${name}`,
     `# generated ${state.meta.generated_utc} | ${fmt(C.findings)} findings from ${fmt(C.papers)} canonical papers`,
-    `# scope: Tier 1 plus ${C.tier2_chunks_extracted} of ${C.tier2_chunks_total} Tier 2 chunks (${C.tier2_coverage_pct}%)`,
-    `# all Tier 2 and combined counts are subset counts; absence is not evidence of absence`,
+    `# scope: pots-findings ${state.meta.version} full corpus; identifiers verified at their authorities; scientific fidelity not yet human-checked`,
+    `# absence of a finding is not evidence of absence`,
     `# automated extraction can contain errors; co-mention is not interaction or causation`,
     `# not medical advice; cite and read the original papers`
   ];
@@ -82,8 +82,8 @@ async function viewAssoc(){
     document.querySelector('#aTbl thead').innerHTML='<tr>'+columns.map(([k,l])=>
       `<th data-k="${k}">${l}${k===key?(direction<0?' ▾':' ▴'):''}</th>`).join('')+'</tr>';
     document.querySelector('#aTbl tbody').innerHTML=values.slice(0,400).map(r=>`<tr>
-      <td><a href="entity.html?e=${encodeURIComponent(r.entity_a)}">${esc(r.entity_a)}</a><div class="kv">${esc(r.entity_kind_a||'')}</div></td>
-      <td><a href="entity.html?e=${encodeURIComponent(r.entity_b)}">${esc(r.entity_b)}</a><div class="kv">${esc(r.entity_kind_b||'')}</div></td>
+      <td><a href="entity?e=${encodeURIComponent(r.entity_a)}">${esc(r.entity_a)}</a><div class="kv">${esc(r.entity_kind_a||'')}</div></td>
+      <td><a href="entity?e=${encodeURIComponent(r.entity_b)}">${esc(r.entity_b)}</a><div class="kv">${esc(r.entity_kind_b||'')}</div></td>
       <td class="num">${fmt(r.n_papers_both)}<div class="kv">expected ${Number(r.expected_papers_both||0).toFixed(1)}</div></td>
       <td class="num">${r.lift==null?'N/A':Number(r.lift).toFixed(1)}</td>
       <td class="num">${r.jaccard==null?'N/A':Number(r.jaccard).toFixed(3)}</td>
@@ -125,7 +125,7 @@ async function viewUnder(){
     document.querySelector('#uTbl thead').innerHTML='<tr>'+columns.map(([k,l])=>
       `<th data-k="${k}">${l}${k===key?(direction<0?' ▾':' ▴'):''}</th>`).join('')+'</tr>';
     document.querySelector('#uTbl tbody').innerHTML=values.slice(0,400).map(r=>`<tr>
-      <td><a href="entity.html?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a><div class="kv">${esc(r.entity_kind||'')}</div></td>
+      <td><a href="entity?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a><div class="kv">${esc(r.entity_kind||'')}</div></td>
       <td>${esc(r.condition||'N/A')}</td><td>${esc(r.direction||'N/A')}</td>
       <td class="num">${fmt(r.n_papers)}</td><td class="num">${fmt(r.n_findings)}</td>
       <td>${esc(r.best_tier||'N/A')}</td><td class="num">${r.max_year||'N/A'}</td>
@@ -157,7 +157,7 @@ async function viewContra(){
   function render(){
     const values=rowsNow(); document.getElementById('kCount').textContent=`${fmt(values.length)} contradictions shown`;
     document.getElementById('kList').innerHTML=values.slice(0,150).map(r=>`<div class="panel" style="padding:12px">
-      <h3><a href="entity.html?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a>
+      <h3><a href="entity?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a>
         <span class="kv">in ${esc(r.condition||'N/A')}</span></h3>
       <div>${sourceList(r.source_literatures)} <span class="pill grey">${esc(r.conflict_type)}</span></div>
       <div class="sides"><div class="side A"><h4>Side A: ${esc(r.side_A_direction||'N/A')}</h4>
@@ -200,10 +200,10 @@ async function viewNulls(){
         &&(!q||`${r.canonical_entity||''} ${r.entity||''} ${r.treatment_class||''} ${p?.title||''}`.toLowerCase().includes(q));});};
   function render(){const values=sortTable(rowsNow(),'year',-1),slice=values.slice(page*PAGE,(page+1)*PAGE);
     document.querySelector('#nTbl tbody').innerHTML=slice.map(r=>{const p=paperByPmid(r.canonical_pmid),url=p&&(p.doi_url||p.pubmed_url||p.pmc_url);
-      return `<tr><td>${r.canonical_entity?`<a href="entity.html?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a>`:esc(r.entity||'N/A')}</td>
+      return `<tr><td>${r.canonical_entity?`<a href="entity?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a>`:esc(r.entity||'N/A')}</td>
       <td>${esc(r.null_class||'N/A')}</td><td>${esc(r.condition||'N/A')}</td><td>${esc(r.evidence_tier||'N/A')}</td>
       <td class="num">${r.year||'N/A'}</td><td>${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(p.first_author||'Source paper')}</a>`:'Source paper'}
-        <div class="kv">${esc((p?.journal||'').slice(0,50))}</div><a class="kv" href="paper.html?pmid=${esc(r.canonical_pmid)}">all findings</a></td>
+        <div class="kv">${esc((p?.journal||'').slice(0,50))}</div><a class="kv" href="paper?pmid=${esc(r.canonical_pmid)}">all findings</a></td>
       <td>${r.provenance_quote_trunc?`<div class="quote">“${esc(r.provenance_quote_trunc)}”</div>`:''}</td></tr>`;}).join('');
     document.getElementById('nCount').textContent=`${fmt(values.length)} results`;
     const pages=Math.ceil(values.length/PAGE);document.getElementById('nPager').innerHTML=`<button id="np" ${page===0?'disabled':''}>prev</button>
@@ -235,7 +235,7 @@ async function viewConv(){
   function render(){const values=sortTable(rowsNow(),key,direction);
     document.querySelector('#vTbl thead').innerHTML='<tr>'+columns.map(([k,l])=>`<th data-k="${k}">${l}</th>`).join('')+'</tr>';
     document.querySelector('#vTbl tbody').innerHTML=values.slice(0,400).map(r=>`<tr>
-      <td><a href="entity.html?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a><div class="kv">${esc(r.entity_kind||'')}</div></td>
+      <td><a href="entity?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a><div class="kv">${esc(r.entity_kind||'')}</div></td>
       <td>${esc(r.concordant_direction||'N/A')}</td><td class="num">${fmt(r.n_source_literatures)}</td>
       <td class="num">${fmt(r.n_conditions)}</td><td class="num">${fmt(r.n_papers)}</td><td class="num">${fmt(r.n_findings)}</td>
       <td>${esc(r.best_tier||'N/A')}</td><td>${sourceList(r.tiers)}</td><td>${sourceList(r.source_literatures)}</td></tr>`).join('');

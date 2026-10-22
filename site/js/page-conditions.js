@@ -2,7 +2,7 @@ import { loadMeta, loadFacets, loadPapers, state, applyFilters, paperCount, fmt,
 import { mount } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadPapers();
-mount('conditions.html');
+mount('conditions');
 
 const conds = state.facets.dicts.c.filter(c=>c && c!=='\u2014');
 const stats = conds.map(c=>{
@@ -19,10 +19,9 @@ document.getElementById('cards').innerHTML = stats.slice(0,6).map(s=>
 document.getElementById('tbl').querySelector('thead').innerHTML=
   `<tr><th>Condition label</th><th>Findings</th><th>Papers</th><th>Source coverage</th></tr>`;
 document.getElementById('tbl').querySelector('tbody').innerHTML=stats.map(s=>`<tr>
-  <td><a href="condition.html?c=${encodeURIComponent(s.c)}"><b>${esc(s.c)}</b></a></td>
+  <td><a href="condition?c=${encodeURIComponent(s.c)}"><b>${esc(s.c)}</b></a></td>
   <td class="num">${fmt(s.n)}</td><td class="num">${fmt(s.papers)}</td>
-  <td><span class="tag tier">tier ${s.tiers.map(esc).join(', ')}</span>
-    <span class="kv">${s.literatures.length} source literature${s.literatures.length===1?'':'s'}:
+  <td><span class="kv">${s.literatures.length} source literature${s.literatures.length===1?'':'s'}:
       ${s.literatures.slice(0,5).map(esc).join(', ')}${s.literatures.length>5?` +${s.literatures.length-5} more`:''}</span></td>
   </tr>`).join('');
 

@@ -3,7 +3,7 @@ import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, pa
 import { mount, entityCoverageNote } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
-mount('charts.html');
+mount('charts');
 const C=state.meta.counts, F=state.facets;
 
 document.getElementById('stats').innerHTML=[
@@ -59,7 +59,7 @@ for(const r of all){ const y=F.cols.y[r]; if(y>0) yrM.set(y,(yrM.get(y)||0)+1); 
 const yrs=[...yrM.keys()].sort();
 boxes.push(chartBox('c5','Findings over time (publication year)',
   `Year is the source paper's publication year. ${state.meta.counts.findings? '':''}
-   2026 is a partial year, and Tier 2 is only ${C.tier2_coverage_pct}% extracted. The shape reflects
+   ${C.year_max} is a partial year. The shape reflects
    both real publication growth and what the query retrieved.`));
 
 document.getElementById('charts').innerHTML=boxes.join('');
@@ -125,8 +125,8 @@ document.addEventListener('click',e=>{
     const head=[`# POTS and related-condition findings browser: chart data (${cs})`,
       `# generated ${M.generated_utc} | ${fmt(cc.findings)} findings from ${fmt(cc.papers)} papers`,
       `# papers counted on canonical_pmid | canonical_entity covers ${cc.canonical_entity_pct}% of findings`,
-      `# scope: Tier 1 plus ${cc.tier2_chunks_extracted} of ${cc.tier2_chunks_total} Tier 2 chunks (${cc.tier2_coverage_pct}%)`,
-      `# all Tier 2 and combined counts are subset counts; absence is not evidence of absence`,
+      `# scope: pots-findings ${M.version} full corpus; identifiers verified at their authorities; scientific fidelity not yet human-checked`,
+      `# absence of a finding is not evidence of absence`,
       `# NOT MEDICAL ADVICE. Machine-extracted research information; extraction errors possible.`];
     const body=[...head, d.cols.join(','),...d.rows.map(r=>r.map(q).join(','))].join('\n');
     const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([body],{type:'text/csv'}));

@@ -2,7 +2,7 @@ import { loadMeta, getJSON, fmt } from './data.js';
 import { mount as mountChrome } from './ui.js';
 
 await loadMeta();
-mountChrome('connections.html');
+mountChrome('connections');
 const source = await getJSON('associations.json');
 const graphRoot = document.getElementById('connectionGraph');
 const caption = document.getElementById('graphCaption');
@@ -67,7 +67,7 @@ function render(){
     group.append(circle,text); svg.append(group);
     const focus=()=>{const id=node.id; svg.querySelectorAll('circle').forEach(c=>c.classList.toggle('dim',c.dataset.id!==id)); svg.querySelectorAll('line').forEach(line=>{const hot=line.dataset.a===id||line.dataset.b===id; line.classList.toggle('hot',hot); line.classList.toggle('dim',!hot);});};
     const drawer=document.getElementById('connectionDrawer');
-    const select=()=>{focus(); const label=node.label; drawer.innerHTML=`<p class="section-kicker">Selected entity</p><h2>${label}</h2><div class="drawer-stat">${fmt(node.degree)}</div><p class="kv">visible connections in this graph</p><a href="entity.html?e=${encodeURIComponent(label)}">Open the full entity record →</a>`;};
+    const select=()=>{focus(); const label=node.label; drawer.innerHTML=`<p class="section-kicker">Selected entity</p><h2>${label}</h2><div class="drawer-stat">${fmt(node.degree)}</div><p class="kv">visible connections in this graph</p><a href="entity?e=${encodeURIComponent(label)}">Open the full entity record →</a>`;};
     let dragging=false;
     circle.addEventListener('mouseenter',()=>{if(!dragging)focus()}); circle.addEventListener('focus',select); circle.addEventListener('mouseleave',()=>{if(!dragging)clearFocus()}); circle.addEventListener('blur',clearFocus); circle.addEventListener('click',select);
     circle.addEventListener('pointerdown',event=>{dragging=true;circle.setPointerCapture(event.pointerId);circle.style.cursor='grabbing';select();});

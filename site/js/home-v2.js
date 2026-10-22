@@ -227,7 +227,7 @@ async function init() {
   document.getElementById('findingCount').textContent = Number(meta.counts.findings).toLocaleString();
   document.getElementById('paperCount').textContent = Number(meta.counts.papers).toLocaleString();
   renderGraph(graphData(associations.rows));
-  document.getElementById('searchForm').addEventListener('submit', event => { event.preventDefault(); const query = document.getElementById('curiosityInput').value.trim(); if (query) window.location.href = `search.html?q=${encodeURIComponent(query)}`; });
+  document.getElementById('searchForm').addEventListener('submit', event => { event.preventDefault(); const query = document.getElementById('curiosityInput').value.trim(); if (query) window.location.href = `search?q=${encodeURIComponent(query)}`; });
   const searchToggle = document.getElementById('searchToggle');
   if (searchToggle) searchToggle.addEventListener('click', () => { const input = document.getElementById('curiosityInput'); input.focus(); searchToggle.setAttribute('aria-expanded', 'true'); });
 }

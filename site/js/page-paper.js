@@ -2,7 +2,7 @@ import { loadMeta, loadFacets, loadPapers, state, ensureRows, fmt, esc, paper } 
 import { mount, findingCard, qs } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadPapers();
-mount('papers.html');
+mount('papers');
 
 const pmid=qs('pmid');
 let pi=-1;
@@ -10,7 +10,7 @@ for(let i=0;i<state.papers.rows.length;i++){ if(String(state.papers.rows[i][stat
 
 if(pi<0){
   document.getElementById('head').innerHTML=`<div class="panel"><h1>Paper not found</h1>
-    <p>No paper with pmid <code>${esc(pmid)}</code>. <a href="papers.html">Browse papers →</a></p></div>`;
+    <p>No paper with pmid <code>${esc(pmid)}</code>. <a href="papers">Browse papers →</a></p></div>`;
 } else {
   const p=paper(pi);
   const rows=[]; const col=state.facets.cols.p;

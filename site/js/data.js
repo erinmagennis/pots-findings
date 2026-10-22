@@ -130,7 +130,7 @@ export function esc(s){
 export function fmt(n){ return (n==null||isNaN(n)) ? 'N/A' : Number(n).toLocaleString('en-US'); }
 
 /* ---- filtering over the facet layer ---- */
-export const FILTER_FIELDS = ['ti','sl','c','d','tr','ce','ft','ek','mc','e','st','ca','ps','ag','cv','th'];
+export const FILTER_FIELDS = ['sl','c','d','tr','ce','ft','ek','mc','e','st','ca','ps','ag','cv','th'];
 
 export function applyFilters(f, opts){
   const F = state.facets, n = F.n, out = [];

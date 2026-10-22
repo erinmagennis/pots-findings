@@ -4,13 +4,13 @@ import { mount, findingCard, qs } from './ui.js';
 
 const PAGE=25; let page=0, rows=[];
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
-mount('entities.html');
+mount('entities');
 
 const name=qs('e');
 const e=state.entityByName.get(name);
 if(!e){
   document.getElementById('head').innerHTML=`<div class="panel"><h1>Entity not found</h1>
-    <p>No canonical entity named <code>${esc(name)}</code>. <a href="entities.html">Browse all entities →</a></p></div>`;
+    <p>No canonical entity named <code>${esc(name)}</code>. <a href="entities">Browse all entities →</a></p></div>`;
 } else {
   rows=applyFilters(state.facets,{e:name});
   const ont = e.oid
@@ -29,7 +29,7 @@ if(!e){
     </div>
     <p class="kv" style="margin-top:8px"><b>papers</b> counts distinct canonical papers including
       split-derived rows; <b>papers (direct)</b> excludes rows created by splitting a compound entity string.</p>
-    <p><a href="search.html?e=${encodeURIComponent(e.name)}">Open in search with filters →</a></p>
+    <p><a href="search?e=${encodeURIComponent(e.name)}">Open in search with filters →</a></p>
   </div>`;
 
   const origs=(e.origs||[]);

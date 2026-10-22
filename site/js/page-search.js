@@ -8,12 +8,12 @@ const PAGE=25;
 let mode='keyword', view='papers', rows=[], scored=null, page=0;
 
 const FLABEL = {c:'Condition', d:'Direction', tr:'Evidence tier', ce:'Certainty', ft:'Finding type',
-  ek:'Entity kind', mc:'Map confidence', e:'Canonical entity', st:'Study type',
+  ek:'Entity kind', mc:'Identifier status', e:'Canonical entity', st:'Study type',
   ca:'Causal/correlational', ps:'POTS subtype', ag:'Age group', cv:'COVID-associated', th:'Theme',
-  ti:'Extraction tier', sl:'Source literature'};
+  ti:'Package (provenance)', sl:'Source literature'};
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
-mount('search.html');
+mount('search');
 
 /* ---- filters ---- */
 const fEl = document.getElementById('filters');
@@ -141,9 +141,9 @@ function paperCard(p){
   if(!p) return '';
   const source=p.doi_url||p.pubmed_url||p.pmc_url;
   const sourceLink=source?`<a href="${esc(source)}" target="_blank" rel="noopener">Read source</a>`:'';
-  return `<div class="card paper-card"><p class="paper-title"><a href="paper.html?pmid=${esc(p.pmid)}">${esc(p.title||p.citation_short||'Untitled paper')}</a></p>
+  return `<div class="card paper-card"><p class="paper-title"><a href="paper?pmid=${esc(p.pmid)}">${esc(p.title||p.citation_short||'Untitled paper')}</a></p>
     <div class="paper-meta">${esc(p.first_author||'Unknown')}${p.author_count>1?' et al.':''} · ${esc(p.journal||'Unknown journal')} · ${esc(p.year||'Year unavailable')}</div>
-    <div class="paper-actions"><span>${fmt(p.n_findings)} extracted findings</span>${sourceLink?` · ${sourceLink}`:''} · <a href="paper.html?pmid=${esc(p.pmid)}">View findings</a></div></div>`;
+    <div class="paper-actions"><span>${fmt(p.n_findings)} extracted findings</span>${sourceLink?` · ${sourceLink}`:''} · <a href="paper?pmid=${esc(p.pmid)}">View findings</a></div></div>`;
 }
 
 function setView(next){

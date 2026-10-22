@@ -3,14 +3,14 @@ import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, fm
 import { mount, selectOpts, entityCoverageNote } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
-mount('builder.html');
+mount('builder');
 const F=state.facets;
 
 const DIM = {c:'Condition', d:'Direction', tr:'Evidence tier', ce:'Certainty', ft:'Finding type',
-  ek:'Entity kind', mc:'Map confidence', e:'Canonical entity', st:'Study type', y:'Year',
+  ek:'Entity kind', mc:'Identifier status', e:'Canonical entity', st:'Study type', y:'Year',
   ca:'Causal/correlational', an:'Anatomical system', ps:'POTS subtype', ag:'Age group',
   sx:'Sex/hormonal', th:'Theme', sr:'Source stream', es:'Evidence stratum', rt:'Relation type',
-  cv:'COVID-associated', nc:'Null/positive class', ti:'Extraction tier', sl:'Source literature'};
+  cv:'COVID-associated', nc:'Null/positive class', ti:'Package (provenance)', sl:'Source literature'};
 
 document.getElementById('xaxis').innerHTML=Object.entries(DIM)
   .map(([k,l])=>`<option value="${k}"${k==='c'?' selected':''}>${l}</option>`).join('');
@@ -128,8 +128,8 @@ document.getElementById('csv').onclick=()=>{
     `# metric: ${LAST.meta.metric} by ${LAST.meta.x}${LAST.meta.series?` split by ${LAST.meta.series}`:''}`,
     `# filters: ${LAST.meta.filters}`,
     `# papers are counted on canonical_pmid`,
-    `# scope: Tier 1 plus ${c.tier2_chunks_extracted} of ${c.tier2_chunks_total} Tier 2 chunks (${c.tier2_coverage_pct}%)`,
-    `# all Tier 2 and combined counts are subset counts; absence is not evidence of absence`,
+    `# scope: pots-findings ${state.meta.version} full corpus; identifiers verified at their authorities; scientific fidelity not yet human-checked`,
+    `# absence of a finding is not evidence of absence`,
     `# canonical_entity covers ${c.canonical_entity_pct}% of findings; entity-based cuts exclude the rest`,
     `# NOT MEDICAL ADVICE - machine-extracted research information, extraction errors possible`];
   const body=[...head, LAST.cols.map(q).join(','), ...LAST.rows.map(r=>r.map(q).join(','))].join('\n');

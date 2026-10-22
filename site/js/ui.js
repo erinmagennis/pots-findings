@@ -2,23 +2,23 @@
 import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS } from './data.js';
 
 export const PAGES = [
-  ['search.html','Search'],['discover.html','Findings'],['connections.html','Connections'],
-  ['builder.html','Analyze'],['about.html','About'],['chat.html','Ask']
+  ['search','Search'],['discover','Findings'],['connections','Connections'],
+  ['builder','Analyze'],['about','About'],['chat','Ask']
 ];
 
 function contextPopover(){
   const c = state.meta.counts;
   return `<details class="context-details"><summary>Scope &amp; safety</summary><div class="context-popover">
-    <p><b>Coverage checkpoint: Tier 1 plus partial Tier 2.</b> This site includes ${fmt(c.findings_tier1)} Tier 1 findings and ${fmt(c.findings_tier2)} findings from <b>${fmt(c.tier2_chunks_extracted)} of ${fmt(c.tier2_chunks_total)} Tier 2 chunks (${c.tier2_coverage_pct}%)</b>. Every Tier 2 and combined count is a subset count. Absence of a signal is not evidence of absence. <a href="about.html#scope">What this means</a>.</p>
+    <p><b>Scope.</b> ${fmt(c.findings)} findings extracted from ${fmt(c.papers)} papers (${c.year_min}–${c.year_max}) across POTS, dysautonomia and ${c.conditions} related condition literatures. Every finding carries a verbatim quote and a link to its paper. Ontology identifiers were verified at their authorities (v1.2); whether each finding states what its paper found has not yet been checked by a human reader. Absence of a signal is not evidence of absence. <a href="about#limits">Verification status</a>.</p>
     <p><b>Not medical advice.</b> Machine-extracted research information, not clinical guidance. No diagnostic or treatment recommendations. Talk to a qualified clinician about any personal health decision.</p>
-    <p><b>Automated extraction has errors.</b> Co-occurrence is not causation; thin evidence includes noise and single-lab artifacts. <a href="about.html#limits">Limitations</a>. Every finding links to its source. The credit belongs to the original authors; please read their paper.</p>
+    <p><b>Automated extraction has errors.</b> Co-occurrence is not causation; thin evidence includes noise and single-lab artifacts. <a href="about#limits">Limitations</a>. Every finding links to its source. The credit belongs to the original authors; please read their paper.</p>
   </div></details>`;
 }
 
 export function header(active){
-  const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}${h==='chat.html'?' <span>(BYO key)</span>':''}</a>`).join('');
+  const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}${h==='chat'?' <span>(BYO key)</span>':''}</a>`).join('');
   return `<header class="site"><div class="wrap">
-    <a class="brand" href="index.html" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
+    <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
     <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation">${tabs}</nav>
     <div class="header-rail"><b>${fmt(state.meta.counts.findings)} findings</b>${fmt(state.meta.counts.papers)} papers · Tier 1 + partial Tier 2 ${contextPopover()}</div>
@@ -27,8 +27,8 @@ export function header(active){
 
 export function footer(){
   const m=state.meta;
-  return `<div class="quiet-support"><div class="wrap"><strong>Grow the map</strong> Help make this public research index easier to extend, check, and reuse. <a href="about.html#connect">Collaborate with the project</a>.</div></div>
-  <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>Tier 1 + Tier 2 at ${m.counts.tier2_coverage_pct}% · data generated ${esc(m.generated_utc)} · <a href="about.html">Scope, methods and limitations</a>.</span></div></footer>`;
+  return `<div class="quiet-support"><div class="wrap"><strong>Grow the map</strong> Help make this public research index easier to extend, check, and reuse. <a href="about#connect">Collaborate with the project</a>.</div></div>
+  <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings ${esc(m.version)} · ${fmt(m.counts.findings)} findings / ${fmt(m.counts.papers)} papers · data generated ${esc(m.generated_utc)} · <a href="about">Scope, methods and limitations</a>.</span></div></footer>`;
 }
 
 export function mount(active){
@@ -67,7 +67,7 @@ export function citeLine(pi){
     ${p.pubmed_url?` · <a href="${esc(p.pubmed_url)}" target="_blank" rel="noopener">PubMed</a>`:''}
     ${p.doi_url?` · <a href="${esc(p.doi_url)}" target="_blank" rel="noopener">DOI</a>`:''}
     ${p.is_open_access?` · <span class="pill grey">open access</span>`:''}
-    <a href="paper.html?pmid=${esc(p.pmid)}" style="margin-left:6px">all findings from this paper →</a></div>`;
+    <a href="paper?pmid=${esc(p.pmid)}" style="margin-left:6px">all findings from this paper →</a></div>`;
 }
 
 /** Reusable notice for any surface built on canonical_entity. Two different coverage numbers :
@@ -75,17 +75,13 @@ export function citeLine(pi){
 export function entityCoverageNote(context){
   const c = state.meta.counts;
   return `<div class="note"><b>Entity coverage: read before interpreting ${context}.</b>
-    A canonical entity is present on <b>${fmt(c.canonical_entity_rows)} of ${fmt(c.findings)} findings
-    (${c.canonical_entity_pct}%)</b>, spanning ${fmt(c.papers_with_canonical_entity)} of ${fmt(c.papers)} papers.
-    An <i>original</i> (uncanonicalized) entity string is present on ${fmt(c.entity_string_rows)} findings
-    (${c.entity_string_pct}%). These are two different things.
-    The gap is ${fmt(c.entity_unmapped_rows)} findings that name an entity which received no canonical mapping:
-    of ${fmt(c.strings_total)} distinct entity strings, ${fmt(c.strings_mapped)} resolve to a canonical and
-    ${fmt(c.strings_unmapped_distinct)} do not because canonicalization deliberately covered the head of the
-    distribution and left the long tail of mostly one-off strings alone.
-    <b>${context} therefore cover about ${c.canonical_entity_pct}% of findings, not the whole corpus</b>.
-    Findings without a canonical entity are excluded from it. They remain fully findable by
-    <a href="search.html">keyword search</a> on their original string.</div>`;
+    An entity (gene, protein, metabolite, drug, measure, cell type) is named on <b>${fmt(c.entity_string_rows)} of ${fmt(c.findings)} findings
+    (${c.entity_string_pct}%)</b>, spanning ${fmt(c.papers_with_canonical_entity)} of ${fmt(c.papers)} papers. The other findings are symptom,
+    phenotype, diagnostic or quality-of-life findings that name no entity by design. Named entities are grouped into ${fmt(c.canonical_entities)} entity pages:
+    ${fmt(c.verified_id_rows)} findings (${c.verified_id_pct}% of all findings) are anchored to an identifier verified at its authority (HGNC, ChEBI, MeSH, UniProt, HPO, UBERON),
+    and spelling variants merge under that identifier; the rest are grouped by name, so one concept can still appear under more than one spelling.
+    <b>${context} therefore cover about ${c.entity_string_pct}% of findings, not the whole corpus</b>. Findings without an entity remain fully findable by
+    keyword and semantic search.</div>`;
 }
 
 /** Result card. Shows canonical entity AND the original string when they differ, so merges are auditable. */
@@ -99,10 +95,10 @@ export function findingCard(row, opts={}){
   const dc = DIRCLASS(dir);
   const estr = val('es_str',row);
   const tags = [];
-  if(ent) tags.push(`<a class="tag ent" href="entity.html?e=${encodeURIComponent(ent)}">${esc(ent)}</a>`);
+  if(ent) tags.push(`<a class="tag ent" href="entity?e=${encodeURIComponent(ent)}">${esc(ent)}</a>`);
   else if(estr) tags.push(`<span class="tag lowconf" title="This entity string was not canonicalized, so this finding does not appear in entity roll-ups or entity filters. It is still fully searchable by keyword.">${esc(estr)} · not canonicalized</span>`);
   if(dir && dir!=='not applicable') tags.push(`<span class="tag dir ${dc}">${esc(dir)}</span>`);
-  if(cond) tags.push(`<a class="tag" href="condition.html?c=${encodeURIComponent(cond)}">${esc(cond)}</a>`);
+  if(cond) tags.push(`<a class="tag" href="condition?c=${encodeURIComponent(cond)}">${esc(cond)}</a>`);
   if(tier) tags.push(`<span class="tag tier">${esc(tier)}</span>`);
   if(cert) tags.push(`<span class="tag">${esc(cert)}</span>`);
   if(ft) tags.push(`<span class="tag">${esc(ft)}</span>`);
