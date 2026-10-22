@@ -27,6 +27,6 @@ Built with `build_packages.py --docs-revision v1.2` from `findings_all_tiers_v1.
 | postviral-autism-findings-v1.2 | 26,032 | 1,587 | 4,113 | 0 | 0 | 21,919 | `355e60be9fc96d31…` |
 | **total** | **148,186** | — | **5,727** | **14,055** | **2,607** | **125,797** | |
 
-Released into the user's `pots/` repo on branch `release/v1.2`: commit `e22d119` (packages v1.1, dated 2026-09-23 = bundle build date, tag `v1.1`) then `1df50c6` (packages v1.2, tag `v1.2`; README section, CHANGELOG.md, About-page verification note). Not pushed — the user pushes/merges.
+Released into the user's `pots/` repo on branch `release/v1.2`: commit `e22d119` (packages v1.1, dated 2026-09-23 = bundle build date, tag `v1.1`) then `2554350` (packages v1.2 with the label fix, tag `v1.2`; `1df50c6` was the id before that amend; README section, CHANGELOG.md, About-page verification note). Not pushed — the user pushes/merges.
 
 Tier 3/4 packages are unchanged in data (their ids were resolver-derived from the start); rebuilt only so the five share one version and one `pots-findings` repo bundle.
