@@ -80,5 +80,5 @@ document.querySelector('.about-content').insertAdjacentHTML('beforeend', `
 <div class="panel" id="connect">
   <h2>Connect with the project</h2>
   <p>Have a question, a useful source, or a way to help this literature become easier to navigate?</p>
-  <p><a href="mailto:hi@erinmagennis.com">Email Erin</a> · <a href="https://x.com/erinmagennis" target="_blank" rel="noopener">Follow on X</a> · <a href="https://github.com/erinmagennis/pots-findings" target="_blank" rel="noopener">View the project on GitHub</a> · <a href="https://artizen.fund/index/p/open-pots" target="_blank" rel="noopener">Support the project</a></p>
+  <p><a href="mailto:hi@erinmagennis.com">Email Erin</a> · <a href="https://x.com/erinmagennis" target="_blank" rel="noopener">Follow on X</a> · <a href="https://github.com/erinmagennis/pots-findings" target="_blank" rel="noopener">View the project on GitHub</a></p>
 </div>`);
