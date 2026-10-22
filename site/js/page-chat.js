@@ -13,18 +13,18 @@ mount('chat');
 const LS_KEY='pots_browser_api_key', LS_PROV='pots_browser_provider';
 const PROVIDERS={
   anthropic:{ label:'Anthropic (Claude)', url:'https://api.anthropic.com/v1/messages',
-    keyHint:'sk-ant-…', model:'claude-sonnet-5',
+    keyHint:'sk-ant-…', model:'claude-sonnet-5-5',
     build:(sys,msgs,model)=>({
       headers:{'content-type':'application/json','x-api-key':getKey(),
                'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:{model, max_tokens:1200, system:sys,
+      body:{model, max_tokens:4096, system:sys,
             messages:msgs.map(m=>({role:m.role,content:m.content}))} }),
     parse:j=> (j.content||[]).filter(c=>c.type==='text').map(c=>c.text).join('') },
   openai:{ label:'OpenAI', url:'https://api.openai.com/v1/chat/completions',
-    keyHint:'sk-…', model:'gpt-4o-mini',
+    keyHint:'sk-…', model:'gpt-5.4-mini',
     build:(sys,msgs,model)=>({
       headers:{'content-type':'application/json','authorization':'Bearer '+getKey()},
-      body:{model, max_tokens:1200, messages:[{role:'system',content:sys},...msgs]} }),
+      body:{model, max_completion_tokens:4096, messages:[{role:'system',content:sys},...msgs]} }),
     parse:j=> j.choices?.[0]?.message?.content || '' }
 };
 const getKey=()=>localStorage.getItem(LS_KEY)||'';
@@ -187,7 +187,8 @@ async function send(){
       throw new Error(`${res.status} ${res.statusText}: ${detail}`);
     }
     const j=await res.json();
-    const text=prov.parse(j)||'(empty response)';
+    const text=prov.parse(j)||(j.stop_reason==='max_tokens'||j.choices?.[0]?.finish_reason==='length'
+      ? '(the model used its whole output budget before answering; try a shorter question or fewer findings)' : '(empty response)');
     pending.remove();
     add('assistant',text,rows);
     history.push({role:'user',content:userMsg},{role:'assistant',content:text});
