@@ -1,15 +1,26 @@
 cff-version: 1.2.0
-title: "POTS / Dysautonomia Literature Findings: Tier 1 plus partial Tier 2"
+title: "POTS / Dysautonomia Literature Findings"
 message: "If you use this dataset, please cite it AND the original papers behind any finding you rely on."
 type: dataset
 authors:
   - family-names: "Magennis"
     given-names: "Erin"
-version: tier2-55pct-2026-08-03
-date-released: "2026-08-03"
+version: v1.2
+date-released: "2026-10-22"
 license: CC-BY-4.0
+repository-code: "https://github.com/erinmagennis/pots-findings"
+url: "https://pots.erinmagennis.com"
+keywords: [dysautonomia, ehlers-danlos, research-findings, open-data]
 abstract: >-
-  73,070 structured research findings machine-extracted from 6,244 canonical papers,
-  with canonicalized entities, source attribution, and discovery tables. This checkpoint combines
-  the completed Tier 1 record with 81 of 146 Tier 2 chunks. Every Tier 2 and combined figure is a
-  subset figure. Verbatim provenance text remains the copyright of its authors and publishers.
+  148,186 structured research findings machine-extracted from 11,519 papers (published 2019 to 2026)
+  on POTS, dysautonomia and related conditions, in five data packages, each with a verbatim source quote. In v1.2
+  every model-written ontology identifier was checked at its authority; 19,782 rows carry a verified identifier.
+  Scientific fidelity has not yet been checked by a human reader. Verbatim quoted text remains the copyright of its
+  authors and publishers.
+references:
+  - type: software
+    title: "condition-findings-builder"
+    authors:
+      - family-names: "Magennis"
+        given-names: "Erin"
+    repository-code: "https://github.com/erinmagennis/condition-findings-builder"

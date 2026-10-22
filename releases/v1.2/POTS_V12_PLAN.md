@@ -16,7 +16,7 @@ Estimated: ~2 h of careful editing and verification; zero model spend. Not attem
 
 ## Build record — v1.2 packages (final build 2026-10-22T11:06:25Z)
 
-Built with `build_packages.py --docs-revision v1.2` from `findings_all_tiers_v1.2.parquet` and the v1.1 annotation tables (the first build of the day shipped the annotation files under tier-prefixed names and was discarded; the final build is file-for-file a superset of v1.1 minus `REBUILD_REPORT.md`, plus `annotations/POTS_MODEL_ID_BENCHMARK.md/.json`). Built twice with `--build-utc` pinned, tarballs byte-identical; `verify_package.py --self-test` PASS and `shasum -c CHECKSUMS.sha256` clean for all five. Docs regenerated from per-package counts; v1.1 prose kept as history. Builder commit `0b5bdc4` (condition-findings-builder).
+Built with `build_packages.py --docs-revision v1.2` from `findings_all_tiers_v1.2.parquet` and the v1.1 annotation tables (the first build of the day shipped the annotation files under tier-prefixed names and was discarded; the final build is file-for-file a superset of v1.1 minus `REBUILD_REPORT.md`, plus `annotations/POTS_MODEL_ID_BENCHMARK.md/.json`). Built twice with `--build-utc` pinned, tarballs byte-identical; `verify_package.py --self-test` PASS and `shasum -c CHECKSUMS.sha256` clean for all five. Docs regenerated from per-package counts; v1.1 prose kept as history. Builder commit `c8f8626` (condition-findings-builder; was `0b5bdc4` before the 2026-10-22 history rewrite that removed macOS `._` files).
 
 | package | findings | papers | authority_verified | authority_verified_retrospective | id_withheld_unverified_v1.2 | no_id | sha256 (tarball) |
 |---|---|---|---|---|---|---|---|

@@ -18,7 +18,7 @@ Full text: https://creativecommons.org/licenses/by/4.0/legalcode
 **You must attribute.** Any use, redistribution, or derivative work, including a fork, a
 republished copy, a paper, a product, or a model trained on this data, must credit:
 
-> Magennis, E. (2026). POTS/Dysautonomia Literature Findings, Tier 1 plus partial Tier 2 checkpoint.
+> Magennis, E. (2026). POTS/Dysautonomia Literature Findings, version 1.2.
 > https://pots.erinmagennis.com · https://github.com/erinmagennis/pots-findings
 > Licensed CC BY 4.0.
 
