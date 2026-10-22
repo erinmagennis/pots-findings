@@ -269,8 +269,10 @@ def discovery(D, P):
     if len(A):
         A["q_bh"] = bh(A.p_hypergeom); A["significant_fdr05"] = A.q_bh < 0.05
         A["neglog10_q"] = -np.log10(A.q_bh.clip(lower=1e-300)); A["assoc_score_recomputed"] = (A.neglog10_q.clip(upper=50) * 2 * np.log1p(A.lift.fillna(0))).round(3)
+        assoc_total, assoc_sig_total = int(len(A)), int(A.significant_fdr05.sum())
         A = A.sort_values(["q_bh", "n_papers_both"], ascending=[True, False]).head(3000).reset_index(drop=True); A["rank"] = A.index + 1
-    assoc = {"n": int(len(A)), "universe_papers": int(universe), "rows": A.to_dict("records")}
+    if not len(A): assoc_total = assoc_sig_total = 0
+    assoc = {"n": int(len(A)), "total": assoc_total, "significant_total": assoc_sig_total, "universe_papers": int(universe), "rows": A.to_dict("records")}
     # --- contradictions: direction flips and null-vs-positive within entity x condition ---
     rows = []
     for (e, c), g in E.groupby(["site_entity", "condition"]):
@@ -287,8 +289,9 @@ def discovery(D, P):
                              source_literatures=",".join(sorted(set(g.source_literature.dropna().astype(str)))),
                              conflict_strength=round(100 * min(len(pa), len(pb)) / max(len(pa), len(pb)) * math.log1p(len(pa) + len(pb)), 3), map_confidence_min=first_nn(g.id_status)))
     C = pd.DataFrame(rows)
+    c_total = int(len(C)); c_flip = int((C.conflict_type == "direction-flip").sum()) if len(C) else 0; c_nvp = int((C.conflict_type == "null-vs-positive").sum()) if len(C) else 0
     if len(C): C = C.sort_values(["conflict_strength"], ascending=False).head(3000).reset_index(drop=True); C["rank"] = C.index + 1
-    contra = {"n": int(len(C)), "rows": C.to_dict("records")}
+    contra = {"n": int(len(C)), "total": c_total, "flip_total": c_flip, "null_vs_positive_total": c_nvp, "rows": C.to_dict("records")}
     # --- understudied: entity x condition with few papers ---
     rows = []
     tot = E.groupby("site_entity").cpmid.nunique()
@@ -302,8 +305,9 @@ def discovery(D, P):
                          tiers="|".join(sorted(set(g.tier_source))), source_literatures=",".join(sorted(set(g.source_literature.dropna().astype(str)))), is_thin=bool(len(g) < 3),
                          pmids=sorted(set(g.cpmid)), replication_score=round(float(len(g)) / npap + (TIER_RANK.index(bt) if bt else 9) / 3, 4)))
     U = pd.DataFrame(rows)
+    u_total = int(len(U))
     if len(U): U = U.sort_values(["n_findings", "mean_year"], ascending=[False, False]).head(5000).reset_index(drop=True); U["rank"] = U.index + 1
-    under = {"n": int(len(U)), "rows": U.to_dict("records")}
+    under = {"n": int(len(U)), "total": u_total, "rows": U.to_dict("records")}
     # --- null results ---
     nm = (D.direction == "no significant difference") | D.null_or_failed_result.astype(str).str.startswith("null")
     N = D[nm]
@@ -330,8 +334,9 @@ def discovery(D, P):
                              n_papers=int(gg.cpmid.nunique()), n_findings=int(len(gg)), n_papers_opposite=int(opp.cpmid.nunique()), tiers="|".join(sorted(set(gg.tier_source))), cross_tier=bool(gg.tier_source.nunique() > 1),
                              best_tier=tier_best(gg.evidence_tier), map_confidence_min=first_nn(gg.id_status), scope_note="full corpus v1.2"))
     V = pd.DataFrame(rows)
+    v_total = int(len(V))
     if len(V): V = V.sort_values(["n_source_literatures", "n_papers"], ascending=False).head(3000).reset_index(drop=True); V["rank"] = V.index + 1
-    conv = {"n": int(len(V)), "rows": V.to_dict("records")}
+    conv = {"n": int(len(V)), "total": v_total, "rows": V.to_dict("records")}
     return assoc, contra, under, nulls, conv
 
 
@@ -369,14 +374,31 @@ def main():
     jdump(f"{out}/autocomplete.json", {"entities": [e["name"] for e in ENT["entities"]], "conditions": sorted(D.condition.dropna().unique().tolist()),
                                         "journals": sorted(set(x for x in P.journal.dropna().astype(str) if x)), "source_literatures": sorted(D.source_literature.dropna().unique().tolist())})
     assoc, contra, under, nulls, conv = discovery(D, P)
-    for name, obj in [("associations", assoc), ("contradictions", contra), ("understudied", under), ("null_results", nulls), ("convergence", conv)]:
+    for name, obj in [("associations", assoc), ("contradictions", contra), ("understudied", under), ("convergence", conv)]:
         jdump(f"{out}/{name}.json", clean_records(obj)); log(name, obj["n"])
+    # null results: 19k rows. Shipped as an index plus column-oriented shards, newest papers first, only the fields the page
+    # and its CSV export use, so the Null tab parses the first shard and loads the rest in the background.
+    NULL_FIELDS = ["canonical_pmid", "tier", "source_literature", "canonical_entity", "entity", "null_class", "condition", "finding_type",
+                   "treatment_class", "evidence_tier", "certainty", "study_type", "n_participants", "year", "provenance_quote_trunc"]
+    NR = sorted(nulls["rows"], key=lambda r: (-(r["year"] or 0), str(r["canonical_pmid"])))
+    NSH = 2500
+    for old in [f for f in os.listdir(out) if re.match(r"null_results_\d+\.json$", f)]: os.remove(os.path.join(out, old))
+    shards_meta = []
+    for i in range(0, len(NR), NSH):
+        chunk = NR[i:i + NSH]; fn = f"null_results_{i // NSH:02d}.json"
+        jdump(f"{out}/{fn}", clean_records({"start": i, "end": i + len(chunk), "rows": [[r.get(k) for k in NULL_FIELDS] for r in chunk]}))
+        shards_meta.append({"file": fn, "start": i, "end": i + len(chunk)})
+    jdump(f"{out}/null_results.json", {"n": len(NR), "fields": NULL_FIELDS, "shard_rows": NSH, "order": "year descending", "shards": shards_meta})
+    log("null_results", len(NR), "in", len(shards_meta), "shards")
     ver = D.site_ontology_id.notna()
     cond_counts = {k: int(v) for k, v in D.condition.value_counts().items()}
     counts = {"findings": int(len(D)), "papers": int(P.pmid.nunique()), "entities": int(ENT["n"]), "conditions": int(D.condition.nunique()),
               "verified_id_rows": int(ver.sum()), "verified_ids_distinct": int(D.site_ontology_id.nunique()), "withheld_id_rows": int((D.ontology_id_verification == "id_withheld_unverified_v1.2").sum()),
               "entity_rows": int(D.entity.notna().sum()), "year_min": int(D.year.min()), "year_max": int(D.year.max()), "journals": int(P.journal.nunique()),
               "quotes": int(D.provenance_quote.notna().sum()), "null_results": nulls["n"], "contradictions": contra["n"], "associations": assoc["n"], "convergence": conv["n"], "understudied": under["n"],
+              "associations_total": assoc["total"], "assoc_significant_total": assoc["significant_total"], "contradictions_total": contra["total"],
+              "contra_flip_total": contra["flip_total"], "contra_null_vs_pos_total": contra["null_vs_positive_total"], "understudied_total": under["total"],
+              "convergence_total": conv["total"],
               "packages": len(ORDER), "per_package": {p: {"findings": int(n), "papers": int(D.loc[D.package == p, "cpmid"].nunique())} for p, n in D.package.value_counts().items()},
               "conditions_rows": cond_counts,
               # legacy key names still read by the pages

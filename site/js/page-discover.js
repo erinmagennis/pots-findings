@@ -1,13 +1,14 @@
 import { loadMeta, loadPapers, loadFacets, loadEntities, getJSON, state, fmt, esc, paperByPmid, val } from './data.js';
 import { mount, sortTable } from './ui.js';
+import { condLabel } from './labels.js';
 
 await loadMeta(); await loadPapers(); await loadFacets(); await loadEntities();
 mount('discover');
 const C=state.meta.counts;
 document.querySelector('#dtabs').insertAdjacentHTML('beforebegin', `<div class="statgrid findings-summary">
-  <a class="stat" href="#assoc"><div class="v">${fmt(C.assoc_significant)}</div><div class="k">significant comparisons</div></a>
-  <a class="stat" href="#contra"><div class="v">${fmt(C.contradictions)}</div><div class="k">contradictions</div></a>
-  <a class="stat" href="#under"><div class="v">${fmt(C.understudied)}</div><div class="k">understudied entities</div></a>
+  <a class="stat" href="#assoc"><div class="v">${fmt(C.assoc_significant_total)}</div><div class="k">significant comparisons</div><div class="kv">top ${fmt(C.associations)} listed</div></a>
+  <a class="stat" href="#contra"><div class="v">${fmt(C.contradictions_total)}</div><div class="k">contradictions</div><div class="kv">top ${fmt(C.contradictions)} listed</div></a>
+  <a class="stat" href="#under"><div class="v">${fmt(C.understudied_total)}</div><div class="k">understudied signals</div><div class="kv">top ${fmt(C.understudied)} listed</div></a>
   <a class="stat" href="#nulls"><div class="v">${fmt(C.nulls)}</div><div class="k">null or failed findings</div></a>
 </div>`);
 
@@ -27,12 +28,12 @@ async function viewOverview(){
   const maxYear=years.length?years[years.length-1][0]:'current';
   document.getElementById('view').innerHTML=`<section class="overview-grid" aria-label="Findings overview">
     <div class="overview-main">
-      <div class="overview-section"><div class="section-kicker">01 · Literature growth</div><h2>Findings by publication year</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows. Year comes from the source paper. <a href="search">Search the underlying findings</a>.</p><div class="year-bars">${years.map(([year,n])=>`<div class="year-bar"><span>${esc(year)}</span><i style="height:${Math.max(4,n/years.reduce((m,x)=>Math.max(m,x[1]),0)*100)}%" title="${fmt(n)} findings"></i><b>${fmt(n)}</b></div>`).join('')}</div><p class="kv">${esc(maxYear)} is a partial year where applicable. Combined counts include partial Tier 2.</p></div>
+      <div class="overview-section"><div class="section-kicker">01 · Literature growth</div><h2>Findings by publication year</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows. Year comes from the source paper. <a href="search">Search the underlying findings</a>.</p><div class="year-bars">${years.map(([year,n])=>`<div class="year-bar"><span>${esc(year)}</span><i style="height:${Math.max(4,n/years.reduce((m,x)=>Math.max(m,x[1]),0)*100)}%" title="${fmt(n)} findings"></i><b>${fmt(n)}</b></div>`).join('')}</div><p class="kv">${esc(maxYear)} is a partial year where applicable.</p></div>
       <div class="overview-section"><div class="section-kicker">02 · Research areas</div><h2>Most represented themes</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows with a theme label. Missing theme labels are excluded.</p>${barRows(areas, state.meta.counts.findings)}</div>
       <div class="overview-section"><div class="section-kicker">03 · Direction and null results</div><h2>What the extracted rows report</h2><div class="overview-columns"><div><h3>Direction</h3><p class="kv">Denominator: ${fmt(directions.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(directions, directions.reduce((s,x)=>s+x[1],0))}</div><div><h3>Null or failed result</h3><p class="kv">Denominator: ${fmt(nulls.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(nulls, nulls.reduce((s,x)=>s+x[1],0))}</div></div></div>
     </div>
     <aside class="overview-side"><div class="overview-section"><div class="section-kicker">04 · Connected entities</div><h2>Highest paper reach</h2><p class="kv">Denominator: ${fmt(state.meta.counts.papers)} canonical papers. Entity coverage is a subset of the findings.</p>${entityLinks}<a class="overview-link" href="connections">Open the connection map →</a></div>
-      <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Current contradictions</h2><p class="overview-number">${fmt(state.meta.counts.contradictions)}</p><p class="kv">Rows with conflicting extracted directions or null-versus-positive results.</p><a class="overview-link" href="#contra">Review contradictions →</a><h3>Under-studied signals</h3><p class="overview-number">${fmt(state.meta.counts.understudied)}</p><p class="kv">Candidates ranked from the current combined analysis.</p><a class="overview-link" href="#under">Review under-studied signals →</a></div>
+      <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Current contradictions</h2><p class="overview-number">${fmt(state.meta.counts.contradictions_total)}</p><p class="kv">Rows with conflicting extracted directions or null-versus-positive results.</p><a class="overview-link" href="#contra">Review contradictions →</a><h3>Under-studied signals</h3><p class="overview-number">${fmt(state.meta.counts.understudied)}</p><p class="kv">Candidates ranked from the current combined analysis.</p><a class="overview-link" href="#under">Review under-studied signals →</a></div>
       <div class="overview-section"><div class="section-kicker">06 · Read the record</div><h2>Complete tables</h2><p class="kv">Browse every row behind this overview, with links to source papers and entities.</p><a class="overview-link" href="#assoc">Comparisons →</a><a class="overview-link" href="#nulls">Null and failed →</a><a class="overview-link" href="papers">All papers →</a><a class="overview-link" href="entities">All entities →</a></div>
     </aside></section>`;
 }
@@ -64,7 +65,7 @@ async function viewAssoc(){
   const d=await getJSON('associations.json');
   document.getElementById('view').innerHTML=`<div class="panel">
     <h2>Entity co-mentions</h2>
-    <p class="lede">${fmt(d.n)} canonical-entity pairs that occur in the same papers. ${fmt(C.assoc_significant)}
+    <p class="lede">${fmt(C.associations_total)} entity pairs occur in at least three of the same papers; the ${fmt(d.n)} strongest are listed. ${fmt(C.assoc_significant_total)}
       pass the supplied BH-FDR q&lt;0.05 threshold.</p>
     <div class="note stop"><b>Co-mention is not interaction or causation.</b> A pair can arise from common
       reporting practices, nested terminology, or a paper discussing separate topics.</div>
@@ -104,7 +105,7 @@ async function viewUnder(){
   const d=await getJSON('understudied.json');
   document.getElementById('view').innerHTML=`<div class="panel">
     <h2>Under-studied signals</h2>
-    <p class="lede">${fmt(d.n)} entity and condition signals ranked for possible replication work.</p>
+    <p class="lede">${fmt(C.understudied_total)} entity and condition signals with three or fewer papers; the ${fmt(d.n)} with the most findings are listed for possible replication work.</p>
     <div class="note stop"><b>Thin evidence can be noise.</b> This table does not establish independent-lab
       replication. It reports the fields present in the current combined analysis and should be used to find
       candidates for closer review.</div>
@@ -126,7 +127,7 @@ async function viewUnder(){
       `<th data-k="${k}">${l}${k===key?(direction<0?' ▾':' ▴'):''}</th>`).join('')+'</tr>';
     document.querySelector('#uTbl tbody').innerHTML=values.slice(0,400).map(r=>`<tr>
       <td><a href="entity?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a><div class="kv">${esc(r.entity_kind||'')}</div></td>
-      <td>${esc(r.condition||'N/A')}</td><td>${esc(r.direction||'N/A')}</td>
+      <td>${esc(condLabel(r.condition)||'N/A')}</td><td>${esc(r.direction||'N/A')}</td>
       <td class="num">${fmt(r.n_papers)}</td><td class="num">${fmt(r.n_findings)}</td>
       <td>${esc(r.best_tier||'N/A')}</td><td class="num">${r.max_year||'N/A'}</td>
       <td class="num">${r.replication_score==null?'N/A':Number(r.replication_score).toFixed(2)}</td>
@@ -144,8 +145,8 @@ async function viewContra(){
   const d=await getJSON('contradictions.json');
   document.getElementById('view').innerHTML=`<div class="panel">
     <h2>Contradictions</h2>
-    <p class="lede">${fmt(d.n)} entity and condition pairs with conflicting directions:
-      ${fmt(C.contra_flip)} direction flips and ${fmt(C.contra_null_vs_pos)} null-versus-positive conflicts.</p>
+    <p class="lede">${fmt(C.contradictions_total)} entity and condition pairs with conflicting directions (the ${fmt(d.n)} strongest are listed):
+      ${fmt(C.contra_flip_total)} direction flips and ${fmt(C.contra_null_vs_pos_total)} null-versus-positive conflicts.</p>
     <div class="note stop">Different populations, methods, or source literatures can produce different results.
       A row here flags disagreement for review; it does not prove that either paper is wrong.</div>
     <div class="chks"><label>Type <select id="kType"><option value="">any</option>
@@ -158,7 +159,7 @@ async function viewContra(){
     const values=rowsNow(); document.getElementById('kCount').textContent=`${fmt(values.length)} contradictions shown`;
     document.getElementById('kList').innerHTML=values.slice(0,150).map(r=>`<div class="panel" style="padding:12px">
       <h3><a href="entity?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a>
-        <span class="kv">in ${esc(r.condition||'N/A')}</span></h3>
+        <span class="kv">in ${esc(condLabel(r.condition)||'N/A')}</span></h3>
       <div>${sourceList(r.source_literatures)} <span class="pill grey">${esc(r.conflict_type)}</span></div>
       <div class="sides"><div class="side A"><h4>Side A: ${esc(r.side_A_direction||'N/A')}</h4>
         <div class="kv">${fmt(r.n_papers_A)} papers, ${fmt(r.n_findings_A)} findings, best tier ${esc(r.top_tier_A||'N/A')}</div>
@@ -177,7 +178,12 @@ async function viewContra(){
 }
 
 async function viewNulls(){
-  const d=await getJSON('null_results.json');
+  // index + column-oriented shards (newest papers first): render from the first shard, load the rest in the background
+  const idx=await getJSON('null_results.json');
+  const toObj=row=>Object.fromEntries(idx.fields.map((k,i)=>[k,row[i]]));
+  const d={n:idx.n, rows:[]}; let loaded=0;
+  const addShard=sh=>{ d.rows.push(...sh.rows.map(toObj)); loaded++; };
+  if(idx.shards.length) addShard(await getJSON(idx.shards[0].file));
   document.getElementById('view').innerHTML=`<div class="panel"><h2>Null and failed results</h2>
     <p class="lede">${fmt(d.n)} findings classified as biomarker, treatment, or diagnostic nulls.</p>
     <div class="note">A null result is not proof of absence or ineffectiveness. Check the sample, dose,
@@ -190,8 +196,9 @@ async function viewNulls(){
       <th>Evidence</th><th>Year</th><th>Source</th><th>Excerpt</th></tr></thead><tbody></tbody></table></div>
     <div class="pager" id="nPager"></div></div>`;
   const unique=k=>[...new Set(d.rows.map(r=>r[k]).filter(Boolean))].sort();
-  document.getElementById('nClass').innerHTML+=unique('null_class').map(v=>`<option>${esc(v)}</option>`).join('');
-  document.getElementById('nTier').innerHTML+=unique('evidence_tier').map(v=>`<option>${esc(v)}</option>`).join('');
+  const fillSelect=(id,k,anyLabel)=>{ const el=document.getElementById(id), keep=el.value;
+    el.innerHTML=`<option value="">${anyLabel}</option>`+unique(k).map(v=>`<option${v===keep?' selected':''}>${esc(v)}</option>`).join(''); };
+  fillSelect('nClass','null_class','Any class'); fillSelect('nTier','evidence_tier','Any evidence tier');
   let page=0; const PAGE=40;
   const rowsNow=()=>{const q=document.getElementById('nQ').value.toLowerCase().trim();
     const cls=document.getElementById('nClass').value,tier=document.getElementById('nTier').value;
@@ -201,11 +208,11 @@ async function viewNulls(){
   function render(){const values=sortTable(rowsNow(),'year',-1),slice=values.slice(page*PAGE,(page+1)*PAGE);
     document.querySelector('#nTbl tbody').innerHTML=slice.map(r=>{const p=paperByPmid(r.canonical_pmid),url=p&&(p.doi_url||p.pubmed_url||p.pmc_url);
       return `<tr><td>${r.canonical_entity?`<a href="entity?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a>`:esc(r.entity||'N/A')}</td>
-      <td>${esc(r.null_class||'N/A')}</td><td>${esc(r.condition||'N/A')}</td><td>${esc(r.evidence_tier||'N/A')}</td>
+      <td>${esc(r.null_class||'N/A')}</td><td>${esc(condLabel(r.condition)||'N/A')}</td><td>${esc(r.evidence_tier||'N/A')}</td>
       <td class="num">${r.year||'N/A'}</td><td>${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(p.first_author||'Source paper')}</a>`:'Source paper'}
         <div class="kv">${esc((p?.journal||'').slice(0,50))}</div><a class="kv" href="paper?pmid=${esc(r.canonical_pmid)}">all findings</a></td>
       <td>${r.provenance_quote_trunc?`<div class="quote">“${esc(r.provenance_quote_trunc)}”</div>`:''}</td></tr>`;}).join('');
-    document.getElementById('nCount').textContent=`${fmt(values.length)} results`;
+    document.getElementById('nCount').textContent=`${fmt(values.length)} results`+(loaded<idx.shards.length?` (loading: ${fmt(d.rows.length)} of ${fmt(d.n)} rows so far)`:'');
     const pages=Math.ceil(values.length/PAGE);document.getElementById('nPager').innerHTML=`<button id="np" ${page===0?'disabled':''}>prev</button>
       <span>page ${page+1} / ${Math.max(pages,1)}</span><button id="nn" ${page>=pages-1?'disabled':''}>next</button>`;
     document.getElementById('np').onclick=()=>{page--;render();};document.getElementById('nn').onclick=()=>{page++;render();};}
@@ -214,6 +221,13 @@ async function viewNulls(){
     'canonical_pmid','tier','source_literature','canonical_entity','entity','null_class','condition',
     'finding_type','treatment_class','evidence_tier','certainty','study_type','n_participants','year',
     'provenance_quote_trunc'],'null_results.csv'); render();
+  for(const sh of idx.shards.slice(1)){
+    if(!document.getElementById('nTbl')) return;                 // user left the tab
+    addShard(await getJSON(sh.file));
+    await new Promise(r=>setTimeout(r,0));                       // let the page breathe between shards
+    if(document.getElementById('nTbl')) render();
+  }
+  if(document.getElementById('nTbl')){ fillSelect('nClass','null_class','Any class'); fillSelect('nTier','evidence_tier','Any evidence tier'); render(); }
 }
 
 async function viewConv(){

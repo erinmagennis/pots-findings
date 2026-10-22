@@ -23,7 +23,7 @@ PAPER_FIELDS = ["pmid", "first_author", "authors", "author_count", "journal", "y
 DISCOVERY = {"associations.json": {"entity_a", "entity_b", "n_papers_both", "expected_papers_both", "lift", "jaccard", "q_bh", "significant_fdr05", "cross_kind", "assoc_score_recomputed", "pmids"},
              "understudied.json": {"canonical_entity", "condition", "direction", "n_papers", "n_findings", "best_tier", "case_report_only", "is_thin", "replication_score", "source_literatures", "pmids"},
              "contradictions.json": {"canonical_entity", "condition", "conflict_type", "side_A_direction", "n_papers_A", "pmids_A", "side_B_direction", "n_papers_B", "pmids_B", "source_literatures"},
-             "null_results.json": {"canonical_pmid", "null_class", "direction", "condition", "evidence_tier", "provenance_quote_trunc"},
+             "null_results.json": {"canonical_pmid", "null_class", "condition", "evidence_tier", "provenance_quote_trunc", "canonical_entity", "entity", "treatment_class", "year"},
              "convergence.json": {"canonical_entity", "concordant_direction", "n_source_literatures", "source_literatures", "n_papers", "n_findings", "best_tier"}}
 # numbers that legitimately appear in code/copy and are not corpus counts
 ALLOW = {"2023-06-01", "1200", "6000", "0001", "9999", "1000", "1e9", "2048", "4096", "8080", "3000", "65535", "1024", "1800", "1900", "2099", "120000"}  # 120000 = embedding worker timeout (ms) in search.js
@@ -97,9 +97,20 @@ def check(root: Path, site: Path, meta_override=None, html_override=None):
         add(f, f"detail_{s:02d} lengths", all(len(Dd[k]) == b - a for k in DETAIL_KEYS - {"start", "end"}), True, "shards"); checks += 3
     E = rj(data / "entities.json"); add(f, "entities.n", E["n"], golden["entities_rows"], "golden"); add(f, "entities list", len(E["entities"]), E["n"], "self"); checks += 2
     for fn, cols in DISCOVERY.items():
-        d = rj(data / fn); rows = d.get("rows", [])
+        d = rj(data / fn)
+        if fn == "null_results.json":                     # index + column-oriented shards
+            add(f, "null_results fields", cols <= set(d["fields"]), True, "page-discover.js"); total = 0
+            for sh in d["shards"]:
+                S_ = rj(data / sh["file"]); total += len(S_["rows"])
+                add(f, f"{sh['file']} row width", all(len(r) == len(d["fields"]) for r in S_["rows"]), True, "fields")
+                add(f, f"{sh['file']} range", (S_["start"], S_["end"], len(S_["rows"])), (sh["start"], sh["end"], sh["end"] - sh["start"]), "index"); checks += 2
+            add(f, "null_results n", total, d["n"], "shards"); add(f, "null_results vs meta", d["n"], C["null_results"], "meta"); checks += 3
+            continue
+        rows = d.get("rows", [])
         add(f, f"{fn} n", d.get("n"), len(rows), "self"); checks += 1
         if rows: add(f, f"{fn} columns", cols <= set(rows[0]), True, "page-discover.js"); checks += 1
+    for listed, total in [("associations", "associations_total"), ("contradictions", "contradictions_total"), ("understudied", "understudied_total"), ("convergence", "convergence_total")]:
+        add(f, f"{total} >= {listed}", C[total] >= C[listed], True, "export cap must not exceed the true count"); checks += 1
     man = rj(data / "emb" / "manifest.json"); qp = rj(data / "emb" / "quant_params.json")
     add(f, "emb total_rows", man["total_rows"], n, "manifest"); add(f, "quant dims", (len(qp["qmin"]), len(qp["scale"])), (man["dims"], man["dims"]), "quant_params"); checks += 2
     for sh in man["shards"]:

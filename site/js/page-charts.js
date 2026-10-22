@@ -9,7 +9,7 @@ const C=state.meta.counts, F=state.facets;
 document.getElementById('stats').innerHTML=[
   [fmt(C.findings),'findings'],[fmt(C.papers),'papers (canonical_pmid)'],
   [fmt(C.canonical_entities),'canonical entities'],[fmt(C.entities_with_ontology),'with ontology ID'],
-  [fmt(C.nulls),'null / failed results'],[fmt(C.contradictions),'contradictions']
+  [fmt(C.nulls),'null / failed results'],[fmt(C.contradictions_total),'contradictions']
 ].map(([v,k])=>`<div class="stat"><div class="v">${v}</div><div class="k">${k}</div></div>`).join('');
 
 const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a58d','#6d6a63'];
