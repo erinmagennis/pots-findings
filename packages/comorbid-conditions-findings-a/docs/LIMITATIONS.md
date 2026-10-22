@@ -22,45 +22,33 @@ unscored.
 **Practical consequence: treat every row as a pointer to a paper you should read, not as a
 fact you can cite.** The `provenance_quote` and `pmid` columns exist to make that cheap.
 
-## 2. Ontology identifiers are model-emitted and largely wrong
+## 2. Ontology identifiers were model-emitted; in v1.2 they are re-grounded, and a share is withheld
 
-`id_denotes_entity_rate` = **0.708** — roughly **29% of identifiers do not denote the entity on
-their own row.** That is a lower bound; the adjudicator over-calls DIFFERENT by ~17%.
+**v1.2 (2026-10-21): every model-emitted identifier in this package was looked up by id at its minting
+authority (HGNC via MyGene, ChEBI via OLS4, MeSH via NLM) and its label and full synonym list compared with the
+entity name; names were also resolved forward to obtain the correct id where one exists. No model was involved.**
 
-**This rate is INHERITED from Tier 2 as a whole, not measured on this wave.** It comes from a
-270-row adjudicated sample drawn across both waves pooled (12,289 rows with an id and an
-authority label). No per-wave rate was ever measured, so the true value for this package
-alone is unknown.
+Of the 6,716 rows that carried a model-emitted id in v1.1: **4,614 denoted their entity** and are now tagged
+`authority_verified_retrospective` with the match mode recorded (compound_partial 333, exact 2,694, exact_relaxed 807, synonym 780); **1,107 ids were replaced** by the id the
+entity name resolves to (exact label or authority synonym; `ontology_id_source` says so); **995 were withheld** (`id_withheld_unverified_v1.2`:
+the id denoted a different entity and the name did not resolve). The original model id is preserved on every affected row in
+`ontology_id_v11_model_emitted`; on replaced rows `entity_ontology_label` / `ontology_label_final` carry the NEW id's label, fetched by id from the authority. Nothing else changed: no row was added or removed and no other column was edited.
 
-The pre-adjudication signal that *can* be computed per wave suggests they are close. Exact
-string agreement between `entity` and the authority's own `entity_ontology_label`, under one
-consistent normalizer: **Part A 40.25%** (6,716 rows) versus **Part B 41.58%** (5,573 rows) — 1.33 points apart.
-That is a weaker measure than the adjudicated rate (it counts synonyms as disagreements, so
-the absolute numbers are not comparable to 0.708), but it is computed identically for both
-waves and gives no reason to expect them to differ materially.
+Measured on this package's full population: **68.7% of the model-emitted ids denoted their entity**; the
+rest existed but pointed at a neighbouring gene, a related compound or a sibling concept — near-miss assignment, not fabrication.
+The v1.1 figure quoted below was an adjudicated SAMPLE and is kept for the record. Full method and corpus-wide numbers: `annotations/POTS_MODEL_ID_BENCHMARK.md`.
 
-Coverage, by contrast, IS measured on this package's own slice and does differ between the
-waves: Part A 18.3%, Part B 16.5%.
+What remains limited: (a) `compound_partial` matches mean the entity string named several entities and the id denotes one of
+them — read the `entity` string; (b) `exact_relaxed` tolerates case, plural, Greek letters and punctuation, never string similarity;
+(c) the 995 withheld rows have an entity NAME but no identifier — resolve the name yourself if you need one;
+(d) correctness was established by label correspondence at the authority, which is the same standard Tiers 3-4 used, but it was
+applied retrospectively to ids the model chose, so coverage here is still the model's coverage, not the resolver's.
 
-6,716 rows carry an identifier, all tagged
-`unverified_model_emitted`. The comparison that matters:
+For the record, v1.1 reported `id_denotes_entity_rate` = **0.708** from an adjudicated sample pooled across both Tier-2 waves; the full-population
+figure in v1.2 is 68.7% once authority synonyms and spelling variants are credited.
 
-| package | id coverage | id correctness |
-|---|---:|---:|
-| Tier 1 | 12.1% | 0.578 |
-| Tier 2 (A+B pooled) | 17.5% | 0.708 |
-| Tier 3 | 15.8% | **0.986** |
-| Tier 4 | 10.3% | **0.998** |
-
-Coverage and correctness rank the packages in *opposite* orders. The high-coverage packages
-are the low-correctness ones.
-
-**Practical consequence: do not use this package's identifiers as an entity mapping.** Use
-the `entity` string with the shipped vocabulary, or resolve names yourself against OLS4 /
-UniProt — `code/multi_authority_resolver.py` is the resolver Tiers 3-4 used.
-
-This is the largest correctness gap in the corpus and it is fixable: re-grounding Tiers 1-2
-through the hardened resolver is the second-highest-value outstanding action.
+**Practical consequence: join on `entity_ontology_id_resolved` only where `ontology_id_verification` is
+`authority_verified` or `authority_verified_retrospective`.** Never use `ontology_id_v11_model_emitted` for joins; it is history.
 
 ## 3. Most quotes cannot be re-checked
 

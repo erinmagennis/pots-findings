@@ -1,17 +1,17 @@
 # Zenodo upload form — Tier 3 — long COVID, post-viral and autism intersections — machine-extracted structured findings (26,032 findings, 1,587 papers)
 
 Manual uploads do not read `.zenodo.json`; paste these values into the form. Upload the package
-tarball `postviral-autism-findings-v1.1.tar.gz` as the single file. Do not publish until every value below is in.
+tarball `postviral-autism-findings-v1.2.tar.gz` as the single file. Do not publish until every value below is in.
 
 | form field | value |
 |---|---|
 | Resource type | Dataset |
 | Title | Tier 3 — long COVID, post-viral and autism intersections — machine-extracted structured findings (26,032 findings, 1,587 papers) |
-| Publication date | the day you click Publish (must equal `date-released` in CITATION.cff: 2026-09-16) |
+| Publication date | the day you click Publish (must equal `date-released` in CITATION.cff: 2026-10-22) |
 | Creators | Magennis, Erin — ORCID 0009-0007-9013-8052 |
 | Description | see block below |
 | License | Creative Commons Attribution 4.0 International (CC-BY-4.0) |
-| Version | tier3-v1.1 |
+| Version | tier3-v1.2 |
 | Keywords | POTS, postural orthostatic tachycardia syndrome, dysautonomia, ME/CFS, myalgic encephalomyelitis, chronic fatigue syndrome, Ehlers-Danlos syndrome, hypermobility, fibromyalgia, mast cell activation syndrome, long COVID, post-viral syndrome, small fiber neuropathy, autism, migraine, text mining, literature extraction, biomarkers, structured findings, text and data mining, large language model extraction |
 | Related identifiers | PLACEHOLDER-DOI-tier1 (references); PLACEHOLDER-DOI-tier2a (references); PLACEHOLDER-DOI-tier2b (references); PLACEHOLDER-DOI-tier4 (references) |
 | Related identifiers (add) | https://github.com/erinmagennis/pots-findings — isSupplementTo, Software |

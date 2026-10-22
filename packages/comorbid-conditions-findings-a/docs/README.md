@@ -13,14 +13,32 @@ python code/verify_package.py --self-test  # prove the checker still catches reg
 
 ---
 
+## What changed in v1.2
+
+**v1.2 (2026-10-21): every model-emitted identifier in this package was looked up by id at its minting
+authority (HGNC via MyGene, ChEBI via OLS4, MeSH via NLM) and its label and full synonym list compared with the
+entity name; names were also resolved forward to obtain the correct id where one exists. No model was involved.**
+
+Of the 6,716 rows that carried a model-emitted id in v1.1: **4,614 denoted their entity** and are now tagged
+`authority_verified_retrospective` with the match mode recorded (compound_partial 333, exact 2,694, exact_relaxed 807, synonym 780); **1,107 ids were replaced** by the id the
+entity name resolves to (exact label or authority synonym; `ontology_id_source` says so); **995 were withheld** (`id_withheld_unverified_v1.2`:
+the id denoted a different entity and the name did not resolve). The original model id is preserved on every affected row in
+`ontology_id_v11_model_emitted`; on replaced rows `entity_ontology_label` / `ontology_label_final` carry the NEW id's label, fetched by id from the authority. Nothing else changed: no row was added or removed and no other column was edited.
+
+Measured on this package's full population: **68.7% of the model-emitted ids denoted their entity**; the
+rest existed but pointed at a neighbouring gene, a related compound or a sibling concept — near-miss assignment, not fabrication.
+The v1.1 figure quoted below was an adjudicated SAMPLE and is kept for the record. Full method and corpus-wide numbers: `annotations/POTS_MODEL_ID_BENCHMARK.md`.
+
+---
+
 ## Read this before you query
 
-1. **This is one half of Tier 2. Part B is a separate package.**
+1. **Ontology identifiers were re-grounded in v1.2 — filter on `ontology_id_verification`.**
+   Of 6,716 rows that carried a model-emitted id in v1.1, 4,614 denoted their entity at the authority and are tagged `authority_verified_retrospective`; 1,107 ids were replaced by the id the name resolves to; 995 were withheld (`id_withheld_unverified_v1.2`) because the id denoted another entity and the name did not resolve. The model's id is kept in `ontology_id_v11_model_emitted` for the record and must not be used for joins. Measured here: 68.7% of the model-emitted ids were correct; the rest were near-miss assignments (a neighbouring gene, a related compound), not fabrications. See `annotations/POTS_MODEL_ID_BENCHMARK.md`.
+2. **This is one half of Tier 2. Part B is a separate package.**
    Tier 2 was extracted in two waves. This package is the first wave: 81 chunks, 36,611 findings, 3,123 papers. The two waves share **zero papers** and their chunk ids interleave, so neither is a clean 'earlier literature' or 'later literature' split — the division is operational, not topical. Both parts cover the same nine themes. Pool them freely: they came from one pipeline with one prompt, and every column has identical semantics across the two.
-2. **`ontology_id_source == 'unresolved_nulled'` means the identifier was KEPT.**
+3. **`ontology_id_source == 'unresolved_nulled'` means the identifier was KEPT.**
    In Tiers 3 and 4 the same value means the identifier was NULLED. The obvious filter `df[df.ontology_id_source != 'unresolved_nulled']` silently drops Tier 2 rows that DO carry identifiers. Use `ontology_id_verification` instead. See COMPARABILITY.md, Trap 3.
-3. **Ontology identifiers here are model-emitted.**
-   `id_denotes_entity_rate` for Tier 2 is 0.708 — roughly 29% of identifiers do not denote the entity on their row (a lower bound). **That figure was measured on Tier 2 as a whole, from a 270-row adjudicated sample spanning both waves, and is inherited by this package; no per-wave rate exists.** Tier 2 has the HIGHEST identifier coverage and the SECOND-WORST identifier correctness in the corpus. See COMPARABILITY.md, Trap 1.
 4. **`canonical_entity` is empty in this package.**
    Join `data/entity_vocabulary_crosstier.parquet` on `entity` to canonicalize.
 5. **Scientific fidelity is UNMEASURED.**
@@ -123,17 +141,18 @@ is the shipped-source figure. Row-level results: `annotations/quote_retrofit_*.p
 
 | | |
 |---|---|
-| rows with a resolved ontology id | 6,716 (18.3% of rows) |
+| rows with a resolved ontology id | 5,721 (15.6% of rows) |
 | rows naming an entity at all | 21,264 |
-| id coverage among entity-naming rows | 31.6% |
-| rows with both an id and an authority label | 6,716 |
+| id coverage among entity-naming rows | 26.9% |
+| rows with both an id and an authority label | 5,721 |
 
 **Verification status** — this is the column to filter on, not `ontology_id_source`:
 
 | `ontology_id_verification` | rows |
 |---|---:|
 | `no_id` | 29,895 |
-| `unverified_model_emitted` | 6,716 |
+| `authority_verified_retrospective` | 5,721 |
+| `id_withheld_unverified_v1.2` | 995 |
 
 | identifier prefix | rows |
 |---|---:|
@@ -198,7 +217,7 @@ deficient rather than the output wrong.
 
 | path | what it is |
 |---|---|
-| `data/tier2a_findings.parquet` | **THE DATA.** 36,611 rows × 107 columns. Start here. |
+| `data/tier2a_findings.parquet` | **THE DATA.** 36,611 rows × 108 columns. Start here. |
 | `data/tier2a_findings.csv.gz` | Identical content as CSV, for tools without parquet support. |
 | `data/entity_vocabulary_crosstier.parquet` | Canonicalization lookup, 39,128 raw strings → 36,173 canonical. Mutates no rows. |
 | `data/chunk_order.parquet` | Paper → chunk → tier assignment for all 14,263 corpus papers. |
@@ -234,14 +253,13 @@ df = pd.read_parquet('data/tier2a_findings.parquet')
 verifiable = df[df.fulltext_status.isin(['abstract-only', 'blocked'])]
 #  -> 7,713 rows (21.07%)
 
-# 2. Ontology identifiers: there are NO authority-verified ids in this package.
+# 2. Ontology identifiers — filter on VERIFICATION, never on coverage (v1.2 re-grounding)
 df.ontology_id_verification.value_counts()
-#  -> no_id, unverified_model_emitted   (authority_verified appears only in Tiers 3-4)
-#
-# The identifiers present are model-emitted and ~29-42% do not denote their entity.
-# To ground entities here, join the shipped vocabulary and resolve names yourself:
-unverified = df[df.ontology_id_verification == 'unverified_model_emitted']
-#  -> 6,716 rows carry an id that has NOT been authority-checked
+#  -> no_id, authority_verified_retrospective, id_withheld_unverified_v1.2
+grounded = df[df.ontology_id_verification.isin(['authority_verified', 'authority_verified_retrospective'])]
+#  -> 5,721 rows whose id was confirmed at its authority (1,107 of them replaced by the id the name resolves to)
+withheld = df[df.ontology_id_verification == 'id_withheld_unverified_v1.2']
+#  -> 995 rows: the model-emitted id denoted another entity; it is kept in ontology_id_v11_model_emitted, not in entity_ontology_id_resolved
 
 # 3. Highest-confidence evidence
 #    NOTE: `certainty_derived` is EMPTY in this package - it was introduced in Tier 3.
@@ -292,6 +310,8 @@ its numerator, denominator and basis. They are covered by `MANIFEST.json` and `C
 | `annotations/COMPARATOR_GATE.json` | — | — | Regression gate run before the retrofit: the shipped comparator reproduces Tier 4's 99.09% and is entity-code symmetric (42/42). |
 | `annotations/CONDITION_ANNOTATIONS_README.md` | — | — | Schema and coverage of condition_annotations, and how to join it. |
 | `annotations/CONDITION_BUCKET_DEFINITIONS.md` | — | — | v1 written definitions of the `condition` buckets (MCAS decided; others provisional) and the MCAS census that prompted them. |
+| `annotations/POTS_MODEL_ID_BENCHMARK.json` | — | see file | additive annotation table |
+| `annotations/POTS_MODEL_ID_BENCHMARK.md` | — | see file | additive annotation table |
 | `annotations/RETROFIT_REPORT.md` | — | — | The retrofit report: deviations, per-stratum rates with controls, itemised permanent losses, untraceable examples. |
 | `annotations/condition_annotations.csv` | 1,083 | `pmid` | CSV twin of condition_annotations.parquet. |
 | `annotations/condition_annotations.parquet` | 1,083 | `pmid` | Per-paper verdict on the `condition == 'MCAS'` bucket under population-studied semantics (`in_bucket` / `bucket_violation` / `NEEDS_HUMAN`), classifier-derived, none human-confirmed. |
@@ -354,5 +374,5 @@ one prompt; pool those two freely.
 
 ---
 
-Built 2026-09-16T12:00:00Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
+Built 2026-10-22T12:15:40Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
 Data CC BY 4.0. Machine-extracted research information — **not medical advice.**

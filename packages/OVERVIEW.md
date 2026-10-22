@@ -1,6 +1,6 @@
 # Five uploadable packages — index
 
-Built 2026-09-16T12:00:00Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
+Built 2026-10-22T12:15:40Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
 
 Each package stands alone: data (parquet + gzipped CSV), documentation, QA evidence, the
 pinned extraction and validation code, and a verifier that re-derives every documented number
@@ -13,11 +13,11 @@ pmid set intersection across all ten pairs at build time.
 
 | package | findings | papers | chunks | identifiers | id correctness † | quotes verifiable | invariants |
 |---|---:|---:|---:|---|---:|---:|---:|
-| `dysautonomia-core-findings-v1.1` | 36,067 | 3,129 | 76 | model-emitted | 0.5784 | 18.12% | 8/9 |
-| `comorbid-conditions-findings-a-v1.1` | 36,611 | 3,123 | 81 | model-emitted | 0.7082 | 21.07% | 7/9 |
-| `comorbid-conditions-findings-b-v1.1` | 33,830 | 2,589 | 64 | model-emitted | 0.7082 | 19.39% | 7/9 |
-| `postviral-autism-findings-v1.1` | 26,032 | 1,587 | 35 | authority-derived | 0.9857 | 12.22% | 9/9 |
-| `migraine-hypermobility-findings-v1.1` | 15,646 | 1,091 | 30 | authority-derived | 0.998 | 100.0% | 9/9 |
+| `dysautonomia-core-findings-v1.2` | 36,067 | 3,129 | 76 | model-emitted | 0.5784 | 18.12% | 8/9 |
+| `comorbid-conditions-findings-a-v1.2` | 36,611 | 3,123 | 81 | model-emitted | 0.7082 | 21.07% | 7/9 |
+| `comorbid-conditions-findings-b-v1.2` | 33,830 | 2,589 | 64 | model-emitted | 0.7082 | 19.39% | 7/9 |
+| `postviral-autism-findings-v1.2` | 26,032 | 1,587 | 35 | authority-derived | 0.9857 | 12.22% | 9/9 |
+| `migraine-hypermobility-findings-v1.2` | 15,646 | 1,091 | 30 | authority-derived | 0.998 | 100.0% | 9/9 |
 | **total** | **148,186** | **11,519** | **286** | | | **26.75%** | |
 
 Per-package counts sum exactly to the corpus totals.
@@ -26,8 +26,8 @@ Per-package counts sum exactly to the corpus totals.
 adjudicated samples drawn per tier (t1 n=276, t2 n=270, t3 n=199, t4 n=56). Tier 2's sample
 spans both waves, so **Part A and Part B both show 0.7082 by inheritance — neither has a rate
 of its own.** Every other figure in the table, coverage included, is measured on each
-package's own slice (Part A 18.34%, Part B 16.47%). A per-wave proxy — exact string agreement
-against the authority label — puts the waves 1.33 points apart (40.25% vs 41.58%), so they are
+package's own slice (Part A 15.63%, Part B 14.15%). A per-wave proxy — exact string agreement
+against the authority label — puts the waves 1.11 points apart (65.51% vs 66.62%), so they are
 unlikely to diverge materially, but the adjudicated rate was never split.
 
 ## Tier 2 is split into the two extraction waves
@@ -76,7 +76,7 @@ a paper worth reading, not as a fact.
 ## Verify any package
 
 ```
-tar -xzf pots-findings-<pkg>-v1.1.tar.gz && cd pots-findings-<pkg>-v1.1
+tar -xzf pots-findings-<pkg>-v1.2.tar.gz && cd pots-findings-<pkg>-v1.2
 shasum -a 256 -c CHECKSUMS.sha256
 python code/verify_package.py --self-test
 ```

@@ -1,4 +1,4 @@
-# Tier 2 Part B — comorbid-condition literatures, second extraction wave — `comorbid-conditions-findings-b-v1.1`
+# Tier 2 Part B — comorbid-condition literatures, second extraction wave — `comorbid-conditions-findings-b-v1.2`
 
 **33,830 findings · 2,589 papers · 64 chunks · 2020–2026**
 
@@ -11,7 +11,7 @@ re-derive every number. No other download required.
 |---|---|
 | topic | EDS/hypermobility, ME/CFS, MCAS, RCCX genes, fibromyalgia, IBS, small-fiber neuropathy, patient-generated evidence, gastroparesis |
 | ontology identifiers | model-emitted, unverified (`id_denotes_entity_rate` 0.708) |
-| identifier coverage | 5,573 rows (16.5%) |
+| identifier coverage | 4,788 rows (14.1%) |
 | quote verifiability | 19.39% |
 | invariants | 7/9 pass |
 | paper overlap with siblings | zero |

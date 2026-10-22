@@ -19,7 +19,7 @@ DOI attaches to the file.
 
 For each of the five packages:
 
-1. New Upload -> drag `pots-findings-<pkg>-v1.1.tar.gz`
+1. New Upload -> drag `pots-findings-<pkg>-v1.2.tar.gz`
 2. Zenodo does **not** read `.zenodo.json` from a manually uploaded archive (that file only drives
    Zenodo's GitHub-release integration). Paste the fields from the package's
    `deposit/ZENODO_FORM.md` — title, description, keywords, license (CC BY 4.0), version, ORCID,
@@ -75,7 +75,7 @@ git remote add origin git@github.com:erinmagennis/pots-findings.git
 git push -u origin main
 ```
 
-The repo is 292 files / 113.4 MB across 5 folders. No file exceeds 18 MB, so **no Git LFS is needed** —
+The repo is 301 files / 113.6 MB across 5 folders. No file exceeds 18 MB, so **no Git LFS is needed** —
 GitHub warns at 50 MB and blocks at 100 MB per file.
 
 `.gitignore` deliberately excludes `*.tar.gz`. Tarballs are deposit products, not sources:
@@ -86,18 +86,18 @@ committing them would double the repo and store a fresh copy in history on every
 Release assets live outside Git history — no repo bloat, 2 GB per file.
 
 ```bash
-gh release create v1.1 \
-  build/dysautonomia-core-findings-v1.1.tar.gz \
-  build/comorbid-conditions-findings-a-v1.1.tar.gz \
-  build/comorbid-conditions-findings-b-v1.1.tar.gz \
-  build/postviral-autism-findings-v1.1.tar.gz \
-  build/migraine-hypermobility-findings-v1.1.tar.gz \
-  --title "v1.1 — five self-contained packages" \
+gh release create v1.2 \
+  build/dysautonomia-core-findings-v1.2.tar.gz \
+  build/comorbid-conditions-findings-a-v1.2.tar.gz \
+  build/comorbid-conditions-findings-b-v1.2.tar.gz \
+  build/postviral-autism-findings-v1.2.tar.gz \
+  build/migraine-hypermobility-findings-v1.2.tar.gz \
+  --title "v1.2 — five self-contained packages" \
   --notes-file dysautonomia-core-findings/deposit/github_release_notes.md
 ```
 
 Each package also carries its own `deposit/github_release_notes.md` if you prefer five
-separate releases (tags `dysautonomia-core-findings-v1.1`, `comorbid-conditions-findings-a-v1.1`, …).
+separate releases (tags `dysautonomia-core-findings-v1.2`, `comorbid-conditions-findings-a-v1.2`, …).
 
 ### Repository settings worth setting
 

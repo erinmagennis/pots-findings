@@ -1,4 +1,4 @@
-# Tier 1 — POTS and dysautonomia core literature — `dysautonomia-core-findings-v1.1`
+# Tier 1 — POTS and dysautonomia core literature — `dysautonomia-core-findings-v1.2`
 
 **36,067 findings · 3,129 papers · 76 chunks · 2019–2026**
 
@@ -11,7 +11,7 @@ re-derive every number. No other download required.
 |---|---|
 | topic | dysautonomia, POTS, dysautonomia subtypes, hyperadrenergic POTS |
 | ontology identifiers | model-emitted, unverified (`id_denotes_entity_rate` 0.578) |
-| identifier coverage | 4,373 rows (12.1%) |
+| identifier coverage | 3,546 rows (9.8%) |
 | quote verifiability | 18.12% |
 | invariants | 8/9 pass |
 | paper overlap with siblings | zero |

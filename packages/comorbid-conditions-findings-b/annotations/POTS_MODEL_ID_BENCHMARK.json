@@ -1,0 +1,130 @@
+{
+ "basis": "Every model-emitted ontology identifier in pots-findings v1.1 flagged ontology_id_verification=unverified_model_emitted (16,662 rows; 6,120 distinct entity-name x id pairs; HGNC 9,661 rows, ChEBI 4,880, MeSH 2,116, GO 4, HP 1) was looked up BY ID at its minting authority (MyGene/HGNC, OLS4 ChEBI, NLM MeSH) and the authority's label + full synonym/alias list compared to the entity name; forward resolution (name -> id) was also run to obtain the repair candidate. 2026-10-21; HTTP only, no model in the loop.",
+ "rows_total": 16662,
+ "classes_rows": {
+  "denotes_exact": 6257,
+  "denotes_relaxed_exact": 1831,
+  "denotes_segment": 650,
+  "denotes_synonym": 2141,
+  "exists_other_entity": 5780,
+  "not_found": 3,
+  "denotes_one_of_compound_name": 650
+ },
+ "classes_pct": {
+  "denotes_exact": 37.6,
+  "denotes_one_of_compound_name": 3.9,
+  "denotes_relaxed_exact": 11.0,
+  "denotes_synonym": 12.8,
+  "exists_other_entity": 34.7,
+  "not_found": 0.0
+ },
+ "headline": {
+  "ids_that_exist_pct": 99.98,
+  "ids_that_denote_the_entity_pct": 65.3,
+  "ids_that_exist_but_denote_another_entity_pct": 34.7
+ },
+ "by_prefix_pct": {
+  "CHEBI": {
+   "denotes_exact": 39.9,
+   "denotes_one_of_compound_name": 2.3,
+   "denotes_relaxed_exact": 6.5,
+   "denotes_synonym": 14.1,
+   "exists_other_entity": 37.2,
+   "not_found": 0.0
+  },
+  "HGNC": {
+   "denotes_exact": 37.1,
+   "denotes_one_of_compound_name": 5.3,
+   "denotes_relaxed_exact": 14.0,
+   "denotes_synonym": 12.3,
+   "exists_other_entity": 31.4,
+   "not_found": 0.0
+  },
+  "MeSH": {
+   "denotes_exact": 34.5,
+   "denotes_one_of_compound_name": 1.5,
+   "denotes_relaxed_exact": 7.5,
+   "denotes_synonym": 12.3,
+   "exists_other_entity": 44.0,
+   "not_found": 0.1
+  }
+ },
+ "by_tier_rows": {
+  "t1": {
+   "denotes_exact": 456,
+   "denotes_one_of_compound_name": 107,
+   "denotes_relaxed_exact": 246,
+   "denotes_synonym": 195,
+   "exists_other_entity": 1718
+  },
+  "t1|t2": {
+   "denotes_exact": 3347,
+   "denotes_one_of_compound_name": 6,
+   "denotes_relaxed_exact": 400,
+   "denotes_synonym": 1030,
+   "exists_other_entity": 540
+  },
+  "t2": {
+   "denotes_exact": 2454,
+   "denotes_one_of_compound_name": 537,
+   "denotes_relaxed_exact": 1185,
+   "denotes_synonym": 916,
+   "exists_other_entity": 3522,
+   "not_found": 3
+  }
+ },
+ "near_miss_evidence": {
+  "wrong_HGNC_ids_with_known_true_id": 631,
+  "within_5_of_true_id": 196,
+  "within_50_of_true_id": 270,
+  "wrong_ids_with_lexically_similar_true_label_triples": 589,
+  "examples": [
+   [
+    "MRGPRX2",
+    "HGNC:29626",
+    "MRGPRD"
+   ],
+   [
+    "SCN9A",
+    "HGNC:10596",
+    "SCN8A"
+   ],
+   [
+    "TGFBR2",
+    "HGNC:11772",
+    "TGFBR1"
+   ],
+   [
+    "Naltrexone",
+    "CHEBI:7459",
+    "naloxone"
+   ],
+   [
+    "Levodopa",
+    "CHEBI:6082",
+    "Japonine"
+   ],
+   [
+    "Orthostatic hypotension",
+    "MeSH:D054970",
+    "Pure Autonomic Failure"
+   ]
+  ]
+ },
+ "v12_actions_rows": {
+  "keep: authority-verified retrospectively (denotes_exact)": 6257,
+  "keep: authority-verified retrospectively (denotes_one_of_compound_name)": 650,
+  "keep: authority-verified retrospectively (denotes_relaxed_exact)": 1831,
+  "keep: authority-verified retrospectively (denotes_synonym)": 2141,
+  "null: id denotes another entity and name does not resolve": 2605,
+  "null: id not found / lookup error": 2,
+  "replace: name resolves to a different authority id": 3176
+ },
+ "reading": "Model-emitted identifiers virtually always EXIST (99.98%) but about a third denote a different entity \u2014 typically a neighbouring gene (SCN9A -> SCN8A's id), a related compound (naltrexone -> naloxone), or a sibling concept. Existence checks therefore catch nothing; only label correspondence does. About 65% of the flagged ids were in fact correct, so nulling them wholesale would have discarded ~10,800 usable identifiers; retrospective verification keeps those as authority-verified and repairs or nulls the rest.",
+ "caveats": [
+  "'denotes_one_of_compound_name' = the entity string lists several entities and the id denotes one of them (3.9%): partially correct",
+  "relaxed matching tolerates case, plural, Greek letters, punctuation and parentheticals; it does not use string similarity for acceptance",
+  "MeSH lookups used descriptor details; supplementary-concept ids (C-prefix) have fewer synonyms, so MeSH 'wrong' may be slightly overstated",
+  "5 lookups errored (GO/HP prefixes unsupported)"
+ ]
+}

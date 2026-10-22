@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this dataset, please cite it — and cite the source papers for any finding that matters to your work."
 type: dataset
 title: "Tier 2 Part B — comorbid-condition literatures, second extraction wave"
-version: "tier2b-v1.1"
-date-released: "2026-09-16"
+version: "tier2b-v1.2"
+date-released: "2026-10-22"
 license: CC-BY-4.0
 repository-code: "https://github.com/erinmagennis/pots-findings"
 authors:

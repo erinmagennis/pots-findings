@@ -1,4 +1,4 @@
-# Tier 3 — long COVID, post-viral and autism intersections — `postviral-autism-findings-v1.1`
+# Tier 3 — long COVID, post-viral and autism intersections — `postviral-autism-findings-v1.2`
 
 **26,032 findings · 1,587 papers · 35 chunks · 2020–2026**
 

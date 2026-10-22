@@ -1,6 +1,6 @@
 # Data Dictionary — `data/tier4_findings.parquet`
 
-**15,646 rows × 107 columns.** Every fill rate below is **measured on
+**15,646 rows × 108 columns.** Every fill rate below is **measured on
 this package's own slice**, not inherited from another tier. Recompute them with
 `python code/verify_package.py`.
 
@@ -22,7 +22,7 @@ this package's own slice**, not inherited from another tier. Recompute them with
    latter has inverted semantics between tiers — see `COMPARABILITY.md`, Trap 3.
 3. **Stratify on `fulltext_status` before comparing any per-paper rate.** It drives yield ~3×.
 4. **A null in a `cap_*` or tier-specific column means NOT PRESENT, not unknown.** This
-   package has 19 entirely-null columns, listed at the bottom — they are retained for
+   package has 20 entirely-null columns, listed at the bottom — they are retained for
    schema compatibility with its siblings, so a pooled read has a stable column set.
 
 ## Columns
@@ -106,8 +106,8 @@ Ordered as in the parquet. `fill` is the percentage of rows with a non-null valu
 | 72 | `cap_hpo_verified` | 100.0% | **Capability flag**: does this tier carry authority-verified HPO identifiers? **[CONSTANT: `True`]** |
 | 73 | `cap_number_in_quote` | 100.0% | **Capability flag**: does this tier carry the `number_in_quote` check? **[CONSTANT: `True`]** |
 | 74 | `cap_quote_source_retained` | 100.0% | **Capability flag**: is the quote's own source text still retained? True only in Tier 4. **[CONSTANT: `True`]** |
-| 75 | `ontology_id_verification` | 100.0% | **Added by harmonization. Consistent semantics across all five packages — filter on THIS.** `authority_verified` (Tiers 3-4) / `unverified_model_emitted` (Tiers 1-2) / `no_id`. |
-| 76 | `ontology_id_match_mode` | 10.3% | **Added by harmonization.** How the identifier was matched (exact label, synonym, …). |
+| 75 | `ontology_id_verification` | 100.0% | **Added by harmonization. Consistent semantics across all five packages — filter on THIS.** `authority_verified` (Tiers 3-4, resolver-derived) / `authority_verified_retrospective` (Tiers 1-2 in v1.2: a model-emitted id confirmed at its authority by label or synonym, or replaced by the id the name resolves to — see `ontology_id_match_mode` and `ontology_id_source`) / `id_withheld_unverified_v1.2` (Tiers 1-2 in v1.2: the model id denoted another entity and the name did not resolve; `entity_ontology_id_resolved` is null, the old id is in `ontology_id_v11_model_emitted`) / `no_id`. v1.0/v1.1 used `unverified_model_emitted` for all Tier 1-2 ids. |
+| 76 | `ontology_id_match_mode` | 10.3% | **Added by harmonization.** How the identifier was matched (exact label, synonym, …). v1.2 adds `exact_relaxed` (case/plural/Greek/punctuation variant of the authority label) and `compound_partial` (the entity string names several entities and the id denotes one of them). |
 | 77 | `hpo_verification` | 100.0% | **Added by harmonization.** HPO verification status, consistent across packages. |
 | 78 | `hpo_id_count_unified` | 100.0% | Number of verified HPO identifiers on the row, unified across packages. |
 | 79 | `ontology_id_prefix` | 10.3% | Ontology namespace of the identifier (HGNC, CHEBI, HP, …). **[CONSTANT: `CHEBI`]** |
@@ -138,10 +138,11 @@ Ordered as in the parquet. `fill` is the percentage of rows with a non-null valu
 | 104 | `query_contamination_note` | 0.0% | Why the row was flagged. **[EMPTY in this package]** |
 | 105 | `screen_verdict_uncertain` | 100.0% | Tier 4: the screen was uncertain whether the paper is in scope. |
 | 106 | `screen_verdict_note` | 14.4% | Screening note. **[CONSTANT: `screened 'uncertain' (topical-drift risk, not abbreviation collision): extracted but flagged`]** |
+| 107 | `ontology_id_v11_model_emitted` | 0.0% | **Added in v1.2 (history column).** The identifier the extraction model emitted in v1.0/v1.1 for this row, preserved verbatim after re-grounding. Null where no model id existed. NEVER join on this column: about a third of these ids denote a different entity (see `annotations/POTS_MODEL_ID_BENCHMARK.md`). The usable id, if any, is `entity_ontology_id_resolved` with `ontology_id_verification` in {`authority_verified`, `authority_verified_retrospective`}. **[EMPTY in this package]** |
 
 ## Entirely empty in this package
 
-19 columns hold no value on any of the 15,646 rows. **Null here means the
+20 columns hold no value on any of the 15,646 rows. **Null here means the
 property was NOT CAPTURED by this extraction pass — not that it was measured and found
 absent.** They are retained so that this package's schema matches its siblings' and a
 pooled read needs no column alignment.
@@ -153,6 +154,7 @@ pooled read needs no column alignment.
 - `entity_ontology_id_note` — Note field. Effectively empty.
 - `ontology_id_final` — Identifier after the repair pass.
 - `ontology_id_repaired` — Whether the syntactic repair pass touched this identifier. **Syntactic only — case and namespace. Re-derived nothing from names.**
+- `ontology_id_v11_model_emitted` — **Added in v1.2 (history column).** The identifier the extraction model emitted in v1.0/v1.1 for this row, preserved verbatim after re-grounding. Null where no model id existed. NEVER join on this column: about a third of these ids denote a different entity (see `annotations/POTS_MODEL_ID_BENCHMARK.md`). The usable id, if any, is `entity_ontology_id_resolved` with `ontology_id_verification` in {`authority_verified`, `authority_verified_retrospective`}.
 - `ontology_label_final` — Final ontology label.
 - `ontology_repair_action` — What the repair pass did.
 - `pathway_id` — **Tiers 1-2 only, 0.1% filled.** Deprecated; no single GO/Reactome term denotes most mechanism prose.

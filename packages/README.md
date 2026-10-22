@@ -49,8 +49,8 @@ than one.
 [Releases](../../releases) page, take just the tier you want:
 
 ```bash
-tar -xzf migraine-hypermobility-findings-v1.1.tar.gz
-cd migraine-hypermobility-findings-v1.1
+tar -xzf migraine-hypermobility-findings-v1.2.tar.gz
+cd migraine-hypermobility-findings-v1.2
 shasum -a 256 -c CHECKSUMS.sha256          # confirm the download is intact
 python code/verify_package.py --self-test  # confirm the data matches the docs
 ```
@@ -58,7 +58,7 @@ python code/verify_package.py --self-test  # confirm the data matches the docs
 That's 10 MB compressed for Tier 4, and nothing from the other four tiers is involved. No Git
 needed.
 
-**From Git, one folder only.** A plain `git clone` fetches all five (~113 MB working tree). To
+**From Git, one folder only.** A plain `git clone` fetches all five (~114 MB working tree). To
 get a single tier, use a sparse checkout:
 
 ```bash
@@ -97,7 +97,7 @@ from `raw.githubusercontent.com`; nothing here approaches that (largest file: 18
 |---|---:|---:|---:|
 | dysautonomia-core-findings | 32 MB | 34 MB | 36,067 |
 | comorbid-conditions-findings-a | 22 MB | 24 MB | 36,611 |
-| comorbid-conditions-findings-b | 19 MB | 21 MB | 33,830 |
+| comorbid-conditions-findings-b | 20 MB | 21 MB | 33,830 |
 | postviral-autism-findings | 16 MB | 18 MB | 26,032 |
 | migraine-hypermobility-findings | 10 MB | 12 MB | 15,646 |
 
@@ -105,8 +105,8 @@ Each folder repeats the shared files — the 39,128-row entity vocabulary, the c
 invariant modules — which is why the five sum to slightly more than the corpus. That redundancy
 is deliberate: it is what lets any one folder work alone.
 
-The whole repository is **292 files / 113.4 MB** (53 + 56 + 56 + 60 + 58 across the five tier
-folders, plus 9 at the root). The largest single file is the 18 MB Tier 1 CSV, so **no Git LFS
+The whole repository is **301 files / 113.6 MB** (55 + 58 + 58 + 62 + 60 across the five tier
+folders, plus 8 at the root). The largest single file is the 18 MB Tier 1 CSV, so **no Git LFS
 is required** — GitHub warns at 50 MB and blocks at 100 MB per file.
 
 **If you want all five**, pool them freely for row counts, paper metadata and quote presence —

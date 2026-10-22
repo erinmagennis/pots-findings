@@ -45,6 +45,14 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
   <p>Paper counts use canonical PMID. The combined total is ${fmt(C.papers)}, not a count of raw PMID rows.
   Finding rows remain append-only: Tier 1 occupies rows 0 through ${fmt(C.findings_tier1-1)}, followed by the
   current Tier 2 rows.</p>
+  <h3>Verification status (packages v1.2)</h3>
+  <p>Each finding carries a verbatim quote from its paper. Across Tiers 1–3 of the full corpus
+  (132,540 findings), 127,041 of 132,295 quotes whose source could be
+  re-fetched were found in that source (96.03%; by tier 92.89% / 97.13% / 96.84% / 97.77%).
+  In a 200-finding sample drawn across all five packages, 185 of 200 quotes were found in freshly fetched text.
+  In v1.2 every model-written ontology identifier was checked at its authority and corrected or withheld
+  (details in each package's README). <b>Whether each finding also states what its paper found has not yet been
+  checked by a human reader.</b> That audit is in progress; its result will be posted here when it is done.</p>
 </div>
 
 <div class="panel" id="reuse">

@@ -1,9 +1,9 @@
 {
- "package": "comorbid-conditions-findings-b-v1.1",
+ "package": "comorbid-conditions-findings-b-v1.2",
  "tier": "tier2b",
  "title": "Tier 2 Part B \u2014 comorbid-condition literatures, second extraction wave",
- "version": "tier2b-v1.1",
- "built_utc": "2026-09-16T12:00:00Z",
+ "version": "tier2b-v1.2",
+ "built_utc": "2026-10-22T12:15:40Z",
  "creator": {
   "name": "Magennis, Erin",
   "orcid": "0009-0007-9013-8052"
@@ -90,7 +90,7 @@
   "tier_source": "t2"
  },
  "schema": {
-  "n_columns": 107,
+  "n_columns": 108,
   "columns": [
    "entity",
    "entity_ontology_id",
@@ -198,7 +198,8 @@
    "query_contamination",
    "query_contamination_note",
    "screen_verdict_uncertain",
-   "screen_verdict_note"
+   "screen_verdict_note",
+   "ontology_id_v11_model_emitted"
   ],
   "all_null_in_this_package": [
    "_source_version_id",
@@ -233,8 +234,7 @@
    "cap_entity_kind": "False",
    "cap_hpo_verified": "False",
    "cap_number_in_quote": "False",
-   "cap_quote_source_retained": "False",
-   "ontology_id_match_mode": "none_recorded"
+   "cap_quote_source_retained": "False"
   }
  },
  "quality": {
@@ -245,7 +245,7 @@
    "no_model_emitted_ids",
    "id_provenance"
   ],
-  "id_resolved_frac": 0.1647,
+  "id_resolved_frac": 0.1415,
   "id_denotes_entity_rate": 0.7082,
   "id_provenance": "model-emitted, existence-checked only",
   "quote_verifiable_rows": 6560,
@@ -277,12 +277,12 @@
   {
    "path": ".zenodo.json",
    "bytes": 3156,
-   "sha256": "603d2aac6a09ac764274937dfc4603cc85d87568c04f5681e3ca8c0ac09861d4"
+   "sha256": "62a840a2cb7f31c62ac0549278341f82adde492f3b6cdc5e268971d327d73887"
   },
   {
    "path": "CITATION.cff",
    "bytes": 2679,
-   "sha256": "3704f2e10e96d6a08fc2cbd834aa1538a16f1945face6a9a8669df510233cc22"
+   "sha256": "a328492f239a58bc095a698a1e547a7dc94a41dcf8b67e894276c67acd6b23b2"
   },
   {
    "path": "LICENSE",
@@ -291,8 +291,8 @@
   },
   {
    "path": "README.md",
-   "bytes": 20563,
-   "sha256": "0cd998bc43fde2fa1e120e02564fdb76ae7aae0a03022c45c06cfd3afa8ed9d4"
+   "bytes": 22718,
+   "sha256": "ae910d5f294e647a9e70fc649e7b8b8870eaf67e02803e83ca4827c5c995e6ca"
   },
   {
    "path": "annotations/COMPARATOR_GATE.json",
@@ -308,6 +308,16 @@
    "path": "annotations/CONDITION_BUCKET_DEFINITIONS.md",
    "bytes": 6663,
    "sha256": "e5534b3423e31352e4d742c1afd52d2e809716323b3d287ef8275b376163a4ea"
+  },
+  {
+   "path": "annotations/POTS_MODEL_ID_BENCHMARK.json",
+   "bytes": 4400,
+   "sha256": "031418cff3e57f8b8048b18fc089f111d01e7f98cb5b06facfbd06836fe4762f"
+  },
+  {
+   "path": "annotations/POTS_MODEL_ID_BENCHMARK.md",
+   "bytes": 2703,
+   "sha256": "277126df3242f1e49d46febc19edfac6e0276b32ac72cf5d5a2a5149c0d522a3"
   },
   {
    "path": "annotations/RETROFIT_REPORT.md",
@@ -441,23 +451,23 @@
   },
   {
    "path": "data/tier2b_findings.csv.gz",
-   "bytes": 7789062,
-   "sha256": "289997502a483c3226b70d8cabe39c9293e8efb0cc74f9519dcaefdfd34fdf6f"
+   "bytes": 7820789,
+   "sha256": "2504f24aca516e9b53fa19ef35a68bf715a06deafa6390b9d28cbb42f34a1284"
   },
   {
    "path": "data/tier2b_findings.parquet",
-   "bytes": 8725489,
-   "sha256": "b3a0bc412089fb4cf59aa89b2d2ee952e67501d295666e1beb25e2e22af2d853"
+   "bytes": 8734594,
+   "sha256": "cc35f97b5ce4c26b2ae2404348ca0cfb135e39d9746312c832229c8af2ee4553"
   },
   {
    "path": "deposit/ZENODO_FORM.md",
    "bytes": 3066,
-   "sha256": "8a29c4c2434fb8f2735a3f9e73913c61b8c17eb0838397721aa440b7dd865c59"
+   "sha256": "f5090c73a328791bb9022b835d2ab81df2e441fcb89b8dee1fe2a800040ce7b3"
   },
   {
    "path": "deposit/github_release_notes.md",
    "bytes": 1871,
-   "sha256": "51a52349fde4811b2f81002d8dde06323cf89e26f727cf7572da7fdc62260454"
+   "sha256": "bb0e1d0e4855ba5e34ef5feeb9504740952d1d2829c165705654aebb36925656"
   },
   {
    "path": "deposit/osf_metadata.json",
@@ -471,23 +481,23 @@
   },
   {
    "path": "docs/DATA_DICTIONARY.md",
-   "bytes": 18411,
-   "sha256": "7f1a8cc72f7c44f2c0d20b5f873b0e414905da12c6e7d191d940e737611b3d67"
+   "bytes": 19502,
+   "sha256": "d586e0554364f73b881dd629469fb77555048a8ea8c942f434b58e5a44d0e280"
   },
   {
    "path": "docs/LIMITATIONS.md",
-   "bytes": 11062,
-   "sha256": "ed97829d5b172c34a5e24e87582df8dde9072e9bcba4f320aa923b29be9e9947"
+   "bytes": 11712,
+   "sha256": "bcce0290500950ba408f1867d998203ef78f4b3e6402fbcf49f594ab0f6d4553"
   },
   {
    "path": "docs/METHODS.md",
-   "bytes": 6497,
-   "sha256": "3da2d20ea7ed252a2ce692c12e243fa0e0546d22475066708fd2c8c9dd21f6ff"
+   "bytes": 8021,
+   "sha256": "e1d0c9917d827cd85c88b70bdde239a7e3a53bd959ac9a3789e925470c74fb32"
   },
   {
    "path": "docs/README.md",
-   "bytes": 20563,
-   "sha256": "0cd998bc43fde2fa1e120e02564fdb76ae7aae0a03022c45c06cfd3afa8ed9d4"
+   "bytes": 22718,
+   "sha256": "ae910d5f294e647a9e70fc649e7b8b8870eaf67e02803e83ca4827c5c995e6ca"
   },
   {
    "path": "docs/WEBSITE_INTEGRATION.md",
@@ -502,12 +512,12 @@
   {
    "path": "qa/invariants.json",
    "bytes": 1237,
-   "sha256": "52c7494211d193cf2d5ffba4a2c2d81798ec23ca263551cb058d35843a284699"
+   "sha256": "5a7ef183751869b1259ee3bafe3596af670da28ad59e8d703544c78971c86c63"
   },
   {
    "path": "qa/package_stats.json",
-   "bytes": 13026,
-   "sha256": "a3ce2b40ab0f817d592f405fcc67392906539fb2b5826c38793cbac4f445f4fe"
+   "bytes": 13211,
+   "sha256": "f6d7501f46a348d58cbbaa0d68df1cb30ce56c5a315cb6f664d033b2bb0e724e"
   },
   {
    "path": "qa/quote_census_all_tiers.json",
@@ -545,6 +555,6 @@
    "sha256": "56ee57a907f8363a16920afe37f92eda13b6b7763c4cb5b21746affa5c4d971b"
   }
  ],
- "n_files": 54,
- "total_bytes": 22154037
+ "n_files": 56,
+ "total_bytes": 22209732
 }

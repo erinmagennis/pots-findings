@@ -1,4 +1,4 @@
-# Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS — `migraine-hypermobility-findings-v1.1`
+# Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS — `migraine-hypermobility-findings-v1.2`
 
 **15,646 findings · 1,091 papers · 30 chunks · 2020–2026**
 

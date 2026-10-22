@@ -164,7 +164,7 @@ deficient rather than the output wrong.
 
 | path | what it is |
 |---|---|
-| `data/tier4_findings.parquet` | **THE DATA.** 15,646 rows × 107 columns. Start here. |
+| `data/tier4_findings.parquet` | **THE DATA.** 15,646 rows × 108 columns. Start here. |
 | `data/tier4_findings.csv.gz` | Identical content as CSV, for tools without parquet support. |
 | `data/entity_vocabulary_crosstier.parquet` | Canonicalization lookup, 39,128 raw strings → 36,173 canonical. Mutates no rows. |
 | `data/chunk_order.parquet` | Paper → chunk → tier assignment for all 14,263 corpus papers. |
@@ -253,6 +253,8 @@ its numerator, denominator and basis. They are covered by `MANIFEST.json` and `C
 | `annotations/COMPARATOR_GATE.json` | — | — | Regression gate run before the retrofit: the shipped comparator reproduces Tier 4's 99.09% and is entity-code symmetric (42/42). |
 | `annotations/CONDITION_ANNOTATIONS_README.md` | — | — | Schema and coverage of condition_annotations, and how to join it. |
 | `annotations/CONDITION_BUCKET_DEFINITIONS.md` | — | — | v1 written definitions of the `condition` buckets (MCAS decided; others provisional) and the MCAS census that prompted them. |
+| `annotations/POTS_MODEL_ID_BENCHMARK.json` | — | see file | additive annotation table |
+| `annotations/POTS_MODEL_ID_BENCHMARK.md` | — | see file | additive annotation table |
 | `annotations/RETROFIT_REPORT.md` | — | — | The retrofit report: deviations, per-stratum rates with controls, itemised permanent losses, untraceable examples. |
 | `annotations/condition_annotations.csv` | 1,083 | `pmid` | CSV twin of condition_annotations.parquet. |
 | `annotations/condition_annotations.parquet` | 1,083 | `pmid` | Per-paper verdict on the `condition == 'MCAS'` bucket under population-studied semantics (`in_bucket` / `bucket_violation` / `NEEDS_HUMAN`), classifier-derived, none human-confirmed. |
@@ -294,5 +296,5 @@ one prompt; pool those two freely.
 
 ---
 
-Built 2026-09-16T12:00:00Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
+Built 2026-10-22T12:15:40Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
 Data CC BY 4.0. Machine-extracted research information — **not medical advice.**

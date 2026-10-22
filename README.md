@@ -3,6 +3,23 @@
 A public, machine-extracted research dataset and static browser covering the completed Tier 1 record plus the
 current Tier 2 checkpoint.
 
+## Findings packages v1.2 (the full corpus)
+
+The complete harmonised corpus — **148,186 findings from 11,519 papers** across Tiers 1–4 — ships as five
+self-contained packages under [`packages/`](packages/) (start at [`packages/README.md`](packages/README.md) and
+[`packages/OVERVIEW.md`](packages/OVERVIEW.md)). Each package carries its data (Parquet + CSV), documentation,
+QA tables, the code that built it and `CHECKSUMS.sha256`; `code/verify_package.py --self-test` re-checks a package end to end.
+
+| version | tag | what changed |
+|---|---|---|
+| v1.2 | `v1.2` | Every model-emitted ontology identifier in Tiers 1–2 was looked up by id at its minting authority (HGNC, ChEBI, MeSH) and compared with the entity name. 14,055 rows are now `authority_verified_retrospective` (10,879 confirmed, 3,176 replaced by the id the name resolves to); 2,607 ids that denoted a different entity were withheld. The original model id is preserved in `ontology_id_v11_model_emitted`. No finding text, quote, direction, condition or paper changed. |
+| v1.1 | `v1.1` | Five harmonised packages; Tier 1–2 identifiers flagged `unverified_model_emitted`. |
+
+Join on `entity_ontology_id_resolved` only where `ontology_id_verification` is `authority_verified` or
+`authority_verified_retrospective` (19,782 rows). **Scientific fidelity — whether each finding states what its paper
+found — has not yet been checked by a human reader**; that audit is open and its result will be posted here and on the
+site's About page. The browser below still serves the Tier 1 + Tier 2 checkpoint; it will move to v1.2 next.
+
 ## Current checkpoint
 
 | Measure | Current value | Basis |

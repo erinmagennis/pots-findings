@@ -1,6 +1,6 @@
 # Data Dictionary — `data/tier2b_findings.parquet`
 
-**33,830 rows × 107 columns.** Every fill rate below is **measured on
+**33,830 rows × 108 columns.** Every fill rate below is **measured on
 this package's own slice**, not inherited from another tier. Recompute them with
 `python code/verify_package.py`.
 
@@ -90,8 +90,8 @@ Ordered as in the parquet. `fill` is the percentage of rows with a non-null valu
 | 56 | `hgnc_id` | 15.5% | HGNC gene identifier. |
 | 57 | `ensembl_id` | 15.5% | Ensembl gene identifier. |
 | 58 | `gene_resolved` | 100.0% | Whether the gene symbol resolved against an authority. |
-| 59 | `entity_ontology_id_resolved` | 16.5% | Resolved ontology identifier. **Meaning differs by tier: authority-derived in Tiers 3-4, model-emitted in Tiers 1-2.** Always read alongside `ontology_id_verification`. |
-| 60 | `entity_ontology_label` | 16.5% | The authority's own label for the identifier. Comparing this to `entity` is how identifier correctness was measured offline. |
+| 59 | `entity_ontology_id_resolved` | 14.2% | Resolved ontology identifier. **Meaning differs by tier: authority-derived in Tiers 3-4, model-emitted in Tiers 1-2.** Always read alongside `ontology_id_verification`. |
+| 60 | `entity_ontology_label` | 14.2% | The authority's own label for the identifier. Comparing this to `entity` is how identifier correctness was measured offline. |
 | 61 | `pathway_id_resolved` | 0.3% | Resolved pathway identifier. |
 | 62 | `pathway_label` | 0.2% | Pathway label. |
 | 63 | `phenotype_hpo_resolved` | 1.9% | Resolved HPO identifier. |
@@ -106,17 +106,17 @@ Ordered as in the parquet. `fill` is the percentage of rows with a non-null valu
 | 72 | `cap_hpo_verified` | 100.0% | **Capability flag**: does this tier carry authority-verified HPO identifiers? **[CONSTANT: `False`]** |
 | 73 | `cap_number_in_quote` | 100.0% | **Capability flag**: does this tier carry the `number_in_quote` check? **[CONSTANT: `False`]** |
 | 74 | `cap_quote_source_retained` | 100.0% | **Capability flag**: is the quote's own source text still retained? True only in Tier 4. **[CONSTANT: `False`]** |
-| 75 | `ontology_id_verification` | 100.0% | **Added by harmonization. Consistent semantics across all five packages — filter on THIS.** `authority_verified` (Tiers 3-4) / `unverified_model_emitted` (Tiers 1-2) / `no_id`. |
-| 76 | `ontology_id_match_mode` | 16.5% | **Added by harmonization.** How the identifier was matched (exact label, synonym, …). **[CONSTANT: `none_recorded`]** |
+| 75 | `ontology_id_verification` | 100.0% | **Added by harmonization. Consistent semantics across all five packages — filter on THIS.** `authority_verified` (Tiers 3-4, resolver-derived) / `authority_verified_retrospective` (Tiers 1-2 in v1.2: a model-emitted id confirmed at its authority by label or synonym, or replaced by the id the name resolves to — see `ontology_id_match_mode` and `ontology_id_source`) / `id_withheld_unverified_v1.2` (Tiers 1-2 in v1.2: the model id denoted another entity and the name did not resolve; `entity_ontology_id_resolved` is null, the old id is in `ontology_id_v11_model_emitted`) / `no_id`. v1.0/v1.1 used `unverified_model_emitted` for all Tier 1-2 ids. |
+| 76 | `ontology_id_match_mode` | 14.2% | **Added by harmonization.** How the identifier was matched (exact label, synonym, …). v1.2 adds `exact_relaxed` (case/plural/Greek/punctuation variant of the authority label) and `compound_partial` (the entity string names several entities and the id denotes one of them). |
 | 77 | `hpo_verification` | 100.0% | **Added by harmonization.** HPO verification status, consistent across packages. |
 | 78 | `hpo_id_count_unified` | 100.0% | Number of verified HPO identifiers on the row, unified across packages. |
 | 79 | `ontology_id_prefix` | 16.5% | Ontology namespace of the identifier (HGNC, CHEBI, HP, …). |
 | 80 | `ontology_id_repaired` | 17.0% | Whether the syntactic repair pass touched this identifier. **Syntactic only — case and namespace. Re-derived nothing from names.** |
 | 81 | `ontology_repair_action` | 4.4% | What the repair pass did. |
-| 82 | `ontology_id_final` | 13.5% | Identifier after the repair pass. |
+| 82 | `ontology_id_final` | 12.3% | Identifier after the repair pass. |
 | 83 | `ontology_id_source` | 16.5% | **TRAP: inverted semantics across tiers.** `unresolved_nulled` means identifier KEPT in Tier 2 and identifier NULLED in Tiers 3-4. Provenance only — never a filter. See COMPARABILITY.md. |
 | 84 | `entity_clean` | 59.5% | Cleaned entity string. |
-| 85 | `ontology_label_final` | 12.3% | Final ontology label. |
+| 85 | `ontology_label_final` | 11.4% | Final ontology label. |
 | 86 | `entity_kind` | 0.0% | Entity type (gene, protein, chemical/metabolite, …). **Tiers 3-4 only** — null means NOT PRESENT in Tiers 1-2. **[EMPTY in this package]** |
 | 87 | `phenotype_terms` | 0.0% | Atomic clinical terms split out of the raw symptom string. **[EMPTY in this package]** |
 | 88 | `certainty_derived` | 0.0% | Hedge-detection over both `finding_text` and `provenance_quote`: both hedged -> hedged, neither -> confirmed, disagreement -> mixed. Never overwrites `certainty`. **[EMPTY in this package]** |
@@ -138,6 +138,7 @@ Ordered as in the parquet. `fill` is the percentage of rows with a non-null valu
 | 104 | `query_contamination_note` | 0.0% | Why the row was flagged. **[EMPTY in this package]** |
 | 105 | `screen_verdict_uncertain` | 0.0% | Tier 4: the screen was uncertain whether the paper is in scope. **[EMPTY in this package]** |
 | 106 | `screen_verdict_note` | 0.0% | Screening note. **[EMPTY in this package]** |
+| 107 | `ontology_id_v11_model_emitted` | 16.5% | **Added in v1.2 (history column).** The identifier the extraction model emitted in v1.0/v1.1 for this row, preserved verbatim after re-grounding. Null where no model id existed. NEVER join on this column: about a third of these ids denote a different entity (see `annotations/POTS_MODEL_ID_BENCHMARK.md`). The usable id, if any, is `entity_ontology_id_resolved` with `ontology_id_verification` in {`authority_verified`, `authority_verified_retrospective`}. |
 
 ## Entirely empty in this package
 
@@ -185,7 +186,6 @@ is a forward-compatibility placeholder.
 | `cap_hpo_verified` | `False` |
 | `cap_number_in_quote` | `False` |
 | `cap_quote_source_retained` | `False` |
-| `ontology_id_match_mode` | `none_recorded` |
 | `tier_source` | `t2` |
 
 ## Multi-value columns

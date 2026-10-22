@@ -52,8 +52,23 @@ DIFFERENT by ~17%). **Measured on Tier 2 as a whole — a 270-row adjudicated sa
 waves — and inherited by this package. No per-wave rate was computed.** Tiers 3 and 4, which emit names only and resolve
 afterwards, score 0.986 and 0.998.
 
-Every affected row is tagged `ontology_id_verification == 'unverified_model_emitted'`,
-so the limitation is queryable rather than merely documented.
+The sentences above describe v1.0/v1.1 and are kept as history. In v1.2 the model-emitted ids were
+re-grounded against their authorities row by row:
+
+**v1.2 (2026-10-21): every model-emitted identifier in this package was looked up by id at its minting
+authority (HGNC via MyGene, ChEBI via OLS4, MeSH via NLM) and its label and full synonym list compared with the
+entity name; names were also resolved forward to obtain the correct id where one exists. No model was involved.**
+
+Of the 6,716 rows that carried a model-emitted id in v1.1: **4,614 denoted their entity** and are now tagged
+`authority_verified_retrospective` with the match mode recorded (compound_partial 333, exact 2,694, exact_relaxed 807, synonym 780); **1,107 ids were replaced** by the id the
+entity name resolves to (exact label or authority synonym; `ontology_id_source` says so); **995 were withheld** (`id_withheld_unverified_v1.2`:
+the id denoted a different entity and the name did not resolve). The original model id is preserved on every affected row in
+`ontology_id_v11_model_emitted`; on replaced rows `entity_ontology_label` / `ontology_label_final` carry the NEW id's label, fetched by id from the authority. Nothing else changed: no row was added or removed and no other column was edited.
+
+Measured on this package's full population: **68.7% of the model-emitted ids denoted their entity**; the
+rest existed but pointed at a neighbouring gene, a related compound or a sibling concept — near-miss assignment, not fabrication.
+The v1.1 figure quoted below was an adjudicated SAMPLE and is kept for the record. Full method and corpus-wide numbers: `annotations/POTS_MODEL_ID_BENCHMARK.md`.
+
 
 ## Quote provenance
 
