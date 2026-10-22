@@ -2,7 +2,7 @@
 import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS } from './data.js';
 
 export const PAGES = [
-  ['search','Search'],['discover','Findings'],['connections','Connections'],
+  ['search','Search'],['discover','Signals'],['connections','Connections'],
   ['builder','Analyze'],['about','About'],['chat','Ask']
 ];
 
