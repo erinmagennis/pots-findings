@@ -1,0 +1,116 @@
+{
+ "build_utc": "2026-10-22T12:15:40Z",
+ "version": "v1.2",
+ "corpus": {
+  "vsum": 39637,
+  "findings": 148186,
+  "papers": 11519,
+  "n_chunks": 286,
+  "vpct": 26.75,
+  "quote_median": 180,
+  "quote_max": 1065,
+  "quote_pct_under_400": 98.2
+ },
+ "packages": {
+  "tier1": {
+   "findings": 36067,
+   "papers": 3129,
+   "n_files": 53,
+   "tarball_bytes": 33586883
+  },
+  "tier2a": {
+   "findings": 36611,
+   "papers": 3123,
+   "n_files": 56,
+   "tarball_bytes": 22883365
+  },
+  "tier2b": {
+   "findings": 33830,
+   "papers": 2589,
+   "n_files": 56,
+   "tarball_bytes": 20448613
+  },
+  "tier3": {
+   "findings": 26032,
+   "papers": 1587,
+   "n_files": 60,
+   "tarball_bytes": 16745358
+  },
+  "tier4": {
+   "findings": 15646,
+   "papers": 1091,
+   "n_files": 58,
+   "tarball_bytes": 10503659
+  }
+ },
+ "repo_files": 301,
+ "repo_bytes": 113627091,
+ "dtype_fix": true,
+ "annotations": {
+  "tier1": [
+   "COMPARATOR_GATE.json",
+   "CONDITION_ANNOTATIONS_README.md",
+   "CONDITION_BUCKET_DEFINITIONS.md",
+   "POTS_MODEL_ID_BENCHMARK.json",
+   "POTS_MODEL_ID_BENCHMARK.md",
+   "RETROFIT_REPORT.md",
+   "condition_annotations.csv",
+   "condition_annotations.parquet",
+   "quote_retrofit_tier1.parquet",
+   "retrofit_fetch_log.parquet",
+   "retrofit_summary.json"
+  ],
+  "tier2a": [
+   "COMPARATOR_GATE.json",
+   "CONDITION_ANNOTATIONS_README.md",
+   "CONDITION_BUCKET_DEFINITIONS.md",
+   "POTS_MODEL_ID_BENCHMARK.json",
+   "POTS_MODEL_ID_BENCHMARK.md",
+   "RETROFIT_REPORT.md",
+   "condition_annotations.csv",
+   "condition_annotations.parquet",
+   "quote_retrofit_tier2a.parquet",
+   "retrofit_fetch_log.parquet",
+   "retrofit_summary.json"
+  ],
+  "tier2b": [
+   "COMPARATOR_GATE.json",
+   "CONDITION_ANNOTATIONS_README.md",
+   "CONDITION_BUCKET_DEFINITIONS.md",
+   "POTS_MODEL_ID_BENCHMARK.json",
+   "POTS_MODEL_ID_BENCHMARK.md",
+   "RETROFIT_REPORT.md",
+   "condition_annotations.csv",
+   "condition_annotations.parquet",
+   "quote_retrofit_tier2b.parquet",
+   "retrofit_fetch_log.parquet",
+   "retrofit_summary.json"
+  ],
+  "tier3": [
+   "COMPARATOR_GATE.json",
+   "CONDITION_ANNOTATIONS_README.md",
+   "CONDITION_BUCKET_DEFINITIONS.md",
+   "POTS_MODEL_ID_BENCHMARK.json",
+   "POTS_MODEL_ID_BENCHMARK.md",
+   "RETROFIT_REPORT.md",
+   "condition_annotations.csv",
+   "condition_annotations.parquet",
+   "quote_retrofit_tier3.parquet",
+   "retrofit_fetch_log.parquet",
+   "retrofit_summary.json"
+  ],
+  "tier4": [
+   "COMPARATOR_GATE.json",
+   "CONDITION_ANNOTATIONS_README.md",
+   "CONDITION_BUCKET_DEFINITIONS.md",
+   "POTS_MODEL_ID_BENCHMARK.json",
+   "POTS_MODEL_ID_BENCHMARK.md",
+   "RETROFIT_REPORT.md",
+   "condition_annotations.csv",
+   "condition_annotations.parquet",
+   "retrofit_fetch_log.parquet",
+   "retrofit_summary.json"
+  ]
+ },
+ "dois": {}
+}

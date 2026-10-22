@@ -1,0 +1,204 @@
+{
+ "basis": "FIDELITY.md / CALIBRATION_HARNESS.md planted arm on the POTS 200-finding sample pool (85 rows whose quote traces in freshly fetched text and whose source is <= 40k chars; pool is abstract-heavy because most full texts exceed the cap); judge reads freshly fetched Europe PMC text",
+ "judge_model": "claude-sonnet-5",
+ "seed": 20261021,
+ "rows_judged": 80,
+ "planted_per_class": 5,
+ "clean_controls": 40,
+ "unparsed": [],
+ "catch_rate_by_class": {
+  "hpo_inject": {
+   "question": "Q9_hpo_terms_complete_and_correct",
+   "n_planted": 5,
+   "n_caught": 5,
+   "n_unparsed": 0,
+   "catch_rate_pct": 100.0
+  },
+  "entity_label_swap": {
+   "question": "Q8_entity_id_correct",
+   "n_planted": 5,
+   "n_caught": 5,
+   "n_unparsed": 0,
+   "catch_rate_pct": 100.0
+  },
+  "tier_upgrade": {
+   "question": "Q4_tier_justified",
+   "n_planted": 5,
+   "n_caught": 5,
+   "n_unparsed": 0,
+   "catch_rate_pct": 100.0
+  },
+  "causal_upgrade": {
+   "question": "Q5_causality_not_overstated",
+   "n_planted": 5,
+   "n_caught": 4,
+   "n_unparsed": 0,
+   "catch_rate_pct": 80.0
+  },
+  "quote_swap": {
+   "question": "Q1_quote_verbatim",
+   "n_planted": 5,
+   "n_caught": 5,
+   "n_unparsed": 0,
+   "catch_rate_pct": 100.0
+  },
+  "direction_flip": {
+   "question": "Q2_direction_correct",
+   "n_planted": 5,
+   "n_caught": 4,
+   "n_unparsed": 0,
+   "catch_rate_pct": 80.0
+  },
+  "condition_relabel": {
+   "question": "Q7_condition_correct",
+   "n_planted": 5,
+   "n_caught": 5,
+   "n_unparsed": 0,
+   "catch_rate_pct": 100.0
+  },
+  "number_perturb": {
+   "question": "Q6_numbers_correct",
+   "n_planted": 5,
+   "n_caught": 5,
+   "n_unparsed": 0,
+   "catch_rate_pct": 100.0
+  }
+ },
+ "flag_rate_unadjudicated_by_question": {
+  "Q1_quote_verbatim": {
+   "n_clean": 40,
+   "n_flagged": 0,
+   "flag_rate_pct": 0.0
+  },
+  "Q2_direction_correct": {
+   "n_clean": 40,
+   "n_flagged": 3,
+   "flag_rate_pct": 7.5
+  },
+  "Q3_quote_supports_finding": {
+   "n_clean": 40,
+   "n_flagged": 6,
+   "flag_rate_pct": 15.0
+  },
+  "Q4_tier_justified": {
+   "n_clean": 40,
+   "n_flagged": 6,
+   "flag_rate_pct": 15.0
+  },
+  "Q5_causality_not_overstated": {
+   "n_clean": 40,
+   "n_flagged": 1,
+   "flag_rate_pct": 2.5
+  },
+  "Q6_numbers_correct": {
+   "n_clean": 40,
+   "n_flagged": 2,
+   "flag_rate_pct": 5.0
+  },
+  "Q7_condition_correct": {
+   "n_clean": 40,
+   "n_flagged": 6,
+   "flag_rate_pct": 15.0
+  },
+  "Q8_entity_id_correct": {
+   "n_clean": 40,
+   "n_flagged": 0,
+   "flag_rate_pct": 0.0
+  },
+  "Q9_hpo_terms_complete_and_correct": {
+   "n_clean": 40,
+   "n_flagged": 0,
+   "flag_rate_pct": 0.0
+  },
+  "Q10_paper_in_scope": {
+   "n_clean": 40,
+   "n_flagged": 7,
+   "flag_rate_pct": 17.5
+  }
+ },
+ "machine_extendable_before_adjudication": [
+  {
+   "question": "Q1_quote_verbatim",
+   "defect_class": "quote_swap",
+   "catch_rate_pct": 100.0,
+   "flag_rate_unadjudicated_pct": 0.0,
+   "verdict": "machine-extendable"
+  },
+  {
+   "question": "Q2_direction_correct",
+   "defect_class": "direction_flip",
+   "catch_rate_pct": 80.0,
+   "flag_rate_unadjudicated_pct": 7.5,
+   "verdict": "keep human - misses its own defect class"
+  },
+  {
+   "question": "Q3_quote_supports_finding",
+   "defect_class": null,
+   "catch_rate_pct": null,
+   "flag_rate_unadjudicated_pct": 15.0,
+   "verdict": "UNTESTED - keep human"
+  },
+  {
+   "question": "Q4_tier_justified",
+   "defect_class": "tier_upgrade",
+   "catch_rate_pct": 100.0,
+   "flag_rate_unadjudicated_pct": 15.0,
+   "verdict": "needs flag adjudication"
+  },
+  {
+   "question": "Q5_causality_not_overstated",
+   "defect_class": "causal_upgrade",
+   "catch_rate_pct": 80.0,
+   "flag_rate_unadjudicated_pct": 2.5,
+   "verdict": "keep human - misses its own defect class"
+  },
+  {
+   "question": "Q6_numbers_correct",
+   "defect_class": "number_perturb",
+   "catch_rate_pct": 100.0,
+   "flag_rate_unadjudicated_pct": 5.0,
+   "verdict": "needs flag adjudication"
+  },
+  {
+   "question": "Q7_condition_correct",
+   "defect_class": "condition_relabel",
+   "catch_rate_pct": 100.0,
+   "flag_rate_unadjudicated_pct": 15.0,
+   "verdict": "needs flag adjudication"
+  },
+  {
+   "question": "Q8_entity_id_correct",
+   "defect_class": "entity_label_swap",
+   "catch_rate_pct": 100.0,
+   "flag_rate_unadjudicated_pct": 0.0,
+   "verdict": "machine-extendable"
+  },
+  {
+   "question": "Q9_hpo_terms_complete_and_correct",
+   "defect_class": "hpo_inject",
+   "catch_rate_pct": 100.0,
+   "flag_rate_unadjudicated_pct": 0.0,
+   "verdict": "machine-extendable"
+  },
+  {
+   "question": "Q10_paper_in_scope",
+   "defect_class": null,
+   "catch_rate_pct": null,
+   "flag_rate_unadjudicated_pct": 17.5,
+   "verdict": "UNTESTED - keep human"
+  }
+ ],
+ "n_flags_for_human_adjudication": 31,
+ "flags_by_question": {
+  "Q10_paper_in_scope": 7,
+  "Q3_quote_supports_finding": 6,
+  "Q4_tier_justified": 6,
+  "Q7_condition_correct": 6,
+  "Q2_direction_correct": 3,
+  "Q6_numbers_correct": 2,
+  "Q5_causality_not_overstated": 1
+ },
+ "reading": "Catch 5/5 on six classes; direction_flip 4/5 and causal_upgrade 4/5 -> Q2 and Q5 stay human on POTS (on EDS, Q2 caught 4/4 parsed). Q1, Q8, Q9 machine-extendable now (0 flags). Q4, Q6, Q7 need flag adjudication. Q3 and Q10 human by design; the 7 Q10 flags on clean rows are a scope signal worth reading given the POTS corpus's known contamination (MCAS stream). 5 per class = directional only.",
+ "q7_text": "Is the condition label the right BUCKET for this finding? The field is a coarse enum, not a precise diagnosis, and `condition` means (population): `condition` names the patient POPULATION the paper studied. A paper about mast-cell mediators in asthma is `general`, not `MCAS`, even though the finding may inform MCAS. Papers that carry a condition label without studying that population are bucket violations and are recorded in the additive annotations table (condition_population_kind = mechanism_only), not corrected in place. Bucket definitions (CONDITION_BUCKET_DEFINITIONS.md v1 (2026-09-16)): POTS = PROVISIONAL (written 2026-09-16 for this config; not yet confirmed by a bucket census). Postural orthostatic tachycardia syndrome as the studied population, including its named subtypes (hyperadrenergic, neurogenic, hypovolemic) and POTS comorbid with hEDS/MCAS/long COVID when POTS is the specific subject.; ME_CFS = PROVISIONAL. Myalgic encephalomyelitis / chronic fatigue syndrome as the studied population, under any of the clinical case definitions (Fukuda, CCC, ICC, IOM/SEID); post-viral fatigue without an ME/CFS diagnosis belongs in `long_COVID` (if SARS-CoV-2) or `general`.; long_COVID = PROVISIONAL. Post-acute sequelae of SARS-CoV-2 infection (long COVID, PASC) as the studied population. Acute COVID-19 cohorts studied for autonomic or fatigue outcomes also land here; acute COVID-19 without a post-acute question is `general`.; EDS_hypermobility = Includes Ehlers-Danlos syndromes, hypermobility spectrum disorder, and generalized joint hypermobility assessed by Beighton score WITHOUT an EDS diagnosis. The corpus draw had a dedicated `hypermobility_spectrum` theme, so hypermobility-without-EDS appears to be deliberately in scope. (CONDITION_BUCKET_DEFINITIONS.md v1, verbatim.); fibromyalgia = PROVISIONAL. Fibromyalgia as the studied population (ACR 1990/2010/2016 criteria or clinician diagnosis). Chronic widespread pain without a fibromyalgia diagnosis is `general`.; MCAS = MCAS means mast cell activation syndrome specifically: the non-clonal activation syndrome, including idiopathic MCAS and MCAS comorbid with POTS/hEDS. Mastocytosis does NOT belong \u2014 it is a clonal neoplasm and a distinct diagnosis. Rationale: \"markers of MCAS\" must remain an answerable question, and pooling a clonal neoplasm with an activation syndrome makes it unanswerable. (CONDITION_BUCKET_DEFINITIONS.md v1, verbatim. Census: of 1,083 papers labelled MCAS, ~69% were mast-cell biology with no MCAS population, ~10% MCAS as defined, ~5% mastocytosis.); dysautonomia = Any autonomic disorder, including MSA, syncope, orthostatic intolerance and autonomic neuropathy, where POTS is not the specific subject. (CONDITION_BUCKET_DEFINITIONS.md v1, verbatim.); small_fiber_neuropathy = PROVISIONAL. Small-fibre neuropathy as the studied population, whether idiopathic or secondary, established by skin biopsy (IENFD), QSART or quantitative sensory testing; SFN found as a sub-phenotype within a fibromyalgia or POTS cohort is labelled by that cohort.; autism = PROVISIONAL. Autism spectrum disorder as the studied population (clinical diagnosis or validated instrument). NOT atrial septal defect or adult spinal deformity (abbreviation collision on ASD \u2014 a draw defect, flagged not deleted).; migraine = PROVISIONAL. Migraine and other primary headache disorders as the studied population, including trigeminal autonomic cephalalgias and cluster headache; secondary headache only when autonomic features are the studied question.; IBS_gut = PROVISIONAL. Irritable bowel syndrome and functional gastrointestinal disorders (Rome criteria) as the studied population, including gastroparesis and functional dyspepsia studied for autonomic or comorbidity questions. Inflammatory bowel disease is `general` unless studied for an in-scope comorbidity.; multiple = Several listed conditions are subjects. (CONDITION_BUCKET_DEFINITIONS.md v1, verbatim.); general = The correct answer when no listed condition is the paper's subject. It is a catch-all by design; \"too vague\" is not a defect. (CONDITION_BUCKET_DEFINITIONS.md v1, verbatim.). Answer N only if the finding does not belong in the assigned bucket at all.",
+ "q10_text": "Is this paper in scope for a biomarker/mechanism corpus on POTS and related conditions (dysautonomia, ME/CFS, EDS/hypermobility, fibromyalgia, MCAS, small-fibre neuropathy, long COVID; autism/migraine/IBS intersections)? In-scope families (illustrative, not exhaustive): dysautonomia / autonomic nervous system disorders: POTS, familial dysautonomia (Riley-Day, ELP1/HSAN III), hereditary sensory and autonomic neuropathies, multiple system atrophy, pure autonomic failure, orthostatic hypotension, orthostatic intolerance, syncope and convulsive syncope, vasovagal syncope, baroreflex failure, autonomic testing/QSART; headache / cephalalgia disorders: migraine, trigeminal autonomic cephalalgias, cluster headache, SUNCT/SUNA, hemicrania, new daily persistent headache, secondary headache with autonomic features; connective-tissue and hypermobility disorders: Ehlers-Danlos (all types), hypermobility spectrum disorder, joint hypermobility, Marfan, Loeys-Dietz, osteogenesis imperfecta; mast cell disease: MCAS, systemic mastocytosis, hereditary alpha-tryptasemia; post-infectious / post-viral: long COVID, PASC, post-viral fatigue, ME/CFS, PANS/PANDAS; autoimmune rheumatic disease studied for neurological/autonomic/fatigue/small-fibre/biomarker aspects: Sjogren syndrome, systemic sclerosis with autonomic or small-fibre involvement; intersections: fibromyalgia, irritable bowel syndrome, autism spectrum disorder, small-fibre neuropathy."
+}
