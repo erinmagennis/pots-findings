@@ -1,3 +1,4 @@
+import { condLabel } from './labels.js';
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const title = value => String(value || '').replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
 
@@ -6,22 +7,24 @@ function graphData(rows) {
   const normalize = label => String(label || '').trim().toLowerCase().replace(/\s+/g, ' ');
   const conditionCounts = new Map();
   potsRows.forEach(row => row.conditions
-    .filter(condition => !['POTS', 'general'].includes(condition))
+    .filter(condition => !['POTS', 'general', 'multiple'].includes(condition))
     .forEach(condition => {
       const key = normalize(condition);
-      const current = conditionCounts.get(key) || { label: condition, count: 0 };
+      const current = conditionCounts.get(key) || { label: condLabel(condition), count: 0 };
       current.count += Number(row.n_papers_both || 0);
       conditionCounts.set(key, current);
     }));
   const conditions = [...conditionCounts.entries()].sort((a, b) => b[1].count - a[1].count).slice(0, 10);
   const conditionKeys = new Set(conditions.map(([key]) => key));
   const evidenceByKey = new Map();
+  const reserved = new Set(['pots', 'postural orthostatic tachycardia syndrome']);
+  conditionCounts.forEach((item, key) => { reserved.add(key); reserved.add(normalize(item.label)); reserved.add(key.replace(/_/g, ' ')); });
   potsRows.forEach(row => {
     const condition = row.conditions.find(value => conditionKeys.has(normalize(value)));
     [row.entity_a, row.entity_b].forEach(entity => {
       const label = title(entity);
       const key = normalize(label);
-      if (!key) return;
+      if (!key || reserved.has(key)) return;
       const current = evidenceByKey.get(key);
       const candidate = { label, count: Number(row.n_papers_both || 0), condition: condition ? normalize(condition) : null };
       if (!current || candidate.count > current.count) evidenceByKey.set(key, candidate);
@@ -35,7 +38,7 @@ function renderGraph(data) {
   const root = document.getElementById('graph');
   let pinned = null;
   const list = document.getElementById('evidenceList');
-  list.innerHTML = data.conditions.map(([key, item]) => `<li><button type="button" data-node="condition:${esc(key)}">${esc(title(item.label))} <span>${item.count.toLocaleString()}</span></button></li>`).join('');
+  list.innerHTML = data.conditions.map(([key, item]) => `<li><button type="button" data-node="condition:${esc(key)}">${esc(item.label)} <span>${item.count.toLocaleString()}</span></button></li>`).join('');
   list.closest('.evidence-view').setAttribute('tabindex', '0');
   list.querySelectorAll('button').forEach(button => button.addEventListener('click', () => { pinned = button.dataset.node; draw(); }));
 
@@ -59,7 +62,7 @@ function renderGraph(data) {
     visibleConditions.forEach(([key, item], index) => {
       const angle = -Math.PI * .86 + (index / Math.max(1, visibleConditions.length - 1)) * Math.PI * 1.72;
       const position = avoidBox(clamp(center.x + Math.cos(angle) * innerRadius, boundary, width - boundary), clamp(center.y + Math.sin(angle) * innerRadius, boundary, height - boundary));
-      const node = { id: `condition:${key}`, label: title(item.label), kind: 'condition', count: item.count, x: position.x, y: position.y };
+      const node = { id: `condition:${key}`, label: item.label, kind: 'condition', count: item.count, x: position.x, y: position.y };
       nodes.push(node); links.push({ source: 'POTS', target: node.id });
     });
     visibleEvidence.forEach(([key, item], index) => {
@@ -137,7 +140,7 @@ function renderGraph(data) {
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       circle.dataset.id = node.id; circle.dataset.kind = node.kind; circle.setAttribute('cx', node.x); circle.setAttribute('cy', node.y); circle.setAttribute('r', node.kind === 'core' ? 6 : node.kind === 'condition' ? 4 : 2.5); circle.setAttribute('tabindex', '0'); circle.setAttribute('role', 'button'); circle.setAttribute('aria-label', `${node.label}, ${node.count.toLocaleString()} papers in the visible association`);
-      label.textContent = node.label; label.setAttribute('x', clamp(node.x + (node.x < centerX(width) ? -8 : 8), boundary, width - boundary)); label.setAttribute('y', clamp(node.y - (node.kind === 'core' ? 9 : 7), boundary, height - boundary)); label.setAttribute('text-anchor', node.x < centerX(width) ? 'end' : 'start'); label.classList.add(`node-label-${node.kind}`);
+      label.textContent = node.label; placeLabel(label, node, node.x, node.y, width, height, boundary); label.classList.add(`node-label-${node.kind}`);
       group.append(circle, label); svg.append(group); nodeEls.set(node.id, { circle, label, group, node });
       const activate = () => focusNode(node.id);
       circle.addEventListener('mouseenter', activate); circle.addEventListener('focus', activate); circle.addEventListener('mouseleave', () => { if (!pinned) focusNode(null); }); circle.addEventListener('blur', () => { if (!pinned) focusNode(null); }); circle.addEventListener('click', () => { pinned = pinned === node.id ? null : node.id; focusNode(pinned); });
@@ -152,8 +155,7 @@ function renderGraph(data) {
         const element = nodeEls.get(id); const node = element.node;
         const x = node.x + state.x; const y = node.y + state.y;
         element.circle.setAttribute('cx', x); element.circle.setAttribute('cy', y);
-        element.label.setAttribute('x', clamp(x + (node.x < centerX(width) ? -8 : 8), boundary, width - boundary));
-        element.label.setAttribute('y', clamp(y - (node.kind === 'core' ? 9 : 7), boundary, height - boundary));
+        placeLabel(element.label, node, x, y, width, height, boundary);
       });
       linkEls.forEach(({ line, link }) => {
         const source = byId.get(link.source); const target = byId.get(link.target);
@@ -200,6 +202,17 @@ function renderGraph(data) {
     focusNode(pinned);
   }
   const centerX = width => width * .58;
+  // text-anchor and x chosen so the whole label stays inside the drawing (estimated 6.4 px per character)
+  function placeLabel(el, node, x, y, width, height, boundary) {
+    const est = String(node.label).length * 6.4;
+    let anchor = node.x < centerX(width) ? 'end' : 'start';
+    let lx = x + (anchor === 'end' ? -8 : 8);
+    if (anchor === 'start' && lx + est > width - 6) { anchor = 'end'; lx = x - 8; }
+    if (anchor === 'end' && lx - est < 6) { anchor = 'start'; lx = x + 8; }
+    el.setAttribute('text-anchor', anchor);
+    el.setAttribute('x', clamp(lx, 6, width - 6));
+    el.setAttribute('y', clamp(y - (node.kind === 'core' ? 9 : 7), boundary, height - boundary));
+  }
   const observer = new ResizeObserver(draw);
   observer.observe(root);
   draw();

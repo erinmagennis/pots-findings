@@ -1,3 +1,4 @@
+import { condLabel } from './labels.js';
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, ensureRows,
          paperCount, paper, fmt, esc, FILTER_FIELDS } from './data.js';
 import { mount, findingCard, selectOpts, autocomplete, qs, entityCoverageNote } from './ui.js';
@@ -23,7 +24,7 @@ fEl.innerHTML = FILTER_FIELDS.map(k=>{
     return `<div><label>${FLABEL[k]}</label><div class="autoc"><input type="text" id="fe"
       placeholder="any entity" autocomplete="off"></div></div>`;
   }
-  return `<div><label>${FLABEL[k]}</label><select data-f="${k}">${selectOpts(vals,'')}</select></div>`;
+  return `<div><label>${FLABEL[k]}</label><select data-f="${k}">${selectOpts(vals,'','Any',k==='c'?condLabel:undefined)}</select></div>`;
 }).join('');
 autocomplete(document.getElementById('fe'), state.entities.map(e=>e.name), ()=>run());
 const cov=document.createElement('div'); cov.innerHTML=entityCoverageNote('the canonical-entity filter');

@@ -1,3 +1,4 @@
+import { condLabel } from './labels.js';
 import { loadMeta, loadFacets, loadPapers, state, applyFilters, paperCount, fmt, esc, val } from './data.js';
 import { mount } from './ui.js';
 
@@ -13,13 +14,13 @@ const stats = conds.map(c=>{
 }).sort((a,b)=>b.n-a.n);
 
 document.getElementById('cards').innerHTML = stats.slice(0,6).map(s=>
-  `<div class="stat"><div class="v">${fmt(s.n)}</div><div class="k">${esc(s.c)}</div>
+  `<div class="stat"><div class="v">${fmt(s.n)}</div><div class="k">${esc(condLabel(s.c))}</div>
    <div class="kv">${fmt(s.papers)} papers</div></div>`).join('');
 
 document.getElementById('tbl').querySelector('thead').innerHTML=
   `<tr><th>Condition label</th><th>Findings</th><th>Papers</th><th>Source coverage</th></tr>`;
 document.getElementById('tbl').querySelector('tbody').innerHTML=stats.map(s=>`<tr>
-  <td><a href="condition?c=${encodeURIComponent(s.c)}"><b>${esc(s.c)}</b></a></td>
+  <td><a href="condition?c=${encodeURIComponent(s.c)}"><b>${esc(condLabel(s.c))}</b></a></td>
   <td class="num">${fmt(s.n)}</td><td class="num">${fmt(s.papers)}</td>
   <td><span class="kv">${s.literatures.length} source literature${s.literatures.length===1?'':'s'}:
       ${s.literatures.slice(0,5).map(esc).join(', ')}${s.literatures.length>5?` +${s.literatures.length-5} more`:''}</span></td>

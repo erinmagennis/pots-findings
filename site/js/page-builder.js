@@ -1,3 +1,4 @@
+import { condLabel } from './labels.js';
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, fmt, esc, val,
          FILTER_FIELDS } from './data.js';
 import { mount, selectOpts, entityCoverageNote } from './ui.js';
@@ -19,7 +20,7 @@ document.getElementById('series').innerHTML='<option value="">None</option>'+
 
 document.getElementById('bfilters').innerHTML=FILTER_FIELDS.map(k=>{
   const vals=[...F.dicts[k]].sort((a,b)=>String(a).localeCompare(String(b)));
-  return `<div><label>${DIM[k]||k}</label><select data-f="${k}">${selectOpts(vals,'')}</select></div>`;
+  return `<div><label>${DIM[k]||k}</label><select data-f="${k}">${selectOpts(vals,'','Any',k==='c'?condLabel:undefined)}</select></div>`;
 }).join('');
 document.getElementById('covnote').innerHTML=
   `<div id="cn"></div>`;

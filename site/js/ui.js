@@ -1,5 +1,6 @@
 /* ui.js: shared chrome: framing banner, nav, result cards, citation lines. */
 import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS } from './data.js';
+import { condLabel } from './labels.js';
 
 export const PAGES = [
   ['search','Search'],['discover','Signals'],['connections','Connections'],
@@ -21,7 +22,7 @@ export function header(active){
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
     <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation">${tabs}</nav>
-    <div class="header-rail"><b>${fmt(state.meta.counts.findings)} findings</b>${fmt(state.meta.counts.papers)} papers · Tier 1 + partial Tier 2 ${contextPopover()}</div>
+    <div class="header-rail"><b>${fmt(state.meta.counts.findings)} findings</b>${fmt(state.meta.counts.papers)} papers · version ${esc(state.meta.version)} ${contextPopover()}</div>
   </div></header>`;
 }
 
@@ -98,7 +99,7 @@ export function findingCard(row, opts={}){
   if(ent) tags.push(`<a class="tag ent" href="entity?e=${encodeURIComponent(ent)}">${esc(ent)}</a>`);
   else if(estr) tags.push(`<span class="tag lowconf" title="This entity string was not canonicalized, so this finding does not appear in entity roll-ups or entity filters. It is still fully searchable by keyword.">${esc(estr)} · not canonicalized</span>`);
   if(dir && dir!=='not applicable') tags.push(`<span class="tag dir ${dc}">${esc(dir)}</span>`);
-  if(cond) tags.push(`<a class="tag" href="condition?c=${encodeURIComponent(cond)}">${esc(cond)}</a>`);
+  if(cond) tags.push(`<a class="tag" href="condition?c=${encodeURIComponent(cond)}">${esc(condLabel(cond))}</a>`);
   if(tier) tags.push(`<span class="tag tier">${esc(tier)}</span>`);
   if(cert) tags.push(`<span class="tag">${esc(cert)}</span>`);
   if(ft) tags.push(`<span class="tag">${esc(ft)}</span>`);
@@ -123,9 +124,9 @@ export function findingCard(row, opts={}){
   </div>`;
 }
 
-export function selectOpts(values, sel, anyLabel='Any'){
+export function selectOpts(values, sel, anyLabel='Any', labeler=v=>v){
   return `<option value="">${anyLabel}</option>` + values.filter(v=>v && v!=='\u2014')
-    .map(v=>`<option value="${esc(v)}"${v===sel?' selected':''}>${esc(v)}</option>`).join('');
+    .map(v=>`<option value="${esc(v)}"${v===sel?' selected':''}>${esc(labeler(v))}</option>`).join('');
 }
 
 /** sortable table helper */

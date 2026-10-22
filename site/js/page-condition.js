@@ -1,3 +1,4 @@
+import { condLabel } from './labels.js';
 import { loadMeta, loadFacets, loadPapers, state, applyFilters, ensureRows, paperCount, fmt, esc, val,
          } from './data.js';
 import { mount, findingCard, qs } from './ui.js';
@@ -14,7 +15,7 @@ const extractionTiers=[...new Set(rows.map(r=>val('ti',r)).filter(Boolean))].sor
 const tally=(f)=>{ const m={}; for(const r of rows){ const v=val(f,r); if(v&&v!=='\u2014') m[v]=(m[v]||0)+1; } return m; };
 
 document.getElementById('head').innerHTML=`<div class="panel">
-  <h1>${esc(c)}</h1>
+  <h1>${esc(condLabel(c))} <span class="kv">label <code>${esc(c)}</code></span></h1>
   <div class="note plain"><b>This is a condition-label view across the whole corpus.</b>
     Its ${fmt(rows.length)} findings come from ${sourceLiteratures.length} source literature${sourceLiteratures.length===1?'':'s'}:
     ${sourceLiteratures.map(x=>`<code>${esc(x)}</code>`).join(', ')}. A condition label and a source literature

@@ -203,3 +203,5 @@ nav.tabs#dtabs{display:flex;gap:5px;align-items:center;overflow-x:auto;margin:22
 .graph-intro .lede{max-width:70ch}.graph-controls select{min-height:38px}.graph-controls button{min-height:38px}.connection-drawer{transition:box-shadow .18s ease}.connection-drawer:hover{box-shadow:0 14px 32px rgba(52,55,53,.12)}.tblwrap{box-shadow:0 2px 10px rgba(52,55,53,.025)}
 @media(max-width:620px){.nav-pill{justify-content:flex-start;overflow-x:auto;max-width:100%;scrollbar-width:none}.nav-pill::-webkit-scrollbar{display:none}.nav-pill a{flex:0 0 auto;padding-left:12px;padding-right:12px}.context-details{margin-left:0}.campaign-strip{font-size:11px}.connection-drawer{position:absolute;top:12px;right:12px;left:12px;width:auto}.graph-caption{bottom:12px}}
 @media(prefers-reduced-motion:reduce){body,body.page-leaving{animation:none}}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

@@ -42,7 +42,8 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
   <p>These are automated extractions and can contain errors. Read the cited paper before relying on a finding.
   The website shows provenance excerpts of up to ${M.quote_max_chars} characters beside the citation so a reader
   can locate the relevant passage.</p>
-  <p>Paper counts use canonical PMID (${fmt(C.papers)} papers; preprint/journal duplicates are merged). Finding rows keep the order of the
+  <p>Paper counts use canonical PMID: ${fmt(C.papers)} papers. The data packages list ${fmt(C.pmids)} PubMed records; ${fmt(C.pmids - C.papers)} of
+  them are a preprint or a duplicate record of another paper in the set, so the site counts each such pair once. Finding rows keep the order of the
   five released packages, so a row number here is a stable citation into the GitHub data.</p>
   <h3 id="verification">Verification status</h3>
   <p>Each finding carries a verbatim quote from its paper. Across ${fmt(V.trace_rows_total)} findings in the first four packages,
