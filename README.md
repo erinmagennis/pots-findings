@@ -1,10 +1,12 @@
 # POTS and dysautonomia literature findings
 
 A public, machine-extracted research dataset and static browser: findings from the POTS, dysautonomia and related-condition literature, with verbatim source quotes, released as five verifiable data packages.
+Built with [condition-findings-builder](https://github.com/erinmagennis/condition-findings-builder). Project index:
+[condition-findings](https://github.com/erinmagennis/condition-findings). Sister dataset: [eds-findings](https://github.com/erinmagennis/eds-findings).
 
 ## Findings packages v1.2 (the full corpus)
 
-The complete harmonised corpus — **<!--n:findings-->148,186<!--/n--> findings from <!--n:pmids-->11,519<!--/n--> papers** across Tiers 1–4 — ships as five
+The complete harmonised corpus: **<!--n:findings-->148,186<!--/n--> findings from <!--n:pmids-->11,519<!--/n--> papers** across Tiers 1–4: ships as five
 self-contained packages under [`packages/`](packages/) (start at [`packages/README.md`](packages/README.md) and
 [`packages/OVERVIEW.md`](packages/OVERVIEW.md)). Each package carries its data (Parquet + CSV), documentation,
 QA tables, the code that built it and `CHECKSUMS.sha256`; `code/verify_package.py --self-test` re-checks a package end to end.
@@ -15,8 +17,8 @@ QA tables, the code that built it and `CHECKSUMS.sha256`; `code/verify_package.p
 | v1.1 | `v1.1` | Five harmonised packages; Tier 1–2 identifiers flagged `unverified_model_emitted`. |
 
 Join on `entity_ontology_id_resolved` only where `ontology_id_verification` is `authority_verified` or
-`authority_verified_retrospective` (<!--n:verified_id_rows-->19,782<!--/n--> rows). **Scientific fidelity — whether each finding states what its paper
-found — has not yet been checked by a human reader**; that audit is open and its result will be posted here and on the
+`authority_verified_retrospective` (<!--n:verified_id_rows-->19,782<!--/n--> rows). **Scientific fidelity: whether each finding states what its paper
+found: has not yet been checked by a human reader**; that audit is open and its result will be posted here and on the
 site's About page. The browser at pots.erinmagennis.com serves this release.
 
 ## Browser
@@ -71,3 +73,5 @@ Before the packages existed the repository published an incremental record: `dat
 Derived structured data is licensed under CC BY 4.0. Verbatim provenance text remains the copyright of its
 respective authors and publishers and is not licensed by this project. See [`NOTICE.md`](NOTICE.md) and
 [`CITATION.cff`](CITATION.cff).
+
+Credit: Erin Magennis.
