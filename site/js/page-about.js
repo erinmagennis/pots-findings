@@ -7,7 +7,7 @@ const C=state.meta.counts, M=state.meta;
 const V = state.meta.verification_stats || {};
 const literatures=Object.entries(C.findings_by_source_literature||{}).sort((a,b)=>b[1]-a[1]);
 
-document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="section-index" aria-label="About sections"><a href="#scope">Scope</a><a href="#limits">Limits</a><a href="#reuse">Reuse</a><a href="#connect">Collaborate</a></nav><div class="about-content">
+document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="section-index" aria-label="About sections"><a href="#scope">Scope</a><a href="#limits">Limits</a><a href="#reuse">Reuse</a><a href="#related">Related data</a><a href="#connect">Collaborate</a></nav><div class="about-content">
 <div class="page-intro">
   <h1>About the data, its limits, and how to reuse it</h1>
   <p class="lede">A searchable index of ${fmt(C.findings)} machine-extracted findings from
@@ -66,6 +66,15 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
   <p>This browser reports what papers said. It does not diagnose conditions, recommend treatments, or replace
   advice from a qualified clinician.</p>
 </div></div></div>`;
+
+document.querySelector('.about-content').insertAdjacentHTML('beforeend', `
+<div class="panel" id="related">
+  <h2>Related data</h2>
+  <p>This site is part of <a href="https://github.com/erinmagennis/condition-findings" target="_blank" rel="noopener">condition-findings</a>,
+  a set of open datasets built the same way. It includes <a href="https://github.com/erinmagennis/eds-findings" target="_blank" rel="noopener">EDS findings</a>:
+  findings from papers on the Ehlers-Danlos syndromes and hypermobility, published 1946 to 2026.
+  The method that builds them is open too, in <a href="https://github.com/erinmagennis/condition-findings-builder" target="_blank" rel="noopener">condition-findings-builder</a>.</p>
+</div>`);
 
 document.querySelector('.about-content').insertAdjacentHTML('beforeend', `
 <div class="panel" id="connect">
