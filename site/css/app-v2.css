@@ -207,3 +207,11 @@ nav.tabs#dtabs{display:flex;gap:5px;align-items:center;overflow-x:auto;margin:22
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 h1 .kv{letter-spacing:normal;font-weight:400;font-size:13px;line-height:1.4;vertical-align:middle;margin-left:.6em;white-space:nowrap}
 .minor-labels{margin-top:22px}.minor-labels h3{font-size:15px;margin:0 0 6px}
+
+/* Page-to-page: the browser crossfades and keeps the header in place (Chrome, Edge, Safari 18.2+). */
+@view-transition{navigation:auto}
+header.site,header.topbar{view-transition-name:site-header}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
+@supports (view-transition-name:none){body{animation:none}}
+@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+main{min-height:calc(100vh - 72px)}

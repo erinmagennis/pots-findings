@@ -257,16 +257,6 @@ async function init() {
     navToggle.setAttribute('aria-expanded', String(!open));
     primaryNav?.toggleAttribute('data-open', !open);
   });
-  document.querySelectorAll('.nav-pill a').forEach(link => {
-    link.addEventListener('click', event => {
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
-      const target = new URL(link.href, location.href);
-      if (target.origin !== location.origin) return;
-      event.preventDefault();
-      document.body.classList.add('page-leaving');
-      window.setTimeout(() => { window.location.href = target.href; }, 120);
-    });
-  });
   const [associations, meta] = await Promise.all([fetch('data/associations.json').then(response => response.json()), fetch('data/meta.json').then(response => response.json())]);
   document.getElementById('findingCount').textContent = Number(meta.counts.findings).toLocaleString();
   document.getElementById('paperCount').textContent = Number(meta.counts.papers).toLocaleString();

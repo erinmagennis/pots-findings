@@ -16,13 +16,17 @@ function contextPopover(){
   </div></details>`;
 }
 
+function railInner(){
+  return `<b>${fmt(state.meta.counts.findings)} findings</b>${fmt(state.meta.counts.papers)} papers · version ${esc(state.meta.version)} ${contextPopover()}`;
+}
+
 export function header(active){
   const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}${h==='chat'?' <span>(BYO key)</span>':''}</a>`).join('');
   return `<header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
     <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation">${tabs}</nav>
-    <div class="header-rail"><b>${fmt(state.meta.counts.findings)} findings</b>${fmt(state.meta.counts.papers)} papers · version ${esc(state.meta.version)} ${contextPopover()}</div>
+    <div class="header-rail">${railInner()}</div>
   </div></header>`;
 }
 
@@ -32,20 +36,11 @@ export function footer(){
   <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings ${esc(m.version)} · ${fmt(m.counts.findings)} findings / ${fmt(m.counts.papers)} papers · data generated ${esc(m.generated_utc)} · <a href="about">Scope, methods and limitations</a>.</span></div></footer>`;
 }
 
-export function mount(active){
-  document.getElementById('framing-slot').outerHTML = '';
-  document.getElementById('header-slot').outerHTML  = header(active);
-  const f=document.getElementById('footer-slot'); if(f) f.outerHTML = footer();
-  document.querySelectorAll('.nav-pill a').forEach(link => {
-    link.addEventListener('click', event => {
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
-      const target = new URL(link.href, location.href);
-      if (target.origin !== location.origin) return;
-      event.preventDefault();
-      document.body.classList.add('page-leaving');
-      window.setTimeout(() => { window.location.href = target.href; }, 120);
-    });
-  });
+/* The header is written into each page's HTML so it paints before any data loads.
+   mount() only fills the counts rail; wireChrome() runs as soon as chrome.js loads. */
+let wired=false;
+export function wireChrome(){
+  if(wired) return; wired=true;
   const navToggle = document.getElementById('mobileNavToggle');
   const primaryNav = document.getElementById('primaryNav');
   navToggle?.addEventListener('click', () => {
@@ -53,6 +48,15 @@ export function mount(active){
     navToggle.setAttribute('aria-expanded', String(!open));
     primaryNav?.toggleAttribute('data-open', !open);
   });
+}
+
+export function mount(active){
+  document.getElementById('framing-slot')?.remove();
+  const slot=document.getElementById('header-slot');
+  if(slot) slot.outerHTML = header(active);
+  else { const rail=document.querySelector('header.site .header-rail'); if(rail && state.meta) rail.innerHTML = railInner(); }
+  const f=document.getElementById('footer-slot'); if(f) f.outerHTML = footer();
+  wireChrome();
 }
 
 /* ---------- citation line: prominent, always with a link ---------- */

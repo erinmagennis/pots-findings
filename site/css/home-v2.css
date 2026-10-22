@@ -145,3 +145,10 @@ h1 span, .hero-lede span { display: block; }
 
 /* labels with no free position stay hidden until their node is hovered or selected */
 .graph text.node-label-evidence.is-crowded:not(.is-revealed) { opacity: 0; }
+
+/* Page-to-page: the browser crossfades and keeps the header in place (Chrome, Edge, Safari 18.2+). */
+@view-transition{navigation:auto}
+header.site,header.topbar{view-transition-name:site-header}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
+@supports (view-transition-name:none){body{animation:none}}
+@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}}

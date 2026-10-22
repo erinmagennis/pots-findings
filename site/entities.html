@@ -7,7 +7,12 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 <link rel="stylesheet" href="css/app-v2.css">
 </head><body>
-<div id="framing-slot"></div><div id="header-slot"></div>
+<div id="framing-slot"></div><header class="site"><div class="wrap">
+    <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
+    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="discover" class="">Signals</a><a href="connections" class="">Connections</a><a href="builder" class="">Analyze</a><a href="about" class="">About</a><a href="chat" class="">Ask <span>(BYO key)</span></a></nav>
+    <div class="header-rail"></div>
+  </div></header>
 <main><div class="wrap">
 
   <div class="panel">
@@ -28,5 +33,6 @@
 
 </div></main>
 <div id="footer-slot"></div>
+<script type="module" src="js/chrome.js"></script>
 <script type="module" src="js/page-entities.js"></script>
 </body></html>
