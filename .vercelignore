@@ -8,3 +8,9 @@
 /_release
 /.vercel
 /site_tools
+/packages
+/releases
+/audits
+/benchmarks
+/learnings
+/design
