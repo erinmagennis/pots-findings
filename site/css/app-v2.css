@@ -205,3 +205,5 @@ nav.tabs#dtabs{display:flex;gap:5px;align-items:center;overflow-x:auto;margin:22
 @media(prefers-reduced-motion:reduce){body,body.page-leaving{animation:none}}
 
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+h1 .kv{letter-spacing:normal;font-weight:400;font-size:13px;line-height:1.4;vertical-align:middle;margin-left:.6em;white-space:nowrap}
+.minor-labels{margin-top:22px}.minor-labels h3{font-size:15px;margin:0 0 6px}

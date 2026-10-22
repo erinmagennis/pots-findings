@@ -142,3 +142,6 @@ h1 span, .hero-lede span { display: block; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
 @media (prefers-reduced-motion: reduce) { body, body.page-leaving { animation: none; } }
+
+/* labels with no free position stay hidden until their node is hovered or selected */
+.graph text.node-label-evidence.is-crowded:not(.is-revealed) { opacity: 0; }

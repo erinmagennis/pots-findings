@@ -1,13 +1,13 @@
-import { condLabel } from './labels.js';
+import { condLabel, MINOR_LABEL_MAX } from './labels.js';
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const title = value => String(value || '').replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
 
-function graphData(rows) {
+function graphData(rows, conditionRows = {}) {
   const potsRows = rows.filter(row => row.conditions?.includes('POTS'));
   const normalize = label => String(label || '').trim().toLowerCase().replace(/\s+/g, ' ');
   const conditionCounts = new Map();
   potsRows.forEach(row => row.conditions
-    .filter(condition => !['POTS', 'general', 'multiple'].includes(condition))
+    .filter(condition => !['POTS', 'general', 'multiple'].includes(condition) && !((conditionRows[condition] ?? MINOR_LABEL_MAX) < MINOR_LABEL_MAX))
     .forEach(condition => {
       const key = normalize(condition);
       const current = conditionCounts.get(key) || { label: condLabel(condition), count: 0 };
@@ -146,6 +146,7 @@ function renderGraph(data) {
       circle.addEventListener('mouseenter', activate); circle.addEventListener('focus', activate); circle.addEventListener('mouseleave', () => { if (!pinned) focusNode(null); }); circle.addEventListener('blur', () => { if (!pinned) focusNode(null); }); circle.addEventListener('click', () => { pinned = pinned === node.id ? null : node.id; focusNode(pinned); });
     });
     root.replaceChildren(svg);
+    resolveLabels(nodeEls, width, height, mobileCard(width) ? null : cardBox);
     function updateMotion() {
       let moving = false;
       motion.forEach((state, id) => {
@@ -202,8 +203,38 @@ function renderGraph(data) {
     focusNode(pinned);
   }
   const centerX = width => width * .58;
+  const mobileCard = width => width < 760;
+  // Label collision pass. Labels are placed in priority order (POTS, conditions by size, evidence by size). Each label
+  // tries a short list of positions around its dot; the first one that overlaps no placed label, stays inside the drawing
+  // and stays off the hero card wins. An evidence label with no free position is hidden until its node is hovered or
+  // selected. Boxes are measured from the rendered text, so no per-label nudges are needed.
+  function resolveLabels(nodeEls, width, height, card) {
+    const pad = 3, placed = [];
+    const hit = (a, b) => a.x < b.x + b.w + pad && a.x + a.w + pad > b.x && a.y < b.y + b.h + pad && a.y + a.h + pad > b.y;
+    const inCard = b => card && b.x < card.right && b.x + b.w > card.left && b.y < card.bottom && b.y + b.h > card.top;
+    const rank = n => n.kind === 'core' ? 0 : n.kind === 'condition' ? 1 : 2;
+    const items = [...nodeEls.values()].sort((a, b) => rank(a.node) - rank(b.node) || (b.node.count || 0) - (a.node.count || 0));
+    items.forEach(({ label, node }) => {
+      node.labelPlace = null; label.classList.remove('is-crowded');
+      const base = -(node.kind === 'core' ? 9 : 7);
+      const near = node.x < centerX(width) ? 'end' : 'start', far = near === 'end' ? 'start' : 'end';
+      const tries = [[near, 0], [far, 0], [near, -12], [near, 12], [far, -12], [far, 12], [near, -24], [near, 24], [far, -24], [far, 24]];
+      for (const [anchor, extra] of tries) {
+        const cand = { anchor, dx: anchor === 'end' ? -8 : 8, dy: base + extra };
+        label.setAttribute('text-anchor', cand.anchor); label.setAttribute('x', node.x + cand.dx); label.setAttribute('y', node.y + cand.dy);
+        const bb = label.getBBox(); const box = { x: bb.x, y: bb.y, w: bb.width, h: bb.height };
+        const inside = box.x >= 4 && box.x + box.w <= width - 4 && box.y >= 4 && box.y + box.h <= height - 4;
+        if (inside && !inCard(box) && !placed.some(other => hit(box, other))) { node.labelPlace = cand; placed.push(box); return; }
+      }
+      if (node.kind === 'evidence') { label.classList.add('is-crowded'); node.labelPlace = { anchor: near, dx: near === 'end' ? -8 : 8, dy: base }; }
+      else { node.labelPlace = { anchor: near, dx: near === 'end' ? -8 : 8, dy: base }; const bb = label.getBBox(); placed.push({ x: bb.x, y: bb.y, w: bb.width, h: bb.height }); }
+      placeLabel(label, node, node.x, node.y, width, height, 0);
+    });
+  }
   // text-anchor and x chosen so the whole label stays inside the drawing (estimated 6.4 px per character)
   function placeLabel(el, node, x, y, width, height, boundary) {
+    const p = node.labelPlace;
+    if (p) { el.setAttribute('text-anchor', p.anchor); el.setAttribute('x', x + p.dx); el.setAttribute('y', y + p.dy); return; }
     const est = String(node.label).length * 6.4;
     let anchor = node.x < centerX(width) ? 'end' : 'start';
     let lx = x + (anchor === 'end' ? -8 : 8);
@@ -239,7 +270,7 @@ async function init() {
   const [associations, meta] = await Promise.all([fetch('data/associations.json').then(response => response.json()), fetch('data/meta.json').then(response => response.json())]);
   document.getElementById('findingCount').textContent = Number(meta.counts.findings).toLocaleString();
   document.getElementById('paperCount').textContent = Number(meta.counts.papers).toLocaleString();
-  renderGraph(graphData(associations.rows));
+  renderGraph(graphData(associations.rows, meta.counts.conditions_rows || {}));
   document.getElementById('searchForm').addEventListener('submit', event => { event.preventDefault(); const query = document.getElementById('curiosityInput').value.trim(); if (query) window.location.href = `search?q=${encodeURIComponent(query)}`; });
   const searchToggle = document.getElementById('searchToggle');
   if (searchToggle) searchToggle.addEventListener('click', () => { const input = document.getElementById('curiosityInput'); input.focus(); searchToggle.setAttribute('aria-expanded', 'true'); });

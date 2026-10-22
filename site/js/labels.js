@@ -8,3 +8,6 @@ export const CONDITION_LABELS = {
   IBD_gut: 'IBD'
 };
 export const condLabel = c => (c == null ? '' : (CONDITION_LABELS[c] || String(c).replace(/_/g, ' ')));
+
+// condition labels with fewer findings than this are listed separately and kept off cards, charts and the home map
+export const MINOR_LABEL_MAX = 10;
