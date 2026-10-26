@@ -1,5 +1,5 @@
 {
- "title": "Tier 3 — long COVID, post-viral and autism intersections — machine-extracted structured findings (26,032 findings, 1,587 papers)",
+ "title": "POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)",
  "upload_type": "dataset",
  "description": "<p>Package 4 of 5. 26,032 structured findings extracted from 1,587 papers (2020–2026) covering long COVID autonomic, autism intersection, post-viral syndromes.</p><p>One block of a five-way partition of an 11,519-paper, 148,186-finding corpus of the POTS, dysautonomia and comorbid-condition literature. The five packages share <strong>zero papers</strong>; per-package counts sum exactly to the corpus totals.</p><p><strong>Self-contained.</strong> Includes the findings table (parquet and CSV), a data dictionary with fill rates measured on this slice, the QA evidence behind every stated number, the pinned extraction and validation code, and <code>code/verify_package.py</code>, which re-derives every headline number from the shipped data and exits non-zero on disagreement.</p><p><strong>Ontology identifiers:</strong> authority-derived (the extraction model emitted names only; a resolver looked identifiers up afterwards), scoring 0.986 on identifier-denotes-entity rate.</p><p><strong>Quote verifiability:</strong> 12.22% of rows have a provenance quote whose own source text is still available and re-checkable.</p><p><strong>Scientific fidelity is unmeasured.</strong> All QA verifies well-formedness, not whether a finding correctly interprets its source. Treat every row as a pointer to a paper to read.</p><p><strong>Not medical advice.</strong></p>",
  "creators": [
@@ -61,5 +61,5 @@
    "scheme": "doi"
   }
  ],
- "notes": "The provenance_quote column contains short verbatim excerpts from the source publications and is NOT covered by CC BY 4.0 — that text remains the copyright of the respective publishers and authors. See LICENSE for the excerpt policy and takedown commitment."
+ "notes": "The provenance_quote column contains short verbatim excerpts from the source publications and is NOT covered by CC BY 4.0, that text remains the copyright of the respective publishers and authors. See LICENSE for the excerpt policy and takedown commitment."
 }

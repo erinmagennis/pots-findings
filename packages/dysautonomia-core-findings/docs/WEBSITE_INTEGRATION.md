@@ -1,4 +1,4 @@
-# Website integration guide — Tier 1 — POTS and dysautonomia core literature
+# Website integration guide: POTS findings v1.2, package 1 of 5: POTS and dysautonomia core literature (36,067 findings, 3,129 papers)
 
 What is new for the site from this package, and what breaks if you load it carelessly.
 This guide assumes the three-layer contract in `SITE_CONTRACT.md`: **Layer 1 THE RECORD**
@@ -11,7 +11,7 @@ The site currently serves **73,070 findings / 6,244 papers /
 2,803 canonical entities**, `meta.json` version `combined-t1t2-1`,
 13 shards.
 
-**This package is already deployed** — it is the site's tier-1 layer, rows 0–36,458.
+**This package is already deployed**: it is the site's tier-1 layer, rows 0–36,458.
 
 **But the row counts differ: this package has 36,067 rows, the site's tier-1 layer has
 36,459.** A 392-row delta. The site was built from the pre-harmonization
@@ -41,7 +41,7 @@ export in the same style.
 ## Rebuild checklist (applies to any load)
 
 - [ ] Append to Layer 1 in row order; never edit existing rows.
-- [ ] Regenerate **all** of Layer 2 — partial regeneration desynchronizes shards from facets.
+- [ ] Regenerate **all** of Layer 2, partial regeneration desynchronizes shards from facets.
 - [ ] Bump `meta.json` version; the loader keys cache on it.
 - [ ] Re-run `site_tools/` verification.
 - [ ] Re-check every hardcoded number in Layer 3 copy. Counts in prose go stale silently.

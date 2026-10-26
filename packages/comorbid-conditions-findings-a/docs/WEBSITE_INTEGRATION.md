@@ -1,4 +1,4 @@
-# Website integration guide — Tier 2 Part A — comorbid-condition literatures, first extraction wave
+# Website integration guide: POTS findings v1.2, package 2 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 1 of 2 (36,611 findings, 3,123 papers)
 
 What is new for the site from this package, and what breaks if you load it carelessly.
 This guide assumes the three-layer contract in `SITE_CONTRACT.md`: **Layer 1 THE RECORD**
@@ -11,7 +11,7 @@ The site currently serves **73,070 findings / 6,244 papers /
 2,803 canonical entities**, `meta.json` version `combined-t1t2-1`,
 13 shards.
 
-**This package is already deployed** — it is the site's tier-2 layer, rows
+**This package is already deployed**: it is the site's tier-2 layer, rows
 36,459–73,069. The arithmetic is exact: 73,070 − 36,459 =
 **36,611**, which is this package's row count to the row.
 
@@ -27,7 +27,7 @@ name what is missing instead of gesturing at a percentage.
 
 Replace the `~55%` framing in `framingBanner()` with something a reader can act on:
 
-> Tier 2 was extracted in two waves. This site currently shows the first wave — 81 of 145
+> Tier 2 was extracted in two waves. This site currently shows the first wave: 81 of 145
 > chunks, 36,611 findings from 3,123 papers. The second wave (64 chunks, 33,830 findings,
 > 2,589 papers) is complete and published separately, but is not loaded here. The two waves
 > share no papers and cover the same nine themes.
@@ -35,7 +35,7 @@ Replace the `~55%` framing in `framingBanner()` with something a reader can act 
 ## Rebuild checklist (applies to any load)
 
 - [ ] Append to Layer 1 in row order; never edit existing rows.
-- [ ] Regenerate **all** of Layer 2 — partial regeneration desynchronizes shards from facets.
+- [ ] Regenerate **all** of Layer 2, partial regeneration desynchronizes shards from facets.
 - [ ] Bump `meta.json` version; the loader keys cache on it.
 - [ ] Re-run `site_tools/` verification.
 - [ ] Re-check every hardcoded number in Layer 3 copy. Counts in prose go stale silently.

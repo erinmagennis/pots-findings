@@ -1,4 +1,4 @@
-# condition_annotations — additive, pmid-keyed, never a mutation of `condition`
+# condition_annotations, additive, pmid-keyed, never a mutation of `condition`
 
 Built 2026-09-16 from the MCAS bucket census (`mcas_census_per_paper.csv`, 200 papers classified against
 freshly fetched abstracts) under **population-studied semantics**: `condition` is read as the patient

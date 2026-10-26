@@ -1,4 +1,6 @@
-# Tier 1 — POTS and dysautonomia core literature — `dysautonomia-core-findings-v1.2`
+# POTS findings v1.2, package 1 of 5: POTS and dysautonomia core literature (36,067 findings, 3,129 papers)
+
+Package `dysautonomia-core-findings-v1.2`
 
 **36,067 findings · 3,129 papers · 76 chunks · 2019–2026**
 
@@ -28,9 +30,9 @@ non-zero if any disagrees. It also re-plants six regressions to prove the checke
 
 ## Read first
 
-- `docs/README.md` — start here
-- `docs/COMPARABILITY.md` — what you may pool with the sibling packages, and the three traps
-- `docs/LIMITATIONS.md` — what is not known, not measured, and known wrong
+- `docs/README.md`: start here
+- `docs/COMPARABILITY.md`: what you may pool with the sibling packages, and the three traps
+- `docs/LIMITATIONS.md`: what is not known, not measured, and known wrong
 
 ## Caveats that change conclusions
 
@@ -38,9 +40,9 @@ non-zero if any disagrees. It also re-plants six regressions to prove the checke
   interpretation. Every row is a pointer to a paper you should read.
 - **Ontology identifiers are model-emitted.** Roughly
   42% do not denote the entity on their row. Not usable as a mapping.
-- **81.88% of quotes cannot be re-checked** — body text was discarded after extraction.
+- **81.88% of quotes cannot be re-checked**: body text was discarded after extraction.
 - **Absence of a finding is not evidence of absence.** Yield depends ~3× on full-text
   availability.
 
-Data CC BY 4.0. `provenance_quote` holds verbatim source excerpts and is not CC BY — see
+Data CC BY 4.0. `provenance_quote` holds verbatim source excerpts and is not CC BY, see
 `LICENSE`. **Not medical advice.**

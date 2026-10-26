@@ -16,35 +16,35 @@
    "findings": 36067,
    "papers": 3129,
    "n_files": 53,
-   "tarball_bytes": 33586883
+   "tarball_bytes": 33587885
   },
   "tier2a": {
    "findings": 36611,
    "papers": 3123,
    "n_files": 56,
-   "tarball_bytes": 22883365
+   "tarball_bytes": 22884409
   },
   "tier2b": {
    "findings": 33830,
    "papers": 2589,
    "n_files": 56,
-   "tarball_bytes": 20448613
+   "tarball_bytes": 20449747
   },
   "tier3": {
    "findings": 26032,
    "papers": 1587,
    "n_files": 60,
-   "tarball_bytes": 16745358
+   "tarball_bytes": 16746056
   },
   "tier4": {
    "findings": 15646,
    "papers": 1091,
    "n_files": 58,
-   "tarball_bytes": 10503659
+   "tarball_bytes": 10504530
   }
  },
  "repo_files": 301,
- "repo_bytes": 113627091,
+ "repo_bytes": 113652183,
  "dtype_fix": true,
  "annotations": {
   "tier1": [
@@ -112,5 +112,11 @@
    "retrofit_summary.json"
   ]
  },
- "dois": {}
+ "dois": {
+  "tier1": "10.5281/zenodo.23671720",
+  "tier2a": "10.5281/zenodo.23671722",
+  "tier2b": "10.5281/zenodo.23671724",
+  "tier3": "10.5281/zenodo.23671726",
+  "tier4": "10.5281/zenodo.23671728"
+ }
 }

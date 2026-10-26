@@ -1,7 +1,7 @@
 {
  "package": "migraine-hypermobility-findings-v1.2",
  "tier": "tier4",
- "title": "Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS",
+ "title": "POTS findings v1.2, package 5 of 5: migraine, hypermobility spectrum, Sj\u00f6gren's, PANS/PANDAS (15,646 findings, 1,091 papers)",
  "version": "tier4-v1.2",
  "built_utc": "2026-10-22T12:15:40Z",
  "creator": {
@@ -212,7 +212,7 @@
   "quote_verifiable_rows": 15646,
   "quote_verifiable_pct": 100.0,
   "enum_drift_rows": 8,
-  "scientific_fidelity": "UNMEASURED — all QA verifies well-formedness, not correct interpretation",
+  "scientific_fidelity": "UNMEASURED: all QA verifies well-formedness, not correct interpretation",
   "id_denotes_entity_rate_basis": "measured on this package's own tier"
  },
  "partition": {
@@ -237,23 +237,23 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3127,
-   "sha256": "7fbc77434e1ab6a8264e8a1540d15992068a08b4e060d222f2a0c4a9edd62c71"
+   "bytes": 3107,
+   "sha256": "067e8d80b0ecd1af26a4e23ee8d598638a1a639fa0cdbb520c3d16711db63e3b"
   },
   {
    "path": "CITATION.cff",
-   "bytes": 2615,
-   "sha256": "54442aae6de0613805d1694cb8837fd125d346d54cc83ecfb7799eafbb762d5f"
+   "bytes": 2988,
+   "sha256": "3eb322f5450f519ba86dcdbaf3651adebba28f40d264ef99262eb934cd50cd2e"
   },
   {
    "path": "LICENSE",
-   "bytes": 4615,
-   "sha256": "1dad5d8241ed12b11a90d6626960ab5c4284e66a573205c24906abcbd4f85718"
+   "bytes": 4585,
+   "sha256": "cf76ed9193bed4ca854dbe2fea3da606a1283eabeb3333c81818eab677fa5b48"
   },
   {
    "path": "README.md",
-   "bytes": 15772,
-   "sha256": "6c605dc7ecf28b8bb8230c5298ad13206323765879c5e3fede95a59cd4fc9aa0"
+   "bytes": 16648,
+   "sha256": "22ff4374bafb30482e8be6cb4caf44bf4fbef2644e0b3deb8b1eb2ea6d018979"
   },
   {
    "path": "annotations/COMPARATOR_GATE.json",
@@ -262,13 +262,13 @@
   },
   {
    "path": "annotations/CONDITION_ANNOTATIONS_README.md",
-   "bytes": 3544,
-   "sha256": "77bda8980baa25a489e91075834c1b2777642b11c150cb197bcdbb26aab063c6"
+   "bytes": 3541,
+   "sha256": "465af6dadc0d8c77f2b3e8203256ef6568017d12c3b2a973c4e0ea3ef1976fd3"
   },
   {
    "path": "annotations/CONDITION_BUCKET_DEFINITIONS.md",
-   "bytes": 6663,
-   "sha256": "e5534b3423e31352e4d742c1afd52d2e809716323b3d287ef8275b376163a4ea"
+   "bytes": 6660,
+   "sha256": "edafcfd5ed83cedcf437fb8c542580b781c5966bfdd09cf2552da923819a7e0c"
   },
   {
    "path": "annotations/POTS_MODEL_ID_BENCHMARK.json",
@@ -277,13 +277,13 @@
   },
   {
    "path": "annotations/POTS_MODEL_ID_BENCHMARK.md",
-   "bytes": 2703,
-   "sha256": "277126df3242f1e49d46febc19edfac6e0276b32ac72cf5d5a2a5149c0d522a3"
+   "bytes": 2700,
+   "sha256": "2d48abad3f1e935e111004fb5c4d2ba6eef8bf6acb66a344fb4a8a0ff38d2abf"
   },
   {
    "path": "annotations/RETROFIT_REPORT.md",
-   "bytes": 23456,
-   "sha256": "562c9c501c373f812e5f476c80b55abbfb540e43b10372d862f0753093b1cc31"
+   "bytes": 23462,
+   "sha256": "315693885153f07100b7be2e779aaca002c05d937f17340ad9bcd0e86b6f4bef"
   },
   {
    "path": "annotations/condition_annotations.csv",
@@ -307,8 +307,8 @@
   },
   {
    "path": "code/README.md",
-   "bytes": 2969,
-   "sha256": "fc8500de03bb7d5171bcf181718931ea15fcc4ba6e24a7d27b16921370ba4974"
+   "bytes": 2960,
+   "sha256": "8db1d9ad604ced729bb0f67cafe29450add6f66b32b1bc8a47d40ec06f30f07e"
   },
   {
    "path": "code/comparator_symmetry_tests.py",
@@ -417,53 +417,53 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 3034,
-   "sha256": "da83907f2509de752d98340b56366602343af098ce8eb13a49b35db64c81423c"
+   "bytes": 3006,
+   "sha256": "69d60d1138f84c90c360f3d5ebc18ec9995e088e7a7bddeac7f479bd827c115a"
   },
   {
    "path": "deposit/github_release_notes.md",
-   "bytes": 1746,
-   "sha256": "080713522fb232ac4919aaa748d34300f10b96695caf0e423af5c1c8ea71286e"
+   "bytes": 1793,
+   "sha256": "763eee5bdda9f1e5e3e76d4fbf8a0011e3710d6bc3d7a65f4d59d72c10492d4b"
   },
   {
    "path": "deposit/osf_metadata.json",
-   "bytes": 1977,
-   "sha256": "3a71850113db60832c6fa65c2c3c00eedea696c83d59b0b1b97438a96dc19113"
+   "bytes": 2401,
+   "sha256": "a1ee5134cdae27a079351bd1cc0c063d7245287a7f46ab2e84162751ed117d11"
   },
   {
    "path": "docs/COMPARABILITY.md",
-   "bytes": 11789,
-   "sha256": "6f7498d4fb138a1fd1276cd99cbbb796283c8e41a84d14c6bc3065e3987752f8"
+   "bytes": 11702,
+   "sha256": "a2507a290b4080c36d338c5cd0767117b494f9de47e0e4e380d9f331f263eede"
   },
   {
    "path": "docs/DATA_DICTIONARY.md",
-   "bytes": 19145,
-   "sha256": "e0862d76d569f5d62cd5c683c3514dd5f9b94bc1636e7f153fff585327f914c3"
+   "bytes": 19067,
+   "sha256": "b42b8abb196588cbcbde79e415a91f45799a880ea98fb25c1cc0115112587020"
   },
   {
    "path": "docs/LIMITATIONS.md",
-   "bytes": 8353,
-   "sha256": "0dd32c82a9feb3f19b66dc3833dc5f0b231c23d365df7795f09e1de5f42b5038"
+   "bytes": 8365,
+   "sha256": "5ae634a2aab3cd5aca2ef6ff0e2e3dde4256e6904a05726191a04d3953e957c0"
   },
   {
    "path": "docs/METHODS.md",
-   "bytes": 5749,
-   "sha256": "ae2d12bd615d2dfae1dfc2624108969cc82aa26fd15e4f7e8d7bd15e32bdbd4d"
+   "bytes": 5767,
+   "sha256": "da8eacd4f5b6a6614e91098a0f0bdcad647c78bd3b7774c9a59db6985accbc35"
   },
   {
    "path": "docs/README.md",
-   "bytes": 15772,
-   "sha256": "6c605dc7ecf28b8bb8230c5298ad13206323765879c5e3fede95a59cd4fc9aa0"
+   "bytes": 16648,
+   "sha256": "22ff4374bafb30482e8be6cb4caf44bf4fbef2644e0b3deb8b1eb2ea6d018979"
   },
   {
    "path": "docs/WEBSITE_INTEGRATION.md",
-   "bytes": 3191,
-   "sha256": "95699d45574005abbbb062146aee3afe981b3cdf3f7abd0df70f24d462f58e5a"
+   "bytes": 3227,
+   "sha256": "5c2c55739a029c16ea208960263f753686d21d0c8de7f378cdf0f55299484e63"
   },
   {
    "path": "qa/comparability_report.json",
-   "bytes": 44265,
-   "sha256": "e07f0e782825b747cf7100495bb22b2dcfd31cc9e79324857934be70338cc26b"
+   "bytes": 45445,
+   "sha256": "4816e451a403ab824c4e055f3b04e8b0539fee604a156d88347c638762b8580b"
   },
   {
    "path": "qa/invariants.json",
@@ -497,8 +497,8 @@
   },
   {
    "path": "qa/tier4_provenance_audit.json",
-   "bytes": 5906,
-   "sha256": "cc42f02f3837d9ba7afb395cf7c3bafd8798866fd9c14e8845ada40b61189d78"
+   "bytes": 5732,
+   "sha256": "b5f9ade780316b7006e72fbb205eedbc7ff287dafc63ee4f9bac1d6c35151c78"
   },
   {
    "path": "qa/tier4_qa_report.json",
@@ -527,5 +527,5 @@
   }
  ],
  "n_files": 58,
- "total_bytes": 12741249
+ "total_bytes": 12744662
 }

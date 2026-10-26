@@ -1,4 +1,4 @@
-# Website integration guide — Tier 2 Part B — comorbid-condition literatures, second extraction wave
+# Website integration guide: POTS findings v1.2, package 3 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 2 of 2 (33,830 findings, 2,589 papers)
 
 What is new for the site from this package, and what breaks if you load it carelessly.
 This guide assumes the three-layer contract in `SITE_CONTRACT.md`: **Layer 1 THE RECORD**
@@ -23,7 +23,7 @@ package. Loading it retires that caveat.
 | tier-2 coverage | 81 of 145 chunks | **145 of 145** |
 | shards @ 6,000 rows | 13 | **18** |
 
-Because the two waves share **zero papers**, this is a pure append — no dedup pass, no
+Because the two waves share **zero papers**, this is a pure append, no dedup pass, no
 paper-record merge.
 
 ### Load procedure
@@ -38,12 +38,12 @@ rows 73,070 – 106,899  tier 2 part B (new)
 ```
 
 1. Append this package's rows to the Layer 1 record in that order.
-2. Regenerate Layer 2 wholesale — `site/data/*.json`, all shards, `emb/*.bin`. Bump
+2. Regenerate Layer 2 wholesale: `site/data/*.json`, all shards, `emb/*.bin`. Bump
    `meta.json` version from `combined-t1t2-1` to `combined-t1t2ab-1`.
 3. Re-embed. Existing embedding shards stay byte-valid (append-only), so only the new
    shards need computing.
 4. Run `site_tools/` verification before publishing.
-5. Update `framingBanner()` — the ~55% caveat is now false and must not survive the load.
+5. Update `framingBanner()`: the ~55% caveat is now false and must not survive the load.
 
 **Watch the facet keys.** `ti` (tier) and `sl` (source_literature) exist but are documented
 as not load-bearing. Both waves are `ti = t2`, so a tier facet will not distinguish them.
@@ -52,7 +52,7 @@ If you want the waves separable in the UI, that is a **new facet**, not a reuse 
 ## Rebuild checklist (applies to any load)
 
 - [ ] Append to Layer 1 in row order; never edit existing rows.
-- [ ] Regenerate **all** of Layer 2 — partial regeneration desynchronizes shards from facets.
+- [ ] Regenerate **all** of Layer 2, partial regeneration desynchronizes shards from facets.
 - [ ] Bump `meta.json` version; the loader keys cache on it.
 - [ ] Re-run `site_tools/` verification.
 - [ ] Re-check every hardcoded number in Layer 3 copy. Counts in prose go stale silently.

@@ -1,4 +1,4 @@
-# Methods — Tier 2 Part A — comorbid-condition literatures, first extraction wave
+# Methods: POTS findings v1.2, package 2 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 1 of 2 (36,611 findings, 3,123 papers)
 
 ## What this package is
 
@@ -37,19 +37,19 @@ blocked. That is the whole reason for the pacing constant.
 **The extraction model was asked to emit ontology identifiers directly. This was a mistake,
 and it is the central quality limitation of this package.**
 
-There is no reasoning path from an entity name to an arbitrary integer — only recall — and a
+There is no reasoning path from an entity name to an arbitrary integer (only recall) and a
 model has no introspective signal for 'do I know this integer?'. The prompt said not to
 invent identifiers, which cannot work. Measured outcome: `anaphylaxis` → *Liver abscess*,
 `IgE` → *Iguanas*.
 
 A later repair pass normalized case and namespaces on 4.8% of rows. **That pass was
-syntactic and re-derived nothing from names** — zero rows in this package carry a resolved
+syntactic and re-derived nothing from names**: zero rows in this package carry a resolved
 identifier without a model-emitted one, so no identifier here was ever independently
 derived from an entity name.
 
-Measured `id_denotes_entity_rate`: **0.708** (a lower bound — the adjudicator over-calls
-DIFFERENT by ~17%). **Measured on Tier 2 as a whole — a 270-row adjudicated sample across both
-waves — and inherited by this package. No per-wave rate was computed.** Tiers 3 and 4, which emit names only and resolve
+Measured `id_denotes_entity_rate`: **0.708** (a lower bound, the adjudicator over-calls
+DIFFERENT by ~17%). **Measured on Tier 2 as a whole, a 270-row adjudicated sample across both
+waves, and inherited by this package. No per-wave rate was computed.** Tiers 3 and 4, which emit names only and resolve
 afterwards, score 0.986 and 0.998.
 
 The sentences above describe v1.0/v1.1 and are kept as history. In v1.2 the model-emitted ids were
@@ -66,21 +66,21 @@ the id denoted a different entity and the name did not resolve). The original mo
 `ontology_id_v11_model_emitted`; on replaced rows `entity_ontology_label` / `ontology_label_final` carry the NEW id's label, fetched by id from the authority. Nothing else changed: no row was added or removed and no other column was edited.
 
 Measured on this package's full population: **68.7% of the model-emitted ids denoted their entity**; the
-rest existed but pointed at a neighbouring gene, a related compound or a sibling concept — near-miss assignment, not fabrication.
+rest existed but pointed at a neighbouring gene, a related compound or a sibling concept, near-miss assignment, not fabrication.
 The v1.1 figure quoted below was an adjudicated SAMPLE and is kept for the record. Full method and corpus-wide numbers: `annotations/POTS_MODEL_ID_BENCHMARK.md`.
 
 
 ## Quote provenance
 
 Every finding carries the verbatim source span it was drawn from. Traceability is measured by
-`code/quote_trace.py` — exact substring match, or ≥60% 8-shingle overlap after normalization.
+`code/quote_trace.py`: exact substring match, or ≥60% 8-shingle overlap after normalization.
 
 **The matcher refuses to report a rate without its negative control.** The control pairs each
 quote with a *different* paper's text; a working matcher scores ~0%. Every stratum of every
 package scored 0.0% wrong-paper false positives.
 
 This is not a formality. A traceability check once read 100% because the caller did `if tr:`
-on a truthy tuple — the wrong-paper control read 400/400 and exposed it.
+on a truthy tuple, the wrong-paper control read 400/400 and exposed it.
 
 **Superscripts are deliberately not normalized.** Normalizing `I2` against `I-squared` drops
 the census from 99.52% to 99.04%, so the raw form is retained.
@@ -96,16 +96,16 @@ re-checked with the same comparator, each stratum with its own wrong-paper contr
 Four families of check, run after every merge step, shipped in `code/tier3_invariants.py` and
 `code/tier3_invariants_ext.py` and re-runnable via `code/verify_package.py`:
 
-1. **Schema completeness** — required columns present.
-2. **Conservation** — no chunk silently absent, no chunk exceeding its paper allotment.
-3. **Monotonicity** — a pass that adds must never shrink counts.
-4. **No model-emitted identifiers** — no id-shaped string in any name field.
-5. **Identifier provenance** — every non-null identifier carries a source tag.
-6. **Enum drift** — flagged, never coerced.
-7. **Duplicates** — on the FULL row. A loose key flags legitimate distinct findings drawn from
+1. **Schema completeness**: required columns present.
+2. **Conservation**: no chunk silently absent, no chunk exceeding its paper allotment.
+3. **Monotonicity**: a pass that adds must never shrink counts.
+4. **No model-emitted identifiers**: no id-shaped string in any name field.
+5. **Identifier provenance**: every non-null identifier carries a source tag.
+6. **Enum drift**: flagged, never coerced.
+7. **Duplicates**: on the FULL row. A loose key flags legitimate distinct findings drawn from
    one summary sentence, which was a false defect reading in Tier 2.
-8. **HPO multi-value consistency** — `hpo_id_count` equals the delimiter count.
-9. **Authority/prefix agreement** — an identifier's prefix must match the authority its
+8. **HPO multi-value consistency**: `hpo_id_count` equals the delimiter count.
+9. **Authority/prefix agreement**: an identifier's prefix must match the authority its
    provenance names. Added after an audit found 49 rows claiming `authority_lookup_ols_hp`
    while holding GO/PATO/MPATH ids: the ids were right, the provenance CLAIM was wrong, and
    the eight-check suite could not see it because it only verified that a source tag exists,

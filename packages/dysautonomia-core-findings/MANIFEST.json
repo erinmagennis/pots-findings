@@ -1,7 +1,7 @@
 {
  "package": "dysautonomia-core-findings-v1.2",
  "tier": "tier1",
- "title": "Tier 1 — POTS and dysautonomia core literature",
+ "title": "POTS findings v1.2, package 1 of 5: POTS and dysautonomia core literature (36,067 findings, 3,129 papers)",
  "version": "tier1-v1.2",
  "built_utc": "2026-10-22T12:15:40Z",
  "creator": {
@@ -261,11 +261,11 @@
   ],
   "id_resolved_frac": 0.0983,
   "id_denotes_entity_rate": 0.5784,
-  "id_provenance": "model-emitted, existence-checked only",
+  "id_provenance": "model-emitted in v1.1; re-grounded in v1.2 by authority lookup of every id (see ontology_id_verification: authority_verified_retrospective / id_withheld_unverified_v1.2)",
   "quote_verifiable_rows": 6536,
   "quote_verifiable_pct": 18.12,
   "enum_drift_rows": 4,
-  "scientific_fidelity": "UNMEASURED — all QA verifies well-formedness, not correct interpretation",
+  "scientific_fidelity": "UNMEASURED: all QA verifies well-formedness, not correct interpretation",
   "id_denotes_entity_rate_basis": "measured on this package's own tier"
  },
  "partition": {
@@ -290,23 +290,23 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3326,
-   "sha256": "61f9b3b0834a38f23056720c6c7b93dc62af6181bd4ee84523818b0e0af69665"
+   "bytes": 3306,
+   "sha256": "6c92b593ecce87897221cea9002aff01f5569cd352136a28636d0efdf3becb81"
   },
   {
    "path": "CITATION.cff",
-   "bytes": 2583,
-   "sha256": "37fd3137248bb8d3485cfb0e2989be4d50cab41b15a585b44aec7bedaf65ec54"
+   "bytes": 2956,
+   "sha256": "efeac2b362641568724d5c291512750cc018128185fed9e3e834905022647f38"
   },
   {
    "path": "LICENSE",
-   "bytes": 4615,
-   "sha256": "1dad5d8241ed12b11a90d6626960ab5c4284e66a573205c24906abcbd4f85718"
+   "bytes": 4585,
+   "sha256": "cf76ed9193bed4ca854dbe2fea3da606a1283eabeb3333c81818eab677fa5b48"
   },
   {
    "path": "README.md",
-   "bytes": 21532,
-   "sha256": "d43df5d3d4b2eb4cb5e0e3b613da98d53f4fe23673b7f4d2d8910cbc414c7cbf"
+   "bytes": 22693,
+   "sha256": "5f062e102d9e54bbb8512a1d755ee0ddc07a4ff1efdbfd8fd5cf64e128fc0335"
   },
   {
    "path": "annotations/COMPARATOR_GATE.json",
@@ -315,13 +315,13 @@
   },
   {
    "path": "annotations/CONDITION_ANNOTATIONS_README.md",
-   "bytes": 3544,
-   "sha256": "77bda8980baa25a489e91075834c1b2777642b11c150cb197bcdbb26aab063c6"
+   "bytes": 3541,
+   "sha256": "465af6dadc0d8c77f2b3e8203256ef6568017d12c3b2a973c4e0ea3ef1976fd3"
   },
   {
    "path": "annotations/CONDITION_BUCKET_DEFINITIONS.md",
-   "bytes": 6663,
-   "sha256": "e5534b3423e31352e4d742c1afd52d2e809716323b3d287ef8275b376163a4ea"
+   "bytes": 6660,
+   "sha256": "edafcfd5ed83cedcf437fb8c542580b781c5966bfdd09cf2552da923819a7e0c"
   },
   {
    "path": "annotations/POTS_MODEL_ID_BENCHMARK.json",
@@ -330,13 +330,13 @@
   },
   {
    "path": "annotations/POTS_MODEL_ID_BENCHMARK.md",
-   "bytes": 2703,
-   "sha256": "277126df3242f1e49d46febc19edfac6e0276b32ac72cf5d5a2a5149c0d522a3"
+   "bytes": 2700,
+   "sha256": "2d48abad3f1e935e111004fb5c4d2ba6eef8bf6acb66a344fb4a8a0ff38d2abf"
   },
   {
    "path": "annotations/RETROFIT_REPORT.md",
-   "bytes": 23456,
-   "sha256": "562c9c501c373f812e5f476c80b55abbfb540e43b10372d862f0753093b1cc31"
+   "bytes": 23462,
+   "sha256": "315693885153f07100b7be2e779aaca002c05d937f17340ad9bcd0e86b6f4bef"
   },
   {
    "path": "annotations/condition_annotations.csv",
@@ -365,8 +365,8 @@
   },
   {
    "path": "code/README.md",
-   "bytes": 3042,
-   "sha256": "4f14289a8bcd323a65979754fa9a0fc1dded11b8e2b4ce470a427053db59e034"
+   "bytes": 3033,
+   "sha256": "5c7617779bb1b76fbb7ee7ef80a8fd16e910aadcbbdbfc458bde4014806f5fc9"
   },
   {
    "path": "code/build_report.py",
@@ -470,53 +470,53 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 2954,
-   "sha256": "019002aefca1f11582540e624ff05407315756047bf83bdca72b4fc3852db795"
+   "bytes": 3180,
+   "sha256": "37d2c9a43409a3c7ec9b914407ba22de98b7c4cfe012d6c5a39c3b5d89f3b785"
   },
   {
    "path": "deposit/github_release_notes.md",
-   "bytes": 1776,
-   "sha256": "5fbd87d12eac265f446b7b0b40aa4934d1b341c43db45f967dfceae569452a01"
+   "bytes": 1823,
+   "sha256": "af2724d45bd11b348ee72ce6afc6f702c37a138ee46053c83c6928b24d6788c7"
   },
   {
    "path": "deposit/osf_metadata.json",
-   "bytes": 1925,
-   "sha256": "ac7c0f3a27fd18eaa05b7a313cda4277c400b82c81ad75800074d532da387925"
+   "bytes": 2349,
+   "sha256": "4d8f4a3f9435dd8b79e2680c2c9633aa9b1f219cb7df26353eadb7f3a99cebb4"
   },
   {
    "path": "docs/COMPARABILITY.md",
-   "bytes": 11789,
-   "sha256": "6f7498d4fb138a1fd1276cd99cbbb796283c8e41a84d14c6bc3065e3987752f8"
+   "bytes": 11702,
+   "sha256": "a2507a290b4080c36d338c5cd0767117b494f9de47e0e4e380d9f331f263eede"
   },
   {
    "path": "docs/DATA_DICTIONARY.md",
-   "bytes": 19738,
-   "sha256": "57a468d9b17ce337fecfa4c166f55b40e4763e310d596f0245829eddf83522fa"
+   "bytes": 19639,
+   "sha256": "39e8a15e7e397e8782c3668307e9085ef03aec8bc7296b862b1015f9c6261224"
   },
   {
    "path": "docs/LIMITATIONS.md",
-   "bytes": 11652,
-   "sha256": "000902956d5873eedc60bdacf9cadeecb2d7cc32a5d60921a49f474523e1004e"
+   "bytes": 11661,
+   "sha256": "5487e9f5a976845098f7ec24acf0c5758ccf3c563e9b9bfd0a88624a55f8964f"
   },
   {
    "path": "docs/METHODS.md",
-   "bytes": 7834,
-   "sha256": "f544e37470d6f24d5146d35ced0ccb18c6b484c1403f6783232f6e9b9ca62969"
+   "bytes": 7840,
+   "sha256": "4bcddc3bdfd83e6cab00890fba48bba6d7a31c2c7d27c34c1be4c5b1fcd50839"
   },
   {
    "path": "docs/README.md",
-   "bytes": 21532,
-   "sha256": "d43df5d3d4b2eb4cb5e0e3b613da98d53f4fe23673b7f4d2d8910cbc414c7cbf"
+   "bytes": 22693,
+   "sha256": "5f062e102d9e54bbb8512a1d755ee0ddc07a4ff1efdbfd8fd5cf64e128fc0335"
   },
   {
    "path": "docs/WEBSITE_INTEGRATION.md",
-   "bytes": 3074,
-   "sha256": "b0d396e779d55993d6deda3b8b804931f4f25d09c08583eb8443d8516eda7a3f"
+   "bytes": 3122,
+   "sha256": "d9f6b98a27eeea24410ca364b80d83c4ebb9786e583765e5619ba84e7e14c1af"
   },
   {
    "path": "qa/comparability_report.json",
-   "bytes": 44265,
-   "sha256": "e07f0e782825b747cf7100495bb22b2dcfd31cc9e79324857934be70338cc26b"
+   "bytes": 45445,
+   "sha256": "4816e451a403ab824c4e055f3b04e8b0539fee604a156d88347c638762b8580b"
   },
   {
    "path": "qa/invariants.json",
@@ -555,5 +555,5 @@
   }
  ],
  "n_files": 53,
- "total_bytes": 35391140
+ "total_bytes": 35395527
 }

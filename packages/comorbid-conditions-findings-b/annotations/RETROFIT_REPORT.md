@@ -1,4 +1,4 @@
-# RETROFIT REPORT — Tier 1–3 quote source re-fetch and traceability census
+# RETROFIT REPORT, build stages 1 to 3 quote source re-fetch and traceability census
 
 Generated 2026-09-16T07:40:23Z. Comparator: `quote_trace.py sha256:0a66bf6e1087` (pinned `migraine-hypermobility-findings/code/quote_trace.py`, imported unmodified; `comparator_symmetry_tests.py` 8/8 PASS; `selftest()` no failures).
 

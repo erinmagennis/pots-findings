@@ -1,4 +1,4 @@
-# Five uploadable packages — index
+# Five uploadable packages, index
 
 Built 2026-10-22T12:15:40Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
 
@@ -8,7 +8,7 @@ from the shipped data. No package requires another download or a network connect
 
 ## The partition
 
-Five blocks of one corpus. **Zero papers are shared between any two packages** — verified by
+Five blocks of one corpus. **Zero papers are shared between any two packages**: verified by
 pmid set intersection across all ten pairs at build time.
 
 | package | findings | papers | chunks | identifiers | id correctness † | quotes verifiable | invariants |
@@ -24,20 +24,20 @@ Per-package counts sum exactly to the corpus totals.
 
 † **`id correctness` (`id_denotes_entity_rate`) is a TIER-level measurement.** It comes from
 adjudicated samples drawn per tier (t1 n=276, t2 n=270, t3 n=199, t4 n=56). Tier 2's sample
-spans both waves, so **Part A and Part B both show 0.7082 by inheritance — neither has a rate
+spans both waves, so **Part A and Part B both show 0.7082 by inheritance, neither has a rate
 of its own.** Every other figure in the table, coverage included, is measured on each
-package's own slice (Part A 15.63%, Part B 14.15%). A per-wave proxy — exact string agreement
-against the authority label — puts the waves 1.11 points apart (65.51% vs 66.62%), so they are
+package's own slice (Part A 15.63%, Part B 14.15%). A per-wave proxy, exact string agreement
+against the authority label, puts the waves 1.11 points apart (65.51% vs 66.62%), so they are
 unlikely to diverge materially, but the adjudicated rate was never split.
 
 ## Tier 2 is split into the two extraction waves
 
-- **Part A** — 81 chunks, 36,611 findings, 3,123 papers
-- **Part B** — 64 chunks, 33,830 findings, 2,589 papers
+- **Part A**: 81 chunks, 36,611 findings, 3,123 papers
+- **Part B**: 64 chunks, 33,830 findings, 2,589 papers
 
 The waves share zero papers and their chunk ids **interleave** (Part B spans 126–219), so the
 split is operational, not topical. Both cover the same nine themes, from one pipeline with one
-prompt — pool them freely.
+prompt, pool them freely.
 
 Part A is exactly the tier-2 layer currently deployed on the website: 73,070 − 36,459 =
 36,611. The site's *"~55% of tier 2"* caveat means precisely
@@ -50,7 +50,7 @@ Part A is exactly the tier-2 layer currently deployed on the website: 73,070 −
    the best. Stratify on `ontology_id_verification`.
 2. **108,549 of 148,186 rows have no shipped source text.** Only Tier 4 retained
    body text. The v1.1 retrofit re-fetched Tier 1–3 source from Europe PMC and re-checked every quote
-   (99.8% of the corpus now has a checkable source; 0/400 false positives) — against
+   (99.8% of the corpus now has a checkable source; 0/400 false positives): against
    *current* text, not the bytes the model read. The `quotes verifiable` column below is the shipped-source
    figure; the retrofit figures are additive, in each package's `annotations/`.
 3. **`ontology_id_source == 'unresolved_nulled'` has inverted meanings.** Identifier KEPT in
@@ -63,12 +63,12 @@ the eleven metrics that are not comparable.
    Use `annotations/condition_annotations.parquet`; see the root README, item 4.
 
 Each package's `annotations/` folder (v1.1) also carries the row-level quote-retrofit results for Tiers
-1–3 — verifiability 18.1% → 99.8% against re-fetched Europe PMC text — as additive tables. No `data/` row
+1–3, verifiability 18.1% → 99.8% against re-fetched Europe PMC text, as additive tables. No `data/` row
 changed between v1 and v1.1.
 
 ## Above all
 
-**Scientific fidelity is unmeasured.** Every QA check verifies well-formedness — quotes trace
+**Scientific fidelity is unmeasured.** Every QA check verifies well-formedness, quotes trace
 to source, identifiers carry provenance, invariants hold. Nothing verifies that a finding
 correctly *interprets* its source. That needs a human reader. Treat every row as a pointer to
 a paper worth reading, not as a fact.
@@ -82,14 +82,22 @@ python code/verify_package.py --self-test
 ```
 
 All five currently report 19/19 headline numbers re-derived, 6/6 planted regressions caught,
-and invariant results matching each README's declaration — including the three packages that
+and invariant results matching each README's declaration, including the three packages that
 correctly declare failures.
 
 ## Deposit sidecars
 
 Every package carries `.zenodo.json`, `deposit/osf_metadata.json` and
 `deposit/github_release_notes.md`, `deposit/ZENODO_FORM.md` (the values to paste into a manual
-Zenodo upload), plus `CITATION.cff`. **The DOI fields hold `PLACEHOLDER-DOI-<pkg>`** — reserve five Zenodo DOIs, then rebuild with `--backfill-doi` before publishing.
+Zenodo upload), plus `CITATION.cff`. Each package's DOI is filled in below and in its `CITATION.cff`, `.zenodo.json` and `deposit/` files; the four sibling references in every package carry the real DOIs.
+
+| package | DOI |
+|---|---|
+| `dysautonomia-core-findings-v1.2` | https://doi.org/10.5281/zenodo.23671720 |
+| `comorbid-conditions-findings-a-v1.2` | https://doi.org/10.5281/zenodo.23671722 |
+| `comorbid-conditions-findings-b-v1.2` | https://doi.org/10.5281/zenodo.23671724 |
+| `postviral-autism-findings-v1.2` | https://doi.org/10.5281/zenodo.23671726 |
+| `migraine-hypermobility-findings-v1.2` | https://doi.org/10.5281/zenodo.23671728 |
 
 ## Website
 

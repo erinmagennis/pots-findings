@@ -1,4 +1,6 @@
-# Tier 3 — long COVID, post-viral and autism intersections — `postviral-autism-findings-v1.2`
+# POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)
+
+Package `postviral-autism-findings-v1.2`
 
 **26,032 findings · 1,587 papers · 35 chunks · 2020–2026**
 
@@ -28,17 +30,17 @@ non-zero if any disagrees. It also re-plants six regressions to prove the checke
 
 ## Read first
 
-- `docs/README.md` — start here
-- `docs/COMPARABILITY.md` — what you may pool with the sibling packages, and the three traps
-- `docs/LIMITATIONS.md` — what is not known, not measured, and known wrong
+- `docs/README.md`: start here
+- `docs/COMPARABILITY.md`: what you may pool with the sibling packages, and the three traps
+- `docs/LIMITATIONS.md`: what is not known, not measured, and known wrong
 
 ## Caveats that change conclusions
 
 - **Scientific fidelity is unmeasured.** QA verifies well-formedness, not correct
   interpretation. Every row is a pointer to a paper you should read.
-- **87.78% of quotes cannot be re-checked** — body text was discarded after extraction.
+- **87.78% of quotes cannot be re-checked**: body text was discarded after extraction.
 - **Absence of a finding is not evidence of absence.** Yield depends ~3× on full-text
   availability.
 
-Data CC BY 4.0. `provenance_quote` holds verbatim source excerpts and is not CC BY — see
+Data CC BY 4.0. `provenance_quote` holds verbatim source excerpts and is not CC BY, see
 `LICENSE`. **Not medical advice.**

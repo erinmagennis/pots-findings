@@ -1,4 +1,4 @@
-# code/ — pinned build and verification code for this package
+# code/, pinned build and verification code for this package
 
 Every file here is byte-identical to what produced or verified the shipped data. Files are named for
 the tier whose build **introduced** them, so a Tier-1 package legitimately carries `tier3_invariants.py`:
@@ -13,7 +13,7 @@ identical across all five packages (sha256-verified at build).
 | `driver_tier3_parts.py` | Part-aware chunk driver for Tier 3. |
 | `extraction_pipeline_v6.py` | Schema-v6 pipeline (Tier 3): names only, identifiers resolved afterwards. |
 | `multi_authority_resolver.py` | Name → identifier resolution against real authorities (HGNC, OLS4/HPO/MONDO, MeSH, QuickGO); records authority and match mode. Exact-label only. |
-| `normalizer_tests.py` | Unit tests for the source-text normalizer — one case per bug that once produced a false quality number. |
+| `normalizer_tests.py` | Unit tests for the source-text normalizer, one case per bug that once produced a false quality number. |
 | `quote_trace.py` | Quote traceability matcher (`normalize`, `quote_traceability`) with its MANDATORY wrong-paper negative control. Read element [1] of the tuple. |
 | `resolution_cache.py` | Persistent cache for resolver look-ups so re-runs make zero API calls. |
 | `retrofit_census.py` | 2026-09-16 retrofit census: re-checks every quote against re-fetched source with the pinned comparator and wrong-paper control; emits annotations/quote_retrofit_<pkg>.parquet. |
@@ -27,7 +27,7 @@ identical across all five packages (sha256-verified at build).
 
 Run order for a reader: `python verify_package.py --self-test` (re-derives every documented number and
 plants six regressions), then `python normalizer_tests.py` and `python comparator_symmetry_tests.py` (the
-quote matcher's unit tests — one case per historical bug). Nothing here needs the network except the
+quote matcher's unit tests, one case per historical bug). Nothing here needs the network except the
 extraction pipeline and the retrofit fetcher, which are shipped as the record of what ran, not as tools
 you are expected to re-run.
 

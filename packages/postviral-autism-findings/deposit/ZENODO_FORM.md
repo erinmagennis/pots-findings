@@ -1,4 +1,4 @@
-# Zenodo upload form — Tier 3 — long COVID, post-viral and autism intersections — machine-extracted structured findings (26,032 findings, 1,587 papers)
+# Zenodo upload form: POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)
 
 Manual uploads do not read `.zenodo.json`; paste these values into the form. Upload the package
 tarball `postviral-autism-findings-v1.2.tar.gz` as the single file. Do not publish until every value below is in.
@@ -6,15 +6,15 @@ tarball `postviral-autism-findings-v1.2.tar.gz` as the single file. Do not publi
 | form field | value |
 |---|---|
 | Resource type | Dataset |
-| Title | Tier 3 — long COVID, post-viral and autism intersections — machine-extracted structured findings (26,032 findings, 1,587 papers) |
+| Title | POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers) |
 | Publication date | the day you click Publish (must equal `date-released` in CITATION.cff: 2026-10-22) |
-| Creators | Magennis, Erin — ORCID 0009-0007-9013-8052 |
+| Creators | Magennis, Erin (ORCID 0009-0007-9013-8052) |
 | Description | see block below |
 | License | Creative Commons Attribution 4.0 International (CC-BY-4.0) |
 | Version | tier3-v1.2 |
 | Keywords | POTS, postural orthostatic tachycardia syndrome, dysautonomia, ME/CFS, myalgic encephalomyelitis, chronic fatigue syndrome, Ehlers-Danlos syndrome, hypermobility, fibromyalgia, mast cell activation syndrome, long COVID, post-viral syndrome, small fiber neuropathy, autism, migraine, text mining, literature extraction, biomarkers, structured findings, text and data mining, large language model extraction |
 | Related identifiers | 10.5281/zenodo.23671720 (references); 10.5281/zenodo.23671722 (references); 10.5281/zenodo.23671724 (references); 10.5281/zenodo.23671728 (references) |
-| Related identifiers (add) | https://github.com/erinmagennis/pots-findings — isSupplementTo, Software |
+| Related identifiers (add) | https://github.com/erinmagennis/pots-findings, relation isSupplementTo, type Software |
 
 ## Description (paste as-is)
 

@@ -1,7 +1,7 @@
 {
  "defect": "id_provenance verified EXISTENCE of a source tag, not AGREEMENT between the tag's named authority and the id prefix it labels.",
  "corpus": {
-  "path": "/Users/erinmagennis/.claude-science/orgs/6a5d2770-cc82-4fa8-9368-765078a83010/artifacts/proj_2fb6e51be987/4c7449b4-6253-4fe7-a29d-4268ef016625/v65d77afd_tier3_findings_grounded_v3.parquet",
+  "path": "tier3_findings_grounded_v3.parquet (artifact 4c7449b4-6253-4fe7-a29d-4268ef016625, version 65d77afd)",
   "rows": 26032,
   "cols": 73
  },
@@ -136,7 +136,7 @@
   "offenders_in_ontology_id_source": 0
  },
  "cache_upgrade": {
-  "source": "/Users/erinmagennis/.claude-science/orgs/6a5d2770-cc82-4fa8-9368-765078a83010/artifacts/proj_2fb6e51be987/e6a394f8-8459-43f0-b478-fb696bfb60dd/v2900ff37_resolution_cache.parquet",
+  "source": "resolution_cache.parquet (artifact e6a394f8-8459-43f0-b478-fb696bfb60dd, version 2900ff37)",
   "pairs_in": 8216,
   "pairs_out": 8216,
   "pairs_preserved": true,
