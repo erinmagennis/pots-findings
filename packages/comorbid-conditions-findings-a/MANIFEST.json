@@ -1,7 +1,7 @@
 {
  "package": "comorbid-conditions-findings-a-v1.2",
  "tier": "tier2a",
- "title": "Tier 2 Part A \u2014 comorbid-condition literatures, first extraction wave",
+ "title": "Tier 2 Part A — comorbid-condition literatures, first extraction wave",
  "version": "tier2a-v1.2",
  "built_utc": "2026-10-22T12:15:40Z",
  "creator": {
@@ -268,8 +268,8 @@
   "quote_verifiable_rows": 7713,
   "quote_verifiable_pct": 21.07,
   "enum_drift_rows": 20,
-  "scientific_fidelity": "UNMEASURED \u2014 all QA verifies well-formedness, not correct interpretation",
-  "id_denotes_entity_rate_basis": "INHERITED from Tier 2 as a whole \u2014 the 270-row adjudicated sample spans both waves; no per-wave rate exists"
+  "scientific_fidelity": "UNMEASURED — all QA verifies well-formedness, not correct interpretation",
+  "id_denotes_entity_rate_basis": "INHERITED from Tier 2 as a whole — the 270-row adjudicated sample spans both waves; no per-wave rate exists"
  },
  "partition": {
   "siblings": [
@@ -293,13 +293,13 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3155,
-   "sha256": "11f7639712ed6cc6ed4a3a16679421797efc06119b7ead5ee89de935a93935a2"
+   "bytes": 3416,
+   "sha256": "ab2ceca68d48ff4cdceb7b1c848d69b04199b3b3089931fbe749ba855a41a7b1"
   },
   {
    "path": "CITATION.cff",
-   "bytes": 2679,
-   "sha256": "abf1dea1f86a3735be5d6414e74111ca4c89940f15fb17d1eb1290647c439c63"
+   "bytes": 2650,
+   "sha256": "71943fb2c7e3181ed52fd939f85be652558bccbce583ecfe3c06fca4fe93334a"
   },
   {
    "path": "LICENSE",
@@ -478,8 +478,8 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 3064,
-   "sha256": "52d146e136f3742680ca467da9855a74db45d188ea2fcbf2d6fc5c9eb71e1f33"
+   "bytes": 3071,
+   "sha256": "2b402bdfddf9a504b707abab561e14e64e47c904b8bf1a06d747e7984703e02c"
   },
   {
    "path": "deposit/github_release_notes.md",
@@ -573,5 +573,5 @@
   }
  ],
  "n_files": 56,
- "total_bytes": 24694848
+ "total_bytes": 24695087
 }

@@ -41,30 +41,34 @@ keywords:
   - "large language model extraction"
 identifiers:
   - type: doi
-    value: "PLACEHOLDER-DOI-tier4"
-    description: "Replace with the DOI minted on deposit."
+    value: "10.5281/zenodo.23671728"
+    description: "Zenodo record of this package"
 references:
   - type: dataset
     title: "Tier 1 — POTS and dysautonomia core literature"
+    doi: "10.5281/zenodo.23671720"
     authors:
       - family-names: "Magennis"
         given-names: "Erin"
-    notes: "Sibling package 1 of 5. Replace notes with its DOI once minted."
+    notes: "Sibling package 1 of 5."
   - type: dataset
     title: "Tier 2 Part A — comorbid-condition literatures, first extraction wave"
+    doi: "10.5281/zenodo.23671722"
     authors:
       - family-names: "Magennis"
         given-names: "Erin"
-    notes: "Sibling package 2 of 5. Replace notes with its DOI once minted."
+    notes: "Sibling package 2 of 5."
   - type: dataset
     title: "Tier 2 Part B — comorbid-condition literatures, second extraction wave"
+    doi: "10.5281/zenodo.23671724"
     authors:
       - family-names: "Magennis"
         given-names: "Erin"
-    notes: "Sibling package 3 of 5. Replace notes with its DOI once minted."
+    notes: "Sibling package 3 of 5."
   - type: dataset
     title: "Tier 3 — long COVID, post-viral and autism intersections"
+    doi: "10.5281/zenodo.23671726"
     authors:
       - family-names: "Magennis"
         given-names: "Erin"
-    notes: "Sibling package 4 of 5. Replace notes with its DOI once minted."
+    notes: "Sibling package 4 of 5."

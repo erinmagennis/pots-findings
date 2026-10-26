@@ -6,6 +6,7 @@
 - Documentation regenerated from measured per-package counts; v1.1 text kept as history. Benchmark: `packages/*/annotations/POTS_MODEL_ID_BENCHMARK.md`.
 - No change to any finding, quote, direction, condition label or paper. Tier 3–4 data identical to v1.1.
 - Verification status note added to the site About page.
+- 2026-10-26: Zenodo DOIs written into each package (`CITATION.cff`, `.zenodo.json`, `deposit/ZENODO_FORM.md`): dysautonomia-core 10.5281/zenodo.23671720, comorbid-a 10.5281/zenodo.23671722, comorbid-b 10.5281/zenodo.23671724, postviral-autism 10.5281/zenodo.23671726, migraine-hypermobility 10.5281/zenodo.23671728. The `.zenodo.json` identifier paragraph for Tiers 1–2 updated to the v1.2 numbers (it still described v1.1). `CHECKSUMS.sha256` and `MANIFEST.json` refreshed for those files only; data unchanged; all five verifiers PASS. Tarball checksums: `releases/v1.2/TARBALL_CHECKSUMS_WITH_DOI.sha256`.
 
 ## v1.1: 2026-09-23 (packages)
 - Five harmonised packages covering Tiers 1–4 (148,186 findings / 11,519 papers); condition-bucket annotations and quote retrofit census shipped as additive tables.

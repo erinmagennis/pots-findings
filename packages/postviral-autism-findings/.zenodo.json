@@ -37,25 +37,25 @@
  "version": "tier3-v1.2",
  "related_identifiers": [
   {
-   "identifier": "PLACEHOLDER-DOI-tier1",
+   "identifier": "10.5281/zenodo.23671720",
    "relation": "references",
    "resource_type": "dataset",
    "scheme": "doi"
   },
   {
-   "identifier": "PLACEHOLDER-DOI-tier2a",
+   "identifier": "10.5281/zenodo.23671722",
    "relation": "references",
    "resource_type": "dataset",
    "scheme": "doi"
   },
   {
-   "identifier": "PLACEHOLDER-DOI-tier2b",
+   "identifier": "10.5281/zenodo.23671724",
    "relation": "references",
    "resource_type": "dataset",
    "scheme": "doi"
   },
   {
-   "identifier": "PLACEHOLDER-DOI-tier4",
+   "identifier": "10.5281/zenodo.23671728",
    "relation": "references",
    "resource_type": "dataset",
    "scheme": "doi"

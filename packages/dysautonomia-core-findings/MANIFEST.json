@@ -1,7 +1,7 @@
 {
  "package": "dysautonomia-core-findings-v1.2",
  "tier": "tier1",
- "title": "Tier 1 \u2014 POTS and dysautonomia core literature",
+ "title": "Tier 1 — POTS and dysautonomia core literature",
  "version": "tier1-v1.2",
  "built_utc": "2026-10-22T12:15:40Z",
  "creator": {
@@ -265,7 +265,7 @@
   "quote_verifiable_rows": 6536,
   "quote_verifiable_pct": 18.12,
   "enum_drift_rows": 4,
-  "scientific_fidelity": "UNMEASURED \u2014 all QA verifies well-formedness, not correct interpretation",
+  "scientific_fidelity": "UNMEASURED — all QA verifies well-formedness, not correct interpretation",
   "id_denotes_entity_rate_basis": "measured on this package's own tier"
  },
  "partition": {
@@ -290,13 +290,13 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3066,
-   "sha256": "70bd8fde8022167636dea376b83e4306cad2887d7b97944945c21f6087c829ff"
+   "bytes": 3326,
+   "sha256": "61f9b3b0834a38f23056720c6c7b93dc62af6181bd4ee84523818b0e0af69665"
   },
   {
    "path": "CITATION.cff",
-   "bytes": 2611,
-   "sha256": "7c143ab7cb4af9d82093313ff2c22e70cd2048b051f6426919c02a806679c09e"
+   "bytes": 2583,
+   "sha256": "37fd3137248bb8d3485cfb0e2989be4d50cab41b15a585b44aec7bedaf65ec54"
   },
   {
    "path": "LICENSE",
@@ -470,8 +470,8 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 2948,
-   "sha256": "96f20e933edbbc23da0aafa769ad7ca283bdb8ae57af8d3d34466bee2dabf5ba"
+   "bytes": 2954,
+   "sha256": "019002aefca1f11582540e624ff05407315756047bf83bdca72b4fc3852db795"
   },
   {
    "path": "deposit/github_release_notes.md",
@@ -555,5 +555,5 @@
   }
  ],
  "n_files": 53,
- "total_bytes": 35390902
+ "total_bytes": 35391140
 }

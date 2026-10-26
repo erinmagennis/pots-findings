@@ -13,7 +13,7 @@ tarball `dysautonomia-core-findings-v1.2.tar.gz` as the single file. Do not publ
 | License | Creative Commons Attribution 4.0 International (CC-BY-4.0) |
 | Version | tier1-v1.2 |
 | Keywords | POTS, postural orthostatic tachycardia syndrome, dysautonomia, ME/CFS, myalgic encephalomyelitis, chronic fatigue syndrome, Ehlers-Danlos syndrome, hypermobility, fibromyalgia, mast cell activation syndrome, long COVID, post-viral syndrome, small fiber neuropathy, autism, migraine, text mining, literature extraction, biomarkers, structured findings, text and data mining, large language model extraction |
-| Related identifiers | PLACEHOLDER-DOI-tier2a (references); PLACEHOLDER-DOI-tier2b (references); PLACEHOLDER-DOI-tier3 (references); PLACEHOLDER-DOI-tier4 (references) |
+| Related identifiers | 10.5281/zenodo.23671722 (references); 10.5281/zenodo.23671724 (references); 10.5281/zenodo.23671726 (references); 10.5281/zenodo.23671728 (references) |
 | Related identifiers (add) | https://github.com/erinmagennis/pots-findings — isSupplementTo, Software |
 
 ## Description (paste as-is)

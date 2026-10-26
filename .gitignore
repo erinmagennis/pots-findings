@@ -9,3 +9,4 @@ _intake/
 _release/
 site_combined/
 site_data_tier1_backup/
+releases/*/tarballs/

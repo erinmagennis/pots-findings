@@ -1,7 +1,7 @@
 {
  "package": "migraine-hypermobility-findings-v1.2",
  "tier": "tier4",
- "title": "Tier 4 \u2014 migraine, hypermobility spectrum, Sj\u00f6gren's, PANS/PANDAS",
+ "title": "Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS",
  "version": "tier4-v1.2",
  "built_utc": "2026-10-22T12:15:40Z",
  "creator": {
@@ -212,7 +212,7 @@
   "quote_verifiable_rows": 15646,
   "quote_verifiable_pct": 100.0,
   "enum_drift_rows": 8,
-  "scientific_fidelity": "UNMEASURED \u2014 all QA verifies well-formedness, not correct interpretation",
+  "scientific_fidelity": "UNMEASURED — all QA verifies well-formedness, not correct interpretation",
   "id_denotes_entity_rate_basis": "measured on this package's own tier"
  },
  "partition": {
@@ -237,13 +237,13 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3121,
-   "sha256": "a21278d54e9e24972797538f1442d905e2f38c5256b42cfc1ddd5aec27f06e40"
+   "bytes": 3127,
+   "sha256": "7fbc77434e1ab6a8264e8a1540d15992068a08b4e060d222f2a0c4a9edd62c71"
   },
   {
    "path": "CITATION.cff",
-   "bytes": 2643,
-   "sha256": "84479e535ef70db5ac209e7b8b5551e698021d6791f169b7a46fc7829d5ab482"
+   "bytes": 2615,
+   "sha256": "54442aae6de0613805d1694cb8837fd125d346d54cc83ecfb7799eafbb762d5f"
   },
   {
    "path": "LICENSE",
@@ -417,8 +417,8 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 3028,
-   "sha256": "bda60eef430ad9c7f087d0447c4d715446b2c315e1c449bfaf92d3b38ae6fc26"
+   "bytes": 3034,
+   "sha256": "da83907f2509de752d98340b56366602343af098ce8eb13a49b35db64c81423c"
   },
   {
    "path": "deposit/github_release_notes.md",
@@ -527,5 +527,5 @@
   }
  ],
  "n_files": 58,
- "total_bytes": 12741265
+ "total_bytes": 12741249
 }

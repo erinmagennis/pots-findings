@@ -1,7 +1,7 @@
 {
  "package": "postviral-autism-findings-v1.2",
  "tier": "tier3",
- "title": "Tier 3 \u2014 long COVID, post-viral and autism intersections",
+ "title": "Tier 3 — long COVID, post-viral and autism intersections",
  "version": "tier3-v1.2",
  "built_utc": "2026-10-22T12:15:40Z",
  "creator": {
@@ -214,7 +214,7 @@
   "quote_verifiable_rows": 3182,
   "quote_verifiable_pct": 12.22,
   "enum_drift_rows": 19,
-  "scientific_fidelity": "UNMEASURED \u2014 all QA verifies well-formedness, not correct interpretation",
+  "scientific_fidelity": "UNMEASURED — all QA verifies well-formedness, not correct interpretation",
   "id_denotes_entity_rate_basis": "measured on this package's own tier"
  },
  "partition": {
@@ -239,13 +239,13 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3079,
-   "sha256": "93e70dec34080504836e5f9f19072a05c3311b8ec691ffc8ff057657d85cb512"
+   "bytes": 3085,
+   "sha256": "d50f2dea81d1bbaec6f51b8758011a33d555bb4486f0678912dd487718798cf8"
   },
   {
    "path": "CITATION.cff",
-   "bytes": 2611,
-   "sha256": "0935c4f6b0f0834a1f3ca5ec87a6b078e4de76d260311df44bd2751642305384"
+   "bytes": 2583,
+   "sha256": "beb0e734e8a31944345f27a9b90cbcb9e94fa062daeb9369812501e86e5ee4e3"
   },
   {
    "path": "LICENSE",
@@ -424,8 +424,8 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 2970,
-   "sha256": "470abba0208d5d63fa589372e910208308ed81884a869413c299fe2f42c81b9d"
+   "bytes": 2976,
+   "sha256": "033169e734aa69b618741b67fe897d8f3d8f63f5a506e1c0f06feff373417f9e"
   },
   {
    "path": "deposit/github_release_notes.md",
@@ -539,5 +539,5 @@
   }
  ],
  "n_files": 60,
- "total_bytes": 18446791
+ "total_bytes": 18446775
 }
