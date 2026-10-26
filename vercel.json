@@ -4,5 +4,8 @@
   "buildCommand": null,
   "installCommand": null,
   "framework": null,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/charts", "destination": "/builder", "permanent": false }
+  ]
 }

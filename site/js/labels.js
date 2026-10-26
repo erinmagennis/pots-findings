@@ -9,5 +9,15 @@ export const CONDITION_LABELS = {
 };
 export const condLabel = c => (c == null ? '' : (CONDITION_LABELS[c] || String(c).replace(/_/g, ' ')));
 
+// source literature names (the stream that brought a paper into the corpus), shown instead of the stored key
+export const SOURCE_LABELS = {
+  long_COVID: 'Long COVID', autism: 'Autism', post_viral: 'Post-viral illness', migraine: 'Migraine',
+  sjogrens: 'Sjogren\'s', EDS_hypermobility: 'EDS and hypermobility', pans_pandas: 'PANS and PANDAS'
+};
+export const srcLabel = s => (s == null ? '' : (SOURCE_LABELS[s] || condLabel(s)));
+// source coverage text for a list of stored source names
+export const sourceList = (list, max = 5) => !list.length ? 'Source literature not recorded'
+  : `${list.length} source literature${list.length === 1 ? '' : 's'}: ${list.slice(0, max).map(srcLabel).join(', ')}${list.length > max ? ` +${list.length - max} more` : ''}`;
+
 // condition labels with fewer findings than this are listed separately and kept off cards, charts and the home map
 export const MINOR_LABEL_MAX = 10;

@@ -215,3 +215,5 @@ header.site,header.topbar{view-transition-name:site-header}
 @supports (view-transition-name:none){body{animation:none}}
 @media(prefers-reduced-motion:reduce){@view-transition{navigation:none}}
 main{min-height:calc(100vh - 72px)}
+
+.preset-section{margin:0 0 18px}.preset-row{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}.preset-pill{border-radius:999px;font-size:12.5px;padding:6px 12px}.preset-pill[aria-pressed=true]{background:var(--rust-soft);border-color:var(--rust);color:var(--rust)}.preset-section .kv{margin:4px 0 0;min-height:1em}

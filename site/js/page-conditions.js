@@ -1,4 +1,4 @@
-import { condLabel, MINOR_LABEL_MAX } from './labels.js';
+import { condLabel, sourceList, MINOR_LABEL_MAX } from './labels.js';
 import { loadMeta, loadFacets, loadPapers, state, applyFilters, paperCount, fmt, esc, val } from './data.js';
 import { mount } from './ui.js';
 
@@ -23,8 +23,7 @@ document.getElementById('tbl').querySelector('thead').innerHTML=
 const rowHtml = s=>`<tr>
   <td><a href="condition?c=${encodeURIComponent(s.c)}"><b>${esc(condLabel(s.c))}</b></a></td>
   <td class="num">${fmt(s.n)}</td><td class="num">${fmt(s.papers)}</td>
-  <td><span class="kv">${s.literatures.length} source literature${s.literatures.length===1?'':'s'}:
-      ${s.literatures.slice(0,5).map(esc).join(', ')}${s.literatures.length>5?` +${s.literatures.length-5} more`:''}</span></td>
+  <td><span class="kv">${esc(sourceList(s.literatures))}</span></td>
   </tr>`;
 document.getElementById('tbl').querySelector('tbody').innerHTML = main.map(rowHtml).join('');
 if(minor.length){
@@ -39,5 +38,5 @@ new Chart(document.getElementById('cChart'),{
   type:'bar',
   data:{labels:main.map(s=>condLabel(s.c)),datasets:[{label:'findings',data:main.map(s=>s.n),backgroundColor:'#9a5638'}]},
   options:{plugins:{legend:{display:false},tooltip:{callbacks:{
-    afterLabel:i=>`${main[i.dataIndex].papers} distinct papers across ${main[i.dataIndex].literatures.length} source literatures`}}},
+    afterLabel:i=>`${main[i.dataIndex].papers} distinct papers; ${main[i.dataIndex].literatures.length} source literatures`}}},
     scales:{y:{beginAtZero:true}}, maintainAspectRatio:false}});

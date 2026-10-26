@@ -1,4 +1,4 @@
-import { condLabel } from './labels.js';
+import { condLabel, srcLabel } from './labels.js';
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, fmt, esc, val,
          FILTER_FIELDS } from './data.js';
 import { mount, selectOpts, entityCoverageNote } from './ui.js';
@@ -20,7 +20,7 @@ document.getElementById('series').innerHTML='<option value="">None</option>'+
 
 document.getElementById('bfilters').innerHTML=FILTER_FIELDS.map(k=>{
   const vals=[...F.dicts[k]].sort((a,b)=>String(a).localeCompare(String(b)));
-  return `<div><label>${DIM[k]||k}</label><select data-f="${k}">${selectOpts(vals,'','Any',k==='c'?condLabel:undefined)}</select></div>`;
+  return `<div><label>${DIM[k]||k}</label><select data-f="${k}">${selectOpts(vals,'','Any',k==='c'?condLabel:k==='sl'?srcLabel:undefined)}</select></div>`;
 }).join('');
 document.getElementById('covnote').innerHTML=
   `<div id="cn"></div>`;
@@ -34,6 +34,8 @@ function opts(){
   o.y0=document.getElementById('y0').value; o.y1=document.getElementById('y1').value;
   return o;
 }
+// display name for a stored category value (condition and source-literature keys never show raw)
+const lab=(field,v)=> field==='c'?condLabel(v) : field==='sl'?srcLabel(v) : String(v);
 const getDim=(field,row)=> field==='y' ? (F.cols.y[row]||null) : val(field,row);
 
 let chart=null, LAST=null;
@@ -68,7 +70,7 @@ function draw(){
 const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a58d','#6d6a63'];
   const grandTotal=cats.reduce((a,c)=>a+total(c),0);
   const datasets=seriesKeys.map((s,i)=>({
-    label: sf? String(s):'value',
+    label: sf? lab(sf,s):'value',
     data: cats.map(c=>{ const cell=G.get(c).get(s); if(!cell) return 0;
       const v=metric(cell); return ym==='pct'? +(100*v/(grandTotal||1)).toFixed(2) : v; }),
     backgroundColor: ct==='doughnut'? PALETTE : PALETTE[i%PALETTE.length],
@@ -78,7 +80,7 @@ const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a
   if(chart) chart.destroy();
   const type = ct==='stackedBar'||ct==='horizontalBar'?'bar':ct;
   chart=new Chart(document.getElementById('cv'),{
-    type, data:{labels:cats.map(String),datasets},
+    type, data:{labels:cats.map(c=>lab(xf,c)),datasets},
     options:{maintainAspectRatio:false, indexAxis: ct==='horizontalBar'?'y':'x',
       plugins:{legend:{display: !!sf || ct==='doughnut'}},
       scales: ct==='doughnut'? {} : {
@@ -98,11 +100,11 @@ const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a
     ? entityCoverageNote('this chart') : '';
 
   // table + CSV payload
-  const cols=[DIM[xf], ...(sf?seriesKeys.map(String):[ylab]), 'total'];
+  const cols=[DIM[xf], ...(sf?seriesKeys.map(s=>lab(sf,s)):[ylab]), 'total'];
   const trows=cats.map(c=>{
     const vals=seriesKeys.map(s=>{ const cell=G.get(c).get(s); if(!cell) return 0;
       const v=metric(cell); return ym==='pct'? +(100*v/(grandTotal||1)).toFixed(2):v; });
-    return [c,...vals, vals.reduce((a,b)=>a+b,0)];
+    return [lab(xf,c),...vals, vals.reduce((a,b)=>a+b,0)];
   });
   document.querySelector('#dtbl thead').innerHTML='<tr>'+cols.map(c=>`<th>${esc(c)}</th>`).join('')+'</tr>';
   document.querySelector('#dtbl tbody').innerHTML=trows.map(r=>'<tr>'+r.map((v,i)=>
@@ -110,9 +112,39 @@ const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a
   LAST={cols,rows:trows,meta:{x:DIM[xf],series:sf?DIM[sf]:'',metric:ylab,filters:JSON.stringify(opts())}};
 }
 
+/* Presets: each one sets the builder's own controls, then redraws. Counts shown come from meta.json only. */
+const topEntity=[...state.entities].sort((a,b)=>b.np_-a.np_)[0]?.name||'';
+const PRESETS=[
+  {id:'cond',label:'Findings by condition',x:'c',y:'findings',type:'bar',topn:60,sort:'value',
+    note:'Condition labels can occur across several source literatures. Use the source literature filter when you need to know where a finding came from.'},
+  {id:'tier',label:'Evidence tiers',x:'tr',y:'findings',type:'horizontalBar',topn:20,sort:'value',
+    note:'Review and expert opinion plus case reports together outnumber RCTs and meta-analyses by a wide margin. Weigh findings with that in mind.'},
+  {id:'ents',label:'Top 20 entities',x:'e',y:'papers',type:'horizontalBar',topn:20,sort:'value',
+    note:'Paper counts use canonical_pmid and include split-derived rows.'},
+  {id:'dir',label:'Direction split for one entity',x:'d',y:'findings',type:'doughnut',topn:15,sort:'value',filters:{e:topEntity},openFilters:true,
+    note:'Showing the most-studied entity. Change the Canonical entity filter to pick another.'},
+  {id:'year',label:'Findings over time',x:'y',y:'findings',type:'line',topn:60,sort:'natural',
+    note:`Year is the source paper's publication year, and ${state.meta.counts.year_max} is a partial year. The shape reflects both real publication growth and what the search retrieved.`}
+];
+const presetRow=document.getElementById('presetRow'), presetNote=document.getElementById('presetNote');
+presetRow.innerHTML=PRESETS.map(p=>`<button type="button" class="preset-pill" data-preset="${p.id}" aria-pressed="false">${esc(p.label)}</button>`).join('');
+function clearPreset(){ presetRow.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed','false')); presetNote.textContent=''; }
+function applyPreset(p){
+  const set=(id,v)=>{ document.getElementById(id).value=v; };
+  set('ctype',p.type); set('xaxis',p.x); set('ymetric',p.y); set('series',p.series||''); set('topn',p.topn); set('sortby',p.sort);
+  document.querySelectorAll('#bfilters select[data-f]').forEach(s=>{ s.value=(p.filters&&p.filters[s.dataset.f])||''; });
+  ['fQuant','fNull','fSplit'].forEach(id=>{ document.getElementById(id).checked=false; });
+  set('y0',''); set('y1','');
+  if(p.openFilters) document.querySelector('.analyze-filter-section').open=true;
+  draw();
+  presetRow.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.preset===p.id)));
+  presetNote.textContent=p.note;
+}
+presetRow.addEventListener('click',e=>{ const b=e.target.closest('button[data-preset]'); if(b) applyPreset(PRESETS.find(p=>p.id===b.dataset.preset)); });
+
 document.getElementById('draw').onclick=draw;
-document.querySelectorAll('#ctype,#xaxis,#ymetric,#series,#topn,#sortby').forEach(e=>e.onchange=draw);
-document.querySelectorAll('#bfilters select,#fQuant,#fNull,#fSplit,#y0,#y1').forEach(e=>e.addEventListener('change',draw));
+document.querySelectorAll('#ctype,#xaxis,#ymetric,#series,#topn,#sortby').forEach(e=>e.onchange=()=>{ clearPreset(); draw(); });
+document.querySelectorAll('#bfilters select,#fQuant,#fNull,#fSplit,#y0,#y1').forEach(e=>e.addEventListener('change',()=>{ clearPreset(); draw(); }));
 
 document.getElementById('png').onclick=()=>{
   const cv=document.getElementById('cv');

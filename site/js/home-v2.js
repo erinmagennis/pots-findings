@@ -10,7 +10,7 @@ function graphData(rows, conditionRows = {}) {
     .filter(condition => !['POTS', 'general', 'multiple'].includes(condition) && !((conditionRows[condition] ?? MINOR_LABEL_MAX) < MINOR_LABEL_MAX))
     .forEach(condition => {
       const key = normalize(condition);
-      const current = conditionCounts.get(key) || { label: condLabel(condition), count: 0 };
+      const current = conditionCounts.get(key) || { label: condLabel(condition), raw: condition, count: 0 };
       current.count += Number(row.n_papers_both || 0);
       conditionCounts.set(key, current);
     }));
@@ -26,7 +26,7 @@ function graphData(rows, conditionRows = {}) {
       const key = normalize(label);
       if (!key || reserved.has(key)) return;
       const current = evidenceByKey.get(key);
-      const candidate = { label, count: Number(row.n_papers_both || 0), condition: condition ? normalize(condition) : null };
+      const candidate = { label, raw: entity, count: Number(row.n_papers_both || 0), condition: condition ? normalize(condition) : null };
       if (!current || candidate.count > current.count) evidenceByKey.set(key, candidate);
     });
   });
@@ -62,7 +62,7 @@ function renderGraph(data) {
     visibleConditions.forEach(([key, item], index) => {
       const angle = -Math.PI * .86 + (index / Math.max(1, visibleConditions.length - 1)) * Math.PI * 1.72;
       const position = avoidBox(clamp(center.x + Math.cos(angle) * innerRadius, boundary, width - boundary), clamp(center.y + Math.sin(angle) * innerRadius, boundary, height - boundary));
-      const node = { id: `condition:${key}`, label: item.label, kind: 'condition', count: item.count, x: position.x, y: position.y };
+      const node = { id: `condition:${key}`, label: item.label, kind: 'condition', raw: item.raw, count: item.count, x: position.x, y: position.y };
       nodes.push(node); links.push({ source: 'POTS', target: node.id });
     });
     visibleEvidence.forEach(([key, item], index) => {
@@ -71,7 +71,7 @@ function renderGraph(data) {
       const conditionId = item.condition ? `condition:${item.condition}` : null;
       if (!conditionId) return;
       const position = avoidBox(clamp(center.x + Math.cos(angle) * outerRadius, boundary, width - boundary), clamp(center.y + Math.sin(angle) * outerRadius + offset, boundary, height - boundary));
-      const node = { id: `evidence:${key}`, label: item.label, kind: 'evidence', count: item.count, x: position.x, y: position.y };
+      const node = { id: `evidence:${key}`, label: item.label, kind: 'evidence', raw: item.raw, count: item.count, x: position.x, y: position.y };
       nodes.push(node); links.push({ source: conditionId, target: node.id });
     });
     const gapFor = node => {
@@ -198,7 +198,11 @@ function renderGraph(data) {
       nodeEls.forEach(({ circle, label, node }) => { const hot = !id || neighborhood.has(node.id); circle.classList.toggle('is-dim', !!id && !hot); label.classList.toggle('is-dim', !!id && !hot); label.classList.toggle('is-revealed', !!id && neighborhood.has(node.id)); circle.classList.toggle('is-hot', node.id === id); });
       linkEls.forEach(({ line, link }) => { const hot = !!id && (link.source === id || link.target === id); line.classList.toggle('is-hot-link', hot); line.classList.toggle('is-dim', !!id && !hot); });
       const selected = id ? byId.get(id) : null;
-      document.getElementById('graphStatus').textContent = selected ? `${selected.label}: ${selected.count.toLocaleString()} papers in the visible association. Click again to release the neighborhood.` : 'POTS is connected to overlapping research areas in the literature. Hover or tap a node to pin its local neighborhood.';
+      const statusText = document.getElementById('graphStatusText');
+      if (selected) {
+        const href = selected.kind === 'condition' ? `condition?c=${encodeURIComponent(selected.raw)}` : selected.kind === 'evidence' ? `entity?e=${encodeURIComponent(selected.raw)}` : '';
+        statusText.innerHTML = `${esc(selected.label)}: ${selected.count.toLocaleString()} papers in the visible association. Click again to release the neighborhood.${href ? ` <a href="${href}">See all findings for ${esc(selected.label)}</a>` : ''}`;
+      } else statusText.textContent = 'POTS is connected to overlapping research areas in the literature. Hover or tap a node to pin its local neighborhood.';
     }
     focusNode(pinned);
   }
@@ -266,4 +270,4 @@ async function init() {
   if (searchToggle) searchToggle.addEventListener('click', () => { const input = document.getElementById('curiosityInput'); input.focus(); searchToggle.setAttribute('aria-expanded', 'true'); });
 }
 
-init().catch(() => { document.getElementById('graphStatus').textContent = 'The map could not load right now. Try the full search instead.'; });
+init().catch(() => { document.getElementById('graphStatusText').textContent = 'The map could not load right now. Try the full search instead.'; });

@@ -85,6 +85,8 @@ h1 span, .hero-lede span { display: block; }
 .graph .is-hot { stroke: var(--home-blue); stroke-width: 2; }
 .graph .is-hot-link { stroke: var(--home-blue); stroke-width: 1px; opacity: .82; }
 .graph-status { position: absolute; left: 8%; right: 8%; bottom: 5px; min-height: 34px; color: var(--home-faint); font-size: 11px; }
+.graph-status a { color: inherit; text-decoration: underline; }
+.graph-status .graph-browse { display: block; }
 .evidence-view { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .evidence-view:focus-within { position: relative; left: auto; width: auto; height: auto; margin: 0 8%; padding: 12px 0; }
 .evidence-label { margin: 0; color: var(--home-muted); font: 11px var(--home-mono); text-transform: uppercase; }
