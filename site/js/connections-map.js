@@ -300,7 +300,7 @@ export function createMap(el){
       <h2>${fmt(M.regions.length)} regions of research</h2>
       <p class="cx-sub">Grouped from ${fmt(M.n_findings)} findings in ${fmt(M.n_papers)} papers. Pick a region on the map or in this list.</p>
       <ul class="cx-rlist">${M.regions.map(c => `<li><span class="cx-sw" style="background:${regionColor(c.id)}"></span><button type="button" class="cx-linkbtn" data-k="${c.id}">${esc(regionName(c.id))}</button><span class="cx-num">${act ? `${fmt(shownIn(c.id))} of ` : ''}${fmt(c.n)}</span></li>`).join('')}</ul>
-      <h3>Biggest disagreements on the map</h3>
+      <h3>Biggest possible splits on the map</h3>
       <p class="cx-sub">${SPLIT_RULE} ${flipTotalText(M.n_splits)}</p>
       ${M.top_splits.slice(0, 5).map(splitHTML).join('')}`;
   }
@@ -323,7 +323,7 @@ export function createMap(el){
       <p class="cx-sub">Counts are papers in this region.</p>
       <h3>How it connects to other regions</h3>
       ${c.rel.map(r => `<div class="cx-rel"><span class="cx-sw" style="background:${regionColor(r.j)}"></span><button type="button" class="cx-linkbtn" data-k="${r.j}">${esc(regionName(r.j))}</button><div class="cx-sub">Both study ${r.shared.map(([e, a, b]) => `${esc(display(e))} <span class="cx-num">(${fmt(a)} here, ${fmt(b)} there)</span>`).join(', ')}</div></div>`).join('')}
-      <h3>Where papers disagree</h3>
+      <h3>Possible splits</h3>
       <p class="cx-sub">${c.ns ? `${fmt(c.ns)} direction flips among this region's papers. The counts below cover only this region's papers, so they can be smaller than on the whole map. The biggest:` : 'No direction flips among this region\'s papers.'}</p>
       ${c.splits.slice(0, 5).map(splitHTML).join('')}
       <h3>No-effect results</h3>

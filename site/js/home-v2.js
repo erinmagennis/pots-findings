@@ -382,7 +382,7 @@ function constellation(D) {
       const d = n.d;
       h = `<b>${esc(n.label)}</b><br><span class="m">${fmt(d.n)} papers. ${fmt(d.both)} of them also report POTS findings.</span>`;
       if (d.shared.length) h += `<span class="k">Shared with POTS</span>${d.shared.map(s => `${esc(displayName(s[0]))} <span class="m">${fmt(s[1])} POTS, ${fmt(s[2])} here</span>`).join('<br>')}`;
-      if (d.split) h += `<span class="k">Where papers split</span>${tallyHTML(d.split)}`;
+      if (d.split) h += `<span class="k">Possible split (any group comparison; read both sides)</span>${tallyHTML(d.split)}`;
     } else {
       const t = n.t, lift = t.lift;
       const rel = lift >= 1.5 ? `${lift.toFixed(1)} times as common in POTS papers as in all papers` : lift >= .8 ? 'About as common in POTS papers as in all papers' : 'Less common in POTS papers than in all papers. It links POTS to other conditions';

@@ -190,7 +190,7 @@ export function createFlow(el){
       h += `<p><span class="cx-num">${fmt(nc(ix('correlational-only')))}</span> papers report a correlation and <span class="cx-num">${fmt(nc(ix('causal-claim')))}</span> make a causal claim somewhere in their findings. A claim is what a paper says, not proof.</p>`;
     }
     h += `<p class="cx-sub">Pick any bar to follow its papers through every column and see where they disagree. Hover a band for its count.</p>
-      <h3>Biggest disagreements on the map</h3><p class="cx-sub">${SPLIT_RULE}</p>${M.top_splits.slice(0, 4).map(splitHTML).join('')}`;
+      <h3>Biggest possible splits on the map</h3><p class="cx-sub">${SPLIT_RULE}</p>${M.top_splits.slice(0, 4).map(splitHTML).join('')}`;
     return h;
   }
   function nodeHTML(){
@@ -200,7 +200,7 @@ export function createFlow(el){
     if(info){
       h += `<h3>Most studied in this band</h3>${barsHTML(info.top)}
         <p class="cx-sub">Counts are papers, from the ${fmt(info.nf)} findings in this band${filtersActive() ? ', using all papers, not your filters' : ''}.</p>
-        <h3>Where papers disagree</h3>
+        <h3>Possible splits</h3>
         <p class="cx-sub">${info.ns ? `${fmt(info.ns)} direction flips among the papers in this band. The counts below cover only this band's papers, so they can be smaller than on the whole map. ${SPLIT_RULE}` : 'No direction flips among the papers in this band.'}</p>
         ${info.splits.map(splitHTML).join('')}`;
     } else if(isSink(id)){

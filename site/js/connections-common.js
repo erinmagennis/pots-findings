@@ -112,7 +112,7 @@ export function topicHTML(byRegion, onRegionAttr = true){
     h += `<h3>Where these papers sit</h3><ul class="cx-rlist">${byRegion.slice(0, 5).map(([k, n]) => `<li><span class="cx-sw" style="background:${regionColor(k)}"></span>${onRegionAttr ? `<button type="button" class="cx-linkbtn" data-k="${k}">${esc(regionName(k))}</button>` : esc(regionName(k))}<span class="cx-num">${fmt(n)}</span></li>`).join('')}</ul>`;
   }
   if(S.splits){
-    h += `<h3>Where papers disagree about it</h3>`;
+    h += `<h3>Possible splits about it</h3>`;
     h += nSplits ? `<p class="cx-sub">${fmt(nSplits)} disagreements name a matching topic. Biggest first. These counts use all papers, not your filters.</p>${splits.map(splitHTML).join('')}`
       : `<p class="cx-sub">No disagreements found for a matching topic.</p>`;
   }
