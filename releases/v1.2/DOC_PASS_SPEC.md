@@ -20,7 +20,7 @@ problems below. Fix them at the generator (`condition-findings-builder/build_pac
 ## Must fix (P1)
 
 1. **Local machine paths.** `migraine-hypermobility-findings/qa/tier4_provenance_audit.json` has two
-   `/Users/erinmagennis/.claude-science/orgs/.../artifacts/...` paths (`path`, `source`). Replace with the bare
+   local machine paths into the Claude Science artifact store (`path`, `source`). Replace with the bare
    file name (and the artifact version id if it matters for provenance). Add a builder check that fails the
    build if any shipped text file contains `/Users/`, `/private/tmp`, `/home/` or `.claude-science`.
 2. **Stale v1.1 identifier claims stated as current.** These still say the ids are "model-emitted,
