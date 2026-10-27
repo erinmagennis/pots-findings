@@ -276,8 +276,8 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3819,
-   "sha256": "64525e01f9c1529e57687818ec3b5c21f1680ca223e842059a990727de591f18"
+   "bytes": 3952,
+   "sha256": "b03f089f192e7497f4140a1bf7727ecb53e4295ac2f5d34648eeca086ee0812c"
   },
   {
    "path": "CHANGELOG.md",
@@ -286,8 +286,8 @@
   },
   {
    "path": "CITATION.cff",
-   "bytes": 3023,
-   "sha256": "c818aa9c1536c90a53124a90d9e478d8a3e9235bc2ac6a9d92e240b716c404ce"
+   "bytes": 3209,
+   "sha256": "a5e5b82d933f01a5041ecbf7da8e6f89c5ccc407087aba32e1b430fffa63d881"
   },
   {
    "path": "LICENSE",
@@ -296,8 +296,8 @@
   },
   {
    "path": "README.md",
-   "bytes": 26332,
-   "sha256": "c10f96be8e8282eb4276adc39bd3e42282ec3f383c0e14818ea52e73191fba61"
+   "bytes": 26453,
+   "sha256": "d416e6affd12565e8001aed16a01de6170992d3f784e84e322bce4ba7ac411a7"
   },
   {
    "path": "annotations/COMPARATOR_GATE.json",
@@ -476,8 +476,8 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 3766,
-   "sha256": "7a20bc76db1af75db6535b3d0fa556bca6198aa1dab43a5cb032265482c48e08"
+   "bytes": 3899,
+   "sha256": "3777220debf5bdaa7bcc67bd968e6eab59a8ec89c80cbf6c8d0c941b023c654e"
   },
   {
    "path": "deposit/github_release_notes.md",
@@ -496,8 +496,8 @@
   },
   {
    "path": "docs/DATA_DICTIONARY.md",
-   "bytes": 19448,
-   "sha256": "0e0e3152cc34deabcadac3296ceda65542adcadd5d9a7932c4c9eca046858dbd"
+   "bytes": 19585,
+   "sha256": "8495643d43d70528c0e4d95aafe38ef2d1ab356edb3b4d9f2ef2d23501cd00b8"
   },
   {
    "path": "docs/LIMITATIONS.md",
@@ -511,13 +511,13 @@
   },
   {
    "path": "docs/README.md",
-   "bytes": 26332,
-   "sha256": "c10f96be8e8282eb4276adc39bd3e42282ec3f383c0e14818ea52e73191fba61"
+   "bytes": 26453,
+   "sha256": "d416e6affd12565e8001aed16a01de6170992d3f784e84e322bce4ba7ac411a7"
   },
   {
    "path": "docs/WEBSITE_INTEGRATION.md",
-   "bytes": 3351,
-   "sha256": "b72cf534207e623be05eda722811de719bef23ebf946aa0c4f1c2580cfee4d16"
+   "bytes": 3352,
+   "sha256": "424561c0185df8ee195313c0bd0cc38aa2d6fc64b8fd9987bc486a6d5811970c"
   },
   {
    "path": "qa/comparability_report.json",
@@ -581,5 +581,5 @@
   }
  ],
  "n_files": 61,
- "total_bytes": 22302301
+ "total_bytes": 22303133
 }

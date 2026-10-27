@@ -23,7 +23,7 @@ package. Loading it retires that caveat.
 | tier-2 coverage | 81 of 145 chunks | **145 of 145** |
 | shards @ 6,000 rows | 13 | **18** |
 
-Because the two waves share **zero papers**, this is a pure append, no dedup pass, no
+Because the two waves share no PubMed record, this is a pure append, no dedup pass, no
 paper-record merge.
 
 ### Load procedure

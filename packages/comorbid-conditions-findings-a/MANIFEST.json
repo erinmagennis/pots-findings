@@ -293,8 +293,8 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3821,
-   "sha256": "7abde317b549dd7852026aeec882a106c34f396fc194e4f023792f86a2f87760"
+   "bytes": 3954,
+   "sha256": "4fc2cb2d960bbe8f4851b5cea71e0630e9adb4a4f24a2b92c55b9f6e49340620"
   },
   {
    "path": "CHANGELOG.md",
@@ -303,8 +303,8 @@
   },
   {
    "path": "CITATION.cff",
-   "bytes": 3023,
-   "sha256": "1209a51e35cc60f28577a1e2cc4c1560a3ba1e7fc601cc7363566fa0a8822aae"
+   "bytes": 3209,
+   "sha256": "b9a859d12294710bb91a52463db4319e018483b4ce014ebae7343ab84623a418"
   },
   {
    "path": "LICENSE",
@@ -313,8 +313,8 @@
   },
   {
    "path": "README.md",
-   "bytes": 27004,
-   "sha256": "9641a5c98225fc082e5b53d2abf7fdcad36dde6e656043871f659b8725cc604d"
+   "bytes": 27125,
+   "sha256": "c01d49b558711506508b6ad11f54d39300e62ea01a1d210d59a5c7304accc2a2"
   },
   {
    "path": "annotations/COMPARATOR_GATE.json",
@@ -493,8 +493,8 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 3768,
-   "sha256": "af54f254a0df6e49f0782b625aafcfca99563c4f90d4e35d875589ac95f5c3bf"
+   "bytes": 3901,
+   "sha256": "2f8b6cefa189ac45c47047de6ef959c23784568ca311a989c150b2397565d44b"
   },
   {
    "path": "deposit/github_release_notes.md",
@@ -513,8 +513,8 @@
   },
   {
    "path": "docs/DATA_DICTIONARY.md",
-   "bytes": 19420,
-   "sha256": "00c4235f099a148caa355467d3f2926013aa3df68d685e9145796cb8a007d1f2"
+   "bytes": 19557,
+   "sha256": "8de10aa1026d0db5b36907bfa40a900c9d9ce3499bac40a705e3d72fc5eb3b41"
   },
   {
    "path": "docs/LIMITATIONS.md",
@@ -528,8 +528,8 @@
   },
   {
    "path": "docs/README.md",
-   "bytes": 27004,
-   "sha256": "9641a5c98225fc082e5b53d2abf7fdcad36dde6e656043871f659b8725cc604d"
+   "bytes": 27125,
+   "sha256": "c01d49b558711506508b6ad11f54d39300e62ea01a1d210d59a5c7304accc2a2"
   },
   {
    "path": "docs/WEBSITE_INTEGRATION.md",
@@ -598,5 +598,5 @@
   }
  ],
  "n_files": 61,
- "total_bytes": 24786954
+ "total_bytes": 24787785
 }

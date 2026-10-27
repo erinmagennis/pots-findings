@@ -16,35 +16,35 @@
    "findings": 36067,
    "papers": 3129,
    "n_files": 58,
-   "tarball_bytes": 33620601
+   "tarball_bytes": 33620686
   },
   "tier2a": {
    "findings": 36611,
    "papers": 3123,
    "n_files": 61,
-   "tarball_bytes": 22914874
+   "tarball_bytes": 22914989
   },
   "tier2b": {
    "findings": 33830,
    "papers": 2589,
    "n_files": 61,
-   "tarball_bytes": 20480479
+   "tarball_bytes": 20480621
   },
   "tier3": {
    "findings": 26032,
    "papers": 1587,
    "n_files": 65,
-   "tarball_bytes": 16774870
+   "tarball_bytes": 16774964
   },
   "tier4": {
    "findings": 15646,
    "papers": 1091,
    "n_files": 63,
-   "tarball_bytes": 10529830
+   "tarball_bytes": 10529912
   }
  },
  "repo_files": 327,
- "repo_bytes": 114096916,
+ "repo_bytes": 114100627,
  "dtype_fix": true,
  "annotations": {
   "tier1": [

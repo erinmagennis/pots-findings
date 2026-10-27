@@ -237,8 +237,8 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3487,
-   "sha256": "be695276756436d635b5d41c542333fadb03a4f8d4c67bb551fcd92bdc81f470"
+   "bytes": 3620,
+   "sha256": "075ee357e5e3126acc5bba0748a2eee8d464114f606aafa0510657ca7d0c3396"
   },
   {
    "path": "CHANGELOG.md",
@@ -247,8 +247,8 @@
   },
   {
    "path": "CITATION.cff",
-   "bytes": 2988,
-   "sha256": "3eb322f5450f519ba86dcdbaf3651adebba28f40d264ef99262eb934cd50cd2e"
+   "bytes": 3174,
+   "sha256": "25bc8bdadbdcfdf658cbc828b7f746e0db84f4728723eda7f1d7126f596d6164"
   },
   {
    "path": "LICENSE",
@@ -432,8 +432,8 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 3386,
-   "sha256": "bc33fc1253854742142942b2e9c991876b6e7628ca2915dc0563831d1a4d3a87"
+   "bytes": 3519,
+   "sha256": "be422d4e305837c138cc5fe30ad5927fc70ff0ce693577a8d14e739d32a7e572"
   },
   {
    "path": "deposit/github_release_notes.md",
@@ -452,8 +452,8 @@
   },
   {
    "path": "docs/DATA_DICTIONARY.md",
-   "bytes": 19067,
-   "sha256": "b42b8abb196588cbcbde79e415a91f45799a880ea98fb25c1cc0115112587020"
+   "bytes": 19204,
+   "sha256": "064412dc7e4e8e14cffa09934555dbdac22cee98fbb970d5552bbb2def824a74"
   },
   {
    "path": "docs/LIMITATIONS.md",
@@ -552,5 +552,5 @@
   }
  ],
  "n_files": 63,
- "total_bytes": 12820810
+ "total_bytes": 12821399
 }

@@ -14,7 +14,7 @@ abstract: >-
   Package 5 of 5. 15,646 structured findings machine-extracted from
   1,091 papers (2020-2026) covering migraine intersection, author-augmented papers, hypermobility spectrum, Sjögren's, PANS/PANDAS.
   One block of a five-way partition of an 11,519-paper, 148,186-finding corpus of the POTS,
-  dysautonomia and comorbid-condition literature; the five packages share zero papers.
+  dysautonomia and comorbid-condition literature. The five packages share no PubMed record; per-package counts sum exactly to the corpus totals. 14 studies appear as a preprint in one package and as the published version in another; annotations/paper_flags.csv links them.
   Scientific fidelity is unmeasured: all QA verifies well-formedness, not correct
   interpretation of sources. Not medical advice.
 keywords:

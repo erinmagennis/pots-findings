@@ -14,7 +14,7 @@ abstract: >-
   Package 1 of 5. 36,067 structured findings machine-extracted from
   3,129 papers (2019-2026) covering dysautonomia, POTS, dysautonomia subtypes, hyperadrenergic POTS.
   One block of a five-way partition of an 11,519-paper, 148,186-finding corpus of the POTS,
-  dysautonomia and comorbid-condition literature; the five packages share zero papers.
+  dysautonomia and comorbid-condition literature. The five packages share no PubMed record; per-package counts sum exactly to the corpus totals. 14 studies appear as a preprint in one package and as the published version in another; annotations/paper_flags.csv links them.
   Scientific fidelity is unmeasured: all QA verifies well-formedness, not correct
   interpretation of sources. Not medical advice.
 keywords:

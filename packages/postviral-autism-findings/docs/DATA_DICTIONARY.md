@@ -7,7 +7,7 @@ this package's own slice**, not inherited from another tier. Recompute them with
 > **Scope: POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)**
 >
 > 1,587 papers, chunks 221–255, of an 11,519-paper five-package corpus.
-> Four sibling packages hold the rest and share zero papers with this one.
+> Four sibling packages hold the rest; no PubMed record appears in two packages (14 studies appear as a preprint in one package and as the published version in another; `annotations/paper_flags.csv` links them).
 >
 > **Not medical advice.** Machine-extracted research information with no diagnostic or
 > treatment recommendations.

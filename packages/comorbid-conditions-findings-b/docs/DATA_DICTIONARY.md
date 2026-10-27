@@ -7,7 +7,7 @@ this package's own slice**, not inherited from another tier. Recompute them with
 > **Scope: POTS findings v1.2, package 3 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 2 of 2 (33,830 findings, 2,589 papers)**
 >
 > 2,589 papers, chunks 126–219 (the remaining 64 tier-2 chunks, interleaved with Part A), of an 11,519-paper five-package corpus.
-> Four sibling packages hold the rest and share zero papers with this one.
+> Four sibling packages hold the rest; no PubMed record appears in two packages (14 studies appear as a preprint in one package and as the published version in another; `annotations/paper_flags.csv` links them).
 >
 > **Not medical advice.** Machine-extracted research information with no diagnostic or
 > treatment recommendations.

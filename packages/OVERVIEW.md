@@ -35,7 +35,7 @@ unlikely to diverge materially, but the adjudicated rate was never split.
 - **Part A**: 81 chunks, 36,611 findings, 3,123 papers
 - **Part B**: 64 chunks, 33,830 findings, 2,589 papers
 
-The waves share zero papers and their chunk ids **interleave** (Part B spans 126–219), so the
+The waves share no PubMed record (2 studies appear as a preprint in one wave and as the published version in the other; see annotations/paper_flags.csv) and their chunk ids **interleave** (Part B spans 126–219), so the
 split is operational, not topical. Both cover the same nine themes, from one pipeline with one
 prompt, pool them freely.
 
