@@ -41,7 +41,7 @@ async function viewOverview(){
     </div>
     <aside class="overview-side"><div class="overview-section"><div class="section-kicker">04 · Connected entities</div><h2>Highest paper reach</h2><p class="kv">Denominator: ${fmt(nPapers)} papers. Entity coverage is a subset of the findings.</p>${entityLinks}<a class="overview-link" href="connections">Open the connection map →</a></div>
       <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Possible splits</h2><p class="overview-number">${fmt(state.meta.counts.contradictions_total)}</p><p class="kv">Topics where papers report opposite directions, or an effect in some and none in others. Many answer different questions, so read both sides.</p><a class="overview-link" href="#contra">See the possible splits →</a><h3>Barely studied</h3><p class="overview-number">${fmt(C.understudied_total)}</p><p class="kv">Entity and condition signals with three or fewer papers.</p><a class="overview-link" href="#under">See what is barely studied →</a></div>
-      <div class="overview-section"><div class="section-kicker">06 · Read the record</div><h2>Complete tables</h2><p class="kv">Browse every row behind this overview, with links to source papers and entities.</p><a class="overview-link" href="#assoc">Comparisons →</a><a class="overview-link" href="#nulls">Null and failed →</a><a class="overview-link" href="papers">All papers →</a><a class="overview-link" href="entities">All entities →</a></div>
+      <div class="overview-section"><div class="section-kicker">06 · Read the record</div><h2>Complete tables</h2><p class="kv">Browse every row behind this overview, with links to source papers and entities.</p><a class="overview-link" href="#assoc">Comparisons →</a><a class="overview-link" href="#nulls">Found nothing →</a><a class="overview-link" href="papers">All papers →</a><a class="overview-link" href="entities">All entities →</a></div>
     </aside></section>`;
 }
 
@@ -194,7 +194,7 @@ async function viewNulls(){
   const d={n:idx.n, rows:[]}; let loaded=0;
   const addShard=sh=>{ d.rows.push(...sh.rows.map(toObj)); loaded++; };
   if(idx.shards.length) addShard(await getJSON(idx.shards[0].file));
-  document.getElementById('view').innerHTML=`<div class="panel"><h2>Null and failed results</h2>
+  document.getElementById('view').innerHTML=`<div class="panel"><h2>Tested and found nothing</h2>
     <p class="lede">${fmt(d.n)} findings classified as biomarker, treatment, or diagnostic nulls. ${EXCL_NOTE}</p>
     <div class="note">A null result is not proof of absence or ineffectiveness. Check the sample, dose,
       comparator, and source paper.</div>

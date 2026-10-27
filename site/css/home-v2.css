@@ -8,8 +8,8 @@
   --home-blue: #4d7b82;
   --home-rust: #a7593e;
   --home-rust-soft: #f5e8e2;
-  --home-gutter: 32px;
-  --home-max: 1320px;
+  --home-gutter: 18px;   /* same content edge as the shared header and footer */
+  --home-max: 1240px;
   --home-pill: 999px;
   --home-sans: "Avenir Next", Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --home-mono: ui-monospace, SFMono-Regular, Menlo, monospace;

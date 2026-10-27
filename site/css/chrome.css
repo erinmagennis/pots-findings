@@ -84,3 +84,4 @@ footer.site-footer .foot-meta a:hover{color:var(--ft-rust)}
   footer.site-footer .foot-title{font-size:18px}
   footer.site-footer .foot-connect{margin-top:18px}
 }
+@media(max-width:900px){header.site .wrap,footer.site-footer .wrap{padding-left:16px;padding-right:16px}}   /* phone gutter matches page content (16px) */

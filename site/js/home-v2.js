@@ -54,9 +54,9 @@ function stand(s) {
       <a class="stand-card" href="signals#contra"><p class="k">Where studies disagree</p><p class="v">${fmt(s.contra_total)}</p><p class="ex">possible splits, for every condition. Many answer different questions, so read both sides.</p>
         <span class="more">See the possible splits</span></a>
       <a class="stand-card" href="signals#nulls"><p class="k">Tested and found nothing</p><p class="v">${fmt(s.nulls)}</p>
-        <p class="ex">${nexHTML}</p><span class="more">See the null results</span></a>
+        <p class="ex">${nexHTML}</p><span class="more">See what found nothing</span></a>
       <a class="stand-card" href="signals#under?all"><p class="k">Barely studied</p><p class="v">${fmt(s.under_total)}</p>
-        ${uexHTML}<span class="more">See what needs more work</span></a>
+        ${uexHTML}<span class="more">See what is barely studied</span></a>
     </div>`;
 }
 

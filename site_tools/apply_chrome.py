@@ -70,7 +70,7 @@ def render_footer(page_file, site="site"):
             '<a href="about#connect">Let\'s connect!</a> <span class="arrow-circle" aria-hidden="true">\u2197</span></p>\n'
             '    </div>\n'
             '    <p class="foot-meta">POTS &amp; Dysautonomia Literature Project · <a href="start">Start here</a> · '
-            '<a href="about#download">Download the data</a> · <a href="about#limits">Not medical advice</a> · '
+            '<a href="about#limits">Not medical advice</a> · '
             f'Data <!--n:version-->{meta["version"]}<!--/n-->, updated {day}</p>\n'
             '  </div></footer><!--/footer-->')
 
