@@ -1,5 +1,10 @@
 # Data Dictionary — `data/tier1_findings.parquet`
 
+> **Archived: Tier 1 (July 2026).** This document describes the first release (36,459 findings from 3,121 papers).
+> The current data is v1.2: 148,186 findings from 11,519 papers in five packages with Zenodo DOIs. See the
+> repository [README](../README.md) ("Download and cite"), each package's own docs, and the plain-language guide at
+> https://pots.erinmagennis.com/start.
+
 **89 columns × 36,459 rows.** Every retained field is documented below with its **measured** fill
 rate, computed directly from the shipped parquet (see `data/field_fill_rates.csv` for the machine-readable
 version, and `notebooks/01_load_and_explore.ipynb` to recompute them yourself).

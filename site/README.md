@@ -1,44 +1,48 @@
 # POTS and dysautonomia findings browser
 
-This is a static, no-backend browser over the current combined research checkpoint:
+This is a static, no-backend browser over findings package v1.2 (live at https://pots.erinmagennis.com):
 
-- 73,070 machine-extracted findings
-- 6,244 canonical papers
-- 2,803 canonical entities
-- Tier 1 plus 81 of 146 Tier 2 chunks, or 55.5% of Tier 2
+- 148,186 machine-extracted findings
+- 11,519 papers (one per PubMed record)
+- five packages with Zenodo DOIs (see the repository README, "Download and cite")
 
-Every Tier 2 and combined number is a subset count. Absence of a finding is not evidence of absence.
+Retracted papers and correction notices are flagged and left out of counts by default (`data/paper_flags.json`).
+Absence of a finding is not evidence of absence.
 
 ## Run locally
 
 From the repository root:
 
 ```bash
-python -m http.server 8000 --directory site
+python site_tools/serve_local.py 8020
 ```
 
-Then open `http://localhost:8000/`.
+Then open `http://localhost:8020/`. This server handles the clean addresses (`/signals`, `/analyze`, `/chat`)
+the way Vercel does; it does not run the redirects in `vercel.json` (`/discover`, `/builder`, `/charts`).
 
-The site uses framework-free ES modules and static JSON. It has no build step. Keyword search works without
-an external model. Semantic search loads a browser model and falls back without breaking keyword search.
+The site uses framework-free ES modules and static JSON. Keyword search works without an external model.
+Semantic search loads a browser model and falls back without breaking keyword search.
 
-## Data contract
+## Pages and shared parts
 
-`site/data/` is generated output. Do not edit it by hand. The row order is Tier 1 first, followed by Tier 2,
-and is shared by facets, text shards, detail shards, and embedding shards.
+- Nav order comes from `PAGES` in `js/ui.js`: Search, Signals, Connections, Analyze, Chat, About.
+- One header and one footer for every page, written into each HTML file by `site_tools/apply_chrome.py`
+  and styled by `css/chrome.css`. Do not edit a page's header or footer by hand.
+- `start.html` is generated from the data by `site_tools/build_start_here.py`.
 
-The main loaders are in `js/data.js`:
+## Rebuild and check
 
-- `loadMeta()`
-- `loadFacets()`
-- `loadPapers()`
-- `loadEntities()`
-- `loadTextShard()` and `loadDetailShard()`
-
-Run the checkpoint before a deployment:
+`site/data/` is generated output. Do not edit it by hand. Rebuild in this order (see `site_tools/rebuild_site.py`):
 
 ```bash
-python site_tools/verify_site.py --self-test
+python site_tools/build_v12_projection.py --root . --out site/data
+python site_tools/build_home_data.py site
+python site_tools/build_start_here.py site
+python site_tools/build_connections_data.py --site site   # needs umap-learn + scikit-learn
+python site_tools/apply_chrome.py site
+python site_tools/apply_counts.py site README.md
+python site_tools/verify_site_v12.py --self-test
 ```
 
-See `SITE_CONTRACT.md` and `INTEGRATION_SITE.md` in the repository root for the full boundaries and release flow.
+The verifier checks every count against the packages, the home, Start and Connections numbers, the
+header, footer and nav on every page, and `CHECKSUMS.txt`. Refresh `CHECKSUMS.txt` after any change.

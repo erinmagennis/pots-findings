@@ -1,5 +1,10 @@
 # POTS / Dysautonomia Literature Findings - Tier 1 (v1)
 
+> **Archived: Tier 1 (July 2026).** This document describes the first release (36,459 findings from 3,121 papers).
+> The current data is v1.2: 148,186 findings from 11,519 papers in five packages with Zenodo DOIs. See the
+> repository [README](../README.md) ("Download and cite"), each package's own docs, and the plain-language guide at
+> https://pots.erinmagennis.com/start.
+
 A machine-extracted, structured database of research findings from the POTS and dysautonomia
 literature, plus four discovery tables built on top of it (associations, under-studied signals,
 contradictions, null results) and a convergence table.

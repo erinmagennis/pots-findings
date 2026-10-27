@@ -1,5 +1,10 @@
 # Core Findings — Tier 1 (POTS / dysautonomia)
 
+> **Archived: Tier 1 (July 2026).** This document describes the first release (36,459 findings from 3,121 papers).
+> The current data is v1.2: 148,186 findings from 11,519 papers in five packages with Zenodo DOIs. See the
+> repository [README](../README.md) ("Download and cite"), each package's own docs, and the plain-language guide at
+> https://pots.erinmagennis.com/start.
+
 **A machine-extracted, source-linked map of what the POTS and dysautonomia literature actually reports.**
 36,459 structured findings from 3,121 distinct papers. Every finding carries its source paper, authors,
 journal, and a link. Every number below is computed from a table you can open and re-check.

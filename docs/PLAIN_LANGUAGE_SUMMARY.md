@@ -1,5 +1,10 @@
 # What We Did, in Plain Language
 
+> **Archived: Tier 1 (July 2026).** This document describes the first release (36,459 findings from 3,121 papers).
+> The current data is v1.2: 148,186 findings from 11,519 papers in five packages with Zenodo DOIs. See the
+> repository [README](../README.md) ("Download and cite"), each package's own docs, and the plain-language guide at
+> https://pots.erinmagennis.com/start.
+
 **A plain-language guide to a machine-built index of POTS and dysautonomia research.**
 Companion to `CORE_FINDINGS.md`, which has the technical detail and all the source links.
 

@@ -1,5 +1,10 @@
 # Canonicalization of the Tier-1 POTS/Dysautonomia Entity Vocabulary
 
+> **Archived: Tier 1 (July 2026).** This document describes the first release (36,459 findings from 3,121 papers).
+> The current data is v1.2: 148,186 findings from 11,519 papers in five packages with Zenodo DOIs. See the
+> repository [README](../README.md) ("Download and cite"), each package's own docs, and the plain-language guide at
+> https://pots.erinmagennis.com/start.
+
 **Vocabulary version:** v1 · **Source table:** `tier1_findings.parquet` (36,067 rows x 70 cols)
 
 ## 1. Model provenance (per standing policy)
