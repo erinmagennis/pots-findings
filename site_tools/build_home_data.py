@@ -18,7 +18,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from signals_rules import Facets, flip_sides, entity_kinds, is_measured, MEASURED_KINDS, TREATMENT_SHARE_MAX, under_examples  # noqa: E402  shared counting rules (one number per fact)
+from signals_rules import Facets, flip_sides, entity_kinds, is_measured, MEASURED_KINDS, TREATMENT_SHARE_MAX, under_examples, clear_splits  # noqa: E402  shared counting rules (one number per fact)
 
 # Generic covariates: measured in almost every study, so raw counts make them look central.
 GENERIC = ['age', 'female sex', 'sex', 'male sex', 'gender', 'female', 'male', 'heart rate', 'blood pressure',
@@ -109,6 +109,7 @@ def build(site):
             have.add(nm)
             topics.append({'e': nm, 'np': a, 'lift': round((a / NP) / (len(ent_all[nm]) / n_ent_papers), 2), 'score': 0, 'kind': 'bridge'})
     kinds = entity_kinds(data)
+    pots_clear = {x['e'].lower() for x in clear_splits(data) if x['c'] == 'POTS'}
     flips = {(r['canonical_entity'], r['condition']): r for r in json.load(open(data / 'contradictions.json'))['rows'] if r['conflict_type'] == 'direction-flip'}
     dict_names = defaultdict(list)
     for i, nm in enumerate(D['e']): dict_names[ALIAS.get(nm, nm)].append(nm)
@@ -117,9 +118,9 @@ def build(site):
         t['links'] = [[c, len(ent_pc[nm].get(c, ()))] for c in conds if len(ent_pc[nm].get(c, ())) >= R['topic_link_min']]
         t['ent'] = nm if nm in D['e'] else dict_names[nm][0]   # name the entity page knows
         t['tally'] = F.tally(t['ent'], 'POTS')
-        # ring: papers split both ways AND the topic is a measured kind (same rule as the Start page's disagreements)
+        # ring: a clear split in POTS (signals_rules.clear_splits, the check the Start page reports); none on 2026-10-27 data
         t['measured'] = is_measured(F, kinds, t['ent'], 'POTS', (flips.get((t['ent'], 'POTS')) or {}).get('entity_kind'))
-        t['disagree'] = t['tally']['up'] > 0 and t['tally']['dn'] > 0 and t['measured']
+        t['disagree'] = t['ent'].lower() in pots_clear
         del t['score']
 
     idf = {nm: math.log(n_ent_papers / len(s)) for nm, s in ent_all.items()}

@@ -154,7 +154,10 @@ function infoText(D) {
     + `The topics in between are the ones most specific to POTS: named in at least ${R.floor} POTS papers and at least ${times} as common in POTS papers as in all papers. The top ${R.top_specific} are shown. `
     + (hidden.length ? `Left out because nearly every study measures them: ${hidden.join(', ')} and similar. ` : '')
     + `Topics in lighter italic are bridges: for each condition, up to ${R.bridges_per_cond} topics it shares most with POTS. `
-    + `A ring marks a measured topic (a body measure, gene or protein, or cell type, or a chemical where no more than ${Math.round(R.treatment_share_max * 100)}% of its POTS findings come from treatment studies) where POTS papers disagree: some report it higher and some lower. Only results the model tagged as a comparison between groups count, not changes after a treatment, and no person has checked these tags. Drugs and treatments get no ring, but their tooltips still show the counts. Dotted lines join the ${R.pairs_drawn} pairs of conditions that share the most topics. `
+    + (D.topics.some(t => t.disagree)
+      ? `A ring marks a topic with a clear split: three or more papers comparing people with POTS to healthy people report it higher, and three or more report it lower. `
+      : `A ring would mark a topic with a clear split: three or more papers comparing people with POTS to healthy people on each side. None qualifies yet. `)
+    + `Tooltips show higher and lower counts from any result the model tagged as a comparison between groups. Dotted lines join the ${R.pairs_drawn} pairs of conditions that share the most topics. `
     + `Hover or tap a condition to see the topics it shares with POTS on its line. Retracted papers and correction notices are left out.`;
 }
 

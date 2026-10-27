@@ -207,7 +207,7 @@ def expected(site):
                 ex = {"text": tx, "quote": q, "paper": dict(zip(pap["fields"], pap["rows"][c["p"][i]]))}; break
     if ex and ex["paper"].get("year"): want["example_year"] = int(ex["paper"]["year"])
     excl = C.get("flag_retracted", 0) + C.get("flag_partially_retracted", 0) + C.get("flag_erratum_notice", 0)
-    picks = {"contra": contra_picks, "pots_split": bool(pots_splits),  "null": null_picks, "under": [r["canonical_entity"] for r in u]}
+    picks = {"contra": contra_picks, "pots_split": bool(pots_splits), "pots_split_entities": {e.lower() for _, e, _, _, _ in pots_splits},  "null": null_picks, "under": [r["canonical_entity"] for r in u]}
     return meta, fac, names, want, ex, len(bad_pm), excl, picks
 
 

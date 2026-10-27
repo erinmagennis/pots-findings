@@ -100,6 +100,7 @@ def check(site_dir):
     n_ent_papers = len(set(P[ent_rows].tolist()))
     pots_ent = len(set(P[ent_rows & cmask('POTS')].tolist()))
     bad = {g.lower() for g in hm.get('generic', [])} | {g.lower() for g in hm.get('condnames', [])}
+    ring_got = {}
     for t in hm['topics']:
         nm = t['e']; em = emask(nm)
         if nm.lower() in bad: f.append(f'topic {nm} is a generic covariate or a condition name')
@@ -121,7 +122,7 @@ def check(site_dir):
         measured = knd in set(R.get('measured_kinds', [])) or (knd == 'chemical/metabolite' and tshare <= R.get('treatment_share_max', 0.5))
         if set(R.get('measured_kinds', [])) != {'physiological-measure', 'gene/protein', 'cell-type'}: f.append('measured kinds differ from the Start page rule')
         if t.get('measured') != measured: f.append(f'topic {nm} measured flag {t.get("measured")} != recount {measured}')
-        if t['disagree'] != (t['tally']['up'] > 0 and t['tally']['dn'] > 0 and measured): f.append(f'topic {nm} disagree ring flag wrong')
+        ring_got[t['ent']] = t['disagree']   # checked below against the clear-split recompute
         if t['ent'] not in D['e']: f.append(f'topic {nm} entity link {t["ent"]} is not an entity name')
     if len(hm['topics']) > R['max_topics']: f.append(f'{len(hm["topics"])} topics > max {R["max_topics"]}')
     for r in hm['cc']:
@@ -131,14 +132,18 @@ def check(site_dir):
             ra, rb = len(papers(emask(nm) & cmask(r['a']))), len(papers(emask(nm) & cmask(r['b'])))
             if (a, b) != (ra, rb): f.append(f'pair {r["a"]}/{r["b"]} shared {nm} {a},{b} != recount {ra},{rb}')
 
+    # rings: exactly the POTS clear splits (verify_start_here's own recompute of signals_rules.clear_splits)
+    sys.path.insert(0, str(Path(__file__).resolve().parent)); import verify_start_here as VS
+    _, _, _, want_s, _, _, _, picks = VS.expected(str(site))
+    for ent, ring in ring_got.items():
+        if ring != (ent.lower() in picks['pots_split_entities']): f.append(f'topic {ent} ring {ring} but clear split in POTS is {ent.lower() in picks["pots_split_entities"]}')
+
     # ---------- What stands out ----------
     for k, mk in (('contra_total', 'contradictions_total'), ('nulls', 'nulls'), ('under_total', 'understudied_total')):
         if hs[k] != m[mk]: f.append(f'stand {k} {hs[k]} != meta {mk} {m[mk]}')
     con = json.load(open(data / 'contradictions.json'))
     if con.get('total') != m['contradictions_total']: f.append('contradictions.json total != meta')
     # disagree and barely studied cards use the Start page picks: compare with verify_start_here's own recompute
-    sys.path.insert(0, str(Path(__file__).resolve().parent)); import verify_start_here as VS
-    _, _, _, want_s, _, _, _, picks = VS.expected(str(site))
     if hs.get('cex'): f.append('home shows an automatic disagreement example; none is shown (the clear splits found were not genuine)')
     js = (site / 'js' / 'home-v2.js').read_text(encoding='utf-8')
     if 'possible splits, for every condition' not in js: f.append('home disagree card does not call its total possible splits')
@@ -173,8 +178,31 @@ def check(site_dir):
     return f
 
 
+def self_test(site):
+    """plant a ring on a topic with no clear split in a copy of home_map.json (other files symlinked); it must be caught"""
+    import os, shutil, tempfile
+    site = Path(site); tmp = Path(tempfile.mkdtemp())
+    try:
+        (tmp / 'data').mkdir()
+        for x in site.iterdir():
+            if x.name != 'data': os.symlink(x.resolve(), tmp / x.name)
+        for x in (site / 'data').iterdir():
+            if x.name != 'home_map.json': os.symlink(x.resolve(), tmp / 'data' / x.name)
+        hm = json.load(open(site / 'data' / 'home_map.json'))
+        t = next(t for t in hm['topics'] if not t['disagree']); t['disagree'] = True
+        json.dump(hm, open(tmp / 'data' / 'home_map.json', 'w'))
+        got = [x for x in check(tmp) if 'ring' in x]
+        print('self-test ring without a clear split:', 'caught' if got else 'MISSED', got[:1])
+        return bool(got)
+    finally:
+        shutil.rmtree(tmp)
+
+
 if __name__ == '__main__':
-    site = sys.argv[1] if len(sys.argv) > 1 else str(Path(__file__).resolve().parent.parent / 'site')
+    args = [a for a in sys.argv[1:] if a != '--self-test']
+    site = args[0] if args else str(Path(__file__).resolve().parent.parent / 'site')
+    if '--self-test' in sys.argv:
+        ok = self_test(site); print('self-test:', 'PASS' if ok else 'FAIL'); sys.exit(0 if ok else 1)
     fails = check(site)
     print('\n'.join(fails) if fails else 'verify_home: PASS')
     sys.exit(1 if fails else 0)
