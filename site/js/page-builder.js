@@ -1,7 +1,7 @@
 import { condLabel, srcLabel } from './labels.js';
-import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, fmt, esc, val,
+import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, excludedIn, fmt, esc, val,
          FILTER_FIELDS } from './data.js';
-import { mount, selectOpts, entityCoverageNote } from './ui.js';
+import { mount, selectOpts, entityCoverageNote, flagToggle, wireFlagToggle } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
 mount('builder');
@@ -22,6 +22,8 @@ document.getElementById('bfilters').innerHTML=FILTER_FIELDS.map(k=>{
   const vals=[...F.dicts[k]].sort((a,b)=>String(a).localeCompare(String(b)));
   return `<div><label>${DIM[k]||k}</label><select data-f="${k}">${selectOpts(vals,'','Any',k==='c'?condLabel:k==='sl'?srcLabel:undefined)}</select></div>`;
 }).join('');
+document.getElementById('flagToggleSlot').innerHTML=flagToggle('fFlagged');
+wireFlagToggle('fFlagged', ()=>{ clearPreset(); draw(); });
 document.getElementById('covnote').innerHTML=
   `<div id="cn"></div>`;
 
@@ -91,10 +93,12 @@ const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a
   const ylab={findings:'Findings',papers:'Distinct papers',pct:'% of findings',entities:'Distinct canonical entities'}[ym];
   document.getElementById('ctitle').textContent=`${ylab} by ${DIM[xf]}${sf?` split by ${DIM[sf]}`:''}`;
   const nf=Object.entries(opts()).filter(([k,v])=>v&&v!==''&&k!=='y0'&&k!=='y1').length;
+  const hidden=state.includeFlagged?0:excludedIn(applyFilters(F,{...opts(),includeFlagged:true}));
   document.getElementById('csub').innerHTML=
     `${fmt(rows.length)} findings pass the current filters (${nf} active filter${nf===1?'':'s'}) ·
      ${fmt(cats.length)} categories shown${G.size>cats.length?` of ${fmt(G.size)}`:''}
-     ${ym==='papers'?' · papers counted on canonical_pmid':''}
+     ${hidden?` · <span id="flagHidden">${fmt(hidden)} from retracted papers and correction notices left out</span>`:''}
+     ${ym==='papers'?' · papers counted per PubMed record':''}
      ${(xf==='e'||sf==='e'||ym==='entities')?` · <b>canonical-entity based: covers ${state.meta.counts.canonical_entity_pct}% of findings</b>`:''}`;
   document.getElementById('cn').innerHTML=(xf==='e'||sf==='e'||ym==='entities')
     ? entityCoverageNote('this chart') : '';
@@ -120,7 +124,7 @@ const PRESETS=[
   {id:'tier',label:'Evidence tiers',x:'tr',y:'findings',type:'horizontalBar',topn:20,sort:'value',
     note:'Review and expert opinion plus case reports together outnumber RCTs and meta-analyses by a wide margin. Weigh findings with that in mind.'},
   {id:'ents',label:'Top 20 entities',x:'e',y:'papers',type:'horizontalBar',topn:20,sort:'value',
-    note:'Paper counts use canonical_pmid and include split-derived rows.'},
+    note:'Paper counts use one paper per PubMed record and include split-derived rows.'},
   {id:'dir',label:'Direction split for one entity',x:'d',y:'findings',type:'doughnut',topn:15,sort:'value',filters:{e:topEntity},openFilters:true,
     note:'Showing the most-studied entity. Change the Canonical entity filter to pick another.'},
   {id:'year',label:'Findings over time',x:'y',y:'findings',type:'line',topn:60,sort:'natural',
@@ -160,7 +164,8 @@ document.getElementById('csv').onclick=()=>{
   const head=[`# POTS and related-condition findings browser: chart data`,
     `# metric: ${LAST.meta.metric} by ${LAST.meta.x}${LAST.meta.series?` split by ${LAST.meta.series}`:''}`,
     `# filters: ${LAST.meta.filters}`,
-    `# papers are counted on canonical_pmid`,
+    `# papers are counted per PubMed record (pmid)`,
+    `# retracted papers and correction notices: ${state.includeFlagged?'included':'left out (default)'}`,
     `# scope: pots-findings ${state.meta.version} full corpus; identifiers verified at their authorities; scientific fidelity not yet human-checked`,
     `# absence of a finding is not evidence of absence`,
     `# canonical_entity covers ${c.canonical_entity_pct}% of findings; entity-based cuts exclude the rest`,

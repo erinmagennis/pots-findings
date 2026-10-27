@@ -19,5 +19,16 @@ export const srcLabel = s => (s == null ? '' : (SOURCE_LABELS[s] || condLabel(s)
 export const sourceList = (list, max = 5) => !list.length ? 'Source literature not recorded'
   : `${list.length} source literature${list.length === 1 ? '' : 's'}: ${list.slice(0, max).map(srcLabel).join(', ')}${list.length > max ? ` +${list.length - max} more` : ''}`;
 
+// research theme names (the search stream a finding came from), shown instead of the stored key
+export const THEME_LABELS = {
+  dysautonomia: 'Dysautonomia', POTS: 'POTS', hyperadrenergic: 'Hyperadrenergic POTS', dysautonomia_subtype: 'Dysautonomia subtypes',
+  patient_evidence: 'Patient-reported evidence', ME_CFS: 'ME/CFS', EDS_hypermobility: 'EDS and hypermobility', fibromyalgia: 'Fibromyalgia',
+  MCAS_mast: 'MCAS and mast cells', small_fiber: 'Small fiber neuropathy', ibs_intersection: 'IBS', rccx_gene: 'RCCX genes',
+  gastroparesis: 'Gastroparesis', autism_intersection: 'Autism', long_covid_auto: 'Long COVID', post_viral: 'Post-viral illness',
+  migraine_intersection: 'Migraine', author_augment: 'Added from key authors', sjogrens: 'Sjogren\'s',
+  hypermobility_spectrum: 'Hypermobility spectrum', pans_pandas: 'PANS and PANDAS'
+};
+export const themeLabel = t => (t == null ? '' : (THEME_LABELS[t] || String(t).replace(/_/g, ' ')));
+
 // condition labels with fewer findings than this are listed separately and kept off cards, charts and the home map
 export const MINOR_LABEL_MAX = 10;

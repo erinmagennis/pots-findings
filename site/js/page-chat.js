@@ -1,78 +1,178 @@
-/* page-chat.js: retrieval-augmented Q&A with a key the VISITOR pastes.
-   The key is kept in localStorage on this device only and is sent to the model provider's own
-   endpoint and nowhere else. There is no server in this app to send it to. */
+/* page-chat.js: questions answered by a language model from retrieved findings, using a key the VISITOR
+   pastes. The key and saved chats stay in this browser's localStorage. The key is sent only to the chosen
+   provider's own API. There is no server in this app to send anything to. */
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, ensureRows,
          textOf, detailOf, paper, val, fmt, esc } from './data.js';
 import { mount, citeLine } from './ui.js';
 import { initModel, modelStatus, onModelStatus, embedQuery, loadEmbeddings, embeddingsReady,
          rankByVector, prepareKeyword, keywordReady, keywordSearch } from './search.js';
+import { trackAsk } from './analytics.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
 mount('chat');
 
-const LS_KEY='pots_browser_api_key', LS_PROV='pots_browser_provider';
+/* ---------- providers ----------
+   Every provider here accepts calls straight from a browser (checked 2026-10-26). All but Anthropic use the
+   OpenAI chat format. `model` is only a fallback for when the provider's model list cannot be read. */
 const PROVIDERS={
-  anthropic:{ label:'Anthropic (Claude)', url:'https://api.anthropic.com/v1/messages',
-    keyHint:'sk-ant-…', model:'claude-sonnet-5-5',
-    build:(sys,msgs,model)=>({
-      headers:{'content-type':'application/json','x-api-key':getKey(),
-               'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:{model, max_tokens:4096, system:sys,
-            messages:msgs.map(m=>({role:m.role,content:m.content}))} }),
-    parse:j=> (j.content||[]).filter(c=>c.type==='text').map(c=>c.text).join('') },
-  openai:{ label:'OpenAI', url:'https://api.openai.com/v1/chat/completions',
-    keyHint:'sk-…', model:'gpt-5.4-mini',
-    build:(sys,msgs,model)=>({
-      headers:{'content-type':'application/json','authorization':'Bearer '+getKey()},
-      body:{model, max_completion_tokens:4096, messages:[{role:'system',content:sys},...msgs]} }),
-    parse:j=> j.choices?.[0]?.message?.content || '' }
+  anthropic:{ label:'Anthropic (Claude)', base:'https://api.anthropic.com/v1', kind:'anthropic', hint:'sk-ant-…',
+    model:'claude-sonnet-5-5', prefer:[/sonnet/], keys:'https://console.anthropic.com/settings/keys' },
+  openai:{ label:'OpenAI (ChatGPT)', base:'https://api.openai.com/v1', hint:'sk-…', model:'gpt-5.4-mini',
+    prefer:[/^gpt-5[.\d]*-mini$/,/mini/], keys:'https://platform.openai.com/api-keys' },
+  gemini:{ label:'Google Gemini', base:'https://generativelanguage.googleapis.com/v1beta/openai', hint:'AIza…',
+    prefer:[/flash(?!.*(lite|image|tts|live))/], keys:'https://aistudio.google.com/apikey',
+    note:'Has a free tier. Google may use free-tier questions to improve its models.' },
+  openrouter:{ label:'OpenRouter (many models, one key)', base:'https://openrouter.ai/api/v1', hint:'sk-or-…',
+    prefer:[/^anthropic\/claude-sonnet/,/sonnet/], keys:'https://openrouter.ai/keys',
+    note:'One key reaches models from many companies, including some free ones.' },
+  perplexity:{ label:'Perplexity', base:'https://api.perplexity.ai', hint:'pplx-…', model:'sonar',
+    keys:'https://www.perplexity.ai/account/api/keys' },
+  mistral:{ label:'Mistral', base:'https://api.mistral.ai/v1', prefer:[/mistral-medium-latest/,/small-latest/],
+    keys:'https://console.mistral.ai/api-keys' },
+  groq:{ label:'Groq', base:'https://api.groq.com/openai/v1', hint:'gsk_…', keys:'https://console.groq.com/keys',
+    note:'Has a free tier.' },
+  deepseek:{ label:'DeepSeek', base:'https://api.deepseek.com', hint:'sk-…', model:'deepseek-chat',
+    prefer:[/deepseek-chat/], keys:'https://platform.deepseek.com/api_keys' },
+  xai:{ label:'xAI (Grok)', base:'https://api.x.ai/v1', hint:'xai-…', keys:'https://console.x.ai' },
+  together:{ label:'Together AI', base:'https://api.together.xyz/v1', keys:'https://api.together.ai/settings/api-keys' },
+  fireworks:{ label:'Fireworks', base:'https://api.fireworks.ai/inference/v1', hint:'fw_…',
+    keys:'https://app.fireworks.ai/settings/users/api-keys' },
+  cerebras:{ label:'Cerebras', base:'https://api.cerebras.ai/v1', hint:'csk-…', keys:'https://cloud.cerebras.ai',
+    note:'Has a free tier.' },
+  huggingface:{ label:'Hugging Face', base:'https://router.huggingface.co/v1', hint:'hf_…',
+    keys:'https://huggingface.co/settings/tokens' },
+  cohere:{ label:'Cohere', base:'https://api.cohere.ai/compatibility/v1', keys:'https://dashboard.cohere.com/api-keys' },
+  deepinfra:{ label:'DeepInfra', base:'https://api.deepinfra.com/v1/openai', keys:'https://deepinfra.com/dash/api_keys' },
+  moonshot:{ label:'Moonshot (Kimi)', base:'https://api.moonshot.ai/v1', hint:'sk-…',
+    keys:'https://platform.moonshot.ai/console/api-keys' },
+  qwen:{ label:'Alibaba Qwen', base:'https://dashscope-intl.aliyuncs.com/compatible-mode/v1', hint:'sk-…',
+    keys:'https://modelstudio.console.alibabacloud.com' },
+  ai21:{ label:'AI21 (Jamba)', base:'https://api.ai21.com/studio/v1', keys:'https://studio.ai21.com/account/api-key' },
+  nebius:{ label:'Nebius AI Studio', base:'https://api.studio.nebius.com/v1', keys:'https://studio.nebius.com' },
+  novita:{ label:'Novita AI', base:'https://api.novita.ai/v3/openai', keys:'https://novita.ai/settings/key-management' },
+  hyperbolic:{ label:'Hyperbolic', base:'https://api.hyperbolic.xyz/v1', keys:'https://app.hyperbolic.xyz/settings' },
+  custom:{ label:'Other, or a model on your computer', base:'', custom:true,
+    note:'Any service that uses the OpenAI chat format, such as Ollama or LM Studio. Paste its address below.' }
 };
-const getKey=()=>localStorage.getItem(LS_KEY)||'';
-const getProv=()=>localStorage.getItem(LS_PROV)||'anthropic';
+const POPULAR=['anthropic','openai','gemini','openrouter','perplexity'];
+// key prefixes that belong to exactly one provider; used only to correct an obvious mismatch, in this browser
+const PREFIXES=[[/^sk-ant-/,'anthropic'],[/^sk-or-/,'openrouter'],[/^gsk_/,'groq'],[/^AIza/,'gemini'],[/^pplx-/,'perplexity'],
+  [/^xai-/,'xai'],[/^fw_/,'fireworks'],[/^csk-/,'cerebras'],[/^hf_/,'huggingface'],[/^sk-(proj|svcacct)-/,'openai']];
+const NOT_CHAT=/embed|tts|whisper|dall-e|image|audio|moderation|realtime|transcri|rerank|guard|computer-use|veo|imagen|davinci|babbage|aqa|learnlm|ocr/i;
 
-/* ---------- key panel ---------- */
-function renderKeyPanel(){
-  const has=!!getKey(), prov=getProv();
-  document.getElementById('keypanel').innerHTML = has
-   ? `<div class="keyrow">
-        <span class="pill">key stored on this device</span>
-        <span class="kv">provider: <b>${esc(PROVIDERS[prov].label)}</b> · model:
-          <input id="model" value="${esc(PROVIDERS[prov].model)}" style="width:230px"></span>
-        <button id="clearkey">Clear key</button>
-      </div>
-      <div class="note plain">Your key is in this browser's <code>localStorage</code> only. It is sent
-        directly to ${esc(new URL(PROVIDERS[prov].url).host)} and to no one else: this site has no backend.
-        Clearing it removes it from this device.</div>`
-   : `<h3>No API key set: everything except this chat panel already works</h3>
-      <p class="lede">Search, filters, entity and paper pages, all five discovery tables, the preset charts and
-        the chart builder need <b>no key at all</b>. A key is only needed to have a language model summarise
-        retrieved findings in prose.</p>
-      <p class="kv"><b>What is an API key?</b> A credential from an AI provider that lets software call their
-        model and bills your account for the usage. You create one in the provider's console. Typical cost for
-        a question here is well under a cent, but it is <b>your</b> account being charged.</p>
-      <div class="keyrow">
-        <select id="prov">${Object.entries(PROVIDERS).map(([k,v])=>
-          `<option value="${k}"${k===prov?' selected':''}>${esc(v.label)}</option>`).join('')}</select>
-        <input type="password" id="key" placeholder="${esc(PROVIDERS[prov].keyHint)}" autocomplete="off">
-        <button class="primary" id="savekey">Save key on this device</button>
-      </div>
-      <div class="note"><b>Where your key goes.</b> It is stored only in this browser's
-        <code>localStorage</code> and sent only to the provider's own API endpoint over HTTPS. It is never
-        transmitted to this site's host, never logged, and no key is bundled in this app. Use a key with a
-        spending limit, and clear it when you're done on a shared computer.</div>`;
-  const sk=document.getElementById('savekey');
-  if(sk) sk.onclick=()=>{
-    const k=document.getElementById('key').value.trim();
-    if(!k) return;
-    localStorage.setItem(LS_KEY,k); localStorage.setItem(LS_PROV,document.getElementById('prov').value);
-    renderKeyPanel();
-  };
-  const ck=document.getElementById('clearkey');
-  if(ck) ck.onclick=()=>{ localStorage.removeItem(LS_KEY); renderKeyPanel(); };
-  const pv=document.getElementById('prov');
-  if(pv) pv.onchange=()=>{ localStorage.setItem(LS_PROV,pv.value); renderKeyPanel(); };
+const LS={ key:'pots_browser_api_key', prov:'pots_browser_provider', base:'pots_browser_base', model:p=>'pots_browser_model_'+p };
+const ls={ get:k=>{ try{ return localStorage.getItem(k)||''; }catch{ return ''; } },
+  set:(k,v)=>{ try{ localStorage.setItem(k,v); }catch{} }, del:k=>{ try{ localStorage.removeItem(k); }catch{} } };
+const getKey=()=>ls.get(LS.key);
+const getProv=()=>PROVIDERS[ls.get(LS.prov)]?ls.get(LS.prov):'anthropic';
+const baseOf=id=>PROVIDERS[id].custom?ls.get(LS.base).replace(/\/+$/,''):PROVIDERS[id].base;
+const ready=()=>!!getKey() || (getProv()==='custom' && !!ls.get(LS.base));
+const hostOf=u=>{ try{ return new URL(u).host; }catch{ return 'that address'; } };
+
+function headersFor(id, key){
+  if(PROVIDERS[id].kind==='anthropic') return {'content-type':'application/json','x-api-key':key,
+    'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};
+  return key ? {'content-type':'application/json','authorization':'Bearer '+key} : {'content-type':'application/json'};
 }
-renderKeyPanel();
+function requestFor(id, sys, msgs, model){
+  const P=PROVIDERS[id], key=getKey();
+  if(P.kind==='anthropic') return { url:baseOf(id)+'/messages', headers:headersFor(id,key),
+    body:{model, max_tokens:4096, system:sys, messages:msgs.map(m=>({role:m.role,content:m.content}))} };
+  const body={model, messages:[{role:'system',content:sys},...msgs]};
+  if(id==='openai') body.max_completion_tokens=4096; else body.max_tokens=4096;
+  return { url:baseOf(id)+'/chat/completions', headers:headersFor(id,key), body };
+}
+const parseReply=(id,j)=> PROVIDERS[id].kind==='anthropic'
+  ? (j.content||[]).filter(c=>c.type==='text').map(c=>c.text).join('')
+  : (j.choices?.[0]?.message?.content || '');
+
+// read the provider's own model list so people pick from real names; falls back to a text box
+async function listModels(id){
+  const url=baseOf(id)+'/models'+(PROVIDERS[id].kind==='anthropic'?'?limit=100':'');
+  const res=await fetch(url,{headers:headersFor(id,getKey())});
+  if(!res.ok) throw new Error(res.status);
+  const j=await res.json();
+  const ids=(j.data||j.models||[]).map(m=>m.id||m.name).filter(Boolean).map(String).filter(m=>!NOT_CHAT.test(m));
+  return [...new Set(ids)];
+}
+function pickDefault(id, models){
+  const saved=ls.get(LS.model(id));
+  if(saved && models.includes(saved)) return saved;
+  for(const re of PROVIDERS[id].prefer||[]){ const m=models.find(x=>re.test(x)); if(m) return m; }
+  return models.includes(PROVIDERS[id].model) ? PROVIDERS[id].model : models[0];
+}
+const currentModel=()=>{ const el=document.getElementById('model'); return (el?.value||PROVIDERS[getProv()].model||'').trim(); };
+
+/* ---------- steps 1 and 2 ---------- */
+const provOptions=sel=>{
+  const opt=id=>`<option value="${id}"${id===sel?' selected':''}>${esc(PROVIDERS[id].label)}</option>`;
+  const more=Object.keys(PROVIDERS).filter(id=>!POPULAR.includes(id)&&id!=='custom')
+    .sort((a,b)=>PROVIDERS[a].label.localeCompare(PROVIDERS[b].label));
+  return `<optgroup label="Most used">${POPULAR.map(opt).join('')}</optgroup>
+    <optgroup label="More providers">${more.map(opt).join('')}</optgroup>
+    <optgroup label="Other">${opt('custom')}</optgroup>`;
+};
+function renderKeyPanel(note=''){
+  const id=getProv(), P=PROVIDERS[id];
+  if(ready()){
+    document.getElementById('keypanel').innerHTML=`<div class="ask-ready"><span class="ok" aria-hidden="true">✓</span>
+      <span>Using <b>${esc(P.label)}</b>${P.custom?` at ${esc(hostOf(baseOf(id)))}`:''}</span>
+      <label class="ask-model">Model <span id="modelslot"><span class="spinner"></span></span></label>
+      <button id="clearkey" class="linkish">${getKey()?'Remove key':'Change'}</button></div>`;
+    document.getElementById('clearkey').onclick=()=>{ ls.del(LS.key); if(P.custom) ls.del(LS.base); renderKeyPanel(); };
+    fillModels(id);
+  } else {
+    document.getElementById('keypanel').innerHTML=`<div class="ask-steps">
+      <section class="ask-step" aria-labelledby="stepGet">
+        <h2 id="stepGet"><span class="step-n">1</span>Choose your AI provider</h2>
+        <select id="prov" aria-label="AI provider">${provOptions(id)}</select>
+        <p class="ask-sub">${P.custom?esc(P.note):`${P.note?esc(P.note)+' ':''}Each question usually costs a few cents or less, billed to your account.`}</p>
+      </section>
+      <section class="ask-step" aria-labelledby="stepPaste">
+        <h2 id="stepPaste"><span class="step-n">2</span>Paste your key</h2>
+        ${P.custom?`<input type="url" id="base" class="ask-input" placeholder="http://localhost:11434/v1" value="${esc(ls.get(LS.base))}" aria-label="Service address">`:''}
+        <div class="keyrow">
+          <input type="password" id="key" placeholder="${esc(P.custom?'Key, if the service needs one':(P.hint||'Paste your key'))}" autocomplete="off" aria-label="API key">
+          <button class="primary" id="savekey">Save</button>
+        </div>
+        ${note?`<p class="ask-sub ask-flag">${esc(note)}</p>`:''}
+        ${P.custom?'':`<p class="ask-sub">No key yet? <a href="${P.keys}" target="_blank" rel="noopener">Make one on the ${esc(P.label.replace(/ \(.*\)$/,''))} site</a>. It takes a minute. Set a spending limit there so you stay in control of the cost.</p>`}
+        <details class="ask-more"><summary>Where does my key go?</summary>
+          <p>It is kept in this browser only and sent only to ${P.custom?'the address you enter':esc(hostOf(P.base))} when you
+            ask a question. This site has no server, so it never sees your key or your questions. Remove the key when
+            you finish on a shared computer.</p></details>
+      </section></div>`;
+    const pv=document.getElementById('prov'), kin=document.getElementById('key');
+    pv.onchange=()=>{ ls.set(LS.prov,pv.value); trackAsk('provider_selected',{provider:pv.value}); renderKeyPanel(); };
+    const save=()=>{
+      const k=kin.value.trim(), b=document.getElementById('base')?.value.trim();
+      if(P.custom){ if(!b){ document.getElementById('base').focus(); return; } ls.set(LS.base,b); }
+      else if(!k){ kin.focus(); return; }
+      // an unmistakable prefix from another provider: switch to it rather than send the key to the wrong place
+      const owner=PREFIXES.find(([re])=>re.test(k))?.[1];
+      if(owner && owner!==id && !P.custom){ ls.set(LS.prov,owner); renderKeyPanel(`That looks like a ${PROVIDERS[owner].label} key, so we switched to ${PROVIDERS[owner].label}. Click Save to use it.`); document.getElementById('key').value=k; return; }
+      if(k) ls.set(LS.key,k);
+      trackAsk('key_saved',{provider:id});
+      renderKeyPanel(); document.getElementById('msg').focus();
+    };
+    document.getElementById('savekey').onclick=save;
+    kin.addEventListener('keydown',e=>{ if(e.key==='Enter') save(); });
+  }
+  document.querySelector('.ask-chat').classList.toggle('waiting',!ready());
+}
+async function fillModels(id){
+  const slot=document.getElementById('modelslot'); if(!slot) return;
+  let models=[];
+  try{ models=await listModels(id); }catch{}
+  if(!document.getElementById('modelslot')) return;
+  if(models.length){
+    const pick=pickDefault(id,models);
+    slot.innerHTML=`<select id="model">${models.map(m=>`<option${m===pick?' selected':''}>${esc(m)}</option>`).join('')}</select>`;
+  } else {
+    slot.innerHTML=`<input id="model" value="${esc(ls.get(LS.model(id))||PROVIDERS[id].model||'')}" placeholder="model name">`;
+  }
+  document.getElementById('model').onchange=e=>ls.set(LS.model(id),e.target.value.trim());
+}
 
 /* ---------- retrieval ---------- */
 const rstate=document.getElementById('rstate');
@@ -131,18 +231,26 @@ HARD RULES:
 7. Quote at most a dozen words verbatim from any finding. Summarize in your own words otherwise.
 8. Be concise and concrete. No preamble about being an AI.`;
 
-/* ---------- chat ---------- */
+/* ---------- chat ----------
+   Chats are saved in this browser only (localStorage), unless the visitor turns saving off. Saved: the
+   questions, the answers and which findings were used. Never the key. */
 const log=document.getElementById('chatlog');
-let history=[];
-function greet(){
-  log.innerHTML=`<div class="msg"><div class="who">about this panel</div><div class="body">Ask about what these
-${fmt(state.meta.counts.findings)} findings report. Your question is used to retrieve the most relevant findings
-locally, and only those findings: plus your question: are sent to the model. Answers cite the findings used
-so you can open the source papers yourself.
+const CHATS='pots_ask_chats', SAVE='pots_ask_save', MAX_CHATS=30;
+const saving=()=>ls.get(SAVE)!=='0';
+const loadChats=()=>{ try{ return JSON.parse(ls.get(CHATS)||'[]'); }catch{ return []; } };
+const storeChats=list=>ls.set(CHATS,JSON.stringify(list.slice(0,MAX_CHATS)));
+const newChat=()=>({id:Date.now().toString(36), at:new Date().toISOString(), title:'', turns:[], history:[]});
+let cur=newChat();
 
-This is research information, not medical advice.</div></div>`;
+const EXAMPLES=['What is reported about norepinephrine in POTS?','Which findings disagree about mast cells?',
+  'What did studies find about small fiber neuropathy?'];
+function greet(){
+  log.innerHTML=`<div class="ask-empty"><p>Try one of these</p>${EXAMPLES.map(q=>
+    `<button class="ask-eg" type="button">${esc(q)}</button>`).join('')}</div>`;
+  log.querySelectorAll('.ask-eg').forEach(b=>b.onclick=()=>{
+    document.getElementById('msg').value=b.textContent; if(ready()) send(); else document.getElementById('key')?.focus();
+  });
 }
-greet();
 
 function add(role, body, used){
   const div=document.createElement('div');
@@ -158,14 +266,71 @@ function add(role, body, used){
   return div;
 }
 
+function persist(){
+  if(!saving() || !cur.turns.length) return;
+  const list=loadChats().filter(c=>c.id!==cur.id);
+  list.unshift(cur); storeChats(list); renderChats();
+}
+async function openChat(id){
+  const c=loadChats().find(x=>x.id===id); if(!c) return;
+  cur=c; log.innerHTML='';
+  await ensureRows(c.turns.flatMap(t=>t.rows||[]));
+  c.turns.forEach(t=>{ add('user',t.q); add('assistant',t.a,t.rows); });
+  renderChats();
+}
+function renderChats(){
+  const box=document.getElementById('chats'), list=loadChats();
+  box.innerHTML=`<div class="ask-chats-head"><h2>Your chats</h2>
+      <label class="ask-toggle"><input type="checkbox" id="saveChats"${saving()?' checked':''}> Save chats on this device</label></div>
+    ${list.length?`<ul class="ask-chatlist">${list.map(c=>`<li class="${c.id===cur.id?'on':''}">
+        <button class="linkish ask-open" data-id="${c.id}">${esc(c.title||'Untitled chat')}</button>
+        <span class="kv">${new Date(c.at).toLocaleDateString()} · ${c.turns.length} question${c.turns.length===1?'':'s'}</span>
+        <button class="linkish ask-del" data-id="${c.id}" aria-label="Delete this chat">Delete</button></li>`).join('')}</ul>
+      <button class="linkish" id="delAll">Delete all chats</button>`
+    :`<p class="kv">${saving()?'Your chats will appear here. They stay in this browser and are never sent to this site.':'Saving is off. Chats disappear when you leave the page.'}</p>`}`;
+  box.querySelectorAll('.ask-open').forEach(b=>b.onclick=()=>openChat(b.dataset.id));
+  box.querySelectorAll('.ask-del').forEach(b=>b.onclick=()=>{
+    storeChats(loadChats().filter(c=>c.id!==b.dataset.id));
+    if(cur.id===b.dataset.id){ cur=newChat(); greet(); }
+    renderChats();
+  });
+  const da=document.getElementById('delAll');
+  if(da) da.onclick=()=>{ ls.del(CHATS); cur=newChat(); greet(); renderChats(); };
+  document.getElementById('saveChats').onchange=e=>{
+    ls.set(SAVE,e.target.checked?'1':'0');
+    if(e.target.checked) persist(); else ls.del(CHATS);
+    renderChats();
+  };
+}
+
+// plain-text copy of the open chat, with each finding's citation and link
+function download(){
+  if(!cur.turns.length) return;
+  const cite=r=>{ const p=paper(state.facets.cols.p[r]); if(!p) return 'citation unavailable';
+    return `${p.first_author||'Unknown'}${p.author_count>1?' et al.':''}, ${p.journal||'N/A'}${p.year?` (${p.year})`:''}. ${p.doi_url||p.pubmed_url||''}`.trim(); };
+  const out=[`# ${cur.title||'Chat'}`, '', `From ${location.origin}/chat on ${new Date(cur.at).toLocaleString()}.`,
+    'Research information, not medical advice. Answers come from automated extractions; check the cited papers.', ''];
+  cur.turns.forEach((t,i)=>{
+    out.push(`## Question ${i+1}`, '', t.q, '', '### Answer', '', t.a, '', '### Findings used', '');
+    (t.rows||[]).forEach((r,j)=>out.push(`${j+1}. [F${j+1}] ${textOf(r)}`, `   ${cite(r)}`));
+    out.push('');
+  });
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([out.join('\n')],{type:'text/markdown'}));
+  a.download=`pots-chat-${cur.at.slice(0,10)}.md`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
 async function send(){
   const q=document.getElementById('msg').value.trim();
   if(!q) return;
-  if(!getKey()){ add('assistant','No API key is set. Add one above, or use Search / Charts / Discover: those need no key.'); return; }
+  if(!ready()){ document.getElementById('key')?.focus(); add('assistant','Add a key in step 2 first. Search, Signals and Analyze work without one.'); return; }
   document.getElementById('msg').value='';
+  log.querySelector('.ask-empty')?.remove();
   add('user',q);
   const pending=add('assistant','retrieving findings…');
   const n=+document.getElementById('ctxn').value||12;
+  const id=getProv();
+  trackAsk('question_sent',{provider:id});
   let rows=[];
   try{
     rows=await retrieve(q,n);
@@ -174,12 +339,9 @@ async function send(){
       return;
     }
     pending.querySelector('.body').innerHTML='<span class="spinner"></span> asking the model…';
-    const prov=PROVIDERS[getProv()];
-    const model=(document.getElementById('model')?.value||prov.model).trim();
     const userMsg=`Question: ${q}\n\nFindings retrieved from the database:\n\n${contextBlock(rows)}`;
-    const msgs=[...history,{role:'user',content:userMsg}];
-    const {headers,body}=prov.build(SYSTEM,msgs,model);
-    const res=await fetch(prov.url,{method:'POST',headers,body:JSON.stringify(body)});
+    const {url,headers,body}=requestFor(id,SYSTEM,[...cur.history,{role:'user',content:userMsg}],currentModel());
+    const res=await fetch(url,{method:'POST',headers,body:JSON.stringify(body)});
     if(!res.ok){
       let detail='';
       try{ const j=await res.json(); detail=j.error?.message||JSON.stringify(j).slice(0,300); }
@@ -187,23 +349,31 @@ async function send(){
       throw new Error(`${res.status} ${res.statusText}: ${detail}`);
     }
     const j=await res.json();
-    const text=prov.parse(j)||(j.stop_reason==='max_tokens'||j.choices?.[0]?.finish_reason==='length'
+    const text=parseReply(id,j)||(j.stop_reason==='max_tokens'||j.choices?.[0]?.finish_reason==='length'
       ? '(the model used its whole output budget before answering; try a shorter question or fewer findings)' : '(empty response)');
     pending.remove();
     add('assistant',text,rows);
-    history.push({role:'user',content:userMsg},{role:'assistant',content:text});
-    if(history.length>6) history=history.slice(-6);
+    cur.history.push({role:'user',content:userMsg},{role:'assistant',content:text});
+    if(cur.history.length>6) cur.history=cur.history.slice(-6);
+    if(!cur.title) cur.title=q.length>70?q.slice(0,67)+'…':q;
+    cur.turns.push({q,a:text,rows});
+    persist();
   }catch(e){
     const msg=String(e.message||e);
     const hint = /Failed to fetch|NetworkError|CORS/i.test(msg)
-      ? ` This is usually a browser/CORS or network problem, or a key the provider rejected before responding. Your key never leaves this device except to the provider: check it is valid and that the provider allows direct browser calls.`
-      : /401|403/.test(msg) ? ' The provider rejected the key. Check it, or clear and re-enter it.'
-      : /429/.test(msg) ? ' Rate-limited or out of quota on your account.' : '';
+      ? ` This is usually a network problem, or a key the provider rejected before answering. Check the key, and for a service on your computer, check it allows requests from this site.`
+      : /401|403/.test(msg) ? ' The provider rejected the key. Check it, or remove it and paste it again.'
+      : /404/.test(msg) ? ' The provider did not recognise the model. Pick another model above.'
+      : /429/.test(msg) ? ' Rate-limited or out of credit on your account.' : '';
     pending.querySelector('.body').innerHTML=
       `<span class="pill err">request failed</span> ${esc(msg)}${hint}
-       <br><br>Search, browse and charts are unaffected and still work without a key.`;
+       <br><br>Search, Signals and Analyze still work without a key.`;
   }
 }
 document.getElementById('send').onclick=send;
 document.getElementById('msg').addEventListener('keydown',e=>{ if(e.key==='Enter') send(); });
-document.getElementById('reset').onclick=()=>{ history=[]; greet(); };
+document.getElementById('newchat').onclick=()=>{ cur=newChat(); greet(); renderChats(); };
+document.getElementById('download').onclick=download;
+renderKeyPanel();
+greet();
+renderChats();

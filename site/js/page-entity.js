@@ -1,5 +1,5 @@
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, ensureRows,
-         paperCount, fmt, esc, val } from './data.js';
+         paperCount, excludedIn, fmt, esc, val } from './data.js';
 import { mount, findingCard, qs } from './ui.js';
 
 const PAGE=25; let page=0, rows=[];
@@ -13,6 +13,10 @@ if(!e){
     <p>No canonical entity named <code>${esc(name)}</code>. <a href="entities">Browse all entities →</a></p></div>`;
 } else {
   rows=applyFilters(state.facets,{e:name});
+  // counts and charts follow the default exclusion of retracted papers and correction notices
+  const hidden=excludedIn(applyFilters(state.facets,{e:name,includeFlagged:true}));
+  const tallyRows=f=>{ const m={}; for(const r of rows){ const v=val(f,r); if(v) m[v]=(m[v]||0)+1; } return m; };
+  const nPapers=paperCount(rows);
   const ont = e.oid
     ? `<span class="mono">${esc(e.oid)}</span> <span class="pill grey">${esc(e.osrc||'')}</span>${e.olabel?`: ${esc(e.olabel)}`:''}`
     : `<span class="pill grey">no ontology ID</span>`;
@@ -21,14 +25,14 @@ if(!e){
     <p class="kv">Ontology: ${ont} · Entity-mapping confidence:
       <b>${esc(e.mapc||'N/A')}</b>${e.mapc&&e.mapc!=='high'?' <span class="tag lowconf">review this merge before relying on it</span>':''}</p>
     <div class="statgrid" style="margin-top:10px">
-      <div class="stat"><div class="v">${fmt(e.np_)}</div><div class="k">papers</div></div>
-      <div class="stat"><div class="v">${fmt(e.npd)}</div><div class="k">papers (direct)</div></div>
-      <div class="stat"><div class="v">${fmt(e.nf)}</div><div class="k">findings</div></div>
+      <div class="stat"><div class="v">${fmt(nPapers)}</div><div class="k">papers</div></div>
+      <div class="stat"><div class="v">${fmt(nPapers)}</div><div class="k">papers (direct)</div></div>
+      <div class="stat"><div class="v">${fmt(rows.length)}</div><div class="k">findings</div></div>
       <div class="stat"><div class="v">${fmt((e.origs||[]).length)}</div><div class="k">merged strings</div></div>
       <div class="stat"><div class="v">${fmt(Object.keys(e.conds||{}).length)}</div><div class="k">conditions</div></div>
     </div>
-    <p class="kv" style="margin-top:8px"><b>papers</b> counts distinct canonical papers including
-      split-derived rows; <b>papers (direct)</b> excludes rows created by splitting a compound entity string.</p>
+    <p class="kv" style="margin-top:8px"><b>papers</b> counts distinct papers, one per PubMed record, including
+      split-derived rows; <b>papers (direct)</b> excludes rows created by splitting a compound entity string.${hidden?` ${fmt(hidden)} finding${hidden===1?'':'s'} from retracted papers or correction notices ${hidden===1?'is':'are'} left out.`:''}</p>
     <p><a href="search?e=${encodeURIComponent(e.name)}">Open in search with filters →</a></p>
   </div>`;
 
@@ -48,7 +52,7 @@ if(!e){
       options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{precision:0}}},
         maintainAspectRatio:false}});
   };
-  mk('cDir',e.dirs,'#9a5638'); mk('cTier',e.tiers,'#397277');
+  mk('cDir',tallyRows('d'),'#9a5638'); mk('cTier',tallyRows('tr'),'#397277');
   render();
 }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ask (BYO key): POTS &amp; Dysautonomia Findings Browser</title>
+<title>Ask the findings: POTS &amp; Dysautonomia Findings Browser</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
@@ -10,33 +10,40 @@
 <div id="framing-slot"></div><header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
-    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="discover" class="">Signals</a><a href="connections" class="">Connections</a><a href="builder" class="">Analyze</a><a href="about" class="">About</a><a href="chat" class="active">Ask <span>(BYO key)</span></a></nav>
+    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="discover" class="">Signals</a><a href="connections" class="">Connections</a><a href="builder" class="">Analyze</a><a href="about" class="">About</a><a href="chat" class="active">Ask</a></nav>
     <div class="header-rail"></div>
   </div></header>
-<main><div class="wrap">
-  <div class="panel">
-    <h1>Ask questions about the findings <span class="pill grey">bring your own API key</span></h1>
-    <p class="lede">Search the findings locally, then ask a language model to explain the matches. Answers cite the findings and source papers.</p>
-    <div class="note stop"><b>Not medical advice.</b> This answers questions <i>about what these papers
-      reported</i>: it is not a clinician, cannot diagnose, and must not be used for treatment decisions.
-      The model can also misread the findings it is given; always open the cited papers.</div>
-    <div id="keypanel"></div>
+<main><div class="wrap ask">
+  <div class="ask-head">
+    <h1>Ask the findings</h1>
+    <p class="lede">Ask a question in plain words. The answer only uses findings from these papers, and cites each one.</p>
   </div>
 
-  <div class="panel" id="chatui">
+  <div id="keypanel"></div>
+
+  <section class="ask-step ask-chat" aria-labelledby="stepAsk">
+    <h2 id="stepAsk"><span class="step-n">3</span>Ask</h2>
     <div id="chatlog"></div>
-    <div class="searchbar" style="margin-top:10px">
-      <input type="text" id="msg" placeholder="e.g. what is reported about norepinephrine in POTS?" style="flex:1 1 340px">
+    <div class="ask-bar">
+      <input type="text" id="msg" placeholder="Type your question" aria-label="Your question">
       <button class="primary" id="send">Ask</button>
-      <button id="reset">Clear conversation</button>
     </div>
-    <div class="chks">
-      <label>Retrieval <select id="rmode"><option value="keyword">keyword</option>
-        <option value="semantic">semantic (loads model)</option></select></label>
-      <label>Findings as context <input type="number" id="ctxn" value="12" min="3" max="30" style="width:64px"></label>
-      <div id="rstate" class="kv"></div>
+    <div class="ask-foot">
+      <span>Research information, not medical advice. Always open the cited papers.</span>
+      <span class="ask-actions"><button id="download" class="linkish">Download this chat</button>
+        <button id="newchat" class="linkish">New chat</button></span>
     </div>
-  </div>
+    <details class="ask-more"><summary>Search options</summary>
+      <div class="chks">
+        <label>Matching <select id="rmode"><option value="keyword">keyword</option>
+          <option value="semantic">by meaning (loads a model)</option></select></label>
+        <label>Findings sent with each question <input type="number" id="ctxn" value="12" min="3" max="30" style="width:64px"></label>
+        <div id="rstate" class="kv"></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="ask-step ask-saved" id="chats" aria-label="Your chats"></section>
 </div></main>
 <div id="footer-slot"></div>
 <script type="module" src="js/chrome.js"></script>

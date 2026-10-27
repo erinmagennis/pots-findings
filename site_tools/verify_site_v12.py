@@ -13,9 +13,14 @@ Checks (each failure names what/got/expected/source):
      site/js/*.js outside <!--n:KEY-->…<!--/n--> markers, code comments, CSS/SVG numerics and an explicit allowlist
   9. markers in static HTML equal the current meta value (apply_counts.py was run)
  10. CHECKSUMS.txt covers every file under site/ and matches
---self-test plants three failures (count, marker, hand-typed number) and requires all three to be caught.
+ 11. PAPER COUNT: meta.counts.papers == distinct pmids across packages/*/data/tier*_findings (read directly, not via the projection)
+ 12. PAPER FLAGS: every pmid in paper_flags.json is a site paper; findings from exclude-flagged papers are left out of the
+     default facet-based counts (findings_default / excluded_findings / retracted_findings recomputed from facets.p + flags),
+     no Signals table (associations, contradictions, understudied, convergence, null results) cites an exclude-flagged paper,
+     and data.js applyFilters carries the default exclusion
+--self-test plants failures (count, marker, hand-typed number, a flag on a non-site paper, a wrong default count) and requires all to be caught.
 """
-import argparse, copy, glob, hashlib, json, os, re, sys
+import argparse, copy, csv, glob, gzip, hashlib, json, os, re, sys
 from pathlib import Path
 
 DETAIL_KEYS = {"start", "end", "quote", "quant", "eff", "path", "lim", "fut", "npart", "comp", "symp", "treat", "sec", "ont"}
@@ -30,7 +35,8 @@ ALLOW = {"2023-06-01", "1200", "6000", "0001", "9999", "1000", "1e9", "2048", "4
 MARKER = re.compile(r"<!--n:([a-z_0-9]+)-->(.*?)<!--/n-->", re.S)
 
 
-def rj(p): return json.load(open(p, encoding="utf-8"))
+def _no_nan(c): raise ValueError(f"non-standard JSON constant {c} (browsers reject NaN/Infinity)")
+def rj(p): return json.load(open(p, encoding="utf-8"), parse_constant=_no_nan)
 def add(f, what, got, exp, src):
     if got != exp: f.append((what, got, exp, src))
 
@@ -74,7 +80,49 @@ def markers_check(site, meta, cov, failures):
     return n
 
 
-def check(root: Path, site: Path, meta_override=None, html_override=None):
+def package_pmids(root):
+    """distinct pmids over the released findings files, read directly (pyarrow when present, else the shipped .csv.gz)."""
+    out = set(); files = sorted(glob.glob(str(root / "packages" / "*" / "data" / "tier*_findings.parquet")))
+    try:
+        import pyarrow.parquet as pq
+        for fp in files: out.update(str(x) for x in pq.read_table(fp, columns=["pmid"]).column("pmid").to_pylist() if x is not None)
+        return out, len(files)
+    except ImportError:
+        csv.field_size_limit(1 << 30); files = sorted(glob.glob(str(root / "packages" / "*" / "data" / "tier*_findings.csv.gz")))
+        for fp in files:
+            with gzip.open(fp, "rt", encoding="utf-8", newline="") as fh:
+                for r in csv.DictReader(fh): out.add(str(int(float(r["pmid"]))) if r.get("pmid") else None)
+        out.discard(None); return out, len(files)
+
+
+def flags_check(data, P, F, C, failures, flags_override=None):
+    """paper flags: pmids are site papers; default exclusion matches meta; no Signals table cites an excluded paper."""
+    n = 0; pf = flags_override if flags_override is not None else rj(data / "paper_flags.json")
+    pi = P["fields"].index("pmid"); site_pm = [str(r[pi]) for r in P["rows"]]; site_set = set(site_pm)
+    bad = sorted(set(pf["flags"]) - site_set); add(failures, "paper_flags pmids not site papers", bad[:10], [], "paper_flags.json vs papers.json"); n += 1
+    excl = {p for p, L in pf["flags"].items() if any(x.get("u") == "exclude" for x in L)}
+    retr = {p for p, L in pf["flags"].items() if any(x.get("f") in ("retracted", "partially_retracted") for x in L)}
+    ex_idx = {i for i, p in enumerate(site_pm) if p in excl}; rt_idx = {i for i, p in enumerate(site_pm) if p in retr}
+    col = F["cols"]["p"]; n_ex = sum(1 for x in col if x in ex_idx); n_rt = sum(1 for x in col if x in rt_idx)
+    add(failures, "default findings (facets minus exclude-flagged papers)", F["n"] - n_ex, C.get("findings_default"), "meta.counts.findings_default")
+    add(failures, "excluded_findings", n_ex, C.get("excluded_findings"), "facets.p + paper_flags.json")
+    add(failures, "retracted_findings", n_rt, C.get("retracted_findings"), "facets.p + paper_flags.json")
+    add(failures, "excluded_papers", len(excl), C.get("excluded_papers"), "paper_flags.json"); n += 4
+    for fk in pf.get("labels", {}):
+        add(failures, f"counts.flag_{fk}", sum(1 for L in pf["flags"].values() if any(x["f"] == fk for x in L)), C.get(f"flag_{fk}"), "paper_flags.json"); n += 1
+    hits = []
+    for fn, keys in [("associations.json", ["pmids"]), ("contradictions.json", ["pmids_A", "pmids_B"]), ("understudied.json", ["pmids"])]:
+        for r in rj(data / fn)["rows"]:
+            for k in keys: hits += [f"{fn}:{p}" for p in (r.get(k) or []) if str(p) in excl]
+    NI = rj(data / "null_results.json"); ci = NI["fields"].index("canonical_pmid")
+    for sh in NI["shards"]: hits += [f"{sh['file']}:{r[ci]}" for r in rj(data / sh["file"])["rows"] if str(r[ci]) in excl]
+    add(failures, "Signals tables citing exclude-flagged papers", hits[:10], [], "projection must drop recommended_use=exclude papers"); n += 1
+    js = open(data.parent / "js" / "data.js", encoding="utf-8").read()
+    add(failures, "data.js applyFilters default exclusion", bool(re.search(r"function applyFilters[\s\S]*?excludePaper", js)), True, "site/js/data.js"); n += 1
+    return n
+
+
+def check(root: Path, site: Path, meta_override=None, html_override=None, flags_override=None):
     f = []; data = site / "data"; checks = 0
     meta = copy.deepcopy(meta_override) if meta_override else rj(data / "meta.json"); C = meta["counts"]
     golden = rj(root / "validation" / "v12_golden_facts.json")
@@ -90,6 +138,10 @@ def check(root: Path, site: Path, meta_override=None, html_override=None):
         if k in F["dicts"] and col: add(f, f"col {k} max code", max(col) < len(F["dicts"][k]), True, "dict bounds"); checks += 1
     P = rj(data / "papers.json"); add(f, "papers.fields", P["fields"], PAPER_FIELDS, "contract"); add(f, "papers rows", len(P["rows"]), golden["papers_rows"], "golden"); checks += 2
     add(f, "paper index bound", max(F["cols"]["p"]) < len(P["rows"]), True, "facets.p"); checks += 1
+    pk, nfiles = package_pmids(root)
+    add(f, "papers vs distinct pmids in packages/*/data/tier*_findings", C["papers"], len(pk), f"{nfiles} package findings files"); add(f, "package findings files", nfiles, 5, "packages")
+    add(f, "papers.json pmids == package pmids", set(str(r[P["fields"].index("pmid")]) for r in P["rows"]) == pk, True, "packages"); checks += 3
+    checks += flags_check(data, P, F, C, f, flags_override)
     for s in range(F["n_shards"]):
         a, b = s * F["shard_rows"], min((s + 1) * F["shard_rows"], n)
         T = rj(data / f"text_{s:02d}.json"); Dd = rj(data / f"detail_{s:02d}.json")
@@ -146,16 +198,19 @@ def main():
     f, checks = check(root, site); r = report(f, checks)
     if r or not a.self_test: return r
     import shutil, tempfile
-    bad = rj(site / "data" / "meta.json"); bad["counts"]["papers"] += 7; bad["counts"]["findings"] = 1
+    bad = rj(site / "data" / "meta.json"); bad["counts"]["papers"] += 7; bad["counts"]["findings"] = 1; bad["counts"]["findings_default"] += 1
     f1, _ = check(root, site, meta_override=bad); caught = {x[0] for x in f1}
     tmp = Path(tempfile.mkdtemp()); shutil.copytree(site, tmp / "site", ignore=shutil.ignore_patterns("data", "vendor"))
     (tmp / "site" / "js").mkdir(exist_ok=True)
     with open(tmp / "site" / "about.html", "a", encoding="utf-8") as fh: fh.write("<p>planted: 73,070 findings from <!--n:papers-->6,244<!--/n--> papers</p>")
     f2 = []; numbers_check(str(tmp / "site"), f2); markers_check(str(tmp / "site"), rj(site / "data" / "meta.json"), rj(site / "data" / "findings_facets.json")["coverage"], f2)
     caught2 = {("hand-typed numbers in site copy" if x[0].startswith("hand-typed") else x[0].split(" in ")[0]) for x in f2}; shutil.rmtree(tmp)
-    need = {"counts.papers", "counts.findings", "facets.n"}; need2 = {"hand-typed numbers in site copy", "marker papers"}
-    if not (need <= caught and need2 <= caught2): print(f"SELF-TEST FAIL: caught {sorted(caught)} / {sorted(caught2)}"); return 1
-    print(f"SELF-TEST PASS: caught all {len(need) + len(need2)} planted failures"); return 0
+    badf = rj(site / "data" / "paper_flags.json"); badf["flags"]["99999999"] = [{"f": "retracted", "l": "Retracted", "u": "exclude"}]
+    f3, _ = check(root, site, flags_override=badf); caught3 = {x[0] for x in f3}
+    need = {"counts.papers", "counts.findings", "facets.n", "papers vs distinct pmids in packages/*/data/tier*_findings", "default findings (facets minus exclude-flagged papers)"}
+    need2 = {"hand-typed numbers in site copy", "marker papers"}; need3 = {"paper_flags pmids not site papers", "excluded_papers", "counts.flag_retracted"}
+    if not (need <= caught and need2 <= caught2 and need3 <= caught3): print(f"SELF-TEST FAIL: caught {sorted(caught)} / {sorted(caught2)} / {sorted(caught3)}"); return 1
+    print(f"SELF-TEST PASS: caught all {len(need) + len(need2) + len(need3)} planted failures"); return 0
 
 
 if __name__ == "__main__":

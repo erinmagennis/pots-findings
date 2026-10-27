@@ -1,7 +1,7 @@
 import { condLabel } from './labels.js';
 import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, ensureRows,
-         paperCount, paper, fmt, esc, FILTER_FIELDS } from './data.js';
-import { mount, findingCard, selectOpts, autocomplete, qs, entityCoverageNote } from './ui.js';
+         paperCount, paper, paperByPmid, pmidsWithFlag, fmt, esc, FILTER_FIELDS } from './data.js';
+import { mount, findingCard, selectOpts, autocomplete, qs, entityCoverageNote, flagPills, flagToggle, wireFlagToggle } from './ui.js';
 import { initModel, modelStatus, onModelStatus, embedQuery, loadEmbeddings, embeddingsReady,
          rankByVector, prepareKeyword, keywordReady, keywordSearch } from './search.js';
 
@@ -27,6 +27,30 @@ fEl.innerHTML = FILTER_FIELDS.map(k=>{
   return `<div><label>${FLABEL[k]}</label><select data-f="${k}">${selectOpts(vals,'','Any',k==='c'?condLabel:undefined)}</select></div>`;
 }).join('');
 autocomplete(document.getElementById('fe'), state.entities.map(e=>e.name), ()=>run());
+// default exclusion switch, kept visible outside the collapsed filters
+document.getElementById('modeState').insertAdjacentHTML('afterend', `<div>${flagToggle('fFlagged')}</div>`);
+wireFlagToggle('fFlagged', ()=>run());
+
+/* paper flags are searchable: these words open a "Flagged papers" group above the results */
+const FLAG_QUERIES = [
+  [/retract/, ['retracted','partially_retracted'], 'Retracted papers'],
+  [/erratum|errata|correction|corrigend/, ['erratum_notice','has_correction'], 'Correction notices and corrected papers'],
+  [/expression of concern|\bconcern\b/, ['expression_of_concern'], 'Expression of concern'],
+  [/preprint/, ['preprint','preprint_with_published_version','published_version_of_preprint'], 'Preprints and their published versions']
+];
+const FLAG_WORDS = ['retracted', 'correction notice', 'erratum', 'expression of concern', 'preprint'];
+autocomplete(document.getElementById('q'), FLAG_WORDS, ()=>run());
+function flaggedGroup(q){
+  const hit = FLAG_QUERIES.find(([re])=>re.test(q.toLowerCase())); if(!hit) return '';
+  const pms = pmidsWithFlag(hit[1]), show = pms.slice(0, 8);
+  const listFlag = hit[1][0]==='preprint' ? 'preprint' : hit[1][0];
+  return `<section class="panel flag-group" aria-label="Flagged papers"><p class="section-kicker">Flagged papers</p>
+    <h2>${esc(hit[2])}: ${fmt(pms.length)} papers</h2>
+    <p class="kv">Flags come from PubMed. Findings from retracted papers and correction notices are left out of counts, charts and the results below unless you tick “Include retracted papers and correction notices”.</p>
+    ${show.map(pm=>paperCard(paperByPmid(pm))).join('')}
+    ${pms.length>show.length?`<p><a href="papers?flag=${esc(listFlag)}">See all ${fmt(pms.length)} in the papers list →</a></p>`:''}</section>`;
+}
+
 const cov=document.createElement('div'); cov.innerHTML=entityCoverageNote('the canonical-entity filter');
 document.getElementById('filters').after(cov);
 
@@ -114,6 +138,7 @@ async function run(){
 
 async function render(label, withScores=false){
   const c=document.getElementById('count');
+  const fg=document.getElementById('flagGroup'); if(fg) fg.innerHTML=flaggedGroup(document.getElementById('q').value.trim());
   const paperRows=[...new Set(rows.map(row=>state.facets.cols.p[row]))];
   const displayRows=view==='papers' ? paperRows : rows;
   const np=paperCount(rows);
@@ -142,7 +167,7 @@ function paperCard(p){
   if(!p) return '';
   const source=p.doi_url||p.pubmed_url||p.pmc_url;
   const sourceLink=source?`<a href="${esc(source)}" target="_blank" rel="noopener">Read source</a>`:'';
-  return `<div class="card paper-card"><p class="paper-title"><a href="paper?pmid=${esc(p.pmid)}">${esc(p.title||p.citation_short||'Untitled paper')}</a></p>
+  return `<div class="card paper-card"><p class="paper-title">${flagPills(p.pmid)}<a href="paper?pmid=${esc(p.pmid)}">${esc(p.title||p.citation_short||'Untitled paper')}</a></p>
     <div class="paper-meta">${esc(p.first_author||'Unknown')}${p.author_count>1?' et al.':''} · ${esc(p.journal||'Unknown journal')} · ${esc(p.year||'Year unavailable')}</div>
     <div class="paper-actions"><span>${fmt(p.n_findings)} extracted findings</span>${sourceLink?` · ${sourceLink}`:''} · <a href="paper?pmid=${esc(p.pmid)}">View findings</a></div></div>`;
 }

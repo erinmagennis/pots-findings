@@ -217,3 +217,68 @@ header.site,header.topbar{view-transition-name:site-header}
 main{min-height:calc(100vh - 72px)}
 
 .preset-section{margin:0 0 18px}.preset-row{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}.preset-pill{border-radius:999px;font-size:12.5px;padding:6px 12px}.preset-pill[aria-pressed=true]{background:var(--rust-soft);border-color:var(--rust);color:var(--rust)}.preset-section .kv{margin:4px 0 0;min-height:1em}
+
+/* Signals overview: each column is one card with inner padding; one column on phones */
+.overview-main,.overview-side{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px 26px;box-shadow:0 8px 30px rgba(52,55,53,.035);align-self:start}
+.overview-section{background:none}
+.overview-section:last-child{padding-bottom:0}
+.year-bars{padding-bottom:22px}.year-bar span{transform:none;transform-origin:center;bottom:-2px}
+@media(max-width:620px){.overview-main,.overview-side{padding:18px;border-radius:14px}.overview-side{display:block}.overview-side .overview-section{border-top:1px solid var(--line);padding-top:22px}.overview-side .overview-section:first-child{border-top:0;padding-top:0}.overview-columns{grid-template-columns:1fr;gap:4px}nav.tabs#dtabs{flex-wrap:nowrap;border-radius:14px}.year-bar span{font-size:9px}}
+.panel>h2:first-child{margin-top:0}
+.tag{white-space:nowrap}
+
+/* Ask: three steps, then the conversation */
+.ask{max-width:920px}
+.ask-head{margin-bottom:22px}.ask-head .lede{margin-bottom:0}
+.ask-steps{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}
+.ask-step{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 24px;box-shadow:0 8px 30px rgba(52,55,53,.035)}
+.ask-step h2{display:flex;align-items:center;gap:10px;font-size:18px;letter-spacing:-.02em;margin:0 0 10px;border:0;padding:0}
+.ask-step p{margin:0 0 10px;font-size:14px;line-height:1.55}
+.step-n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--charcoal);color:#fff;font:700 13px var(--mono);flex:none}
+.ask-step .keyrow{margin:4px 0 10px;max-width:640px}.ask-step .keyrow select{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:13px}
+.ask-step .keyrow input{border-radius:10px;padding:9px 10px}
+.ask-more{font-size:13px;color:var(--muted)}.ask-more summary{cursor:pointer;width:max-content;max-width:100%}.ask-more p{margin:8px 0 0;font-size:13px}
+.ask-more .chks{margin-top:10px}
+.ask-ready{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;margin-bottom:16px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font-size:14px}
+.ask-ready .ok{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px}
+button.linkish{border:0;background:none;padding:0;color:var(--rust);font-size:13px;text-decoration:underline;text-underline-offset:2px}button.linkish:hover{transform:none}
+.ask-chat #chatlog{max-height:520px;min-height:150px;border-radius:14px;background:#fff;padding:16px}
+.ask-chat.waiting h2 .step-n{background:#c9c4ba}
+.ask-bar{display:flex;gap:8px;margin-top:12px}.ask-bar input{flex:1;min-width:0;padding:13px 18px;border:1px solid #d3cec4;border-radius:999px;font-size:15px;background:#fff}
+.ask-bar input:focus{outline:2px solid rgba(57,114,119,.25);border-color:var(--teal)}
+.ask-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:10px 4px 12px;font-size:12.5px;color:var(--muted)}
+.ask-empty p{margin:0 0 10px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.ask-eg{display:block;margin:0 0 8px;text-align:left;font-size:14px;border-radius:12px}
+@media(max-width:620px){.ask-steps{grid-template-columns:1fr}.ask-step{padding:18px;border-radius:14px}.ask-ready{border-radius:14px}}
+
+.ask-step select#prov{width:100%;max-width:420px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px;margin:2px 0 10px}
+.ask-sub{font-size:13.5px;color:var(--muted)}.ask-sub a{font-weight:650}
+.ask-flag{color:var(--rust)}
+.ask-input{display:block;width:100%;max-width:640px;margin:2px 0 8px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;font-family:var(--mono);font-size:12.5px}
+.ask-model{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-left:auto}
+.ask-model select,.ask-model input{max-width:260px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:12.5px}
+.ask-actions{display:inline-flex;gap:16px}
+.ask-saved{margin-top:12px}
+.ask-chats-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.ask-chats-head h2{margin:0}
+.ask-toggle{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.ask-chatlist{list-style:none;padding:0;margin:4px 0 12px}
+.ask-chatlist li{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:9px 0;border-top:1px solid var(--line)}
+.ask-chatlist li:first-child{border-top:0}
+.ask-chatlist .ask-open{font-size:14px;text-decoration:none;color:var(--ink);text-align:left}
+.ask-chatlist li.on .ask-open{color:var(--rust);font-weight:650}
+.ask-chatlist .ask-del{margin-left:auto;font-size:12px;color:var(--muted)}
+@media(max-width:620px){.ask-ready{align-items:flex-start}.ask-model{margin-left:0;width:100%}.ask-model select,.ask-model input{max-width:none;flex:1}}
+
+/* paper flags */
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.flag-pills{display:inline-flex;gap:4px;flex-wrap:wrap;vertical-align:1px;margin-right:6px}
+.flag-pill{white-space:nowrap;font-size:10.5px;padding:2px 8px;line-height:1.5}
+.flag-banner{font-size:14px;margin:0 0 16px}
+.flag-banner b{display:block;font-size:15px;margin-bottom:2px}
+.flag-links{font-size:13px;color:var(--muted);margin:6px 0 0}
+.flag-links p{margin:4px 0}
+.flag-toggle{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:var(--ink);margin-top:10px}
+.flag-group{margin-bottom:16px}
+.flag-group h2{font-size:18px;margin:.2em 0 .3em}
+.flag-group .kv{margin:0 0 10px}

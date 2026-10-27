@@ -4,9 +4,12 @@
 Reads  : packages/*/data/<tier>_findings.parquet (corpus order t1, t2a, t2b, t3, t4),
          packages/dysautonomia-core-findings/data/entity_vocabulary_crosstier.parquet,
          data/corpus_augmented.parquet (paper metadata: authors, journal, OA, citations),
-         data/paper_metadata.parquet (Tier-1 PMC urls), data/pmid_dedup_map.parquet (9 title merges).
+         data/paper_metadata.parquet (Tier-1 PMC urls), paper flags via site_tools/paper_flags.py.
+Papers : every PubMed record (PMID) is its own paper, matching the packages.  Records that are the same work (preprint and
+         published version, co-publications) are linked by paper flags, not merged.
 Writes : site/data/{meta,findings_facets,papers,entities,autocomplete}.json, text_NN/detail_NN shards,
-         discovery tables (associations/contradictions/understudied/null_results/convergence.json),
+         discovery tables (associations/contradictions/understudied/null_results/convergence.json, recomputed without
+         papers whose flag says recommended_use=exclude), paper_flags.json,
          validation/v12_golden_facts.json.  Embeddings are produced by embed_v12.py (separate env).
 
 Contract: SITE_CONTRACT.md "File shapes". Encoding rules (first-appearance dictionaries, em-dash missing
@@ -24,6 +27,8 @@ import argparse, json, math, os, re, sys, time
 from datetime import datetime, timezone
 import numpy as np, pandas as pd
 from scipy.stats import hypergeom
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from paper_flags import load_paper_flags, FLAGS as FLAG_LABELS
 
 MISS = "\u2014"; SHARD_ROWS = 6000
 VERIFIED = {"authority_verified", "authority_verified_retrospective"}
@@ -157,9 +162,18 @@ def add_site_entity(D, EV):
     return D
 
 
+def clean_title(t):
+    """PubMed titles can carry markup (<i>Aedes</i>) and HTML entities (&#xe9;); the site shows plain text."""
+    import html as _html
+    t = _html.unescape(_html.unescape(t))          # some titles store markup escaped (&lt;i&gt;), so decode first
+    return " ".join(re.sub(r"</?(i|b|em|strong|sup|sub|u|span)[^>]*>", "", t).split())
+
+
 def paper_table(D, CA, PM, DM):
-    dedup = {str(a): str(b) for a, b, ap in zip(DM.pmid, DM.canonical_pmid, DM.merge_applied) if ap and str(a) != str(b)}
-    D["cpmid"] = D.pmid.astype(str).map(lambda x: dedup.get(x, x))
+    # one paper per PubMed record (no title merges): the packages' counting unit.  cpmid is kept as the column name the
+    # rest of this script groups on; it now always equals pmid.
+    dedup = {}
+    D["cpmid"] = D.pmid.astype(str)
     nf = D.groupby("cpmid").size()
     c = CA.drop_duplicates("pmid").set_index(CA.drop_duplicates("pmid").pmid.astype(str))
     pm1 = PM.drop_duplicates("pmid").set_index(PM.drop_duplicates("pmid").pmid.astype(str))
@@ -167,11 +181,13 @@ def paper_table(D, CA, PM, DM):
     for p in D.cpmid.drop_duplicates():
         ca = c.loc[p] if p in c.index else None
         d = D[D.cpmid == p].iloc[0]
-        au = (str(ca.authors) if ca is not None and pd.notna(ca.authors) else "").rstrip(".")
+        au = clean_title(str(ca.authors) if ca is not None and pd.notna(ca.authors) else "").rstrip(".")
         names = [x.strip() for x in au.split(",") if x.strip()]
         yr = int(d.year) if pd.notna(d.year) else (int(ca.year) if ca is not None and pd.notna(ca.year) else None)
         journal = d.journal if pd.notna(d.journal) else (ca.journal if ca is not None else None)
         title = d.title if pd.notna(d.title) else (ca.title if ca is not None else None)
+        if isinstance(title, str): title = clean_title(title)
+        if isinstance(journal, str): journal = clean_title(journal)
         doi = d.doi if pd.notna(d.doi) else (ca.doi if ca is not None and pd.notna(ca.doi) else None)
         pmc = pm1.loc[p].pmc_url if p in pm1.index and pd.notna(pm1.loc[p].pmc_url) else (f"https://www.ncbi.nlm.nih.gov/pmc/articles/{d.pmcid}/" if "pmcid" in D.columns and pd.notna(d.pmcid) else None)
         fa = names[0] if names else None
@@ -332,7 +348,7 @@ def discovery(D, P):
             rows.append(dict(canonical_entity=e, entity_kind=first_nn(gg.entity_kind), ontology_id=first_nn(gg.site_primary_id), concordant_direction=dirn,
                              n_source_literatures=len(lits), source_literatures=",".join(lits), n_conditions=int(gg.condition.nunique()), conditions=",".join(sorted(set(gg.condition.dropna().astype(str)))),
                              n_papers=int(gg.cpmid.nunique()), n_findings=int(len(gg)), n_papers_opposite=int(opp.cpmid.nunique()), tiers="|".join(sorted(set(gg.tier_source))), cross_tier=bool(gg.tier_source.nunique() > 1),
-                             best_tier=tier_best(gg.evidence_tier), map_confidence_min=first_nn(gg.id_status), scope_note="full corpus v1.2"))
+                             best_tier=tier_best(gg.evidence_tier), map_confidence_min=first_nn(gg.id_status), scope_note="full corpus v1.2, exclude-flagged papers left out"))
     V = pd.DataFrame(rows)
     v_total = int(len(V))
     if len(V): V = V.sort_values(["n_source_literatures", "n_papers"], ascending=False).head(3000).reset_index(drop=True); V["rank"] = V.index + 1
@@ -355,6 +371,7 @@ def clean_records(obj):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--root", default="."); ap.add_argument("--out", default="site/data")
     ap.add_argument("--version", default="v1.2"); ap.add_argument("--build-utc", default=None); ap.add_argument("--golden", default="validation/v12_golden_facts.json")
+    ap.add_argument("--flags-candidates", default=None, help="paper_flags_candidates.csv when no packages/*/annotations/paper_flags.csv exists (default: releases/v1.2/paper_flags/)")
     a = ap.parse_args(); root = a.root; out = os.path.join(root, a.out) if not os.path.isabs(a.out) else a.out; os.makedirs(out, exist_ok=True)
     D, EV, CA, PM, DM = load(root); log("loaded", len(D), "rows")
     D = add_site_entity(D, EV); log("site_entity rows", int(D.site_entity.notna().sum()), "verified-id rows", int(D.site_ontology_id.notna().sum()))
@@ -373,6 +390,28 @@ def main():
     ENT = build_entities(D); jdump(f"{out}/entities.json", ENT); log("entities", ENT["n"])
     jdump(f"{out}/autocomplete.json", {"entities": [e["name"] for e in ENT["entities"]], "conditions": sorted(D.condition.dropna().unique().tolist()),
                                         "journals": sorted(set(x for x in P.journal.dropna().astype(str) if x)), "source_literatures": sorted(D.source_literature.dropna().unique().tolist())})
+    # ---- paper flags: retractions, correction notices, preprints, linked records ----
+    FL, fl_src = load_paper_flags(root, a.flags_candidates); site_pm = set(P.pmid.astype(str))
+    dropped = FL[~FL.pmid.isin(site_pm)]
+    if len(dropped): log("paper flags: dropped", len(dropped), "rows whose pmid is not a site paper")
+    FL = FL[FL.pmid.isin(site_pm)].copy(); log("paper flags from", fl_src, ":", len(FL), "rows,", FL.pmid.nunique(), "papers")
+    title_of = dict(zip(P.pmid.astype(str), P.title))
+    FL["linked_title"] = [clean_title(t) if isinstance(t, str) else t for t in FL.linked_title]
+    FL["linked_title"] = [lt if isinstance(lt, str) and lt else title_of.get(lp) for lt, lp in zip(FL.linked_title, FL.linked_pmid)]
+    FL["linked_in_dataset"] = FL.linked_pmid.isin(site_pm)
+    excl_pm = set(FL.loc[FL.recommended_use == "exclude", "pmid"]); retr_pm = set(FL.loc[FL.flag.isin(["retracted", "partially_retracted"]), "pmid"])
+    FL = FL.astype(object).where(FL.notna(), None)   # NaN -> None: the browser's JSON.parse rejects NaN
+    pf = {}
+    for r in FL.sort_values(["pmid", "flag"]).itertuples():
+        o = {"f": r.flag, "l": r.flag_label}
+        if r.linked_pmid: o["lp"] = r.linked_pmid
+        if r.linked_pmid and r.linked_in_dataset: o["li"] = 1
+        if isinstance(r.linked_title, str) and r.linked_title: o["lt"] = r.linked_title
+        if r.flag in ("same_work_other_record", "update_of", "partially_retracted") and isinstance(r.relation_note, str): o["n"] = r.relation_note
+        o["u"] = r.recommended_use
+        pf.setdefault(r.pmid, []).append(o)
+    jdump(f"{out}/paper_flags.json", {"source": fl_src, "labels": FLAG_LABELS, "flags": pf}); log("paper_flags.json", len(pf), "papers")
+    D_all = D; D = D[~D.cpmid.isin(excl_pm)]; log("discovery tables over", len(D), "findings (", len(D_all) - len(D), "from exclude-flagged papers left out)")
     assoc, contra, under, nulls, conv = discovery(D, P)
     for name, obj in [("associations", assoc), ("contradictions", contra), ("understudied", under), ("convergence", conv)]:
         jdump(f"{out}/{name}.json", clean_records(obj)); log(name, obj["n"])
@@ -390,6 +429,7 @@ def main():
         shards_meta.append({"file": fn, "start": i, "end": i + len(chunk)})
     jdump(f"{out}/null_results.json", {"n": len(NR), "fields": NULL_FIELDS, "shard_rows": NSH, "order": "year descending", "shards": shards_meta})
     log("null_results", len(NR), "in", len(shards_meta), "shards")
+    D = D_all
     ver = D.site_ontology_id.notna()
     cond_counts = {k: int(v) for k, v in D.condition.value_counts().items()}
     counts = {"findings": int(len(D)), "papers": int(P.pmid.nunique()), "entities": int(ENT["n"]), "conditions": int(D.condition.nunique()),
@@ -414,12 +454,16 @@ def main():
               "id_retrospective_rows": int((D.ontology_id_verification == "authority_verified_retrospective").sum()),
               "id_replaced_rows": int(((D.ontology_id_verification == "authority_verified_retrospective") & D.ontology_id_source.astype(str).str.startswith("v1.2 forward")).sum()),
               "id_kept_rows": int(((D.ontology_id_verification == "authority_verified_retrospective") & ~D.ontology_id_source.astype(str).str.startswith("v1.2 forward")).sum()),
-              "pmids": int(D.pmid.nunique())}
+              "pmids": int(D.pmid.nunique()),
+              "excluded_papers": len(excl_pm), "excluded_findings": int(D.cpmid.isin(excl_pm).sum()), "retracted_findings": int(D.cpmid.isin(retr_pm).sum()),
+              "findings_default": int((~D.cpmid.isin(excl_pm)).sum()), "flagged_papers": int(FL.pmid.nunique())}
+    for fk in FLAG_LABELS: counts[f"flag_{fk}"] = int(FL.loc[FL.flag == fk, "pmid"].nunique())
     vs = {}
     vsp = os.path.join(root, "validation", "verification_stats.json")
     if os.path.exists(vsp): vs = json.load(open(vsp))
     meta = {"version": a.version, "generated_utc": a.build_utc or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), "counts": counts, "verification_stats": vs,
-            "basis": {"papers": "canonical PMID (9 preprint/duplicate title merges applied from data/pmid_dedup_map.parquet)", "findings": "one row per extracted finding; corpus order = package order (dysautonomia-core, comorbid-a, comorbid-b, postviral-autism, migraine-hypermobility)",
+            "basis": {"papers": "PubMed record (PMID): every record is one paper, as in the packages; linked records are marked in paper_flags.json, not merged",
+                      "default_exclusion": "findings from papers whose paper flag has recommended_use=exclude (retracted, partially retracted, correction notices) are left out of default counts, charts and the Signals tables", "findings": "one row per extracted finding; corpus order = package order (dysautonomia-core, comorbid-a, comorbid-b, postviral-autism, migraine-hypermobility)",
                       "entities": "site_entity: authority-verified ontology id where present, else cross-tier canonical name (entity_vocabulary_crosstier), else entity string"},
             "verification": {"identifiers": "every model-emitted identifier was looked up at its authority in v1.2; see packages/*/annotations/POTS_MODEL_ID_BENCHMARK.md",
                              "fidelity": "whether each finding states what its paper found has not yet been checked by a human reader (audit in progress)"},

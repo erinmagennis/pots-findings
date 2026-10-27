@@ -1,6 +1,6 @@
-import { loadMeta, loadPapers, loadFacets, loadEntities, getJSON, state, fmt, esc, paperByPmid, val } from './data.js';
-import { mount, sortTable } from './ui.js';
-import { condLabel } from './labels.js';
+import { loadMeta, loadPapers, loadFacets, loadEntities, getJSON, state, fmt, esc, paperByPmid, val, applyFilters, paperCount } from './data.js';
+import { mount, sortTable, flagPills } from './ui.js';
+import { condLabel, themeLabel, srcLabel, MINOR_LABEL_MAX } from './labels.js';
 
 await loadMeta(); await loadPapers(); await loadFacets(); await loadEntities();
 mount('discover');
@@ -12,28 +12,35 @@ document.querySelector('#dtabs').insertAdjacentHTML('beforebegin', `<div class="
   <a class="stat" href="#nulls"><div class="v">${fmt(C.nulls)}</div><div class="k">null or failed findings</div></a>
 </div>`);
 
-const facetRows = Array.from({length:state.facets.n},(_,i)=>i);
+// overview bars follow the default exclusion: findings from retracted papers and correction notices are left out
+const facetRows = applyFilters(state.facets,{});
+const EXCL_NOTE = 'Papers flagged as retracted or as correction notices are left out.';
 const tally = field => { const map=new Map(); facetRows.forEach(row=>{ const value=val(field,row); if(value) map.set(value,(map.get(value)||0)+1); }); return [...map].sort((a,b)=>b[1]-a[1]); };
 const pct = (n,d) => d ? `${(n/d*100).toFixed(1)}%` : '0%';
-const barRows = (items, denominator, linkFor=()=>null, limit=8) => items.slice(0,limit).map(([label,n])=>`<div class="overview-bar"><div class="overview-bar-head"><span>${linkFor(label)||esc(label)}</span><b>${fmt(n)} <small>${pct(n,denominator)}</small></b></div><div class="overview-track"><i style="width:${Math.max(2,n/items[0][1]*100)}%"></i></div></div>`).join('');
+const barRows = (items, denominator, linkFor=()=>null, limit=8, show=x=>x) => items.slice(0,limit).map(([label,n])=>`<div class="overview-bar"><div class="overview-bar-head"><span>${linkFor(label)||esc(show(label))}</span><b>${fmt(n)} <small>${pct(n,denominator)}</small></b></div><div class="overview-track"><i style="width:${Math.max(2,n/items[0][1]*100)}%"></i></div></div>`).join('');
 
 async function viewOverview(){
   const [associations, contradictions, understudied] = await Promise.all([getJSON('associations.json'),getJSON('contradictions.json'),getJSON('understudied.json')]);
   const years=tally('y').filter(([year])=>year!=='0').sort((a,b)=>Number(a[0])-Number(b[0]));
   const areas=tally('th');
-  const directions=tally('d');
-  const nulls=tally('nc');
-  const entityRows=[...state.entities].sort((a,b)=>b.np_-a.np_).slice(0,8).map(entity=>[entity.name,entity.np_]);
-  const entityLinks=barRows(entityRows, state.meta.counts.papers, label=>`<a href="entity?e=${encodeURIComponent(label)}">${esc(label)}</a>`);
+  // stray one-off labels from extraction stay in the tables but off the overview bars
+  const directions=tally('d').filter(([,n])=>n>=MINOR_LABEL_MAX);
+  const nulls=tally('nc').filter(([,n])=>n>=MINOR_LABEL_MAX);
+  const plain=x=>String(x).replace(/-/g,' ');
+  const reach=new Map(), pcol=state.facets.cols.p;
+  for(const r of facetRows){ const e=val('e',r); if(!e) continue; if(!reach.has(e)) reach.set(e,new Set()); reach.get(e).add(pcol[r]); }
+  const entityRows=[...reach].map(([name,s])=>[name,s.size]).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const nPapers=paperCount(facetRows);
+  const entityLinks=barRows(entityRows, nPapers, label=>`<a href="entity?e=${encodeURIComponent(label)}">${esc(label)}</a>`);
   const maxYear=years.length?years[years.length-1][0]:'current';
   document.getElementById('view').innerHTML=`<section class="overview-grid" aria-label="Findings overview">
     <div class="overview-main">
-      <div class="overview-section"><div class="section-kicker">01 · Literature growth</div><h2>Findings by publication year</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows. Year comes from the source paper. <a href="search">Search the underlying findings</a>.</p><div class="year-bars">${years.map(([year,n])=>`<div class="year-bar"><span>${esc(year)}</span><i style="height:${Math.max(4,n/years.reduce((m,x)=>Math.max(m,x[1]),0)*100)}%" title="${fmt(n)} findings"></i><b>${fmt(n)}</b></div>`).join('')}</div><p class="kv">${esc(maxYear)} is a partial year where applicable.</p></div>
-      <div class="overview-section"><div class="section-kicker">02 · Research areas</div><h2>Most represented themes</h2><p class="kv">Denominator: ${fmt(state.meta.counts.findings)} finding rows with a theme label. Missing theme labels are excluded.</p>${barRows(areas, state.meta.counts.findings)}</div>
-      <div class="overview-section"><div class="section-kicker">03 · Direction and null results</div><h2>What the extracted rows report</h2><div class="overview-columns"><div><h3>Direction</h3><p class="kv">Denominator: ${fmt(directions.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(directions, directions.reduce((s,x)=>s+x[1],0))}</div><div><h3>Null or failed result</h3><p class="kv">Denominator: ${fmt(nulls.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(nulls, nulls.reduce((s,x)=>s+x[1],0))}</div></div></div>
+      <div class="overview-section"><div class="section-kicker">01 · Literature growth</div><h2>Findings by publication year</h2><p class="kv">Denominator: ${fmt(facetRows.length)} finding rows. ${EXCL_NOTE} Year comes from the source paper. <a href="search">Search the underlying findings</a>.</p><div class="year-bars">${years.map(([year,n])=>`<div class="year-bar"><span>${esc(year)}</span><i style="height:${Math.max(4,n/years.reduce((m,x)=>Math.max(m,x[1]),0)*100)}%" title="${fmt(n)} findings"></i><b>${fmt(n)}</b></div>`).join('')}</div><p class="kv">${esc(maxYear)} is a partial year where applicable.</p></div>
+      <div class="overview-section"><div class="section-kicker">02 · Research areas</div><h2>Most represented themes</h2><p class="kv">Denominator: ${fmt(facetRows.length)} finding rows with a theme label. Missing theme labels are excluded.</p>${barRows(areas, facetRows.length, ()=>null, 8, themeLabel)}</div>
+      <div class="overview-section"><div class="section-kicker">03 · Direction and null results</div><h2>What the extracted rows report</h2><div class="overview-columns"><div><h3>Direction</h3><p class="kv">Denominator: ${fmt(directions.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(directions, directions.reduce((s,x)=>s+x[1],0), ()=>null, 8, plain)}</div><div><h3>Null or failed result</h3><p class="kv">Denominator: ${fmt(nulls.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(nulls, nulls.reduce((s,x)=>s+x[1],0), ()=>null, 8, plain)}</div></div></div>
     </div>
-    <aside class="overview-side"><div class="overview-section"><div class="section-kicker">04 · Connected entities</div><h2>Highest paper reach</h2><p class="kv">Denominator: ${fmt(state.meta.counts.papers)} canonical papers. Entity coverage is a subset of the findings.</p>${entityLinks}<a class="overview-link" href="connections">Open the connection map →</a></div>
-      <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Current contradictions</h2><p class="overview-number">${fmt(state.meta.counts.contradictions_total)}</p><p class="kv">Rows with conflicting extracted directions or null-versus-positive results.</p><a class="overview-link" href="#contra">Review contradictions →</a><h3>Under-studied signals</h3><p class="overview-number">${fmt(state.meta.counts.understudied)}</p><p class="kv">Candidates ranked from the current combined analysis.</p><a class="overview-link" href="#under">Review under-studied signals →</a></div>
+    <aside class="overview-side"><div class="overview-section"><div class="section-kicker">04 · Connected entities</div><h2>Highest paper reach</h2><p class="kv">Denominator: ${fmt(nPapers)} papers. Entity coverage is a subset of the findings.</p>${entityLinks}<a class="overview-link" href="connections">Open the connection map →</a></div>
+      <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Current contradictions</h2><p class="overview-number">${fmt(state.meta.counts.contradictions_total)}</p><p class="kv">Rows with conflicting extracted directions or null-versus-positive results.</p><a class="overview-link" href="#contra">Review contradictions →</a><h3>Under-studied signals</h3><p class="overview-number">${fmt(C.understudied_total)}</p><p class="kv">Entity and condition signals with three or fewer papers.</p><a class="overview-link" href="#under">Review under-studied signals →</a></div>
       <div class="overview-section"><div class="section-kicker">06 · Read the record</div><h2>Complete tables</h2><p class="kv">Browse every row behind this overview, with links to source papers and entities.</p><a class="overview-link" href="#assoc">Comparisons →</a><a class="overview-link" href="#nulls">Null and failed →</a><a class="overview-link" href="papers">All papers →</a><a class="overview-link" href="entities">All entities →</a></div>
     </aside></section>`;
 }
@@ -43,13 +50,14 @@ const pmidLinks=(v,cap=6)=>{const values=asList(v); return values.length
   ? values.slice(0,cap).map(p=>`<a href="paper?pmid=${esc(p)}">${esc(p)}</a>`).join(' ')
     +(values.length>cap?` <span class="kv">+${values.length-cap} more</span>`:'')
   :'N/A';};
-const sourceList=v=>asList(v).map(x=>`<span class="tag">${esc(x)}</span>`).join(' ');
+const sourceList=v=>asList(v).map(x=>`<span class="tag">${esc(srcLabel(x))}</span>`).join(' ');
 
 export function csv(rows,cols,name){
   const quote=v=>{if(v==null)return '';const s=String(v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
   const head=[
     `# POTS and related-condition findings browser: ${name}`,
-    `# generated ${state.meta.generated_utc} | ${fmt(C.findings)} findings from ${fmt(C.papers)} canonical papers`,
+    `# generated ${state.meta.generated_utc} | ${fmt(C.findings)} findings from ${fmt(C.papers)} papers`,
+    `# papers flagged as retracted or as correction notices are left out of this table`,
     `# scope: pots-findings ${state.meta.version} full corpus; identifiers verified at their authorities; scientific fidelity not yet human-checked`,
     `# absence of a finding is not evidence of absence`,
     `# automated extraction can contain errors; co-mention is not interaction or causation`,
@@ -66,7 +74,7 @@ async function viewAssoc(){
   document.getElementById('view').innerHTML=`<div class="panel">
     <h2>Entity co-mentions</h2>
     <p class="lede">${fmt(C.associations_total)} entity pairs occur in at least three of the same papers; the ${fmt(d.n)} strongest are listed. ${fmt(C.assoc_significant_total)}
-      pass the supplied BH-FDR q&lt;0.05 threshold.</p>
+      pass the supplied BH-FDR q&lt;0.05 threshold. ${EXCL_NOTE}</p>
     <div class="note stop"><b>Co-mention is not interaction or causation.</b> A pair can arise from common
       reporting practices, nested terminology, or a paper discussing separate topics.</div>
     <div class="chks"><label><input type="checkbox" id="aCross" checked> cross-kind only</label>
@@ -105,7 +113,7 @@ async function viewUnder(){
   const d=await getJSON('understudied.json');
   document.getElementById('view').innerHTML=`<div class="panel">
     <h2>Under-studied signals</h2>
-    <p class="lede">${fmt(C.understudied_total)} entity and condition signals with three or fewer papers; the ${fmt(d.n)} with the most findings are listed for possible replication work.</p>
+    <p class="lede">${fmt(C.understudied_total)} entity and condition signals with three or fewer papers; the ${fmt(d.n)} with the most findings are listed for possible replication work. ${EXCL_NOTE}</p>
     <div class="note stop"><b>Thin evidence can be noise.</b> This table does not establish independent-lab
       replication. It reports the fields present in the current combined analysis and should be used to find
       candidates for closer review.</div>
@@ -146,7 +154,7 @@ async function viewContra(){
   document.getElementById('view').innerHTML=`<div class="panel">
     <h2>Contradictions</h2>
     <p class="lede">${fmt(C.contradictions_total)} entity and condition pairs with conflicting directions (the ${fmt(d.n)} strongest are listed):
-      ${fmt(C.contra_flip_total)} direction flips and ${fmt(C.contra_null_vs_pos_total)} null-versus-positive conflicts.</p>
+      ${fmt(C.contra_flip_total)} direction flips and ${fmt(C.contra_null_vs_pos_total)} null-versus-positive conflicts. ${EXCL_NOTE}</p>
     <div class="note stop">Different populations, methods, or source literatures can produce different results.
       A row here flags disagreement for review; it does not prove that either paper is wrong.</div>
     <div class="chks"><label>Type <select id="kType"><option value="">any</option>
@@ -185,7 +193,7 @@ async function viewNulls(){
   const addShard=sh=>{ d.rows.push(...sh.rows.map(toObj)); loaded++; };
   if(idx.shards.length) addShard(await getJSON(idx.shards[0].file));
   document.getElementById('view').innerHTML=`<div class="panel"><h2>Null and failed results</h2>
-    <p class="lede">${fmt(d.n)} findings classified as biomarker, treatment, or diagnostic nulls.</p>
+    <p class="lede">${fmt(d.n)} findings classified as biomarker, treatment, or diagnostic nulls. ${EXCL_NOTE}</p>
     <div class="note">A null result is not proof of absence or ineffectiveness. Check the sample, dose,
       comparator, and source paper.</div>
     <div class="searchbar"><input id="nQ" placeholder="filter by entity, paper title, or treatment">
@@ -209,7 +217,7 @@ async function viewNulls(){
     document.querySelector('#nTbl tbody').innerHTML=slice.map(r=>{const p=paperByPmid(r.canonical_pmid),url=p&&(p.doi_url||p.pubmed_url||p.pmc_url);
       return `<tr><td>${r.canonical_entity?`<a href="entity?e=${encodeURIComponent(r.canonical_entity)}">${esc(r.canonical_entity)}</a>`:esc(r.entity||'N/A')}</td>
       <td>${esc(r.null_class||'N/A')}</td><td>${esc(condLabel(r.condition)||'N/A')}</td><td>${esc(r.evidence_tier||'N/A')}</td>
-      <td class="num">${r.year||'N/A'}</td><td>${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(p.first_author||'Source paper')}</a>`:'Source paper'}
+      <td class="num">${r.year||'N/A'}</td><td>${flagPills(r.canonical_pmid)}${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(p.first_author||'Source paper')}</a>`:'Source paper'}
         <div class="kv">${esc((p?.journal||'').slice(0,50))}</div><a class="kv" href="paper?pmid=${esc(r.canonical_pmid)}">all findings</a></td>
       <td>${r.provenance_quote_trunc?`<div class="quote">“${esc(r.provenance_quote_trunc)}”</div>`:''}</td></tr>`;}).join('');
     document.getElementById('nCount').textContent=`${fmt(values.length)} results`+(loaded<idx.shards.length?` (loading: ${fmt(d.rows.length)} of ${fmt(d.n)} rows so far)`:'');
@@ -233,7 +241,7 @@ async function viewNulls(){
 async function viewConv(){
   const d=await getJSON('convergence.json');
   document.getElementById('view').innerHTML=`<div class="panel"><h2>Shared biology across literatures</h2>
-    <p class="lede">${fmt(d.n)} canonical entities reported in a consistent direction across source literatures.</p>
+    <p class="lede">${fmt(d.n)} canonical entities reported in a consistent direction across source literatures. ${EXCL_NOTE}</p>
     <div class="note stop"><b>Shared biology is not a comorbidity claim.</b> This view identifies repeated entity
       signals across extracted literatures. It does not show that the conditions co-occur in the same patients.</div>
     <div class="chks"><label><input type="checkbox" id="vFour" checked> at least 4 source literatures</label>

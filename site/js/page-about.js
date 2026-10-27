@@ -5,9 +5,10 @@ await loadMeta(); await loadFacets();
 mount('about');
 const C=state.meta.counts, M=state.meta;
 const V = state.meta.verification_stats || {};
+const pl=(n,one,many)=>`${fmt(n)} ${n===1?one:many}`;
 const literatures=Object.entries(C.findings_by_source_literature||{}).sort((a,b)=>b[1]-a[1]);
 
-document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="section-index" aria-label="About sections"><a href="#scope">Scope</a><a href="#limits">Limits</a><a href="#reuse">Reuse</a><a href="#related">Related data</a><a href="#connect">Collaborate</a></nav><div class="about-content">
+document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="section-index" aria-label="About sections"><a href="#scope">Scope</a><a href="#limits">Limits</a><a href="#flags">Paper flags</a><a href="#reuse">Reuse</a><a href="#related">Related data</a><a href="#connect">Collaborate</a></nav><div class="about-content">
 <div class="page-intro">
   <h1>About the data, its limits, and how to reuse it</h1>
   <p class="lede">A searchable index of ${fmt(C.findings)} machine-extracted findings from
@@ -42,8 +43,8 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
   <p>These are automated extractions and can contain errors. Read the cited paper before relying on a finding.
   The website shows provenance excerpts of up to ${M.quote_max_chars} characters beside the citation so a reader
   can locate the relevant passage.</p>
-  <p>Paper counts use canonical PMID: ${fmt(C.papers)} papers. The data packages list ${fmt(C.pmids)} PubMed records; ${fmt(C.pmids - C.papers)} of
-  them are a preprint or a duplicate record of another paper in the set, so the site counts each such pair once. Finding rows keep the order of the
+  <p>Each PubMed record counts as one paper, as in the data packages: ${fmt(C.papers)} papers. Some records belong together, such as a preprint
+  and its published version. The site links them with <a href="#flags">paper flags</a> and does not merge them. Finding rows keep the order of the
   five released packages, so a row number here is a stable citation into the GitHub data.</p>
   <h3 id="verification">Verification status</h3>
   <p>Each finding carries a verbatim quote from its paper. Across ${fmt(V.trace_rows_total)} findings in the first four packages,
@@ -54,11 +55,26 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
   states what its paper found has not yet been checked by a human reader.</b> That audit is in progress; its result will be posted here when it is done.</p>
 </div>
 
+<div class="panel" id="flags">
+  <h2>Paper flags</h2>
+  <p>Some papers carry a flag taken from PubMed. ${pl(C.flag_retracted,'paper was','papers were')} retracted, and ${pl(C.flag_erratum_notice,'record is a correction notice','records are correction notices')}
+  for another paper. Their ${pl(C.excluded_findings,'finding is','findings are')} kept for the record and left out of counts, charts and the Signals tables by default.
+  To bring them back, tick “Include retracted papers and correction notices” on Search or Analyze.</p>
+  <p>${pl(C.flag_has_correction,'paper has','papers have')} a published correction, ${pl(C.flag_expression_of_concern,'paper has','papers have')} an expression of concern,
+  and ${pl(C.flag_preprint,'record is a preprint','records are preprints')}. ${pl(C.flag_preprint_with_published_version,'preprint has its','preprints have their')} published version
+  in this dataset too. These papers stay in all counts and show a small label. Each paper page explains its flag and links the related record.</p>
+  <p><a href="papers?flag=retracted">Retracted papers</a> · <a href="papers?flag=erratum_notice">Correction notices</a> · <a href="papers?flag=preprint">Preprints</a></p>
+</div>
+
 <div class="panel" id="reuse">
   <h2>Search, chat, and reuse</h2>
   <p>Keyword search works without an external model. Semantic search may become unavailable when its browser model
   cannot load; keyword search remains available. The chat page uses a key supplied by the visitor and stores it only
   in that browser's local storage. This site has no server-side API key.</p>
+  <p id="privacy"><b>Privacy.</b> Your key, your questions, the answers and any saved chats stay in your browser. The
+  site counts three things on the Ask page, using PostHog: which AI provider is chosen, when a key is saved and when a
+  question is sent. Each count holds only the provider name. There are no cookies, no recordings of the page and no
+  location lookup.</p>
 </div>
 
 <div class="panel">

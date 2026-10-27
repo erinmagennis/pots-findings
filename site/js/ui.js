@@ -1,5 +1,5 @@
 /* ui.js: shared chrome: framing banner, nav, result cards, citation lines. */
-import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS } from './data.js';
+import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS, flagsOf, EXCLUDE_TOGGLE_LABEL } from './data.js';
 import { condLabel } from './labels.js';
 
 export const PAGES = [
@@ -21,7 +21,7 @@ function railInner(){
 }
 
 export function header(active){
-  const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}${h==='chat'?' <span>(BYO key)</span>':''}</a>`).join('');
+  const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}</a>`).join('');
   return `<header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
@@ -59,6 +59,33 @@ export function mount(active){
   wireChrome();
 }
 
+/* ---------- paper flags: compact pills, shared by every list of findings or papers ---------- */
+const PILL = {   // flag -> [pill text, pill class, hover text]
+  retracted: ['Retracted','err','This paper was retracted on PubMed. Its findings are left out of counts and charts by default.'],
+  partially_retracted: ['Partially retracted','err','Part of this paper was retracted on PubMed. Its findings are left out of counts and charts by default.'],
+  erratum_notice: ['Correction notice','err','This PubMed record is a correction notice for another paper. Its findings are left out of counts and charts by default.'],
+  expression_of_concern: ['Expression of concern','warn','The journal published an expression of concern about this paper.'],
+  preprint: ['Preprint','grey','A preprint: not peer reviewed when posted.'],
+  preprint_with_published_version: ['Preprint','grey','A preprint. The published version is also in this dataset.']
+};
+export function flagPills(pmid){
+  const seen = new Set(), out = [];
+  for(const x of flagsOf(pmid)){
+    const p = PILL[x.f]; if(!p || seen.has(p[0])) continue;
+    seen.add(p[0]); out.push(`<span class="pill ${p[1]} flag-pill" title="${esc(p[2])}">${p[0]}</span>`);
+  }
+  return out.length ? `<span class="flag-pills">${out.join('')}</span>` : '';
+}
+/** the one visible switch for the default exclusion: flagToggle() writes it, wireFlagToggle() sets state.includeFlagged and calls onChange */
+export function flagToggle(id){
+  return `<label class="flag-toggle"><input type="checkbox" id="${id}"${state.includeFlagged?' checked':''}> ${EXCLUDE_TOGGLE_LABEL}</label>`;
+}
+export function wireFlagToggle(id, onChange){
+  const el=document.getElementById(id); if(!el) return;
+  el.checked=state.includeFlagged;
+  el.addEventListener('change',()=>{ state.includeFlagged=el.checked; onChange&&onChange(); });
+}
+
 /* ---------- citation line: prominent, always with a link ---------- */
 export function citeLine(pi){
   const p = paper(pi);
@@ -67,7 +94,7 @@ export function citeLine(pi){
   const etal = p.author_count>1 ? ' et al.' : '';
   const label = `${esc(p.first_author||'Unknown')}${etal}`;
   const link = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${label}</a>` : label;
-  return `<div class="cite">${link}: <span class="jr">${esc(p.journal||'N/A')}</span>
+  return `<div class="cite">${flagPills(p.pmid)}${link}: <span class="jr">${esc(p.journal||'N/A')}</span>
     ${p.year?`(${p.year})`:''}
     ${p.pubmed_url?` · <a href="${esc(p.pubmed_url)}" target="_blank" rel="noopener">PubMed</a>`:''}
     ${p.doi_url?` · <a href="${esc(p.doi_url)}" target="_blank" rel="noopener">DOI</a>`:''}

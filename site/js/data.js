@@ -13,7 +13,8 @@ export async function getJSON(path){
   return _cache[path];
 }
 
-export const state = { facets:null, meta:null, papers:null, entities:null, text:{}, detail:{} };
+export const state = { facets:null, meta:null, papers:null, entities:null, text:{}, detail:{},
+  flags:{}, flagLabels:{}, excludePaper:null, includeFlagged:false };
 
 export async function loadMeta(){ state.meta = state.meta || await getJSON('meta.json'); return state.meta; }
 
@@ -38,7 +39,42 @@ export async function loadPapers(){
   state.pmidIndex = new Map();
   const pi = idx.pmid;
   p.rows.forEach((r,i)=> state.pmidIndex.set(String(r[pi]), i));
+  await loadFlags();
   return state.papers;
+}
+
+/* ---- paper flags (retractions, correction notices, preprints, linked records) ----
+   paper_flags.json: {flags:{pmid:[{f,l,lp,li,lt,n,u}]}, labels:{flag:label}}. u = recommended use:
+   'exclude' papers are left out of default counts, charts and searches (applyFilters) unless
+   state.includeFlagged (or opts.includeFlagged) is set. A missing file must never break a page. */
+export const EXCLUDE_TOGGLE_LABEL = 'Include retracted papers and correction notices';
+export async function loadFlags(){
+  try{
+    const d = await getJSON('paper_flags.json');
+    state.flags = d.flags || {}; state.flagLabels = d.labels || {};
+  }catch(e){ state.flags = {}; state.flagLabels = {}; }
+  if(state.papers){
+    const ex = new Uint8Array(state.papers.rows.length);
+    for(const pm in state.flags){
+      if(!state.flags[pm].some(x=>x.u==='exclude')) continue;
+      const i = state.pmidIndex.get(String(pm)); if(i!=null) ex[i] = 1;
+    }
+    state.excludePaper = ex;
+  }
+  return state.flags;
+}
+export function flagsOf(pmid){ return (pmid!=null && state.flags[String(pmid)]) || []; }
+export function isExcludedPmid(pmid){ return flagsOf(pmid).some(x=>x.u==='exclude'); }
+/** pmids carrying any of the given flag names, in papers.json order */
+export function pmidsWithFlag(names){
+  const want = new Set(names), out = [];
+  for(const pm in state.flags) if(state.flags[pm].some(x=>want.has(x.f))) out.push(pm);
+  return out.sort((a,b)=>(state.pmidIndex?.get(a)??0)-(state.pmidIndex?.get(b)??0));
+}
+/** number of finding rows left out by the default exclusion within a row set filtered with includeFlagged */
+export function excludedIn(rows){
+  const ex = state.excludePaper, p = state.facets.cols.p; if(!ex) return 0;
+  let n=0; for(const r of rows) if(ex[p[r]]) n++; return n;
 }
 /** Look up a full paper record by pmid string. Returns null when the pmid is not in the canonical index. */
 export function paperByPmid(pmid){
@@ -143,13 +179,15 @@ export function applyFilters(f, opts){
     }
   }
   const y0 = opts.y0? +opts.y0 : null, y1 = opts.y1? +opts.y1 : null;
-  const yr = F.cols.y, q = F.cols.q, sd = F.cols.sd, nc = F.cols.nc;
+  const yr = F.cols.y, q = F.cols.q, sd = F.cols.sd, nc = F.cols.nc, pc = F.cols.p;
+  const excludePaper = (opts.includeFlagged || state.includeFlagged) ? null : state.excludePaper;
   const nullCode = F.inv.nc.get('null-no-effect'), failCode = F.inv.nc.get('failed-to-replicate'),
         abanCode = F.inv.nc.get('tried-and-abandoned');
   for(let i=0;i<n;i++){
     let ok = true;
     for(const k in codes){ if(F.cols[k][i]!==codes[k]){ ok=false; break; } }
     if(!ok) continue;
+    if(excludePaper && excludePaper[pc[i]]) continue;   // retracted papers and correction notices, unless included
     if(y0 && (yr[i]<y0 || yr[i]===0)) continue;
     if(y1 && (yr[i]>y1 || yr[i]===0)) continue;
     if(opts.hasQuant && !q[i]) continue;
@@ -163,7 +201,7 @@ export function applyFilters(f, opts){
   return out;
 }
 
-/** distinct canonical papers among a row set (the project counting rule) */
+/** distinct papers (PubMed records) among a row set (the project counting rule) */
 export function paperCount(rows){
   const F = state.facets, s = new Set();
   for(const r of rows) s.add(F.cols.p[r]);

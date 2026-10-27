@@ -7,7 +7,7 @@ mount('charts');
 const C=state.meta.counts, F=state.facets;
 
 document.getElementById('stats').innerHTML=[
-  [fmt(C.findings),'findings'],[fmt(C.papers),'papers (canonical_pmid)'],
+  [fmt(C.findings),'findings'],[fmt(C.papers),'papers'],
   [fmt(C.canonical_entities),'canonical entities'],[fmt(C.entities_with_ontology),'with ontology ID'],
   [fmt(C.nulls),'null / failed results'],[fmt(C.contradictions_total),'contradictions']
 ].map(([v,k])=>`<div class="stat"><div class="v">${v}</div><div class="k">${k}</div></div>`).join('');
@@ -42,7 +42,7 @@ boxes.push(chartBox('c2','Evidence-tier composition',
 /* 3. top entities by paper count */
 const topEnt=[...state.entities].sort((a,b)=>b.np_-a.np_).slice(0,20);
 boxes.push(chartBox('c3','Top 20 canonical entities by paper count',
-  'Paper counts use canonical_pmid and include split-derived rows.',
+  'Paper counts use one paper per PubMed record and include split-derived rows.',
   entityCoverageNote('this entity chart')));
 
 /* 4. direction split for a chosen entity */
@@ -85,7 +85,7 @@ new Chart(document.getElementById('c3'),{type:'bar',
     {label:'papers',data:topEnt.map(e=>e.np_),backgroundColor:'#9a5638'},
     {label:'papers (direct only)',data:topEnt.map(e=>e.npd),backgroundColor:'#71896f'}]},
   options:{indexAxis:'y',scales:{x:{beginAtZero:true}},maintainAspectRatio:false}});
-CSVDATA.c3={cols:['entity','kind','papers_canonical_pmid','papers_direct','findings'],
+CSVDATA.c3={cols:['entity','kind','papers','papers_direct','findings'],
   rows:topEnt.map(e=>[e.name,e.kind,e.np_,e.npd,e.nf])};
 
 const sel=document.getElementById('entSel');
@@ -124,7 +124,7 @@ document.addEventListener('click',e=>{
     const M=state.meta, cc=M.counts;
     const head=[`# POTS and related-condition findings browser: chart data (${cs})`,
       `# generated ${M.generated_utc} | ${fmt(cc.findings)} findings from ${fmt(cc.papers)} papers`,
-      `# papers counted on canonical_pmid | canonical_entity covers ${cc.canonical_entity_pct}% of findings`,
+      `# papers counted per PubMed record (pmid) | canonical_entity covers ${cc.canonical_entity_pct}% of findings`,
       `# scope: pots-findings ${M.version} full corpus; identifiers verified at their authorities; scientific fidelity not yet human-checked`,
       `# absence of a finding is not evidence of absence`,
       `# NOT MEDICAL ADVICE. Machine-extracted research information; extraction errors possible.`];
