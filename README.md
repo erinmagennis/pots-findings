@@ -82,7 +82,7 @@ Scientific fidelity (does each finding state what its paper found) has not yet b
 Before the packages existed the repository published an incremental record: `data/` (Tier 1, July 2026) and
 `data/tier2/` (Tier 2 at 55%, August 2026), with docs under `docs/` and `docs/tier2/` and the site generator of that era in
 `site_tools/site_generator.py`. They are kept unchanged for reproducibility of the earlier releases (tags `tier1-v1`,
-`tier2-55pct-2026-08-03`); the packages supersede them. The package versions are tags `v1.1` and `v1.2`.
+`tier2-55pct-2026-08-03`); the packages supersede them. The package versions are tags `v1.1` and `v1.2.0`.
 
 ## Important distinctions
 

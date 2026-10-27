@@ -163,3 +163,7 @@ header.site,header.topbar{view-transition-name:site-header}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
 @supports (view-transition-name:none){body{animation:none}}
 @media(prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+.hero-start { width: 390px; max-width: 100%; margin: 14px 0 0; color: var(--home-muted); font-size: 13px; text-align: center; }
+.hero-start a { color: var(--home-rust); text-decoration: none; font-weight: 600; }
+.hero-start a::after { content: " \2192"; }
+.hero-start a:hover, .hero-start a:focus-visible { text-decoration: underline; }
