@@ -53,7 +53,7 @@ python -m http.server 8000 --directory site      # then open http://localhost:80
 ```
 
 Naming prefix: `pots_`. Browser storage keys start with `pots_`, and every analytics event carries
-`app: 'pots_findings'` (Ask page events are `ask_provider_selected`, `ask_key_saved`, `ask_question_sent`; they never
+`app: 'pots_findings'` (Chat page events are `ask_provider_selected`, `ask_key_saved`, `ask_question_sent`; they never
 include a key, a question or an answer).
 
 ## Quick start with the data

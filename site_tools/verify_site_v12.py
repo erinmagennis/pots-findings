@@ -136,6 +136,19 @@ def releases_check(root, data, failures, rel_override=None):
     return 1
 
 
+def nav_check(site, failures):
+    """every page's primary nav lists the same pages, in the same order, as ui.js PAGES (labels and addresses)"""
+    js = open(f"{site}/js/ui.js", encoding="utf-8").read()
+    want = re.findall(r"\['(\w+)','(\w+)'\]", js[js.index("PAGES"):js.index("];", js.index("PAGES"))])
+    n = 0
+    for p in sorted(glob.glob(f"{site}/*.html")):
+        m = re.search(r'<nav[^>]*(?:primaryNav|nav-pill)[^>]*>(.*?)</nav>', open(p, encoding="utf-8").read(), re.S)
+        if not m: continue
+        got = [(h, re.sub(r"<span class=\"nav-tag\">.*?</span>", "", t).strip()) for h, t in re.findall(r'<a href="([^"#?]+)"[^>]*>(.*?)</a>', m.group(1), re.S)]
+        n += 1; add(failures, f"nav order in {os.path.basename(p)}", got, want, "ui.js PAGES")
+    return n
+
+
 def check(root: Path, site: Path, meta_override=None, html_override=None, flags_override=None, rel_override=None):
     f = []; data = site / "data"; checks = 0
     meta = copy.deepcopy(meta_override) if meta_override else rj(data / "meta.json"); C = meta["counts"]
@@ -194,6 +207,7 @@ def check(root: Path, site: Path, meta_override=None, html_override=None, flags_
     cov = F["coverage"]
     checks += numbers_check(site if html_override is None else html_override, f) or 1
     checks += markers_check(site if html_override is None else html_override, meta, cov, f)
+    checks += nav_check(site if html_override is None else html_override, f)
     # checksums
     ck = site / "CHECKSUMS.txt"
     if ck.exists():
@@ -227,14 +241,15 @@ def main():
     tmp = Path(tempfile.mkdtemp()); shutil.copytree(site, tmp / "site", ignore=shutil.ignore_patterns("data", "vendor"))
     (tmp / "site" / "js").mkdir(exist_ok=True)
     with open(tmp / "site" / "about.html", "a", encoding="utf-8") as fh: fh.write("<p>planted: 73,070 findings from <!--n:papers-->6,244<!--/n--> papers</p><meta data-n-content=\"{papers} papers\" content=\"6,244 papers\">")
-    f2 = []; numbers_check(str(tmp / "site"), f2); markers_check(str(tmp / "site"), rj(site / "data" / "meta.json"), rj(site / "data" / "findings_facets.json")["coverage"], f2)
+    navp = tmp / "site" / "about.html"; navp.write_text(navp.read_text(encoding="utf-8").replace('<a href="signals"', '<a href="zz"', 1), encoding="utf-8")
+    f2 = []; numbers_check(str(tmp / "site"), f2); nav_check(str(tmp / "site"), f2); markers_check(str(tmp / "site"), rj(site / "data" / "meta.json"), rj(site / "data" / "findings_facets.json")["coverage"], f2)
     caught2 = {("hand-typed numbers in site copy" if x[0].startswith("hand-typed") else x[0].split(" in ")[0]) for x in f2}; shutil.rmtree(tmp)
     badf = rj(site / "data" / "paper_flags.json"); badf["flags"]["99999999"] = [{"f": "retracted", "l": "Retracted", "u": "exclude"}]
     f3, _ = check(root, site, flags_override=badf); caught3 = {x[0] for x in f3}
     badr = rj(site / "data" / "releases.json"); badr["packages"][0]["concept_doi"] = "10.5281/zenodo.1"
     f4, _ = check(root, site, rel_override=badr); caught |= {x[0] for x in f4}
     need = {"releases.json vs README download table", "counts.papers", "counts.findings", "facets.n", "papers vs distinct pmids in packages/*/data/tier*_findings", "default findings (facets minus exclude-flagged papers)"}
-    need2 = {"hand-typed numbers in site copy", "marker papers", "attribute template"}; need3 = {"paper_flags pmids not site papers", "excluded_papers", "counts.flag_retracted"}
+    need2 = {"hand-typed numbers in site copy", "marker papers", "attribute template", "nav order"}; need3 = {"paper_flags pmids not site papers", "excluded_papers", "counts.flag_retracted"}
     if not (need <= caught and need2 <= caught2 and need3 <= caught3): print(f"SELF-TEST FAIL: caught {sorted(caught)} / {sorted(caught2)} / {sorted(caught3)}"); return 1
     print(f"SELF-TEST PASS: caught all {len(need) + len(need2) + len(need3)} planted failures"); return 0
 

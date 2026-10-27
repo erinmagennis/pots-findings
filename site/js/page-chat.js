@@ -9,7 +9,7 @@ import { initModel, modelStatus, onModelStatus, embedQuery, loadEmbeddings, embe
 import { trackAsk } from './analytics.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
-mount('ask');
+mount('chat');
 
 /* ---------- providers ----------
    Every provider here accepts calls straight from a browser (checked 2026-10-26). All but Anthropic use the
@@ -308,7 +308,7 @@ function download(){
   if(!cur.turns.length) return;
   const cite=r=>{ const p=paper(state.facets.cols.p[r]); if(!p) return 'citation unavailable';
     return `${p.first_author||'Unknown'}${p.author_count>1?' et al.':''}, ${p.journal||'N/A'}${p.year?` (${p.year})`:''}. ${p.doi_url||p.pubmed_url||''}`.trim(); };
-  const out=[`# ${cur.title||'Chat'}`, '', `From ${location.origin}/ask on ${new Date(cur.at).toLocaleString()}.`,
+  const out=[`# ${cur.title||'Chat'}`, '', `From ${location.origin}/chat on ${new Date(cur.at).toLocaleString()}.`,
     'Research information, not medical advice. Answers come from automated extractions; check the cited papers.', ''];
   cur.turns.forEach((t,i)=>{
     out.push(`## Question ${i+1}`, '', t.q, '', '### Answer', '', t.a, '', '### Findings used', '');

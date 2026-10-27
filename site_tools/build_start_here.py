@@ -311,7 +311,7 @@ def render(meta, F):
 <header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
-    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="signals" class="">Signals</a><a href="connections" class="">Connections</a><a href="analyze" class="">Analyze</a><a href="ask" class="">Ask</a><a href="about" class="">About</a></nav>
+    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="signals" class="">Signals</a><a href="connections" class="">Connections</a><a href="analyze" class="">Analyze</a><a href="chat" class="">Chat</a><a href="about" class="nav-about"><span class="nav-tag">Scope &amp; safety</span>About</a></nav>
   </div></header>'''
 
     body = f'''
@@ -332,7 +332,7 @@ def render(meta, F):
     <li><a href="connections">Connections</a> See a map of every paper, grouped by what it reports, and follow papers from topic to finding.</li>
     <li><a href="signals">Signals</a> See where papers disagree, what was tested and found nothing, and what has barely been studied.</li>
     <li><a href="analyze">Analyze</a> Count findings by year, condition or study type, and make your own chart.</li>
-    <li><a href="ask">Ask</a> Ask a question in plain words and get an answer that cites the papers. You need your own AI key.</li>
+    <li><a href="chat">Chat</a> Ask a question in plain words and get an answer that cites the papers. You need your own AI key.</li>
   </ul>
 </section>
 

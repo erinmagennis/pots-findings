@@ -87,7 +87,7 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
   cannot load; keyword search remains available. The chat page uses a key supplied by the visitor and stores it only
   in that browser's local storage. This site has no server-side API key.</p>
   <p id="privacy"><b>Privacy.</b> Your key, your questions, the answers and any saved chats stay in your browser. The
-  site counts three things on the Ask page, using PostHog: which AI provider is chosen, when a key is saved and when a
+  site counts three things on the Chat page, using PostHog: which AI provider is chosen, when a key is saved and when a
   question is sent. Each count holds only the provider name. There are no cookies, no recordings of the page and no
   location lookup.</p>
 </div>

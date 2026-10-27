@@ -4,11 +4,13 @@ import { condLabel } from './labels.js';
 
 export const PAGES = [
   ['search','Search'],['signals','Signals'],['connections','Connections'],
-  ['analyze','Analyze'],['ask','Ask'],['about','About']
+  ['analyze','Analyze'],['chat','Chat'],['about','About']
 ];
 
 export function header(active){
-  const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}</a>`).join('');
+  const tabs = PAGES.map(([h,t])=> h==='about'
+    ? `<a href="about" class="${h===active?'active ':''}nav-about"><span class="nav-tag">Scope &amp; safety</span>About</a>`   // small label so people know where scope and safety live
+    : `<a href="${h}" class="${h===active?'active':''}">${t}</a>`).join('');
   return `<header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>

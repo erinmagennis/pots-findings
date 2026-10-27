@@ -167,3 +167,5 @@ header.site,header.topbar{view-transition-name:site-header}
 .hero-start a { color: var(--home-rust); text-decoration: none; font-weight: 600; }
 .hero-start a::after { content: " \2192"; }
 .hero-start a:hover, .hero-start a:focus-visible { text-decoration: underline; }
+.nav-pill a.nav-about { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.05; padding-top: 3px; padding-bottom: 3px; }
+.nav-pill a .nav-tag { display: block; margin-bottom: 2px; font: 600 7.5px/1 var(--home-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--home-rust); }
