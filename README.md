@@ -11,9 +11,29 @@ self-contained packages under [`packages/`](packages/) (start at [`packages/READ
 [`packages/OVERVIEW.md`](packages/OVERVIEW.md)). Each package carries its data (Parquet + CSV), documentation,
 QA tables, the code that built it and `CHECKSUMS.sha256`; `code/verify_package.py --self-test` re-checks a package end to end.
 
+### Download and cite
+
+Each package is archived on Zenodo with its own DOI. The "all versions" DOI always resolves to the newest version.
+
+| package | contents | size | DOI (v1.2) | DOI (all versions) |
+|---|---|---|---|---|
+| 1 of 5 | POTS and dysautonomia core literature | 33.6 MB | [10.5281/zenodo.23671720](https://doi.org/10.5281/zenodo.23671720) | [10.5281/zenodo.23671719](https://doi.org/10.5281/zenodo.23671719) |
+| 2 of 5 | EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 1 | 22.9 MB | [10.5281/zenodo.23671722](https://doi.org/10.5281/zenodo.23671722) | [10.5281/zenodo.23671721](https://doi.org/10.5281/zenodo.23671721) |
+| 3 of 5 | the same conditions, part 2 | 20.5 MB | [10.5281/zenodo.23671724](https://doi.org/10.5281/zenodo.23671724) | [10.5281/zenodo.23671723](https://doi.org/10.5281/zenodo.23671723) |
+| 4 of 5 | long COVID, post-viral and autism intersections | 16.8 MB | [10.5281/zenodo.23671726](https://doi.org/10.5281/zenodo.23671726) | [10.5281/zenodo.23671725](https://doi.org/10.5281/zenodo.23671725) |
+| 5 of 5 | migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS | 10.5 MB | [10.5281/zenodo.23671728](https://doi.org/10.5281/zenodo.23671728) | [10.5281/zenodo.23671727](https://doi.org/10.5281/zenodo.23671727) |
+
+The same five files are attached to the [v1.2 GitHub release](https://github.com/erinmagennis/pots-findings/releases/tag/v1.2.0).
+Each package's `CITATION.cff` gives the citation for that package.
+
+**Paper flags.** Every package carries `annotations/paper_flags.csv`, which marks retracted papers (10 across the
+corpus, 139 findings), correction notices extracted as papers, papers with a published correction, and preprints
+whose published version is also in the dataset. Rows are flagged, never removed: exclude or count them once as the
+file recommends. Checked against PubMed and Crossref on 2026-10-26.
+
 | version | tag | what changed |
 |---|---|---|
-| v1.2 | `v1.2` | Every model-emitted ontology identifier in Tiers 1–2 was looked up by id at its minting authority (HGNC, ChEBI, MeSH) and compared with the entity name. <!--n:id_retrospective_rows-->14,055<!--/n--> rows are now `authority_verified_retrospective` (<!--n:id_kept_rows-->10,879<!--/n--> confirmed, <!--n:id_replaced_rows-->3,176<!--/n--> replaced by the id the name resolves to); <!--n:withheld_id_rows-->2,607<!--/n--> ids that denoted a different entity were withheld. The original model id is preserved in `ontology_id_v11_model_emitted`. No finding text, quote, direction, condition or paper changed. |
+| v1.2 | `v1.2.0` | Paper flags added (retractions, correction notices, duplicate versions; see above). Every model-emitted ontology identifier in Tiers 1–2 was looked up by id at its minting authority (HGNC, ChEBI, MeSH) and compared with the entity name. <!--n:id_retrospective_rows-->14,055<!--/n--> rows are now `authority_verified_retrospective` (<!--n:id_kept_rows-->10,879<!--/n--> confirmed, <!--n:id_replaced_rows-->3,176<!--/n--> replaced by the id the name resolves to); <!--n:withheld_id_rows-->2,607<!--/n--> ids that denoted a different entity were withheld. The original model id is preserved in `ontology_id_v11_model_emitted`. No finding text, quote, direction, condition or paper changed. |
 | v1.1 | `v1.1` | Five harmonised packages; Tier 1–2 identifiers flagged `unverified_model_emitted`. |
 
 Join on `entity_ontology_id_resolved` only where `ontology_id_verification` is `authority_verified` or

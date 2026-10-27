@@ -1,6 +1,9 @@
-# Tier 3 — long COVID, post-viral and autism intersections
+# POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)
 
 **26,032 findings · 1,587 papers · 35 chunks (221–255) · 2020–2026**
+
+Build stage tier3 of the corpus. Where "tier" appears in file and column names (`data/tier3_findings.parquet`,
+`tier_source`, `MANIFEST.tier`) it names the build stage in which these rows were extracted, not a rank or a quality grade.
 
 This package stands alone. It contains its slice of the corpus, the documentation needed to
 read it, the QA evidence behind every number below, and the code to re-derive all of it.
@@ -18,13 +21,13 @@ python code/verify_package.py --self-test  # prove the checker still catches reg
 1. **Identifiers here are authority-derived and score 0.986.**
    The extraction model emitted names only; a resolver looked every identifier up afterwards. This is the property Tiers 1 and 2 lack. All nine invariants pass.
 2. **40 rows are flagged `query_contamination`.**
-   Six papers were pulled in by the ambiguous abbreviation 'ASD' — adult spinal deformity and atrial septal defect, not autism. Filter with `df[~df.query_contamination.fillna(False)]`. The 28 wrong-ASD PMIDs are listed in `scope/tier3_offtopic_pmids.csv`. Note that `query_contamination` means something DIFFERENT in Tier 4 — see COMPARABILITY.md.
+   Six papers were pulled in by the ambiguous abbreviation 'ASD', adult spinal deformity and atrial septal defect, not autism. Filter with `df[~df.query_contamination.fillna(False)]`. The 28 wrong-ASD PMIDs are listed in `scope/tier3_offtopic_pmids.csv`. Note that `query_contamination` means something DIFFERENT in Tier 4, see COMPARABILITY.md.
 3. **Shipped-source verifiability is the lowest in the corpus at 12.22%.**
-   Tier 3 had the highest full-text retrieval success (69% of papers), and full text was discarded after extraction — so its very success is why so few of its quotes have a shipped source. The v1.1 retrofit re-fetched every paper and re-checked every quote (99.96% now have a checkable source; see the Annotations section and `annotations/quote_retrofit_tier3.parquet`), against Europe PMC's current text rather than a retained archive.
+   Tier 3 had the highest full-text retrieval success (69% of papers), and full text was discarded after extraction, so its very success is why so few of its quotes have a shipped source. The v1.1 retrofit re-fetched every paper and re-checked every quote (99.96% now have a checkable source; see the Annotations section and `annotations/quote_retrofit_tier3.parquet`), against Europe PMC's current text rather than a retained archive.
 4. **Scientific fidelity is UNMEASURED.**
-   Everything verified in `qa/` is well-formedness: quotes trace to source, identifiers carry authority provenance, invariants hold. **Nobody has checked that the extracted science is correctly interpreted.** That needs a human reader — an LLM adjudicator shares the extractor's blind spots. Treat every row as a pointer to a paper you should read, not as a fact.
+   Everything verified in `qa/` is well-formedness: quotes trace to source, identifiers carry authority provenance, invariants hold. **Nobody has checked that the extracted science is correctly interpreted.** That needs a human reader, an LLM adjudicator shares the extractor's blind spots. Treat every row as a pointer to a paper you should read, not as a fact.
 5. **`condition` is a coarse POPULATION bucket, and the `MCAS` bucket is mostly not MCAS.**
-   `condition` means the patient population the paper studied — not a diagnosis, not a mechanism-relevance tag. Its bucket definitions were written down only on 2026-09-16 (`annotations/CONDITION_BUCKET_DEFINITIONS.md`). A stratified census of the 1,083 `MCAS`-labelled papers corpus-wide projects ~69% study mast-cell biology with no mast-cell-disorder population, ~10% MCAS as defined, ~5% mastocytosis (a distinct clonal neoplasm). The shipped column is unchanged; `annotations/condition_annotations.parquet` (pmid-keyed) carries a per-paper verdict, all classifier-derived and `human_confirmed == False`. In this package 18 papers (27 rows) carry `condition == 'MCAS'`: 0 verified `in_bucket`, 2 `bucket_violation`, 16 unassessed.
+   `condition` means the patient population the paper studied, not a diagnosis, not a mechanism-relevance tag. Its bucket definitions were written down only on 2026-09-16 (`annotations/CONDITION_BUCKET_DEFINITIONS.md`). A stratified census of the 1,083 `MCAS`-labelled papers corpus-wide projects ~69% study mast-cell biology with no mast-cell-disorder population, ~10% MCAS as defined, ~5% mastocytosis (a distinct clonal neoplasm). The shipped column is unchanged; `annotations/condition_annotations.parquet` (pmid-keyed) carries a per-paper verdict, all classifier-derived and `human_confirmed == False`. In this package 18 papers (27 rows) carry `condition == 'MCAS'`: 0 verified `in_bucket`, 2 `bucket_violation`, 16 unassessed.
 
 ---
 
@@ -50,7 +53,7 @@ python code/verify_package.py --self-test  # prove the checker still catches reg
 literature the paper came from (`source_literature`). A POTS paper reporting on a fibromyalgia
 cohort has `source_literature` of the POTS/dysautonomia literature and `condition == 'fibromyalgia'`.
 Bucket definitions: `annotations/CONDITION_BUCKET_DEFINITIONS.md`. Read warning 5 above before
-counting anything by `condition` — only the `MCAS` bucket has been censused, and it is mostly not MCAS.
+counting anything by `condition`: only the `MCAS` bucket has been censused, and it is mostly not MCAS.
 
 | condition | findings | papers |
 |---|---:|---:|
@@ -69,9 +72,9 @@ counting anything by `condition` — only the `MCAS` bucket has been censused, a
 | | |
 |---|---|
 | findings per paper (overall) | 16.4 |
-| findings per paper — `abstract-only` | 6.48 (468 papers, 3,033 findings) |
-| findings per paper — `blocked` | 6.48 (23 papers, 149 findings) |
-| findings per paper — `retrieved-fulltext` | 20.85 (1,096 papers, 22,850 findings) |
+| findings per paper: `abstract-only` | 6.48 (468 papers, 3,033 findings) |
+| findings per paper: `blocked` | 6.48 (23 papers, 149 findings) |
+| findings per paper: `retrieved-fulltext` | 20.85 (1,096 papers, 22,850 findings) |
 
 **Never compare findings-per-paper across packages without stratifying by
 `fulltext_status`.** Yield is driven roughly 3× by whether full text was retrieved, and the
@@ -94,11 +97,11 @@ retrieval success, not extraction productivity.
 
 ### Quote provenance
 
-Every one of the 26,032 rows carries a `provenance_quote` — the span of source
+Every one of the 26,032 rows carries a `provenance_quote`: the span of source
 text the finding was drawn from. Median 184 characters, 90th percentile
 305, longest 880.
 
-**3,182 of 26,032 rows (12.22%) are verifiable** — meaning the
+**3,182 of 26,032 rows (12.22%) are verifiable**: meaning the
 quote's own source text still exists and can be re-read.
 
 Abstract-derived rows only; body text was discarded after extraction, so full-text-derived quotes have no surviving source.
@@ -109,7 +112,7 @@ wrong-paper false positives in every stratum**. The body text was simply discard
 extraction. `qa/` carries the census with its negative control.
 
 **v1.1 retrofit:** the source of every paper in this package was re-fetched from Europe PMC and every quote
-re-checked — **26,021 of 26,032 rows (99.96%) now have a checkable source**; full-text quotes trace at
+re-checked: **26,021 of 26,032 rows (99.96%) now have a checkable source**; full-text quotes trace at
 98.04% (22,402/22,850), wrong-paper control 0/400.
 This checks Europe PMC's *current* text, not the bytes the model read, and the text is not shipped; the figure above
 is the shipped-source figure. Row-level results: `annotations/quote_retrofit_*.parquet` (see the Annotations section).
@@ -123,7 +126,7 @@ is the shipped-source figure. Row-level results: `annotations/quote_retrofit_*.p
 | id coverage among entity-naming rows | 23.1% |
 | rows with both an id and an authority label | 4,113 |
 
-**Verification status** — this is the column to filter on, not `ontology_id_source`:
+**Verification status**: this is the column to filter on, not `ontology_id_source`:
 
 | `ontology_id_verification` | rows |
 |---|---:|
@@ -157,10 +160,10 @@ The pinned nine-check suite, run unmodified on this exact slice: **9 of 9 pass.*
 | `authority_prefix_match` | pass |
 
 All nine pass. The suite is verified against planted regressions, not merely against data that
-happened to pass — `python code/verify_package.py --self-test` re-plants six and asserts each
+happened to pass: `python code/verify_package.py --self-test` re-plants six and asserts each
 is caught.
 
-### Enum drift — flagged, never coerced
+### Enum drift, flagged, never coerced
 
 19 rows (0.073%) carry a value outside the pinned enum for
 their column. The extraction prompt pinned both vocabularies; the model drifted past the
@@ -173,7 +176,7 @@ deficient rather than the output wrong.
 | `evidence_tier` | `systematic-review/meta-analysis` | 17 |
 | `evidence_tier` | `systematic review` | 2 |
 
-- `systematic-review/meta-analysis` and `systematic review` are the model splitting a distinction the enum collapses into `meta-analysis`. Arguably the enum is the deficient one — a systematic review without a pooled estimate is not a meta-analysis.
+- `systematic-review/meta-analysis` and `systematic review` are the model splitting a distinction the enum collapses into `meta-analysis`. Arguably the enum is the deficient one, a systematic review without a pooled estimate is not a meta-analysis.
 
 ---
 
@@ -197,9 +200,9 @@ deficient rather than the output wrong.
 | `qa/*` | The original QA evidence from this tier's extraction run. |
 | `code/verify_package.py` | Re-derives every number above from the shipped data. |
 | `code/tier3_invariants*.py` | The pinned invariant modules, byte-identical to the build. |
-| `code/quote_trace.py` | The quote matcher — refuses to report a rate without its negative control. |
+| `code/quote_trace.py` | The quote matcher, refuses to report a rate without its negative control. |
 | `code/*` | The extraction pipeline, prompt and driver used for this tier. |
-| `code/README.md` | The role of every file in `code/` — including why a Tier-1 package carries `tier3_*` modules. |
+| `code/README.md` | The role of every file in `code/`: including why a Tier-1 package carries `tier3_*` modules. |
 | `code/comparator_symmetry_tests.py` | Pins that the quote matcher decodes entities and folds whitespace on BOTH sides. |
 | `MANIFEST.json` | File inventory with SHA-256 for every file. |
 | `CHECKSUMS.sha256` | `shasum -a 256 -c CHECKSUMS.sha256` to verify the download. |
@@ -207,7 +210,7 @@ deficient rather than the output wrong.
 | `CITATION.cff` | How to cite this package. |
 | `scope/*` | Excluded and no-yield PMIDs with reasons. |
 | `figures/*` | Per-chunk yield and QA figures. |
-| `annotations/*` | ADDITIVE annotation tables keyed to this package's rows/papers — see below. |
+| `annotations/*` | ADDITIVE annotation tables keyed to this package's rows/papers, see below. |
 
 ## Quickstart
 
@@ -219,7 +222,7 @@ df = pd.read_parquet('data/tier3_findings.parquet')
 verifiable = df[df.fulltext_status.isin(['abstract-only', 'blocked'])]
 #  -> 3,182 rows (12.22%)
 
-# 2. Ontology identifiers you can trust — filter on VERIFICATION, never on coverage
+# 2. Ontology identifiers you can trust, filter on VERIFICATION, never on coverage
 grounded = df[df.ontology_id_verification == 'authority_verified']
 #  -> 4,113 rows in this package
 
@@ -230,7 +233,7 @@ strong = df[df.evidence_tier.isin(['meta-analysis', 'RCT'])
             & df.certainty_derived.eq('confirmed')]
 #  -> 1,595 rows
 
-# 4. Marker frequency — case-fold, or canonicalize with the shipped vocabulary
+# 4. Marker frequency, case-fold, or canonicalize with the shipped vocabulary
 vocab = pd.read_parquet('data/entity_vocabulary_crosstier.parquet')
 df = df.merge(vocab[['raw_entity', 'canonical_entity']]
               .rename(columns={'raw_entity': 'entity',
@@ -280,6 +283,8 @@ its numerator, denominator and basis. They are covered by `MANIFEST.json` and `C
 | `annotations/quote_retrofit_tier3.parquet` | 26,032 | `row_idx` = 0-based row of `data/<pkg>_findings.parquet` (+ `pmid`, `quote_sha1` as checks) | Per-row quote traceability against source text re-fetched from Europe PMC on 2026-09-16, with source depth, fetch status and the wrong-paper control. Null `retrofit_traceable` means no source exists today. |
 | `annotations/retrofit_fetch_log.parquet` | 10,428 | `pmid` | One row per Tier 1–3 paper attempted in the retrofit: abstract/full-text availability, PMCID, HTTP outcome, fetch date. |
 | `annotations/retrofit_summary.json` | — | — | Machine-readable retrofit numbers for all four Tier 1–3 packages, every rate with numerator, denominator and basis. |
+| `annotations/paper_flags.csv` | 60 | pmid, flag | Retracted, corrected, preprint and duplicate records, one row per (record, flag), with the recommended use. See the Paper flags section. |
+| `annotations/paper_flags.parquet` | 60 | pmid, flag | Parquet twin of paper_flags.csv (same content). |
 
 ### Quote source retrofit (2026-09-16)
 
@@ -310,26 +315,59 @@ package labelled `condition == 'MCAS'`: **0 `in_bucket`, 2 `bucket_violation`**
 `CONDITION_BUCKET_DEFINITIONS.md` v1 under population-studied semantics and none is human-confirmed.
 Other buckets are not yet censused. See `annotations/CONDITION_ANNOTATIONS_README.md`.
 
+### Paper flags (checked 2026-10-26)
+
+`annotations/paper_flags.csv` (and `.parquet`, same content) marks every PubMed record in this package that a reader
+must be able to see and filter: 60 rows over 58 of the package's 1,587 records, one row per
+(record, flag). Flags come from PubMed publication types and linked notices and from Crossref update notices
+(Retraction Watch data), both read on 2026-10-26, plus a recorded adjudication of every title-match pair
+(`qa/paper_flags_adjudication.json`). Flagged rows are flagged, never removed.
+
+| flag | papers | findings | recommended use |
+|---|---:|---:|---|
+| `retracted` | 2 | 46 | exclude |
+| `has_correction` | 31 | 485 | note |
+| `preprint_with_published_version` | 4 | 49 | count_once |
+| `published_version_of_preprint` | 7 | 186 | note |
+| `preprint` | 11 | 304 | note |
+| `same_work_other_record` | 4 | 55 | note on the canonical record, count_once on the duplicate |
+| `update_of` | 1 | 3 | note |
+
+How to use it: exclude `retracted` records and `erratum_notice` records (a correction notice whose text was
+extracted as if it were a study); count each duplicate group once, on its `canonical_pmid` (the peer-reviewed
+version over a preprint, the original over a reprint or notice); read the linked notice before quoting a number
+from a `has_correction` or `expression_of_concern` record. `recommended_use` carries that rule per row.
+
+The package's paper count (1,587) is a count of PubMed records. Derived from the flags, it holds
+**1,582 distinct works**: records minus correction notices minus duplicate records (`recommended_use == count_once`).
+Retracted papers remain works and remain in the data; exclude them yourself with the flag.
+
+```python
+flags = pd.read_csv('annotations/paper_flags.csv', dtype=str)
+drop = set(flags.loc[flags.recommended_use.isin(['exclude', 'count_once']), 'pmid'])
+clean = df[~df.pmid.astype(str).isin(drop)]        # retracted and notice rows out, each work counted once
+```
+
 ---
 
 ## The other four packages
 
 This is one block of a five-way partition of a single corpus. **Zero papers are shared
-between any two packages** — verified by pmid set intersection across all ten pairs at build
+between any two packages**: verified by pmid set intersection across all ten pairs at build
 time. Per-package counts sum exactly to the corpus totals.
 
 | package | findings | papers | chunks | identifiers | quotes verifiable |
 |---|---:|---:|---:|---|---:|
-| Tier 1 | 36,067 | 3,129 | 76 | model-emitted | 18.12% |
-| Tier 2 Part A | 36,611 | 3,123 | 81 | model-emitted | 21.07% |
-| Tier 2 Part B | 33,830 | 2,589 | 64 | model-emitted | 19.39% |
-| Tier 3 ← | 26,032 | 1,587 | 35 | authority-derived | 12.22% |
-| Tier 4 | 15,646 | 1,091 | 30 | authority-derived | 100.0% |
+| POTS findings v1.2, package 1 of 5: POTS and dysautonomia core literature (36,067 findings, 3,129 papers) | 36,067 | 3,129 | 76 | model-emitted | 18.12% |
+| POTS findings v1.2, package 2 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 1 of 2 (36,611 findings, 3,123 papers) | 36,611 | 3,123 | 81 | model-emitted | 21.07% |
+| POTS findings v1.2, package 3 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 2 of 2 (33,830 findings, 2,589 papers) | 33,830 | 2,589 | 64 | model-emitted | 19.39% |
+| POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers) ← | 26,032 | 1,587 | 35 | authority-derived | 12.22% |
+| POTS findings v1.2, package 5 of 5: migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS (15,646 findings, 1,091 papers) | 15,646 | 1,091 | 30 | authority-derived | 100.0% |
 | **corpus total** | **148,186** | **11,519** | **286** | | **26.75%** |
 
 Pooling any subset is safe for row and paper counts, paper metadata, quote presence, the
 harmonized verification columns, and the capability flags. Eleven other metrics are **not**
-comparable across all five — `docs/COMPARABILITY.md` lists each with its reason.
+comparable across all five: `docs/COMPARABILITY.md` lists each with its reason.
 
 Tier 2 Part A and Part B are the two waves of a single extraction pass with one pipeline and
 one prompt; pool those two freely.
@@ -337,4 +375,4 @@ one prompt; pool those two freely.
 ---
 
 Built 2026-10-22T12:15:40Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
-Data CC BY 4.0. Machine-extracted research information — **not medical advice.**
+Data CC BY 4.0. Machine-extracted research information: **not medical advice.**

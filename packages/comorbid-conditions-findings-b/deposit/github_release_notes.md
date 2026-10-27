@@ -1,4 +1,6 @@
-# Tier 2 Part B — comorbid-condition literatures, second extraction wave — `comorbid-conditions-findings-b-v1.2`
+# POTS findings v1.2, package 3 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 2 of 2 (33,830 findings, 2,589 papers)
+
+Package `comorbid-conditions-findings-b-v1.2`
 
 **33,830 findings · 2,589 papers · 64 chunks · 2020–2026**
 
@@ -28,9 +30,9 @@ non-zero if any disagrees. It also re-plants six regressions to prove the checke
 
 ## Read first
 
-- `docs/README.md` — start here
-- `docs/COMPARABILITY.md` — what you may pool with the sibling packages, and the three traps
-- `docs/LIMITATIONS.md` — what is not known, not measured, and known wrong
+- `docs/README.md`: start here
+- `docs/COMPARABILITY.md`: what you may pool with the sibling packages, and the three traps
+- `docs/LIMITATIONS.md`: what is not known, not measured, and known wrong
 
 ## Caveats that change conclusions
 
@@ -38,9 +40,9 @@ non-zero if any disagrees. It also re-plants six regressions to prove the checke
   interpretation. Every row is a pointer to a paper you should read.
 - **Ontology identifiers are model-emitted.** Roughly
   29% do not denote the entity on their row. Not usable as a mapping.
-- **80.61% of quotes cannot be re-checked** — body text was discarded after extraction.
+- **80.61% of quotes cannot be re-checked**: body text was discarded after extraction.
 - **Absence of a finding is not evidence of absence.** Yield depends ~3× on full-text
   availability.
 
-Data CC BY 4.0. `provenance_quote` holds verbatim source excerpts and is not CC BY — see
+Data CC BY 4.0. `provenance_quote` holds verbatim source excerpts and is not CC BY, see
 `LICENSE`. **Not medical advice.**

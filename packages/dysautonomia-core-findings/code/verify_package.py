@@ -96,7 +96,7 @@ def annotation_checks(root, df, manifest):
     must align 1:1 with the primary table — same length, row_idx == 0..n-1, identical pmids,
     sha1(provenance_quote) identical. Returns [] when the package has no annotations/ folder,
     so v1 packages are unaffected."""
-    import hashlib, pandas as pd
+    import hashlib, re, pandas as pd
     out = []
     adir = root / "annotations"
     if not adir.is_dir():
@@ -118,6 +118,42 @@ def annotation_checks(root, df, manifest):
                             measured=dict(len=ok_len, row_idx=bool(ok_idx), pmid=bool(ok_pmid), quote_sha1=bool(ok_sha))))
             out.append(dict(name=f"annotation_null_rule:{p.name}", ok=null_rule,
                             expected="retrofit_traceable is null iff retrofit_source_depth == none", measured=null_rule))
+        if p.name == "paper_flags.csv":
+            VOCAB = {"retracted", "partially_retracted", "expression_of_concern", "erratum_notice", "has_correction",
+                     "preprint_with_published_version", "published_version_of_preprint", "preprint", "same_work_other_record",
+                     "update_of", "publisher_removal_notice"}
+            fl = pd.read_csv(p, dtype=str, keep_default_na=False)
+            pm_all = set(df.pmid.astype(str))
+            ok_in = fl.pmid.isin(pm_all).all()
+            out.append(dict(name="paper_flags_pmids_in_package", ok=bool(ok_in), expected="every flagged pmid is in data/", measured=int((~fl.pmid.isin(pm_all)).sum())))
+            bad_v = sorted(set(fl.flag) - VOCAB)
+            out.append(dict(name="paper_flags_vocabulary", ok=not bad_v, expected="every flag in the vocabulary", measured=bad_v))
+            # linked_in_dataset == true: offline, a package can prove membership only for its own PMIDs; for a sibling
+            # package it checks the record is in the read corpus (data/chunk_order.parquet, every PubMed record read)
+            # and that linked_package names a sibling. The cross-package build check (build_packages.py) proves the full set.
+            co = pd.read_parquet(root / "data" / "chunk_order.parquet")
+            corpus_pm = set(co["pmid"].astype(str))
+            me = manifest.get("package", "").rsplit("-v", 1)[0]
+            linked_true = fl[fl.linked_in_dataset == "true"]
+            def _ok(r):
+                pk_list = r.linked_package.split("; ") if r.linked_package else []
+                return bool(pk_list) and all((x in pm_all) if me in pk_list and len(pk_list) == 1 else (x in corpus_pm) for x in r.linked_pmid.split("; "))
+            ok_link = all(_ok(r) for r in linked_true.itertuples())
+            ok_false = (fl.loc[fl.linked_in_dataset == "false", "linked_package"] == "").all()
+            out.append(dict(name="paper_flags_linked_in_dataset", ok=bool(ok_link and ok_false),
+                            expected="in-dataset links name a package and resolve (own package: in data/; sibling: in the read corpus); out-of-dataset links name no package", measured=len(linked_true)))
+            ret = set(fl.loc[fl.flag == "retracted", "pmid"])
+            bad_canon = sorted(set(fl.loc[fl.canonical_pmid != "", "canonical_pmid"]) & ret)
+            out.append(dict(name="paper_flags_canonical_not_retracted", ok=not bad_canon, expected="no canonical_pmid points to a retracted record", measured=bad_canon))
+            # README per-flag counts equal the file
+            rd = (root / "README.md").read_text(encoding="utf-8")
+            exp = {f: (int(g.pmid.nunique()), int(g.drop_duplicates("pmid").n_findings.astype(int).sum())) for f, g in fl.groupby("flag")}
+            got = {m.group(1): (int(m.group(2).replace(",", "")), int(m.group(3).replace(",", ""))) for m in re.finditer(r"^\| `([a-z_]+)` \| ([\d,]+) \| ([\d,]+) \|", rd, re.M) if m.group(1) in VOCAB}
+            out.append(dict(name="paper_flags_readme_counts", ok=exp == got, expected=exp, measured=got))
+            pq_ = root / "annotations" / "paper_flags.parquet"
+            if pq_.exists():
+                same = pd.read_parquet(pq_).astype(str).fillna("").equals(fl.astype(str).assign(n_findings=fl.n_findings.astype(int).astype(str)))
+                out.append(dict(name="paper_flags_parquet_matches_csv", ok=bool(same), expected="parquet and csv carry the same rows", measured=bool(same)))
         if p.name == "condition_annotations.parquet":
             a = pd.read_parquet(p)
             pk = manifest.get("tier") or manifest["package"].replace("pots-corpus-", "").rsplit("-", 1)[0]

@@ -1,4 +1,4 @@
-# How often are model-emitted ontology identifiers right? — a full-population benchmark from pots-findings v1.1 (2026-10-21)
+# How often are model-emitted ontology identifiers right?, a full-population benchmark from pots-findings v1.1 (2026-10-21)
 
 **Setting.** The first two POTS packages (t1, t2) let the extraction model write ontology identifiers directly (HGNC, ChEBI, MeSH). Later packages replaced this with authority resolution and the v1.1 release flagged the model-written ids `unverified_model_emitted` (16,662 rows; 6,120 distinct name × id pairs). Every one of those ids was looked up **by id** at its minting authority and the authority's label and full synonym list compared with the entity name; the name was also resolved forward to obtain the correct id where one exists. No model was involved.
 

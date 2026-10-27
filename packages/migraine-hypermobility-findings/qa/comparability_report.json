@@ -1,5 +1,15 @@
 {
  "report": "corpus_alignment_report",
+ "record_status_edits_2026_10_26": {
+  "string_values_edited": 2,
+  "where": [
+   "grounding_schema_reconciliation.columns_added_by_this_step.ontology_id_verification.definition",
+   "grounding_schema_reconciliation.tier12_id_verification_verdict.answer"
+  ],
+  "what": "the v1.1 wording that the ids were checked for existence but not correctness now carries '(v1.1 status; re-grounded in v1.2)'",
+  "numeric_values_changed": 0
+ },
+ "record_status": "v1.1 RECORD, kept as history. This alignment analysis was generated for the v1.1 corpus (tier version ids under refresh_provenance). Its statements that build-stage 1-2 identifiers were model-emitted and checked for existence but not for correctness, and the verification value 'unverified_model_emitted', describe v1.1. In v1.2 every model-emitted id was looked up by id at its authority; ontology_id_verification now takes authority_verified_retrospective or id_withheld_unverified_v1.2 on those rows and unverified_model_emitted no longer occurs. Current state: README.md 'What changed in v1.2' and annotations/POTS_MODEL_ID_BENCHMARK.md.",
  "generated_for": "findings_all_tiers.parquet (four-tier POTS/dysautonomia extraction corpus)",
  "partition_verification": {
   "rows_total": 148186,
@@ -150,7 +160,7 @@
      "unverified_model_emitted": 16662,
      "authority_verified": 5727
     },
-    "definition": "authority_verified = id derived from the entity NAME by authority lookup (t3/t4); unverified_model_emitted = id recalled by the model, existence-checked only (t1/t2); no_id = null"
+    "definition": "authority_verified = id derived from the entity NAME by authority lookup (t3/t4); unverified_model_emitted = id recalled by the model, existence-checked (v1.1 status; re-grounded in v1.2) (t1/t2); no_id = null"
    },
    "ontology_id_match_mode": {
     "values": {
@@ -193,7 +203,7 @@
    }
   },
   "tier12_id_verification_verdict": {
-   "answer": "MODEL-EMITTED, existence-checked only. NOT authority-verified.",
+   "answer": "MODEL-EMITTED, existence-checked (v1.1 status; every id re-grounded by authority lookup in v1.2, see record_status).",
    "what_repaired_means_in_tier2": {
     "ontology_repair_action_counts": {
      "None": 67038,

@@ -1,7 +1,7 @@
 {
- "title": "Tier 3 — long COVID, post-viral and autism intersections",
+ "title": "POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)",
  "category": "data",
- "description": "Package 4 of 5 — 26,032 structured findings from 1,587 papers on long COVID autonomic, autism intersection, post-viral syndromes. Self-contained: data, docs, QA evidence and re-derivation code. Zero papers shared with the sibling packages.",
+ "description": "Package 4 of 5: 26,032 structured findings from 1,587 papers on long COVID autonomic, autism intersection, post-viral syndromes. Self-contained: data, docs, QA evidence and re-derivation code. Zero papers shared with the sibling packages.",
  "tags": [
   "POTS",
   "postural orthostatic tachycardia syndrome",
@@ -40,19 +40,19 @@
  ],
  "node_structure": {
   "suggested_parent_project": "POTS/Dysautonomia Cross-Condition Literature Findings",
-  "this_component": "Tier 3 — long COVID, post-viral and autism intersections",
+  "this_component": "POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)",
   "sibling_components": [
-   "Tier 1 — POTS and dysautonomia core literature",
-   "Tier 2 Part A — comorbid-condition literatures, first extraction wave",
-   "Tier 2 Part B — comorbid-condition literatures, second extraction wave",
-   "Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS"
+   "POTS findings v1.2, package 1 of 5: POTS and dysautonomia core literature (36,067 findings, 3,129 papers)",
+   "POTS findings v1.2, package 2 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 1 of 2 (36,611 findings, 3,123 papers)",
+   "POTS findings v1.2, package 3 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 2 of 2 (33,830 findings, 2,589 papers)",
+   "POTS findings v1.2, package 5 of 5: migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS (15,646 findings, 1,091 papers)"
   ]
  },
- "wiki_home": "See docs/README.md — paste its contents as the component wiki home page.",
+ "wiki_home": "See docs/README.md, paste its contents as the component wiki home page.",
  "files_of_note": {
   "data": "data/tier3_findings.parquet",
   "start_here": "docs/README.md",
   "verify": "code/verify_package.py"
  },
- "notes": "provenance_quote holds verbatim source excerpts and is not CC BY — see LICENSE."
+ "notes": "provenance_quote holds verbatim source excerpts and is not CC BY, see LICENSE."
 }

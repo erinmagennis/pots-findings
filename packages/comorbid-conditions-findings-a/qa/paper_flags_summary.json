@@ -1,0 +1,99 @@
+{
+ "checked_utc": "2026-10-26T23:50:22Z",
+ "n_records": 11519,
+ "n_flag_rows": 316,
+ "n_flagged_pmids": 312,
+ "per_flag": {
+  "erratum_notice": {
+   "papers": 5,
+   "findings": 23
+  },
+  "expression_of_concern": {
+   "papers": 1,
+   "findings": 4
+  },
+  "has_correction": {
+   "papers": 185,
+   "findings": 2734
+  },
+  "preprint": {
+   "papers": 40,
+   "findings": 881
+  },
+  "preprint_with_published_version": {
+   "papers": 30,
+   "findings": 514
+  },
+  "published_version_of_preprint": {
+   "papers": 29,
+   "findings": 610
+  },
+  "publisher_removal_notice": {
+   "papers": 1,
+   "findings": 5
+  },
+  "retracted": {
+   "papers": 10,
+   "findings": 139
+  },
+  "same_work_other_record": {
+   "papers": 14,
+   "findings": 138
+  },
+  "update_of": {
+   "papers": 1,
+   "findings": 3
+  }
+ },
+ "pairs_accepted": 8,
+ "pairs_rejected": 13,
+ "crossref_only_retractions": [],
+ "pubmed_only_retractions": [
+  "41911553"
+ ],
+ "dedup_map_merges": 8,
+ "dedup_map_merges_covered": 8,
+ "distinct_works_rule": "PubMed records minus erratum_notice records minus records whose recommended_use is count_once (a duplicate of another record in the dataset)",
+ "inputs": {
+  "pubmed_esummary": "pubmed_esummary_2026-10-26.json",
+  "crossref_updates": "crossref_updates_2026-10-26.json"
+ },
+ "package": "comorbid-conditions-findings-a",
+ "counts": {
+  "retracted": {
+   "papers": 4,
+   "findings": 43
+  },
+  "expression_of_concern": {
+   "papers": 1,
+   "findings": 4
+  },
+  "erratum_notice": {
+   "papers": 3,
+   "findings": 21
+  },
+  "has_correction": {
+   "papers": 44,
+   "findings": 671
+  },
+  "preprint_with_published_version": {
+   "papers": 5,
+   "findings": 97
+  },
+  "published_version_of_preprint": {
+   "papers": 3,
+   "findings": 69
+  },
+  "preprint": {
+   "papers": 2,
+   "findings": 59
+  },
+  "same_work_other_record": {
+   "papers": 2,
+   "findings": 8
+  },
+  "_distinct_works": 3114,
+  "_records": 3123,
+  "_rows": 64
+ }
+}

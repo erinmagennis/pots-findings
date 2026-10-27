@@ -1,4 +1,4 @@
-# Methods — Tier 3 — long COVID, post-viral and autism intersections
+# Methods: POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)
 
 ## What this package is
 
@@ -31,7 +31,7 @@ blocked. That is the whole reason for the pacing constant.
 - **The model emits NAMES ONLY.** Every identifier is derived afterwards by authority lookup. A parser guard rejects any id-shaped string the model returns anyway.
 - Accept header fixed to `*/*`, with a non-empty >2000-char assertion before treating a paper as abstract-only.
 - `blocked` made retryable, with the HTTP status recorded in `fetch_note`.
-- Full text discarded after extraction — the one fix not made.
+- Full text discarded after extraction, the one fix not made.
 
 ## Identifier grounding
 
@@ -43,21 +43,21 @@ alongside it so that correctness could be audited offline with zero API calls.
 This is why this package scores
 **0.986** on `id_denotes_entity_rate` against Tier 1's 0.578.
 
-Fuzzy matches were **adjudicated, never accepted** — 59% of fuzzy OLS4 HPO matches were
+Fuzzy matches were **adjudicated, never accepted**: 59% of fuzzy OLS4 HPO matches were
 wrong, and accepting them would have reproduced the fabrication defect with a false
 'authority verified' provenance.
 
 ## Quote provenance
 
 Every finding carries the verbatim source span it was drawn from. Traceability is measured by
-`code/quote_trace.py` — exact substring match, or ≥60% 8-shingle overlap after normalization.
+`code/quote_trace.py`: exact substring match, or ≥60% 8-shingle overlap after normalization.
 
 **The matcher refuses to report a rate without its negative control.** The control pairs each
 quote with a *different* paper's text; a working matcher scores ~0%. Every stratum of every
 package scored 0.0% wrong-paper false positives.
 
 This is not a formality. A traceability check once read 100% because the caller did `if tr:`
-on a truthy tuple — the wrong-paper control read 400/400 and exposed it.
+on a truthy tuple, the wrong-paper control read 400/400 and exposed it.
 
 **Superscripts are deliberately not normalized.** Normalizing `I2` against `I-squared` drops
 the census from 99.52% to 99.04%, so the raw form is retained.
@@ -73,16 +73,16 @@ re-checked with the same comparator, each stratum with its own wrong-paper contr
 Four families of check, run after every merge step, shipped in `code/tier3_invariants.py` and
 `code/tier3_invariants_ext.py` and re-runnable via `code/verify_package.py`:
 
-1. **Schema completeness** — required columns present.
-2. **Conservation** — no chunk silently absent, no chunk exceeding its paper allotment.
-3. **Monotonicity** — a pass that adds must never shrink counts.
-4. **No model-emitted identifiers** — no id-shaped string in any name field.
-5. **Identifier provenance** — every non-null identifier carries a source tag.
-6. **Enum drift** — flagged, never coerced.
-7. **Duplicates** — on the FULL row. A loose key flags legitimate distinct findings drawn from
+1. **Schema completeness**: required columns present.
+2. **Conservation**: no chunk silently absent, no chunk exceeding its paper allotment.
+3. **Monotonicity**: a pass that adds must never shrink counts.
+4. **No model-emitted identifiers**: no id-shaped string in any name field.
+5. **Identifier provenance**: every non-null identifier carries a source tag.
+6. **Enum drift**: flagged, never coerced.
+7. **Duplicates**: on the FULL row. A loose key flags legitimate distinct findings drawn from
    one summary sentence, which was a false defect reading in Tier 2.
-8. **HPO multi-value consistency** — `hpo_id_count` equals the delimiter count.
-9. **Authority/prefix agreement** — an identifier's prefix must match the authority its
+8. **HPO multi-value consistency**: `hpo_id_count` equals the delimiter count.
+9. **Authority/prefix agreement**: an identifier's prefix must match the authority its
    provenance names. Added after an audit found 49 rows claiming `authority_lookup_ols_hp`
    while holding GO/PATO/MPATH ids: the ids were right, the provenance CLAIM was wrong, and
    the eight-check suite could not see it because it only verified that a source tag exists,

@@ -1,7 +1,7 @@
 {
- "title": "Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS — machine-extracted structured findings (15,646 findings, 1,091 papers)",
+ "title": "POTS findings v1.2, package 5 of 5: migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS (15,646 findings, 1,091 papers)",
  "upload_type": "dataset",
- "description": "<p>Package 5 of 5. 15,646 structured findings extracted from 1,091 papers (2020–2026) covering migraine intersection, author-augmented papers, hypermobility spectrum, Sjögren's, PANS/PANDAS.</p><p>One block of a five-way partition of an 11,519-paper, 148,186-finding corpus of the POTS, dysautonomia and comorbid-condition literature. The five packages share <strong>zero papers</strong>; per-package counts sum exactly to the corpus totals.</p><p><strong>Self-contained.</strong> Includes the findings table (parquet and CSV), a data dictionary with fill rates measured on this slice, the QA evidence behind every stated number, the pinned extraction and validation code, and <code>code/verify_package.py</code>, which re-derives every headline number from the shipped data and exits non-zero on disagreement.</p><p><strong>Ontology identifiers:</strong> authority-derived (the extraction model emitted names only; a resolver looked identifiers up afterwards), scoring 0.998 on identifier-denotes-entity rate.</p><p><strong>Quote verifiability:</strong> 100.0% of rows have a provenance quote whose own source text is still available and re-checkable.</p><p><strong>Scientific fidelity is unmeasured.</strong> All QA verifies well-formedness, not whether a finding correctly interprets its source. Treat every row as a pointer to a paper to read.</p><p><strong>Not medical advice.</strong></p>",
+ "description": "<p>Package 5 of 5. 15,646 structured findings extracted from 1,091 papers (2020–2026) covering migraine intersection, author-augmented papers, hypermobility spectrum, Sjögren's, PANS/PANDAS.</p><p>One block of a five-way partition of an 11,519-paper, 148,186-finding corpus of the POTS, dysautonomia and comorbid-condition literature. The five packages share <strong>no PubMed record</strong>; per-package counts sum exactly to the corpus totals. 14 studies appear as a preprint in one package and as the published version in another; annotations/paper_flags.csv links them.</p><p><strong>Self-contained.</strong> Includes the findings table (parquet and CSV), a data dictionary with fill rates measured on this slice, the QA evidence behind every stated number, the pinned extraction and validation code, and <code>code/verify_package.py</code>, which re-derives every headline number from the shipped data and exits non-zero on disagreement.</p><p><strong>Ontology identifiers:</strong> authority-derived (the extraction model emitted names only; a resolver looked identifiers up afterwards), scoring 0.998 on identifier-denotes-entity rate.</p><p><strong>Quote verifiability:</strong> 100.0% of rows have a provenance quote whose own source text is still available and re-checkable.</p><p><strong>Scientific fidelity is unmeasured.</strong> All QA verifies well-formedness, not whether a finding correctly interprets its source. Treat every row as a pointer to a paper to read.</p><p><strong>Paper flags:</strong> includes annotations/paper_flags.csv, which marks 0 retracted papers, 0 correction notices extracted as papers, 19 papers with a published correction and 10 duplicate records (preprint and published versions, co-publications). Exclude or count them as the file recommends; no row was removed. Checked against PubMed and Crossref on 2026-10-26.</p><p><strong>Not medical advice.</strong></p>",
  "creators": [
   {
    "name": "Magennis, Erin",
@@ -37,29 +37,29 @@
  "version": "tier4-v1.2",
  "related_identifiers": [
   {
-   "identifier": "PLACEHOLDER-DOI-tier1",
+   "identifier": "10.5281/zenodo.23671720",
    "relation": "references",
    "resource_type": "dataset",
    "scheme": "doi"
   },
   {
-   "identifier": "PLACEHOLDER-DOI-tier2a",
+   "identifier": "10.5281/zenodo.23671722",
    "relation": "references",
    "resource_type": "dataset",
    "scheme": "doi"
   },
   {
-   "identifier": "PLACEHOLDER-DOI-tier2b",
+   "identifier": "10.5281/zenodo.23671724",
    "relation": "references",
    "resource_type": "dataset",
    "scheme": "doi"
   },
   {
-   "identifier": "PLACEHOLDER-DOI-tier3",
+   "identifier": "10.5281/zenodo.23671726",
    "relation": "references",
    "resource_type": "dataset",
    "scheme": "doi"
   }
  ],
- "notes": "The provenance_quote column contains short verbatim excerpts from the source publications and is NOT covered by CC BY 4.0 — that text remains the copyright of the respective publishers and authors. See LICENSE for the excerpt policy and takedown commitment."
+ "notes": "The provenance_quote column contains short verbatim excerpts from the source publications and is NOT covered by CC BY 4.0, that text remains the copyright of the respective publishers and authors. See LICENSE for the excerpt policy and takedown commitment."
 }

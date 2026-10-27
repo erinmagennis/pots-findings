@@ -1,7 +1,7 @@
 cff-version: 1.2.0
-message: "If you use this dataset, please cite it — and cite the source papers for any finding that matters to your work."
+message: "If you use this dataset, please cite it, and cite the source papers for any finding that matters to your work."
 type: dataset
-title: "Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS"
+title: "POTS findings v1.2, package 5 of 5: migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS (15,646 findings, 1,091 papers)"
 version: "tier4-v1.2"
 date-released: "2026-10-22"
 license: CC-BY-4.0
@@ -14,7 +14,7 @@ abstract: >-
   Package 5 of 5. 15,646 structured findings machine-extracted from
   1,091 papers (2020-2026) covering migraine intersection, author-augmented papers, hypermobility spectrum, Sjögren's, PANS/PANDAS.
   One block of a five-way partition of an 11,519-paper, 148,186-finding corpus of the POTS,
-  dysautonomia and comorbid-condition literature; the five packages share zero papers.
+  dysautonomia and comorbid-condition literature. The five packages share no PubMed record; per-package counts sum exactly to the corpus totals. 14 studies appear as a preprint in one package and as the published version in another; annotations/paper_flags.csv links them.
   Scientific fidelity is unmeasured: all QA verifies well-formedness, not correct
   interpretation of sources. Not medical advice.
 keywords:
@@ -41,30 +41,34 @@ keywords:
   - "large language model extraction"
 identifiers:
   - type: doi
-    value: "PLACEHOLDER-DOI-tier4"
-    description: "Replace with the DOI minted on deposit."
+    value: "10.5281/zenodo.23671728"
+    description: "Zenodo record of this package"
 references:
   - type: dataset
-    title: "Tier 1 — POTS and dysautonomia core literature"
+    title: "POTS findings v1.2, package 1 of 5: POTS and dysautonomia core literature (36,067 findings, 3,129 papers)"
     authors:
       - family-names: "Magennis"
         given-names: "Erin"
-    notes: "Sibling package 1 of 5. Replace notes with its DOI once minted."
+    doi: "10.5281/zenodo.23671720"
+    notes: "Sibling package 1 of 5."
   - type: dataset
-    title: "Tier 2 Part A — comorbid-condition literatures, first extraction wave"
+    title: "POTS findings v1.2, package 2 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 1 of 2 (36,611 findings, 3,123 papers)"
     authors:
       - family-names: "Magennis"
         given-names: "Erin"
-    notes: "Sibling package 2 of 5. Replace notes with its DOI once minted."
+    doi: "10.5281/zenodo.23671722"
+    notes: "Sibling package 2 of 5."
   - type: dataset
-    title: "Tier 2 Part B — comorbid-condition literatures, second extraction wave"
+    title: "POTS findings v1.2, package 3 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 2 of 2 (33,830 findings, 2,589 papers)"
     authors:
       - family-names: "Magennis"
         given-names: "Erin"
-    notes: "Sibling package 3 of 5. Replace notes with its DOI once minted."
+    doi: "10.5281/zenodo.23671724"
+    notes: "Sibling package 3 of 5."
   - type: dataset
-    title: "Tier 3 — long COVID, post-viral and autism intersections"
+    title: "POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers)"
     authors:
       - family-names: "Magennis"
         given-names: "Erin"
-    notes: "Sibling package 4 of 5. Replace notes with its DOI once minted."
+    doi: "10.5281/zenodo.23671726"
+    notes: "Sibling package 4 of 5."

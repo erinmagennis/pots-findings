@@ -1,4 +1,4 @@
-# Condition bucket definitions — v1, and the MCAS census that prompted them
+# Condition bucket definitions, v1, and the MCAS census that prompted them
 
 Written 2026-09-16. The `condition` field is a **coarse bucket enum**, not a
 precise diagnosis. Until now its inclusion rules were never written down, which is why an AI

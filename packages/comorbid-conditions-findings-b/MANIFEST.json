@@ -1,7 +1,7 @@
 {
  "package": "comorbid-conditions-findings-b-v1.2",
  "tier": "tier2b",
- "title": "Tier 2 Part B \u2014 comorbid-condition literatures, second extraction wave",
+ "title": "POTS findings v1.2, package 3 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 2 of 2 (33,830 findings, 2,589 papers)",
  "version": "tier2b-v1.2",
  "built_utc": "2026-10-22T12:15:40Z",
  "creator": {
@@ -247,11 +247,11 @@
   ],
   "id_resolved_frac": 0.1415,
   "id_denotes_entity_rate": 0.7082,
-  "id_provenance": "model-emitted, existence-checked only",
+  "id_provenance": "model-emitted in v1.1; re-grounded in v1.2 by authority lookup of every id (see ontology_id_verification: authority_verified_retrospective / id_withheld_unverified_v1.2)",
   "quote_verifiable_rows": 6560,
   "quote_verifiable_pct": 19.39,
   "enum_drift_rows": 16,
-  "scientific_fidelity": "UNMEASURED \u2014 all QA verifies well-formedness, not correct interpretation",
+  "scientific_fidelity": "UNMEASURED: all QA verifies well-formedness, not correct interpretation",
   "id_denotes_entity_rate_basis": "INHERITED from Tier 2 as a whole \u2014 the 270-row adjudicated sample spans both waves; no per-wave rate exists"
  },
  "partition": {
@@ -276,23 +276,28 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3156,
-   "sha256": "62a840a2cb7f31c62ac0549278341f82adde492f3b6cdc5e268971d327d73887"
+   "bytes": 3952,
+   "sha256": "b03f089f192e7497f4140a1bf7727ecb53e4295ac2f5d34648eeca086ee0812c"
+  },
+  {
+   "path": "CHANGELOG.md",
+   "bytes": 2067,
+   "sha256": "59afa9eaa496fb2c7dbfb03712daaf275d0a2e3a9da162b21de15298b0f9a60d"
   },
   {
    "path": "CITATION.cff",
-   "bytes": 2679,
-   "sha256": "a328492f239a58bc095a698a1e547a7dc94a41dcf8b67e894276c67acd6b23b2"
+   "bytes": 3209,
+   "sha256": "a5e5b82d933f01a5041ecbf7da8e6f89c5ccc407087aba32e1b430fffa63d881"
   },
   {
    "path": "LICENSE",
-   "bytes": 4615,
-   "sha256": "1dad5d8241ed12b11a90d6626960ab5c4284e66a573205c24906abcbd4f85718"
+   "bytes": 4585,
+   "sha256": "cf76ed9193bed4ca854dbe2fea3da606a1283eabeb3333c81818eab677fa5b48"
   },
   {
    "path": "README.md",
-   "bytes": 22718,
-   "sha256": "ae910d5f294e647a9e70fc649e7b8b8870eaf67e02803e83ca4827c5c995e6ca"
+   "bytes": 26453,
+   "sha256": "d416e6affd12565e8001aed16a01de6170992d3f784e84e322bce4ba7ac411a7"
   },
   {
    "path": "annotations/COMPARATOR_GATE.json",
@@ -301,13 +306,13 @@
   },
   {
    "path": "annotations/CONDITION_ANNOTATIONS_README.md",
-   "bytes": 3544,
-   "sha256": "77bda8980baa25a489e91075834c1b2777642b11c150cb197bcdbb26aab063c6"
+   "bytes": 3541,
+   "sha256": "465af6dadc0d8c77f2b3e8203256ef6568017d12c3b2a973c4e0ea3ef1976fd3"
   },
   {
    "path": "annotations/CONDITION_BUCKET_DEFINITIONS.md",
-   "bytes": 6663,
-   "sha256": "e5534b3423e31352e4d742c1afd52d2e809716323b3d287ef8275b376163a4ea"
+   "bytes": 6660,
+   "sha256": "edafcfd5ed83cedcf437fb8c542580b781c5966bfdd09cf2552da923819a7e0c"
   },
   {
    "path": "annotations/POTS_MODEL_ID_BENCHMARK.json",
@@ -316,13 +321,13 @@
   },
   {
    "path": "annotations/POTS_MODEL_ID_BENCHMARK.md",
-   "bytes": 2703,
-   "sha256": "277126df3242f1e49d46febc19edfac6e0276b32ac72cf5d5a2a5149c0d522a3"
+   "bytes": 2700,
+   "sha256": "2d48abad3f1e935e111004fb5c4d2ba6eef8bf6acb66a344fb4a8a0ff38d2abf"
   },
   {
    "path": "annotations/RETROFIT_REPORT.md",
-   "bytes": 23456,
-   "sha256": "562c9c501c373f812e5f476c80b55abbfb540e43b10372d862f0753093b1cc31"
+   "bytes": 23462,
+   "sha256": "315693885153f07100b7be2e779aaca002c05d937f17340ad9bcd0e86b6f4bef"
   },
   {
    "path": "annotations/condition_annotations.csv",
@@ -333,6 +338,16 @@
    "path": "annotations/condition_annotations.parquet",
    "bytes": 105104,
    "sha256": "2e53652e4342b8f34a2c4090da775d4f9d7177bac34271551ede219581e5f24e"
+  },
+  {
+   "path": "annotations/paper_flags.csv",
+   "bytes": 30435,
+   "sha256": "2a4100fdb5dd982612b10872193dd0f32a7c6b6fada3406c6e7f95b75be56a0a"
+  },
+  {
+   "path": "annotations/paper_flags.parquet",
+   "bytes": 21199,
+   "sha256": "be3607d65200ffd3de03013dd9b534fb3d93c43433c05a38d309c8d91ebfccf7"
   },
   {
    "path": "annotations/quote_retrofit_tier2b.parquet",
@@ -351,8 +366,8 @@
   },
   {
    "path": "code/README.md",
-   "bytes": 3163,
-   "sha256": "4b790134299992694fce19f6ab22b938d158f90cc61d241f6dc942bc6f41b6d9"
+   "bytes": 3154,
+   "sha256": "9c678b57572f7b4616a748223fee2d1a21b351deb0657c3f03c6c919a6f95e1e"
   },
   {
    "path": "code/build_report.py",
@@ -436,8 +451,8 @@
   },
   {
    "path": "code/verify_package.py",
-   "bytes": 12391,
-   "sha256": "04ca91090fc999882cc43fa8d333963739ef836e95d8211276ba500f33dee30a"
+   "bytes": 15875,
+   "sha256": "88255df5278abca580f12026999c822af6b8a00a88b57f9ef6706189f74385a4"
   },
   {
    "path": "data/chunk_order.parquet",
@@ -461,53 +476,53 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 3066,
-   "sha256": "f5090c73a328791bb9022b835d2ab81df2e441fcb89b8dee1fe2a800040ce7b3"
+   "bytes": 3899,
+   "sha256": "3777220debf5bdaa7bcc67bd968e6eab59a8ec89c80cbf6c8d0c941b023c654e"
   },
   {
    "path": "deposit/github_release_notes.md",
-   "bytes": 1871,
-   "sha256": "bb0e1d0e4855ba5e34ef5feeb9504740952d1d2829c165705654aebb36925656"
+   "bytes": 1963,
+   "sha256": "52381824a53664ee493bbe2907acf2e2ad0b2677e8d0b7c6d19d23aeabb4b46a"
   },
   {
    "path": "deposit/osf_metadata.json",
-   "bytes": 2016,
-   "sha256": "9d7eee9baf3a19186d9c000c34e6fd4dd62b57f9ca841271c52bad065135d32f"
+   "bytes": 2485,
+   "sha256": "422b8d2d5cf7ce1ac9c0d92a362864808a3e145dc76768a41832f7fe4f18273f"
   },
   {
    "path": "docs/COMPARABILITY.md",
-   "bytes": 11789,
-   "sha256": "6f7498d4fb138a1fd1276cd99cbbb796283c8e41a84d14c6bc3065e3987752f8"
+   "bytes": 11702,
+   "sha256": "a2507a290b4080c36d338c5cd0767117b494f9de47e0e4e380d9f331f263eede"
   },
   {
    "path": "docs/DATA_DICTIONARY.md",
-   "bytes": 19502,
-   "sha256": "d586e0554364f73b881dd629469fb77555048a8ea8c942f434b58e5a44d0e280"
+   "bytes": 19585,
+   "sha256": "8495643d43d70528c0e4d95aafe38ef2d1ab356edb3b4d9f2ef2d23501cd00b8"
   },
   {
    "path": "docs/LIMITATIONS.md",
-   "bytes": 11712,
-   "sha256": "bcce0290500950ba408f1867d998203ef78f4b3e6402fbcf49f594ab0f6d4553"
+   "bytes": 12594,
+   "sha256": "0b8cb69e850904206fa461e484b7c5c72af81b129597b53f9b29d25abd6c711d"
   },
   {
    "path": "docs/METHODS.md",
-   "bytes": 8021,
-   "sha256": "e1d0c9917d827cd85c88b70bdde239a7e3a53bd959ac9a3789e925470c74fb32"
+   "bytes": 8066,
+   "sha256": "d0ce55db00ca629225233ab478d1b49c2d928a965ee25f4cc45eb7dafcbffab0"
   },
   {
    "path": "docs/README.md",
-   "bytes": 22718,
-   "sha256": "ae910d5f294e647a9e70fc649e7b8b8870eaf67e02803e83ca4827c5c995e6ca"
+   "bytes": 26453,
+   "sha256": "d416e6affd12565e8001aed16a01de6170992d3f784e84e322bce4ba7ac411a7"
   },
   {
    "path": "docs/WEBSITE_INTEGRATION.md",
-   "bytes": 3264,
-   "sha256": "37e879e1b13967d37c747f77bd856265585c2b40701819360b83fc4d6c191c99"
+   "bytes": 3352,
+   "sha256": "424561c0185df8ee195313c0bd0cc38aa2d6fc64b8fd9987bc486a6d5811970c"
   },
   {
    "path": "qa/comparability_report.json",
-   "bytes": 44265,
-   "sha256": "e07f0e782825b747cf7100495bb22b2dcfd31cc9e79324857934be70338cc26b"
+   "bytes": 45445,
+   "sha256": "4816e451a403ab824c4e055f3b04e8b0539fee604a156d88347c638762b8580b"
   },
   {
    "path": "qa/invariants.json",
@@ -518,6 +533,16 @@
    "path": "qa/package_stats.json",
    "bytes": 13211,
    "sha256": "f6d7501f46a348d58cbbaa0d68df1cb30ce56c5a315cb6f664d033b2bb0e724e"
+  },
+  {
+   "path": "qa/paper_flags_adjudication.json",
+   "bytes": 22085,
+   "sha256": "ab250cee6630a7e1b5eae8a64e295c84421ef033e30adfa1af9956ed4f050fbb"
+  },
+  {
+   "path": "qa/paper_flags_summary.json",
+   "bytes": 1792,
+   "sha256": "fa12914886e70e1700de40c08adfe63022b0e30445418494c8cb61b5682a197f"
   },
   {
    "path": "qa/quote_census_all_tiers.json",
@@ -555,6 +580,6 @@
    "sha256": "56ee57a907f8363a16920afe37f92eda13b6b7763c4cb5b21746affa5c4d971b"
   }
  ],
- "n_files": 56,
- "total_bytes": 22209732
+ "n_files": 61,
+ "total_bytes": 22303133
 }

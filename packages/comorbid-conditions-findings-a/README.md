@@ -1,6 +1,9 @@
-# Tier 2 Part A — comorbid-condition literatures, first extraction wave
+# POTS findings v1.2, package 2 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 1 of 2 (36,611 findings, 3,123 papers)
 
 **36,611 findings · 3,123 papers · 81 chunks (76–220 (81 of the 145 tier-2 chunks)) · 2019–2026**
+
+Build stage tier2a of the corpus. Where "tier" appears in file and column names (`data/tier2a_findings.parquet`,
+`tier_source`, `MANIFEST.tier`) it names the build stage in which these rows were extracted, not a rank or a quality grade.
 
 This package stands alone. It contains its slice of the corpus, the documentation needed to
 read it, the QA evidence behind every number below, and the code to re-derive all of it.
@@ -26,25 +29,25 @@ the id denoted a different entity and the name did not resolve). The original mo
 `ontology_id_v11_model_emitted`; on replaced rows `entity_ontology_label` / `ontology_label_final` carry the NEW id's label, fetched by id from the authority. Nothing else changed: no row was added or removed and no other column was edited.
 
 Measured on this package's full population: **68.7% of the model-emitted ids denoted their entity**; the
-rest existed but pointed at a neighbouring gene, a related compound or a sibling concept — near-miss assignment, not fabrication.
+rest existed but pointed at a neighbouring gene, a related compound or a sibling concept, near-miss assignment, not fabrication.
 The v1.1 figure quoted below was an adjudicated SAMPLE and is kept for the record. Full method and corpus-wide numbers: `annotations/POTS_MODEL_ID_BENCHMARK.md`.
 
 ---
 
 ## Read this before you query
 
-1. **Ontology identifiers were re-grounded in v1.2 — filter on `ontology_id_verification`.**
+1. **Ontology identifiers were re-grounded in v1.2, filter on `ontology_id_verification`.**
    Of 6,716 rows that carried a model-emitted id in v1.1, 4,614 denoted their entity at the authority and are tagged `authority_verified_retrospective`; 1,107 ids were replaced by the id the name resolves to; 995 were withheld (`id_withheld_unverified_v1.2`) because the id denoted another entity and the name did not resolve. The model's id is kept in `ontology_id_v11_model_emitted` for the record and must not be used for joins. Measured here: 68.7% of the model-emitted ids were correct; the rest were near-miss assignments (a neighbouring gene, a related compound), not fabrications. See `annotations/POTS_MODEL_ID_BENCHMARK.md`.
 2. **This is one half of Tier 2. Part B is a separate package.**
-   Tier 2 was extracted in two waves. This package is the first wave: 81 chunks, 36,611 findings, 3,123 papers. The two waves share **zero papers** and their chunk ids interleave, so neither is a clean 'earlier literature' or 'later literature' split — the division is operational, not topical. Both parts cover the same nine themes. Pool them freely: they came from one pipeline with one prompt, and every column has identical semantics across the two.
+   Tier 2 was extracted in two waves. This package is the first wave: 81 chunks, 36,611 findings, 3,123 papers. The two waves share no PubMed record (2 studies appear as a preprint in one wave and as the published version in the other; see annotations/paper_flags.csv) and their chunk ids interleave, so neither is a clean 'earlier literature' or 'later literature' split, the division is operational, not topical. Both parts cover the same nine themes. Pool them freely: they came from one pipeline with one prompt, and every column has identical semantics across the two.
 3. **`ontology_id_source == 'unresolved_nulled'` means the identifier was KEPT.**
    In Tiers 3 and 4 the same value means the identifier was NULLED. The obvious filter `df[df.ontology_id_source != 'unresolved_nulled']` silently drops Tier 2 rows that DO carry identifiers. Use `ontology_id_verification` instead. See COMPARABILITY.md, Trap 3.
 4. **`canonical_entity` is empty in this package.**
    Join `data/entity_vocabulary_crosstier.parquet` on `entity` to canonicalize.
 5. **Scientific fidelity is UNMEASURED.**
-   Everything verified in `qa/` is well-formedness: quotes trace to source, identifiers carry authority provenance, invariants hold. **Nobody has checked that the extracted science is correctly interpreted.** That needs a human reader — an LLM adjudicator shares the extractor's blind spots. Treat every row as a pointer to a paper you should read, not as a fact.
+   Everything verified in `qa/` is well-formedness: quotes trace to source, identifiers carry authority provenance, invariants hold. **Nobody has checked that the extracted science is correctly interpreted.** That needs a human reader, an LLM adjudicator shares the extractor's blind spots. Treat every row as a pointer to a paper you should read, not as a fact.
 6. **`condition` is a coarse POPULATION bucket, and the `MCAS` bucket is mostly not MCAS.**
-   `condition` means the patient population the paper studied — not a diagnosis, not a mechanism-relevance tag. Its bucket definitions were written down only on 2026-09-16 (`annotations/CONDITION_BUCKET_DEFINITIONS.md`). A stratified census of the 1,083 `MCAS`-labelled papers corpus-wide projects ~69% study mast-cell biology with no mast-cell-disorder population, ~10% MCAS as defined, ~5% mastocytosis (a distinct clonal neoplasm). The shipped column is unchanged; `annotations/condition_annotations.parquet` (pmid-keyed) carries a per-paper verdict, all classifier-derived and `human_confirmed == False`. In this package 496 papers (4,306 rows) carry `condition == 'MCAS'`: 16 verified `in_bucket`, 63 `bucket_violation`, 417 unassessed.
+   `condition` means the patient population the paper studied, not a diagnosis, not a mechanism-relevance tag. Its bucket definitions were written down only on 2026-09-16 (`annotations/CONDITION_BUCKET_DEFINITIONS.md`). A stratified census of the 1,083 `MCAS`-labelled papers corpus-wide projects ~69% study mast-cell biology with no mast-cell-disorder population, ~10% MCAS as defined, ~5% mastocytosis (a distinct clonal neoplasm). The shipped column is unchanged; `annotations/condition_annotations.parquet` (pmid-keyed) carries a per-paper verdict, all classifier-derived and `human_confirmed == False`. In this package 496 papers (4,306 rows) carry `condition == 'MCAS'`: 16 verified `in_bucket`, 63 `bucket_violation`, 417 unassessed.
 
 ---
 
@@ -73,7 +76,7 @@ The v1.1 figure quoted below was an adjudicated SAMPLE and is kept for the recor
 literature the paper came from (`source_literature`). A POTS paper reporting on a fibromyalgia
 cohort has `source_literature` of the POTS/dysautonomia literature and `condition == 'fibromyalgia'`.
 Bucket definitions: `annotations/CONDITION_BUCKET_DEFINITIONS.md`. Read warning 6 above before
-counting anything by `condition` — only the `MCAS` bucket has been censused, and it is mostly not MCAS.
+counting anything by `condition`: only the `MCAS` bucket has been censused, and it is mostly not MCAS.
 
 | condition | findings | papers |
 |---|---:|---:|
@@ -92,9 +95,9 @@ counting anything by `condition` — only the `MCAS` bucket has been censused, a
 | | |
 |---|---|
 | findings per paper (overall) | 11.72 |
-| findings per paper — `abstract-only` | 5.6 (1,377 papers, 7,706 findings) |
-| findings per paper — `blocked` | 7.0 (1 papers, 7 findings) |
-| findings per paper — `retrieved-fulltext` | 16.56 (1,745 papers, 28,898 findings) |
+| findings per paper: `abstract-only` | 5.6 (1,377 papers, 7,706 findings) |
+| findings per paper: `blocked` | 7.0 (1 papers, 7 findings) |
+| findings per paper: `retrieved-fulltext` | 16.56 (1,745 papers, 28,898 findings) |
 
 **Never compare findings-per-paper across packages without stratifying by
 `fulltext_status`.** Yield is driven roughly 3× by whether full text was retrieved, and the
@@ -117,11 +120,11 @@ retrieval success, not extraction productivity.
 
 ### Quote provenance
 
-Every one of the 36,611 rows carries a `provenance_quote` — the span of source
+Every one of the 36,611 rows carries a `provenance_quote`: the span of source
 text the finding was drawn from. Median 181 characters, 90th percentile
 301, longest 718.
 
-**7,713 of 36,611 rows (21.07%) are verifiable** — meaning the
+**7,713 of 36,611 rows (21.07%) are verifiable**: meaning the
 quote's own source text still exists and can be re-read.
 
 Abstract-derived rows only; body text was discarded after extraction, so full-text-derived quotes have no surviving source.
@@ -132,7 +135,7 @@ wrong-paper false positives in every stratum**. The body text was simply discard
 extraction. `qa/` carries the census with its negative control.
 
 **v1.1 retrofit:** the source of every paper in this package was re-fetched from Europe PMC and every quote
-re-checked — **36,547 of 36,611 rows (99.83%) now have a checkable source**; full-text quotes trace at
+re-checked: **36,547 of 36,611 rows (99.83%) now have a checkable source**; full-text quotes trace at
 98.12% (28,353/28,895), wrong-paper control 0/400.
 This checks Europe PMC's *current* text, not the bytes the model read, and the text is not shipped; the figure above
 is the shipped-source figure. Row-level results: `annotations/quote_retrofit_*.parquet` (see the Annotations section).
@@ -146,7 +149,7 @@ is the shipped-source figure. Row-level results: `annotations/quote_retrofit_*.p
 | id coverage among entity-naming rows | 26.9% |
 | rows with both an id and an authority label | 5,721 |
 
-**Verification status** — this is the column to filter on, not `ontology_id_source`:
+**Verification status**: this is the column to filter on, not `ontology_id_source`:
 
 | `ontology_id_verification` | rows |
 |---|---:|
@@ -171,8 +174,8 @@ The pinned nine-check suite, run unmodified on this exact slice: **7 of 9 pass.*
 | `schema_completeness` | pass |
 | `conservation` | pass |
 | `monotonicity` | pass |
-| `no_model_emitted_ids` | **fail — see below** |
-| `id_provenance` | **fail — see below** |
+| `no_model_emitted_ids` | **fail, see below** |
+| `id_provenance` | **fail, see below** |
 | `enum_drift` | pass |
 | `duplicates` | pass |
 | `hpo_multivalue` | pass |
@@ -180,18 +183,18 @@ The pinned nine-check suite, run unmodified on this exact slice: **7 of 9 pass.*
 
 #### Why these fail, and why they are not repaired
 
-**`no_model_emitted_ids`** — 11 rows from a single paper (PMID 41449404) carry GO identifiers inside the free-text `pathway_or_mechanism` field, e.g. 'Presynaptic modulation of chemical synaptic transmission (GO:0099171)'. The model wrote them into a prose field. They are NOT used as identifiers anywhere — `pathway_id` was dropped from the schema — so nothing downstream consumes them. Left verbatim rather than stripped: the rule is to flag, never silently repair. Filter with a regex on `pathway_or_mechanism` if a clean prose field matters to you.
+**`no_model_emitted_ids`**: 11 rows from a single paper (PMID 41449404) carry GO identifiers inside the free-text `pathway_or_mechanism` field, e.g. 'Presynaptic modulation of chemical synaptic transmission (GO:0099171)'. The model wrote them into a prose field. They are NOT used as identifiers anywhere (`pathway_id` was dropped from the schema) so nothing downstream consumes them. Left verbatim rather than stripped: the rule is to flag, never silently repair. Filter with a regex on `pathway_or_mechanism` if a clean prose field matters to you.
 
-**`id_provenance`** — 1,243 rows carry a resolved ontology id and 5,714 an HGNC id whose source tag is absent or reads `unresolved_nulled` — which in Tier 2 means the identifier was KEPT (see COMPARABILITY.md, Trap 3). Tier 2's tag vocabulary (`authority_lookup_B/C/D`) records neither ontology nor match mode. KNOWN and DOCUMENTED; use the harmonized verification columns instead.
+**`id_provenance`**: In v1.1 this package's 6,716 identifier-bearing rows carried a model-emitted id with no source tag (`ontology_id_source` was null; the package predates the provenance-tag convention), and the check reports that absence. In v1.2 every one of those ids was looked up by id at its minting authority: 4,614 confirmed (`authority_verified_retrospective`), 1,107 replaced by the id the entity name resolves to, 995 withheld (`id_withheld_unverified_v1.2`). The verification columns `ontology_id_verification` and `ontology_id_match_mode` are the authoritative record; the invariant is kept failing, not repaired, because the v1.1 source tag it tests for was never written. See `annotations/POTS_MODEL_ID_BENCHMARK.md`.
 
 The suite was written during Tier 3 and encodes conventions Tiers 1 and 2 predate. These are
 **pre-existing, characterized properties of the earlier extraction passes**, not damage from
 packaging. They are shipped as failures rather than suppressed because the project rule is to
-flag and never silently repair — a suite tuned until it passes is not a suite. The harmonized
+flag and never silently repair, a suite tuned until it passes is not a suite. The harmonized
 `ontology_id_verification` / `ontology_id_match_mode` columns exist precisely so that a query
 can respect this without reading the invariant output.
 
-### Enum drift — flagged, never coerced
+### Enum drift, flagged, never coerced
 
 20 rows (0.0546%) carry a value outside the pinned enum for
 their column. The extraction prompt pinned both vocabularies; the model drifted past the
@@ -206,10 +209,10 @@ deficient rather than the output wrong.
 | `condition` | `IBD_gut` | 2 |
 | `condition` | `other patient group` | 2 |
 
-- `systematic-review/meta-analysis` and `systematic review` are the model splitting a distinction the enum collapses into `meta-analysis`. Arguably the enum is the deficient one — a systematic review without a pooled estimate is not a meta-analysis.
+- `systematic-review/meta-analysis` and `systematic review` are the model splitting a distinction the enum collapses into `meta-analysis`. Arguably the enum is the deficient one, a systematic review without a pooled estimate is not a meta-analysis.
 - `case-report/case-series` is the model refusing to choose between two adjacent enum values that the source genuinely straddles.
 - `other patient group` marks findings about a different disease used as a mechanistic analogy. The enum has no slot for that, so this is an enum deficiency, formally unadjudicated.
-- `IBD_gut` is probably a typo for `IBS_gut` — but inflammatory bowel disease and irritable bowel syndrome are different diseases, so auto-correcting it would be a guess that changes what a row claims. Left as-is, flagged, unadjudicated.
+- `IBD_gut` is probably a typo for `IBS_gut`: but inflammatory bowel disease and irritable bowel syndrome are different diseases, so auto-correcting it would be a guess that changes what a row claims. Left as-is, flagged, unadjudicated.
 
 ---
 
@@ -233,15 +236,15 @@ deficient rather than the output wrong.
 | `qa/*` | The original QA evidence from this tier's extraction run. |
 | `code/verify_package.py` | Re-derives every number above from the shipped data. |
 | `code/tier3_invariants*.py` | The pinned invariant modules, byte-identical to the build. |
-| `code/quote_trace.py` | The quote matcher — refuses to report a rate without its negative control. |
+| `code/quote_trace.py` | The quote matcher, refuses to report a rate without its negative control. |
 | `code/*` | The extraction pipeline, prompt and driver used for this tier. |
-| `code/README.md` | The role of every file in `code/` — including why a Tier-1 package carries `tier3_*` modules. |
+| `code/README.md` | The role of every file in `code/`: including why a Tier-1 package carries `tier3_*` modules. |
 | `code/comparator_symmetry_tests.py` | Pins that the quote matcher decodes entities and folds whitespace on BOTH sides. |
 | `MANIFEST.json` | File inventory with SHA-256 for every file. |
 | `CHECKSUMS.sha256` | `shasum -a 256 -c CHECKSUMS.sha256` to verify the download. |
 | `LICENSE` | CC BY 4.0 for the data; the quote column is separately described. |
 | `CITATION.cff` | How to cite this package. |
-| `annotations/*` | ADDITIVE annotation tables keyed to this package's rows/papers — see below. |
+| `annotations/*` | ADDITIVE annotation tables keyed to this package's rows/papers, see below. |
 
 ## Quickstart
 
@@ -253,7 +256,7 @@ df = pd.read_parquet('data/tier2a_findings.parquet')
 verifiable = df[df.fulltext_status.isin(['abstract-only', 'blocked'])]
 #  -> 7,713 rows (21.07%)
 
-# 2. Ontology identifiers — filter on VERIFICATION, never on coverage (v1.2 re-grounding)
+# 2. Ontology identifiers, filter on VERIFICATION, never on coverage (v1.2 re-grounding)
 df.ontology_id_verification.value_counts()
 #  -> no_id, authority_verified_retrospective, id_withheld_unverified_v1.2
 grounded = df[df.ontology_id_verification.isin(['authority_verified', 'authority_verified_retrospective'])]
@@ -262,13 +265,13 @@ withheld = df[df.ontology_id_verification == 'id_withheld_unverified_v1.2']
 #  -> 995 rows: the model-emitted id denoted another entity; it is kept in ontology_id_v11_model_emitted, not in entity_ontology_id_resolved
 
 # 3. Highest-confidence evidence
-#    NOTE: `certainty_derived` is EMPTY in this package - it was introduced in Tier 3.
+#    NOTE: `certainty_derived` is EMPTY in this package - it was introduced at build stage 3 (postviral-autism-findings).
 #    Use `certainty`, the extractor's own judgment, which is populated here.
 strong = df[df.evidence_tier.isin(['meta-analysis', 'RCT'])
             & df.certainty.eq('confirmed')]
 #  -> 1,062 rows
 
-# 4. Marker frequency — case-fold, or canonicalize with the shipped vocabulary
+# 4. Marker frequency, case-fold, or canonicalize with the shipped vocabulary
 vocab = pd.read_parquet('data/entity_vocabulary_crosstier.parquet')
 df = df.merge(vocab[['raw_entity', 'canonical_entity']]
               .rename(columns={'raw_entity': 'entity',
@@ -318,6 +321,8 @@ its numerator, denominator and basis. They are covered by `MANIFEST.json` and `C
 | `annotations/quote_retrofit_tier2a.parquet` | 36,611 | `row_idx` = 0-based row of `data/<pkg>_findings.parquet` (+ `pmid`, `quote_sha1` as checks) | Per-row quote traceability against source text re-fetched from Europe PMC on 2026-09-16, with source depth, fetch status and the wrong-paper control. Null `retrofit_traceable` means no source exists today. |
 | `annotations/retrofit_fetch_log.parquet` | 10,428 | `pmid` | One row per Tier 1–3 paper attempted in the retrofit: abstract/full-text availability, PMCID, HTTP outcome, fetch date. |
 | `annotations/retrofit_summary.json` | — | — | Machine-readable retrofit numbers for all four Tier 1–3 packages, every rate with numerator, denominator and basis. |
+| `annotations/paper_flags.csv` | 64 | pmid, flag | Retracted, corrected, preprint and duplicate records, one row per (record, flag), with the recommended use. See the Paper flags section. |
+| `annotations/paper_flags.parquet` | 64 | pmid, flag | Parquet twin of paper_flags.csv (same content). |
 
 ### Quote source retrofit (2026-09-16)
 
@@ -348,26 +353,60 @@ package labelled `condition == 'MCAS'`: **16 `in_bucket`, 63 `bucket_violation`*
 `CONDITION_BUCKET_DEFINITIONS.md` v1 under population-studied semantics and none is human-confirmed.
 Other buckets are not yet censused. See `annotations/CONDITION_ANNOTATIONS_README.md`.
 
+### Paper flags (checked 2026-10-26)
+
+`annotations/paper_flags.csv` (and `.parquet`, same content) marks every PubMed record in this package that a reader
+must be able to see and filter: 64 rows over 64 of the package's 3,123 records, one row per
+(record, flag). Flags come from PubMed publication types and linked notices and from Crossref update notices
+(Retraction Watch data), both read on 2026-10-26, plus a recorded adjudication of every title-match pair
+(`qa/paper_flags_adjudication.json`). Flagged rows are flagged, never removed.
+
+| flag | papers | findings | recommended use |
+|---|---:|---:|---|
+| `retracted` | 4 | 43 | exclude |
+| `expression_of_concern` | 1 | 4 | note |
+| `erratum_notice` | 3 | 21 | exclude |
+| `has_correction` | 44 | 671 | note |
+| `preprint_with_published_version` | 5 | 97 | count_once |
+| `published_version_of_preprint` | 3 | 69 | note |
+| `preprint` | 2 | 59 | note |
+| `same_work_other_record` | 2 | 8 | note on the canonical record, count_once on the duplicate |
+
+How to use it: exclude `retracted` records and `erratum_notice` records (a correction notice whose text was
+extracted as if it were a study); count each duplicate group once, on its `canonical_pmid` (the peer-reviewed
+version over a preprint, the original over a reprint or notice); read the linked notice before quoting a number
+from a `has_correction` or `expression_of_concern` record. `recommended_use` carries that rule per row.
+
+The package's paper count (3,123) is a count of PubMed records. Derived from the flags, it holds
+**3,114 distinct works**: records minus correction notices minus duplicate records (`recommended_use == count_once`).
+Retracted papers remain works and remain in the data; exclude them yourself with the flag.
+
+```python
+flags = pd.read_csv('annotations/paper_flags.csv', dtype=str)
+drop = set(flags.loc[flags.recommended_use.isin(['exclude', 'count_once']), 'pmid'])
+clean = df[~df.pmid.astype(str).isin(drop)]        # retracted and notice rows out, each work counted once
+```
+
 ---
 
 ## The other four packages
 
 This is one block of a five-way partition of a single corpus. **Zero papers are shared
-between any two packages** — verified by pmid set intersection across all ten pairs at build
+between any two packages**: verified by pmid set intersection across all ten pairs at build
 time. Per-package counts sum exactly to the corpus totals.
 
 | package | findings | papers | chunks | identifiers | quotes verifiable |
 |---|---:|---:|---:|---|---:|
-| Tier 1 | 36,067 | 3,129 | 76 | model-emitted | 18.12% |
-| Tier 2 Part A ← | 36,611 | 3,123 | 81 | model-emitted | 21.07% |
-| Tier 2 Part B | 33,830 | 2,589 | 64 | model-emitted | 19.39% |
-| Tier 3 | 26,032 | 1,587 | 35 | authority-derived | 12.22% |
-| Tier 4 | 15,646 | 1,091 | 30 | authority-derived | 100.0% |
+| POTS findings v1.2, package 1 of 5: POTS and dysautonomia core literature (36,067 findings, 3,129 papers) | 36,067 | 3,129 | 76 | model-emitted | 18.12% |
+| POTS findings v1.2, package 2 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 1 of 2 (36,611 findings, 3,123 papers) ← | 36,611 | 3,123 | 81 | model-emitted | 21.07% |
+| POTS findings v1.2, package 3 of 5: EDS and hypermobility, ME/CFS, MCAS, fibromyalgia, IBS, small fiber neuropathy and RCCX genes, part 2 of 2 (33,830 findings, 2,589 papers) | 33,830 | 2,589 | 64 | model-emitted | 19.39% |
+| POTS findings v1.2, package 4 of 5: long COVID, post-viral and autism intersections (26,032 findings, 1,587 papers) | 26,032 | 1,587 | 35 | authority-derived | 12.22% |
+| POTS findings v1.2, package 5 of 5: migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS (15,646 findings, 1,091 papers) | 15,646 | 1,091 | 30 | authority-derived | 100.0% |
 | **corpus total** | **148,186** | **11,519** | **286** | | **26.75%** |
 
 Pooling any subset is safe for row and paper counts, paper metadata, quote presence, the
 harmonized verification columns, and the capability flags. Eleven other metrics are **not**
-comparable across all five — `docs/COMPARABILITY.md` lists each with its reason.
+comparable across all five: `docs/COMPARABILITY.md` lists each with its reason.
 
 Tier 2 Part A and Part B are the two waves of a single extraction pass with one pipeline and
 one prompt; pool those two freely.
@@ -375,4 +414,4 @@ one prompt; pool those two freely.
 ---
 
 Built 2026-10-22T12:15:40Z from harmonized corpus `f0b86f9a-f688-48c4-a08f-94e946afb9af`.
-Data CC BY 4.0. Machine-extracted research information — **not medical advice.**
+Data CC BY 4.0. Machine-extracted research information: **not medical advice.**

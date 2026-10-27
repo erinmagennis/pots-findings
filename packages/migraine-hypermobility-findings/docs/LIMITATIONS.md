@@ -1,4 +1,4 @@
-# Limitations — Tier 4 — migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS
+# Limitations: POTS findings v1.2, package 5 of 5: migraine, hypermobility spectrum, Sjögren's, PANS/PANDAS (15,646 findings, 1,091 papers)
 
 Ordered by how much they should change what you conclude. Nothing here is hedging: each item
 is a measured property with its measurement.
@@ -7,7 +7,7 @@ is a measured property with its measurement.
 
 **This is the largest limitation and it applies to every package.**
 
-Everything in `qa/` verifies well-formedness — a quote is real text from the right paper, an
+Everything in `qa/` verifies well-formedness, a quote is real text from the right paper, an
 identifier carries authority provenance, counts are conserved, enum drift is flagged. **No
 check asks whether a finding correctly interprets its source.**
 
@@ -30,7 +30,7 @@ Identifiers here are authority-derived and score 0.998 on
 
 The resolver leaves a name unmatched rather than guessing, and fuzzy matches were
 adjudicated rather than accepted (59% of fuzzy OLS4 HPO matches were wrong). **Low coverage
-is the price of the high correctness, and it was the right trade** — but it means an
+is the price of the high correctness, and it was the right trade**: but it means an
 identifier-keyed analysis covers a minority of rows.
 
 **Practical consequence: identifier-keyed views cover a fraction of the findings. Never
@@ -38,7 +38,7 @@ present an identifier-keyed count as a total.** Keyword search on `entity` reach
 
 ## 3. Verifiability is complete here but not corpus-wide
 
-Every row in this package is verifiable — body text was retained. **But corpus-wide
+Every row in this package is verifiable, body text was retained. **But corpus-wide
 verifiability is 26.75%**, because Tiers 1-3 discarded theirs. If you pool this package
 with its siblings, the pooled verifiability is not 100%.
 
@@ -62,7 +62,7 @@ abstract-only, or because retrieval failed. These are indistinguishable in the d
 ## 5. Entity coverage, and what a null entity means
 
 11,259 of 15,646 rows (72.0%) name an entity. The remainder name
-**none by design** — symptom-burden, phenotype, quality-of-life and study-characteristic
+**none by design**: symptom-burden, phenotype, quality-of-life and study-characteristic
 findings have no marker to name.
 
 **Practical consequence: an entity-keyed view covers roughly half these findings, and that is
@@ -70,21 +70,21 @@ correct behavior, not missing data.** Never present an entity-keyed count as a t
 
 Entity strings are **not canonicalized in-row** for Tiers 1-2. Case variants
 (`Interleukin-6` / `interleukin-6`) are distinct strings. Join
-`data/entity_vocabulary_crosstier.parquet`, or case-fold at query time — but **never
+`data/entity_vocabulary_crosstier.parquet`, or case-fold at query time, but **never
 lowercase to merge**, which would collapse human and mouse gene symbols (`MECP2`/`Mecp2`).
 
 ## 6. Enum drift
 
 8 rows (0.0511%) carry a value outside the pinned enum. **Shipped
 verbatim, never coerced.** Two of the drifted values are arguments that the enum is
-deficient rather than the output wrong — `other patient group` (findings about another
+deficient rather than the output wrong: `other patient group` (findings about another
 disease used as a mechanistic analogy, which the enum has no slot for) and `IBD_gut`
 (probably an `IBS_gut` typo, but IBD and IBS are different diseases so correcting it would
 change what the row claims). Both are formally unadjudicated.
 
 The `condition` column carries three values that appear in the shipped data but have no written
 definition in `annotations/CONDITION_BUCKET_DEFINITIONS.md`: `IBD_gut`, `orthostatic_hypotension` and
-`other patient group` — 4 papers corpus-wide, none in this package.
+`other patient group`: 4 papers corpus-wide, none in this package.
 They are extraction-time enum drift, not buckets. Read them as `general` for population counts; they are not
 repaired in the data.
 
@@ -107,11 +107,11 @@ Eleven metrics are not comparable across all five packages. Five aggregates are 
 The corpus was assembled by keyword query, so it inherits every bias of the queries: it is
 **English-language, PubMed/Europe-PMC-indexed, and weighted toward the conditions that were
 searched for**. Conditions appear in packages other than their own only as incidental
-mentions — a count of `condition == 'fibromyalgia'` in the Tier 1 package means
+mentions, a count of `condition == 'fibromyalgia'` in the Tier 1 package means
 *POTS/dysautonomia papers that mention fibromyalgia*, not the fibromyalgia literature.
 
 Publication bias is inherited wholesale and unmeasured. Null results are retained where the
-source reported them (`null_or_failed_result`), which partially offsets this — but only
+source reported them (`null_or_failed_result`), which partially offsets this, but only
 partially, since unpublished nulls are absent by construction.
 
 ## 9. All adjudicated error rates are LLM-judged
@@ -119,7 +119,7 @@ partially, since unpublished nulls are absent by construction.
 The identifier-denotation rates, the HPO fuzzy-match verdicts, and the quote-residual
 classifications were adjudicated by a model, not a human. Each has a negative control
 establishing that the instrument discriminates, and controls are reported alongside every
-rate — but a control proves the instrument is not random, not that it is right.
+rate, but a control proves the instrument is not random, not that it is right.
 
 ## 10. The `condition` bucket is a population label, and one bucket is mostly mislabelled
 
@@ -128,7 +128,7 @@ rate — but a control proves the instrument is not random, not that it is right
 the `MCAS` bucket found ~69% of its papers study mast-cell biology with no MCAS population and ~5% study
 mastocytosis, a different disease. The shipped column is not edited; `annotations/condition_annotations.parquet`
 records a per-paper verdict against the definitions. In this package: 0 papers `in_bucket`,
-22 `bucket_violation`, 14 `NEEDS_HUMAN` — all classifier-derived and unconfirmed. The
+22 `bucket_violation`, 14 `NEEDS_HUMAN`: all classifier-derived and unconfirmed. The
 other buckets have not been censused and may carry the same defect at an unknown rate. Eight of the
 thirteen bucket definitions are provisional.
 
@@ -140,12 +140,23 @@ which normalizes both sides symmetrically (`code/comparator_symmetry_tests.py`, 
 check against a clean copy of the paper will miss them. This is a presentation defect, not a fabrication,
 and it is not repaired in place.
 
+## 13. Retracted, corrected and duplicate records are kept and flagged
+
+`annotations/paper_flags.csv` marks 0 retracted papers (0 findings),
+0 with an expression of concern, 0 correction notices whose text was extracted as a paper,
+19 papers with a published correction, 22 preprints and
+11 records that duplicate another record in the dataset. None of these rows was removed:
+the data is frozen and the flags are additive. Any count that does not first apply `recommended_use` includes retracted
+findings and double-counts duplicated works. The flags reflect PubMed and Crossref as read on 2026-10-26; a paper retracted
+after that date is not flagged. The title-match decisions (accepted and rejected, with reasons) are in
+`qa/paper_flags_adjudication.json`; the v1.0 `data/pmid_dedup_map.parquet` is superseded by this file.
+
 ## What would most improve this package
 
-1. **Score the fidelity worksheet** with a human reader — the only way to learn whether the
+1. **Score the fidelity worksheet** with a human reader, the only way to learn whether the
    extracted science is right. The AI-scorer calibration (Q7/Q8 machine-extendable, Q3/Q10 human) cuts it to ~2–4 h.
-2. **Human-confirm the `condition` annotations** — start with the 66 papers whose title contains "mastocytos",
+2. **Human-confirm the `condition` annotations**: start with the 66 papers whose title contains "mastocytos",
    then census the remaining buckets against the written definitions.
-3. **Extend identifier coverage** — 10.3% is the corpus low, though what is there is right.
+3. **Extend identifier coverage**: 10.3% is the corpus low, though what is there is right.
 4. **Adjudicate the 2,257 `screen_verdict_uncertain` rows** with a human reader (v1 docs said 1,960; the data says 2,257).
 
