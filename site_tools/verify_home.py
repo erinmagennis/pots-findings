@@ -139,16 +139,12 @@ def check(site_dir):
     # disagree and barely studied cards use the Start page picks: compare with verify_start_here's own recompute
     sys.path.insert(0, str(Path(__file__).resolve().parent)); import verify_start_here as VS
     _, _, _, want_s, _, _, _, picks = VS.expected(str(site))
-    c = hs['cex']
-    if (c['e'] if c else None) != (picks['contra'][0] if picks['contra'] else None):
-        f.append(f'disagree example {c and c["e"]} != Start page pick {picks["contra"][:1]}')
-    elif c:
-        got = {k: v for k, v, _ in c['parts']}
-        exp = {k.split(':', 1)[0][7:]: v for k, v in want_s.items() if k.startswith('contra_') and k.split(':', 1)[1] == c['e']}
-        if got != exp: f.append(f'disagree example counts {got} != contradictions.json {exp}')
-        for k, v, w in c['parts']:
-            word = {'hi': 'higher', 'lo': 'lower', 'nu': 'no difference'}[k]
-            if word not in w: f.append(f'disagree example part {k} worded {w!r}')
+    c = hs['cex']   # the best clear split in any condition (Start page rule, recomputed by verify_start_here)
+    got_c = [(c['e'], c['c'], c['hi'], c['lo'])] if c else []
+    if got_c != picks['split_best']: f.append(f'disagree example {got_c} != clear-split pick {picks["split_best"]}')
+    js = (site / 'js' / 'home-v2.js').read_text(encoding='utf-8')
+    if 'possible splits' not in js: f.append('home disagree card does not call its total possible splits')
+    if 'higher than in healthy people' not in js: f.append('home disagree example does not say the comparison is with healthy people')
     nul = json.load(open(data / 'null_results.json')); fl = nul['fields']; ix = {k: fl.index(k) for k in fl}
     if nul['n'] != m['nulls']: f.append('null_results.json n != meta nulls')
     n = hs['nex']; hit = None
@@ -169,7 +165,6 @@ def check(site_dir):
                     and r['n_findings'] == u['nf'] and [str(x) for x in r['pmids']] == u['pmids']), None)
         if not row: f.append(f'understudied example {u["e"]} is not a row of understudied.json')
         if set(u['pmids']) & excl: f.append('understudied example cites an exclude-flagged paper')
-    js = (site / 'js' / 'home-v2.js').read_text(encoding='utf-8')
     if 'href="discover#under?all"' not in js: f.append('home barely studied card does not link to discover#under?all (the set its total describes)')
 
     # page wiring: the home script reads these files, and the hero counts are apply_counts markers

@@ -48,7 +48,7 @@ function stand(s) {
   const host = document.getElementById('stand'); if (!host) return;
   const c = s.cex, n = s.nex, u = s.uex;
   // examples are picked at build time with the Start page rules (site_tools/signals_rules.py); words come with the counts
-  const cexHTML = c ? `<p class="ex">For example, <b>${esc(displayName(c.e))}</b> in ${esc(condLabel(c.c))}: ${c.parts.map(([, v, w]) => `${fmt(v)}${esc(w)}`).join(', ')}.</p>` : '';
+  const cexHTML = c ? `<p class="ex">For example, <b>${esc(displayName(c.e))}</b> in ${esc(condLabel(c.c))}: ${fmt(c.hi)} papers report it higher than in healthy people, ${fmt(c.lo)} report it lower.</p>` : '';
   const uexHTML = u ? `<p class="ex">For example, <b>${esc(displayName(u.e))}</b> and ${esc(condLabel(u.c))}: ${fmt(u.n)} papers so far, ${fmt(u.nf)} findings.</p>` : '';
   const lc = w => (/^[A-Z][a-z]/.test(w) ? w[0].toLowerCase() + w.slice(1) : w);   // drug names read in lower case mid-sentence
   const vs = String(n.e || '').split(/\s+vs\.?\s+/i);   // a head-to-head entity ("A vs B") found no difference between A and B
@@ -58,8 +58,8 @@ function stand(s) {
   host.innerHTML = `
     <h2>What stands out</h2>
     <div class="stand-grid">
-      <a class="stand-card" href="discover#contra"><p class="k">Where studies disagree</p><p class="v">${fmt(s.contra_total)}</p>
-        ${cexHTML}<span class="more">See the disagreements</span></a>
+      <a class="stand-card" href="discover#contra"><p class="k">Where studies disagree</p><p class="v">${fmt(s.contra_total)}</p><p class="ex">possible splits, for every condition. Many answer different questions, so read both sides.</p>
+        ${cexHTML}<span class="more">See the possible splits</span></a>
       <a class="stand-card" href="discover#nulls"><p class="k">Tested and found nothing</p><p class="v">${fmt(s.nulls)}</p>
         <p class="ex">${nexHTML}</p><span class="more">See the null results</span></a>
       <a class="stand-card" href="discover#under?all"><p class="k">Barely studied</p><p class="v">${fmt(s.under_total)}</p>

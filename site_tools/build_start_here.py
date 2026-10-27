@@ -28,7 +28,7 @@ DIR_WORDS = {"elevated": "higher", "depleted/reduced": "lower", "no significant 
 DIR_KEY = {"elevated": "up", "depleted/reduced": "down", "no significant difference": "nodiff"}  # data-k key slugs
 TIER_ORDER = ["meta-analysis", "systematic-review/meta-analysis", "systematic review", "RCT", "cohort", "case-control", "cross-sectional"]
 N_TOPICS, N_CONDS, N_EACH = 6, 5, 2
-# example selection rules live in signals_rules.py (contra_examples, null_examples, under_examples)
+# example selection rules live in signals_rules.py (clear_splits, null_examples, under_examples)
 SPLIT_YEAR = 2021   # "most were published in SPLIT_YEAR or later" (meta counts papers_2021_on / papers_before_2021)
 
 CONDITION_LABELS = {  # mirrors site/js/labels.js CONDITION_LABELS
@@ -174,10 +174,12 @@ def compute():
         return row_kind or (ents.get(name) or {}).get("kind")
 
     # the three example lists use the shared picks in signals_rules.py (one rule for the Start page and the home cards):
-    # contra_examples (direction-flip or null-vs-positive rows, >= MIN_SIDE papers each side, contradictions.json counts),
+    # clear_splits (papers vs healthy people, no reviews, a paper on both sides counts on neither, >= MIN_SIDE each side),
     # null_examples (primary non-review studies, see its docstring), under_examples (clear barely studied topics)
-    RF = SR.Facets(D); kinds = SR.entity_kinds(D)
-    disagree = SR.contra_examples(D, FOCUS, RF, kinds, n=N_EACH)
+    kinds = SR.entity_kinds(D)
+    splits = SR.clear_splits(D)
+    disagree = [x for x in splits if x["c"] == FOCUS][:N_EACH]
+    other = [x for x in splits if x["c"] != FOCUS]
     nulls = SR.null_examples(D, FOCUS, kinds, skip={x["e"] for x in disagree})
     under = [dict(r, _kind=kind_of(r["canonical_entity"], r.get("entity_kind"))) for r in SR.under_examples(D, FOCUS, n=N_EACH)]
 
@@ -200,7 +202,7 @@ def compute():
                 ex = {"row": i, "text": text, "quote": quote, "entity": top, "tier": dic["tr"][TR[i]],
                       "dir": dic["d"][cols["d"][i]], "paper": p}
                 break
-    return meta, dict(n_focus_papers=len(focus_papers), topics=topics, conds=conds, disagree=disagree,
+    return meta, dict(n_focus_papers=len(focus_papers), topics=topics, conds=conds, disagree=disagree, other_splits=other,
                       nulls=nulls, under=under, example=ex)
 
 
@@ -218,14 +220,19 @@ def render(meta, F):
         f'<li><a href="condition?c={enc(c)}">{esc(cond_label(c))}</a>{CONDITION_NOTES.get(c, "")}<span class="start-count">{f.num(f"co_papers:{c}", n)} papers</span></li>'
         for c, n in F["conds"])
 
-    dis = []
-    for x in F["disagree"]:
-        e = x["e"]
-        parts = ", ".join(f'{f.num(f"contra_{k}:{e}", v)}{words}' for k, v, words in SR.contra_sentence_parts(x))
-        dis.append(f'<li><b>{ent(e)}</b> in POTS: {parts}.</li>')
+    def split_li(x):
+        k = f'{x["e"]}|{x["c"]}'
+        return (f'<b>{ent(x["e"])}</b> in {esc(cond_label(x["c"]))}: {f.num(f"split_hi:{k}", x["hi"])} papers report it higher than in '
+                f'healthy people and {f.num(f"split_lo:{k}", x["lo"])} report it lower.')
+    dis = [f'<li>{split_li(x)}</li>' for x in F["disagree"]]
     if not dis:
-        dis.append('<li class="start-none">No POTS topic has three or more papers on each side under one name, '
-                   'either higher against lower or an effect against no difference.</li>')
+        msg = ('Among POTS papers that compare people with POTS to healthy people, no topic has a clear split yet: '
+               'none has three such papers on each side.')
+        if F["other_splits"]:
+            n_other = len(F["other_splits"])
+            msg += (f' Related conditions have {"one" if n_other == 1 else f.num("clear_splits_other", n_other)} clear {"split" if n_other == 1 else "splits"}. '
+                    f'For example, {split_li(F["other_splits"][0])}')
+        dis.append(f'<li class="start-none">{msg}</li>')
 
     nul = []
     for cls, e, nst, _ in F["nulls"]:
@@ -359,10 +366,11 @@ def render(meta, F):
     <div>
       <h3>Where studies disagree</h3>
       <ul class="start-ex">{"".join(dis)}</ul>
-      <p class="kv">A disagreement means papers found the same thing higher in some and lower in others, or an effect in some and none in others.
-      Only results the model tagged as a comparison between groups count, such as people with and without POTS, or two patient groups.
-      Results tagged as a change after a treatment are left out. No person has checked these tags. A split is a reason to read both sides. It does not prove either side wrong.
-      <a href="discover#contra">All {m("contradictions_total")} disagreements, for every condition</a>{more("contradictions", "contradictions_total")}</p>
+      <p class="kv">A clear split here counts only papers that compare people with the condition to healthy people. Reviews are left out,
+      and a paper that reports both directions counts on neither side. The list of possible splits is wider: it counts any result the model
+      tagged as a comparison between groups, such as two patient groups, and also an effect against no difference. Changes after a treatment
+      are left out. No person has checked these tags. A split does not prove either side wrong.
+      <a href="discover#contra">All {m("contradictions_total")} possible splits, for every condition.</a> Many answer different questions, so read both sides.{more("contradictions", "contradictions_total")}</p>
     </div>
     <div>
       <h3>Tested and found nothing</h3>

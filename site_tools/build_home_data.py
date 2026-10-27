@@ -18,7 +18,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from signals_rules import Facets, flip_sides, entity_kinds, is_measured, MEASURED_KINDS, TREATMENT_SHARE_MAX, contra_examples, contra_sentence_parts, under_examples  # noqa: E402  shared counting rules (one number per fact)
+from signals_rules import Facets, flip_sides, entity_kinds, is_measured, MEASURED_KINDS, TREATMENT_SHARE_MAX, clear_splits, under_examples  # noqa: E402  shared counting rules (one number per fact)
 
 # Generic covariates: measured in almost every study, so raw counts make them look central.
 GENERIC = ['age', 'female sex', 'sex', 'male sex', 'gender', 'female', 'male', 'heart rate', 'blood pressure',
@@ -166,8 +166,8 @@ def build(site):
     m = meta['counts']
     topic_names = [t['e'].lower() for t in topics]
     con = json.load(open(data / 'contradictions.json'))
-    # disagree and barely studied cards: the same picks as the Start page (signals_rules.contra_examples / under_examples)
-    cx = (contra_examples(data, 'POTS', F, kinds, n=1) or [None])[0]
+    # disagree and barely studied cards: the same picks as the Start page (signals_rules.clear_splits / under_examples)
+    cx = (clear_splits(data) or [None])[0]   # any condition: POTS has none on this data
     nul = json.load(open(data / 'null_results.json')); f = nul['fields']; ix = {k: f.index(k) for k in f}
     nex = None
     for sh in nul['shards']:
@@ -182,7 +182,7 @@ def build(site):
     home_stand = {
         'version': meta['version'],
         'contra_total': m['contradictions_total'], 'nulls': m['nulls'], 'under_total': m['understudied_total'],
-        'cex': ({'e': cx['e'], 'c': cx['c'], 'parts': [[k, v, w] for k, v, w in contra_sentence_parts(cx)]} if cx else None),
+        'cex': ({'e': cx['e'], 'c': cx['c'], 'hi': cx['hi'], 'lo': cx['lo']} if cx else None),
         'nex': {'e': nex[ix['canonical_entity']], 'pmid': str(nex[ix['canonical_pmid']]), 'year': nex[ix['year']],
                 'q': nex[ix['provenance_quote_trunc']], 'nc': nex[ix['null_class']], 'c': nex[ix['condition']]},
         'uex': ({'e': uex['canonical_entity'], 'c': uex['condition'], 'n': uex['n_papers'], 'nf': uex['n_findings'],

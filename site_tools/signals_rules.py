@@ -17,9 +17,12 @@ flips apply this (build_connections_data.py; contra_flip_total in meta.json coun
 
 Example picks shared by the Start page (build_start_here.py) and the home "What stands out" cards (build_home_data.py), so
 one rule chooses every example; verify_start_here.py recomputes them on its own and verify_home.py compares the home cards:
-  contra_examples  entity x condition with a direction-flip row (higher vs lower) or a null-vs-positive row (effect vs no
-                   difference) in contradictions.json, at least MIN_SIDE papers on each side of a qualifying row, a
-                   measured kind (is_measured), no exclude-flagged paper; counts are the contradictions.json numbers.
+  clear_splits     the disagreement examples shown on the Start page and the home card: same entity (site entity name,
+                   lower case) and condition label; only findings tagged vs-disease-state whose comparator mentions
+                   "healthy"; findings with a review study type and papers that are reviews (review_papers) left out; a
+                   paper on both sides counts on neither; at least MIN_SIDE papers higher and MIN_SIDE lower; labels that
+                   name no condition (general, multiple, other patient group) left out; exclude-flagged papers out.
+                   Ranked by the smaller side, then both sides together, then name.
   null_examples    POTS null results from primary studies (evidence tier RCT / cohort / case-control / cross-sectional),
                    papers that are reviews left out (review_papers), a treatment example has a treatment kind
                    (TREATMENT_KINDS, so an outcome such as supine heart rate is not one), never an entity that defines
@@ -27,7 +30,9 @@ one rule chooses every example; verify_start_here.py recomputes them on its own 
                    one whose papers also report an effect for it; at least 2 separate studies (linked records are one). If no
                    treatment qualifies, one randomized trial may be shown, worded as one trial.
   under_examples   understudied rows with 2+ papers, not case-report-only, 2+ separate non-review studies, and no more
-                   POTS papers mentioning the topic (topic_stems, in any entity name or finding text) than the papers shown.
+                   POTS papers mentioning the topic (topic_stems, in any entity name or finding text) than the papers shown,
+                   and no contiguous sub-phrase of 2+ words of the name (e.g. "stroke volume" in "stroke volume index")
+                   mentioned, as plain lower-case text in an entity name or finding text, by more POTS papers than shown.
 """
 import json
 from pathlib import Path
@@ -135,48 +140,6 @@ import re as _re
 REVIEW_TITLE = _re.compile(r'review|meta-analys', _re.I)
 
 
-def _clean(row, keys, excluded):
-    return not any(str(p) in excluded for k in keys for p in (row.get(k) or []))
-
-
-def contra_examples(data_dir, cond, F, kinds, n=2):
-    """[{'e','c','hi','lo','nu','rank'}]: hi/lo/nu are contradictions.json paper counts (None when that row does not exist)."""
-    excluded = excluded_pmids(data_dir)
-    by = {}
-    for r in json.load(open(Path(data_dir) / 'contradictions.json'))['rows']:
-        if r['condition'] == cond and _clean(r, ('pmids_A', 'pmids_B'), excluded):
-            by.setdefault(r['canonical_entity'], {})[r['conflict_type']] = r
-    out = []
-    for e, rr in by.items():
-        fr, nr = rr.get('direction-flip'), rr.get('null-vs-positive')
-        sides = []
-        if fr and {fr['side_A_direction'], fr['side_B_direction']} == {HIGHER, LOWER}: sides.append(min(fr['n_papers_A'], fr['n_papers_B']))
-        if nr: sides.append(min(nr['n_papers_A'], nr['n_papers_B']))
-        if not sides or max(sides) < MIN_SIDE: continue
-        if not is_measured(F, kinds, e, cond, (fr or nr).get('entity_kind')): continue
-        if fr: hi, lo = flip_sides(fr)
-        else:   # no flip row: the effect side of the null-vs-positive row has one direction only
-            hi, lo = (nr['n_papers_A'], None) if nr['side_A_direction'] == HIGHER else (None, nr['n_papers_A'])
-        nu = nr['n_papers_B'] if nr else None
-        rank = min(x['rank'] for x in (fr, nr) if x)
-        out.append({'e': e, 'c': cond, 'hi': hi, 'lo': lo, 'nu': nu, 'rank': rank,
-                    '_k': (-max(sides), -sum(x or 0 for x in (hi, lo, nu)), rank, e)})
-    out.sort(key=lambda x: x['_k'])
-    return [{k: v for k, v in x.items() if k != '_k'} for x in out[:n]]
-
-
-def contra_sentence_parts(x):
-    """plain parts for an example: '47 papers report it higher', '1 reports it lower', '5 found no difference'"""
-    parts, first = [], True
-    for key, verb in (('hi', 'report{s} it higher'), ('lo', 'report{s} it lower'), ('nu', 'found no difference')):
-        v = x.get(key)
-        if not v: continue
-        noun = (' paper' if v == 1 else ' papers') if first else ''
-        parts.append((key, v, noun + ' ' + verb.format(s='s' if v == 1 else '')))
-        first = False
-    return parts
-
-
 class Linked:
     """union of PubMed records that are one study (preprint and published version, same work, update)"""
     def __init__(self, data_dir):
@@ -241,6 +204,44 @@ def topic_stems(name):
     return sorted({w[:5] for w in words}) or [s.strip()]
 
 
+def sub_phrases(name):
+    """every contiguous run of 2+ words of the name (without a bracketed part), lower case, shorter than the whole name"""
+    w = name.split(' (')[0].lower().split()
+    return [' '.join(w[a:b]) for a in range(len(w)) for b in range(a + 2, len(w) + 1) if b - a < len(w)]
+
+
+NOT_A_CONDITION = {'general', 'multiple', 'other patient group'}
+
+
+def clear_splits(data_dir):
+    """[{'e','c','hi','lo'}] every clear split (module docstring), best first. 'e' is the most common spelling in those findings."""
+    from collections import Counter, defaultdict
+    data = Path(data_dir); fac = json.load(open(data / 'findings_facets.json')); D = fac['dicts']; C = fac['cols']
+    pms = [str(r[0]) for r in json.load(open(data / 'papers.json'))['rows']]
+    excluded = excluded_pmids(data); reviews = review_papers(data)
+    comp = []
+    for s in range(fac['n_shards']):
+        comp += json.load(open(data / f'detail_{s:02d}.json'))['comp']
+    ref = D['dr'].index(DISEASE_REF); up = D['d'].index(HIGHER); dn = D['d'].index(LOWER)
+    st_rev = {i for i, v in enumerate(D['st']) if v in REVIEW_TYPES}
+    H, L, spell = defaultdict(set), defaultdict(set), defaultdict(Counter)
+    for i in range(fac['n']):
+        if C['dr'][i] != ref or C['d'][i] not in (up, dn) or C['st'][i] in st_rev: continue
+        pm = pms[C['p'][i]]; e = D['e'][C['e'][i]]; c = D['c'][C['c'][i]]
+        if pm in excluded or pm in reviews or e in ('\u2014', '') or c in NOT_A_CONDITION: continue
+        if 'healthy' not in str(comp[i] or '').lower(): continue
+        k = (e.lower(), c); spell[k][e] += 1
+        (H if C['d'][i] == up else L)[k].add(pm)
+    out = []
+    for k in set(H) & set(L):
+        hi, lo = len(H[k] - L[k]), len(L[k] - H[k])
+        if hi >= MIN_SIDE and lo >= MIN_SIDE:
+            e = sorted(spell[k].items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+            out.append({'e': e, 'c': k[1], 'hi': hi, 'lo': lo})
+    out.sort(key=lambda x: (-min(x['hi'], x['lo']), -(x['hi'] + x['lo']), x['e'].lower(), x['c']))
+    return out
+
+
 def under_examples(data_dir, cond, n=2):
     """understudied.json rows that are clear examples (see module docstring), in Signals rank order"""
     data = Path(data_dir); excluded = excluded_pmids(data); reviews = review_papers(data); L = Linked(data)
@@ -261,6 +262,7 @@ def under_examples(data_dir, cond, n=2):
         stems = topic_stems(e)
         mention = {pms[C['p'][i]] for i in rows if all(st in ename_l[C['e'][i]] for st in stems) or all(st in text[i] for st in stems)}
         if len(mention) > r['n_papers']: continue
+        if any(len({pms[C['p'][i]] for i in rows if ph in ename_l[C['e'][i]] or ph in text[i]}) > r['n_papers'] for ph in sub_phrases(e)): continue
         out.append(r)
         if len(out) == n: break
     return out
