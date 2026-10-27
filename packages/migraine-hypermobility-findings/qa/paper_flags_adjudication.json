@@ -1,0 +1,785 @@
+{
+ "adjudicated_on": "2026-10-26",
+ "method": "Each possible_same_work pair compared on PubMed/Europe PMC authors, publication type, DOI, journal, dates and abstract text (difflib ratio on the first 1,500 characters). Accepted only when authors match and the abstract or the publication record shows one work; same-title papers by disjoint author groups, parts I/II, comment/reply pairs, and distinct studies by one group are rejected. canonical_pmid rule: the peer-reviewed version over a preprint; the original over a notice or reprint; for a true co-publication the earlier first-publication date, then the lower PMID.",
+ "pairs": [
+  {
+   "pmid_a": "33532785",
+   "pmid_b": "33688642",
+   "decision": "accepted",
+   "flag": "same_work_other_record",
+   "canonical_pmid": "34373540",
+   "recommended_use": "count_once",
+   "reason": "Two preprint records (medRxiv, Research Square) of one manuscript by the same seven authors; abstracts 96% similar; both carry a PubMed version link to the published article 34373540, which is in the dataset and is the canonical record.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.96,
+    "a": {
+     "journal": "medRxiv",
+     "date": "2021-01-30",
+     "doi": "10.1101/2021.01.27.21250617",
+     "types": [
+      "research-article",
+      "Preprint",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Res Sq",
+     "date": "2021-03-01",
+     "doi": "10.21203/rs.3.rs-266574/v1",
+     "types": [
+      "research-article",
+      "Preprint",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "33589103",
+   "pmid_b": "35400372",
+   "decision": "accepted",
+   "flag": "same_work_other_record",
+   "canonical_pmid": "33589103",
+   "recommended_use": "count_once",
+   "reason": "Identical title, single author (Gota CE), identical abstract; Med Clin North Am 2021 reprinted in Rheum Dis Clin North Am 2022 (Elsevier Clinics reprint). The 2021 original is canonical.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 1.0,
+    "a": {
+     "journal": "Med Clin North Am",
+     "date": "2021-03-01",
+     "doi": "10.1016/j.mcna.2020.09.012",
+     "types": [
+      "Review",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Rheum Dis Clin North Am",
+     "date": "2022-05-01",
+     "doi": "10.1016/j.rdc.2022.02.006",
+     "types": [
+      "Review",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "33941600",
+   "pmid_b": "34625436",
+   "decision": "accepted",
+   "flag": "update_of",
+   "canonical_pmid": "",
+   "recommended_use": "note",
+   "reason": "Same four authors; the second record is titled 'Update to ...' and its DOI carries the publisher's '-up' suffix: a later update article to the first, kept as its own paper and linked.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.99,
+    "a": {
+     "journal": "Cleve Clin J Med",
+     "date": "2021-05-03",
+     "doi": "10.3949/ccjm.88a.21010",
+     "types": [
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Cleve Clin J Med",
+     "date": "2021-10-08",
+     "doi": "10.3949/ccjm.88a.21010-up",
+     "types": [
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "34053992",
+   "pmid_b": "35470419",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Same title, disjoint author groups (Ishibashi et al. case report in Intern Med; Savytskyi et al. letter in Cardiol J): two different papers sharing a title. Matches the earlier dedup-map rejection.",
+   "evidence": {
+    "author_jaccard": 0.0,
+    "abstract_similarity": 1.0,
+    "a": {
+     "journal": "Intern Med",
+     "date": "2021-05-29",
+     "doi": "10.2169/internalmedicine.7626-21",
+     "types": [
+      "Journal Article",
+      "case-report"
+     ]
+    },
+    "b": {
+     "journal": "Cardiol J",
+     "date": "2022-04-26",
+     "doi": "10.5603/cj.a2022.0021",
+     "types": [
+      "Letter"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "34425627",
+   "pmid_b": "36257307",
+   "decision": "accepted",
+   "flag": "same_work_other_record",
+   "canonical_pmid": "34425627",
+   "recommended_use": "count_once",
+   "reason": "Same thirteen authors, identical German-language abstract; Dtsch Med Wochenschr 2021 republished in Pneumologie 2022 (Thieme). The 2021 original is canonical.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 1.0,
+    "a": {
+     "journal": "Dtsch Med Wochenschr",
+     "date": "2021-08-23",
+     "doi": "10.1055/a-1546-4291",
+     "types": [
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Pneumologie",
+     "date": "2022-10-18",
+     "doi": "10.1055/a-1916-1405",
+     "types": [
+      "Journal Article",
+      "English Abstract"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "35366250",
+   "pmid_b": "41218636",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Same title 'Small Fiber Neuropathy in Sarcoidosis', disjoint author groups, abstract similarity 0.06: two different reviews.",
+   "evidence": {
+    "author_jaccard": 0.0,
+    "abstract_similarity": 0.06,
+    "a": {
+     "journal": "Pathophysiology",
+     "date": "2021-12-20",
+     "doi": "10.3390/pathophysiology28040035",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Semin Respir Crit Care Med",
+     "date": "2025-11-11",
+     "doi": "10.1055/a-2716-1691",
+     "types": [
+      "Review",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "36173501",
+   "pmid_b": "36418529",
+   "decision": "accepted",
+   "flag": "same_work_other_record",
+   "canonical_pmid": "36173501",
+   "recommended_use": "count_once",
+   "reason": "Consensus statement by the same seven authors co-published in Clin Auton Res and Hypertens Res (abstract similarity 0.93). Earlier first-publication date (2022-09-29) is canonical.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.93,
+    "a": {
+     "journal": "Clin Auton Res",
+     "date": "2022-09-29",
+     "doi": "10.1007/s10286-022-00897-8",
+     "types": [
+      "Research Support, Non-U.S. Gov't",
+      "review-article",
+      "Review",
+      "Consensus Statement",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Hypertens Res",
+     "date": "2022-11-22",
+     "doi": "10.1038/s41440-022-01074-0",
+     "types": [
+      "Comment",
+      "Editorial"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "36711216",
+   "pmid_b": "38099282",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Same four authors but two studies: acute exercise (ynpai.2023.100118) versus acute experimental stress (ynpai.2023.100144); abstract similarity 0.19.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.19,
+    "a": {
+     "journal": "Neurobiol Pain",
+     "date": "2023-01-19",
+     "doi": "10.1016/j.ynpai.2023.100118",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Neurobiol Pain",
+     "date": "2023-08-01",
+     "doi": "10.1016/j.ynpai.2023.100144",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "37316864",
+   "pmid_b": "39529262",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Same group; a feasibility study (Pilot Feasibility Stud 2023) and the subsequent main study (Eur J Pain 2024); abstract similarity 0.09: two papers.",
+   "evidence": {
+    "author_jaccard": 0.83,
+    "abstract_similarity": 0.09,
+    "a": {
+     "journal": "Pilot Feasibility Stud",
+     "date": "2023-06-14",
+     "doi": "10.1186/s40814-023-01320-3",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Eur J Pain",
+     "date": "2024-11-11",
+     "doi": "10.1002/ejp.4754",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "37478960",
+   "pmid_b": "37481021",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Part I and Part II of a two-part study by the same authors; different content (abstract similarity 0.14). Two papers by design.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.14,
+    "a": {
+     "journal": "Am J Med",
+     "date": "2023-07-20",
+     "doi": "10.1016/j.amjmed.2023.07.009",
+     "types": [
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Am J Med",
+     "date": "2023-07-20",
+     "doi": "10.1016/j.amjmed.2023.07.004",
+     "types": [
+      "Research Support, Non-U.S. Gov't",
+      "Published Erratum",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "37731386",
+   "pmid_b": "37732339",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "A letter ('Comments on ...') and the authors' reply carry the same title; disjoint authors. Two records, two works.",
+   "evidence": {
+    "author_jaccard": 0.0,
+    "abstract_similarity": 0.1,
+    "a": {
+     "journal": "Eur J Transl Myol",
+     "date": "2023-09-20",
+     "doi": "10.4081/ejtm.2023.11722",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Eur J Transl Myol",
+     "date": "2023-09-20",
+     "doi": "10.4081/ejtm.2023.11804",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "37814551",
+   "pmid_b": "37814552",
+   "decision": "accepted",
+   "flag": "same_work_other_record",
+   "canonical_pmid": "37814551",
+   "recommended_use": "count_once",
+   "reason": "EAN/PNS Guillain-Barre guideline co-published in J Peripher Nerv Syst and Eur J Neurol, same 21 authors, identical abstract, same date (2023-10-10); lower PMID is canonical. The earlier dedup map chose 37814552; this file supersedes it with the stated rule.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 1.0,
+    "a": {
+     "journal": "J Peripher Nerv Syst",
+     "date": "2023-10-10",
+     "doi": "10.1111/jns.12594",
+     "types": [
+      "Research Support, Non-U.S. Gov't",
+      "Practice Guideline",
+      "Review",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Eur J Neurol",
+     "date": "2023-10-10",
+     "doi": "10.1111/ene.16073",
+     "types": [
+      "Research Support, Non-U.S. Gov't",
+      "Practice Guideline",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "38155611",
+   "pmid_b": "38545325",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Same 22-author group and cohort; two papers on different outcomes (redo procedures; pericarditis prophylaxis), abstract similarity 0.16.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.16,
+    "a": {
+     "journal": "Europace",
+     "date": "2023-12-01",
+     "doi": "10.1093/europace/euad373",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Heart Rhythm O2",
+     "date": "2024-01-10",
+     "doi": "10.1016/j.hroo.2024.01.001",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "38608783",
+   "pmid_b": "40516846",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Same laboratory; brain histamine (2024) versus carnosine (2025) studies with different abstracts (0.12).",
+   "evidence": {
+    "author_jaccard": 0.75,
+    "abstract_similarity": 0.12,
+    "a": {
+     "journal": "Biochem Pharmacol",
+     "date": "2024-04-10",
+     "doi": "10.1016/j.bcp.2024.116201",
+     "types": [
+      "Research Support, Non-U.S. Gov't",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Eur J Pharmacol",
+     "date": "2025-06-12",
+     "doi": "10.1016/j.ejphar.2025.177844",
+     "types": [
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "38821429",
+   "pmid_b": "39002769",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Knee arthroplasty and hip arthroplasty cohorts by the same authors: two studies.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.34,
+    "a": {
+     "journal": "J Arthroplasty",
+     "date": "2024-05-29",
+     "doi": "10.1016/j.arth.2024.05.069",
+     "types": [
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "J Arthroplasty",
+     "date": "2024-07-11",
+     "doi": "10.1016/j.arth.2024.07.008",
+     "types": [
+      "Research Support, Non-U.S. Gov't",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "39580213",
+   "pmid_b": "40494135",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Same two-word title 'Small fiber neuropathy', disjoint author groups, different journals: two reviews.",
+   "evidence": {
+    "author_jaccard": 0.0,
+    "abstract_similarity": 0.04,
+    "a": {
+     "journal": "Int Rev Neurobiol",
+     "date": "2024-10-29",
+     "doi": "10.1016/bs.irn.2024.10.001",
+     "types": [
+      "Review",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Med Clin (Barc)",
+     "date": "2025-06-09",
+     "doi": "10.1016/j.medcli.2025.106950",
+     "types": [
+      "Review",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "39743902",
+   "pmid_b": "40401568",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "Same group (Stec, Suwalski, de Asmundis ...), overlapping titles ('first' vs 'initial experience in Central Europe'), author lists differ (8 vs 10), Kardiol Pol Jan 2025 and Pol Arch Intern Med May 2025; neither record has an abstract in PubMed and each has one title-only finding, so the same-series question cannot be settled from the record. Kept as two papers; a reader pooling case counts should read both.",
+   "evidence": {
+    "author_jaccard": 0.64,
+    "abstract_similarity": 1.0,
+    "a": {
+     "journal": "Kardiol Pol",
+     "date": "2025-01-02",
+     "doi": "10.33963/v.phj.103819",
+     "types": [
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Pol Arch Intern Med",
+     "date": "2025-05-21",
+     "doi": "10.20452/pamw.17014",
+     "types": [
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "39973399",
+   "pmid_b": "39973466",
+   "decision": "accepted",
+   "flag": "same_work_other_record",
+   "canonical_pmid": "39973466",
+   "recommended_use": "count_once",
+   "reason": "Same seven authors, identical title and abstract, both J Neuromuscul Dis: the article is registered under two DOIs (10.3233/jnd-240071 from the journal's previous publisher IOS Press, 2024-11-01; 10.1177/22143602241284130 from SAGE, 2024-12-27). The earlier record is canonical.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 1.0,
+    "a": {
+     "journal": "J Neuromuscul Dis",
+     "date": "2024-12-27",
+     "doi": "10.1177/22143602241284130",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "J Neuromuscul Dis",
+     "date": "2024-11-01",
+     "doi": "10.3233/jnd-240071",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "40294227",
+   "pmid_b": "40911763",
+   "decision": "accepted",
+   "flag": "same_work_other_record",
+   "canonical_pmid": "40294227",
+   "recommended_use": "count_once",
+   "reason": "Same eight authors and title in J Cardiovasc Pharmacol; the later record (Sep 2025, one finding, no abstract) is a short companion to the Jul 2025 article (the dedup map's 'short_companion_or_correction'). The article is canonical.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.0,
+    "a": {
+     "journal": "J Cardiovasc Pharmacol",
+     "date": "2025-06-19",
+     "doi": "10.1097/fjc.0000000000001705",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "J Cardiovasc Pharmacol",
+     "date": "2025-08-26",
+     "doi": "10.1097/fjc.0000000000001754",
+     "types": [
+      "Journal Article"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "40851429",
+   "pmid_b": "41431981",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "An original article and the authors' reply letter (pubtype Letter) under the same title: two records, two works.",
+   "evidence": {
+    "author_jaccard": 1.0,
+    "abstract_similarity": 0.0,
+    "a": {
+     "journal": "Eur J Neurol",
+     "date": "2025-08-01",
+     "doi": "10.1111/ene.70321",
+     "types": [
+      "research-article",
+      "Journal Article"
+     ]
+    },
+    "b": {
+     "journal": "Eur J Neurol",
+     "date": "2025-12-01",
+     "doi": "10.1111/ene.70474",
+     "types": [
+      "Letter"
+     ]
+    }
+   }
+  },
+  {
+   "pmid_a": "41431977",
+   "pmid_b": "41431981",
+   "decision": "rejected",
+   "flag": "",
+   "canonical_pmid": "",
+   "recommended_use": "",
+   "reason": "A letter to the editor and the authors' reply under the article's title; disjoint authors. Two works.",
+   "evidence": {
+    "author_jaccard": 0.0,
+    "abstract_similarity": 1.0,
+    "a": {
+     "journal": "Eur J Neurol",
+     "date": "2025-12-01",
+     "doi": "10.1111/ene.70466",
+     "types": [
+      "Letter"
+     ]
+    },
+    "b": {
+     "journal": "Eur J Neurol",
+     "date": "2025-12-01",
+     "doi": "10.1111/ene.70474",
+     "types": [
+      "Letter"
+     ]
+    }
+   }
+  }
+ ],
+ "preprint_published_version_search": {
+  "method": "For the 41 preprints without a PubMed version link: Europe PMC exact-title search, then first-author plus four distinctive title words within three years; a hit counts only with author Jaccard >= 0.4 and title Jaccard >= 0.3. Dataset membership checked against the 11,519 PMIDs.",
+  "in_dataset_accepted": [
+   {
+    "preprint": "38585862",
+    "published": "39395208",
+    "reason": "Brown CR and Foster JD, bioRxiv 2024 to J Neurochem 2025; title reworded (Jaccard 0.47), abstract similarity 0.85: the published version."
+   }
+  ],
+  "in_dataset_rejected": [
+   {
+    "preprint": "42396528",
+    "candidate": "41758479",
+    "reason": "Same programme (PORT therapy) but a pilot-trial outcomes preprint versus a rationale/development paper: different works."
+   },
+   {
+    "preprint": "41646353",
+    "candidate": "39660107",
+    "reason": "Title token overlap 0.67 but a 2026 sex-differences study versus a 2024 hEDS-vs-HSD comparison: different works."
+   }
+  ],
+  "published_outside_dataset": [
+   {
+    "preprint": "37790494",
+    "published_pmid": "42141334",
+    "journal": "Clin Auton Res",
+    "year": "2026",
+    "doi": "10.1007/s10286-026-01211-6",
+    "title_jaccard": 1.0,
+    "author_jaccard": 0.55,
+    "basis": "exact-title search"
+   },
+   {
+    "preprint": "38077075",
+    "published_pmid": "38530776",
+    "journal": "Pain Med",
+    "year": "2024",
+    "doi": "10.1093/pm/pnae023",
+    "title_jaccard": 1.0,
+    "author_jaccard": 1.0,
+    "basis": "exact-title search"
+   },
+   {
+    "preprint": "39211876",
+    "published_pmid": "42110977",
+    "journal": "Neurobiol Stress",
+    "year": "2026",
+    "doi": "10.1016/j.ynstr.2026.100806",
+    "title_jaccard": 1.0,
+    "author_jaccard": 0.73,
+    "basis": "exact-title search"
+   },
+   {
+    "preprint": "39605577",
+    "published_pmid": "42690250",
+    "journal": "Development",
+    "year": "2026",
+    "doi": "10.1242/dev.205371",
+    "title_jaccard": 1.0,
+    "author_jaccard": 0.73,
+    "basis": "exact-title search"
+   },
+   {
+    "preprint": "39990442",
+    "published_pmid": "40924481",
+    "journal": "J Clin Invest",
+    "year": "2025",
+    "doi": "10.1172/jci193698",
+    "title_jaccard": 0.42,
+    "author_jaccard": 0.88,
+    "basis": "author plus title-word search"
+   },
+   {
+    "preprint": "40166553",
+    "published_pmid": "42790339",
+    "journal": "EBioMedicine",
+    "year": "2026",
+    "doi": "10.1016/j.ebiom.2026.106490",
+    "title_jaccard": 0.64,
+    "author_jaccard": 0.94,
+    "basis": "author plus title-word search"
+   },
+   {
+    "preprint": "41001472",
+    "published_pmid": "42521817",
+    "journal": "Nat Med",
+    "year": "2026",
+    "doi": "10.1038/s41591-026-04492-6",
+    "title_jaccard": 1.0,
+    "author_jaccard": 0.86,
+    "basis": "author plus title-word search"
+   },
+   {
+    "preprint": "41836510",
+    "published_pmid": "42825602",
+    "journal": "Pain",
+    "year": "2026",
+    "doi": "10.1097/j.pain.0000000000004111",
+    "title_jaccard": 0.54,
+    "author_jaccard": 1.0,
+    "basis": "author plus title-word search"
+   },
+   {
+    "preprint": "41960343",
+    "published_pmid": "42872835",
+    "journal": "Pharmacoepidemiol Drug Saf",
+    "year": "2026",
+    "doi": "10.1002/pds.70501",
+    "title_jaccard": 0.76,
+    "author_jaccard": 0.9,
+    "basis": "author plus title-word search"
+   }
+  ]
+ },
+ "erratum_notice_review": [
+  {
+   "pmid": "37481021",
+   "decision": "reclassified_has_correction",
+   "reason": "PubMed types this record 'Published Erratum' and links it both 'Erratum for' and 'Erratum in' 38816335, but the record is the Part I study itself (Am J Med, 14 abstract-derived findings, n = 253); 38816335 is its correction. Treated as a paper with a correction, not as a notice."
+  }
+ ],
+ "dedup_map_fold_in": {
+  "source": "data/pmid_dedup_map.parquet (package 1 only, 9 title groups, 8 merges)",
+  "merges_confirmed": 8,
+  "notes": [
+   "5 preprint merges coincide with PubMed version links (preprint_with_published_version / published_version_of_preprint).",
+   "35821105 -> 35351814 coincides with the PubMed erratum_notice flag.",
+   "37814551/37814552 co-publication confirmed; canonical changed to 37814551 by the stated rule.",
+   "40911763 -> 40294227 confirmed as same_work_other_record.",
+   "The one rejected group (34053992/35470419) is rejected here too."
+  ]
+ }
+}

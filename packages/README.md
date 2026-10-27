@@ -105,8 +105,8 @@ Each folder repeats the shared files, the 39,128-row entity vocabulary, the chun
 invariant modules, which is why the five sum to slightly more than the corpus. That redundancy
 is deliberate: it is what lets any one folder work alone.
 
-The whole repository is **301 files / 113.7 MB** (55 + 58 + 58 + 62 + 60 across the five tier
-folders, plus 8 at the root). The largest single file is the 18 MB Tier 1 CSV, so **no Git LFS
+The whole repository is **327 files / 114.1 MB** (60 + 63 + 63 + 67 + 65 across the five tier
+folders, plus 9 at the root). The largest single file is the 18 MB Tier 1 CSV, so **no Git LFS
 is required**: GitHub warns at 50 MB and blocks at 100 MB per file.
 
 **If you want all five**, pool them freely for row counts, paper metadata and quote presence.
@@ -197,6 +197,32 @@ files under each package's `annotations/`, covered by its `MANIFEST.json` and `C
   explains why a Tier-1 package carries `tier3_*` modules; three boolean columns are now stored as nullable
   `boolean` in the parquet (values unchanged); the Tier-4 "1,960 uncertain rows" figure is corrected to the
   data's 2,257; `PACKAGE_INDEX.csv` file counts now match each `MANIFEST.json`.
+
+## Paper flags (checked 2026-10-26)
+
+Every package ships `annotations/paper_flags.csv` (and `.parquet`): one row per (PubMed record, flag) for the records a reader
+must be able to see and filter. Across the five packages: 316 rows over 312 of the 11,519 records.
+Sources: PubMed publication types and linked notices, and Crossref update notices (Retraction Watch data), both read on
+2026-10-26; title-match pairs were adjudicated one by one (`<package>/qa/paper_flags_adjudication.json`, 8 accepted,
+13 rejected). Flagged rows are flagged, never removed.
+
+| flag | papers | findings | recommended use |
+|---|---:|---:|---|
+| `retracted` | 10 | 139 | exclude |
+| `expression_of_concern` | 1 | 4 | note |
+| `erratum_notice` | 5 | 23 | exclude |
+| `has_correction` | 185 | 2,734 | note |
+| `preprint_with_published_version` | 30 | 514 | count_once |
+| `published_version_of_preprint` | 29 | 610 | note |
+| `preprint` | 40 | 881 | note |
+| `same_work_other_record` | 14 | 138 | note on the canonical record, count_once on the duplicate |
+| `update_of` | 1 | 3 | note |
+| `publisher_removal_notice` | 1 | 5 | note |
+
+Exclude `retracted` and `erratum_notice` records; count each duplicate group once, on its `canonical_pmid`; read the notice
+before quoting a number from a `has_correction` or `expression_of_concern` record. `recommended_use` carries the rule per row.
+The headline paper count (11,519) is a count of PubMed records; derived from the flags it holds **11,478 distinct works**
+(records minus correction notices minus `count_once` duplicates). Retracted papers remain works and remain in the data.
 
 ## Quickstart
 

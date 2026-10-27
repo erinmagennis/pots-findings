@@ -85,7 +85,7 @@ git remote add origin git@github.com:erinmagennis/pots-findings.git
 git push -u origin main
 ```
 
-The repo is 301 files / 113.7 MB across 5 folders. No file exceeds 18 MB, so **no Git LFS is needed**.
+The repo is 327 files / 114.1 MB across 5 folders. No file exceeds 18 MB, so **no Git LFS is needed**.
 GitHub warns at 50 MB and blocks at 100 MB per file.
 
 `.gitignore` deliberately excludes `*.tar.gz`. Tarballs are deposit products, not sources:

@@ -15,36 +15,36 @@
   "tier1": {
    "findings": 36067,
    "papers": 3129,
-   "n_files": 53,
-   "tarball_bytes": 33587885
+   "n_files": 58,
+   "tarball_bytes": 33620601
   },
   "tier2a": {
    "findings": 36611,
    "papers": 3123,
-   "n_files": 56,
-   "tarball_bytes": 22884409
+   "n_files": 61,
+   "tarball_bytes": 22914874
   },
   "tier2b": {
    "findings": 33830,
    "papers": 2589,
-   "n_files": 56,
-   "tarball_bytes": 20449747
+   "n_files": 61,
+   "tarball_bytes": 20480479
   },
   "tier3": {
    "findings": 26032,
    "papers": 1587,
-   "n_files": 60,
-   "tarball_bytes": 16746056
+   "n_files": 65,
+   "tarball_bytes": 16774870
   },
   "tier4": {
    "findings": 15646,
    "papers": 1091,
-   "n_files": 58,
-   "tarball_bytes": 10504530
+   "n_files": 63,
+   "tarball_bytes": 10529830
   }
  },
- "repo_files": 301,
- "repo_bytes": 113652183,
+ "repo_files": 327,
+ "repo_bytes": 114096916,
  "dtype_fix": true,
  "annotations": {
   "tier1": [
@@ -58,7 +58,9 @@
    "condition_annotations.parquet",
    "quote_retrofit_tier1.parquet",
    "retrofit_fetch_log.parquet",
-   "retrofit_summary.json"
+   "retrofit_summary.json",
+   "paper_flags.csv",
+   "paper_flags.parquet"
   ],
   "tier2a": [
    "COMPARATOR_GATE.json",
@@ -71,7 +73,9 @@
    "condition_annotations.parquet",
    "quote_retrofit_tier2a.parquet",
    "retrofit_fetch_log.parquet",
-   "retrofit_summary.json"
+   "retrofit_summary.json",
+   "paper_flags.csv",
+   "paper_flags.parquet"
   ],
   "tier2b": [
    "COMPARATOR_GATE.json",
@@ -84,7 +88,9 @@
    "condition_annotations.parquet",
    "quote_retrofit_tier2b.parquet",
    "retrofit_fetch_log.parquet",
-   "retrofit_summary.json"
+   "retrofit_summary.json",
+   "paper_flags.csv",
+   "paper_flags.parquet"
   ],
   "tier3": [
    "COMPARATOR_GATE.json",
@@ -97,7 +103,9 @@
    "condition_annotations.parquet",
    "quote_retrofit_tier3.parquet",
    "retrofit_fetch_log.parquet",
-   "retrofit_summary.json"
+   "retrofit_summary.json",
+   "paper_flags.csv",
+   "paper_flags.parquet"
   ],
   "tier4": [
    "COMPARATOR_GATE.json",
@@ -109,7 +117,9 @@
    "condition_annotations.csv",
    "condition_annotations.parquet",
    "retrofit_fetch_log.parquet",
-   "retrofit_summary.json"
+   "retrofit_summary.json",
+   "paper_flags.csv",
+   "paper_flags.parquet"
   ]
  },
  "dois": {

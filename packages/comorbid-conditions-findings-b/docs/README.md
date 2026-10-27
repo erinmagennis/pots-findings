@@ -315,6 +315,8 @@ its numerator, denominator and basis. They are covered by `MANIFEST.json` and `C
 | `annotations/quote_retrofit_tier2b.parquet` | 33,830 | `row_idx` = 0-based row of `data/<pkg>_findings.parquet` (+ `pmid`, `quote_sha1` as checks) | Per-row quote traceability against source text re-fetched from Europe PMC on 2026-09-16, with source depth, fetch status and the wrong-paper control. Null `retrofit_traceable` means no source exists today. |
 | `annotations/retrofit_fetch_log.parquet` | 10,428 | `pmid` | One row per Tier 1–3 paper attempted in the retrofit: abstract/full-text availability, PMCID, HTTP outcome, fetch date. |
 | `annotations/retrofit_summary.json` | — | — | Machine-readable retrofit numbers for all four Tier 1–3 packages, every rate with numerator, denominator and basis. |
+| `annotations/paper_flags.csv` | 66 | pmid, flag | Retracted, corrected, preprint and duplicate records, one row per (record, flag), with the recommended use. See the Paper flags section. |
+| `annotations/paper_flags.parquet` | 66 | pmid, flag | Parquet twin of paper_flags.csv (same content). |
 
 ### Quote source retrofit (2026-09-16)
 
@@ -344,6 +346,38 @@ package labelled `condition == 'MCAS'`: **7 `in_bucket`, 57 `bucket_violation`**
 2 neither), **379 `NEEDS_HUMAN`**. Verdicts are classifier-derived against
 `CONDITION_BUCKET_DEFINITIONS.md` v1 under population-studied semantics and none is human-confirmed.
 Other buckets are not yet censused. See `annotations/CONDITION_ANNOTATIONS_README.md`.
+
+### Paper flags (checked 2026-10-26)
+
+`annotations/paper_flags.csv` (and `.parquet`, same content) marks every PubMed record in this package that a reader
+must be able to see and filter: 66 rows over 66 of the package's 2,589 records, one row per
+(record, flag). Flags come from PubMed publication types and linked notices and from Crossref update notices
+(Retraction Watch data), both read on 2026-10-26, plus a recorded adjudication of every title-match pair
+(`qa/paper_flags_adjudication.json`). Flagged rows are flagged, never removed.
+
+| flag | papers | findings | recommended use |
+|---|---:|---:|---|
+| `retracted` | 3 | 36 | exclude |
+| `has_correction` | 42 | 590 | note |
+| `preprint_with_published_version` | 4 | 85 | count_once |
+| `published_version_of_preprint` | 7 | 121 | note |
+| `preprint` | 8 | 184 | note |
+| `same_work_other_record` | 2 | 10 | note on the canonical record, count_once on the duplicate |
+
+How to use it: exclude `retracted` records and `erratum_notice` records (a correction notice whose text was
+extracted as if it were a study); count each duplicate group once, on its `canonical_pmid` (the peer-reviewed
+version over a preprint, the original over a reprint or notice); read the linked notice before quoting a number
+from a `has_correction` or `expression_of_concern` record. `recommended_use` carries that rule per row.
+
+The package's paper count (2,589) is a count of PubMed records. Derived from the flags, it holds
+**2,584 distinct works**: records minus correction notices minus duplicate records (`recommended_use == count_once`).
+Retracted papers remain works and remain in the data; exclude them yourself with the flag.
+
+```python
+flags = pd.read_csv('annotations/paper_flags.csv', dtype=str)
+drop = set(flags.loc[flags.recommended_use.isin(['exclude', 'count_once']), 'pmid'])
+clean = df[~df.pmid.astype(str).isin(drop)]        # retracted and notice rows out, each work counted once
+```
 
 ---
 

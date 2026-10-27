@@ -140,6 +140,17 @@ which normalizes both sides symmetrically (`code/comparator_symmetry_tests.py`, 
 check against a clean copy of the paper will miss them. This is a presentation defect, not a fabrication,
 and it is not repaired in place.
 
+## 13. Retracted, corrected and duplicate records are kept and flagged
+
+`annotations/paper_flags.csv` marks 0 retracted papers (0 findings),
+0 with an expression of concern, 0 correction notices whose text was extracted as a paper,
+19 papers with a published correction, 22 preprints and
+11 records that duplicate another record in the dataset. None of these rows was removed:
+the data is frozen and the flags are additive. Any count that does not first apply `recommended_use` includes retracted
+findings and double-counts duplicated works. The flags reflect PubMed and Crossref as read on 2026-10-26; a paper retracted
+after that date is not flagged. The title-match decisions (accepted and rejected, with reasons) are in
+`qa/paper_flags_adjudication.json`; the v1.0 `data/pmid_dedup_map.parquet` is superseded by this file.
+
 ## What would most improve this package
 
 1. **Score the fidelity worksheet** with a human reader, the only way to learn whether the

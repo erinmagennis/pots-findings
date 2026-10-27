@@ -158,6 +158,17 @@ README §Annotations). The retrofit checked quotes against Europe PMC's *current
 read; the retained-archive guarantee Tier 4 has is not reproducible here. Stratify on `retrofit_source_depth`
 before quoting any traceability rate from it.
 
+## 13. Retracted, corrected and duplicate records are kept and flagged
+
+`annotations/paper_flags.csv` marks 2 retracted papers (46 findings),
+0 with an expression of concern, 0 correction notices whose text was extracted as a paper,
+31 papers with a published correction, 15 preprints and
+8 records that duplicate another record in the dataset. None of these rows was removed:
+the data is frozen and the flags are additive. Any count that does not first apply `recommended_use` includes retracted
+findings and double-counts duplicated works. The flags reflect PubMed and Crossref as read on 2026-10-26; a paper retracted
+after that date is not flagged. The title-match decisions (accepted and rejected, with reasons) are in
+`qa/paper_flags_adjudication.json`; the v1.0 `data/pmid_dedup_map.parquet` is superseded by this file.
+
 ## What would most improve this package
 
 1. **Score the fidelity worksheet** with a human reader, the only way to learn whether the

@@ -293,8 +293,13 @@
  "files": [
   {
    "path": ".zenodo.json",
-   "bytes": 3442,
-   "sha256": "c53361d3e0600da351ab2e465f2cf8919688e70e72b6af0166a8724b07571468"
+   "bytes": 3821,
+   "sha256": "7abde317b549dd7852026aeec882a106c34f396fc194e4f023792f86a2f87760"
+  },
+  {
+   "path": "CHANGELOG.md",
+   "bytes": 2066,
+   "sha256": "cce1bd351135bf9b33413ba16cce6ab87d4dd349572acf5aafbdbbc86f134829"
   },
   {
    "path": "CITATION.cff",
@@ -308,8 +313,8 @@
   },
   {
    "path": "README.md",
-   "bytes": 24690,
-   "sha256": "cf4b3b4fd8694d878a5b38cdd69df3d1942fb6425c220ac8aad0c7c2367bd379"
+   "bytes": 27004,
+   "sha256": "9641a5c98225fc082e5b53d2abf7fdcad36dde6e656043871f659b8725cc604d"
   },
   {
    "path": "annotations/COMPARATOR_GATE.json",
@@ -350,6 +355,16 @@
    "path": "annotations/condition_annotations.parquet",
    "bytes": 105104,
    "sha256": "2e53652e4342b8f34a2c4090da775d4f9d7177bac34271551ede219581e5f24e"
+  },
+  {
+   "path": "annotations/paper_flags.csv",
+   "bytes": 29909,
+   "sha256": "d2384b9475a78b0cdcbf286d2722a3ac67f9e46d8ce51643c7546437b39f1b3b"
+  },
+  {
+   "path": "annotations/paper_flags.parquet",
+   "bytes": 21157,
+   "sha256": "b46e7beaff326617dfd049b9645bbfaf676ad825f574f7f5f217a9f7f6d3cd42"
   },
   {
    "path": "annotations/quote_retrofit_tier2a.parquet",
@@ -453,8 +468,8 @@
   },
   {
    "path": "code/verify_package.py",
-   "bytes": 12391,
-   "sha256": "04ca91090fc999882cc43fa8d333963739ef836e95d8211276ba500f33dee30a"
+   "bytes": 15875,
+   "sha256": "88255df5278abca580f12026999c822af6b8a00a88b57f9ef6706189f74385a4"
   },
   {
    "path": "data/chunk_order.parquet",
@@ -478,8 +493,8 @@
   },
   {
    "path": "deposit/ZENODO_FORM.md",
-   "bytes": 3389,
-   "sha256": "9e8b3a9cd3e7c74345181fd294f1f77302b96e36eb30a33c88fa023ebc89c585"
+   "bytes": 3768,
+   "sha256": "af54f254a0df6e49f0782b625aafcfca99563c4f90d4e35d875589ac95f5c3bf"
   },
   {
    "path": "deposit/github_release_notes.md",
@@ -503,8 +518,8 @@
   },
   {
    "path": "docs/LIMITATIONS.md",
-   "bytes": 11777,
-   "sha256": "a8a6d344f3b181f433c9cdc03541759d7b51925039ee6428d6e9100a6f650e0f"
+   "bytes": 12604,
+   "sha256": "4d480cf8f23b26b7197e194859d1865e58e45d6aa2bb7b52225b8259b7bdbbe1"
   },
   {
    "path": "docs/METHODS.md",
@@ -513,8 +528,8 @@
   },
   {
    "path": "docs/README.md",
-   "bytes": 24690,
-   "sha256": "cf4b3b4fd8694d878a5b38cdd69df3d1942fb6425c220ac8aad0c7c2367bd379"
+   "bytes": 27004,
+   "sha256": "9641a5c98225fc082e5b53d2abf7fdcad36dde6e656043871f659b8725cc604d"
   },
   {
    "path": "docs/WEBSITE_INTEGRATION.md",
@@ -535,6 +550,16 @@
    "path": "qa/package_stats.json",
    "bytes": 13732,
    "sha256": "0bc1de20eca6305649c2a2b75367c6681ef30563608cab8e88f68f1d9f82618b"
+  },
+  {
+   "path": "qa/paper_flags_adjudication.json",
+   "bytes": 22085,
+   "sha256": "ab250cee6630a7e1b5eae8a64e295c84421ef033e30adfa1af9956ed4f050fbb"
+  },
+  {
+   "path": "qa/paper_flags_summary.json",
+   "bytes": 1917,
+   "sha256": "9e872238b6fe4fc3ff8cd26bb578c8ffd7abe4b8efebe5a8bdb016430289a0e1"
   },
   {
    "path": "qa/quote_census_all_tiers.json",
@@ -572,6 +597,6 @@
    "sha256": "56ee57a907f8363a16920afe37f92eda13b6b7763c4cb5b21746affa5c4d971b"
   }
  ],
- "n_files": 56,
- "total_bytes": 24700123
+ "n_files": 61,
+ "total_bytes": 24786954
 }

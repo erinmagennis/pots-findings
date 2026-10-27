@@ -43,7 +43,7 @@ Part A is exactly the tier-2 layer currently deployed on the website: 73,070 −
 36,611. The site's *"~55% of tier 2"* caveat means precisely
 "Part A only".
 
-## Four things that will mislead you across packages
+## Five things that will mislead you across packages
 
 1. **`id_resolved_frac` ranks the packages backwards.** It measures identifier *coverage*, not
    *correctness*. Tier 2 has the most identifiers and nearly the worst; Tier 4 the fewest and
@@ -65,6 +65,8 @@ the eleven metrics that are not comparable.
 Each package's `annotations/` folder (v1.1) also carries the row-level quote-retrofit results for Tiers
 1–3, verifiability 18.1% → 99.8% against re-fetched Europe PMC text, as additive tables. No `data/` row
 changed between v1 and v1.1.
+
+5. **316 paper-flag rows across the packages (`annotations/paper_flags.csv`).** 10 retracted papers (139 findings) are kept and flagged, not removed; 5 correction notices were extracted as papers; 30 preprints have their published version in the dataset. Apply `recommended_use` before any count; the 11,519 records are 11,478 distinct works. Checked against PubMed and Crossref on 2026-10-26.
 
 ## Above all
 
