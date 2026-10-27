@@ -201,7 +201,7 @@ export function createFlow(el){
       h += `<h3>Most studied in this band</h3>${barsHTML(info.top)}
         <p class="cx-sub">Counts are papers, from the ${fmt(info.nf)} findings in this band${filtersActive() ? ', using all papers, not your filters' : ''}.</p>
         <h3>Where papers disagree</h3>
-        <p class="cx-sub">${info.ns ? `${fmt(info.ns)} direction flips among the papers in this band. The counts below cover only this band's papers, so they are smaller than on the whole map. ${SPLIT_RULE}` : 'No direction flips among the papers in this band.'}</p>
+        <p class="cx-sub">${info.ns ? `${fmt(info.ns)} direction flips among the papers in this band. The counts below cover only this band's papers, so they can be smaller than on the whole map. ${SPLIT_RULE}` : 'No direction flips among the papers in this band.'}</p>
         ${info.splits.map(splitHTML).join('')}`;
     } else if(isSink(id)){
       h += `<p>These papers have no ${id[0] === 's' ? 'body system' : LAST[last].noun} recorded in any finding.</p>`;

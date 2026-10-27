@@ -139,12 +139,9 @@ def check(site_dir):
     # disagree and barely studied cards use the Start page picks: compare with verify_start_here's own recompute
     sys.path.insert(0, str(Path(__file__).resolve().parent)); import verify_start_here as VS
     _, _, _, want_s, _, _, _, picks = VS.expected(str(site))
-    c = hs['cex']   # the best clear split in any condition (Start page rule, recomputed by verify_start_here)
-    got_c = [(c['e'], c['c'], c['hi'], c['lo'])] if c else []
-    if got_c != picks['split_best']: f.append(f'disagree example {got_c} != clear-split pick {picks["split_best"]}')
+    if hs.get('cex'): f.append('home shows an automatic disagreement example; none is shown (the clear splits found were not genuine)')
     js = (site / 'js' / 'home-v2.js').read_text(encoding='utf-8')
-    if 'possible splits' not in js: f.append('home disagree card does not call its total possible splits')
-    if 'higher than in healthy people' not in js: f.append('home disagree example does not say the comparison is with healthy people')
+    if 'possible splits, for every condition' not in js: f.append('home disagree card does not call its total possible splits')
     nul = json.load(open(data / 'null_results.json')); fl = nul['fields']; ix = {k: fl.index(k) for k in fl}
     if nul['n'] != m['nulls']: f.append('null_results.json n != meta nulls')
     n = hs['nex']; hit = None

@@ -112,13 +112,17 @@ def expected(site):
     # clear splits (disagreement examples): same entity name in lower case and condition; findings tagged vs-disease-state
     # whose comparator mentions "healthy"; no review-typed findings, no review papers; a paper on both sides counts on neither;
     # >= MIN_SIDE papers each side; no-condition labels left out. Best: bigger smaller side, more papers, name, condition.
-    comp = []
-    for s in range(fac["n_shards"]): comp += j(f"detail_{s:02d}.json")["comp"]
+    comp, quo, txt_all = [], [], []
+    for s in range(fac["n_shards"]):
+        dd_ = j(f"detail_{s:02d}.json"); comp += dd_["comp"]; quo += dd_["quote"]; txt_all += j(f"text_{s:02d}.json")["t"]
+    animal = re.compile(r"\b(mice|mouse|murine|rats?|rodents?|rabbits?|porcine|pigs?|canine|dogs?|animal|zebrafish|primates?)\b", re.I)
     Hs, Ls, spell = defaultdict(set), defaultdict(set), defaultdict(lambda: defaultdict(int))
     for i in range(fac["n"]):
         dirn = d["d"][c["d"][i]]; e = d["e"][c["e"][i]]; lab = d["c"][c["c"][i]]; pm_ = pm_row[c["p"][i]]
         if d["dr"][c["dr"][i]] != "vs-disease-state" or dirn not in ("elevated", "depleted/reduced") or d["st"][c["st"][i]] in REVIEWS: continue
-        if pm_ in bad_pm or pm_ in reviews or e in ("—", "") or lab in NONCOND or "healthy" not in str(comp[i] or "").lower(): continue
+        if pm_ in bad_pm or pm_ in reviews or e in ("—", "") or lab in NONCOND | {"dysautonomia"} or "healthy" not in str(comp[i] or "").lower(): continue
+        if d["st"][c["st"][i]] == "mechanistic/in-vitro" or d["tr"][c["tr"][i]] == "mechanistic/in-vitro": continue
+        if animal.search(" ".join(str(x or "") for x in (txt_all[i], quo[i], comp[i]))): continue
         k = (e.lower(), lab); spell[k][e] += 1
         (Hs if dirn == "elevated" else Ls)[k].add(pm_)
     splits = []
@@ -128,12 +132,9 @@ def expected(site):
             splits.append(((-min(hi, lo), -(hi + lo), min(spell[k].items(), key=lambda kv: (-kv[1], kv[0]))[0].lower(), k[1]),
                            min(spell[k].items(), key=lambda kv: (-kv[1], kv[0]))[0], k[1], hi, lo))
     splits.sort()
-    pots_splits = [x for x in splits if x[2] == "POTS"][:2]
-    other_splits = [x for x in splits if x[2] != "POTS"]
-    shown_splits = pots_splits or other_splits[:1]
-    for _, e, lab, hi, lo in shown_splits: want[f"split_hi:{e}|{lab}"], want[f"split_lo:{e}|{lab}"] = hi, lo
-    if not pots_splits and len(other_splits) > 1: want["clear_splits_other"] = len(other_splits)
-    contra_picks = [e for _, e, _, _, _ in pots_splits]
+    pots_splits = [x for x in splits if x[2] == "POTS"]   # a check only: the page reports the count, never an example
+    if pots_splits: want["pots_clear_splits"] = len(pots_splits)
+    contra_picks = []
     # null examples: primary-study rows (evidence tier), papers that are reviews left out, not POTS-defining, not POTS itself,
     # a treatment has a treatment kind, no paper also reports an effect for the entity; 2+ separate studies (else, treatments
     # only, one randomized trial, shown in words)
@@ -181,6 +182,11 @@ def expected(site):
         ws = e.split(" (")[0].lower().split()   # every shorter run of 2+ words ("stroke volume" in "stroke volume index")
         subs = [" ".join(ws[a:b]) for a in range(len(ws)) for b in range(a + 2, len(ws) + 1) if b - a < len(ws)]
         if any(len({pm_row[c["p"][i]] for i in keep if ph in elow[c["e"][i]] or ph in texts[i]}) > r["n_papers"] for ph in subs): continue
+        second = re.compile(r"et al|\bcit(?:ing|ed)\b|previous stud|prior stud|previously reported|a study by|reported by|earlier stud", re.I)
+        ec = d["e"].index(e)
+        fh = {st_of(pm_row[c["p"][i]]) for i in keep if c["e"][i] == ec and pm_row[c["p"][i]] in own and pm_row[c["p"][i]] not in reviews
+              and not second.search(texts[i] + " " + str(quo[i] or ""))}
+        if len(fh) < 2: continue   # 2+ separate studies with a first-hand finding (not retelling earlier work)
         u.append(r)
         if len(u) == 2: break
     for r in u: want[f"under_findings:{r['canonical_entity']}"], want[f"under_papers:{r['canonical_entity']}"] = r["n_findings"], r["n_papers"]
@@ -201,7 +207,7 @@ def expected(site):
                 ex = {"text": tx, "quote": q, "paper": dict(zip(pap["fields"], pap["rows"][c["p"][i]]))}; break
     if ex and ex["paper"].get("year"): want["example_year"] = int(ex["paper"]["year"])
     excl = C.get("flag_retracted", 0) + C.get("flag_partially_retracted", 0) + C.get("flag_erratum_notice", 0)
-    picks = {"contra": contra_picks, "split": [(e, lab, hi, lo) for _, e, lab, hi, lo in shown_splits], "pots_split": bool(pots_splits), "split_best": [(e, lab, hi, lo) for _, e, lab, hi, lo in splits[:1]], "null": null_picks, "under": [r["canonical_entity"] for r in u]}
+    picks = {"contra": contra_picks, "pots_split": bool(pots_splits),  "null": null_picks, "under": [r["canonical_entity"] for r in u]}
     return meta, fac, names, want, ex, len(bad_pm), excl, picks
 
 
@@ -233,9 +239,8 @@ def check(site_dir):
         if k not in got: f.append(f"missing on page: {k} = {want[k]}")
         elif k not in want: f.append(f"on page but not expected from data: {k} = {got[k]}")
         elif got[k] != norm(want[k], k): f.append(f"{k}: page {got[k]} != data {norm(want[k], k)}")
-    for k, v in got.items():   # rule on the page itself: a shown split has >= MIN_SIDE papers on each side
-        if k.startswith(("split_hi:", "split_lo:")) and int(v.replace(",", "")) < MIN_SIDE:
-            f.append(f"disagree example {k} has {v} papers on one side; each side needs at least {MIN_SIDE}")
+    for k in got:   # no automatic disagreement example is shown (2026-10-27 reading: the passing cells were not genuine)
+        if k.startswith(("split_hi:", "split_lo:", "contra_")): f.append(f"disagreement example shown: {k}")
     if re.search(r"\d[\d,]*</span>(<!--/n-->)? disagreements", raw): f.append("a total of possible splits is labelled as disagreements")
     # 8 rules shown on the page itself
     C, V = meta["counts"], meta.get("verification_stats") or {}
@@ -325,9 +330,6 @@ def self_test(site):
     src = open(os.path.join(site, "start.html"), encoding="utf-8").read()
     def first_span(prefix):
         return re.search(r'(<span data-k="' + re.escape(prefix) + r'[^"]*">)([^<]*)(</span>)', src)
-    def low_side(s):
-        m = first_span("split_lo:")
-        return s.replace(m.group(0), m.group(1) + "2" + m.group(3), 1)
     def lower_name(s):
         m = re.search(r'(href="entity\?e=[^"]*">)([A-Z][a-z][^<]*)(</a>)', s)
         return s.replace(m.group(0), m.group(1) + m.group(2)[0].lower() + m.group(2)[1:] + m.group(3), 1)
@@ -340,12 +342,13 @@ def self_test(site):
         "em dash": lambda s: s.replace("Limits</h2>", "Limits \u2014</h2>"),
         "stale marker": lambda s: re.sub(r"(<!--n:nulls-->)[^<]*", r"\g<1>1", s),
         "dropped item": lambda s: re.sub(r'<li><a href="condition\?c=[^"]*">.*?</li>', "", s, count=1),
-        "disagree side below 3": low_side,
         "entity name not capitalised": lower_name,
         "MCAS note dropped": lambda s: s.replace(' <span class="kv">' + MCAS_NOTE + '</span>', "", 1),
         "unknown Signals option": lambda s: s.replace("discover#under?all", "discover#under?thin", 1),
         "one trial not worded as one": lambda s: s.replace("one randomized trial found", "one study found", 1),
-        "split example not the clear-split pick": lambda s: re.sub(r'(<span data-k="split_hi:[^|"]*\|)[^"]*', r"\1POTS", s, count=1),
+        "automatic split example shown": lambda s: s.replace("so we do not show one as an example.", 'for example <span data-k="split_hi:TNF-alpha|ME_CFS">6</span>.', 1),
+        "second-hand barely studied example": lambda s: re.sub(r'data-k="under_(findings|papers):[^"]*"', r'data-k="under_\1:testosterone"', s),
+        "POTS no-split sentence dropped": lambda s: s.replace("no topic has a clear split yet", "no topic splits", 1),
         "total called disagreements": lambda s: s.replace("possible splits, for every condition", "disagreements, for every condition", 1),
         "barely studied example fails the sub-phrase guard": lambda s: re.sub(r'data-k="under_findings:[^"]*"', 'data-k="under_findings:Stroke volume index"', s, count=1),
     }

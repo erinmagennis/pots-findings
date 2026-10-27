@@ -324,7 +324,7 @@ export function createMap(el){
       <h3>How it connects to other regions</h3>
       ${c.rel.map(r => `<div class="cx-rel"><span class="cx-sw" style="background:${regionColor(r.j)}"></span><button type="button" class="cx-linkbtn" data-k="${r.j}">${esc(regionName(r.j))}</button><div class="cx-sub">Both study ${r.shared.map(([e, a, b]) => `${esc(display(e))} <span class="cx-num">(${fmt(a)} here, ${fmt(b)} there)</span>`).join(', ')}</div></div>`).join('')}
       <h3>Where papers disagree</h3>
-      <p class="cx-sub">${c.ns ? `${fmt(c.ns)} direction flips among this region's papers. The counts below cover only this region's papers, so they are smaller than on the whole map. The biggest:` : 'No direction flips among this region\'s papers.'}</p>
+      <p class="cx-sub">${c.ns ? `${fmt(c.ns)} direction flips among this region's papers. The counts below cover only this region's papers, so they can be smaller than on the whole map. The biggest:` : 'No direction flips among this region\'s papers.'}</p>
       ${c.splits.slice(0, 5).map(splitHTML).join('')}
       <h3>No-effect results</h3>
       <p><span class="cx-num">${fmt(c.nullf)}</span> findings in <span class="cx-num">${fmt(c.nullp)}</span> papers report no effect or a failed replication.${named[0] ? ` <a href="search?null=1&c=${encodeURIComponent(named[0][0])}">See no-effect results for ${esc(condLabel(named[0][0]))}</a>` : ''}</p>

@@ -177,10 +177,9 @@ def compute():
     # clear_splits (papers vs healthy people, no reviews, a paper on both sides counts on neither, >= MIN_SIDE each side),
     # null_examples (primary non-review studies, see its docstring), under_examples (clear barely studied topics)
     kinds = SR.entity_kinds(D)
-    splits = SR.clear_splits(D)
-    disagree = [x for x in splits if x["c"] == FOCUS][:N_EACH]
-    other = [x for x in splits if x["c"] != FOCUS]
-    nulls = SR.null_examples(D, FOCUS, kinds, skip={x["e"] for x in disagree})
+    # clear_splits is a check only: the page says how many POTS cells pass it and never shows an automatic example
+    n_pots_splits = sum(1 for x in SR.clear_splits(D) if x["c"] == FOCUS)
+    nulls = SR.null_examples(D, FOCUS, kinds)
     under = [dict(r, _kind=kind_of(r["canonical_entity"], r.get("entity_kind"))) for r in SR.under_examples(D, FOCUS, n=N_EACH)]
 
     # example finding: top topic, POTS label, strongest study type, has a quote, readable length, lowest row
@@ -202,7 +201,7 @@ def compute():
                 ex = {"row": i, "text": text, "quote": quote, "entity": top, "tier": dic["tr"][TR[i]],
                       "dir": dic["d"][cols["d"][i]], "paper": p}
                 break
-    return meta, dict(n_focus_papers=len(focus_papers), topics=topics, conds=conds, disagree=disagree, other_splits=other,
+    return meta, dict(n_focus_papers=len(focus_papers), topics=topics, conds=conds, n_pots_splits=n_pots_splits,
                       nulls=nulls, under=under, example=ex)
 
 
@@ -220,19 +219,14 @@ def render(meta, F):
         f'<li><a href="condition?c={enc(c)}">{esc(cond_label(c))}</a>{CONDITION_NOTES.get(c, "")}<span class="start-count">{f.num(f"co_papers:{c}", n)} papers</span></li>'
         for c, n in F["conds"])
 
-    def split_li(x):
-        k = f'{x["e"]}|{x["c"]}'
-        return (f'<b>{ent(x["e"])}</b> in {esc(cond_label(x["c"]))}: {f.num(f"split_hi:{k}", x["hi"])} papers report it higher than in '
-                f'healthy people and {f.num(f"split_lo:{k}", x["lo"])} report it lower.')
-    dis = [f'<li>{split_li(x)}</li>' for x in F["disagree"]]
-    if not dis:
-        msg = ('Among POTS papers that compare people with POTS to healthy people, no topic has a clear split yet: '
-               'none has three such papers on each side.')
-        if F["other_splits"]:
-            n_other = len(F["other_splits"])
-            msg += (f' Related conditions have {"one" if n_other == 1 else f.num("clear_splits_other", n_other)} clear {"split" if n_other == 1 else "splits"}. '
-                    f'For example, {split_li(F["other_splits"][0])}')
-        dis.append(f'<li class="start-none">{msg}</li>')
+    if F["n_pots_splits"]:
+        dis = (f'<p>Among papers that compare people with POTS to healthy people, {f.num("pots_clear_splits", F["n_pots_splits"])} '
+               f'{"topic has" if F["n_pots_splits"] == 1 else "topics have"} a clear split: three or more such papers on each side. '
+               'We do not pick one as an example, so read both sides in the list.</p>')
+    else:
+        dis = ('<p>Among papers that compare people with POTS to healthy people, no topic has a clear split yet: none has three such '
+               'papers on each side. In related conditions, the splits we found mix different diseases, animal studies or different '
+               'measures, so we do not show one as an example.</p>')
 
     nul = []
     for cls, e, nst, _ in F["nulls"]:
@@ -365,11 +359,8 @@ def render(meta, F):
   <div class="start-three">
     <div>
       <h3>Where studies disagree</h3>
-      <ul class="start-ex">{"".join(dis)}</ul>
-      <p class="kv">A clear split here counts only papers that compare people with the condition to healthy people. Reviews are left out,
-      and a paper that reports both directions counts on neither side. The list of possible splits is wider: it counts any result the model
-      tagged as a comparison between groups, such as two patient groups, and also an effect against no difference. Changes after a treatment
-      are left out. No person has checked these tags. A split does not prove either side wrong.
+      {dis}
+      <p class="kv">The list of possible splits is wider: it counts any result the model tagged as a comparison between groups.
       <a href="discover#contra">All {m("contradictions_total")} possible splits, for every condition.</a> Many answer different questions, so read both sides.{more("contradictions", "contradictions_total")}</p>
     </div>
     <div>

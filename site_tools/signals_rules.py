@@ -17,12 +17,14 @@ flips apply this (build_connections_data.py; contra_flip_total in meta.json coun
 
 Example picks shared by the Start page (build_start_here.py) and the home "What stands out" cards (build_home_data.py), so
 one rule chooses every example; verify_start_here.py recomputes them on its own and verify_home.py compares the home cards:
-  clear_splits     the disagreement examples shown on the Start page and the home card: same entity (site entity name,
-                   lower case) and condition label; only findings tagged vs-disease-state whose comparator mentions
-                   "healthy"; findings with a review study type and papers that are reviews (review_papers) left out; a
-                   paper on both sides counts on neither; at least MIN_SIDE papers higher and MIN_SIDE lower; labels that
-                   name no condition (general, multiple, other patient group) left out; exclude-flagged papers out.
-                   Ranked by the smaller side, then both sides together, then name.
+  clear_splits     a check, not an example source: the Start page reports how many POTS cells pass it and shows no
+                   example (a 2026-10-27 reading of the papers found every passing cell in other labels mixed different
+                   diseases, animal studies or different measures). Same entity (site entity name, lower case) and
+                   condition label; only findings tagged vs-disease-state whose comparator mentions "healthy"; findings
+                   with a review or mechanistic/in-vitro study type or evidence tier, animal findings (ANIMAL words in
+                   the finding text, quote or comparator) and papers that are reviews (review_papers) left out; a paper
+                   on both sides counts on neither; at least MIN_SIDE papers higher and MIN_SIDE lower; umbrella labels
+                   (UMBRELLA: dysautonomia, general, multiple, other patient group) left out; exclude-flagged papers out.
   null_examples    POTS null results from primary studies (evidence tier RCT / cohort / case-control / cross-sectional),
                    papers that are reviews left out (review_papers), a treatment example has a treatment kind
                    (TREATMENT_KINDS, so an outcome such as supine heart rate is not one), never an entity that defines
@@ -32,7 +34,9 @@ one rule chooses every example; verify_start_here.py recomputes them on its own 
   under_examples   understudied rows with 2+ papers, not case-report-only, 2+ separate non-review studies, and no more
                    POTS papers mentioning the topic (topic_stems, in any entity name or finding text) than the papers shown,
                    and no contiguous sub-phrase of 2+ words of the name (e.g. "stroke volume" in "stroke volume index")
-                   mentioned, as plain lower-case text in an entity name or finding text, by more POTS papers than shown.
+                   mentioned, as plain lower-case text in an entity name or finding text, by more POTS papers than shown;
+                   and 2+ separate studies with a first-hand finding on the topic (SECOND_HAND: a finding whose text or
+                   quote cites earlier work, such as "et al" or "previously reported", is not first-hand).
 """
 import json
 from pathlib import Path
@@ -211,6 +215,17 @@ def sub_phrases(name):
 
 
 NOT_A_CONDITION = {'general', 'multiple', 'other patient group'}
+UMBRELLA = NOT_A_CONDITION | {'dysautonomia'}   # labels that pool many different diseases
+ANIMAL = _re.compile(r'\b(mice|mouse|murine|rats?|rodents?|rabbits?|porcine|pigs?|canine|dogs?|animal|zebrafish|primates?)\b', _re.I)
+SECOND_HAND = _re.compile(r'et al|\bcit(?:ing|ed)\b|previous stud|prior stud|previously reported|a study by|reported by|earlier stud', _re.I)
+
+
+def _shard_cols(data, fac, key, src):
+    """one column from text_NN ('t') or detail_NN shards as a list over all findings"""
+    out = []
+    for s in range(fac['n_shards']):
+        out += json.load(open(data / f'{src}_{s:02d}.json'))[key]
+    return out
 
 
 def clear_splits(data_dir):
@@ -219,17 +234,17 @@ def clear_splits(data_dir):
     data = Path(data_dir); fac = json.load(open(data / 'findings_facets.json')); D = fac['dicts']; C = fac['cols']
     pms = [str(r[0]) for r in json.load(open(data / 'papers.json'))['rows']]
     excluded = excluded_pmids(data); reviews = review_papers(data)
-    comp = []
-    for s in range(fac['n_shards']):
-        comp += json.load(open(data / f'detail_{s:02d}.json'))['comp']
+    comp = _shard_cols(data, fac, 'comp', 'detail'); quote = _shard_cols(data, fac, 'quote', 'detail'); text = _shard_cols(data, fac, 't', 'text')
     ref = D['dr'].index(DISEASE_REF); up = D['d'].index(HIGHER); dn = D['d'].index(LOWER)
-    st_rev = {i for i, v in enumerate(D['st']) if v in REVIEW_TYPES}
+    st_rev = {i for i, v in enumerate(D['st']) if v in REVIEW_TYPES or v == 'mechanistic/in-vitro'}
+    tr_mech = {i for i, v in enumerate(D['tr']) if v == 'mechanistic/in-vitro'}
     H, L, spell = defaultdict(set), defaultdict(set), defaultdict(Counter)
     for i in range(fac['n']):
         if C['dr'][i] != ref or C['d'][i] not in (up, dn) or C['st'][i] in st_rev: continue
         pm = pms[C['p'][i]]; e = D['e'][C['e'][i]]; c = D['c'][C['c'][i]]
-        if pm in excluded or pm in reviews or e in ('\u2014', '') or c in NOT_A_CONDITION: continue
+        if pm in excluded or pm in reviews or e in ('\u2014', '') or c in UMBRELLA or C['tr'][i] in tr_mech: continue
         if 'healthy' not in str(comp[i] or '').lower(): continue
+        if ANIMAL.search(' '.join(str(x or '') for x in (text[i], quote[i], comp[i]))): continue
         k = (e.lower(), c); spell[k][e] += 1
         (H if C['d'][i] == up else L)[k].add(pm)
     out = []
@@ -254,6 +269,7 @@ def under_examples(data_dir, cond, n=2):
         t = json.load(open(data / f'text_{s:02d}.json'))
         text.update({i: t['t'][i - t['start']].lower() for i in range(t['start'], t['end'])})
     ename_l = [str(v).lower() for v in D['e']]
+    qall = _shard_cols(data, fac, 'quote', 'detail'); quote = {i: qall[i] for i in rows}
     out = []
     for r in sorted(json.load(open(data / 'understudied.json'))['rows'], key=lambda r: r['rank']):
         e = r['canonical_entity']; own = set(map(str, r['pmids']))
@@ -263,6 +279,10 @@ def under_examples(data_dir, cond, n=2):
         mention = {pms[C['p'][i]] for i in rows if all(st in ename_l[C['e'][i]] for st in stems) or all(st in text[i] for st in stems)}
         if len(mention) > r['n_papers']: continue
         if any(len({pms[C['p'][i]] for i in rows if ph in ename_l[C['e'][i]] or ph in text[i]}) > r['n_papers'] for ph in sub_phrases(e)): continue
+        code = D['e'].index(e)
+        first_hand = {L.find(pms[C['p'][i]]) for i in rows if C['e'][i] == code and pms[C['p'][i]] in own and pms[C['p'][i]] not in reviews
+                      and not SECOND_HAND.search(text[i] + ' ' + str(quote[i] or ''))}
+        if len(first_hand) < 2: continue
         out.append(r)
         if len(out) == n: break
     return out
