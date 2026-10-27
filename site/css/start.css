@@ -24,3 +24,6 @@
 .start-foot{margin-top:6px}
 @media(max-width:900px){.start-three{grid-template-columns:1fr}}
 @media(max-width:620px){.start-two{grid-template-columns:1fr}.start-do li{grid-template-columns:1fr;gap:0}.start .panel{padding:16px}}
+.start-big{margin:2px 0 4px;font:600 30px/1.1 var(--sans,inherit);letter-spacing:-.01em}
+.start-big a{color:var(--ink);text-decoration:none}
+.start-big a:hover,.start-big a:focus-visible{color:var(--rust);text-decoration:underline}

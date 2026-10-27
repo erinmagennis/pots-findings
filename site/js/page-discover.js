@@ -3,13 +3,13 @@ import { mount, sortTable, flagPills } from './ui.js';
 import { condLabel, themeLabel, srcLabel, MINOR_LABEL_MAX } from './labels.js';
 
 await loadMeta(); await loadPapers(); await loadFacets(); await loadEntities();
-mount('discover');
+mount('signals');
 const C=state.meta.counts;
 document.querySelector('#dtabs').insertAdjacentHTML('beforebegin', `<div class="statgrid findings-summary">
   <a class="stat" href="#assoc"><div class="v">${fmt(C.assoc_significant_total)}</div><div class="k">significant comparisons</div><div class="kv">top ${fmt(C.associations)} listed</div></a>
-  <a class="stat" href="#contra"><div class="v">${fmt(C.contradictions_total)}</div><div class="k">contradictions</div><div class="kv">top ${fmt(C.contradictions)} listed</div></a>
-  <a class="stat" href="#under"><div class="v">${fmt(C.understudied_total)}</div><div class="k">understudied signals</div><div class="kv">top ${fmt(C.understudied)} listed</div></a>
-  <a class="stat" href="#nulls"><div class="v">${fmt(C.nulls)}</div><div class="k">null or failed findings</div></a>
+  <a class="stat" href="#contra"><div class="v">${fmt(C.contradictions_total)}</div><div class="k">possible splits</div><div class="kv">top ${fmt(C.contradictions)} listed</div></a>
+  <a class="stat" href="#under"><div class="v">${fmt(C.understudied_total)}</div><div class="k">barely studied topics</div><div class="kv">top ${fmt(C.understudied)} listed</div></a>
+  <a class="stat" href="#nulls"><div class="v">${fmt(C.nulls)}</div><div class="k">null results (tested and found nothing)</div></a>
 </div>`);
 
 // overview bars follow the default exclusion: findings from retracted papers and correction notices are left out
@@ -40,7 +40,7 @@ async function viewOverview(){
       <div class="overview-section"><div class="section-kicker">03 · Direction and null results</div><h2>What the extracted rows report</h2><div class="overview-columns"><div><h3>Direction</h3><p class="kv">Denominator: ${fmt(directions.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(directions, directions.reduce((s,x)=>s+x[1],0), ()=>null, 8, plain)}</div><div><h3>Null or failed result</h3><p class="kv">Denominator: ${fmt(nulls.reduce((s,x)=>s+x[1],0))} labeled rows.</p>${barRows(nulls, nulls.reduce((s,x)=>s+x[1],0), ()=>null, 8, plain)}</div></div></div>
     </div>
     <aside class="overview-side"><div class="overview-section"><div class="section-kicker">04 · Connected entities</div><h2>Highest paper reach</h2><p class="kv">Denominator: ${fmt(nPapers)} papers. Entity coverage is a subset of the findings.</p>${entityLinks}<a class="overview-link" href="connections">Open the connection map →</a></div>
-      <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Current contradictions</h2><p class="overview-number">${fmt(state.meta.counts.contradictions_total)}</p><p class="kv">Rows with conflicting extracted directions or null-versus-positive results.</p><a class="overview-link" href="#contra">Review contradictions →</a><h3>Under-studied signals</h3><p class="overview-number">${fmt(C.understudied_total)}</p><p class="kv">Entity and condition signals with three or fewer papers.</p><a class="overview-link" href="#under">Review under-studied signals →</a></div>
+      <div class="overview-section"><div class="section-kicker">05 · Review signals</div><h2>Possible splits</h2><p class="overview-number">${fmt(state.meta.counts.contradictions_total)}</p><p class="kv">Topics where papers report opposite directions, or an effect in some and none in others. Many answer different questions, so read both sides.</p><a class="overview-link" href="#contra">See the possible splits →</a><h3>Barely studied</h3><p class="overview-number">${fmt(C.understudied_total)}</p><p class="kv">Entity and condition signals with three or fewer papers.</p><a class="overview-link" href="#under">See what is barely studied →</a></div>
       <div class="overview-section"><div class="section-kicker">06 · Read the record</div><h2>Complete tables</h2><p class="kv">Browse every row behind this overview, with links to source papers and entities.</p><a class="overview-link" href="#assoc">Comparisons →</a><a class="overview-link" href="#nulls">Null and failed →</a><a class="overview-link" href="papers">All papers →</a><a class="overview-link" href="entities">All entities →</a></div>
     </aside></section>`;
 }
@@ -112,8 +112,8 @@ async function viewAssoc(){
 async function viewUnder(opt){
   const d=await getJSON('understudied.json');
   document.getElementById('view').innerHTML=`<div class="panel">
-    <h2>Under-studied signals</h2>
-    <p class="lede">${fmt(C.understudied_total)} entity and condition signals with three or fewer papers and at least two findings; the ${fmt(d.n)} with the most findings are listed for possible replication work. ${EXCL_NOTE}</p>
+    <h2>Barely studied</h2>
+    <p class="lede">${fmt(C.understudied_total)} barely studied topics: a topic in one condition with three or fewer papers and at least two findings; the ${fmt(d.n)} with the most findings are listed for possible replication work. ${EXCL_NOTE}</p>
     <div class="note stop"><b>Thin evidence can be noise.</b> This table does not establish independent-lab
       replication. It reports the fields present in the current combined analysis and should be used to find
       candidates for closer review.</div>
@@ -144,7 +144,7 @@ async function viewUnder(opt){
     document.querySelectorAll('#uTbl th[data-k]').forEach(th=>th.onclick=()=>{const next=th.dataset.k;
       if(next===key)direction*=-1;else{key=next;direction=next==='canonical_entity'?1:-1;}render();});
   }
-  if(opt==='all') ['uThin','uTwo','uCase'].forEach(id=>{document.getElementById(id).checked=false;});  // discover#under?all: every listed row
+  if(opt==='all') ['uThin','uTwo','uCase'].forEach(id=>{document.getElementById(id).checked=false;});  // signals#under?all: every listed row
   ['uThin','uTwo','uCase'].forEach(id=>document.getElementById(id).onchange=render);
   document.getElementById('uCsv').onclick=()=>csv(rowsNow(),columns.map(x=>x[0]),'understudied_signals.csv');
   render();
@@ -153,8 +153,8 @@ async function viewUnder(opt){
 async function viewContra(){
   const d=await getJSON('contradictions.json');
   document.getElementById('view').innerHTML=`<div class="panel">
-    <h2>Contradictions</h2>
-    <p class="lede">${fmt(C.contradictions_total)} entity and condition pairs with conflicting directions (the ${fmt(d.n)} strongest are listed):
+    <h2>Possible splits</h2>
+    <p class="lede">${fmt(C.contradictions_total)} possible splits, each a topic in one condition (the ${fmt(d.n)} strongest are listed):
       ${fmt(C.contra_flip_total)} direction flips and ${fmt(C.contra_null_vs_pos_total)} null-versus-positive conflicts. ${EXCL_NOTE}</p>
     <p class="kv">A disagreement means papers found the same thing higher in some and lower in others, or an effect in some and none in others. Only results the model tagged as a comparison between groups count, such as people with and without the condition, or two patient groups. Results tagged as a change after a treatment are left out. No person has checked these tags.</p>
     <div class="note stop">Different populations, methods, or source literatures can produce different results.
@@ -178,7 +178,7 @@ async function viewContra(){
         <div class="kv">${fmt(r.n_papers_B)} papers, ${fmt(r.n_findings_B)} findings, best tier ${esc(r.top_tier_B||'N/A')}</div>
         <div class="kv">${pmidLinks(r.pmids_B,8)}</div></div></div>
       ${r.n_papers_both_sides?`<div class="kv">${r.n_papers_both_sides} paper(s) report both directions.</div>`:''}
-      </div>`).join('')||'<div class="panel">No contradictions match.</div>';
+      </div>`).join('')||'<div class="panel">No possible splits match.</div>';
   }
   ['kType','kMulti'].forEach(id=>document.getElementById(id).onchange=render);
   document.getElementById('kCsv').onclick=()=>csv(rowsNow(),[

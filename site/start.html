@@ -30,8 +30,7 @@
 <header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
-    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="discover" class="">Signals</a><a href="connections" class="">Connections</a><a href="builder" class="">Analyze</a><a href="about" class="">About</a><a href="chat" class="">Ask</a></nav>
-    <div class="header-rail"><b><!--n:findings-->148,186<!--/n--> findings</b><!--n:papers-->11,519<!--/n--> papers · version v1.2</div>
+    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="signals" class="">Signals</a><a href="connections" class="">Connections</a><a href="analyze" class="">Analyze</a><a href="ask" class="">Ask</a><a href="about" class="">About</a></nav>
   </div></header>
 <main><div class="wrap"><div class="about-grid start"><nav class="section-index" aria-label="Start here sections"><a href="#what">What this is</a><a href="#do">What you can do</a><a href="#most">Studied most</a><a href="#signals">Disagree, nothing, barely</a><a href="#read">Read a finding</a><a href="#limits">Limits</a></nav><div class="about-content">
 
@@ -48,9 +47,9 @@
   <ul class="start-do">
     <li><a href="search">Search</a> Look up a symptom, drug, test or gene and read the findings that name it.</li>
     <li><a href="connections">Connections</a> See a map of every paper, grouped by what it reports, and follow papers from topic to finding.</li>
-    <li><a href="discover">Signals</a> See where papers disagree, what was tested and found nothing, and what has barely been studied.</li>
-    <li><a href="builder">Analyze</a> Count findings by year, condition or study type, and make your own chart.</li>
-    <li><a href="chat">Ask</a> Ask a question in plain words and get an answer that cites the papers. You need your own AI key.</li>
+    <li><a href="signals">Signals</a> See where papers disagree, what was tested and found nothing, and what has barely been studied.</li>
+    <li><a href="analyze">Analyze</a> Count findings by year, condition or study type, and make your own chart.</li>
+    <li><a href="ask">Ask</a> Ask a question in plain words and get an answer that cites the papers. You need your own AI key.</li>
   </ul>
 </section>
 
@@ -75,23 +74,25 @@
   <h2 id="signals-h">Where the papers do not line up</h2>
   <div class="start-three">
     <div>
-      <h3>Where studies disagree</h3>
-      <p>Among papers that compare people with POTS to healthy people, no topic has a clear split yet: none has three such papers on each side. In related conditions, the splits we found mix different diseases, animal studies or different measures, so we do not show one as an example.</p>
-      <p class="kv">The list of possible splits is wider: it counts any result the model tagged as a comparison between groups.
-      <a href="discover#contra">All <!--n:contradictions_total-->2,315<!--/n--> possible splits, for every condition.</a> Many answer different questions, so read both sides.</p>
+      <h3>Possible splits</h3>
+      <p class="start-big"><a href="signals#contra"><!--n:contradictions_total-->2,315<!--/n--></a></p>
+      <p>possible splits, for every condition: papers that report the same thing higher in some and lower in others, or an effect in some and none in others.
+      They count any result the model tagged as a comparison between groups. Many answer different questions, so read both sides.
+      <a href="signals#contra">See all possible splits</a></p>
+      <p class="kv">Among papers that compare people with POTS to healthy people, no topic has a clear split yet: none has three such papers on each side. In related conditions, the splits we found mix different diseases, animal studies or different measures, so we do not show one as an example.</p>
     </div>
     <div>
       <h3>Tested and found nothing</h3>
       <ul class="start-ex"><li><b><a href="entity?e=intravenous%20immunoglobulin">Intravenous immunoglobulin</a></b>, as a treatment for POTS: one randomized trial found no effect on at least one outcome.</li><li><b><a href="entity?e=ganglionic%20acetylcholine%20receptor%20antibody">Ganglionic acetylcholine receptor antibody</a></b>, as a marker in POTS: <span data-k="null_studies:biomarker/mechanism null|ganglionic acetylcholine receptor antibody">2</span> studies found no difference on at least one measure.</li></ul>
       <p class="kv">A study that finds nothing may have been small, or used a different dose or group. It is still worth knowing.
       Examples here come from trials and other studies of patients, not case reports or reviews.
-      <a href="discover#nulls">All <!--n:nulls-->19,245<!--/n--> null results, for every condition</a></p>
+      <a href="signals#nulls">All <!--n:nulls-->19,245<!--/n--> null results, for every condition</a></p>
     </div>
     <div>
       <h3>Barely studied</h3>
       <ul class="start-ex"><li><b><a href="entity?e=Guanfacine">Guanfacine</a></b> (a chemical, hormone or drug) in POTS: <span data-k="under_findings:Guanfacine">5</span> findings from only <span data-k="under_papers:Guanfacine">3</span> papers.</li></ul>
       <p class="kv">With so few papers, a result could be chance. It could also be a lead that needs testing again.
-      <a href="discover#under?all">All <!--n:understudied_total-->9,033<!--/n--> barely studied topics, for every condition</a> (the table lists the <!--n:understudied-->5,000<!--/n--> with the most findings)</p>
+      <a href="signals#under?all">All <!--n:understudied_total-->9,033<!--/n--> barely studied topics, for every condition</a> (the table lists the <!--n:understudied-->5,000<!--/n--> with the most findings)</p>
     </div>
   </div>
   <p class="kv">These examples come from the Signals tables for findings labelled POTS, with extra checks so each one is a clear case. Retracted papers and correction notices are left out.</p>
@@ -126,6 +127,6 @@
 <a href="about#download">Download the data</a>.</p>
 </div></div></div></main>
 <div class="quiet-support"><div class="wrap"><strong>Grow the map</strong> Help make this public research index easier to extend, check, and reuse. <a href="about#connect">Collaborate with the project</a>.</div></div>
-<footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings v1.2 · <!--n:findings-->148,186<!--/n--> findings / <!--n:papers-->11,519<!--/n--> papers · data generated 2026-10-27 15:10 UTC · <a href="about">Scope, methods and limitations</a>.</span></div></footer>
+<footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings v1.2 · <!--n:findings-->148,186<!--/n--> findings / <!--n:papers-->11,519<!--/n--> papers · data generated 2026-10-27 15:10 UTC · <a href="about#limits">Scope, methods and limits</a> · Not medical advice.</span></div></footer>
 <script type="module" src="js/chrome.js"></script>
 </body></html>

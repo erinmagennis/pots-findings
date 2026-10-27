@@ -306,8 +306,8 @@ def check(site_dir):
         if u.fragment:
             frag, _, opt = u.fragment.partition("?")
             if pg == "about" and u.fragment not in about_ids: f.append(f"link {href}: no id {u.fragment!r} on About")
-            if pg == "discover" and frag not in views: f.append(f"link {href}: no Signals view {frag!r}")
-            if pg == "discover" and opt and f"opt==='{opt}'" not in open(pdsc, encoding="utf-8").read(): f.append(f"link {href}: Signals does not read option {opt!r}")
+            if pg == "signals" and frag not in views: f.append(f"link {href}: no Signals view {frag!r}")
+            if pg == "signals" and opt and f"opt==='{opt}'" not in open(pdsc, encoding="utf-8").read(): f.append(f"link {href}: Signals does not read option {opt!r}")
     # 6 dashes and verify_site_v12's hand-typed number rule
     for ch, nm in (("—", "em dash"), ("–", "en dash"), ("&mdash;", "em dash entity"), ("&ndash;", "en dash entity")):
         if ch in raw: f.append(f"{nm} in start.html")
@@ -344,7 +344,7 @@ def self_test(site):
         "dropped item": lambda s: re.sub(r'<li><a href="condition\?c=[^"]*">.*?</li>', "", s, count=1),
         "entity name not capitalised": lower_name,
         "MCAS note dropped": lambda s: s.replace(' <span class="kv">' + MCAS_NOTE + '</span>', "", 1),
-        "unknown Signals option": lambda s: s.replace("discover#under?all", "discover#under?thin", 1),
+        "unknown Signals option": lambda s: s.replace("signals#under?all", "signals#under?thin", 1),
         "one trial not worded as one": lambda s: s.replace("one randomized trial found", "one study found", 1),
         "automatic split example shown": lambda s: s.replace("so we do not show one as an example.", 'for example <span data-k="split_hi:TNF-alpha|ME_CFS">6</span>.', 1),
         "second-hand barely studied example": lambda s: re.sub(r'data-k="under_(findings|papers):[^"]*"', r'data-k="under_\1:testosterone"', s),

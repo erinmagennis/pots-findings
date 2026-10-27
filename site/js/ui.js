@@ -3,22 +3,9 @@ import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS, fl
 import { condLabel } from './labels.js';
 
 export const PAGES = [
-  ['search','Search'],['discover','Signals'],['connections','Connections'],
-  ['builder','Analyze'],['about','About'],['chat','Ask']
+  ['search','Search'],['signals','Signals'],['connections','Connections'],
+  ['analyze','Analyze'],['ask','Ask'],['about','About']
 ];
-
-function contextPopover(){
-  const c = state.meta.counts;
-  return `<details class="context-details"><summary>Scope &amp; safety</summary><div class="context-popover">
-    <p><b>Scope.</b> ${fmt(c.findings)} findings extracted from ${fmt(c.papers)} papers (${c.year_min}–${c.year_max}) across POTS, dysautonomia and ${c.conditions} related condition literatures. Every finding carries a verbatim quote and a link to its paper. Ontology identifiers were verified at their authorities (v1.2); whether each finding states what its paper found has not yet been checked by a human reader. Absence of a signal is not evidence of absence. <a href="about#limits">Verification status</a>.</p>
-    <p><b>Not medical advice.</b> Machine-extracted research information, not clinical guidance. No diagnostic or treatment recommendations. Talk to a qualified clinician about any personal health decision.</p>
-    <p><b>Automated extraction has errors.</b> Co-occurrence is not causation; thin evidence includes noise and single-lab artifacts. <a href="about#limits">Limitations</a>. Every finding links to its source. The credit belongs to the original authors; please read their paper.</p>
-  </div></details>`;
-}
-
-function railInner(){
-  return `<b>${fmt(state.meta.counts.findings)} findings</b>${fmt(state.meta.counts.papers)} papers · version ${esc(state.meta.version)} ${contextPopover()}`;
-}
 
 export function header(active){
   const tabs = PAGES.map(([h,t])=>`<a href="${h}" class="${h===active?'active':''}">${t}</a>`).join('');
@@ -26,14 +13,13 @@ export function header(active){
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
     <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation">${tabs}</nav>
-    <div class="header-rail">${railInner()}</div>
   </div></header>`;
 }
 
 export function footer(){
   const m=state.meta;
   return `<div class="quiet-support"><div class="wrap"><strong>Grow the map</strong> Help make this public research index easier to extend, check, and reuse. <a href="about#connect">Collaborate with the project</a>.</div></div>
-  <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings ${esc(m.version)} · ${fmt(m.counts.findings)} findings / ${fmt(m.counts.papers)} papers · data generated ${esc(m.generated_utc)} · <a href="start">Start here</a> · <a href="about">Scope, methods and limitations</a>.</span></div></footer>`;
+  <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings ${esc(m.version)} · ${fmt(m.counts.findings)} findings / ${fmt(m.counts.papers)} papers · data generated ${esc(m.generated_utc)} · <a href="start">Start here</a> · <a href="about#limits">Scope, methods and limits</a> · Not medical advice.</span></div></footer>`;
 }
 
 /* The header is written into each page's HTML so it paints before any data loads.
@@ -54,7 +40,7 @@ export function mount(active){
   document.getElementById('framing-slot')?.remove();
   const slot=document.getElementById('header-slot');
   if(slot) slot.outerHTML = header(active);
-  else { const rail=document.querySelector('header.site .header-rail'); if(rail && state.meta) rail.innerHTML = railInner(); }
+  /* the header has no counts rail: counts, version and the safety link sit in the footer */
   const f=document.getElementById('footer-slot'); if(f) f.outerHTML = footer();
   wireChrome();
 }

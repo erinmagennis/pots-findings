@@ -167,7 +167,7 @@ def check(site_dir):
                     and r['n_findings'] == u['nf'] and [str(x) for x in r['pmids']] == u['pmids']), None)
         if not row: f.append(f'understudied example {u["e"]} is not a row of understudied.json')
         if set(u['pmids']) & excl: f.append('understudied example cites an exclude-flagged paper')
-    if 'href="discover#under?all"' not in js: f.append('home barely studied card does not link to discover#under?all (the set its total describes)')
+    if 'href="signals#under?all"' not in js: f.append('home barely studied card does not link to signals#under?all (the set its total describes)')
 
     # page wiring: the home script reads these files, and the hero counts are apply_counts markers
     js = (site / 'js' / 'home-v2.js').read_text(encoding='utf-8'); html = (site / 'index.html').read_text(encoding='utf-8')

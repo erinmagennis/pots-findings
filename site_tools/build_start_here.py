@@ -220,11 +220,11 @@ def render(meta, F):
         for c, n in F["conds"])
 
     if F["n_pots_splits"]:
-        dis = (f'<p>Among papers that compare people with POTS to healthy people, {f.num("pots_clear_splits", F["n_pots_splits"])} '
+        dis = (f'<p class="kv">Among papers that compare people with POTS to healthy people, {f.num("pots_clear_splits", F["n_pots_splits"])} '
                f'{"topic has" if F["n_pots_splits"] == 1 else "topics have"} a clear split: three or more such papers on each side. '
                'We do not pick one as an example, so read both sides in the list.</p>')
     else:
-        dis = ('<p>Among papers that compare people with POTS to healthy people, no topic has a clear split yet: none has three such '
+        dis = ('<p class="kv">Among papers that compare people with POTS to healthy people, no topic has a clear split yet: none has three such '
                'papers on each side. In related conditions, the splits we found mix different diseases, animal studies or different '
                'measures, so we do not show one as an example.</p>')
 
@@ -311,8 +311,7 @@ def render(meta, F):
 <header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
-    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="discover" class="">Signals</a><a href="connections" class="">Connections</a><a href="builder" class="">Analyze</a><a href="about" class="">About</a><a href="chat" class="">Ask</a></nav>
-    <div class="header-rail"><b>{m("findings")} findings</b>{m("papers")} papers · version {esc(meta["version"])}</div>
+    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="signals" class="">Signals</a><a href="connections" class="">Connections</a><a href="analyze" class="">Analyze</a><a href="ask" class="">Ask</a><a href="about" class="">About</a></nav>
   </div></header>'''
 
     body = f'''
@@ -331,9 +330,9 @@ def render(meta, F):
   <ul class="start-do">
     <li><a href="search">Search</a> Look up a symptom, drug, test or gene and read the findings that name it.</li>
     <li><a href="connections">Connections</a> See a map of every paper, grouped by what it reports, and follow papers from topic to finding.</li>
-    <li><a href="discover">Signals</a> See where papers disagree, what was tested and found nothing, and what has barely been studied.</li>
-    <li><a href="builder">Analyze</a> Count findings by year, condition or study type, and make your own chart.</li>
-    <li><a href="chat">Ask</a> Ask a question in plain words and get an answer that cites the papers. You need your own AI key.</li>
+    <li><a href="signals">Signals</a> See where papers disagree, what was tested and found nothing, and what has barely been studied.</li>
+    <li><a href="analyze">Analyze</a> Count findings by year, condition or study type, and make your own chart.</li>
+    <li><a href="ask">Ask</a> Ask a question in plain words and get an answer that cites the papers. You need your own AI key.</li>
   </ul>
 </section>
 
@@ -358,23 +357,25 @@ def render(meta, F):
   <h2 id="signals-h">Where the papers do not line up</h2>
   <div class="start-three">
     <div>
-      <h3>Where studies disagree</h3>
+      <h3>Possible splits</h3>
+      <p class="start-big"><a href="signals#contra">{m("contradictions_total")}</a></p>
+      <p>possible splits, for every condition: papers that report the same thing higher in some and lower in others, or an effect in some and none in others.
+      They count any result the model tagged as a comparison between groups. Many answer different questions, so read both sides.
+      <a href="signals#contra">See all possible splits</a>{more("contradictions", "contradictions_total")}</p>
       {dis}
-      <p class="kv">The list of possible splits is wider: it counts any result the model tagged as a comparison between groups.
-      <a href="discover#contra">All {m("contradictions_total")} possible splits, for every condition.</a> Many answer different questions, so read both sides.{more("contradictions", "contradictions_total")}</p>
     </div>
     <div>
       <h3>Tested and found nothing</h3>
       <ul class="start-ex">{"".join(nul)}</ul>
       <p class="kv">A study that finds nothing may have been small, or used a different dose or group. It is still worth knowing.
       Examples here come from trials and other studies of patients, not case reports or reviews.
-      <a href="discover#nulls">All {m("nulls")} null results, for every condition</a></p>
+      <a href="signals#nulls">All {m("nulls")} null results, for every condition</a></p>
     </div>
     <div>
       <h3>Barely studied</h3>
       <ul class="start-ex">{"".join(und)}</ul>
       <p class="kv">With so few papers, a result could be chance. It could also be a lead that needs testing again.
-      <a href="discover#under?all">All {m("understudied_total")} barely studied topics, for every condition</a>{more("understudied", "understudied_total")}</p>
+      <a href="signals#under?all">All {m("understudied_total")} barely studied topics, for every condition</a>{more("understudied", "understudied_total")}</p>
     </div>
   </div>
   <p class="kv">These examples come from the Signals tables for findings labelled POTS, with extra checks so each one is a clear case. Retracted papers and correction notices are left out.</p>
@@ -409,7 +410,7 @@ def render(meta, F):
 <a href="about#download">Download the data</a>.</p>
 </div></div></div></main>
 <div class="quiet-support"><div class="wrap"><strong>Grow the map</strong> Help make this public research index easier to extend, check, and reuse. <a href="about#connect">Collaborate with the project</a>.</div></div>
-<footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings {esc(meta["version"])} · {m("findings")} findings / {m("papers")} papers · data generated {esc(meta["generated_utc"])} · <a href="about">Scope, methods and limitations</a>.</span></div></footer>
+<footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings {esc(meta["version"])} · {m("findings")} findings / {m("papers")} papers · data generated {esc(meta["generated_utc"])} · <a href="about#limits">Scope, methods and limits</a> · Not medical advice.</span></div></footer>
 <script type="module" src="js/chrome.js"></script>
 </body></html>
 '''

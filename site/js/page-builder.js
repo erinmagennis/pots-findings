@@ -4,7 +4,7 @@ import { loadMeta, loadFacets, loadPapers, loadEntities, state, applyFilters, ex
 import { mount, selectOpts, entityCoverageNote, flagToggle, wireFlagToggle } from './ui.js';
 
 await loadMeta(); await loadFacets(); await loadPapers(); await loadEntities();
-mount('builder');
+mount('analyze');
 const F=state.facets;
 
 const DIM = {c:'Condition', d:'Direction', tr:'Evidence tier', ce:'Certainty', ft:'Finding type',

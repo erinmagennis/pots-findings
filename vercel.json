@@ -6,6 +6,9 @@
   "framework": null,
   "cleanUrls": true,
   "redirects": [
-    { "source": "/charts", "destination": "/builder", "permanent": false }
+    { "source": "/discover", "destination": "/signals", "permanent": true },
+    { "source": "/builder", "destination": "/analyze", "permanent": true },
+    { "source": "/chat", "destination": "/ask", "permanent": true },
+    { "source": "/charts", "destination": "/analyze", "permanent": false }
   ]
 }
