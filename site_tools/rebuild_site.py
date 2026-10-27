@@ -32,6 +32,9 @@ def main():
         "This entrypoint belongs to the 2026-08 checkpoint generator and is kept for the archive. The current site is built by:\n"
         "  python site_tools/build_v12_projection.py --root . --out site/data\n"
         "  python site_tools/embed_v12.py site/data            # sentence-transformers env\n"
+        "  python site_tools/build_home_data.py site\n"
+        "  python site_tools/build_start_here.py site\n"
+        "  python site_tools/build_connections_data.py --site site   # needs umap-learn + scikit-learn\n"
         "  python site_tools/apply_counts.py site README.md\n"
         "  python site_tools/verify_site_v12.py --self-test"
     )

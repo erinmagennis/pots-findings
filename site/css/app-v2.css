@@ -46,7 +46,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .modeswitch{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
 .modeswitch button{border:0;border-radius:0;padding:8px 12px;background:#fff}
 .modeswitch button.on{background:var(--accent);color:#fff}
-.modeswitch button.on:hover{color:#fff}
+.modeswitch button.on:hover{color:var(--rust)}
 .result-switch{margin:0 0 12px;max-width:max-content}
 .paper-title{font-size:17px;font-weight:650;margin:0 0 5px;line-height:1.35}
 .paper-title a{text-decoration:none;color:var(--ink)}
@@ -282,3 +282,6 @@ button.linkish{border:0;background:none;padding:0;color:var(--rust);font-size:13
 .flag-group{margin-bottom:16px}
 .flag-group h2{font-size:18px;margin:.2em 0 .3em}
 .flag-group .kv{margin:0 0 10px}
+@media (max-width:900px){.about-grid{grid-template-columns:minmax(0,1fr)}.section-index{max-width:100%}}
+.dl-table th:last-child{text-align:right}
+.tag{max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}

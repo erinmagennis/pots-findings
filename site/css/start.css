@@ -1,0 +1,26 @@
+/* start.css: layout for the generated "Start here" page (site/start.html). Uses the app-v2.css tokens only. */
+.start .page-intro{margin-bottom:22px}
+.start .page-intro .lede{font-size:17px;color:var(--ink)}
+.start .panel{padding:20px 22px}
+.start .panel>h2:first-child{margin-top:0}
+.start h3{font-size:15px;margin:.2em 0 .3em}
+.start .kv{font-size:13px}
+.start-do{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.start-do li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:baseline}
+.start-do a{font-weight:650}
+.start-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+.start-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.start-list{margin:8px 0 0;padding:0;list-style:none;counter-reset:s}
+.start-list li{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line)}
+.start-list li:last-child{border-bottom:0}
+.start-count{font:600 13px var(--mono);color:var(--muted);white-space:nowrap}
+.start-ex{margin:6px 0 10px;padding-left:18px}
+.start-ex li{margin-bottom:8px}
+.start-how{margin:0;padding-left:18px}
+.start-how li{margin-bottom:7px}
+.start-example{margin:0}
+.start-example .tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.start-example blockquote.quote{margin:8px 0}
+.start-foot{margin-top:6px}
+@media(max-width:900px){.start-three{grid-template-columns:1fr}}
+@media(max-width:620px){.start-two{grid-template-columns:1fr}.start-do li{grid-template-columns:1fr;gap:0}.start .panel{padding:16px}}

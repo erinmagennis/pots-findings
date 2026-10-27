@@ -14,7 +14,14 @@ export async function getJSON(path){
 }
 
 export const state = { facets:null, meta:null, papers:null, entities:null, text:{}, detail:{},
-  flags:{}, flagLabels:{}, excludePaper:null, includeFlagged:false };
+  flags:{}, flagLabels:{}, excludePaper:null, includeFlagged:readIncludeFlagged() };
+
+// the include-flagged choice lasts for this tab only, so a new visit starts with the default exclusion
+function readIncludeFlagged(){ try{ return sessionStorage.getItem('pots_include_flagged')==='1'; }catch{ return false; } }
+export function setIncludeFlagged(on){
+  state.includeFlagged=!!on;
+  try{ on ? sessionStorage.setItem('pots_include_flagged','1') : sessionStorage.removeItem('pots_include_flagged'); }catch{}
+}
 
 export async function loadMeta(){ state.meta = state.meta || await getJSON('meta.json'); return state.meta; }
 

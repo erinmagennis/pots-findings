@@ -2,13 +2,16 @@ import { loadMeta, loadFacets, state, fmt, esc } from './data.js';
 import { mount, entityCoverageNote } from './ui.js';
 
 await loadMeta(); await loadFacets();
+// the five published packages (DOIs and sizes), kept in one data file
+const REL=await fetch('data/releases.json').then(r=>r.json()).catch(()=>({packages:[]}));
+const totalMB=Math.round(REL.packages.reduce((a,p)=>a+p.mb,0));
 mount('about');
 const C=state.meta.counts, M=state.meta;
 const V = state.meta.verification_stats || {};
 const pl=(n,one,many)=>`${fmt(n)} ${n===1?one:many}`;
 const literatures=Object.entries(C.findings_by_source_literature||{}).sort((a,b)=>b[1]-a[1]);
 
-document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="section-index" aria-label="About sections"><a href="#scope">Scope</a><a href="#limits">Limits</a><a href="#flags">Paper flags</a><a href="#reuse">Reuse</a><a href="#related">Related data</a><a href="#connect">Collaborate</a></nav><div class="about-content">
+document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="section-index" aria-label="About sections"><a href="start">Start here</a><a href="#scope">Scope</a><a href="#download">Download</a><a href="#limits">Limits</a><a href="#flags">Paper flags</a><a href="#reuse">Reuse</a><a href="#related">Related data</a><a href="#connect">Collaborate</a></nav><div class="about-content">
 <div class="page-intro">
   <h1>About the data, its limits, and how to reuse it</h1>
   <p class="lede">A searchable index of ${fmt(C.findings)} machine-extracted findings from
@@ -17,14 +20,25 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
 
 <div class="panel" id="scope">
   <h2>Scope</h2>
-  <p>${fmt(C.findings)} findings from ${fmt(C.papers)} papers (${C.year_min}–${C.year_max}), released as five data packages on
-  <a href="https://github.com/erinmagennis/pots-findings">GitHub</a> (version ${esc(M.version)}). Each finding is one extracted statement with its
+  <p>${fmt(C.findings)} findings from ${fmt(C.papers)} papers (${C.year_min}–${C.year_max}), released as <a href="#download">five data packages</a>
+  on Zenodo and GitHub (version ${esc(M.version)}). Each finding is one extracted statement with its
   verbatim source quote, direction, evidence tier, condition label and, where the paper named one, the entity it concerns. A missing finding may mean the
   paper was outside the retrieval queries, had no accessible text, or that the extractor missed it. Absence here is not evidence of absence in the literature.</p>
   <h3>Findings by source literature</h3>
   <div class="statgrid">${literatures.map(([name,n])=>`<div class="stat"><div class="v">${fmt(n)}</div>
     <div class="k">${esc(name)}</div></div>`).join('')}</div>
   <p class="kv">Source literature records where a paper entered extraction. It is separate from the condition label on an individual finding.</p>
+</div>
+
+<div class="panel" id="download">
+  <h2>Download and cite</h2>
+  <p>The data comes as ${REL.packages.length} packages, about ${totalMB} MB in all. Each one has its own DOI on Zenodo and works on its own: the findings table
+  (Parquet and CSV), the paper flags, a data dictionary and a script that checks every stated number.</p>
+  <div class="tblwrap"><table class="dl-table"><thead><tr><th>Package and DOI</th><th>Size</th></tr></thead><tbody>
+  ${REL.packages.map(p=>`<tr><td><a href="https://doi.org/${esc(p.concept_doi)}" target="_blank" rel="noopener">${p.n}. ${esc(p.name)}</a><br><span class="kv">${esc(p.concept_doi)}</span></td><td class="num">${p.mb} MB</td></tr>`).join('')}
+  </tbody></table></div>
+  <p class="kv">These DOIs always lead to the newest version. The same files are on <a href="${esc(REL.github_release||'')}" target="_blank" rel="noopener">GitHub</a>
+  with a checksum file. To cite the data, cite the DOI of each package you used.</p>
 </div>
 
 <div class="panel">
@@ -96,5 +110,6 @@ document.querySelector('.about-content').insertAdjacentHTML('beforeend', `
 <div class="panel" id="connect">
   <h2>Connect with the project</h2>
   <p>Have a question, a useful source, or a way to help this literature become easier to navigate?</p>
+  <p>Thank you to everyone who has donated to the project.</p>
   <p><a href="mailto:hi@erinmagennis.com">Email Erin</a> · <a href="https://x.com/erinmagennis" target="_blank" rel="noopener">Follow on X</a> · <a href="https://github.com/erinmagennis/pots-findings" target="_blank" rel="noopener">View the project on GitHub</a></p>
 </div>`);

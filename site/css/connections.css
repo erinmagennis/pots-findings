@@ -1,0 +1,126 @@
+/* connections.css: the Connections page (Map and Flow). Builds on the tokens in app-v2.css. */
+main.cx{padding-top:30px}
+.cx-intro{max-width:860px;margin-bottom:14px}
+.cx-intro h1{margin:.1em 0 .2em}
+.cx-intro .lede{margin:.3em 0 .7em}
+.cx-caveat{font:11.5px/1.55 var(--mono);color:var(--muted);margin:0;max-width:110ch}
+
+.cx-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 6px}
+.cx-views button{min-width:64px;font-weight:600}
+/* app-v2 keeps an older white-on-hover rule for the active switch button; keep its text readable here */
+.cx .modeswitch button.on:hover{color:var(--rust)}
+.cx-search{display:flex;flex:1 1 260px;max-width:380px;min-width:0}
+.cx-search input{width:100%;min-width:0;padding:9px 16px;border:1px solid #d3cec4;border-radius:999px;background:#fff;font-size:14px;color:var(--ink)}
+.cx-field{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.cx-field select{padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;color:var(--ink);max-width:100%}
+.cx-search input:focus-visible,.cx-field select:focus-visible,#cxMap:focus-visible,.cx-node:focus-visible{outline:2px solid rgba(57,114,119,.45);outline-offset:2px}
+.cx-status{min-height:22px;margin:6px 0 12px;font-size:13px;color:var(--muted)}
+
+.cx-stage{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:18px;align-items:start;margin-bottom:40px}
+.cx-stage[hidden]{display:none}
+.cx-viz{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 30px rgba(52,55,53,.035);min-width:0}
+#cxMap{display:block;width:100%;height:660px;cursor:grab;touch-action:none;background:radial-gradient(circle at 50% 45%,#fffdf9 0,#faf8f3 75%)}
+#cxMap.dragging{cursor:grabbing}
+.cx-mapbtns{position:absolute;left:12px;top:12px;display:flex;gap:6px}
+.cx-mapbtns button{min-width:38px;min-height:34px;padding:5px 11px;background:#fffdf9;font-size:14px;line-height:1}
+.cx-hint{position:absolute;right:14px;top:14px;margin:0;font:11px var(--mono);color:var(--muted);background:rgba(255,253,249,.85);padding:3px 7px;border-radius:8px;pointer-events:none}
+.cx-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:10px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.cx-legend b{color:var(--ink)}
+.cx-tip{position:absolute;z-index:5;display:none;max-width:320px;padding:8px 11px;background:rgba(255,253,249,.98);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 28px rgba(52,55,53,.12);font-size:12.5px;line-height:1.4;pointer-events:none}
+.cx-tip b{display:block;font-weight:650}
+.cx-tip .cx-sub{display:block;margin-top:2px}
+
+.cx-panel{position:sticky;top:92px;max-height:calc(100vh - 110px);overflow:auto;padding:20px 22px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 30px rgba(52,55,53,.035)}
+.cx-panel h2{font-size:20px;line-height:1.25;letter-spacing:-.02em;margin:0 0 6px;border:0;padding:0}
+.cx-panel h3{font:700 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:22px 0 8px}
+.cx-panel p{margin:0 0 8px;font-size:14px}
+.cx-sub{color:var(--muted);font-size:13px}
+.cx-panel p.cx-sub{font-size:13px}
+.cx-kicker{font:700 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.cx-num{font-family:var(--mono);font-size:.86em}
+.cx-sw{display:inline-block;width:9px;height:9px;border-radius:50%;flex:0 0 auto;vertical-align:baseline}
+.cx-linkbtn{background:none;border:0;padding:0;color:var(--rust);font:inherit;font-size:13px;text-align:left;cursor:pointer;min-height:0}
+.cx-linkbtn:hover{text-decoration:underline;transform:none;color:var(--rust)}
+.cx-rlist{list-style:none;margin:0;padding:0}
+.cx-rlist li{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+.cx-rlist li:first-child{border-top:0}
+.cx-rlist .cx-num{color:var(--muted);white-space:nowrap}
+.cx-chip{display:inline-block;margin:2px 3px 2px 0;padding:2px 9px;border:1px solid var(--line);border-radius:999px;background:#f1f6f3;color:var(--ink);font-size:12px;line-height:1.6;text-decoration:none;cursor:pointer}
+.cx-chip:hover{border-color:var(--rust);color:var(--rust);transform:none}
+button.cx-chip{font:inherit;font-size:12px}
+.cx-chip .cx-num{color:var(--muted)}
+.cx-bars{list-style:none;margin:0;padding:0}
+.cx-bars li{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 52px;gap:8px;align-items:center;padding:4px 0 6px;font-size:13px}
+.cx-bars a{color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
+.cx-bars a:hover{color:var(--rust);text-decoration:underline}
+.cx-bars .cx-num{text-align:right;color:var(--muted)}
+.cx-bar{position:absolute;left:0;right:0;bottom:1px;height:2px;background:var(--rust-soft)}
+.cx-bar i{display:block;height:100%;background:var(--rust);opacity:.6}
+.cx-rel{padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.cx-rel:first-of-type{border-top:0}
+.cx-rel .cx-sw{margin-right:6px}
+.cx-rel .cx-sub{font-size:12.5px;margin-top:2px}
+.cx-split{padding:10px 0;border-top:1px solid var(--line);font-size:13px}
+h3+.cx-split,p+.cx-split{border-top:0}
+.cx-split-head{line-height:1.35}
+.cx-ent{font-weight:650;color:var(--ink);text-decoration:none}
+.cx-ent:hover{color:var(--rust);text-decoration:underline}
+.cx-dirs{display:flex;flex-wrap:wrap;gap:4px 12px;margin:4px 0;font:12px var(--mono)}
+.cx-panel .up,.cx-dirs .up{color:var(--up)} .cx-panel .dn,.cx-dirs .dn{color:var(--down)} .cx-panel .nu,.cx-dirs .nu{color:var(--flat)}
+.cx-ex{font-size:12px;color:var(--muted);line-height:1.55}
+.cx-ex a{text-decoration:none}
+.cx-ex a:hover{text-decoration:underline}
+.cx-topic{margin:0 0 18px;padding:14px 16px;background:#f1f6f3;border:1px solid #d6e3de;border-radius:14px}
+.cx-topic h2{font-size:18px}
+.cx-topic .cx-split{border-color:#d6e3de}
+
+/* flow */
+.cx-flowbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.cx-flowbar-k{font-size:12px;color:var(--muted)}
+.cx-check{display:inline-flex;gap:6px;align-items:center;font-size:13px}
+.cx-check[hidden]{display:none}
+.cx-flownote{margin:0;padding:10px 16px;font-size:13px;color:var(--ink);background:#faf6ef;border-bottom:1px solid var(--line)}
+.cx-flowwrap{overflow-x:auto;overscroll-behavior-x:contain}
+.cx-swipe{display:none;margin:0;padding:8px 16px 0;font-size:12px;color:var(--muted)}
+#cxFlow{display:block;width:100%;min-width:760px;height:720px}
+.cx-link{fill:none;stroke-opacity:.24;cursor:pointer}
+.cx-link:hover{stroke-opacity:.5}
+.cx-dim .cx-link{stroke-opacity:.06}
+.cx-hl path{fill:none;stroke:#9a5638;stroke-opacity:.5;pointer-events:none}
+.cx-node{cursor:pointer;outline:none}
+.cx-node rect{shape-rendering:crispEdges}
+.cx-node .cx-hit{fill:transparent}
+.cx-node.sink rect:first-child{stroke:#c9c3b8}
+.cx-node.sel rect:first-child,.cx-node:focus-visible rect:first-child{stroke:var(--ink);stroke-width:1.5}
+.cx-node text{font-size:11.5px;fill:var(--ink);paint-order:stroke;stroke:#fffdf9;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.cx-node .cx-tnum{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.cx-colhead{font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;fill:var(--teal)}
+.cx-empty{font-size:14px;fill:var(--muted)}
+
+@media (max-width:1100px){.cx-stage{grid-template-columns:minmax(0,1fr) 330px}}
+@media (max-width:900px){
+  .cx-stage{grid-template-columns:minmax(0,1fr)}
+  .cx-panel{position:static;max-height:none}
+  #cxMap{height:460px}
+  #cxFlow{height:640px}
+  .cx-hint{display:none}
+  .cx-swipe{display:block}
+}
+@media (max-width:620px){
+  main.cx{padding-top:22px}
+  .cx-intro h1{font-size:30px}
+  .cx-intro .lede{font-size:15px}
+  .cx-caveat{font-size:11px}
+  .cx-toolbar{gap:8px}
+  .cx-views{flex:0 0 auto}
+  .cx-search{flex:1 1 100%;max-width:none;order:2}
+  .cx-field{order:3}
+  .cx-field:nth-of-type(2){flex:1 1 100%}
+  .cx-field:nth-of-type(2) select{width:100%}
+  #cxReset{order:3}
+  #cxMap{height:420px}
+  .cx-panel{padding:18px 16px;border-radius:14px}
+  .cx-viz{border-radius:14px}
+  .cx-legend{font-size:11.5px;padding:9px 12px}
+}
+@media (prefers-reduced-motion:reduce){.cx-link,.cx-chip,.cx-linkbtn{transition:none}}

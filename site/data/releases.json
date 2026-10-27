@@ -1,0 +1,12 @@
+{
+  "version": "v1.2",
+  "note": "Published Zenodo records. concept_doi always resolves to the newest version; checked against README.md by verify_site_v12.py.",
+  "github_release": "https://github.com/erinmagennis/pots-findings/releases/latest",
+  "packages": [
+    {"n": 1, "name": "POTS and dysautonomia core", "mb": 33.6, "doi": "10.5281/zenodo.23671720", "concept_doi": "10.5281/zenodo.23671719"},
+    {"n": 2, "name": "EDS, ME/CFS, MCAS and related conditions, part 1", "mb": 22.9, "doi": "10.5281/zenodo.23671722", "concept_doi": "10.5281/zenodo.23671721"},
+    {"n": 3, "name": "The same conditions, part 2", "mb": 20.5, "doi": "10.5281/zenodo.23671724", "concept_doi": "10.5281/zenodo.23671723"},
+    {"n": 4, "name": "Long COVID, post-viral and autism", "mb": 16.8, "doi": "10.5281/zenodo.23671726", "concept_doi": "10.5281/zenodo.23671725"},
+    {"n": 5, "name": "Migraine, hypermobility, Sjögren's and PANS/PANDAS", "mb": 10.5, "doi": "10.5281/zenodo.23671728", "concept_doi": "10.5281/zenodo.23671727"}
+  ]
+}

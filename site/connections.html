@@ -2,11 +2,12 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Connections | POTS &amp; Dysautonomia Findings Browser</title>
-<meta name="description" content="Explore connections among entities in the POTS and dysautonomia literature.">
+<meta name="description" content="A map of what POTS and dysautonomia papers are about, how topics connect, and where papers disagree.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 <link rel="stylesheet" href="css/app-v2.css">
+<link rel="stylesheet" href="css/connections.css">
 </head><body>
 <div id="framing-slot"></div><header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
@@ -14,23 +15,61 @@
     <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="discover" class="">Signals</a><a href="connections" class="active">Connections</a><a href="builder" class="">Analyze</a><a href="about" class="">About</a><a href="chat" class="">Ask</a></nav>
     <div class="header-rail"></div>
   </div></header>
-<main><div class="wrap">
-  <div class="panel graph-intro">
-    <h1>Connections in the literature</h1>
-    <p class="lede">See which entities occur in the same papers as POTS. Co-mention is not interaction or causation.</p>
-    <div class="graph-controls" aria-label="Graph controls">
-      <label>Scope <select id="scope"><option value="pots">POTS literature</option><option value="all">All available associations</option></select></label>
-      <label>Show <select id="topN"><option value="24">24 associations</option><option value="48" selected>48 associations</option><option value="72">72 associations</option></select></label>
-      <label><input type="checkbox" id="significant" checked> significant only</label>
-      <label><input type="checkbox" id="crossKind"> cross-kind only</label>
-      <button class="primary" id="refreshGraph">Update graph</button>
+<main class="cx"><div class="wrap">
+  <section class="cx-intro">
+    <p class="section-kicker">Connections</p>
+    <h1 id="cxTitle">A map of what the papers are about</h1>
+    <p class="lede" id="cxLede">Each dot is a paper, placed by what its findings say. Papers close together report on similar things.</p>
+    <p class="cx-caveat" id="cxCaveat">Findings were extracted by a language model and not checked by a person. Sitting close together means similar topics, not a proven link.</p>
+  </section>
+
+  <div class="cx-toolbar" role="group" aria-label="View and filters">
+    <div class="modeswitch cx-views" role="group" aria-label="View">
+      <button type="button" data-view="map" aria-pressed="true" class="on">Map</button>
+      <button type="button" data-view="flow" aria-pressed="false">Flow</button>
     </div>
+    <label class="cx-search"><span class="sr-only">Find a paper or topic</span><input id="cxQ" type="search" placeholder="Find a paper or topic, e.g. mast cells" autocomplete="off"></label>
+    <label class="cx-field"><span class="sr-only">Condition</span><select id="cxCond"><option value="">All conditions</option></select></label>
+    <label class="cx-field"><span>From</span><select id="cxY0" aria-label="From year"></select></label>
+    <label class="cx-field"><span>To</span><select id="cxY1" aria-label="To year"></select></label>
+    <button type="button" id="cxReset">Reset</button>
   </div>
-  <div class="graph-panel">
-    <div id="connectionGraph" class="connection-graph" role="img" aria-label="Interactive network of POTS literature connections"></div>
-    <aside id="connectionDrawer" class="connection-drawer" aria-live="polite"><p class="section-kicker">Selected entity</p><h2>Choose a node</h2><p class="kv">Select a node to see its visible connections and open its full entity record.</p></aside>
-    <p class="graph-caption" id="graphCaption">Loading connections…</p>
-  </div>
+  <p class="cx-status" id="cxStatus" aria-live="polite">Loading the map…</p>
+
+  <section class="cx-stage" id="mapStage" aria-label="Map of papers">
+    <div class="cx-viz">
+      <canvas id="cxMap" tabindex="0" aria-label="Map of papers grouped into topic regions. Use the region list beside the map to explore with a keyboard. Plus and minus keys zoom, arrow keys pan."></canvas>
+      <div class="cx-mapbtns">
+        <button type="button" id="cxZin" aria-label="Zoom in">+</button>
+        <button type="button" id="cxZout" aria-label="Zoom out">&minus;</button>
+        <button type="button" id="cxFit">Fit</button>
+      </div>
+      <p class="cx-hint" id="cxHint">Scroll or pinch to zoom. Drag to move. Zoom in for more labels.</p>
+      <div class="cx-tip" id="cxTip" role="tooltip"></div>
+      <div class="cx-legend" id="cxLegend"></div>
+    </div>
+    <aside class="cx-panel" id="mapPanel" aria-live="polite"></aside>
+  </section>
+
+  <section class="cx-stage" id="flowStage" aria-label="Flow of papers" hidden>
+    <div class="cx-viz">
+      <div class="cx-flowbar">
+        <span class="cx-flowbar-k">Last column</span>
+        <div class="modeswitch" role="group" aria-label="Last column">
+          <button type="button" data-last="ft" aria-pressed="true" class="on">Finding type</button>
+          <button type="button" data-last="ca" aria-pressed="false">Strength of claim</button>
+          <button type="button" data-last="ps" aria-pressed="false">POTS subtype</button>
+        </div>
+        <label class="cx-check" id="cxSinkWrap" hidden><input type="checkbox" id="cxSink"> Show papers with no claim type</label>
+      </div>
+      <p class="cx-flownote" id="cxFlowNote"></p>
+      <p class="cx-swipe">Swipe the chart sideways to see every column.</p>
+      <div class="cx-flowwrap" id="cxFlowWrap"><svg id="cxFlow" role="img" aria-label="Flow of papers from topic regions to body systems to finding type, strength of claim or POTS subtype"></svg></div>
+      <div class="cx-tip" id="cxFlowTip" role="tooltip"></div>
+      <p class="cx-legend" id="cxFlowLegend"></p>
+    </div>
+    <aside class="cx-panel" id="flowPanel" aria-live="polite"></aside>
+  </section>
 </div></main>
 <div id="footer-slot"></div>
 <script type="module" src="js/chrome.js"></script>

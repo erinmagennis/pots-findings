@@ -47,7 +47,7 @@ def strip_code_noise(text, is_js):
     else:
         text = re.sub(r"<!--(?!n:|/n).*?-->", " ", text, flags=re.S); text = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", text, flags=re.S)
         text = re.sub(r"<svg.*?</svg>", " ", text, flags=re.S)
-    text = MARKER.sub(" ", text)
+    text = MARKER.sub(" ", text); text = re.sub(r'data-n-content="[^"]*" content="[^"]*"', " ", text)   # checked by markers_check
     text = re.sub(r"#[0-9a-fA-F]{3,8}\b", " ", text)                      # colours
     text = re.sub(r"\b\d+(\.\d+)?(px|em|rem|ms|s|%|vh|vw|deg)\b", " ", text)  # css numerics
     text = re.sub(r"(rgba?|hsla?)\([^)]*\)", " ", text)
@@ -77,6 +77,10 @@ def markers_check(site, meta, cov, failures):
             n += 1
             if k not in src: failures.append((f"marker {k}", "no such meta key", "known key", os.path.basename(p))); continue
             add(failures, f"marker {k} in {os.path.basename(p)}", val, fmt(src[k]), "apply_counts.py not run")
+        for tpl, content in re.findall(r'data-n-content="([^"]*)" content="([^"]*)"', open(p, encoding="utf-8").read()):
+            n += 1; keys = re.findall(r"[{]([a-z_0-9]+)[}]", tpl)
+            if any(k not in src for k in keys): failures.append(("attribute template", tpl, "known keys", os.path.basename(p))); continue
+            add(failures, f"attribute template in {os.path.basename(p)}", content, re.sub(r"[{]([a-z_0-9]+)[}]", lambda x: fmt(src[x.group(1)]), tpl), "apply_counts.py not run")
     return n
 
 
@@ -122,7 +126,16 @@ def flags_check(data, P, F, C, failures, flags_override=None):
     return n
 
 
-def check(root: Path, site: Path, meta_override=None, html_override=None, flags_override=None):
+def releases_check(root, data, failures, rel_override=None):
+    """site/data/releases.json (About's download table) must match the README "Download and cite" table: DOIs, all-versions DOIs, sizes."""
+    rel = rel_override or rj(data / "releases.json"); readme = (root / "README.md").read_text(encoding="utf-8")
+    rows = re.findall(r"^\| (\d) of 5 \|[^|]*\| ([\d.]+) MB \| \[([^\]]+)\][^|]*\| \[([^\]]+)\]", readme, flags=re.M)
+    got = [(p["n"], p["mb"], p["doi"], p["concept_doi"]) for p in rel["packages"]]
+    add(failures, "releases.json vs README download table", got, [(int(n), float(mb), d, c) for n, mb, d, c in rows], "README.md")
+    return 1
+
+
+def check(root: Path, site: Path, meta_override=None, html_override=None, flags_override=None, rel_override=None):
     f = []; data = site / "data"; checks = 0
     meta = copy.deepcopy(meta_override) if meta_override else rj(data / "meta.json"); C = meta["counts"]
     golden = rj(root / "validation" / "v12_golden_facts.json")
@@ -142,6 +155,12 @@ def check(root: Path, site: Path, meta_override=None, html_override=None, flags_
     add(f, "papers vs distinct pmids in packages/*/data/tier*_findings", C["papers"], len(pk), f"{nfiles} package findings files"); add(f, "package findings files", nfiles, 5, "packages")
     add(f, "papers.json pmids == package pmids", set(str(r[P["fields"].index("pmid")]) for r in P["rows"]) == pk, True, "packages"); checks += 3
     checks += flags_check(data, P, F, C, f, flags_override)
+    checks += releases_check(root, data, f, rel_override)
+    if meta_override is None and flags_override is None and rel_override is None:   # page builders re-derive from the real files only
+        sys.path.insert(0, str(Path(__file__).parent))
+        for mod in ("verify_home", "verify_start_here", "verify_connections"):
+            for msg in __import__(mod).check(site): f.append((f"{mod}: {msg}", None, "pass", mod))
+            checks += 1
     for s in range(F["n_shards"]):
         a, b = s * F["shard_rows"], min((s + 1) * F["shard_rows"], n)
         T = rj(data / f"text_{s:02d}.json"); Dd = rj(data / f"detail_{s:02d}.json")
@@ -202,13 +221,15 @@ def main():
     f1, _ = check(root, site, meta_override=bad); caught = {x[0] for x in f1}
     tmp = Path(tempfile.mkdtemp()); shutil.copytree(site, tmp / "site", ignore=shutil.ignore_patterns("data", "vendor"))
     (tmp / "site" / "js").mkdir(exist_ok=True)
-    with open(tmp / "site" / "about.html", "a", encoding="utf-8") as fh: fh.write("<p>planted: 73,070 findings from <!--n:papers-->6,244<!--/n--> papers</p>")
+    with open(tmp / "site" / "about.html", "a", encoding="utf-8") as fh: fh.write("<p>planted: 73,070 findings from <!--n:papers-->6,244<!--/n--> papers</p><meta data-n-content=\"{papers} papers\" content=\"6,244 papers\">")
     f2 = []; numbers_check(str(tmp / "site"), f2); markers_check(str(tmp / "site"), rj(site / "data" / "meta.json"), rj(site / "data" / "findings_facets.json")["coverage"], f2)
     caught2 = {("hand-typed numbers in site copy" if x[0].startswith("hand-typed") else x[0].split(" in ")[0]) for x in f2}; shutil.rmtree(tmp)
     badf = rj(site / "data" / "paper_flags.json"); badf["flags"]["99999999"] = [{"f": "retracted", "l": "Retracted", "u": "exclude"}]
     f3, _ = check(root, site, flags_override=badf); caught3 = {x[0] for x in f3}
-    need = {"counts.papers", "counts.findings", "facets.n", "papers vs distinct pmids in packages/*/data/tier*_findings", "default findings (facets minus exclude-flagged papers)"}
-    need2 = {"hand-typed numbers in site copy", "marker papers"}; need3 = {"paper_flags pmids not site papers", "excluded_papers", "counts.flag_retracted"}
+    badr = rj(site / "data" / "releases.json"); badr["packages"][0]["concept_doi"] = "10.5281/zenodo.1"
+    f4, _ = check(root, site, rel_override=badr); caught |= {x[0] for x in f4}
+    need = {"releases.json vs README download table", "counts.papers", "counts.findings", "facets.n", "papers vs distinct pmids in packages/*/data/tier*_findings", "default findings (facets minus exclude-flagged papers)"}
+    need2 = {"hand-typed numbers in site copy", "marker papers", "attribute template"}; need3 = {"paper_flags pmids not site papers", "excluded_papers", "counts.flag_retracted"}
     if not (need <= caught and need2 <= caught2 and need3 <= caught3): print(f"SELF-TEST FAIL: caught {sorted(caught)} / {sorted(caught2)} / {sorted(caught3)}"); return 1
     print(f"SELF-TEST PASS: caught all {len(need) + len(need2) + len(need3)} planted failures"); return 0
 

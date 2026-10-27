@@ -1,5 +1,5 @@
 /* ui.js: shared chrome: framing banner, nav, result cards, citation lines. */
-import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS, flagsOf, EXCLUDE_TOGGLE_LABEL } from './data.js';
+import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS, flagsOf, EXCLUDE_TOGGLE_LABEL, setIncludeFlagged } from './data.js';
 import { condLabel } from './labels.js';
 
 export const PAGES = [
@@ -83,7 +83,7 @@ export function flagToggle(id){
 export function wireFlagToggle(id, onChange){
   const el=document.getElementById(id); if(!el) return;
   el.checked=state.includeFlagged;
-  el.addEventListener('change',()=>{ state.includeFlagged=el.checked; onChange&&onChange(); });
+  el.addEventListener('change',()=>{ setIncludeFlagged(el.checked); onChange&&onChange(); });
 }
 
 /* ---------- citation line: prominent, always with a link ---------- */

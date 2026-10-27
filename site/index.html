@@ -6,7 +6,7 @@
   <title>POTS and dysautonomia research map</title>
   <meta name="description" content="A living map of POTS and dysautonomia research. Explore what is known, what is connected, and what is next.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/home-v2.css?v=7">
+  <link rel="stylesheet" href="css/home-v2.css?v=8">
 </head>
 <body>
   <header class="topbar"><div class="header-inner">
@@ -39,20 +39,24 @@
               <button type="submit" aria-label="Search the literature"></button>
             </div>
           </form>
-          <p class="hero-footnote">Search the <span id="findingCount"><!--n:findings-->148,186<!--/n--></span> findings from <span id="paperCount"><!--n:papers-->11,519<!--/n--></span> papers in the project</p>
+          <p class="hero-footnote">Search the <!--n:findings-->148,186<!--/n--> findings from <!--n:papers-->11,519<!--/n--> papers in the project</p>
         </div>
       </div>
 
-      <div class="graph-stage" aria-labelledby="graphTitle">
-        <div id="graph" class="graph" role="img" aria-label="Interactive network showing POTS research overlap"></div>
-        <div class="graph-status" id="graphStatus" aria-live="polite"><span id="graphStatusText">POTS is connected to overlapping research areas in the literature.</span> <a class="graph-browse" href="conditions">Browse all conditions</a></div>
-        <div class="evidence-view" id="evidenceView">
-          <p class="evidence-label">Accessible evidence view</p>
-          <ul id="evidenceList"></ul>
-        </div>
+      <div class="graph-stage" id="stage">
+        <div id="graph" class="graph" role="img" aria-label="POTS in the middle, conditions around it sized by papers, and the topics most specific to POTS between them"></div>
       </div>
+      <div class="graph-foot">
+        <div>
+          <p class="graph-status" id="graphStatus" aria-live="polite">Loading the map.</p>
+          <p class="caveat">Findings extracted by a language model and not checked by a person. Linked means studied together, not a proven cause.</p>
+        </div>
+        <button class="info" type="button" aria-label="How this map is built" aria-describedby="infoPop">i<span class="pop" id="infoPop" role="tooltip">How this map is built.</span></button>
+      </div>
+      <nav class="sr-only" aria-label="Conditions on the map"><ul id="condList"></ul></nav>
     </section>
-
+    <section class="stand" id="stand" aria-label="What stands out"></section>
+    <p class="start-line">New here? <a href="start">Start here</a> · <a href="about#download">Download the data</a> (<!--n:version-->v1.2<!--/n-->, about 104 MB, on Zenodo and GitHub)</p>
   </main>
   <footer class="project-footer" id="connect">
     <div class="footer-left">
@@ -61,6 +65,6 @@
     </div>
     <p class="footer-connect">Have a question, a useful source, or a recommendation?<br><a href="about#connect">Let's connect!</a> <span class="arrow-circle" aria-hidden="true">↗</span></p>
   </footer>
-  <script type="module" src="js/home-v2.js?v=7"></script>
+  <script type="module" src="js/home-v2.js?v=8"></script>
 </body>
 </html>

@@ -104,11 +104,14 @@ const PALETTE=['#9a5638','#397277','#71896f','#343735','#b97858','#5b8f91','#91a
     ? entityCoverageNote('this chart') : '';
 
   // table + CSV payload
-  const cols=[DIM[xf], ...(sf?seriesKeys.map(s=>lab(sf,s)):[ylab]), 'total'];
+  // a Total column only where it adds something and adds up: findings and % split by series (papers and entities can repeat across series)
+  const withTotal = !!sf && (ym==='findings'||ym==='pct');
+  const cols=[DIM[xf], ...(sf?seriesKeys.map(s=>lab(sf,s)):[ylab]), ...(withTotal?['Total']:[])];
   const trows=cats.map(c=>{
     const vals=seriesKeys.map(s=>{ const cell=G.get(c).get(s); if(!cell) return 0;
       const v=metric(cell); return ym==='pct'? +(100*v/(grandTotal||1)).toFixed(2):v; });
-    return [lab(xf,c),...vals, vals.reduce((a,b)=>a+b,0)];
+    const sum=vals.reduce((a,b)=>a+b,0);
+    return [lab(xf,c),...vals, ...(withTotal?[ym==='pct'? +sum.toFixed(2) : sum]:[])];
   });
   document.querySelector('#dtbl thead').innerHTML='<tr>'+cols.map(c=>`<th>${esc(c)}</th>`).join('')+'</tr>';
   document.querySelector('#dtbl tbody').innerHTML=trows.map(r=>'<tr>'+r.map((v,i)=>
