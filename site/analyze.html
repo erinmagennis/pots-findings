@@ -6,13 +6,14 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
 <link rel="stylesheet" href="css/app-v2.css">
+<link rel="stylesheet" href="css/chrome.css">
 <script src="vendor/chart.umd.js"></script>
 </head><body>
-<div id="framing-slot"></div><header class="site"><div class="wrap">
+<div id="framing-slot"></div><!--header--><header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
     <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
-    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search" class="">Search</a><a href="signals" class="">Signals</a><a href="connections" class="">Connections</a><a href="analyze" class="active">Analyze</a><a href="chat" class="">Chat</a><a href="about" class="nav-about"><span class="nav-tag">Scope &amp; safety</span>About</a></nav>
-  </div></header>
+    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation"><a href="search">Search</a><a href="signals">Signals</a><a href="connections">Connections</a><a href="analyze" class="active" aria-current="page">Analyze</a><a href="chat">Chat</a><a href="about" class="nav-about"><span class="nav-tag">Scope &amp; safety</span>About</a></nav>
+  </div></header><!--/header-->
 <main><div class="wrap">
   <section class="preset-section" aria-label="Start from a preset"><p class="section-kicker">Start from a preset</p>
     <div class="preset-row" id="presetRow"></div><p class="kv" id="presetNote" aria-live="polite"></p></section>
@@ -56,7 +57,13 @@
     <div class="tblwrap"><table id="dtbl"><thead></thead><tbody></tbody></table></div></div>
   </section></div>
 </div></main>
-<div id="footer-slot"></div>
+<!--footer--><footer class="site-footer"><div class="wrap">
+    <div class="foot-band">
+      <div class="foot-left"><p class="foot-kicker">Grow the map</p><p class="foot-title">Collaborate with the <a href="about#connect">POTS &amp; Dysautonomia Literature Project</a></p></div>
+      <p class="foot-connect">Have a question, a useful source, or a recommendation?<br><a href="about#connect">Let's connect!</a> <span class="arrow-circle" aria-hidden="true">↗</span></p>
+    </div>
+    <p class="foot-meta">POTS &amp; Dysautonomia Literature Project · <a href="start">Start here</a> · <a href="about#download">Download the data</a> · <a href="about#limits">Not medical advice</a> · Data <!--n:version-->v1.2<!--/n-->, updated 27 Oct 2026</p>
+  </div></footer><!--/footer-->
 <script type="module" src="js/chrome.js"></script>
 <script type="module" src="js/page-builder.js"></script>
 </body></html>

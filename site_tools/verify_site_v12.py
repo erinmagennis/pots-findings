@@ -19,7 +19,8 @@ Checks (each failure names what/got/expected/source):
      default facet-based counts (findings_default / excluded_findings / retracted_findings recomputed from facets.p + flags),
      no Signals table (associations, contradictions, understudied, convergence, null results) cites an exclude-flagged paper,
      and data.js applyFilters carries the default exclusion
---self-test plants failures (count, marker, hand-typed number, a flag on a non-site paper, a wrong default count) and requires all to be caught.
+ 14. CHROME: every page's <!--header--> and <!--footer--> blocks equal site_tools/apply_chrome.py output; chrome.css and chrome.js load on every page
+--self-test plants failures (a changed header on about, a changed footer on signals, count, marker, hand-typed number, a flag on a non-site paper, a wrong default count) and requires all to be caught.
 """
 import argparse, copy, csv, glob, gzip, hashlib, json, os, re, sys
 from pathlib import Path
@@ -149,6 +150,21 @@ def nav_check(site, failures):
     return n
 
 
+def chrome_check(site, failures, real_site=None):
+    """every page's <!--header--> and <!--footer--> blocks equal what site_tools/apply_chrome.py writes for that page,
+    and every page loads css/chrome.css and js/chrome.js (one header, one footer, one menu toggle, on every page)"""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import apply_chrome
+    n = 0
+    for p in sorted(glob.glob(f"{site}/*.html")):
+        s = open(p, encoding="utf-8").read(); b = os.path.basename(p)
+        for what, rx, render in (("header", apply_chrome.BLOCK_RE, apply_chrome.render_header), ("footer", apply_chrome.FOOT_RE, apply_chrome.render_footer)):
+            m = rx.findall(s); want = render(p, real_site or site)
+            add(failures, f"{what} block in {b}", m[0] if len(m) == 1 else f"{len(m)} marked blocks", want, "apply_chrome.py (run it)"); n += 1
+        add(failures, f"chrome assets in {b}", (apply_chrome.CSS_LINK in s, apply_chrome.JS_TAG in s), (True, True), "apply_chrome.py"); n += 1
+    return n
+
+
 def check(root: Path, site: Path, meta_override=None, html_override=None, flags_override=None, rel_override=None):
     f = []; data = site / "data"; checks = 0
     meta = copy.deepcopy(meta_override) if meta_override else rj(data / "meta.json"); C = meta["counts"]
@@ -208,6 +224,7 @@ def check(root: Path, site: Path, meta_override=None, html_override=None, flags_
     checks += numbers_check(site if html_override is None else html_override, f) or 1
     checks += markers_check(site if html_override is None else html_override, meta, cov, f)
     checks += nav_check(site if html_override is None else html_override, f)
+    checks += chrome_check(site if html_override is None else html_override, f, real_site=site)
     # checksums
     ck = site / "CHECKSUMS.txt"
     if ck.exists():
@@ -242,14 +259,15 @@ def main():
     (tmp / "site" / "js").mkdir(exist_ok=True)
     with open(tmp / "site" / "about.html", "a", encoding="utf-8") as fh: fh.write("<p>planted: 73,070 findings from <!--n:papers-->6,244<!--/n--> papers</p><meta data-n-content=\"{papers} papers\" content=\"6,244 papers\">")
     navp = tmp / "site" / "about.html"; navp.write_text(navp.read_text(encoding="utf-8").replace('<a href="signals"', '<a href="zz"', 1), encoding="utf-8")
-    f2 = []; numbers_check(str(tmp / "site"), f2); nav_check(str(tmp / "site"), f2); markers_check(str(tmp / "site"), rj(site / "data" / "meta.json"), rj(site / "data" / "findings_facets.json")["coverage"], f2)
+    sigp = tmp / "site" / "signals.html"; sigp.write_text(sigp.read_text(encoding="utf-8").replace("Let's connect!", "Get in touch", 1), encoding="utf-8")
+    f2 = []; numbers_check(str(tmp / "site"), f2); nav_check(str(tmp / "site"), f2); chrome_check(str(tmp / "site"), f2, real_site=str(site)); markers_check(str(tmp / "site"), rj(site / "data" / "meta.json"), rj(site / "data" / "findings_facets.json")["coverage"], f2)
     caught2 = {("hand-typed numbers in site copy" if x[0].startswith("hand-typed") else x[0].split(" in ")[0]) for x in f2}; shutil.rmtree(tmp)
     badf = rj(site / "data" / "paper_flags.json"); badf["flags"]["99999999"] = [{"f": "retracted", "l": "Retracted", "u": "exclude"}]
     f3, _ = check(root, site, flags_override=badf); caught3 = {x[0] for x in f3}
     badr = rj(site / "data" / "releases.json"); badr["packages"][0]["concept_doi"] = "10.5281/zenodo.1"
     f4, _ = check(root, site, rel_override=badr); caught |= {x[0] for x in f4}
     need = {"releases.json vs README download table", "counts.papers", "counts.findings", "facets.n", "papers vs distinct pmids in packages/*/data/tier*_findings", "default findings (facets minus exclude-flagged papers)"}
-    need2 = {"hand-typed numbers in site copy", "marker papers", "attribute template", "nav order"}; need3 = {"paper_flags pmids not site papers", "excluded_papers", "counts.flag_retracted"}
+    need2 = {"hand-typed numbers in site copy", "marker papers", "attribute template", "nav order", "header block", "footer block"}; need3 = {"paper_flags pmids not site papers", "excluded_papers", "counts.flag_retracted"}
     if not (need <= caught and need2 <= caught2 and need3 <= caught3): print(f"SELF-TEST FAIL: caught {sorted(caught)} / {sorted(caught2)} / {sorted(caught3)}"); return 1
     print(f"SELF-TEST PASS: caught all {len(need) + len(need2) + len(need3)} planted failures"); return 0
 

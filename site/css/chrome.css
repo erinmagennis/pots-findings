@@ -1,0 +1,86 @@
+/* chrome.css: the one site header (logo + nav) and the one site footer, loaded on every page (home included).
+   The markup is written by site_tools/apply_chrome.py. Every value they need is set here,
+   so page stylesheets (app-v2.css, home-v2.css) cannot change how they look. */
+header.site,footer.site-footer{
+  --hd-ink:#242321;--hd-muted:#716d65;--hd-line:#ded9cf;--hd-paper:#fffdf9;
+  --hd-rust:#9a5638;--hd-teal:#397277;--hd-mark-line:#c2d1ca;
+  --hd-sans:"Avenir Next",Avenir,ui-sans-serif,system-ui,sans-serif;
+  --hd-mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ft-ink:#252824;--ft-muted:#69716c;--ft-rust:#a7593e;--ft-blue:#4d7b82;--ft-line:#eadfd9;--ft-ring:#c2d1ca;
+  box-sizing:border-box;color:var(--hd-ink);font:15px/1.55 var(--hd-sans);letter-spacing:normal}
+header.site{
+  position:sticky;top:0;z-index:20;box-sizing:border-box;min-height:0;
+  background:rgba(247,245,240,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--hd-line);
+  view-transition-name:site-header
+}
+header.site *,header.site *::before,header.site *::after,footer.site-footer *,footer.site-footer *::before,footer.site-footer *::after{box-sizing:border-box}
+/* header and footer share one width and one gutter */
+header.site .wrap,footer.site-footer .wrap{width:min(1240px,100%);max-width:1280px;margin:0 auto;padding-left:18px;padding-right:18px}
+header.site .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
+
+/* brand: mark + three-line lockup */
+header.site .brand{display:flex;align-items:center;gap:10px;color:var(--hd-ink);text-decoration:none;
+  font-size:17px;font-weight:700;letter-spacing:-.025em;line-height:1.08}
+header.site .mark{position:relative;display:block;width:34px;height:34px;
+  background:linear-gradient(0deg,transparent 48%,var(--hd-mark-line) 49%,var(--hd-mark-line) 51%,transparent 52%),linear-gradient(90deg,transparent 48%,var(--hd-mark-line) 49%,var(--hd-mark-line) 51%,transparent 52%),linear-gradient(45deg,transparent 48%,var(--hd-mark-line) 49%,var(--hd-mark-line) 51%,transparent 52%),linear-gradient(-45deg,transparent 48%,var(--hd-mark-line) 49%,var(--hd-mark-line) 51%,transparent 52%)}
+header.site .mark i{position:absolute;display:block;width:5px;height:5px;border-radius:50%;background:var(--hd-teal);z-index:3}
+header.site .mark i:nth-child(1){top:2px;left:14px}
+header.site .mark i:nth-child(2){top:14px;left:2px}
+header.site .mark i:nth-child(3){top:26px;left:14px}
+header.site .mark i:nth-child(4){top:14px;left:26px}
+header.site .mark i:nth-child(5){top:14px;left:14px;background:var(--hd-rust)}
+header.site .brand-lockup{display:flex;flex-direction:column;margin-left:4px;font-size:11px;line-height:1.15;letter-spacing:.01em}
+header.site .brand small{display:block;margin-top:3px;color:var(--hd-muted);font-size:10px;font-weight:500;letter-spacing:0}
+
+/* nav pill */
+header.site .nav-pill{display:flex;gap:5px;align-items:center;justify-content:center;padding:3px;border:1px solid var(--hd-line);border-radius:999px;background:rgba(255,253,249,.88);box-shadow:0 8px 28px rgba(54,76,68,.06)}
+header.site .nav-pill a{min-height:34px;padding:6px 15px;border-radius:999px;color:var(--hd-muted);background:transparent;text-decoration:none;font-size:12px;white-space:nowrap;
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease}
+header.site .nav-pill a:hover,header.site .nav-pill a:focus-visible{color:var(--hd-ink);background:#f1f6f3}
+header.site .nav-pill a:hover{outline:none}
+header.site .nav-pill a:focus-visible{outline:2px solid rgba(57,114,119,.34);outline-offset:2px}
+header.site .nav-pill a.active{color:var(--hd-ink);background:#eaf1ee}
+/* About carries a small "Scope & safety" label above its name */
+header.site .nav-pill a.nav-about{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;padding-top:3px;padding-bottom:3px}
+header.site .nav-pill a .nav-tag{display:block;margin-bottom:2px;font:600 7.5px/1 var(--hd-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--hd-rust)}
+
+/* phone menu button (wired in js/chrome.js) */
+header.site .mobile-nav-toggle{display:none;place-items:center;position:absolute;top:10px;right:16px;width:38px;height:34px;padding:0;margin:0;
+  border:1px solid var(--hd-line);border-radius:10px;color:var(--hd-ink);background:var(--hd-paper);font:inherit;font-size:19px;line-height:1;cursor:pointer;outline:none;
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease}
+header.site .mobile-nav-toggle:hover{border-color:var(--hd-rust);color:var(--hd-rust);transform:translateY(-1px)}
+header.site .mobile-nav-toggle:active{transform:translateY(0)}
+header.site .mobile-nav-toggle:focus-visible{outline:2px solid rgba(57,114,119,.34);outline-offset:2px}
+header.site .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+@media(max-width:900px){header.site .wrap{grid-template-columns:1fr auto}}
+@media(max-width:620px){
+  header.site .wrap{display:block;position:relative;padding-top:10px;padding-bottom:10px}
+  header.site .brand{margin-bottom:9px}
+  header.site .mobile-nav-toggle{display:grid}
+  header.site .nav-pill{display:none;justify-content:flex-start;overflow-x:auto;max-width:100%;scrollbar-width:none}
+  header.site .nav-pill::-webkit-scrollbar{display:none}
+  header.site .nav-pill[data-open]{display:flex;flex-wrap:wrap;margin-top:8px}
+  header.site .nav-pill a{flex:0 0 auto;padding-left:12px;padding-right:12px}
+}
+
+/* footer: the "Grow the map" band, then one quiet line (version and date filled by apply_chrome / apply_counts) */
+footer.site-footer{margin:0;border-top:1px solid var(--ft-line);background:#faf5f1;color:var(--ft-ink)}
+footer.site-footer p{margin:0}
+footer.site-footer a{color:var(--ft-rust);text-decoration:none}
+footer.site-footer a:hover{text-decoration:underline}
+footer.site-footer a:focus-visible{outline:2px solid rgba(57,114,119,.34);outline-offset:2px}
+footer.site-footer .foot-band{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;padding:32px 0 26px}
+footer.site-footer .foot-left{max-width:560px}
+footer.site-footer .foot-kicker{margin-bottom:8px;color:var(--ft-blue);font:11px/1.3 var(--hd-mono);letter-spacing:.08em;text-transform:uppercase}
+footer.site-footer .foot-title{color:var(--ft-ink);font-size:20px;line-height:1.2;letter-spacing:-.025em}
+footer.site-footer .foot-connect{max-width:440px;color:var(--ft-muted);font-size:14px;line-height:1.55}
+footer.site-footer .arrow-circle{display:inline-grid;place-items:center;width:24px;height:24px;margin-left:7px;border:1px solid var(--ft-ring);border-radius:50%;color:var(--ft-rust);font-size:14px;line-height:1;vertical-align:middle}
+footer.site-footer .foot-meta{padding:13px 0 18px;border-top:1px solid var(--ft-line);color:var(--ft-muted);font-size:12px;line-height:1.5}
+footer.site-footer .foot-meta a{color:var(--ft-muted);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+footer.site-footer .foot-meta a:hover{color:var(--ft-rust)}
+@media(max-width:900px){
+  footer.site-footer .foot-band{display:block;padding:24px 0 22px}
+  footer.site-footer .foot-title{font-size:18px}
+  footer.site-footer .foot-connect{margin-top:18px}
+}

@@ -264,6 +264,7 @@ def check(site_dir):
             f.append(f"one-trial null example {e} not worded as one randomized trial")
     # 4 no other digits in visible text
     body = raw[raw.index("<body>"):]
+    body = re.sub(r"<!--(header|footer)-->.*?<!--/\1-->", " ", body, flags=re.S)   # shared chrome: apply_chrome.py writes it, verify_site_v12.py checks it
     body = re.sub(r"<!--n:[a-z_0-9]+-->.*?<!--/n-->", " ", body, flags=re.S)
     body = re.sub(r'<span data-k="[^"]*">[^<]*</span>', " ", body)
     exm = re.search(r'<figure class="card start-example">(.*?)</figure>', body, flags=re.S)

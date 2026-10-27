@@ -35,6 +35,7 @@ def main():
         "  python site_tools/build_home_data.py site\n"
         "  python site_tools/build_start_here.py site\n"
         "  python site_tools/build_connections_data.py --site site   # needs umap-learn + scikit-learn\n"
+        "  python site_tools/apply_chrome.py site\n"
         "  python site_tools/apply_counts.py site README.md\n"
         "  python site_tools/verify_site_v12.py --self-test"
     )

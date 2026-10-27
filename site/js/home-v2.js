@@ -28,14 +28,8 @@ function tallyHTML(t) {
   return `<span class="tally">${esc(displayName(t.e))} in ${esc(condLabel(t.c))}: <span class="u">▲ ${fmt(t.up)} higher</span> <span class="d">▼ ${fmt(t.dn)} lower</span> <span class="n">${fmt(t.nu)} no difference</span></span>`;
 }
 
-// ---------- page shell: mobile menu and search ----------
+// ---------- page shell: search (the phone menu is wired by js/chrome.js) ----------
 function shell() {
-  const t = document.getElementById('mobileNavToggle'), nav = document.getElementById('primaryNav');
-  t?.addEventListener('click', () => {
-    const open = t.getAttribute('aria-expanded') === 'true';
-    t.setAttribute('aria-expanded', String(!open));
-    nav?.toggleAttribute('data-open', !open);
-  });
   document.getElementById('searchForm')?.addEventListener('submit', e => {
     e.preventDefault();
     const q = document.getElementById('curiosityInput').value.trim();

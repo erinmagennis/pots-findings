@@ -1,49 +1,18 @@
 /* ui.js: shared chrome: framing banner, nav, result cards, citation lines. */
 import { state, esc, fmt, val, origEntity, textOf, detailOf, paper, DIRCLASS, flagsOf, EXCLUDE_TOGGLE_LABEL, setIncludeFlagged } from './data.js';
 import { condLabel } from './labels.js';
+import { wireChrome } from './chrome.js';
 
 export const PAGES = [
   ['search','Search'],['signals','Signals'],['connections','Connections'],
   ['analyze','Analyze'],['chat','Chat'],['about','About']
 ];
 
-export function header(active){
-  const tabs = PAGES.map(([h,t])=> h==='about'
-    ? `<a href="about" class="${h===active?'active ':''}nav-about"><span class="nav-tag">Scope &amp; safety</span>About</a>`   // small label so people know where scope and safety live
-    : `<a href="${h}" class="${h===active?'active':''}">${t}</a>`).join('');
-  return `<header class="site"><div class="wrap">
-    <a class="brand" href="/" aria-label="POTS and Dysautonomia Literature Project home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b></b></span><span class="brand-lockup"><span>POTS &amp; Dysautonomia</span><span>Literature Project</span><small>Research findings, source papers, and connections</small></span></a>
-    <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span aria-hidden="true">☰</span><span class="sr-only">Menu</span></button>
-    <nav class="nav-pill" id="primaryNav" aria-label="Primary navigation">${tabs}</nav>
-  </div></header>`;
-}
-
-export function footer(){
-  const m=state.meta;
-  return `<div class="quiet-support"><div class="wrap"><strong>Grow the map</strong> Help make this public research index easier to extend, check, and reuse. <a href="about#connect">Collaborate with the project</a>.</div></div>
-  <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings ${esc(m.version)} · ${fmt(m.counts.findings)} findings / ${fmt(m.counts.papers)} papers · data generated ${esc(m.generated_utc)} · <a href="start">Start here</a> · <a href="about#limits">Scope, methods and limits</a> · Not medical advice.</span></div></footer>`;
-}
-
-/* The header is written into each page's HTML so it paints before any data loads.
-   mount() only fills the counts rail; wireChrome() runs as soon as chrome.js loads. */
-let wired=false;
-export function wireChrome(){
-  if(wired) return; wired=true;
-  const navToggle = document.getElementById('mobileNavToggle');
-  const primaryNav = document.getElementById('primaryNav');
-  navToggle?.addEventListener('click', () => {
-    const open = navToggle.getAttribute('aria-expanded') === 'true';
-    navToggle.setAttribute('aria-expanded', String(!open));
-    primaryNav?.toggleAttribute('data-open', !open);
-  });
-}
+/* The header is written into each page's HTML by site_tools/apply_chrome.py (from PAGES above) so it paints before any data loads.
+   So is the footer. The phone menu is wired by chrome.js (wireChrome). */
 
 export function mount(active){
   document.getElementById('framing-slot')?.remove();
-  const slot=document.getElementById('header-slot');
-  if(slot) slot.outerHTML = header(active);
-  /* the header has no counts rail: counts, version and the safety link sit in the footer */
-  const f=document.getElementById('footer-slot'); if(f) f.outerHTML = footer();
   wireChrome();
 }
 
