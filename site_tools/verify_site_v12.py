@@ -14,6 +14,7 @@ Checks (each failure names what/got/expected/source):
   9. markers in static HTML equal the current meta value (apply_counts.py was run)
  10. CHECKSUMS.txt covers every file under site/ and matches
  11. PAPER COUNT: meta.counts.papers == distinct pmids across packages/*/data/tier*_findings (read directly, not via the projection)
+ 13. facet dr (direction_reference) exists with normalised values and contradictions.json carries its "rule" string
  12. PAPER FLAGS: every pmid in paper_flags.json is a site paper; findings from exclude-flagged papers are left out of the
      default facet-based counts (findings_default / excluded_findings / retracted_findings recomputed from facets.p + flags),
      no Signals table (associations, contradictions, understudied, convergence, null results) cites an exclude-flagged paper,
@@ -149,6 +150,10 @@ def check(root: Path, site: Path, meta_override=None, html_override=None, flags_
     for k, col in F["cols"].items():
         add(f, f"col {k} length", len(col), n, "facets"); checks += 1
         if k in F["dicts"] and col: add(f, f"col {k} max code", max(col) < len(F["dicts"][k]), True, "dict bounds"); checks += 1
+    # facet dr (direction_reference, typos normalised) carries the disagreement rule; contradictions.json states it
+    add(f, "facet dr present", "dr" in F["cols"] and "dr" in F["dicts"] and F.get("facet_fields", {}).get("dr") == "direction_reference_norm", True, "build_v12_projection.py FACET_MAP")
+    add(f, "facet dr values", set(F["dicts"].get("dr", [])) <= {"vs-disease-state", "vs-intervention", "not-applicable", "hormonal-axis-implicated", "\u2014"} and "vs-disease-state" in F["dicts"].get("dr", []), True, "normalised direction_reference")
+    add(f, "contradictions.json rule names vs-disease-state", "vs-disease-state" in rj(data / "contradictions.json").get("rule", ""), True, "build_v12_projection.py CONTRA_RULE"); checks += 3
     P = rj(data / "papers.json"); add(f, "papers.fields", P["fields"], PAPER_FIELDS, "contract"); add(f, "papers rows", len(P["rows"]), golden["papers_rows"], "golden"); checks += 2
     add(f, "paper index bound", max(F["cols"]["p"]) < len(P["rows"]), True, "facets.p"); checks += 1
     pk, nfiles = package_pmids(root)

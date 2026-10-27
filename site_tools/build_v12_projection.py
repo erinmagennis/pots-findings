@@ -22,6 +22,15 @@ cross-tier canonical name from entity_vocabulary_crosstier (raw entity -> canoni
 the raw entity string.  Rows sharing a verified id are merged under one display name.
 
 Tiers are provenance only: emitted as facet `ti` (tier_source) for the download/explain pages, never a headline.
+
+Disagreement rule (contradictions.json, one definition for every page): both conflict types are computed only from findings
+whose direction_reference is "vs-disease-state" (the typo "vas-disease-state" is read as the same value), i.e. papers that
+compare people with the condition to people without it.  A change measured before vs after a treatment ("vs-intervention")
+or a finding with no reference ("not-applicable") never counts as a disagreement.  direction-flip: some papers report the
+entity higher, some lower.  null-vs-positive: some papers report higher or lower, some report no significant difference
+(or flag a null result); both sides vs-disease-state.  Other rules unchanged: >= 2 distinct papers for the entity and
+condition among those rows, exclude-flagged papers left out, export capped at 3000 rows.  The rule string is written into
+contradictions.json ("rule") and the facet `dr` (direction_reference, normalised) lets page builders apply the same rule.
 """
 import argparse, json, math, os, re, sys, time
 from datetime import datetime, timezone
@@ -39,7 +48,7 @@ FACET_MAP = {"e": "site_entity", "c": "condition", "d": "direction", "tr": "evid
              "ek": "entity_kind", "mc": "id_status", "nc": "null_or_failed_result", "st": "study_type", "ca": "causal_or_correlational",
              "an": "anatomical_system", "ps": "pots_subtype", "ag": "population_age_group", "sx": "sex_hormonal", "th": "theme",
              "sr": "source_stream", "es": "evidence_stratum", "rt": "relation_type", "cv": "is_covid_associated", "ti": "tier_source",
-             "sl": "source_literature"}
+             "sl": "source_literature", "dr": "direction_reference_norm"}
 DETAIL_SPEC = {"quote": ("provenance_quote", 200), "quant": ("quantitative_detail", None), "eff": ("effect_size", None),
                "path": ("pathway_or_mechanism", None), "lim": ("limitations_stated", 300), "fut": ("future_direction", 300),
                "npart": ("n_participants", None), "comp": ("comparator", None), "symp": ("symptom_correlate", 300),
@@ -51,6 +60,12 @@ _DEFAULTS = {"is_open_access": False, "cited_by_count": 0}
 TIER_RANK = ["meta-analysis", "RCT", "cohort", "case-control", "cross-sectional", "case-series", "case-report",
              "mechanistic/in-vitro", "review/expert-opinion"]
 UP = {"elevated", "increased", "higher", "present", "improved"}; DOWN = {"depleted/reduced", "decreased", "lower", "reduced", "worsened"}
+DR_DISEASE = "vs-disease-state"
+DR_NORM = {"vas-disease-state": "vs-disease-state", "vas-intervention": "vs-intervention"}   # typos in 6 package rows
+CONTRA_RULE = ("Disagreements count only findings that compare people with the condition to people without it "
+               "(direction_reference vs-disease-state; vas-disease-state read as the same). Changes after a treatment "
+               "(vs-intervention) and findings with no reference (not-applicable) are not counted. A cell needs at least 2 "
+               "distinct papers among those findings; exclude-flagged papers are left out.")
 ID_STATUS = {"authority_verified": "verified at authority", "authority_verified_retrospective": "verified at authority",
              "id_withheld_unverified_v1.2": "id withheld (unverified)", "no_id": "no identifier"}
 
@@ -290,8 +305,9 @@ def discovery(D, P):
     if not len(A): assoc_total = assoc_sig_total = 0
     assoc = {"n": int(len(A)), "total": assoc_total, "significant_total": assoc_sig_total, "universe_papers": int(universe), "rows": A.to_dict("records")}
     # --- contradictions: direction flips and null-vs-positive within entity x condition ---
+    # only comparisons against people without the condition (see module docstring, CONTRA_RULE)
     rows = []
-    for (e, c), g in E.groupby(["site_entity", "condition"]):
+    for (e, c), g in E[E.direction_reference_norm == DR_DISEASE].groupby(["site_entity", "condition"]):
         if g.cpmid.nunique() < 2: continue
         d = g.direction.fillna("")
         sides = [("direction-flip", g[d.isin(UP)], g[d.isin(DOWN)]), ("null-vs-positive", g[d.isin(UP | DOWN)], g[(d == "no significant difference") | g.null_or_failed_result.astype(str).str.startswith("null")])]
@@ -307,7 +323,7 @@ def discovery(D, P):
     C = pd.DataFrame(rows)
     c_total = int(len(C)); c_flip = int((C.conflict_type == "direction-flip").sum()) if len(C) else 0; c_nvp = int((C.conflict_type == "null-vs-positive").sum()) if len(C) else 0
     if len(C): C = C.sort_values(["conflict_strength"], ascending=False).head(3000).reset_index(drop=True); C["rank"] = C.index + 1
-    contra = {"n": int(len(C)), "total": c_total, "flip_total": c_flip, "null_vs_positive_total": c_nvp, "rows": C.to_dict("records")}
+    contra = {"rule": CONTRA_RULE, "n": int(len(C)), "total": c_total, "flip_total": c_flip, "null_vs_positive_total": c_nvp, "rows": C.to_dict("records")}
     # --- understudied: entity x condition with few papers ---
     rows = []
     tot = E.groupby("site_entity").cpmid.nunique()
@@ -374,6 +390,7 @@ def main():
     ap.add_argument("--flags-candidates", default=None, help="paper_flags_candidates.csv when no packages/*/annotations/paper_flags.csv exists (default: releases/v1.2/paper_flags/)")
     a = ap.parse_args(); root = a.root; out = os.path.join(root, a.out) if not os.path.isabs(a.out) else a.out; os.makedirs(out, exist_ok=True)
     D, EV, CA, PM, DM = load(root); log("loaded", len(D), "rows")
+    D["direction_reference_norm"] = D.direction_reference.map(lambda x: DR_NORM.get(x, x) if isinstance(x, str) else x)
     D = add_site_entity(D, EV); log("site_entity rows", int(D.site_entity.notna().sum()), "verified-id rows", int(D.site_ontology_id.notna().sum()))
     P, dedup = paper_table(D, CA, PM, DM); log("papers", len(P))
     pmid_order = P.pmid.tolist()
@@ -456,11 +473,21 @@ def main():
               "id_kept_rows": int(((D.ontology_id_verification == "authority_verified_retrospective") & ~D.ontology_id_source.astype(str).str.startswith("v1.2 forward")).sum()),
               "pmids": int(D.pmid.nunique()),
               "excluded_papers": len(excl_pm), "excluded_findings": int(D.cpmid.isin(excl_pm).sum()), "retracted_findings": int(D.cpmid.isin(retr_pm).sum()),
-              "findings_default": int((~D.cpmid.isin(excl_pm)).sum()), "flagged_papers": int(FL.pmid.nunique())}
+              "findings_default": int((~D.cpmid.isin(excl_pm)).sum()), "flagged_papers": int(FL.pmid.nunique()),
+              # per paper fulltext_status (one value per paper in the packages): retrieved-fulltext vs abstract-only or blocked
+              "papers_fulltext": int(D.loc[D.fulltext_status == "retrieved-fulltext", "cpmid"].nunique()),
+              "papers_abstract_only": int(D.loc[D.fulltext_status.isin(["abstract-only", "blocked"]), "cpmid"].nunique()),
+              "papers_2021_on": int((P.year >= 2021).sum()), "papers_before_2021": int((P.year < 2021).sum())}
+    for yv, nv in P.year.dropna().astype(int).value_counts().items(): counts[f"papers_year_{yv}"] = int(nv)
     for fk in FLAG_LABELS: counts[f"flag_{fk}"] = int(FL.loc[FL.flag == fk, "pmid"].nunique())
     vs = {}
     vsp = os.path.join(root, "validation", "verification_stats.json")
     if os.path.exists(vsp): vs = json.load(open(vsp))
+    # quote trace (packages/*/annotations/retrofit_summary.json via validation/verification_stats.json, first four packages):
+    # copied into counts so pages can show them in <!--n:KEY--> markers
+    for ck, vk in (("quote_trace_checked", "trace_verifiable"), ("quote_trace_found", "trace_found")):
+        if isinstance(vs.get(vk), int): counts[ck] = vs[vk]
+    if vs.get("trace_found") and vs.get("trace_verifiable"): counts["quote_trace_per_100"] = int(round(100 * vs["trace_found"] / vs["trace_verifiable"]))
     meta = {"version": a.version, "generated_utc": a.build_utc or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), "counts": counts, "verification_stats": vs,
             "basis": {"papers": "PubMed record (PMID): every record is one paper, as in the packages; linked records are marked in paper_flags.json, not merged",
                       "default_exclusion": "findings from papers whose paper flag has recommended_use=exclude (retracted, partially retracted, correction notices) are left out of default counts, charts and the Signals tables", "findings": "one row per extracted finding; corpus order = package order (dysautonomia-core, comorbid-a, comorbid-b, postviral-autism, migraine-hypermobility)",
@@ -474,7 +501,11 @@ def main():
     golden = {"generated_from": "build_v12_projection.py over packages/*/data", "version": a.version, "counts": counts,
               "facets": {k: len(v) for k, v in F["dicts"].items()}, "coverage": F["coverage"], "n_shards": F["n_shards"], "shard_rows": SHARD_ROWS,
               "papers_rows": len(P), "entities_rows": ENT["n"], "top_entities": [(e["name"], e["np_"]) for e in ENT["entities"][:10]]}
-    gp = os.path.join(root, a.golden); os.makedirs(os.path.dirname(gp), exist_ok=True); jdump(gp, golden)
+    gp = os.path.join(root, a.golden); os.makedirs(os.path.dirname(gp), exist_ok=True)
+    if os.path.exists(gp):
+        prev = json.load(open(gp))
+        if prev.get("changes"): golden["changes"] = prev["changes"]   # dated notes on why golden values moved are kept
+    jdump(gp, golden)
     if os.path.isdir(f"{root}/_intake"): D[["cpmid", "site_entity", "site_ontology_id", "id_status", "entity_basis", "tier_source", "package", "concept_group", "site_primary_id"]].to_parquet(f"{root}/_intake/site_entity_v12.parquet", index=False)
     log("done; meta.counts:", {k: v for k, v in counts.items() if not isinstance(v, dict)})
 

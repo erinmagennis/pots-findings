@@ -11,7 +11,7 @@ Every number on the page comes from the data at build time:
 Default exclusion matches the site: findings from papers whose paper flag has recommended_use (u) = "exclude"
 (retracted papers, correction notices) are left out. Output is deterministic for the same data (no clock reads).
 """
-import html, json, os, sys, urllib.parse
+import html, json, os, re, sys, urllib.parse
 from collections import Counter, defaultdict
 
 SITE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
@@ -28,13 +28,21 @@ DIR_KEY = {"elevated": "up", "depleted/reduced": "down", "no significant differe
 TIER_ORDER = ["meta-analysis", "systematic-review/meta-analysis", "systematic review", "RCT", "cohort", "case-control", "cross-sectional"]
 N_TOPICS, N_CONDS, N_EACH = 6, 5, 2
 MIN_SIDE = 3  # a disagreement needs at least this many papers on each side
+DISEASE_REF = "vs-disease-state"  # facet dr: only comparisons with people without the condition count (contradictions.json rule)
+PRIMARY_TIERS = {"RCT", "cohort", "case-control", "cross-sectional"}  # null examples: primary studies, no case reports or reviews
+DEFINING = {"blood pressure", "systolic blood pressure", "diastolic blood pressure", "heart rate", "orthostatic heart rate"}  # part of how POTS is defined
+REVIEW_TYPES = {"review/narrative", "systematic-review/meta-analysis"}  # restate other studies; not a separate study
+LINKED_FLAGS = {"preprint_with_published_version", "published_version_of_preprint", "same_work_other_record", "update_of"}  # same study, two records
+TEXT_OTHER_MAX = 5  # barely studied: skip a topic whose name appears in finding text of more than this many other POTS papers
+SPLIT_YEAR = 2021   # "most were published in SPLIT_YEAR or later" (meta counts papers_2021_on / papers_before_2021)
 
 CONDITION_LABELS = {  # mirrors site/js/labels.js CONDITION_LABELS
     "long_COVID": "Long COVID", "general": "Not condition-specific", "dysautonomia": "Dysautonomia", "ME_CFS": "ME/CFS",
     "EDS_hypermobility": "EDS and hypermobility", "MCAS": "MCAS", "fibromyalgia": "Fibromyalgia", "migraine": "Migraine",
     "multiple": "Several conditions", "POTS": "POTS", "IBS_gut": "IBS and gut", "small_fiber_neuropathy": "Small fiber neuropathy",
     "autism": "Autism", "other patient group": "Other patient group", "orthostatic_hypotension": "Orthostatic hypotension", "IBD_gut": "IBD"}
-KIND_WORDS = {"physiological-measure": "a body measure", "gene/protein": "a gene or protein", "chemical/metabolite": "a chemical or drug",
+CONDITION_NOTES = {"MCAS": ' <span class="kv">(this label also covers mast-cell lab studies)</span>'}  # README: most MCAS-labelled papers study mast-cell biology
+KIND_WORDS = {"physiological-measure": "a body measure", "gene/protein": "a gene or protein", "chemical/metabolite": "a chemical, hormone or drug",
               "cell-type": "a cell type", "anatomical-structure": "a body part", "pathogen": "a germ", "device": "a device",
               "procedural": "a procedure"}
 
@@ -83,6 +91,38 @@ class Facts:
         return f'<span data-k="{esc(key)}">{fmt(n)}</span>'
 
 
+ABBR = re.compile(r"\s*\(([A-Za-z0-9\-/]{1,10})\)$")   # trailing bracketed abbreviation, e.g. "(HR)", "(NE)"
+
+
+def topic_key(name):
+    """spelling-variant key: lower case, no trailing period, no trailing bracketed abbreviation (2+ capitals, no spaces)"""
+    s = name.strip().rstrip(".").strip()
+    m = ABBR.search(s)
+    if m and sum(ch.isupper() for ch in m.group(1)) >= 2:
+        s = s[:m.start()].strip()
+    return s.lower()
+
+
+def topic_groups(names):
+    """{key: set of names}; a key ending in "s" folds into the same key without it when both exist (plural)"""
+    g = defaultdict(set)
+    for n in names:
+        g[topic_key(n)].add(n)
+    for k in sorted(g):
+        if k.endswith("s") and len(k) > 3 and k[:-1] in g and k in g:
+            g[k[:-1]] |= g.pop(k)
+    return g
+
+
+def with_ties(ordered, count, n):
+    """first n items, plus any further items whose count ties with the n-th (so a cut never splits a tie)"""
+    out = list(ordered[:n])
+    for x in ordered[n:]:
+        if out and count(x) == count(out[-1]): out.append(x)
+        else: break
+    return out
+
+
 def marker(meta, key):
     v = meta["counts"][key]
     return f"<!--n:{key}-->{fmt(v) if isinstance(v, int) else v}<!--/n-->"
@@ -104,15 +144,26 @@ def compute():
     rows = [i for i in range(fac["n"]) if P[i] not in ex_idx and Cc[i] == focus_code]
     focus_papers = {P[i] for i in rows}
 
-    # topics most studied in POTS findings: distinct papers per named entity
-    reach, nfind = defaultdict(set), Counter()
+    # topics most studied in POTS findings: distinct papers per topic. The facet entity (site_entity) already groups spellings
+    # that share a verified id or cross-tier canonical name; on top of that, names that are spelling variants of the SAME
+    # name are counted together (topic_key: case, a trailing period, a trailing abbreviation in brackets such as "(HR)",
+    # a plural "s"). Different measures (orthostatic heart rate, supine heart rate, heart rate variability) stay separate.
+    # The topic is shown and linked under its member name with the most papers.
+    byname, nfind = defaultdict(set), Counter()
     for i in rows:
         e = dic["e"][E[i]]
-        if e in ("—", "") or e.lower() in SELF_NAMES:
+        if e in ("—", ""):
             continue
-        reach[e].add(P[i]); nfind[e] += 1
-    topics = sorted(reach, key=lambda e: (-len(reach[e]), -nfind[e], e.lower()))[:N_TOPICS]
-    topics = [(e, len(reach[e]), nfind[e]) for e in topics]
+        byname[e].add(P[i]); nfind[e] += 1
+    groups = topic_groups(byname)
+    reach, gfind, shown_as = {}, Counter(), {}
+    for k, members in groups.items():
+        if k in SELF_NAMES:
+            continue
+        shown_as[k] = min(members, key=lambda n: (-len(byname[n]), n.lower(), n))
+        reach[k] = set().union(*(byname[n] for n in members)); gfind[k] = sum(nfind[n] for n in members)
+    order = with_ties(sorted(reach, key=lambda k: (-len(reach[k]), -gfind[k], k)), lambda k: len(reach[k]), N_TOPICS)
+    topics = [(shown_as[k], len(reach[k]), gfind[k]) for k in order]
 
     # conditions studied in the same papers: papers with a POTS finding that also have a finding with another label
     co = defaultdict(set)
@@ -121,7 +172,7 @@ def compute():
             c = dic["c"][Cc[i]]
             if c != FOCUS and c not in NOT_A_CONDITION:
                 co[c].add(P[i])
-    conds = sorted(co, key=lambda c: (-len(co[c]), c))[:N_CONDS]
+    conds = with_ties(sorted(co, key=lambda c: (-len(co[c]), c)), lambda c: len(co[c]), N_CONDS)
     conds = [(c, len(co[c])) for c in conds]
 
     def kind_of(name, row_kind=None):
@@ -138,6 +189,7 @@ def compute():
         ids = [i for i in rows if E[i] == code]
         return sum(dic["ft"][cols["ft"][i]] == "treatment/intervention" for i in ids) / max(1, len(ids))
     nodiff_code = dic["d"].index("no significant difference")
+    ref_code = dic["dr"].index(DISEASE_REF)
     best = {}
     for r in load("contradictions.json")["rows"]:
         e = r["canonical_entity"]
@@ -153,11 +205,17 @@ def compute():
         hi, lo = (r["n_papers_A"], r["n_papers_B"]) if r["side_A_direction"] == "elevated" else (r["n_papers_B"], r["n_papers_A"])
         key = (-min(hi, lo), -(hi + lo), r["rank"])
         if e not in best or key < best[e][0]:
-            nd = len({P[i] for i in rows if E[i] == code and cols["d"][i] == nodiff_code})
+            nd = len({P[i] for i in rows if E[i] == code and cols["d"][i] == nodiff_code and cols["dr"][i] == ref_code})
             best[e] = (key, {"entity": e, "higher": hi, "lower": lo, "nodiff": nd})
     disagree = [x for _, x in sorted(best.values(), key=lambda x: x[0])][:N_EACH]
 
-    # tested and found nothing: POTS null results, one treatment and one marker, most distinct papers
+    # tested and found nothing: POTS null results, one treatment and one marker, most distinct papers. Only primary studies
+    # (evidence tier RCT, cohort, case-control, cross-sectional: no case reports, case series, reviews). An entity is skipped
+    # when any of those papers also reports an effect for it in POTS (direction higher or lower, or a positive-effect flag),
+    # when it is part of how POTS is defined (DEFINING), names POTS itself, or (treatment) is a measured kind, not a treatment.
+    eff_d = {dic["d"].index(w) for w in ("elevated", "depleted/reduced") if w in dic["d"]}
+    pos_nc = dic["nc"].index("positive-effect") if "positive-effect" in dic["nc"] else -1
+    effect = {(pmids[P[i]], dic["e"][E[i]]) for i in rows if cols["d"][i] in eff_d or cols["nc"][i] == pos_nc}
     idx = load("null_results.json")
     nul = []
     for sh in idx["shards"]:
@@ -167,16 +225,46 @@ def compute():
     for cls in ("treatment null", "biomarker/mechanism null"):
         g, gf = defaultdict(set), Counter()
         for r in nul:
-            if r["condition"] == FOCUS and r["null_class"] == cls and r["canonical_entity"] and r["canonical_entity"] not in shown and str(r["canonical_pmid"]) not in excluded:
-                g[r["canonical_entity"]].add(str(r["canonical_pmid"])); gf[r["canonical_entity"]] += 1
+            e = r["canonical_entity"]
+            if (r["condition"] == FOCUS and r["null_class"] == cls and e and e not in shown and str(r["canonical_pmid"]) not in excluded
+                    and r["evidence_tier"] in PRIMARY_TIERS and e.lower() not in SELF_NAMES and e.lower() not in DEFINING
+                    and not (cls == "treatment null" and kind_of(e) in MEASURED_KINDS)):
+                g[e].add(str(r["canonical_pmid"])); gf[e] += 1
+        for e in [e for e in g if any((p, e) in effect for p in g[e])]:
+            del g[e]
         if g:
             e = sorted(g, key=lambda e: (-len(g[e]), -gf[e], e.lower()))[0]
             nulls.append((cls, e, len(g[e]), gf[e]))
 
-    # barely studied: POTS understudied rows with the Signals page defaults (thin, 2+ papers, not case-report-only), by rank
-    us = load("understudied.json")
-    under = [r for r in sorted(us["rows"], key=lambda r: r["rank"])
-             if r["condition"] == FOCUS and r["is_thin"] and r["n_papers"] >= 2 and not r["case_report_only"] and clean(r, ("pmids",))][:N_EACH]
+    # barely studied: POTS understudied rows (2 or 3 papers), not case-report-only, by Signals rank, that are clear examples:
+    # at least 2 separate studies (records linked by a preprint / same-work / update flag are one study), at least 2 of them
+    # not reviews, and the topic's name (without a bracketed abbreviation) is not in the finding text of more than
+    # TEXT_OTHER_MAX other POTS papers under other topic names (a sign the topic is studied more under another spelling).
+    root = {}
+    def find(x):
+        while root.setdefault(x, x) != x: x = root[x]
+        return x
+    for pm, fl in sorted(flags.items()):
+        for x in fl:
+            if x.get("f") in LINKED_FLAGS and x.get("lp"): root[find(str(pm))] = find(str(x["lp"]))
+    texts = {}
+    for s in sorted({i // fac["shard_rows"] for i in rows}):
+        t = load(f"text_{s:02d}.json")
+        for i in range(t["start"], t["end"]):
+            texts[i] = t["t"][i - t["start"]]
+    ST = cols["st"]; text_low = {i: texts[i].lower() for i in rows}
+    us = load("understudied.json"); under = []
+    for r in sorted(us["rows"], key=lambda r: r["rank"]):
+        e = r["canonical_entity"]
+        if r["condition"] != FOCUS or r["n_papers"] < 2 or r["case_report_only"] or not clean(r, ("pmids",)) or e not in dic["e"]:
+            continue
+        code = dic["e"].index(e); own = set(map(str, r["pmids"]))
+        if len({find(p) for p in own}) < 2: continue
+        if len({find(pmids[P[i]]) for i in rows if E[i] == code and dic["st"][ST[i]] not in REVIEW_TYPES}) < 2: continue
+        probe = e.split(" (")[0].strip().lower()
+        if len({pmids[P[i]] for i in rows if E[i] != code and probe in text_low[i]} - own) > TEXT_OTHER_MAX: continue
+        under.append(r)
+        if len(under) == N_EACH: break
     under = [dict(r, _kind=kind_of(r["canonical_entity"], r.get("entity_kind"))) for r in under]
 
     # example finding: top topic, POTS label, strongest study type, has a quote, readable length, lowest row
@@ -213,22 +301,25 @@ def render(meta, F):
     topics = "".join(
         f'<li>{ent(e)}<span class="start-count">{f.num(f"topic_papers:{e}", n)} papers</span></li>' for e, n, _ in F["topics"])
     conds = "".join(
-        f'<li><a href="condition?c={enc(c)}">{esc(cond_label(c))}</a><span class="start-count">{f.num(f"co_papers:{c}", n)} papers</span></li>'
+        f'<li><a href="condition?c={enc(c)}">{esc(cond_label(c))}</a>{CONDITION_NOTES.get(c, "")}<span class="start-count">{f.num(f"co_papers:{c}", n)} papers</span></li>'
         for c, n in F["conds"])
 
     dis = []
     for x in F["disagree"]:
         e = x["entity"]
         nd = f', {f.num(f"contra_nodiff:{e}", x["nodiff"])} found no difference' if x["nodiff"] else ""
-        dis.append(f'<li><b>{ent(e)}</b> in POTS: {f.num(f"contra_higher:{e}", x["higher"])} papers report higher, '
-                   f'{f.num(f"contra_lower:{e}", x["lower"])} report lower{nd}.</li>')
+        dis.append(f'<li><b>{ent(e)}</b> in POTS: {f.num(f"contra_higher:{e}", x["higher"])} papers report it higher than in people '
+                   f'without POTS, {f.num(f"contra_lower:{e}", x["lower"])} report it lower{nd}.</li>')
+    if not dis:
+        dis.append('<li class="start-none">Few clear splits exist yet. No POTS topic has three or more papers on each side.</li>')
 
     nul = []
     for cls, e, npap, nf in F["nulls"]:
         what = "as a treatment for POTS" if cls == "treatment null" else "as a marker in POTS"
         res = "no effect" if cls == "treatment null" else "no difference"
-        nul.append(f'<li><b>{ent(e)}</b>, {what}: {f.num(f"null_findings:{cls}|{e}", nf)} findings from '
-                   f'{f.num(f"null_papers:{cls}|{e}", npap)} papers report {res}.</li>')
+        unit = "outcome" if cls == "treatment null" else "measure"
+        nul.append(f'<li><b>{ent(e)}</b>, {what}: {f.num(f"null_papers:{cls}|{e}", npap)} papers found {res} '
+                   f'on at least one {unit}.</li>')
 
     und = []
     for r in F["under"]:
@@ -252,10 +343,22 @@ def render(meta, F):
                   f'<div class="tags">{"".join(tags)}</div><blockquote class="quote">\u201c{esc(ex["quote"])}\u201d</blockquote>'
                   f'<figcaption class="cite">{cite}: <span class="jr">{esc(p.get("journal") or "")}</span>{yr}{pm}</figcaption></figure>')
 
-    ver = (f'In a check of {f.num("sample_n", V["sample_n"])} findings, the quote was found word for word in the paper for '
-           f'{f.num("sample_found", V["sample_found"])}. ') if V.get("sample_n") else ""
+    ver = (f'In a check of {m("quote_trace_checked")} quotes from the first four data packages, {m("quote_trace_found")} '
+           f'were found in the paper. ') if "quote_trace_checked" in C else ""
     years = f'<span data-k="year_min">{C["year_min"]}</span> to <span data-k="year_max">{C["year_max"]}</span>'
     f.k["year_min"], f.k["year_max"] = C["year_min"], C["year_max"]
+    f.k["trace_base"] = 100
+    old_years = sorted(int(k.rsplit("_", 1)[1]) for k in C if k.startswith("papers_year_") and int(k.rsplit("_", 1)[1]) < SPLIT_YEAR)
+    for y in old_years: f.k[f"year_old:{y}"] = y
+    old_txt = " and ".join(f'<span data-k="year_old:{y}">{y}</span>' for y in old_years)
+    f.k["year_split"] = SPLIT_YEAR
+    yrs = (f'Most were published in <span data-k="year_split">{SPLIT_YEAR}</span> or later ({m("papers_2021_on")} papers). '
+           + (f'Only {m("papers_before_2021")} are older, from {old_txt}.' if old_years else ""))
+    def more(listed, total):  # say when the Signals table lists fewer rows than the total
+        return f' (the table lists the {m(listed)} {"strongest" if listed == "contradictions" else "with the most findings"})' if C[listed] < C[total] else ""
+    trace = (f'The quote should be copied from the paper. In our check, about {m("quote_trace_per_100")} in <span data-k="trace_base">100</span> quotes were found '
+             f'in the paper, word for word or nearly. A few are the model\'s rewording, so check the paper.') if "quote_trace_per_100" in C else \
+            "The quote should be copied from the paper. Some are the model's rewording, so check the paper."
 
     head = f'''<!DOCTYPE html>
 <html lang="en"><head>
@@ -298,8 +401,9 @@ def render(meta, F):
 
 <div class="page-intro" id="what">
   <h1>Start here</h1>
-  <p class="lede">This site collects research findings about POTS, dysautonomia and related conditions. A language model read {m("papers")} papers from PubMed,
-  published {years}, and pulled out {m("findings")} short findings. Each finding comes with a quote from its paper and a link to it.
+  <p class="lede">This site collects research findings about POTS, dysautonomia and related conditions. A language model read {m("papers")} papers
+  found through PubMed and Europe PMC, published {years}. It read the full text of {m("papers_fulltext")} papers and only the abstract of the
+  other {m("papers_abstract_only")}. It pulled out {m("findings")} short findings. Each finding comes with a quote from its paper and a link to it.
   No person has checked each finding yet. It is a map of what papers report, not medical advice.</p>
 </div>
 
@@ -319,12 +423,12 @@ def render(meta, F):
   <div class="start-two">
     <div>
       <h3>Topics in POTS findings</h3>
-      <p class="kv">Number of papers with a POTS finding that names the topic.</p>
+      <p class="kv">Papers with a POTS finding that names the topic. Spellings of the same name are counted together. A related measure, such as orthostatic heart rate, is counted on its own.</p>
       <ol class="start-list">{topics}</ol>
     </div>
     <div>
       <h3>Conditions in the same papers</h3>
-      <p class="kv">Of the {f.num("focus_papers", F["n_focus_papers"])} papers with a POTS finding, how many also report on each condition.</p>
+      <p class="kv">Of the {f.num("focus_papers", F["n_focus_papers"])} papers with a POTS finding, how many also have findings labelled with each condition.</p>
       <ol class="start-list">{conds}</ol>
     </div>
   </div>
@@ -337,23 +441,25 @@ def render(meta, F):
     <div>
       <h3>Where studies disagree</h3>
       <ul class="start-ex">{"".join(dis)}</ul>
-      <p class="kv">Studies test different people in different ways. A split is a reason to read both sides. It does not prove either side wrong.
-      <a href="discover#contra">All <!--n:contradictions_total-->{fmt(C["contradictions_total"])}<!--/n--> disagreements</a></p>
+      <p class="kv">Only papers that compare people with POTS to people without it count here. Changes after a treatment are not counted.
+      A split is a reason to read both sides. It does not prove either side wrong.
+      <a href="discover#contra">All {m("contradictions_total")} disagreements, for every condition</a>{more("contradictions", "contradictions_total")}</p>
     </div>
     <div>
       <h3>Tested and found nothing</h3>
       <ul class="start-ex">{"".join(nul)}</ul>
       <p class="kv">A study that finds nothing may have been small, or used a different dose or group. It is still worth knowing.
-      <a href="discover#nulls">All <!--n:nulls-->{fmt(C["nulls"])}<!--/n--> null results</a></p>
+      Examples here come from trials and other studies of patients, not case reports or reviews.
+      <a href="discover#nulls">All {m("nulls")} null results, for every condition</a></p>
     </div>
     <div>
       <h3>Barely studied</h3>
       <ul class="start-ex">{"".join(und)}</ul>
       <p class="kv">With so few papers, a result could be chance. It could also be a lead that needs testing again.
-      <a href="discover#under">All <!--n:understudied_total-->{fmt(C["understudied_total"])}<!--/n--> thin signals</a></p>
+      <a href="discover#under?all">All {m("understudied_total")} barely studied topics, for every condition</a>{more("understudied", "understudied_total")}</p>
     </div>
   </div>
-  <p class="kv">These lists use the same rules as the Signals page, for findings labelled POTS. Retracted papers and correction notices are left out.</p>
+  <p class="kv">These examples come from the Signals tables for findings labelled POTS, with extra checks so each one is a clear case. Retracted papers and correction notices are left out.</p>
 </section>
 
 <section class="panel" id="read" aria-labelledby="read-h">
@@ -363,7 +469,7 @@ def render(meta, F):
     <ul class="start-how">
       <li>The first line is the model's short summary of one result from one paper.</li>
       <li>The tags show the topic, which way it went, the condition and the type of study.</li>
-      <li>The quote in italics is copied from the paper, so you can find the passage.</li>
+      <li>{trace}</li>
       <li>The link at the bottom opens the paper. Read it before you rely on a finding. It says who was studied, how many people, and how.</li>
     </ul>
   </div>
@@ -373,7 +479,7 @@ def render(meta, F):
   <h2 id="limits-h">Limits</h2>
   <ul class="start-how">
     <li>A language model pulled out every finding, and it makes mistakes. {ver}No person has yet checked that each finding says what its paper found.</li>
-    <li>Papers were found by PubMed searches and published {years}. If a finding is missing, its paper may not be in this set.</li>
+    <li>Papers were found by searches of PubMed and Europe PMC. {yrs} If a finding is missing, its paper may not be in this set.</li>
     <li>{m("flag_retracted")} retracted papers and {m("flag_erratum_notice")} correction notices are hidden by default. Their {m("excluded_findings")} findings are kept for the record but left out of the lists on this page and the Signals tables.</li>
     <li>Two topics in the same papers are studied together. That does not mean one causes the other.</li>
     <li>Nothing here is medical advice. Take questions about your own care to a clinician who knows you.</li>

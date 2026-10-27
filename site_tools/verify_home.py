@@ -34,6 +34,10 @@ def check(site_dir):
     flags = json.load(open(data / 'paper_flags.json'))['flags']
     excl = {str(pm) for pm, xs in flags.items() if any(x.get('u') == 'exclude' for x in xs)}
     keep = ~np.array([pm in excl for pm in pm_of])[P]
+    # disagreement rule (contradictions.json "rule"): higher / lower / no difference count only findings that compare people
+    # with the condition to people without it (facet dr == vs-disease-state)
+    if 'dr' not in D: return f + ['findings_facets.json has no dr facet (direction_reference)']
+    ref = np.asarray(C['dr']) == (D['dr'].index('vs-disease-state') if 'vs-disease-state' in D['dr'] else -1)
     if hm.get('excluded_papers') != m.get('excluded_papers'):
         f.append(f'excluded_papers {hm.get("excluded_papers")} != meta {m.get("excluded_papers")}')
 
@@ -58,7 +62,7 @@ def check(site_dir):
     kinds = {e['name']: e.get('kind') for e in json.load(open(data / 'entities.json'))['entities']}
     treat = D['ft'].index('treatment/intervention') if 'treatment/intervention' in D['ft'] else -1
     def tally_check(what, tt, ent, cond):
-        base = keep & (E == raw_code.get(ent, -1)) & cmask(cond)
+        base = keep & ref & (E == raw_code.get(ent, -1)) & cmask(cond)   # vs-disease-state findings only (disagreement rule)
         up, dn, nu = (len(set(P[base & (Dd == dcode[w])].tolist())) for w in ('elevated', 'depleted/reduced', 'no significant difference'))
         if (tt['e'], tt['c']) != (ent, cond): f.append(f'{what} tally names {tt["e"]}/{tt["c"]} != {ent}/{cond}')
         if (tt['up'], tt['dn'], tt['nu']) != (up, dn, nu): f.append(f'{what} tally {tt["up"]},{tt["dn"]},{tt["nu"]} != recount {up},{dn},{nu}')

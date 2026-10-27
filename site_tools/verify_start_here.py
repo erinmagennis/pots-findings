@@ -13,6 +13,10 @@ Checks
   6. no em dash or en dash anywhere in the file; no hand-typed number >= 1000 by verify_site_v12's own rule
 Usage: python site_tools/verify_start_here.py [site_dir] [--self-test]
   7. disagreement examples have at least MIN_SIDE papers on each side; entity names show with the display rule
+  8. disagreement counts use only vs-disease-state findings (facet dr); null examples are primary studies, never an entity
+     that defines POTS, never one the same papers report an effect for; barely studied examples are 2+ separate non-review
+     studies whose name is not spread over other POTS papers; topic and condition lists never cut a tie; MCAS carries its
+     label note; quote-trace numbers equal verification_stats; year split counts add up
 """
 import html as H, json, os, re, sys, urllib.parse
 from collections import defaultdict
@@ -21,6 +25,21 @@ SELF = {"pots", "postural orthostatic tachycardia syndrome", "postural tachycard
 NONCOND = {"general", "multiple", "other patient group"}
 MEASURED = {"physiological-measure", "gene/protein", "cell-type"}
 MIN_SIDE = 3  # a shown disagreement needs at least this many papers on each side
+PRIMARY = {"RCT", "cohort", "case-control", "cross-sectional"}
+DEFINING = {"blood pressure", "systolic blood pressure", "diastolic blood pressure", "heart rate", "orthostatic heart rate"}
+REVIEWS = {"review/narrative", "systematic-review/meta-analysis"}
+LINKED = {"preprint_with_published_version", "published_version_of_preprint", "same_work_other_record", "update_of"}
+TEXT_MAX = 5
+SPLIT = 2021
+MCAS_NOTE = "(this label also covers mast-cell lab studies)"
+
+
+def cut_ties(items, n):  # items sorted, (key, count) pairs: keep n plus any further ties with the n-th
+    out = items[:n]
+    for it in items[n:]:
+        if out and it[1] == out[-1][1]: out.append(it)
+        else: break
+    return out
 
 
 def display(name):  # visible entity name rule (first letter up unless capital/digit start or gene-like first word)
@@ -43,19 +62,36 @@ def expected(site):
     want = {}
     pp = {c["p"][i] for i in keep}
     want["focus_papers"] = len(pp)
-    per, nf = defaultdict(set), defaultdict(int)
+    # topics: spelling variants of the same name count together (lower case, trailing period, trailing bracketed
+    # abbreviation with 2+ capitals, plural "s"); different measures stay apart; shown under the member with most papers
+    byn, nfn = defaultdict(set), defaultdict(int)
     for i in keep:
         name = d["e"][c["e"][i]]
-        if name and name != "—" and name.lower() not in SELF:
-            per[name].add(c["p"][i]); nf[name] += 1
-    tops = sorted(per.items(), key=lambda kv: (-len(kv[1]), -nf[kv[0]], kv[0].lower()))[:6]
+        if name and name != "—":
+            byn[name].add(c["p"][i]); nfn[name] += 1
+    def vkey(nm):
+        s = nm.strip().rstrip(".").strip()
+        m = re.search(r"\s*\(([A-Za-z0-9\-/]{1,10})\)$", s)
+        if m and sum(ch.isupper() for ch in m.group(1)) >= 2: s = s[:m.start()].strip()
+        return s.lower()
+    grp = defaultdict(set)
+    for nm in byn: grp[vkey(nm)].add(nm)
+    for k in sorted(grp):
+        if k.endswith("s") and len(k) > 3 and k[:-1] in grp and k in grp: grp[k[:-1]] |= grp.pop(k)
+    per, nf = {}, {}
+    for k, mem in grp.items():
+        if k in SELF: continue
+        disp = sorted(mem, key=lambda nm: (-len(byn[nm]), nm.lower(), nm))[0]
+        per[disp] = set().union(*(byn[nm] for nm in mem)); nf[disp] = sum(nfn[nm] for nm in mem)
+    tops = cut_ties([(nm, len(s)) for nm, s in sorted(per.items(), key=lambda kv: (-len(kv[1]), -nf[kv[0]], vkey(kv[0])))], 6)
+    tops = [(nm, per[nm]) for nm, _ in tops]
     for name, s in tops: want[f"topic_papers:{name}"] = len(s)
     co = defaultdict(set)
     for i, p in enumerate(c["p"]):
         if p in pp:
             lab = d["c"][c["c"][i]]
             if lab != "POTS" and lab not in NONCOND: co[lab].add(p)
-    for lab, s in sorted(co.items(), key=lambda kv: (-len(kv[1]), kv[0]))[:5]: want[f"co_papers:{lab}"] = len(s)
+    for lab, n_ in cut_ties([(lab, len(s)) for lab, s in sorted(co.items(), key=lambda kv: (-len(kv[1]), kv[0]))], 5): want[f"co_papers:{lab}"] = n_
     # disagreements: POTS direction flips (higher vs lower), each side >= MIN_SIDE papers, measured things or non-treatment
     # chemicals; ranked by the smaller side, then total, then rank. No-difference = distinct POTS papers with that direction.
     cand = {}
@@ -74,7 +110,7 @@ def expected(site):
             if sum(d["ft"][c["ft"][i]] == "treatment/intervention" for i in mine) > 0.5 * max(1, len(mine)): continue
         rk = (-min(up, dn), -(up + dn), r["rank"])
         if e in cand and cand[e][0] <= rk: continue
-        nd = len({c["p"][i] for i in keep if c["e"][i] == ec and d["d"][c["d"][i]] == "no significant difference"})
+        nd = len({c["p"][i] for i in keep if c["e"][i] == ec and d["d"][c["d"][i]] == "no significant difference" and d["dr"][c["dr"][i]] == "vs-disease-state"})
         cand[e] = (rk, up, dn, nd)
     for e, (_, up, dn, nd) in sorted(cand.items(), key=lambda kv: kv[1][0])[:2]:
         want[f"contra_higher:{e}"], want[f"contra_lower:{e}"] = up, dn
@@ -83,21 +119,50 @@ def expected(site):
     rows = [dict(zip(F, x)) for s in idx["shards"] for x in j(s["file"])["rows"]]
     if len(rows) != idx["n"]: want["__null_rows"] = (len(rows), idx["n"])
     shown = {k.split(":", 1)[1] for k in want if k.startswith("contra_higher:")}   # null examples skip entities shown as disagreements
+    pm_row = [str(r[pi]) for r in pap["rows"]]
+    effect = set()   # (pmid, entity) where a POTS finding reports higher / lower or a positive effect
+    for i in keep:
+        if d["d"][c["d"][i]] in ("elevated", "depleted/reduced") or d["nc"][c["nc"][i]] == "positive-effect":
+            effect.add((pm_row[c["p"][i]], d["e"][c["e"][i]]))
     for cls in ("treatment null", "biomarker/mechanism null"):
         g, n = defaultdict(set), defaultdict(int)
         for r in rows:
-            if r["condition"] == "POTS" and r["null_class"] == cls and r["canonical_entity"] and r["canonical_entity"] not in shown and str(r["canonical_pmid"]) not in bad_pm:
-                g[r["canonical_entity"]].add(str(r["canonical_pmid"])); n[r["canonical_entity"]] += 1
+            e = r["canonical_entity"]
+            if not (r["condition"] == "POTS" and r["null_class"] == cls and e and e not in shown and str(r["canonical_pmid"]) not in bad_pm): continue
+            if r["evidence_tier"] not in PRIMARY or e.lower() in SELF or e.lower() in DEFINING: continue
+            if cls == "treatment null" and names.get(e) in MEASURED: continue
+            g[e].add(str(r["canonical_pmid"])); n[e] += 1
+        g = {e: s for e, s in g.items() if not any((p, e) in effect for p in s)}
         if g:
             e = min(g, key=lambda e: (-len(g[e]), -n[e], e.lower()))
-            want[f"null_findings:{cls}|{e}"], want[f"null_papers:{cls}|{e}"] = n[e], len(g[e])
-    u = sorted(j("understudied.json")["rows"], key=lambda r: r["rank"])
-    u = [r for r in u if r["condition"] == "POTS" and r["is_thin"] and r["n_papers"] >= 2 and not r["case_report_only"]
-         and not set(map(str, r.get("pmids") or [])) & bad_pm][:2]
+            want[f"null_papers:{cls}|{e}"] = len(g[e])
+    study = {}   # linked records (preprint and published version, same work, update) are one study
+    def st_of(x):
+        while study.setdefault(x, x) != x: x = study[x]
+        return x
+    for p_, v in sorted(fl.items()):
+        for x in v:
+            if x.get("f") in LINKED and x.get("lp"): study[st_of(str(p_))] = st_of(str(x["lp"]))
+    texts = {}
+    for s in range(fac["n_shards"]):
+        t = j(f"text_{s:02d}.json"); texts.update({i: t["t"][i - t["start"]].lower() for i in range(t["start"], t["end"])})
+    u = []
+    for r in sorted(j("understudied.json")["rows"], key=lambda r: r["rank"]):
+        e = r["canonical_entity"]; own = set(map(str, r.get("pmids") or []))
+        if r["condition"] != "POTS" or r["n_papers"] < 2 or r["case_report_only"] or own & bad_pm or e not in d["e"]: continue
+        ec = d["e"].index(e)
+        if len({st_of(p_) for p_ in own}) < 2: continue
+        if len({st_of(pm_row[c["p"][i]]) for i in keep if c["e"][i] == ec and d["st"][c["st"][i]] not in REVIEWS}) < 2: continue
+        probe = e.split(" (")[0].strip().lower()
+        if len({pm_row[c["p"][i]] for i in keep if c["e"][i] != ec and probe in texts[i]} - own) > TEXT_MAX: continue
+        u.append(r)
+        if len(u) == 2: break
     for r in u: want[f"under_findings:{r['canonical_entity']}"], want[f"under_papers:{r['canonical_entity']}"] = r["n_findings"], r["n_papers"]
-    V = meta.get("verification_stats") or {}
-    if V.get("sample_n"): want["sample_n"], want["sample_found"] = V["sample_n"], V["sample_found"]
     C = meta["counts"]; want["year_min"], want["year_max"] = C["year_min"], C["year_max"]
+    if "quote_trace_per_100" in C: want["trace_base"] = 100
+    want["year_split"] = SPLIT
+    for k in C:
+        if k.startswith("papers_year_") and int(k.rsplit("_", 1)[1]) < SPLIT: want[f"year_old:{k.rsplit('_', 1)[1]}"] = int(k.rsplit("_", 1)[1])
     want["generated_utc"] = meta["generated_utc"]
     # example finding row (same rule as the build) for check 4
     ex = None
@@ -114,7 +179,7 @@ def expected(site):
 
 
 def norm(v, key=""):
-    if key in ("year_min", "year_max", "example_year"): return str(v)
+    if key in ("year_min", "year_max", "example_year", "year_split") or key.startswith("year_old:"): return str(v)
     return f"{v:,}" if isinstance(v, int) else str(v)
 
 
@@ -144,6 +209,22 @@ def check(site_dir):
     for k, v in got.items():  # rule on the page itself, independent of the recompute
         if k.startswith(("contra_higher:", "contra_lower:")) and int(v.replace(",", "")) < MIN_SIDE:
             f.append(f"disagree example {k} has {v} papers on one side; each side needs at least {MIN_SIDE}")
+    # 8 rules shown on the page itself
+    C, V = meta["counts"], meta.get("verification_stats") or {}
+    if "quote_trace_checked" in C:
+        if (C["quote_trace_checked"], C["quote_trace_found"]) != (V.get("trace_verifiable"), V.get("trace_found")): f.append("quote trace counts != verification_stats")
+        if C.get("quote_trace_per_100") != round(100 * C["quote_trace_found"] / C["quote_trace_checked"]): f.append("quote_trace_per_100 != found / checked")
+    yrs = {k: v for k, v in C.items() if k.startswith("papers_year_")}
+    if C.get("papers_before_2021") != sum(v for k, v in yrs.items() if int(k[-4:]) < SPLIT) or C.get("papers_2021_on") != sum(v for k, v in yrs.items() if int(k[-4:]) >= SPLIT) \
+            or C.get("papers_2021_on", 0) + C.get("papers_before_2021", 0) > C["papers"]:   # a few papers have no year
+        f.append("year split counts do not match papers_year_* or exceed papers")
+    if C.get("papers_fulltext", 0) + C.get("papers_abstract_only", 0) != C["papers"]: f.append("full text + abstract-only papers != papers")
+    if 'href="condition?c=MCAS"' in raw and not re.search(r'href="condition\?c=MCAS">MCAS</a> <span class="kv">' + re.escape(MCAS_NOTE), raw):
+        f.append("MCAS in the conditions list without its label note")
+    if not any(k.startswith("contra_higher:") for k in want) and "Few clear splits exist yet" not in raw:
+        f.append("no disagreement example qualifies but the page does not say few clear splits exist")
+    for k in got:
+        if k.startswith("null_papers:") and k.split("|", 1)[1].lower() in DEFINING: f.append(f"null example {k} is part of how POTS is defined")
     # 4 no other digits in visible text
     body = raw[raw.index("<body>"):]
     body = re.sub(r"<!--n:[a-z_0-9]+-->.*?<!--/n-->", " ", body, flags=re.S)
@@ -186,8 +267,10 @@ def check(site_dir):
         if pg == "entity" and q.get("e", [None])[0] not in names: f.append(f"link {href}: no such entity")
         if pg == "condition" and q.get("c", [None])[0] not in conds: f.append(f"link {href}: no such condition label")
         if u.fragment:
+            frag, _, opt = u.fragment.partition("?")
             if pg == "about" and u.fragment not in about_ids: f.append(f"link {href}: no id {u.fragment!r} on About")
-            if pg == "discover" and u.fragment not in views: f.append(f"link {href}: no Signals view {u.fragment!r}")
+            if pg == "discover" and frag not in views: f.append(f"link {href}: no Signals view {frag!r}")
+            if pg == "discover" and opt and f"opt==='{opt}'" not in open(pdsc, encoding="utf-8").read(): f.append(f"link {href}: Signals does not read option {opt!r}")
     # 6 dashes and verify_site_v12's hand-typed number rule
     for ch, nm in (("—", "em dash"), ("–", "en dash"), ("&mdash;", "em dash entity"), ("&ndash;", "en dash entity")):
         if ch in raw: f.append(f"{nm} in start.html")
@@ -211,7 +294,10 @@ def self_test(site):
     def first_span(prefix):
         return re.search(r'(<span data-k="' + re.escape(prefix) + r'[^"]*">)([^<]*)(</span>)', src)
     def low_side(s):
-        m = first_span("contra_lower:"); return s.replace(m.group(0), m.group(1) + "2" + m.group(3), 1)
+        m = first_span("contra_lower:")
+        if not m:   # no example qualifies on this data: plant one with a side of 2
+            return s.replace('<li class="start-none">', '<li><span data-k="contra_higher:x">5</span> <span data-k="contra_lower:x">2</span></li><li class="start-none">', 1)
+        return s.replace(m.group(0), m.group(1) + "2" + m.group(3), 1)
     def lower_name(s):
         m = re.search(r'(href="entity\?e=[^"]*">)([A-Z][a-z][^<]*)(</a>)', s)
         return s.replace(m.group(0), m.group(1) + m.group(2)[0].lower() + m.group(2)[1:] + m.group(3), 1)
@@ -226,6 +312,8 @@ def self_test(site):
         "dropped item": lambda s: re.sub(r'<li><a href="condition\?c=[^"]*">.*?</li>', "", s, count=1),
         "disagree side below 3": low_side,
         "entity name not capitalised": lower_name,
+        "MCAS note dropped": lambda s: s.replace(' <span class="kv">' + MCAS_NOTE + '</span>', "", 1),
+        "unknown Signals option": lambda s: s.replace("discover#under?all", "discover#under?thin", 1),
     }
     tmp = tempfile.mkdtemp(); ok = True
     try:

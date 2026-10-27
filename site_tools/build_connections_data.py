@@ -16,11 +16,12 @@ Rules
   * Paper position: mean of its findings' MiniLM embeddings (emb/, dequantised and L2-normalised), UMAP to 2D for the
     layout and to 10D for KMeans regions. Sub-regions: KMeans on the 2D layout inside each region.
   * Disagreement (direction flip): the shared rule in site_tools/signals_rules.py, the same one contradictions.json, the
-    home page and the Start page use. Entity name as stored in findings_facets, same condition, every finding type
-    (treatment included), distinct papers with an "elevated" finding (higher) and with a "depleted/reduced" finding
-    (lower); a flip needs both and at least two distinct papers on that entity and condition, as in
-    build_v12_projection.py. No difference = distinct papers with a "no significant difference" finding for the same
-    entity and condition. Exclude-flagged papers are out. Region and band tallies are the same rule restricted to the
+    home page and the Start page use. Only findings that compare people with the condition to people without it count
+    (facet dr == "vs-disease-state"); changes after a treatment are not disagreements. Entity name as stored in
+    findings_facets, same condition, distinct papers with an "elevated" finding (higher) and with a "depleted/reduced"
+    finding (lower); a flip needs both and at least two distinct papers with vs-disease-state findings on that entity and
+    condition, as in build_v12_projection.py. No difference = distinct papers with a vs-disease-state "no significant
+    difference" finding for the same entity and condition. Exclude-flagged papers are out. Region and band tallies are the same rule restricted to the
     papers of that region or band.
 
 Deterministic: fixed random_state everywhere, sorted tie-breaks, no timestamps in output. UMAP results depend on the
@@ -36,7 +37,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from signals_rules import HIGHER, LOWER, NODIFF, excluded_pmids, display  # noqa: E402
+from signals_rules import HIGHER, LOWER, NODIFF, excluded_pmids, display, disease_ref_mask  # noqa: E402
 
 K_REGIONS = 16
 SEED = 7
@@ -119,6 +120,8 @@ def main():
     dcls[Dd == up_d] = 1; dcls[Dd == dn_d] = -1; dcls[Dd == nsd_d] = 2
     dcls[np.isin(E, list(blank_e))] = 0
     dcls[~f_keep] = 0
+    f_ref = disease_ref_mask(fac)   # disagreement rule: vs-disease-state findings only
+    dcls[~f_ref] = 0
 
     # ---------- paper embeddings, UMAP, regions ----------
     M, man = load_embeddings(data)
@@ -160,7 +163,7 @@ def main():
         """splits over a set of finding indices -> sorted list of dicts"""
         dd = defaultdict(lambda: ([set(), set(), set(), set()]))   # higher, lower, no difference, any finding
         for i in find_idx:
-            if not f_keep[i] or int(E[i]) in blank_e:
+            if not f_keep[i] or not f_ref[i] or int(E[i]) in blank_e:
                 continue
             g = dd[(int(E[i]), int(Cc[i]))]; g[3].add(int(P[i]))
             dc = int(dcls[i])

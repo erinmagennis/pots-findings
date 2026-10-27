@@ -88,7 +88,7 @@ export function splitHTML(s){
     <div class="cx-dirs"><span class="up"><span aria-hidden="true">&#9650;</span> ${fmt(s.up)} higher</span><span class="dn"><span aria-hidden="true">&#9660;</span> ${fmt(s.dn)} lower</span><span class="nu">${fmt(s.nu)} no difference</span></div>
     <div class="cx-ex">${ex.join('<br>')}</div></div>`;
 }
-export const SPLIT_RULE = 'The same thing, in the same condition, reported higher by some papers and lower by others. Counts are papers, with the same rule as Signals and the home page.';
+export const SPLIT_RULE = 'Papers that compared people with the condition to people without it found the same thing higher in some and lower in others. Changes after a treatment are not counted. Counts are papers, with the same rule as Signals and the home page.';
 
 /** "most studied" bar list: [[entity, papers], ...] */
 export function barsHTML(top){

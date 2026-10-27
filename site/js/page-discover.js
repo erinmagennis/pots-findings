@@ -109,7 +109,7 @@ async function viewAssoc(){
   render();
 }
 
-async function viewUnder(){
+async function viewUnder(opt){
   const d=await getJSON('understudied.json');
   document.getElementById('view').innerHTML=`<div class="panel">
     <h2>Under-studied signals</h2>
@@ -144,6 +144,7 @@ async function viewUnder(){
     document.querySelectorAll('#uTbl th[data-k]').forEach(th=>th.onclick=()=>{const next=th.dataset.k;
       if(next===key)direction*=-1;else{key=next;direction=next==='canonical_entity'?1:-1;}render();});
   }
+  if(opt==='all') ['uThin','uTwo','uCase'].forEach(id=>{document.getElementById(id).checked=false;});  // discover#under?all: every listed row
   ['uThin','uTwo','uCase'].forEach(id=>document.getElementById(id).onchange=render);
   document.getElementById('uCsv').onclick=()=>csv(rowsNow(),columns.map(x=>x[0]),'understudied_signals.csv');
   render();
@@ -155,6 +156,7 @@ async function viewContra(){
     <h2>Contradictions</h2>
     <p class="lede">${fmt(C.contradictions_total)} entity and condition pairs with conflicting directions (the ${fmt(d.n)} strongest are listed):
       ${fmt(C.contra_flip_total)} direction flips and ${fmt(C.contra_null_vs_pos_total)} null-versus-positive conflicts. ${EXCL_NOTE}</p>
+    <p class="kv">A disagreement here means papers that compared people with the condition to people without it found opposite results. Changes after a treatment are not counted.</p>
     <div class="note stop">Different populations, methods, or source literatures can produce different results.
       A row here flags disagreement for review; it does not prove that either paper is wrong.</div>
     <div class="chks"><label>Type <select id="kType"><option value="">any</option>
@@ -268,7 +270,7 @@ async function viewConv(){
 }
 
 const VIEWS={overview:viewOverview,assoc:viewAssoc,under:viewUnder,contra:viewContra,nulls:viewNulls,conv:viewConv};
-function go(){const key=(location.hash||'#overview').slice(1),fn=VIEWS[key]||viewOverview;
+function go(){const [key,opt]=(location.hash||'#overview').slice(1).split('?'),fn=VIEWS[key]||viewOverview;
   document.querySelectorAll('#dtabs a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+key));
-  document.getElementById('view').innerHTML='<div class="panel"><span class="spinner"></span> loading...</div>';fn();}
+  document.getElementById('view').innerHTML='<div class="panel"><span class="spinner"></span> loading...</div>';fn(opt);}
 window.addEventListener('hashchange',go);go();

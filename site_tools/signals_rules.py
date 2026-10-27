@@ -1,13 +1,15 @@
 """signals_rules.py: shared counting rules so a fact shows the same number on every page.
 
-Higher / lower papers for an entity in a condition follow contradictions.json (build_v12_projection.py): the entity name as
-stored in findings_facets (no merging of spellings), the condition label, every finding type (treatment findings included),
-distinct papers per side, side "higher" = direction "elevated", side "lower" = "depleted/reduced", findings from
-exclude-flagged papers left out. No-difference papers follow build_start_here.py: distinct papers with a finding on the same
-entity and condition whose direction is "no significant difference", same exclusion.
+Disagreement rule (same as contradictions.json "rule", build_v12_projection.py): only findings that compare people with the
+condition to people without it count, i.e. facet `dr` (direction_reference, typos normalised) == "vs-disease-state".  A
+change after a treatment (vs-intervention) or a finding with no reference (not-applicable) is never a disagreement.
+Higher / lower papers for an entity in a condition: the entity name as stored in findings_facets (no merging of spellings),
+the condition label, vs-disease-state findings only, distinct papers per side, side "higher" = direction "elevated", side
+"lower" = "depleted/reduced", findings from exclude-flagged papers left out. No-difference papers: distinct papers with a
+vs-disease-state finding on the same entity and condition whose direction is "no significant difference", same exclusion.
 Checked against every direction-flip row of contradictions.json by verify_home.py.
-A disagreement (direction flip) also needs at least 2 distinct papers for that entity and condition, as
-build_v12_projection.py does: one paper reporting both directions is not a disagreement between studies. Pages that list
+A disagreement (direction flip) also needs at least 2 distinct papers with vs-disease-state findings for that entity and
+condition, as build_v12_projection.py does: one paper reporting both directions is not a disagreement between studies. Pages that list
 flips apply this (build_connections_data.py; contra_flip_total in meta.json counts the same set).
 """
 import json
@@ -20,6 +22,15 @@ MEASURED_KINDS = {'physiological-measure', 'gene/protein', 'cell-type'}
 TREATMENT_SHARE_MAX = 0.5   # a chemical/metabolite counts as measured only when at most half its findings are treatment findings
 
 HIGHER, LOWER, NODIFF = 'elevated', 'depleted/reduced', 'no significant difference'
+DISEASE_REF = 'vs-disease-state'   # facet `dr`: the only direction_reference that counts for higher / lower / no difference
+
+
+def disease_ref_mask(fac):
+    """numpy bool mask over findings: True where facet `dr` is vs-disease-state (the disagreement rule)."""
+    if 'dr' not in fac['dicts']:
+        raise SystemExit('findings_facets.json has no `dr` facet (direction_reference): rebuild with build_v12_projection.py')
+    code = fac['dicts']['dr'].index(DISEASE_REF) if DISEASE_REF in fac['dicts']['dr'] else -1
+    return np.asarray(fac['cols']['dr']) == code
 
 
 def excluded_pmids(data_dir):
@@ -47,14 +58,15 @@ class Facets:
         self.pmids = [str(r[0]) for r in json.load(open(data / 'papers.json'))['rows']]
         self.excluded = excluded_pmids(data)
         self.keep = ~np.array([pm in self.excluded for pm in self.pmids])[self.cols['p']]
+        self.ref = disease_ref_mask(fac)   # vs-disease-state findings: the only ones counted by tally()
         self._d = {w: (self.D['d'].index(w) if w in self.D['d'] else -1) for w in (HIGHER, LOWER, NODIFF)}
 
     def tally(self, entity, cond):
-        """{'e','c','up','dn','nu'}: distinct papers higher / lower / no difference for entity in cond."""
+        """{'e','c','up','dn','nu'}: distinct papers higher / lower / no difference for entity in cond (vs-disease-state only)."""
         D, C = self.D, self.cols
         e = D['e'].index(entity) if entity in D['e'] else -1
         c = D['c'].index(cond) if cond in D['c'] else -1
-        base = self.keep & (C['e'] == e) & (C['c'] == c)
+        base = self.keep & self.ref & (C['e'] == e) & (C['c'] == c)
         n = lambda w: len(set(C['p'][base & (C['d'] == self._d[w])].tolist()))
         return {'e': entity, 'c': cond, 'up': n(HIGHER), 'dn': n(LOWER), 'nu': n(NODIFF)}
 

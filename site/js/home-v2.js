@@ -149,7 +149,7 @@ function infoText(D) {
     + `The topics in between are the ones most specific to POTS: named in at least ${R.floor} POTS papers and at least ${times} as common in POTS papers as in all papers. The top ${R.top_specific} are shown. `
     + (hidden.length ? `Left out because nearly every study measures them: ${hidden.join(', ')} and similar. ` : '')
     + `Topics in lighter italic are bridges: for each condition, up to ${R.bridges_per_cond} topics it shares most with POTS. `
-    + `A ring marks a measured topic (a body measure, gene or protein, or cell type, or a chemical where no more than ${Math.round(R.treatment_share_max * 100)}% of its POTS findings come from treatment studies) where some POTS papers report it higher and some lower. Drugs and treatments get no ring, but their tooltips still show the counts. Dotted lines join the ${R.pairs_drawn} pairs of conditions that share the most topics. `
+    + `A ring marks a measured topic (a body measure, gene or protein, or cell type, or a chemical where no more than ${Math.round(R.treatment_share_max * 100)}% of its POTS findings come from treatment studies) where papers comparing people with POTS to people without it disagree: some report it higher and some lower. Changes after a treatment are not counted. Drugs and treatments get no ring, but their tooltips still show the counts. Dotted lines join the ${R.pairs_drawn} pairs of conditions that share the most topics. `
     + `Hover or tap a condition to see the topics it shares with POTS on its line. Retracted papers and correction notices are left out.`;
 }
 
@@ -380,7 +380,7 @@ function constellation(D) {
       const rel = lift >= 1.5 ? `${lift.toFixed(1)} times as common in POTS papers as in all papers` : lift >= .8 ? 'About as common in POTS papers as in all papers' : 'Less common in POTS papers than in all papers. It links POTS to other conditions';
       h = `<b>${esc(n.label)}</b><br><span class="m">${fmt(t.np)} POTS papers. ${rel}.</span>`;
       const tt = t.tally;
-      h += `<span class="k">In POTS papers</span>` + (tt.up + tt.dn + tt.nu ? tallyHTML(tt) : '<span class="m">No higher or lower results outside treatment studies.</span>');
+      h += `<span class="k">In POTS papers</span>` + (tt.up + tt.dn + tt.nu ? tallyHTML(tt) : '<span class="m">No papers compare it in people with and without POTS.</span>');
       if (t.links.length) h += `<span class="k">Also studied in</span>${t.links.map(([c, k]) => `${esc(condLabel(c))} <span class="m">${fmt(k)}</span>`).join(', ')}`;
     }
     const isPin = pinned === id;

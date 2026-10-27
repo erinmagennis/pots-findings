@@ -19,7 +19,7 @@ from collections import defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from signals_rules import HIGHER, LOWER, NODIFF, Facets as RuleFacets, flip_sides  # noqa: E402
+from signals_rules import HIGHER, LOWER, NODIFF, Facets as RuleFacets, flip_sides, DISEASE_REF  # noqa: E402
 
 FILES = ('conn_map.json', 'conn_papers.json', 'conn_ents.json', 'conn_splits.json', 'conn_flow.json')
 
@@ -111,7 +111,9 @@ def check(site_dir):
     E, Cc, Dd = cols['e'], cols['c'], cols['d']
     blank = {i for i, v in enumerate(D['e']) if v in ('—', '')}
     up, dn, nsd = D['d'].index(HIGHER), D['d'].index(LOWER), D['d'].index(NODIFF)
-    ok = [keepF[i] and E[i] not in blank for i in range(nF)]
+    if 'dr' not in D: return f + ['findings_facets.json has no dr facet (direction_reference)']
+    ref_code = D['dr'].index(DISEASE_REF) if DISEASE_REF in D['dr'] else -1; DR = cols['dr']   # only vs-disease-state findings count
+    ok = [keepF[i] and E[i] not in blank and DR[i] == ref_code for i in range(nF)]
     cls = [0] * nF  # 1 higher, 2 lower, 3 no difference (signals_rules)
     for i in range(nF):
         if ok[i]: cls[i] = 1 if Dd[i] == up else 2 if Dd[i] == dn else 3 if Dd[i] == nsd else 0
