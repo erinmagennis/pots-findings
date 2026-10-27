@@ -33,7 +33,7 @@ export function header(active){
 export function footer(){
   const m=state.meta;
   return `<div class="quiet-support"><div class="wrap"><strong>Grow the map</strong> Help make this public research index easier to extend, check, and reuse. <a href="about#connect">Collaborate with the project</a>.</div></div>
-  <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings ${esc(m.version)} · ${fmt(m.counts.findings)} findings / ${fmt(m.counts.papers)} papers · data generated ${esc(m.generated_utc)} · <a href="about">Scope, methods and limitations</a>.</span></div></footer>`;
+  <footer class="site"><div class="wrap"><span class="brand-footer">POTS &amp; Dysautonomia Findings</span><span>pots-findings ${esc(m.version)} · ${fmt(m.counts.findings)} findings / ${fmt(m.counts.papers)} papers · data generated ${esc(m.generated_utc)} · <a href="start">Start here</a> · <a href="about">Scope, methods and limitations</a>.</span></div></footer>`;
 }
 
 /* The header is written into each page's HTML so it paints before any data loads.
