@@ -47,7 +47,7 @@ document.getElementById('body').innerHTML=`<div class="about-grid"><nav class="s
     <li>Co-mention means two entities appeared in the same paper. It does not establish interaction or causation.</li>
     <li>Shared biology across source literatures is not the same claim as patient comorbidity.</li>
     <li>A null or failed result does not prove ineffectiveness. Dose, comparator, sample size, and population matter.</li>
-    <li>A disagreement on the Signals page means papers that compared people with the condition to people without it found opposite results. Changes after a treatment are not counted.</li>
+    <li>On the Signals page, a disagreement means papers found the same thing higher in some and lower in others, or an effect in some and none in others. Only results the model tagged as a comparison between groups count, such as people with and without the condition, or two patient groups. Results tagged as a change after a treatment are left out. No person has checked these tags.</li>
     <li>Contradictory directions may reflect different populations or methods rather than a direct replication failure.</li>
   </ul>
   ${entityCoverageNote('entity pages, entity filters, and entity-based charts')}

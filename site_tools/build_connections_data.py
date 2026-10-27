@@ -16,12 +16,13 @@ Rules
   * Paper position: mean of its findings' MiniLM embeddings (emb/, dequantised and L2-normalised), UMAP to 2D for the
     layout and to 10D for KMeans regions. Sub-regions: KMeans on the 2D layout inside each region.
   * Disagreement (direction flip): the shared rule in site_tools/signals_rules.py, the same one contradictions.json, the
-    home page and the Start page use. Only findings that compare people with the condition to people without it count
-    (facet dr == "vs-disease-state"); changes after a treatment are not disagreements. Entity name as stored in
+    home page and the Start page use. Only findings the model tagged as a comparison between groups count (facet dr ==
+    "vs-disease-state": people with vs without the condition, or two patient groups; tags not checked by a person);
+    changes after a treatment are not disagreements. Entity name as stored in
     findings_facets, same condition, distinct papers with an "elevated" finding (higher) and with a "depleted/reduced"
     finding (lower); a flip needs both and at least two distinct papers with vs-disease-state findings on that entity and
-    condition, as in build_v12_projection.py. No difference = distinct papers with a vs-disease-state "no significant
-    difference" finding for the same entity and condition. Exclude-flagged papers are out. Region and band tallies are the same rule restricted to the
+    condition, as in build_v12_projection.py. No difference = distinct papers with a vs-disease-state finding for the
+    same entity and condition on the null side of contradictions.json ("no significant difference" or a null flag). Exclude-flagged papers are out. Region and band tallies are the same rule restricted to the
     papers of that region or band.
 
 Deterministic: fixed random_state everywhere, sorted tie-breaks, no timestamps in output. UMAP results depend on the
@@ -37,7 +38,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from signals_rules import HIGHER, LOWER, NODIFF, excluded_pmids, display, disease_ref_mask  # noqa: E402
+from signals_rules import HIGHER, LOWER, NODIFF, excluded_pmids, display, disease_ref_mask, null_side_mask  # noqa: E402
 
 K_REGIONS = 16
 SEED = 7
@@ -117,7 +118,8 @@ def main():
     null_nc = np.array([v in NULL_NC for v in D['nc']])
     # per finding direction class (signals_rules): 1 higher, -1 lower, 2 no difference, 0 not counted
     dcls = np.zeros(nF, dtype=np.int8)
-    dcls[Dd == up_d] = 1; dcls[Dd == dn_d] = -1; dcls[Dd == nsd_d] = 2
+    dcls[Dd == up_d] = 1; dcls[Dd == dn_d] = -1
+    nul_f = null_side_mask(D, C)   # no difference: the null side of contradictions.json (direction or null flag)
     dcls[np.isin(E, list(blank_e))] = 0
     dcls[~f_keep] = 0
     f_ref = disease_ref_mask(fac)   # disagreement rule: vs-disease-state findings only
@@ -168,7 +170,9 @@ def main():
             g = dd[(int(E[i]), int(Cc[i]))]; g[3].add(int(P[i]))
             dc = int(dcls[i])
             if dc:
-                g[{1: 0, -1: 1, 2: 2}[dc]].add(int(P[i]))
+                g[{1: 0, -1: 1}[dc]].add(int(P[i]))
+            if nul_f[i]:
+                g[2].add(int(P[i]))
         out = []
         for (e, c), (u, d, n, a) in dd.items():
             # contradictions.json rule: the entity and condition need at least two papers, one higher and one lower

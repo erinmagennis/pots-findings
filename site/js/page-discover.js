@@ -113,7 +113,7 @@ async function viewUnder(opt){
   const d=await getJSON('understudied.json');
   document.getElementById('view').innerHTML=`<div class="panel">
     <h2>Under-studied signals</h2>
-    <p class="lede">${fmt(C.understudied_total)} entity and condition signals with three or fewer papers; the ${fmt(d.n)} with the most findings are listed for possible replication work. ${EXCL_NOTE}</p>
+    <p class="lede">${fmt(C.understudied_total)} entity and condition signals with three or fewer papers and at least two findings; the ${fmt(d.n)} with the most findings are listed for possible replication work. ${EXCL_NOTE}</p>
     <div class="note stop"><b>Thin evidence can be noise.</b> This table does not establish independent-lab
       replication. It reports the fields present in the current combined analysis and should be used to find
       candidates for closer review.</div>
@@ -156,7 +156,7 @@ async function viewContra(){
     <h2>Contradictions</h2>
     <p class="lede">${fmt(C.contradictions_total)} entity and condition pairs with conflicting directions (the ${fmt(d.n)} strongest are listed):
       ${fmt(C.contra_flip_total)} direction flips and ${fmt(C.contra_null_vs_pos_total)} null-versus-positive conflicts. ${EXCL_NOTE}</p>
-    <p class="kv">A disagreement here means papers that compared people with the condition to people without it found opposite results. Changes after a treatment are not counted.</p>
+    <p class="kv">A disagreement means papers found the same thing higher in some and lower in others, or an effect in some and none in others. Only results the model tagged as a comparison between groups count, such as people with and without the condition, or two patient groups. Results tagged as a change after a treatment are left out. No person has checked these tags.</p>
     <div class="note stop">Different populations, methods, or source literatures can produce different results.
       A row here flags disagreement for review; it does not prove that either paper is wrong.</div>
     <div class="chks"><label>Type <select id="kType"><option value="">any</option>

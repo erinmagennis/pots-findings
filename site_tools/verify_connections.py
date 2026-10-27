@@ -24,7 +24,7 @@ from signals_rules import HIGHER, LOWER, NODIFF, Facets as RuleFacets, flip_side
 FILES = ('conn_map.json', 'conn_papers.json', 'conn_ents.json', 'conn_splits.json', 'conn_flow.json')
 
 
-def _tally(idx, cls, E, C, P, ename, cname, pm_of, ok):
+def _tally(idx, cls, E, C, P, ename, cname, pm_of, ok, nul):
     dd = defaultdict(lambda: [set(), set(), set(), set()])
     for i in idx:
         if not ok[i]: continue
@@ -32,6 +32,8 @@ def _tally(idx, cls, E, C, P, ename, cname, pm_of, ok):
         c = cls[i]
         if c:
             g[c - 1].add(P[i])
+        if nul[i]:
+            g[2].add(P[i])
     out = {}
     for (e, c), (u, d, n, a) in dd.items():
         if len(a) >= 2 and u and d:
@@ -114,10 +116,12 @@ def check(site_dir):
     if 'dr' not in D: return f + ['findings_facets.json has no dr facet (direction_reference)']
     ref_code = D['dr'].index(DISEASE_REF) if DISEASE_REF in D['dr'] else -1; DR = cols['dr']   # only vs-disease-state findings count
     ok = [keepF[i] and E[i] not in blank and DR[i] == ref_code for i in range(nF)]
-    cls = [0] * nF  # 1 higher, 2 lower, 3 no difference (signals_rules)
+    cls = [0] * nF  # 1 higher, 2 lower; nul: no difference = direction "no significant difference" or a null flag
+    NC = cols['nc']; null_nc = {i for i, v in enumerate(D['nc']) if str(v).startswith('null')}
+    nul = [ok[i] and (Dd[i] == nsd or NC[i] in null_nc) for i in range(nF)]
     for i in range(nF):
-        if ok[i]: cls[i] = 1 if Dd[i] == up else 2 if Dd[i] == dn else 3 if Dd[i] == nsd else 0
-    want = _tally(range(nF), cls, E, Cc, P, D['e'], D['c'], pm_of, ok)
+        if ok[i]: cls[i] = 1 if Dd[i] == up else 2 if Dd[i] == dn else 0
+    want = _tally(range(nF), cls, E, Cc, P, D['e'], D['c'], pm_of, ok, nul)
     if SP['n'] != len(want) or M['n_splits'] != len(want): f.append(f"map-wide disagreements: data says {SP['n']}/{M['n_splits']}, recomputed {len(want)}")
     def cmp(label, shown, ref):
         for s in shown:
@@ -137,6 +141,10 @@ def check(site_dir):
             nrow += 1; hi, lo = flip_sides(row); s = shown.get((row['canonical_entity'], row['condition']))
             if not s: f.append(f"contradictions.json flip {row['canonical_entity']} / {row['condition']} missing from conn_splits")
             elif (s['up'], s['dn']) != (hi, lo): f.append(f"{row['canonical_entity']} / {row['condition']}: Connections {s['up']}/{s['dn']}, contradictions.json {hi}/{lo}")
+        nvp = {(r['canonical_entity'], r['condition']): r['n_papers_B'] for r in CJ['rows'] if r['conflict_type'] == 'null-vs-positive'}
+        for s in SP['splits']:   # one number per fact: no difference equals the null side of the null-vs-positive row
+            if s['nu'] and nvp.get((s['e'], s['c'])) != s['nu']:
+                f.append(f"{s['e']} / {s['c']}: Connections no difference {s['nu']}, contradictions.json {nvp.get((s['e'], s['c']))}")
         if nrow == 0: f.append('contradictions.json has no direction-flip rows to compare')
         flip_total = json.load(open(data / 'meta.json'))['counts'].get('contra_flip_total', CJ.get('flip_total'))
         if SP['n'] != flip_total: f.append(f"whole-map direction flips {SP['n']} != Signals flip total {flip_total}")
@@ -152,7 +160,7 @@ def check(site_dir):
     for i in range(nF):
         if keepF[i]: by_k[k_of_row.get(P[i], -1)].append(i)
     for r in R:
-        ref = _tally(by_k[r['id']], cls, E, Cc, P, D['e'], D['c'], pm_of, ok)
+        ref = _tally(by_k[r['id']], cls, E, Cc, P, D['e'], D['c'], pm_of, ok, nul)
         if r['ns'] != len(ref): f.append(f"region {r['id']}: {r['ns']} disagreements shown, recomputed {len(ref)}")
         cmp(f"region {r['id']}", r['splits'], ref)
         info = FL['info'].get(f"k{r['id']}")

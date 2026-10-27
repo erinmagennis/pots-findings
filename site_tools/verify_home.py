@@ -37,6 +37,7 @@ def check(site_dir):
     # disagreement rule (contradictions.json "rule"): higher / lower / no difference count only findings that compare people
     # with the condition to people without it (facet dr == vs-disease-state)
     if 'dr' not in D: return f + ['findings_facets.json has no dr facet (direction_reference)']
+    nullnc = np.isin(np.asarray(C['nc']), [i for i, v in enumerate(D['nc']) if str(v).startswith('null')])
     ref = np.asarray(C['dr']) == (D['dr'].index('vs-disease-state') if 'vs-disease-state' in D['dr'] else -1)
     if hm.get('excluded_papers') != m.get('excluded_papers'):
         f.append(f'excluded_papers {hm.get("excluded_papers")} != meta {m.get("excluded_papers")}')
@@ -63,7 +64,8 @@ def check(site_dir):
     treat = D['ft'].index('treatment/intervention') if 'treatment/intervention' in D['ft'] else -1
     def tally_check(what, tt, ent, cond):
         base = keep & ref & (E == raw_code.get(ent, -1)) & cmask(cond)   # vs-disease-state findings only (disagreement rule)
-        up, dn, nu = (len(set(P[base & (Dd == dcode[w])].tolist())) for w in ('elevated', 'depleted/reduced', 'no significant difference'))
+        up, dn = (len(set(P[base & (Dd == dcode[w])].tolist())) for w in ('elevated', 'depleted/reduced'))
+        nu = len(set(P[base & ((Dd == dcode['no significant difference']) | nullnc)].tolist()))   # null side of contradictions.json
         if (tt['e'], tt['c']) != (ent, cond): f.append(f'{what} tally names {tt["e"]}/{tt["c"]} != {ent}/{cond}')
         if (tt['up'], tt['dn'], tt['nu']) != (up, dn, nu): f.append(f'{what} tally {tt["up"]},{tt["dn"]},{tt["nu"]} != recount {up},{dn},{nu}')
         r = flips.get((ent, cond))
@@ -134,11 +136,19 @@ def check(site_dir):
         if hs[k] != m[mk]: f.append(f'stand {k} {hs[k]} != meta {mk} {m[mk]}')
     con = json.load(open(data / 'contradictions.json'))
     if con.get('total') != m['contradictions_total']: f.append('contradictions.json total != meta')
+    # disagree and barely studied cards use the Start page picks: compare with verify_start_here's own recompute
+    sys.path.insert(0, str(Path(__file__).resolve().parent)); import verify_start_here as VS
+    _, _, _, want_s, _, _, _, picks = VS.expected(str(site))
     c = hs['cex']
-    row = next((r for r in con['rows'] if r['canonical_entity'] == c['e'] and r['condition'] == c['c'] and r['conflict_type'] == 'direction-flip'
-                and r['n_papers_A'] == c['a'] and r['n_papers_B'] == c['b'] and r['side_A_direction'] == c['da'] and r['side_B_direction'] == c['db']), None)
-    if not row: f.append(f'disagree example {c["e"]} is not a row of contradictions.json')
-    elif (set(map(str, row['pmids_A'])) | set(map(str, row['pmids_B']))) & excl: f.append('disagree example cites an exclude-flagged paper')
+    if (c['e'] if c else None) != (picks['contra'][0] if picks['contra'] else None):
+        f.append(f'disagree example {c and c["e"]} != Start page pick {picks["contra"][:1]}')
+    elif c:
+        got = {k: v for k, v, _ in c['parts']}
+        exp = {k.split(':', 1)[0][7:]: v for k, v in want_s.items() if k.startswith('contra_') and k.split(':', 1)[1] == c['e']}
+        if got != exp: f.append(f'disagree example counts {got} != contradictions.json {exp}')
+        for k, v, w in c['parts']:
+            word = {'hi': 'higher', 'lo': 'lower', 'nu': 'no difference'}[k]
+            if word not in w: f.append(f'disagree example part {k} worded {w!r}')
     nul = json.load(open(data / 'null_results.json')); fl = nul['fields']; ix = {k: fl.index(k) for k in fl}
     if nul['n'] != m['nulls']: f.append('null_results.json n != meta nulls')
     n = hs['nex']; hit = None
@@ -153,10 +163,14 @@ def check(site_dir):
     und = json.load(open(data / 'understudied.json'))
     if und.get('total') != m['understudied_total']: f.append('understudied.json total != meta')
     u = hs['uex']
-    row = next((r for r in und['rows'] if r['canonical_entity'] == u['e'] and r['condition'] == u['c'] and r['n_papers'] == u['n']
-                and r['n_findings'] == u['nf'] and [str(x) for x in r['pmids']] == u['pmids']), None)
-    if not row: f.append(f'understudied example {u["e"]} is not a row of understudied.json')
-    if set(u['pmids']) & excl: f.append('understudied example cites an exclude-flagged paper')
+    if (u['e'] if u else None) != (picks['under'][0] if picks['under'] else None): f.append(f'understudied example {u and u["e"]} != Start page pick {picks["under"][:1]}')
+    if u:
+        row = next((r for r in und['rows'] if r['canonical_entity'] == u['e'] and r['condition'] == u['c'] and r['n_papers'] == u['n']
+                    and r['n_findings'] == u['nf'] and [str(x) for x in r['pmids']] == u['pmids']), None)
+        if not row: f.append(f'understudied example {u["e"]} is not a row of understudied.json')
+        if set(u['pmids']) & excl: f.append('understudied example cites an exclude-flagged paper')
+    js = (site / 'js' / 'home-v2.js').read_text(encoding='utf-8')
+    if 'href="discover#under?all"' not in js: f.append('home barely studied card does not link to discover#under?all (the set its total describes)')
 
     # page wiring: the home script reads these files, and the hero counts are apply_counts markers
     js = (site / 'js' / 'home-v2.js').read_text(encoding='utf-8'); html = (site / 'index.html').read_text(encoding='utf-8')

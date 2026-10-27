@@ -12,6 +12,8 @@ Default exclusion matches the site: findings from papers whose paper flag has re
 (retracted papers, correction notices) are left out. Output is deterministic for the same data (no clock reads).
 """
 import html, json, os, re, sys, urllib.parse
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import signals_rules as SR  # noqa: E402  shared example picks (Start page and home cards)
 from collections import Counter, defaultdict
 
 SITE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
@@ -22,18 +24,11 @@ CANON = "https://pots.erinmagennis.com/start"
 FOCUS = "POTS"                                         # condition label the page is about
 SELF_NAMES = {"pots", "postural orthostatic tachycardia syndrome", "postural tachycardia syndrome"}  # the condition itself, not a topic
 NOT_A_CONDITION = {"general", "multiple", "other patient group"}  # labels that name no condition
-MEASURED_KINDS = {"physiological-measure", "gene/protein", "cell-type"}  # kinds where "higher/lower" reads plainly
 DIR_WORDS = {"elevated": "higher", "depleted/reduced": "lower", "no significant difference": "no clear difference"}
 DIR_KEY = {"elevated": "up", "depleted/reduced": "down", "no significant difference": "nodiff"}  # data-k key slugs
 TIER_ORDER = ["meta-analysis", "systematic-review/meta-analysis", "systematic review", "RCT", "cohort", "case-control", "cross-sectional"]
 N_TOPICS, N_CONDS, N_EACH = 6, 5, 2
-MIN_SIDE = 3  # a disagreement needs at least this many papers on each side
-DISEASE_REF = "vs-disease-state"  # facet dr: only comparisons with people without the condition count (contradictions.json rule)
-PRIMARY_TIERS = {"RCT", "cohort", "case-control", "cross-sectional"}  # null examples: primary studies, no case reports or reviews
-DEFINING = {"blood pressure", "systolic blood pressure", "diastolic blood pressure", "heart rate", "orthostatic heart rate"}  # part of how POTS is defined
-REVIEW_TYPES = {"review/narrative", "systematic-review/meta-analysis"}  # restate other studies; not a separate study
-LINKED_FLAGS = {"preprint_with_published_version", "published_version_of_preprint", "same_work_other_record", "update_of"}  # same study, two records
-TEXT_OTHER_MAX = 5  # barely studied: skip a topic whose name appears in finding text of more than this many other POTS papers
+# example selection rules live in signals_rules.py (contra_examples, null_examples, under_examples)
 SPLIT_YEAR = 2021   # "most were published in SPLIT_YEAR or later" (meta counts papers_2021_on / papers_before_2021)
 
 CONDITION_LABELS = {  # mirrors site/js/labels.js CONDITION_LABELS
@@ -178,94 +173,13 @@ def compute():
     def kind_of(name, row_kind=None):
         return row_kind or (ents.get(name) or {}).get("kind")
 
-    def clean(r, keys):  # Signals tables already leave out exclude-flagged papers; re-check here
-        return not any(str(p) in excluded for k in keys for p in (r.get(k) or []))
-
-    # where studies disagree: real two-way splits. POTS direction-flip rows (higher vs lower), both sides >= MIN_SIDE papers,
-    # on measured things (body measures, genes/proteins, cell types, chemicals that are not mostly studied as a treatment),
-    # ranked by the smaller side, then total papers, then Signals rank. No-difference papers: distinct papers with a POTS
-    # finding on the entity whose direction is "no significant difference" (same facet counting as the two sides).
-    def treatment_share(code):
-        ids = [i for i in rows if E[i] == code]
-        return sum(dic["ft"][cols["ft"][i]] == "treatment/intervention" for i in ids) / max(1, len(ids))
-    nodiff_code = dic["d"].index("no significant difference")
-    ref_code = dic["dr"].index(DISEASE_REF)
-    best = {}
-    for r in load("contradictions.json")["rows"]:
-        e = r["canonical_entity"]
-        if r["condition"] != FOCUS or r["conflict_type"] != "direction-flip" or not clean(r, ("pmids_A", "pmids_B")):
-            continue
-        if {r["side_A_direction"], r["side_B_direction"]} != {"elevated", "depleted/reduced"}:
-            continue
-        if min(r["n_papers_A"], r["n_papers_B"]) < MIN_SIDE or e not in dic["e"]:
-            continue
-        kind = kind_of(e, r.get("entity_kind")); code = dic["e"].index(e)
-        if kind not in MEASURED_KINDS and not (kind == "chemical/metabolite" and treatment_share(code) <= 0.5):
-            continue
-        hi, lo = (r["n_papers_A"], r["n_papers_B"]) if r["side_A_direction"] == "elevated" else (r["n_papers_B"], r["n_papers_A"])
-        key = (-min(hi, lo), -(hi + lo), r["rank"])
-        if e not in best or key < best[e][0]:
-            nd = len({P[i] for i in rows if E[i] == code and cols["d"][i] == nodiff_code and cols["dr"][i] == ref_code})
-            best[e] = (key, {"entity": e, "higher": hi, "lower": lo, "nodiff": nd})
-    disagree = [x for _, x in sorted(best.values(), key=lambda x: x[0])][:N_EACH]
-
-    # tested and found nothing: POTS null results, one treatment and one marker, most distinct papers. Only primary studies
-    # (evidence tier RCT, cohort, case-control, cross-sectional: no case reports, case series, reviews). An entity is skipped
-    # when any of those papers also reports an effect for it in POTS (direction higher or lower, or a positive-effect flag),
-    # when it is part of how POTS is defined (DEFINING), names POTS itself, or (treatment) is a measured kind, not a treatment.
-    eff_d = {dic["d"].index(w) for w in ("elevated", "depleted/reduced") if w in dic["d"]}
-    pos_nc = dic["nc"].index("positive-effect") if "positive-effect" in dic["nc"] else -1
-    effect = {(pmids[P[i]], dic["e"][E[i]]) for i in rows if cols["d"][i] in eff_d or cols["nc"][i] == pos_nc}
-    idx = load("null_results.json")
-    nul = []
-    for sh in idx["shards"]:
-        nul += [dict(zip(idx["fields"], x)) for x in load(sh["file"])["rows"]]
-    nulls = []
-    shown = {d["entity"] for d in disagree}   # an entity already in the disagree list would show a second, differently counted "no difference"
-    for cls in ("treatment null", "biomarker/mechanism null"):
-        g, gf = defaultdict(set), Counter()
-        for r in nul:
-            e = r["canonical_entity"]
-            if (r["condition"] == FOCUS and r["null_class"] == cls and e and e not in shown and str(r["canonical_pmid"]) not in excluded
-                    and r["evidence_tier"] in PRIMARY_TIERS and e.lower() not in SELF_NAMES and e.lower() not in DEFINING
-                    and not (cls == "treatment null" and kind_of(e) in MEASURED_KINDS)):
-                g[e].add(str(r["canonical_pmid"])); gf[e] += 1
-        for e in [e for e in g if any((p, e) in effect for p in g[e])]:
-            del g[e]
-        if g:
-            e = sorted(g, key=lambda e: (-len(g[e]), -gf[e], e.lower()))[0]
-            nulls.append((cls, e, len(g[e]), gf[e]))
-
-    # barely studied: POTS understudied rows (2 or 3 papers), not case-report-only, by Signals rank, that are clear examples:
-    # at least 2 separate studies (records linked by a preprint / same-work / update flag are one study), at least 2 of them
-    # not reviews, and the topic's name (without a bracketed abbreviation) is not in the finding text of more than
-    # TEXT_OTHER_MAX other POTS papers under other topic names (a sign the topic is studied more under another spelling).
-    root = {}
-    def find(x):
-        while root.setdefault(x, x) != x: x = root[x]
-        return x
-    for pm, fl in sorted(flags.items()):
-        for x in fl:
-            if x.get("f") in LINKED_FLAGS and x.get("lp"): root[find(str(pm))] = find(str(x["lp"]))
-    texts = {}
-    for s in sorted({i // fac["shard_rows"] for i in rows}):
-        t = load(f"text_{s:02d}.json")
-        for i in range(t["start"], t["end"]):
-            texts[i] = t["t"][i - t["start"]]
-    ST = cols["st"]; text_low = {i: texts[i].lower() for i in rows}
-    us = load("understudied.json"); under = []
-    for r in sorted(us["rows"], key=lambda r: r["rank"]):
-        e = r["canonical_entity"]
-        if r["condition"] != FOCUS or r["n_papers"] < 2 or r["case_report_only"] or not clean(r, ("pmids",)) or e not in dic["e"]:
-            continue
-        code = dic["e"].index(e); own = set(map(str, r["pmids"]))
-        if len({find(p) for p in own}) < 2: continue
-        if len({find(pmids[P[i]]) for i in rows if E[i] == code and dic["st"][ST[i]] not in REVIEW_TYPES}) < 2: continue
-        probe = e.split(" (")[0].strip().lower()
-        if len({pmids[P[i]] for i in rows if E[i] != code and probe in text_low[i]} - own) > TEXT_OTHER_MAX: continue
-        under.append(r)
-        if len(under) == N_EACH: break
-    under = [dict(r, _kind=kind_of(r["canonical_entity"], r.get("entity_kind"))) for r in under]
+    # the three example lists use the shared picks in signals_rules.py (one rule for the Start page and the home cards):
+    # contra_examples (direction-flip or null-vs-positive rows, >= MIN_SIDE papers each side, contradictions.json counts),
+    # null_examples (primary non-review studies, see its docstring), under_examples (clear barely studied topics)
+    RF = SR.Facets(D); kinds = SR.entity_kinds(D)
+    disagree = SR.contra_examples(D, FOCUS, RF, kinds, n=N_EACH)
+    nulls = SR.null_examples(D, FOCUS, kinds, skip={x["e"] for x in disagree})
+    under = [dict(r, _kind=kind_of(r["canonical_entity"], r.get("entity_kind"))) for r in SR.under_examples(D, FOCUS, n=N_EACH)]
 
     # example finding: top topic, POTS label, strongest study type, has a quote, readable length, lowest row
     ex = None
@@ -306,26 +220,30 @@ def render(meta, F):
 
     dis = []
     for x in F["disagree"]:
-        e = x["entity"]
-        nd = f', {f.num(f"contra_nodiff:{e}", x["nodiff"])} found no difference' if x["nodiff"] else ""
-        dis.append(f'<li><b>{ent(e)}</b> in POTS: {f.num(f"contra_higher:{e}", x["higher"])} papers report it higher than in people '
-                   f'without POTS, {f.num(f"contra_lower:{e}", x["lower"])} report it lower{nd}.</li>')
+        e = x["e"]
+        parts = ", ".join(f'{f.num(f"contra_{k}:{e}", v)}{words}' for k, v, words in SR.contra_sentence_parts(x))
+        dis.append(f'<li><b>{ent(e)}</b> in POTS: {parts}.</li>')
     if not dis:
-        dis.append('<li class="start-none">Few clear splits exist yet. No POTS topic has three or more papers on each side.</li>')
+        dis.append('<li class="start-none">No POTS topic has three or more papers on each side under one name, '
+                   'either higher against lower or an effect against no difference.</li>')
 
     nul = []
-    for cls, e, npap, nf in F["nulls"]:
+    for cls, e, nst, _ in F["nulls"]:
         what = "as a treatment for POTS" if cls == "treatment null" else "as a marker in POTS"
         res = "no effect" if cls == "treatment null" else "no difference"
         unit = "outcome" if cls == "treatment null" else "measure"
-        nul.append(f'<li><b>{ent(e)}</b>, {what}: {f.num(f"null_papers:{cls}|{e}", npap)} papers found {res} '
-                   f'on at least one {unit}.</li>')
+        who = "one randomized trial" if nst == 1 else f'{f.num(f"null_studies:{cls}|{e}", nst)} studies'
+        nul.append(f'<li><b>{ent(e)}</b>, {what}: {who} found {res} on at least one {unit}.</li>')
+    if not nul:
+        nul.append('<li class="start-none">No clear example right now.</li>')
 
     und = []
     for r in F["under"]:
         e = r["canonical_entity"]; kw = KIND_WORDS.get(r["_kind"] or "")
         und.append(f'<li><b>{ent(e)}</b>{f" ({kw})" if kw else ""} in POTS: {f.num(f"under_findings:{e}", r["n_findings"])} findings '
                    f'from only {f.num(f"under_papers:{e}", r["n_papers"])} papers.</li>')
+    if not und:
+        und.append('<li class="start-none">No clear example right now.</li>')
 
     ex = F["example"]; excard = ""
     if ex:
@@ -441,8 +359,9 @@ def render(meta, F):
     <div>
       <h3>Where studies disagree</h3>
       <ul class="start-ex">{"".join(dis)}</ul>
-      <p class="kv">Only papers that compare people with POTS to people without it count here. Changes after a treatment are not counted.
-      A split is a reason to read both sides. It does not prove either side wrong.
+      <p class="kv">A disagreement means papers found the same thing higher in some and lower in others, or an effect in some and none in others.
+      Only results the model tagged as a comparison between groups count, such as people with and without POTS, or two patient groups.
+      Results tagged as a change after a treatment are left out. No person has checked these tags. A split is a reason to read both sides. It does not prove either side wrong.
       <a href="discover#contra">All {m("contradictions_total")} disagreements, for every condition</a>{more("contradictions", "contradictions_total")}</p>
     </div>
     <div>

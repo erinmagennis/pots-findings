@@ -18,7 +18,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from signals_rules import Facets, flip_sides, entity_kinds, is_measured, MEASURED_KINDS, TREATMENT_SHARE_MAX  # noqa: E402  shared counting rules (one number per fact)
+from signals_rules import Facets, flip_sides, entity_kinds, is_measured, MEASURED_KINDS, TREATMENT_SHARE_MAX, contra_examples, contra_sentence_parts, under_examples  # noqa: E402  shared counting rules (one number per fact)
 
 # Generic covariates: measured in almost every study, so raw counts make them look central.
 GENERIC = ['age', 'female sex', 'sex', 'male sex', 'gender', 'female', 'male', 'heart rate', 'blood pressure',
@@ -166,8 +166,8 @@ def build(site):
     m = meta['counts']
     topic_names = [t['e'].lower() for t in topics]
     con = json.load(open(data / 'contradictions.json'))
-    cex = next(r for r in con['rows'] if r['condition'] == 'POTS' and r['conflict_type'] == 'direction-flip'
-               and not (set(map(str, r['pmids_A'])) | set(map(str, r['pmids_B']))) & excl)
+    # disagree and barely studied cards: the same picks as the Start page (signals_rules.contra_examples / under_examples)
+    cx = (contra_examples(data, 'POTS', F, kinds, n=1) or [None])[0]
     nul = json.load(open(data / 'null_results.json')); f = nul['fields']; ix = {k: f.index(k) for k in f}
     nex = None
     for sh in nul['shards']:
@@ -178,17 +178,15 @@ def build(site):
                     and any(re.search(r'\b' + re.escape(t) + r'\b', ent.lower()) for t in topic_names)):
                 nex = r; break
         if nex: break
-    und = json.load(open(data / 'understudied.json'))
-    uex = next(r for r in und['rows'] if r['condition'] == 'POTS' and r['n_papers'] >= 2 and not set(map(str, r['pmids'])) & excl)
+    uex = (under_examples(data, 'POTS', n=1) or [None])[0]
     home_stand = {
         'version': meta['version'],
         'contra_total': m['contradictions_total'], 'nulls': m['nulls'], 'under_total': m['understudied_total'],
-        'cex': {'e': cex['canonical_entity'], 'c': cex['condition'], 'a': cex['n_papers_A'], 'b': cex['n_papers_B'],
-                'da': cex['side_A_direction'], 'db': cex['side_B_direction'], 'rank': cex.get('rank')},
+        'cex': ({'e': cx['e'], 'c': cx['c'], 'parts': [[k, v, w] for k, v, w in contra_sentence_parts(cx)]} if cx else None),
         'nex': {'e': nex[ix['canonical_entity']], 'pmid': str(nex[ix['canonical_pmid']]), 'year': nex[ix['year']],
                 'q': nex[ix['provenance_quote_trunc']], 'nc': nex[ix['null_class']], 'c': nex[ix['condition']]},
-        'uex': {'e': uex['canonical_entity'], 'c': uex['condition'], 'n': uex['n_papers'], 'nf': uex['n_findings'],
-                'dir': uex['direction'], 'pmids': [str(x) for x in uex['pmids']]},
+        'uex': ({'e': uex['canonical_entity'], 'c': uex['condition'], 'n': uex['n_papers'], 'nf': uex['n_findings'],
+                 'dir': uex['direction'], 'pmids': [str(x) for x in uex['pmids']]} if uex else None),
     }
     return home_map, home_stand
 
